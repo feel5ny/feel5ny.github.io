@@ -484,10 +484,7 @@ code {
   overflow: hidden;
   position: absolute;
   width: 180px;
-  background: -webkit-linear-gradient(208deg, #26d0ce, #1a2980) url("images/opacity-10.png") repeat;
-  background: -moz-linear-gradient(208deg, #26d0ce, #1a2980) url("images/opacity-10.png") repeat;
-  background: -ms-linear-gradient(208deg, #26d0ce, #1a2980) url("images/opacity-10.png") repeat;
-  background: linear-gradient(242deg, #26d0ce, #1a2980) url("images/opacity-10.png") repeat;
+  background: url("images/opacity-10.png") #16325c repeat;
 }
 .nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-child li {
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.06);
