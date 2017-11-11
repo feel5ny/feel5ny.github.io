@@ -276,7 +276,7 @@ code {
   padding: 10px 0;
   width: 375px;
   height: 216px;
-  background-image: url("images/logo_typing.gif");
+  background-image: url("/images/logo_typing.gif");
   background-position: 0px 10px;
   background-repeat: no-repeat;
   -webkit-background-size: 375px 216px;
@@ -294,8 +294,8 @@ code {
   box-sizing: border-box;
   -webkit-box-shadow: rgba(0,0,0,0.098) 0px 1px 1px 0px;
   box-shadow: rgba(0,0,0,0.098) 0px 1px 1px 0px;
-  padding-left: 340px;
-  background: url("images/s-left.png") repeat-y left 0;
+  padding-right: 340px;
+  background: url("images/s-left.png") repeat-y right 0;
 }
 .main-body-inner:before,
 .main-body-inner:after {
@@ -306,7 +306,7 @@ code {
   clear: both;
 }
 #main {
-  float: right;
+  float: left;
   width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -368,7 +368,7 @@ code {
 }
 #header-title .logo-wrap,
 #header-title .subtitle-wrap {
-  float: right;
+  float: left;
 }
 #header-title .subtitle-wrap {
   padding: 10px 0px 0px;
@@ -376,10 +376,8 @@ code {
 }
 #header-title .subtitle {
   font-size: 16px;
-  font-style: italic;
   line-height: 226px;
-  color: rgba(255,255,255,0.7);
-  text-shadow: 0 1px rgba(0,0,0,0.2);
+  color: #16325c;
 }
 .nav-container .nav-icon,
 .nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-link {
@@ -558,8 +556,8 @@ code {
   display: none;
 }
 #sidebar {
-  float: left;
-  margin-left: -340px;
+  float: right;
+  margin-right: -340px;
   width: 340px;
 }
 #sidebar .sidebar-toggle {
@@ -1901,12 +1899,12 @@ i.icon:before {
     margin-top: -50px;
   }
   .main-body-inner {
-    padding-left: 50px;
-    background-position: -290px 0 !important;
+    padding-right: 50px;
+    background-position: -340px 0 !important;
   }
   .main-body-inner #sidebar {
-    left: 0;
-    background: url("images/s-left.png") repeat-y left 0;
+    right: 0;
+    background: url("images/s-left.png") repeat-y right 0;
     margin: 0;
     height: 100%;
     position: absolute;
@@ -1943,7 +1941,7 @@ i.icon:before {
     font-family: fontawesome;
   }
   .main-body-inner #sidebar .sidebar-toggle .toggle:before {
-    content: '\f101';
+    content: '\f100';
   }
   .main-body-inner #sidebar .sidebar-top {
     padding: 10px 30px;
