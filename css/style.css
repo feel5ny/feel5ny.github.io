@@ -369,6 +369,17 @@ code {
 #header-title .logo-wrap,
 #header-title .subtitle-wrap {
   float: left;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: end;
+  -moz-box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
 }
 #header-title .subtitle-wrap {
   padding: 10px 0px 0px;
