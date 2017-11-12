@@ -3,24 +3,28 @@
 <head>
     <meta charset="utf-8">
     
-    <title>dada | 필오의 개발일지</title>
+    <title>Firebase의 storage 연동하기 | 필오의 개발일지</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="react,firebase,db" />
     
-    <meta property="og:type" content="article">
-<meta property="og:title" content="dada">
-<meta property="og:url" content="http://yoursite.com/2017/11/11/dada/index.html">
+    <meta name="description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
+<meta name="keywords" content="react,firebase,db">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Firebase의 storage 연동하기">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/Til/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://yoursite.com/images/thumb-default.png">
-<meta property="og:updated_time" content="2017-11-11T09:41:15.000Z">
+<meta property="og:image" content="http://yoursite.com/images/post_img/02/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-12T18:35:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dada">
-<meta name="twitter:image" content="http://yoursite.com/images/thumb-default.png">
+<meta name="twitter:title" content="Firebase의 storage 연동하기">
+<meta name="twitter:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
+<meta name="twitter:image" content="http://yoursite.com/images/post_img/02/thumb_default.jpg">
     
-    <link rel="canonical" href="http://yoursite.com/2017/11/11/dada/"/>
+    <link rel="canonical" href="http://yoursite.com/2017/11/13/Til/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -88,7 +92,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">Home</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/">Project</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/DA-DA/">DA, DA</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/he/">he</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/">Project</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
@@ -147,18 +151,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Project/">Project</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project/DA-DA/">DA, DA</a>
+    <a class="page-title-link" href="/categories/Project/">Project</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project/Univ-Project/">Univ Project</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-dada" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Til" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        dada
+        Firebase의 storage 연동하기
         </h1>
     
 
@@ -168,24 +172,50 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/11/dada/" class="article-date">
-            <time datetime="2017-11-11T06:19:04.000Z" itemprop="datePublished">2017-11-11</time>
+        <a href="/2017/11/13/Til/" class="article-date">
+            <time datetime="2017-11-13T01:10:04.000Z" itemprop="datePublished">2017-11-13</time>
         </a>
     </div>
 
                 
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/db/">db</a>, <a class="tag-link" href="/tags/firebase/">firebase</a>, <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            
+            <h2 id="학교-로고-모음-사이트"><a href="#학교-로고-모음-사이트" class="headerlink" title="학교 로고 모음 사이트"></a>학교 로고 모음 사이트</h2><blockquote>
+<p>현재 상황</p>
+</blockquote>
+<p>팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.</p>
+<h3 id="DB-구조짜기"><a href="#DB-구조짜기" class="headerlink" title="DB 구조짜기"></a>DB 구조짜기</h3><p>300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건 db에 url 칼럼을 넣는 방식. 파이어베이스에서는 스토리지와 데이터베이스 연결하는 것까지는 제공하지 않는 듯하다. 수동으로 작업해야 하는데 아직 좋은 방법이 떠오르지 않는다. </p>
+<h3 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h3><p>storage에 있는 데이터를 가져오는데, 현재 이슈.</p>
+<ol>
+<li>한 디렉토리에 300개를 넣어두고 한 번에 갖고 오는 방식이라 아주 느리다.<ul>
+<li>db 디렉토리를 20개씩 분리한 후, 더 보기 형태의 방식으로 해결해야겠다.<br><br></li>
+</ul>
+</li>
+<li>map을 돌려서 해당 db 인덱스값과 같은 값의 파일을 갖고 오게 하기위해서 파일 이름에 학교 이름이 아닌 PNG_1.png 이런 방식의 파일 이름으로 지정해두었다. 매칭이 잘못된 학교 이름을 찾아 내기도 힘들고, ux도 너무 안 좋을 것 같아서, 파일 이름을 학교 이름으로 바꾸기로 결정했다.<br><br></li>
+<li>생각해 보니 지역별 칼럼을 정리하지 않았다.<br><br></li>
+<li>비록 일일이 검토 후에 로고를 올리는 것이지만, 한 번 더 체킹을 위해 학교 url을 넣는게 좋겠다고 판단. 칼럼을 추가해야겠다.<ul>
+<li>공공api가 있었으면 좋겠다.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>생각보다 db 짜는건 굉장한 노가다다! dada 프로젝트 할 때 백엔드 분께서 ‘생각보다 노가다도 많이 하게 되는데, 또 생각보다 어렵진 않더라구요!’ 라고 했던 말이 와닿는 하루다. </p>
+</blockquote>
+
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://yoursite.com/2017/11/11/dada/" data-id="cj9v85qos0000wi2m9lvcx205" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2017/11/13/Til/" data-id="cj9x406sw0000q42mazygu2q6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -325,10 +355,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/11/11/dada/" class="thumbnail">
+                            <a href="/2017/11/13/Til/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/thumb-default.png)" alt="dada" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/02/thumb_default.jpg)" alt="Firebase의 storage 연동하기" class="thumbnail-image"></span>
     
     
 </a>
@@ -336,9 +366,9 @@ ga('send', 'pageview');
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Project/">Project</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Project/DA-DA/">DA, DA</a></p>
-                            <p class="item-title"><a href="/2017/11/11/dada/" class="title">dada</a></p>
-                            <p class="item-date"><time datetime="2017-11-11T06:19:04.000Z" itemprop="datePublished">2017-11-11</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/Project/">Project</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Project/Univ-Project/">Univ Project</a></p>
+                            <p class="item-title"><a href="/2017/11/13/Til/" class="title">Firebase의 storage 연동하기</a></p>
+                            <p class="item-date"><time datetime="2017-11-13T01:10:04.000Z" itemprop="datePublished">2017-11-13</time></p>
                         </div>
                     </li>
                 
@@ -356,7 +386,7 @@ ga('send', 'pageview');
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog/he/">he</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog/hexo/">hexo</a></p>
                             <p class="item-title"><a href="/2017/10/10/aboutHEXO/" class="title">Hexo 설치</a></p>
                             <p class="item-date"><time datetime="2017-10-10T11:46:25.000Z" itemprop="datePublished">2017-10-10</time></p>
                         </div>
@@ -371,7 +401,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/he/">he</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -391,7 +421,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">node.js</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/db/">db</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firebase/">firebase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-js/">node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -401,7 +431,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a>
+            <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/react/" style="font-size: 10px;">react</a>
         </div>
     </div>
 
@@ -453,7 +483,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://yoursite.com/2017/11/11/dada/';
+    var disqus_url = 'http://yoursite.com/2017/11/13/Til/';
     
     (function() {
     var dsq = document.createElement('script');
