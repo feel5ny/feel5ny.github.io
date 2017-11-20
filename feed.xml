@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>필오의 개발일지</title>
+  
+  
+  <link href="/feed.xml" rel="self"/>
+  
+  <link href="http://feel5ny.github.io/"/>
+  <updated>2017-11-13T11:01:08.000Z</updated>
+  <id>http://feel5ny.github.io/</id>
+  
+  <author>
+    <name>clara Kim</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>overview</title>
+    <link href="http://feel5ny.github.io/2017/11/14/dada_06week/"/>
+    <id>http://feel5ny.github.io/2017/11/14/dada_06week/</id>
+    <published>2017-11-14T01:10:04.000Z</published>
+    <updated>2017-11-13T11:01:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="식단-다이어리-서비스-DA-DA"><a href="#식단-다이어리-서비스-DA-DA" class="headerlink" title="식단 다이어리 서비스, DA,DA"></a>식단 다이어리 서비스, DA,DA</h1><p>프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 <strong>프론트엔드 중심으로</strong> 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이슈에 대해서 5가지 챕터로 포스팅하려고 한다.</p><hr><p>chapter 1 : 기획 및 프로토타입 및 디자인<br>chapter 2 : 퍼블리싱<br>chapter 3 : 핵심기능 개발<br>chapter 4 : 리팩토링 및 테스트<br>chapter 5 : 추가개발 및 배포</p><hr><p>이번 프로젝트를 통해서 크게 3가지를 얻을 수 있었다.</p><ol><li>비동기통신</li><li>redux 자유로운 사용</li><li>react 라이프사이클과 한계</li></ol><hr><ul><li>github : <a href="https://github.com/huusz/Da-Da" target="_blank" rel="external">https://github.com/huusz/Da-Da</a></li><li>DA,DA : <a href="https://dada.downmix.net" target="_blank" rel="external">https://dada.downmix.net</a> (카카오 아이디로 로그인)</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;식단-다이어리-서비스-DA-DA&quot;&gt;&lt;a href=&quot;#식단-다이어리-서비스-DA-DA&quot; class=&quot;headerlink&quot; title=&quot;식단 다이어리 서비스, DA,DA&quot;&gt;&lt;/a&gt;식단 다이어리 서비스, DA,DA&lt;/h1&gt;&lt;p&gt;프론트엔드 스쿨
+      
+    
+    </summary>
+    
+      <category term="Project" scheme="http://feel5ny.github.io/categories/Project/"/>
+    
+      <category term="DA, DA" scheme="http://feel5ny.github.io/categories/Project/DA-DA/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
+    
+      <category term="DADA" scheme="http://feel5ny.github.io/tags/DADA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>야근지수 (미제)</title>
+    <link href="http://feel5ny.github.io/2017/11/13/algorithm/"/>
+    <id>http://feel5ny.github.io/2017/11/13/algorithm/</id>
+    <published>2017-11-13T08:10:04.000Z</published>
+    <updated>2017-11-13T09:34:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="야근-지수"><a href="#야근-지수" class="headerlink" title="야근 지수"></a>야근 지수</h2><p>회사원인 수민이는 많은 일이 쌓여 있습니다. 수민이는 야근을 최소화하기 위해 남은 일의 작업량을 숫자로 메기고, 일에 대한 야근 지수를 줄이기로 결정했습니다. 야근 지수는 남은 일의 작업량을 제곱하여 더한 값을 의미합니다. 수민이는 1시간 동안 남은 일 중 하나를 골라 작업량 1만큼 처리할 수 있습니다. 수민이의 퇴근까지 남은 N 시간과 각 일에 대한 작업량이 있을 때, noOvertime 함수를 제작하여 수민이의 야근 지수를 최소화 한 결과를 출력해 주세요. 예를 들어, N=4 일 때, 남은 일의 작업량이 [4, 3, 3] 이라면 야근 지수를 최소화하기 위해 일을 한 결과는 [2, 2, 2]가 되고 야근 지수는 22 + 22 + 22 = 12가 되어 12를 반환해 줍니다.</p><hr><ul><li>처음 생각한 로직</li></ul><ol><li>해당 배열의 전체 합 - N값</li><li>1번의 값을 배열의 길이로 나눈다.</li><li>나머지가 0인 경우와, 0이 아닌 경우가 생긴다.<ul><li>나머지가 0인 경우, 해당 몫의 제곱근에 length값을 곱한다. (끝)</li><li>나머지가 0이 아닌경우, <ul><li>몫이 소수점이 나온는데, 이는 내림하여 소수점 자리수들을 버리고 (floor)</li><li>해당 값과 배열의 인자를 비교하여, 해당 값보다 작은 인자의 경우 바로 제곱근화 하고, 나머지 값은 해당 몫으로 제곱하여 더한다. <strong>(이 부분이 잘못되었음)</strong></li></ul></li></ul></li><li>3번의 첫번째 나머지가 0인 경우는 테스트가 통과하는데 2번째 경우는 로직이 잘못됨</li></ol><hr><blockquote><p>통과하고 싶다</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;야근-지수&quot;&gt;&lt;a href=&quot;#야근-지수&quot; class=&quot;headerlink&quot; title=&quot;야근 지수&quot;&gt;&lt;/a&gt;야근 지수&lt;/h2&gt;&lt;p&gt;회사원인 수민이는 많은 일이 쌓여 있습니다. 수민이는 야근을 최소화하기 위해 남은 일의 작업량을 숫자로 
+      
+    
+    </summary>
+    
+      <category term="algorithm" scheme="http://feel5ny.github.io/categories/algorithm/"/>
+    
+      <category term="Level3" scheme="http://feel5ny.github.io/categories/algorithm/Level3/"/>
+    
+    
+      <category term="algorithm" scheme="http://feel5ny.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Firebase의 storage 연동하기</title>
+    <link href="http://feel5ny.github.io/2017/11/13/firebase/"/>
+    <id>http://feel5ny.github.io/2017/11/13/firebase/</id>
+    <published>2017-11-13T01:10:04.000Z</published>
+    <updated>2017-11-13T09:23:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="학교-로고-모음-사이트"><a href="#학교-로고-모음-사이트" class="headerlink" title="학교 로고 모음 사이트"></a>학교 로고 모음 사이트</h2><blockquote><p>현재 상황</p></blockquote><p>팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.</p><h3 id="DB-구조짜기"><a href="#DB-구조짜기" class="headerlink" title="DB 구조짜기"></a>DB 구조짜기</h3><p>300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건 db에 url 칼럼을 넣는 방식. 파이어베이스에서는 스토리지와 데이터베이스 연결하는 것까지는 제공하지 않는 듯하다. 수동으로 작업해야 하는데 아직 좋은 방법이 떠오르지 않는다. </p><h3 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h3><p>storage에 있는 데이터를 가져오는데, 현재 이슈.</p><ol><li>한 디렉토리에 300개를 넣어두고 한 번에 갖고 오는 방식이라 아주 느리다.<ul><li>db 디렉토리를 20개씩 분리한 후, 더 보기 형태의 방식으로 해결해야겠다.<br><br></li></ul></li><li>map을 돌려서 해당 db 인덱스값과 같은 값의 파일을 갖고 오게 하기위해서 파일 이름에 학교 이름이 아닌 PNG_1.png 이런 방식의 파일 이름으로 지정해두었다. 매칭이 잘못된 학교 이름을 찾아 내기도 힘들고, ux도 너무 안 좋을 것 같아서, 파일 이름을 학교 이름으로 바꾸기로 결정했다.<br><br></li><li>생각해 보니 지역별 칼럼을 정리하지 않았다.<br><br></li><li>비록 일일이 검토 후에 로고를 올리는 것이지만, 한 번 더 체킹을 위해 학교 url을 넣는게 좋겠다고 판단. 칼럼을 추가해야겠다.<ul><li>공공api가 있었으면 좋겠다.</li></ul></li></ol><blockquote><p>생각보다 db 짜는건 굉장한 노가다다! dada 프로젝트 할 때 백엔드 분께서 ‘생각보다 노가다도 많이 하게 되는데, 또 생각보다 어렵진 않더라구요!’ 라고 했던 말이 와닿는 하루다. </p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;학교-로고-모음-사이트&quot;&gt;&lt;a href=&quot;#학교-로고-모음-사이트&quot; class=&quot;headerlink&quot; title=&quot;학교 로고 모음 사이트&quot;&gt;&lt;/a&gt;학교 로고 모음 사이트&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;현재 상황&lt;/p&gt;
+&lt;/block
+      
+    
+    </summary>
+    
+      <category term="Project" scheme="http://feel5ny.github.io/categories/Project/"/>
+    
+      <category term="Univ Project" scheme="http://feel5ny.github.io/categories/Project/Univ-Project/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
+    
+      <category term="firebase" scheme="http://feel5ny.github.io/tags/firebase/"/>
+    
+      <category term="db" scheme="http://feel5ny.github.io/tags/db/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0/ Typescript?</title>
+    <link href="http://feel5ny.github.io/2017/11/08/TS_01/"/>
+    <id>http://feel5ny.github.io/2017/11/08/TS_01/</id>
+    <published>2017-11-08T09:23:55.000Z</published>
+    <updated>2017-11-20T14:56:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="자바스크립트-말고-타입스크립트"><a href="#자바스크립트-말고-타입스크립트" class="headerlink" title="자바스크립트 말고 타입스크립트?"></a>자바스크립트 말고 타입스크립트?</h1><p>최근 <a href="https://feel5ny.github.io/2017/11/14/dada_06week/">프로젝트</a>를 진행하면서 나도 모르는 사이에 타입이 자주 바뀌는 자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그 순간에 내 머릿속에서만 생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발생하면, <code>삽질</code> 후에 원인이 타입 때문이라는 것을 알게 되고.. 이는 생각보다 빈번하게 일어났다. 콘솔에서 타입 에러를 잡지 않고 렌더링이 될 때가 있기 때문에 타입으로 발생한 버그를 잡을 때는 시간이 더 걸린다.( 왜 에러가 나는 거여? 물론 리액트는 타입도 종종 잡아준다. 무튼 시간 아까워! ) 버그 잡는 게 중요하긴 한데, 타입이 원인이라는 것은 뭔가 어처구니없는 실수라는 생각도 들었다..<br>그러다 문득! 예전에 타입 버그가 날 때마다 <code>타입스크립트를 배우면 이런 버그는 애초에 만나지 않을 겁니다!</code> 라고 자주 얘기하셨던 선생님이 종종 생각났고.. 게다가 지금 여러 프로젝트에서 타입스크립트을 도입하고도 있고, 얼마 후에 앵귤러도 시작하고자 해서.. 겸사겸사 동기부여가 여러 군데에서 생겼기 때문에!! 시작!!</p><hr><blockquote><p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8#" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p></blockquote><ol><li>타입스크립트는 무엇인가</li><li>컴파일러? 트랜스파일러? 인터프리터?</li><li>정적타입 언어 vs 동적타입 언어</li></ol><hr><h2 id="1-타입스크립트는-무엇인가"><a href="#1-타입스크립트는-무엇인가" class="headerlink" title="1. 타입스크립트는 무엇인가."></a>1. 타입스크립트는 무엇인가.</h2><p>타입스크립트는 프로그래밍 언어 중 하나이다. 자바스크립트가 인터프리터 기반의 언어로써, 실행과 동시에 렌더링이 되는데, 타입스크립트는 인터프리터 방식이 아닌 컴파일 후에 실행되는 <code>Compiled Language</code>이다. 별도의 빌드 과정이 필요! 전통적인 컴파일 언어와는 다른데, (C언어, 자바 …) 때문에 Compile말고, <code>Transpile</code>이라는 용어를 사용하기도 한다. 혹은 meta programming이라고 한다.</p><h2 id="2-컴파일러-트랜스파일러-인터프리터"><a href="#2-컴파일러-트랜스파일러-인터프리터" class="headerlink" title="2. 컴파일러? 트랜스파일러? 인터프리터?"></a>2. 컴파일러? 트랜스파일러? 인터프리터?</h2><p>간단하게 3가지를 비교해보면 아래 그림과 같다.<br><img src="/images/post_img/11/CompileTranspileInterpreter.jpg"></p><ul><li><strong>transpiler</strong><br>하나의 <strong>언어</strong>를 다른 형태의 <strong>언어</strong>로 변환해 주는 기능을 <code>부각</code>시키는 표현으로 compiler라는 표현보다 transpiler라는 표현을 쓴다. (번역이라는 말과 합쳐진 듯 하다.)<br>ex. Typescript, Babel<br><br></li><li><strong>compiler</strong><br>한 번 컴파일 하게 되면, 별도 생성된 목적 파일을 통해 빠르게 실행할 수 있다. 대용량 소스에 적합 <ul><li>컴파일이 필요 O</li><li>컴파일러가 필요 O</li><li>컴파일하는 시점 O =&gt; 컴파일 타임</li><li>컴파일된 결과물을 실행</li><li>컴파일된 결과물을 실행하는 시점<br>ex. C, Go, C#, JAVA, …<br><br></li></ul></li><li><strong>interpreter</strong><br>목적 파일 산출 과정이 없이 실행과 동시에 줄 단위로 번역이 된다. 저용량 소스에 적합  <ul><li>컴파일이 필요 X </li><li>컴파일러가 필요 X</li><li>컴파일하는 시점 X</li><li>코드 자체를 실행</li><li>코드를 실행하는 시점 o = 런타임<br>ex. javascript</li></ul></li></ul><h3 id="Tranditional-Compiled-Language"><a href="#Tranditional-Compiled-Language" class="headerlink" title="*Tranditional Compiled Language"></a>*Tranditional Compiled Language</h3><ul><li>컴파일 언어라고 한다.</li><li>C, C++, Go, C#, Java, …</li><li>프로그래머가 작성한 <code>Source Code</code> 를 기계어로 변환하는 과정을 <code>Compile</code>이라고 한다.</li><li>기계어로 변환된 결과물을 <code>Object Code</code> (목적 코드)라 한다.</li><li><code>Compile</code> 하는 프로그램을 <code>Compiler</code> 라고 한다.</li><li><code>Compile</code> 하는 동안을 <code>Compile Time</code> 이라고 한다.</li><li>컴파일된 코드는 프로세서에 따라 다르다.</li><li>소스 코드에서는 OS 에 따라 라이브러리가 다르다.</li><li>컴파일된 코드는 작은 크기에 최적화된다.</li><li>일반적으로 실행시 기계어로 바꾸는 방식(인터프리터 언어)보다 빠르다.</li><li>실행시 기계어로 바꿔주는 연산이 필요없기 때문이다.</li></ul><h2 id="3-정적타입-언어-vs-동적타입-언어"><a href="#3-정적타입-언어-vs-동적타입-언어" class="headerlink" title="3. 정적타입 언어 vs 동적타입 언어"></a>3. 정적타입 언어 vs 동적타입 언어</h2><ul><li>정적 타입 언어 : 미리 타입을 지정해놓고 시작<ul><li>자바스크립트에서 정적타입언어만 갖고오자라고 한 것이 TypeScript</li><li>동적 타입 언어가 갖고 있는 단점을 커버하자.하는 목적이다.</li><li>test coverage를 올리면 상관없긴하다.</li><li>ex. Typescript</li></ul></li><li>동적 타입 언어 : 타입을 정하지 않는다. 타입 자체가 변화하는 것을 막지않는다.<ul><li>ex. Javascript</li></ul></li></ul><h3 id="The-End-of-Dynamic-Languages-vs-Have-Static-Languages-Won"><a href="#The-End-of-Dynamic-Languages-vs-Have-Static-Languages-Won" class="headerlink" title="*The End of Dynamic Languages vs Have Static Languages Won?"></a>*<a href="http://elbenshira.com/blog/the-end-of-dynamic-languages/" target="_blank" rel="external">The End of Dynamic Languages</a> vs <a href="https://pointersgonewild.com/2015/11/25/have-static-languages-won/?utm_source=Clojure+Gazette&amp;utm_medium=email&amp;utm_campaign=152" target="_blank" rel="external">Have Static Languages Won?</a></h3><ul><li>최근 나타나는 신생언어들은 대부분 정적 타입을 지원한다. (Typed Racket, Typed Clojure, TypeScript, Typed Lua, Python with type hints)</li><li><code>정적 언어로 작성된 코드의 버그는 해당 코드를 실행하기 전까지는 찾을 수 없다.</code></li><li>동적 언어의 경우 대부분 대충 디자인되어있다. JavaScript의 경우에는 2주만에 개발된 언어이다보니 컴파일러와 힌들리-밀너 타입추론 시스템과 같은 CS지식으로 무장한 사람들이 디자인한 언어와 비교하는건 무리다.</li><li>Closure 같은 경우에도 이제는 대부분의 언어에서 지원하게 되면서 functional 과 imperative 프로그래밍이 융합되듯이, 동적 언어와 정적 언어도 그렇게 되지 않을까? Crystal Programming Language  의 경우 루비를 기반으로 하는 정적/동적 언어가 합쳐진 언어이다.</li></ul><hr><h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol><li><a href="http://www.notforme.kr/archives/1541" target="_blank" rel="external">http://www.notforme.kr/archives/1541</a></li><li><a href="http://www.geekhours.com/2017/03/08/difference-compiling-transpiling/" target="_blank" rel="external">http://www.geekhours.com/2017/03/08/difference-compiling-transpiling/</a></li><li><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="external">https://ruslanspivak.com/lsbasi-part1/</a></li><li><a href="http://blog.sejongin.kr/44" target="_blank" rel="external">http://blog.sejongin.kr/44</a></li><li><a href="http://hieroglyph.tistory.com/4" target="_blank" rel="external">http://hieroglyph.tistory.com/4</a></li><li><a href="https://okky.kr/article/304342" target="_blank" rel="external">https://okky.kr/article/304342</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;자바스크립트-말고-타입스크립트&quot;&gt;&lt;a href=&quot;#자바스크립트-말고-타입스크립트&quot; class=&quot;headerlink&quot; title=&quot;자바스크립트 말고 타입스크립트?&quot;&gt;&lt;/a&gt;자바스크립트 말고 타입스크립트?&lt;/h1&gt;&lt;p&gt;최근 &lt;a href=&quot;
+      
+    
+    </summary>
+    
+      <category term="TIL" scheme="http://feel5ny.github.io/categories/TIL/"/>
+    
+      <category term="Typescript" scheme="http://feel5ny.github.io/categories/TIL/Typescript/"/>
+    
+    
+      <category term="til" scheme="http://feel5ny.github.io/tags/til/"/>
+    
+      <category term="typescript" scheme="http://feel5ny.github.io/tags/typescript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo 설치</title>
+    <link href="http://feel5ny.github.io/2017/09/10/aboutHEXO/"/>
+    <id>http://feel5ny.github.io/2017/09/10/aboutHEXO/</id>
+    <published>2017-09-10T11:46:25.000Z</published>
+    <updated>2017-11-13T10:16:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>intro</p></blockquote><p> 무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하기 때문에 블로깅 자체가 공부가 됩니다.</p><p> 이왕 <code>node.js</code>까지 배우고 있으니, <code>jekyll</code>이 아닌, <code>hexo</code>를 사용해서 블로그를 만들었습니다. </p><p><img src="/images/post_img/01/post_1-10.jpg"></p><hr><blockquote><p>목차</p></blockquote><ol><li>Github 간단 소개<ol><li>원격 저장소</li><li>원격저장소 Github이 제공하는 정적웹사이트, Github Pages</li><li>호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO</li></ol></li><li>Github Pages로 정적 페이지 Hosting하기<ol><li>로컬에 저장소 생성하기</li><li>원격 저장소 생성하기 (Github Repository)</li><li>원격 저장소와 로컬 저장소 연결하기</li></ol></li><li>Hexo 설치하기<ol><li>Hexo 설치 전 준비</li><li>Hexo npm 설치하기</li><li>설정파일 업데이트</li></ol></li><li>Github에 배포하기<ol><li>hexo 설정을 통해 정적 리소스를 생성하기</li><li>배포하기</li></ol></li><li>anatol 테마적용하기</li></ol><hr><h2 id="0-Github-간단-소개"><a href="#0-Github-간단-소개" class="headerlink" title="0. Github 간단 소개"></a>0. Github 간단 소개</h2><p>깃에 대해서 잘 알고 있다면 1번으로 넘어가도 됩니다.</p><h3 id="0-1-원격저장소"><a href="#0-1-원격저장소" class="headerlink" title="0-1. 원격저장소"></a>0-1. 원격저장소</h3><p><img src="/images/post_img/01/post_1-01.svg" width="600px"><br><a href="https://backlogtool.com/git-tutorial/kr/intro/intro1_1.html" target="_blank" rel="external">Git</a>이란 소스코드를 효과적으로 관리하기 위해 개발된 ‘분산형 버전 관리 시스템’입니다.<br>git은 저장소에서 관리를 하는데, 내 컴퓨터에 있는 저장소를 <code>로컬저장소</code>라고 하고, 웹 상에 있는 저장소를 <code>원격저장소</code>라고 합니다. 우리가 흔히 알고 있는 원격저장소를 제공하는 서비스에는 <strong>깃헙, 비트버킷, 깃랩</strong>등이 있습니다다. 헥소를 이용한 블로그 개설을 위해서는 <strong>깃헙</strong>을 사용해야합니다.</p><h3 id="0-2-원격저장소-Github이-제공하는-정적웹사이트-Github-Pages"><a href="#0-2-원격저장소-Github이-제공하는-정적웹사이트-Github-Pages" class="headerlink" title="0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages"></a>0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages</h3><p><img src="/images/post_img/01/post_1-02.svg" width="600px"><br>Github에서 제공하는 Static Website, Github Pages가 있다. 깃헙 저장소에 리소스를 <code>push</code>만 해도(push란 저장소에 리소스를 넣을때 사용하는 명령어) 간단하게 웹사이트를 만들 수 있다. 즉, 다른 호스팅 서비스의 도움없이, 원격저장소에 올리기만해도 호스팅이 가능하다.</p><h3 id="0-3-호스팅을-편리하게-만들어주는-generator-Jekyll-amp-HEXO"><a href="#0-3-호스팅을-편리하게-만들어주는-generator-Jekyll-amp-HEXO" class="headerlink" title="0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO"></a>0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO</h3><p><img src="/images/post_img/01/post_1-04.svg" width="600px"></p><p>사실, hexo나 jekyll이 없이도, html,css,javascript를 통해서도 호스팅이 가능하나, 블로그 구성상 <strong>글을 등록하고, 리스트를 보여주며, 댓글을 달 수 있는, 블로그가 갖고 있는 기능을 편라히게 사용하기 위해서</strong> hexo나 jekyll과 같은 generator를 사용해야 한다.</p><p>Static Website generator는 마크다운을(.md 파일)로 편집 후 html로 변환할 수 있도록 돕는다. generator에는 jekyll과 HEXO가 있는데, jekyll은 <code>ruby</code>기반, HEXO는 <code>node.js</code>기반이다.</p><hr><p>그럼 generator을 셋팅하기 전, 내 컴퓨터에 디렉토리(폴더)를 생성하고, 원격저장소(github)에 연결을 시켜보자.</p><h2 id="1-Github-Pages로-정적-페이지-호스팅하기"><a href="#1-Github-Pages로-정적-페이지-호스팅하기" class="headerlink" title="1. Github Pages로 정적 페이지 호스팅하기"></a>1. Github Pages로 정적 페이지 호스팅하기</h2><p>Github Pages를 사용하기 위해 Github의 원격저장소에 리소스를 올려야한다는 사실을 잊지말자. 아래 그림의 저장소들이 필요하다.</p><p><img src="/images/post_img/01/post_1-05.svg" width="600px"></p><h3 id="1-1-로컬에-저장소-생성하기"><a href="#1-1-로컬에-저장소-생성하기" class="headerlink" title="1-1. 로컬에 저장소 생성하기"></a>1-1. 로컬에 저장소 생성하기</h3><p>내 컴퓨터 원하는 장소에 폴더를 생성한다.<br>terminal없이도 생성해도 된다.<br>아래는 terminal을 이용한 생성방법</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 바탕화면에 생성한다는 가정 </span><br><span class="line">(글쓴이는 운영체제가 mac입니다.) --&gt;</span><br><span class="line">$ <span class="built_in">cd</span> Desktop</span><br><span class="line">$ mkdir github-blog</span><br></pre></td></tr></table></figure><p>바탕화면에 <code>github-blog</code>라는 이름의 폴더가 생성이 되었다.</p><h3 id="1-2-원격-저장소-생성하기-Github-Repository"><a href="#1-2-원격-저장소-생성하기-Github-Repository" class="headerlink" title="1-2. 원격 저장소 생성하기 (Github Repository)"></a>1-2. 원격 저장소 생성하기 (Github Repository)</h3><p><img src="/images/post_img/01/post_1-11.jpg" width="600px"><br>github pages를 통해 손쉽게 <code>USERNAME.github.io</code>를 통해 정적 페이지를 호스팅 할 수 있다. </p><blockquote><p>번외 &gt; gh-pages 브랜치를 생성하면, 각 repository마다 <code>USERNAME.github.io/레포이름</code>으로 호스팅이 가능하다.</p></blockquote><p>지금부터 말하는 USERNAME은, 당신의 아이디이다. 깃헙주소 뒷부분 <code>/</code>이후 붙는 유저네임을 붙이면된다. 아래 순서로 깃 저장소를 생성한다.</p><ol><li>New Repository &gt; 이름은 꼭 <code>USERNAME.github.io</code>로 적용한다. </li><li>Public선택.</li><li>원격저장소 생성 완료</li></ol><p><img src="/images/post_img/01/post_1-12.jpg" width="600px"></p><h3 id="1-3-원격-저장소와-로컬-저장소-연결하기"><a href="#1-3-원격-저장소와-로컬-저장소-연결하기" class="headerlink" title="1-3. 원격 저장소와 로컬 저장소 연결하기"></a>1-3. 원격 저장소와 로컬 저장소 연결하기</h3><p><img src="/images/post_img/01/post_1-06.svg" width="600px"><br>내 컴퓨터에 저장소를 만들고, 원격에도 만들었으니, 연결을 해야한다. 연결하는 방법은 간단하다. 지금은 터미널을 열고 명령어를 입력해야하는 타이밍이다.</p><ol><li>1번에서 만들었던 디렉토리로 이동한다.</li><li>해당 디렉토리에서 원격저장소의 git을 clone한다. clone 뒤에 생성한 원격저장소의 주소를 입력하는데, 이는 remote가 동시에 일어나므로, 따로 remote 명령어를 입력안해도 된다.</li><li>연결 테스트겸, READMD.md 파일을 생성한다.</li><li>생성된 README.md파일을 푸시한다. (commit &gt; push)</li></ol><p>위의 순서를 코드로 옮기면. </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 1. 해당 디렉토리로 이동 --&gt;</span><br><span class="line"><span class="built_in">cd</span> Desktop</span><br><span class="line"><span class="built_in">cd</span> github-blog</span><br><span class="line"></span><br><span class="line">&lt;!-- 2. git <span class="built_in">clone</span> --&gt;</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/feel5ny/TEST.github.io.git</span><br><span class="line"><span class="built_in">cd</span> test.github.io</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 3. README.md파일 생성 --&gt;</span><br><span class="line"><span class="built_in">echo</span> README.md</span><br><span class="line"></span><br><span class="line">&lt;!-- 4. 원격저장소에 올리기 --&gt;</span><br><span class="line">git add --all</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><p>step 1이 끝났다! 그리고 벌써 호스팅이 완료되었다.<br><strong>USERNAME.github.io</strong>에 가보자.</p><hr><p>아직 블로그의 형태를 띄지 않았다. 위에서 말했던 generator를 이용하여 블로그의 구조를 짤 예정인데, 우리는 HEXO를 이용할 것이다. </p><h2 id="2-Hexo-설치하기"><a href="#2-Hexo-설치하기" class="headerlink" title="2. Hexo 설치하기"></a>2. Hexo 설치하기</h2><p>Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하다. 다양한 plugin과 테마를 지원하고 있다.<br><img src="/images/post_img/01/post_1-07.svg" width="600px"></p><h3 id="2-1-Hexo-설치-전-준비"><a href="#2-1-Hexo-설치-전-준비" class="headerlink" title="2-1. Hexo 설치 전 준비"></a>2-1. Hexo 설치 전 준비</h3><p>Hexo는 말했다 싶이 node.js 기반이기 때문에 node.js가 로컬에 기본적으로 설치되어있어야 한다. node.js는 <a href="https://nodejs.org/en/" target="_blank" rel="external">공식 사이트</a>에서 설치가 가능하다. stable버전을 추천한다.</p><h3 id="2-2-Hexo-npm-설치하기"><a href="#2-2-Hexo-npm-설치하기" class="headerlink" title="2-2. Hexo npm 설치하기"></a>2-2. Hexo npm 설치하기</h3><p>Node.js를 설치 한 후에 아래 CLI를 순서대로 입력하여 npm을 설치한다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p><p>node.js를 설치하면 npm을 사용할 수 있는데, 패키지 중에 hexo-cli를 설치한다. blog파일을 생성하여 hexo를 초기화한다. blog 디렉토리로 이동후, npm install을 사용하여, blog에 필요한 파일들을 자동으로 설치한다.</p><h3 id="2-3-설정파일-업데이트"><a href="#2-3-설정파일-업데이트" class="headerlink" title="2-3. 설정파일 업데이트"></a>2-3. 설정파일 업데이트</h3><p>위의 순서가 끝나면, root 디렉토리에 <code>_config.yml</code>이라는 설정파일이 생성된다. (yml파일은 사람이 쉽게 읽을 수 있는 데이터 직력화 양식으로,…<a href="http://www.openthefile.net/ko/extension/yml" target="_blank" rel="external">more</a>) 해당 파일에 블로그 정보를 수정한다. 나머지 정보는 <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo 공식 문서</a>에서.</p><ol><li><p>Site 정보<br>블로그 정보를 수정할 수 있다.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 제목(html head에 들어가는 title태그에 들어가는 제목과 같다.)</span><br><span class="line">subtitle: </span><br><span class="line">description:</span><br><span class="line">author: Nayoung Kim</span><br></pre></td></tr></table></figure></li><li><p>URL 정보<br>블로그 URL 정보를 설정할 수 있다.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://USERNAME.github.io</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure></li><li><p>Github 정보<br>배포를 위해서 저장소 주소를 추가한다.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/feel5ny/TEST.github.io.git</span><br></pre></td></tr></table></figure></li></ol><p>테마별로 구성을 수정하는 스타일이 다르다. 테마 적용하기 파트에서 anatol 레이아웃 수정방법을 설명하겠다.</p><h3 id="2-4-로컬에서-테스트하기"><a href="#2-4-로컬에서-테스트하기" class="headerlink" title="2-4. 로컬에서 테스트하기"></a>2-4. 로컬에서 테스트하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure><p>blog 디렉토리에 위치되어있는 상태에서 서버를 구동한다. blog에 위치되어있지 않으면 서버구동이 안된다. 서버 구동이 완료되면 4000번 포트로 접속이 가능하다. </p><ul><li><a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></li></ul><p>테스트시 구동이 잘 안될 경우, 서버를 껐다가 다시 실행해 보면된다. 서버를 끄는 방법은 터미널에서 <code>ctrl+c</code>를 두번 입력하면 된다. </p><hr><h2 id="3-Github에-배포하기"><a href="#3-Github에-배포하기" class="headerlink" title="3. Github에 배포하기"></a>3. Github에 배포하기</h2><p>로컬에서 테스트를 완료하면 USERNAME.github.io 주소로 배포해보자.<br><img src="/images/post_img/01/post_1-08.svg" width="600px"></p><h3 id="3-1-hexo-설정을-통해-정적-리소스를-생성하기"><a href="#3-1-hexo-설정을-통해-정적-리소스를-생성하기" class="headerlink" title="3-1. hexo 설정을 통해 정적 리소스를 생성하기"></a>3-1. hexo 설정을 통해 정적 리소스를 생성하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure><p>위 명령어를 입력하면, github에 올라갈 리소스만 정리되어 따로 폴더가 생성된다.</p><h3 id="3-2-배포하기"><a href="#3-2-배포하기" class="headerlink" title="3-2. 배포하기"></a>3-2. 배포하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><p>위 명령어를 입력하면 배고가 완료된다. generate와 deploy를 한번에 진행하고 싶은 경우 아래 명령어를 입력한다. </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure><p>약자로 <code>hexo d g</code>를 사용해도 됩니다.</p><h3 id="3-3-배포가-잘-안될-경우"><a href="#3-3-배포가-잘-안될-경우" class="headerlink" title="3-3. 배포가 잘 안될 경우"></a>3-3. 배포가 잘 안될 경우</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;intro&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="http://feel5ny.github.io/categories/blog/"/>
+    
+      <category term="hexo" scheme="http://feel5ny.github.io/categories/blog/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://feel5ny.github.io/tags/hexo/"/>
+    
+      <category term="node.js" scheme="http://feel5ny.github.io/tags/node-js/"/>
+    
+  </entry>
+  
+</feed>
