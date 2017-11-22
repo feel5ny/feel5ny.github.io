@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>2/ Typescript_tsconfig.json 프로퍼티의 종류 | 필오의 개발일지</title>
+    <title>2/ Typescript_기본 데이터 타입 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,21 +14,21 @@
     <meta name="description" content="컴파일러 옵션실제 프로젝트에서는 컴파일러 옵션을 그렇게 많이 셋팅하진 않는다. 옵션을 셋팅할 수 있는 전체 스펙은 이 링크로 가면 확인 가능하다.   타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.   최상위 프로퍼티 compileOnSave extends files, includ">
 <meta name="keywords" content="til,typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2&#x2F; Typescript_tsconfig.json 프로퍼티의 종류">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/15/Typescript_03/index.html">
+<meta property="og:title" content="2&#x2F; Typescript_기본 데이터 타입">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/16/Typescript_04/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
 <meta property="og:description" content="컴파일러 옵션실제 프로젝트에서는 컴파일러 옵션을 그렇게 많이 셋팅하진 않는다. 옵션을 셋팅할 수 있는 전체 스펙은 이 링크로 가면 확인 가능하다.   타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.   최상위 프로퍼티 compileOnSave extends files, includ">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/13/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-21T17:26:48.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/14/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-21T17:28:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2&#x2F; Typescript_tsconfig.json 프로퍼티의 종류">
+<meta name="twitter:title" content="2&#x2F; Typescript_기본 데이터 타입">
 <meta name="twitter:description" content="컴파일러 옵션실제 프로젝트에서는 컴파일러 옵션을 그렇게 많이 셋팅하진 않는다. 옵션을 셋팅할 수 있는 전체 스펙은 이 링크로 가면 확인 가능하다.   타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.   최상위 프로퍼티 compileOnSave extends files, includ">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/13/thumb_default.jpg">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/14/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/15/Typescript_03/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/16/Typescript_04/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -160,14 +160,14 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Typescript_03" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Typescript_04" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        2/ Typescript_tsconfig.json 프로퍼티의 종류
+        2/ Typescript_기본 데이터 타입
         </h1>
     
 
@@ -177,8 +177,8 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/15/Typescript_03/" class="article-date">
-            <time datetime="2017-11-15T10:30:01.000Z" itemprop="datePublished">2017-11-15</time>
+        <a href="/2017/11/16/Typescript_04/" class="article-date">
+            <time datetime="2017-11-16T03:33:40.000Z" itemprop="datePublished">2017-11-16</time>
         </a>
     </div>
 
@@ -405,7 +405,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/15/Typescript_03/" data-id="cjaalm1700000um2mbx16rhc7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/16/Typescript_04/" data-id="cjaalm17d0009um2m5nwsm023" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -523,20 +523,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/16/Typescript_04/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/11/16/algorithm_2016년A월B일/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            2/ Typescript_기본 데이터 타입
+            2016년 A월 B일
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/11/14/dada_06week/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/15/Typescript_03/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">overview</p>
+        <p class="article-nav-title">2/ Typescript_tsconfig.json 프로퍼티의 종류</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -743,7 +743,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/15/Typescript_03/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/16/Typescript_04/';
     
     (function() {
     var dsq = document.createElement('script');

@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Firebase의 storage 연동하기 | 필오의 개발일지</title>
+    <title>2016년 A월 B일 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,firebase,db" />
+        <meta name="keywords" content="algorithm" />
     
     
-    <meta name="description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="keywords" content="react,firebase,db">
+    <meta name="description" content="2016년 A월 B일2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각SUN,MON,TUE,WED,THU,FRI,SAT를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 2">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase의 storage 연동하기">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/13/firebaseStorage/index.html">
+<meta property="og:title" content="2016년 A월 B일">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/16/algorithm_2016년A월B일/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
+<meta property="og:description" content="2016년 A월 B일2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각SUN,MON,TUE,WED,THU,FRI,SAT를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 2">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-21T16:59:13.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/15/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-22T05:17:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase의 storage 연동하기">
-<meta name="twitter:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
+<meta name="twitter:title" content="2016년 A월 B일">
+<meta name="twitter:description" content="2016년 A월 B일2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각SUN,MON,TUE,WED,THU,FRI,SAT를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 2">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/15/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/13/firebaseStorage/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/16/algorithm_2016년A월B일/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Project/">Project</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project/Univ-Project/">Univ Project</a>
+    <a class="page-title-link" href="/categories/algorithm/">algorithm</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/algorithm/Level2/">Level2</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-firebaseStorage" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-algorithm_2016년A월B일" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Firebase의 storage 연동하기
+        2016년 A월 B일
         </h1>
     
 
@@ -177,42 +177,53 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/13/firebaseStorage/" class="article-date">
-            <time datetime="2017-11-13T01:10:04.000Z" itemprop="datePublished">2017-11-13</time>
+        <a href="/2017/11/16/algorithm_2016년A월B일/" class="article-date">
+            <time datetime="2017-11-16T04:42:33.000Z" itemprop="datePublished">2017-11-16</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/db/">db</a>, <a class="tag-link" href="/tags/firebase/">firebase</a>, <a class="tag-link" href="/tags/react/">react</a>
+        <a class="tag-link" href="/tags/algorithm/">algorithm</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="학교-로고-모음-사이트"><a href="#학교-로고-모음-사이트" class="headerlink" title="학교 로고 모음 사이트"></a>학교 로고 모음 사이트</h2><blockquote>
-<p>현재 상황</p>
-</blockquote>
-<p>팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.</p>
-<h3 id="DB-구조짜기"><a href="#DB-구조짜기" class="headerlink" title="DB 구조짜기"></a>DB 구조짜기</h3><p>300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건 db에 url 칼럼을 넣는 방식. 파이어베이스에서는 스토리지와 데이터베이스 연결하는 것까지는 제공하지 않는 듯하다. 수동으로 작업해야 하는데 아직 좋은 방법이 떠오르지 않는다. </p>
-<h3 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h3><p>storage에 있는 데이터를 가져오는데, 현재 이슈.</p>
-<ol>
-<li>한 디렉토리에 300개를 넣어두고 한 번에 갖고 오는 방식이라 아주 느리다.<ul>
-<li>db 디렉토리를 20개씩 분리한 후, 더 보기 형태의 방식으로 해결해야겠다.<br><br></li>
+            <h2 id="2016년-A월-B일"><a href="#2016년-A월-B일" class="headerlink" title="2016년 A월 B일"></a>2016년 A월 B일</h2><p>2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각<br><code>SUN,MON,TUE,WED,THU,FRI,SAT</code><br>를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 24일은 화요일이므로 TUE를 반환하면 됩니다. </p>
+<hr>
+<h3 id="1-처음-생각한-로직"><a href="#1-처음-생각한-로직" class="headerlink" title="1. 처음 생각한 로직"></a>1. 처음 생각한 로직</h3><ul>
+<li>월마다 일 수가 다르다.<br>a월이 1,3,5,7,10,12 &gt; 31일<br>a월이 4,6,8,9,11 &gt; 30일<br>a월이 2 &gt; 28일</li>
 </ul>
+<ul>
+<li><p>일별로 요일이 다르다.<br><code>const day = [&quot;FRI&quot;, &quot;SAT&quot;, &quot;SUN&quot;, &quot;MON&quot;, &quot;TUE&quot;, &quot;WED&quot;, &quot;THU&quot;]</code><br>7일 day[0]<br>6일 day[6]</p>
+<p>전체 일수가 x라면<br>x일을 7로 나눈후 나머지값 arr[x%7]<br>x의 값은 ?</p>
 </li>
-<li>map을 돌려서 해당 db 인덱스값과 같은 값의 파일을 갖고 오게 하기위해서 파일 이름에 학교 이름이 아닌 PNG_1.png 이런 방식의 파일 이름으로 지정해두었다. 매칭이 잘못된 학교 이름을 찾아 내기도 힘들고, ux도 너무 안 좋을 것 같아서, 파일 이름을 학교 이름으로 바꾸기로 결정했다.<br><br></li>
-<li>생각해 보니 지역별 칼럼을 정리하지 않았다.<br><br></li>
-<li>비록 일일이 검토 후에 로고를 올리는 것이지만, 한 번 더 체킹을 위해 학교 url을 넣는게 좋겠다고 판단. 칼럼을 추가해야겠다.<ul>
-<li>공공api가 있었으면 좋겠다.</li>
 </ul>
+<ul>
+<li>전체 일수를 배열과 연결하자.<br>31일 + 1 = 32 // 배열에서 금요일부터 32번 후의 값<br>1월 <code>0</code><br>2월 <code>31일 + b</code><br>3월 <code>31일 + 29일 + b</code><br>4월 <code>31일 + 29일 + 31일 + b</code><br>5월 <code>31일 + 29일 + 31일 + 30일 + b</code><br>6월 <code>31일 + 29일 + 31일 + 30일 + 31일</code> = <code>31일 * 3 + 30일 * 2 - 1</code><br>7월 <code>31일 * 3 + 30일 * 3 -1</code><br>8월 <code>31일 * 4 + 30일 * 3 -1</code><br>9월 <code>31일 * 5 + 30일 * 3 -1</code><br>10월 <code>31일 * 5 + 30일 * 4 -1</code><br>11월 <code>31일 * 6 + 30일 * 4 -1</code><br>12월 <code>31일 * 6 + 30일 * 5 -1</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDayName</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> answer = <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">let</span> month = a;</span><br><span class="line">  <span class="keyword">let</span> date = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> inputDate = b;</span><br><span class="line">  <span class="keyword">let</span> week = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> day = [<span class="string">"FRI"</span>, <span class="string">"SAT"</span>, <span class="string">"SUN"</span>, <span class="string">"MON"</span>, <span class="string">"TUE"</span>, <span class="string">"WED"</span>, <span class="string">"THU"</span>]</span><br><span class="line">  <span class="keyword">switch</span> (month) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      date = <span class="number">0</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      date = <span class="number">31</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      date = <span class="number">31</span> + <span class="number">28</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">2</span> + <span class="number">29</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">2</span> + <span class="number">30</span> * <span class="number">2</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">3</span> + <span class="number">30</span> * <span class="number">2</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">3</span> + <span class="number">30</span> * <span class="number">3</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">4</span> + <span class="number">30</span> * <span class="number">3</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">5</span> + <span class="number">30</span> * <span class="number">3</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">5</span> + <span class="number">30</span> * <span class="number">4</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">6</span> + <span class="number">30</span> * <span class="number">4</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">      date = <span class="number">31</span> * <span class="number">6</span> + <span class="number">30</span> * <span class="number">5</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  date = date + inputDate</span><br><span class="line">  <span class="keyword">return</span> day[date % <span class="number">7</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//아래 코드는 테스트를 위한 코드입니다.</span></span><br><span class="line"><span class="built_in">console</span>.log(getDayName(<span class="number">5</span>, <span class="number">24</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="2-case-문이-너무-비효율적이다-gt-반복문으로-바꾸자"><a href="#2-case-문이-너무-비효율적이다-gt-반복문으로-바꾸자" class="headerlink" title="2. case 문이 너무 비효율적이다. &gt; 반복문으로 바꾸자"></a>2. case 문이 너무 비효율적이다. &gt; 반복문으로 바꾸자</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDayName</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> answer = [<span class="string">"THU"</span>, <span class="string">"FRI"</span>, <span class="string">"SAT"</span>, <span class="string">"SUN"</span>, <span class="string">"MON"</span>, <span class="string">"TUE"</span>, <span class="string">"WED"</span>,];</span><br><span class="line">  <span class="keyword">let</span> month = [<span class="number">31</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>];</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; a - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    sum += month[i];</span><br><span class="line">  &#125;</span><br><span class="line">  sum += b;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> answer[(sum % <span class="number">7</span>)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Date-메소드를-사용해보자"><a href="#3-Date-메소드를-사용해보자" class="headerlink" title="3. Date 메소드를 사용해보자."></a>3. Date 메소드를 사용해보자.</h3><p>메소드 사용</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDayName</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arr = [<span class="string">'SUN'</span>, <span class="string">'MON'</span>, <span class="string">'TUE'</span>, <span class="string">'WED'</span>, <span class="string">'THU'</span>, <span class="string">'FRI'</span>, <span class="string">'SAT'</span>];</span><br><span class="line">  <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">`2016,<span class="subst">$&#123;a&#125;</span>,<span class="subst">$&#123;b&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">let</span> day = date.getDay()</span><br><span class="line">  <span class="keyword">return</span> arr[day];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>템플릿 리터럴을 사용하지 않으면 값이 이상하게 나온다.</p>
+<ul>
+<li><p>이유 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Date();</span><br><span class="line">new Date(value);</span><br><span class="line">new Date(dateString);</span><br><span class="line">new Date(year, month[, day[, hour[, minutes[, seconds[, milliseconds]]]]]);</span><br></pre></td></tr></table></figure>
+<p><strong> *dateString</strong><br>날짜를 표현하는 <code>문자열값</code>. 문자열은 parse 메소드에 의해 인식가능한 형식이어야 한다.</p>
+<p><strong> *year, month, date</strong><br>날짜의 각 부분을 표현하는 <code>정수값</code>. 월(month)부분은 0부터 11까지의 값을 가지며, 0이 1월을, 11이 12월을 가리킨다. </p>
 </li>
-</ol>
+</ul>
 <blockquote>
-<p>생각보다 db 짜는건 굉장한 노가다다! dada 프로젝트 할 때 백엔드 분께서 ‘생각보다 노가다도 많이 하게 되는데, 또 생각보다 어렵진 않더라구요!’ 라고 했던 말이 와닿는 하루다. </p>
+<p>때문에 템플릿 리터럴로 넣게 되면 문자열이 되어서 그대로 파싱하지만, 숫자일 경우 배열의 인덱스값으로 인지하여서 월의 시작숫자가 0이게 된다.<br>즉, let date = new Date(2016,<code>a-1</code>,b) 이렇게 넣어야 한다.</p>
 </blockquote>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" rel="external">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date</a></li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -220,7 +231,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/13/firebaseStorage/" data-id="cjaalm17h000gum2mt6n7kc2z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/16/algorithm_2016년A월B일/" data-id="cjaalm17a0006um2mvywtjb2j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -338,20 +349,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/13/algorithm_야근지수/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            야근지수 (미제)
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/10/Typescript_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/16/Typescript_04/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">1/ Typescript_환경 셋팅</p>
+        <p class="article-nav-title">2/ Typescript_기본 데이터 타입</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -558,7 +559,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/13/firebaseStorage/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/16/algorithm_2016년A월B일/';
     
     (function() {
     var dsq = document.createElement('script');
