@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>7/ class(2) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="til,typescript" />
+    
+    
+    <meta name="description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약  class getter, setter class 멤버변수 class 멤버함수 class private static property or method Abstract Class private constructor single">
+<meta name="keywords" content="til,typescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7&#x2F; class(2)">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/22/Typescript_08/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약  class getter, setter class 멤버변수 class 멤버함수 class private static property or method Abstract Class private constructor single">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/21/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-27T08:14:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7&#x2F; class(2)">
+<meta name="twitter:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약  class getter, setter class 멤버변수 class 멤버함수 class private static property or method Abstract Class private constructor single">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/21/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/22/Typescript_08/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/">Project</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL/">TIL</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL/Typescript/">Typescript</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/algorithm/">algorithm</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/algorithm/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/algorithm/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL/Typescript/">Typescript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Typescript_08" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        7/ class(2)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/22/Typescript_08/" class="article-date">
+            <time datetime="2017-11-22T01:32:11.000Z" itemprop="datePublished">2017-11-22</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/til/">til</a>, <a class="tag-link" href="/tags/typescript/">typescript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8-14" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
+</blockquote>
+<p><strong>요약</strong></p>
+<ol>
+<li><a href="#getter_setter">class getter, setter</a></li>
+<li><a href="#member">class 멤버변수</a></li>
+<li><a href="#memberFunction">class 멤버함수</a></li>
+<li><a href="#statcProperty">class private static property or method</a></li>
+<li><a href="#abstract">Abstract Class</a></li>
+<li><a href="#constructor">private constructor</a></li>
+<li><a href="#singleTon">singleTon</a></li>
+<li><a href="#readonly">readonly</a></li>
+</ol>
+<hr>
+<h3 id="1-class-getter-setter"><a href="#1-class-getter-setter" class="headerlink" title=" 1. class getter, setter"></a><a name="getter_setter"></a> 1. class getter, setter</h3><p>get, set을 하는 중에 무언가를 해주기 위해서 사용한다. get과 set 사이에 추가적인 작업이 있을 때 사용한다.</p>
+<ol>
+<li>_ 를 변수명 앞에 붙이고, 내부에서만 사용한다.</li>
+<li>getter를 함수처럼 설정하면, 프로퍼티처럼 꺼내쓸수있다.</li>
+<li>마찬가지로 setter 를 함수처럼 설정하면, 추가 작업을 하고 셋팅할 수 있다.</li>
+</ol>
+<blockquote>
+<p>강사님은 getter setter가 혼란을 줄 수 있는 경우가 있어서 사용하지 않고, 대신 메서드를 같은 역할을 하는 메서드를 만드는데 메서드의 이름을 getName, setName으로 짓는다고 하셨따.</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">private</span> _name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">private</span> _age: <span class="built_in">number</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span>, age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">        <span class="keyword">this</span>._age = age;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> name() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> name(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="comment">// 작업</span></span><br><span class="line">        <span class="keyword">this</span>._name = <span class="string">`<span class="subst">$&#123;name&#125;</span> Lee`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = <span class="keyword">new</span> Person(<span class="string">'Mark'</span>, <span class="number">35</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line">person.name = <span class="string">'Woongjae'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br></pre></td></tr></table></figure>
+<h4 id="getter"><a href="#getter" class="headerlink" title="getter"></a><code>getter</code></h4><p>getter는 어떤 멤버 변수에 접근할 때마다 멤버 변수의 값을 조작하는 행위가 필요할 때 사용한다. 사용 방법은 아래와 같다.</p>
+<h4 id="setter"><a href="#setter" class="headerlink" title="setter"></a><code>setter</code></h4><p>setter는 어떤 멤버 변수에 값을 할당할 때마다 멤버 변수의 값을 조작하는 행위가 필요할 때 사용한다. 사용 방법은 아래와 같다.</p>
+<hr>
+<h3 id="2-class-멤버변수"><a href="#2-class-멤버변수" class="headerlink" title=" 2. class 멤버변수"></a><a name="member"></a> 2. class 멤버변수</h3><p>객체지향의 class와 거의 유사하다. static property와 static method가 있다.</p>
+<ol>
+<li>static 키워드를 붙힌 프로퍼티는 클래스.프로퍼티로 사용한다.</li>
+<li>static 프로퍼티에 private, protected 를 붙히면 똑같이 동작한다.</li>
+</ol>
+<ul>
+<li>public static은 외부에서 변경이 가능하다.</li>
+<li>default는 public이다.</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CITY = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> lastName: <span class="built_in">string</span> = <span class="string">'Lee'</span>;</span><br><span class="line">    <span class="keyword">private</span> _name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">private</span> _age: <span class="built_in">number</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span>, age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">        <span class="keyword">this</span>._age = age;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> print() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;this._name&#125;</span> <span class="subst">$&#123;Person.lastName&#125;</span> in <span class="subst">$&#123;Person.CITY&#125;</span>.`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = <span class="keyword">new</span> Person(<span class="string">'Mark'</span>, <span class="number">35</span>);</span><br><span class="line">Person.CITY = <span class="string">'Seoul'</span>;</span><br><span class="line">person.print(); <span class="comment">// Mark Lee in Seoul.</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-class-멤버함수"><a href="#3-class-멤버함수" class="headerlink" title=" 3. class 멤버함수"></a><a name="memberFunction"></a> 3. class 멤버함수</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Talk(): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'안녕하세요.'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.Talk(); <span class="comment">// 안녕하세요.</span></span><br></pre></td></tr></table></figure>
+<p>public static은 의미가 있다.<br>private static 메소드와 프로퍼티는 무슨 의미가 있나?<br>대부분 한 ts파일에 한 class를 사용하고, 모듈을 다른곳에서 쓰기위해서 export import를 쓴다. </p>
+<h4 id="private-static"><a href="#private-static" class="headerlink" title="private static?"></a><code>private static</code>?</h4><ul>
+<li>사용시 class의 private static과 ts파일 안의 제일 상단에 있는 const 변수와 어떤 차이가 있나? 라고 할때 애매하다.</li>
+<li>private이라 애매한 것. </li>
+</ul>
+<hr>
+<h3 id="4-class-private-static-property-or-method"><a href="#4-class-private-static-property-or-method" class="headerlink" title=" 4. class private static property or method"></a><a name="statcProperty"></a> 4. class private static property or method</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> PROPERTY = <span class="string">'프라이빗 프로퍼티'</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> METHOD() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'프라이빗 메서드'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(Person.PROPERTY);</span><br><span class="line">        Person.METHOD();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> PROPERTY = <span class="string">'모듈 내 변수'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">METHOD</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'모듈 내 함수'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(PROPERTY);</span><br><span class="line">        METHOD();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5-Abstract-Class-128566"><a href="#5-Abstract-Class-128566" class="headerlink" title=" 5. Abstract Class &#128566;"></a><a name="abstract"></a> 5. Abstract Class &#128566;</h3><ol>
+<li>abstract 키워드가 사용된 클래스는 new 로 생성할 수 없다.</li>
+<li>abstract 키워드가 사용된 클래스를 상속하면 abstract 키워드가 붙은 함수를 구현해야 한다.</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> APerson &#123;</span><br><span class="line">    <span class="keyword">protected</span> _name: <span class="built_in">string</span> = <span class="string">'Mark'</span>;</span><br><span class="line">    <span class="keyword">abstract</span> setName(name: <span class="built_in">string</span>): <span class="built_in">void</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person <span class="keyword">extends</span> APerson &#123;</span><br><span class="line">    setName(name: <span class="built_in">string</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const person = new APerson(); // (X)</span></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="6-private-constructor"><a href="#6-private-constructor" class="headerlink" title=" 6. private constructor"></a><a name="constructor"></a> 6. private constructor</h3><ol>
+<li>생성자 함수 앞에 접근제어자인 private 을 붙일 수 있다.</li>
+<li>외부에서 생성이 불가능하다.</li>
+</ol>
+<blockquote>
+<p>내부에서 생성하는 방법을 써야하고, 그러다보니 싱글톤 패턴을 정확하게 배치해서 사용할 수 있게 되었다. </p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Preference &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// const p: Preference = new Preference(); (X)</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="7-singleTon-128580"><a href="#7-singleTon-128580" class="headerlink" title=" 7. singleTon &#128580;"></a><a name="singleTon"></a> 7. singleTon &#128580;</h3><p>자바스크립트의 함수는 new로 생성자를 사용할 때마다 새로이 생성된 객체를 리턴합니다. 하지만 특수한 상황에서는 하나의 함수에서 생성되는 객체가 오직 한개만을 가져야 할 때가 있다. 그럴 경우 사용되는 디자인 패턴이 <code>Singleton Pattern</code></p>
+<ul>
+<li>싱글턴 패턴 : 객체리터럴이 싱글턴 패턴의 대표적.<ul>
+<li>모듈패턴을 변형한 디자인 패턴<ul>
+<li>처음 namespace를 만들 때 사용한다. </li>
+<li>게임을 실행할 때 게임은 한번만 켜져야 하기 때문에 싱글턴이 적절.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>private 생성자를 이용해서 내부에서만 인스턴스 생성이 가능하도록 함.</li>
+<li>pubilc static 메서드를 통해 private static 인스턴스 레퍼런스를 획득한다.</li>
+<li>Lazy Loading (Initialization) : 최초 실행시가 아니라, 사용시에 할당을 함</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Preference &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> getInstance() &#123;</span><br><span class="line">        <span class="comment">// 유일 객체가 정의되지 않았다면 객체를 생성.</span></span><br><span class="line">        <span class="keyword">if</span> (Preference.instance === <span class="literal">null</span>) &#123;</span><br><span class="line">            Preference.instance = <span class="keyword">new</span> Preference();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Preference.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> instance: Preference = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p: Preference = Preference.getInstance();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="8-readonly"><a href="#8-readonly" class="headerlink" title=" 8. readonly"></a><a name="readonly"></a> 8. readonly</h3><p>private인데 get, set중 get만 있는 상황과 같다. </p>
+<ol>
+<li><code>private readonly</code> 로 선언된 경우, 생성자에서는 할당이 가능하다.</li>
+<li><code>private readonly</code> 로 선언된 경우, 생성자 이외에서는 할당이 불가능하다.</li>
+<li><code>public readonly</code> 로 선언된 경우, 클래스 외부에서는 다른값을 할당할 수 없다.</li>
+<li>마치 getter 만 있는 경우와 같다.</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">private</span> readonly _name: <span class="built_in">string</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> readonly age: <span class="built_in">number</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> setName(name: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="comment">// this._name = name; (X)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p: Person = <span class="keyword">new</span> Person(<span class="string">'Mark'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p.age);</span><br><span class="line"><span class="comment">// p.age = 36; // (X)</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/es6-class" target="_blank" rel="external">http://poiemaweb.com/es6-class</a></li>
+<li><a href="http://blog.javarouka.me/2012/02/javascripts-pattern-1-singeton-patterrn.html" target="_blank" rel="external">http://blog.javarouka.me/2012/02/javascripts-pattern-1-singeton-patterrn.html</a></li>
+<li><a href="http://karl27.tistory.com/10" target="_blank" rel="external">http://karl27.tistory.com/10</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/11/22/Typescript_08/" data-id="cjahx4vko000ex02mptqqgzt2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/11/21/Typescript_07/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">6/ class(1)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/22/Typescript_08/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/21/thumb_default.jpg)" alt="7/ class(2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2017/11/22/Typescript_08/" class="title">7/ class(2)</a></p>
+                            <p class="item-date"><time datetime="2017-11-22T01:32:11.000Z" itemprop="datePublished">2017-11-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/21/Typescript_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/20/thumb_default.jpg)" alt="6/ class(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2017/11/21/Typescript_07/" class="title">6/ class(1)</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T01:32:11.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/20/Typescript_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/18/thumb_default.jpg)" alt="5/ interface" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2017/11/20/Typescript_06/" class="title">5/ interface</a></p>
+                            <p class="item-date"><time datetime="2017-11-20T13:10:56.000Z" itemprop="datePublished">2017-11-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/18/Typescript_05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/17/thumb_default.jpg)" alt="4/ 타입추론, Type assertions, Type alias" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2017/11/18/Typescript_05/" class="title">4/ 타입추론, Type assertions, Type alias</a></p>
+                            <p class="item-date"><time datetime="2017-11-18T06:13:11.000Z" itemprop="datePublished">2017-11-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/17/Typescript_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/14/thumb_default.jpg)" alt="3/ Typescript_기본 데이터 타입" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL/">TIL</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2017/11/17/Typescript_04/" class="title">3/ Typescript_기본 데이터 타입</a></p>
+                            <p class="item-date"><time datetime="2017-11-17T03:33:40.000Z" itemprop="datePublished">2017-11-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/">Project</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL/">TIL</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL/Typescript/">Typescript</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/til/" style="font-size: 20px;">til</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/11/22/Typescript_08/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
