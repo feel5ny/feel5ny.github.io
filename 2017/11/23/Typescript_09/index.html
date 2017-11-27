@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>1/ Typescript_환경 셋팅 | 필오의 개발일지</title>
+    <title>8/ Generic | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,24 +11,24 @@
         <meta name="keywords" content="til,typescript" />
     
     
-    <meta name="description" content="개발환경 구축 및 컴파일러 셋팅앞선 글에서 컴파일러와 트랜스파일러 인터프리터의 차이점을 알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는했지만, 앞으로의 글에서는 컴파일러라고 통일해서 쓰려고 한다 . 타입스크립트는 컴파일드 언어라고 했지만 , 실제적으로 어떻게 환경을 셋팅하고 작업해야하는지 알아보자 .    타입스크립트 정리 글은 이웅재님의강의와강의록을">
+    <meta name="description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를 보다 범용적으로 재사용하기 위한">
 <meta name="keywords" content="til,typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1&#x2F; Typescript_환경 셋팅">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/10/Typescript_02/index.html">
+<meta property="og:title" content="8&#x2F; Generic">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/23/Typescript_09/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="개발환경 구축 및 컴파일러 셋팅앞선 글에서 컴파일러와 트랜스파일러 인터프리터의 차이점을 알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는했지만, 앞으로의 글에서는 컴파일러라고 통일해서 쓰려고 한다 . 타입스크립트는 컴파일드 언어라고 했지만 , 실제적으로 어떻게 환경을 셋팅하고 작업해야하는지 알아보자 .    타입스크립트 정리 글은 이웅재님의강의와강의록을">
+<meta property="og:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를 보다 범용적으로 재사용하기 위한">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/12/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-27T08:52:22.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/22/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-27T15:01:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1&#x2F; Typescript_환경 셋팅">
-<meta name="twitter:description" content="개발환경 구축 및 컴파일러 셋팅앞선 글에서 컴파일러와 트랜스파일러 인터프리터의 차이점을 알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는했지만, 앞으로의 글에서는 컴파일러라고 통일해서 쓰려고 한다 . 타입스크립트는 컴파일드 언어라고 했지만 , 실제적으로 어떻게 환경을 셋팅하고 작업해야하는지 알아보자 .    타입스크립트 정리 글은 이웅재님의강의와강의록을">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/12/thumb_default.jpg">
+<meta name="twitter:title" content="8&#x2F; Generic">
+<meta name="twitter:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를 보다 범용적으로 재사용하기 위한">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/22/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/10/Typescript_02/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/23/Typescript_09/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -160,14 +160,14 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Typescript_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Typescript_09" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        1/ Typescript_환경 셋팅
+        8/ Generic
         </h1>
     
 
@@ -177,8 +177,8 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/10/Typescript_02/" class="article-date">
-            <time datetime="2017-11-10T01:52:01.000Z" itemprop="datePublished">2017-11-10</time>
+        <a href="/2017/11/23/Typescript_09/" class="article-date">
+            <time datetime="2017-11-23T05:22:55.000Z" itemprop="datePublished">2017-11-23</time>
         </a>
     </div>
 
@@ -192,81 +192,70 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="개발환경-구축-및-컴파일러-셋팅"><a href="#개발환경-구축-및-컴파일러-셋팅" class="headerlink" title="개발환경 구축 및 컴파일러 셋팅"></a>개발환경 구축 및 컴파일러 셋팅</h2><p><a href="https://feel5ny.github.io/2017/11/08/TS_01/">앞선 글</a>에서 컴파일러와 트랜스파일<br>러 인터프리터의 차이점을 알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는<br>했지만, 앞으로의 글에서는 컴파일러라고 통일해서 쓰려고 한다 . 타입스크립트는 컴<br>파일드 언어라고 했지만 , 실제적으로 어떻게 환경을 셋팅하고 작업해야하는지 알아보<br>자 .</p>
-<p><img src="/images/post_img/12/index.jpg"></p>
-<hr>
-<blockquote>
-<p>타입스크립트 정리 글은 이웅재님의<br><a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와<br><a href="http://slides.com/woongjae/deck-8#" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. ( 짱<br>짱) <strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
+            <blockquote>
+<p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8-15" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
 </blockquote>
+<p><strong>요약</strong><br>제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를 보다 범용적으로 재사용하기 위한 요구가 있기 때문에 제네릭이라는 프로그래밍 기법이 생긴 게 아닐까한다. </p>
 <ol>
-<li>실행환경</li>
-<li>컴파일러 셋팅, 에디터</li>
-<li>간단하게 실습</li>
-<li>컴파일러 옵션</li>
+<li><a href="#generic">~any~ =&gt; generic</a></li>
+<li><a href="#basic">basic generic</a></li>
+<li><a href="#array">Generic Array</a></li>
+<li><a href="#types">Generic Types</a></li>
+<li><a href="#class">Generic Class</a></li>
+<li><a href="#extends">Generic with extends</a></li>
+<li><a href="#multiple">Generic with multiple types</a></li>
+<li><a href="#lookupSystem">type lookup system</a></li>
 </ol>
-<p><strong>목표</strong> 타입스크립트를 사용하기 위해서 첫번째 실행환경을 셋팅하고 , 컴파일러 셋<br>팅 (npm으로 설치 ), 에디터에서 환경셋팅(tslint, 등등) 을 하고 , 간단하게 실습으<br>로 컴파일 테스팅해본다. 기본 테스트가 완료되면 컴파일러 옵션을 어떻게 추가해야하<br>는지 알아본다 .</p>
 <hr>
-<h2 id="1-실행환경"><a href="#1-실행환경" class="headerlink" title="1. 실행환경"></a>1. 실행환경</h2><p>런타임 환경</p>
-<h3 id="1-1-node-js"><a href="#1-1-node-js" class="headerlink" title="1-1. node.js"></a>1-1. node.js</h3><ul>
-<li>자바스크립트 런타임 환경으로 node.js를 사용한다.</li>
-<li>컴파일러를 설치하기 위해서 필요하다.</li>
-<li>타입스크립트에서 컴파일러 프로그램을 제공하는 것이 npm 모듈로 있기 때문에 ..</li>
-<li>node.js없이 VScode에서도 셋팅이 가능하긴하다 . (2번에서 확인!)</li>
-<li>버전을 바꾸고 싶을 때는 nvm (node.js version manager) 사용 ~</li>
-</ul>
-<h3 id="1-2-browser"><a href="#1-2-browser" class="headerlink" title="1-2. browser"></a>1-2. browser</h3><ul>
-<li>결과를 보는 곳.. 그냥 있는거 쓰자 .</li>
-</ul>
-<hr>
-<h2 id="2-타입스크립트-컴파일러-셋팅-에디터"><a href="#2-타입스크립트-컴파일러-셋팅-에디터" class="headerlink" title="2. (타입스크립트 ) 컴파일러 셋팅 , 에디터"></a>2. (타입스크립트 ) 컴파일러 셋팅 , 에디터</h2><p>타입스크립트를 셋팅해 보자. 셋팅 방법에는 npm 과 VScode plugin으로 설치하는 방법<br>이 있는데 , npm으로 설치해보았다 .</p>
-<h3 id="2-1-npm으로-설치하기"><a href="#2-1-npm으로-설치하기" class="headerlink" title="2-1. npm으로 설치하기"></a>2-1. npm으로 설치하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i typescript -g</span><br></pre></td></tr></table></figure>
-<p>설치 후 node_modules 폴더의 bin파일에 tsc 파일이 생성되는 것을 볼 수 있다 .<br><code>.bin</code> 내부에 있는 파일들은 스크립트에서 경로 없이 파일 이름으로만 바로 실행시킬<br>수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">node_modules/.bin/tsc 파일이름</span><br><span class="line">// 원래는 이렇게</span><br><span class="line"></span><br><span class="line">tsc source.ts</span><br><span class="line">// 경로 생략 가능, 뒷부분은 컴파일 할 파일 이름</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-Visual-Studio-Code-내장-플러그인-사용하기"><a href="#2-2-Visual-Studio-Code-내장-플러그인-사용하기" class="headerlink" title="2-2. Visual Studio Code 내장 플러그인 사용하기"></a>2-2. Visual Studio Code 내장 플러그인 사용하기</h3><p>타입스크립트로 만들어졌기 때문에 타입스크립트에 대한 지원이 강력 !</p>
-<p><img src="/images/post_img/12/vs_01.jpg"><br>ts파일을 선택 후 하단 bar를 보면 Typescript라는 단어와 버전이 보인다. 버전을 누르면 옵션창이 보이게 되는데, 이는 VS Code에 내장되어있는 컴파일러 리스트 중 선택하라는 옵션창이다. 내장된 컴파일러 버전은 VS Code 가 업데이트 되면서 자동으로 올라가며, 컴파일러 버전과 VS Code 의 버전은 상관 관계가 있다. 내장된 컴파일러를 선택할수 있고, 직접 설치한 컴파일러를 선택할 수도 있다.</p>
-<h3 id="2-3-tslint-설치"><a href="#2-3-tslint-설치" class="headerlink" title="2-3. tslint 설치"></a>2-3. tslint 설치</h3><p>eslint와 같이 코딩 컨벤션을 맞추기 위한 프로그램이다 .</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i typescript tslint (로컬)</span><br><span class="line">tslint --init</span><br></pre></td></tr></table></figure>
-<p>tslint.json파일이 생성되고, 프로젝트에 맞게 코딩 컨벤션을 셋팅할 수 있다 .<br><a href="https://palantir.github.io/tslint/" target="_blank" rel="external">https://palantir.github.io/tslint/</a></p>
+<h3 id="1-any-gt-generic"><a href="#1-any-gt-generic" class="headerlink" title=" 1. ~any~ =&gt; generic"></a><a name="generic"></a> 1. ~any~ =&gt; generic</h3><p>any의 사용을 지양하고자 타입을 인자로 넘긴다.</p>
 <ul>
-<li><p>에디터에서 tslint 플러그인 설치</p>
-<ol>
-<li>cmd + p &gt; 옵션창</li>
-<li>ext install tslint 그냥 확장프로그램에 가서 tslint 검색 후 다운로드 받아도<br>된다.</li>
+<li>탬플릿을 만드는 개념. 인자값과 출력값의 타입을 같게 탬플릿을 만들어준다.</li>
+<li>제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 <code>하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다.</code> 한번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</li>
+<li><code>T</code>는 제네릭을 선언할 때 관용적으로 사용되는 식별자로 타입 파라미터(Type parameter)라 한다. T는 Type의 약자로 반드시 T를 사용하여야 하는 것은 아니다.</li>
+<li>함수에도 제네릭을 사용할 수 있다. 제네릭을 사용하면 하나의 타입만이 아닌 다양한 타입의 매개변수와 리턴값을 사용할 수 있다.</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloGeneric</span>&lt;<span class="title">T</span>&gt;(<span class="params">message: T</span>): <span class="title">T</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloString</span>(<span class="params">message: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloNumber</span>(<span class="params">message: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 더 많은 반복된 함수들 ...</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">message: <span class="built_in">any</span></span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloGeneric</span>&lt;<span class="title">T</span>&gt;(<span class="params">message: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(hello(<span class="string">'Mark'</span>).length);</span><br><span class="line"><span class="built_in">console</span>.log(hello(<span class="number">35</span>).length); <span class="comment">// hello 의 리턴이 any 이기 때문에 타입 헬퍼가 제대로 되지 않음</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(helloGeneric(<span class="number">35</span>).toString()); <span class="comment">// console.log(helloGeneric&lt;number&gt;(35).toString());</span></span><br><span class="line"><span class="comment">// helloGeneric 을 사용하면 정상적으로 사용가능</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-basic-generic"><a href="#2-basic-generic" class="headerlink" title=" 2. basic generic"></a><a name="basic"></a> 2. basic generic</h3><ol>
+<li>Generic 타입을 쓰지 않으면, T 로 추론</li>
+<li>Generic 타입을 쓰면, T 를 확인</li>
 </ol>
-<p>VScode : <a href="https://marketplace.visualstudio.com/items?itemName=eg2.tslint" target="_blank" rel="external">https://marketplace.visualstudio.com/items?itemName=eg2.tslint</a></p>
-</li>
-</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloGeneric</span>&lt;<span class="title">T</span>&gt;(<span class="params">message: T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>&lt;<span class="title">T</span>&gt;(<span class="params">message:  T</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(hello&lt;<span class="built_in">string</span>&gt;(<span class="string">'Hello'</span>));</span><br><span class="line"><span class="keyword">let</span> age = hello(<span class="number">35</span>);</span><br><span class="line">hello&lt;<span class="built_in">number</span>&gt;(<span class="string">'35'</span>);</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="3-간단하게-실습"><a href="#3-간단하게-실습" class="headerlink" title="3. 간단하게 실습"></a>3. 간단하게 실습</h2><h3 id="3-1-특정-프로젝트-폴더에서-타입스크립트-컴파일러-설정에-맞춰-컴파일"><a href="#3-1-특정-프로젝트-폴더에서-타입스크립트-컴파일러-설정에-맞춰-컴파일" class="headerlink" title="3-1. 특정 프로젝트 폴더에서 타입스크립트 컴파일러 설정에 맞춰 컴파일"></a>3-1. 특정 프로젝트 폴더에서 타입스크립트 컴파일러 설정에 맞춰 컴파일</h3><p>tsconfig.json 파일에서 옵션을 추가하여 컴파일시 여러 조건을 걸 수 있다.</p>
+<h3 id="3-Generic-Array"><a href="#3-Generic-Array" class="headerlink" title=" 3. Generic Array"></a><a name="array"></a> 3. Generic Array</h3><p>hello 함수의 제네릭 타입을 [] 를 이용하여 배열로 사용할 수 있음</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>&lt;<span class="title">T</span>&gt;(<span class="params">messages: T[]</span>): <span class="title">T</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> messages[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(hello&lt;<span class="built_in">string</span>&gt;([<span class="string">'Hello'</span>, <span class="string">'World'</span>]));</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4-Generic-Type"><a href="#4-Generic-Type" class="headerlink" title=" 4. Generic Type"></a><a name="types"></a> 4. Generic Type</h3><p>구현체에 return T 를 설정하지 않아도, return false 시 오류가 나지 않는다?</p>
 <ul>
-<li>tsconfig 파일 초기셋팅</li>
+<li>때에 따라서 적합하지 않을 수 있다. </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc --init</span><br></pre></td></tr></table></figure>
-<p>tsconfig.json 파일이 생성이 된다. 처음 생성시 디폴트로 되어있는 tsconfig.json파<br>일</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">    /* Basic Options */</span><br><span class="line">    "target":</span><br><span class="line">      "es5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,</span><br><span class="line">    "module":</span><br><span class="line">      "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,</span><br><span class="line">    "strict": true /* Enable all strict type-checking options. */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> HelloGeneric = &lt;T&gt;<span class="function">(<span class="params">message: T</span>) =&gt;</span> T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hello: HelloGeneric = &lt;T&gt;(message: T): <span class="function"><span class="params">T</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(hello&lt;<span class="built_in">string</span>&gt;(<span class="string">'Hello'</span>).length);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5-Generic-Class"><a href="#5-Generic-Class" class="headerlink" title=" 5. Generic Class"></a><a name="class"></a> 5. Generic Class</h3><p>명시적으로 제네릭 타입을 설정하면 오류 </p>
 <ul>
-<li>target : 컴파일된 결과물을 es5 버전으로 맞추겠다는 것</li>
-<li>module : 컴파일된 결과물이 어떤 모듈로 사용할 것인지?</li>
+<li>function에서 generic을 사용할 때의 오류와 같다.</li>
 </ul>
-<p>옵션에 대한 자세한 설명은 4번에서 설명!</p>
-<h3 id="3-2-watch-모드"><a href="#3-2-watch-모드" class="headerlink" title="3-2. watch 모드"></a>3-2. watch 모드</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc -w</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> _name: T;</span><br><span class="line">    <span class="keyword">private</span> _age: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: T</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person(<span class="string">'Mark'</span>);</span><br><span class="line"><span class="comment">// new Person&lt;string&gt;(35);</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="6-Generic-with-extends"><a href="#6-Generic-with-extends" class="headerlink" title=" 6. Generic with extends"></a><a name="extends"></a> 6. Generic with extends</h3><p>T 가 string 또는 number 를 상속받기 때문에 boolean 은 안된다.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person&lt;T <span class="keyword">extends</span> <span class="built_in">string</span> | <span class="built_in">number</span>&gt; &#123; <span class="comment">// union type</span></span><br><span class="line">    <span class="keyword">private</span> _name: T;</span><br><span class="line">    <span class="keyword">private</span> _age: T;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: T</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person(<span class="string">'Mark'</span>);</span><br><span class="line"><span class="keyword">new</span> Person(<span class="number">35</span>);</span><br><span class="line"><span class="comment">// new Person(true);</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="7-Generic-with-multiple-types"><a href="#7-Generic-with-multiple-types" class="headerlink" title=" 7. Generic with multiple types"></a><a name="multiple"></a> 7. Generic with multiple types</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Person&lt;T, K&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> _name: T;</span><br><span class="line">    <span class="keyword">private</span> _age: K;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: T, age: K</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">        <span class="keyword">this</span>._age = age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person(<span class="string">'Mark'</span>, <span class="number">35</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="8-type-lookup-system"><a href="#8-type-lookup-system" class="headerlink" title=" 8. type lookup system"></a><a name="lookupSystem"></a> 8. type lookup system</h3><p>keyof 키워드를 알아야한다.<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Test = keyof Person;</span><br><span class="line"><span class="comment">// 리터럴 타입의 유니온 타입이 나온다. "name" | "age"</span></span><br></pre></td></tr></table></figure></p>
+<p>객체와 key값을 인자로 받아서 perperty의 타입값을 알아내는 함수를 만들었다고 치자.<br>함수에서 컴파일 타입을 검증할 수 있는 시스템이 필요하다. =&gt; type lookup system</p>
 <ul>
-<li>변경되면 감지해서 새로 컴파일 해주는 것 .</li>
-<li>보통은 gulp 를 사용한다 .</li>
+<li><code>getProperty</code>: Generic과 type alias를 결합하여 사용하여 type을 찾아낼 수 있는 시스템을 만든다.</li>
+<li><code>setProperty</code>: Generic과 type alias를 결합하여 사용하여 type을 찾아내고, 타입을 다시 재정의 하는 함수</li>
 </ul>
-<h3 id="3-3-프로젝트-파일-내에서만-설치할-경우-로컬"><a href="#3-3-프로젝트-파일-내에서만-설치할-경우-로컬" class="headerlink" title="3-3. 프로젝트 파일 내에서만 설치할 경우 ( 로컬)"></a>3-3. 프로젝트 파일 내에서만 설치할 경우 ( 로컬)</h3><p>셋팅 방법</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line">npm i typescript // 프로젝트 이름(폴더이름)이 동일하면 안된다.</span><br><span class="line">package.json &gt; <span class="string">"scripts"</span>에 <span class="string">"transpile"</span> : <span class="string">"tsc"</span> 추가.</span><br><span class="line">// tsc파일이 .bin폴더 내부에 있는데, npm에서는 .bin내부의 파일들은 전체 상대 경로를 적지 않아도 접근 가능하다.</span><br><span class="line">npm run transpile</span><br></pre></td></tr></table></figure>
-<ul>
-<li>typescirpt 를 글로벌로 설치할 경우 <code>tsc 파일이름.ts</code> 명령어만으로 컴파일이 가<br>능하다.</li>
-<li>로컬로만 설치할 경우 , 위의 방법처럼 따로 스크립트에 추가 후에 명령어를 사용하<br>면된다.</li>
-</ul>
-<blockquote>
-<p>cli 명령어로 명렁어를 다 걸어둘 수 있지만 json 파일을 만들어서 설정을 정리하며<br>서 쓴다 .</p>
-</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>): <span class="title">T</span>[<span class="title">K</span>] </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person: Person = &#123;</span><br><span class="line">    name: <span class="string">'Mark'</span>,</span><br><span class="line">    age: <span class="number">35</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>): <span class="title">T</span>[<span class="title">K</span>] </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> obj[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K, value: T[K]</span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    obj[key] = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getProperty(person, <span class="string">'name'</span>));</span><br><span class="line"><span class="comment">// console.log(getProperty(person, fullname));</span></span><br><span class="line">setProperty(person, <span class="string">'name'</span>, <span class="string">'Anna'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(getProperty(person, <span class="string">'name'</span>));</span><br><span class="line"><span class="comment">// setProperty(person, 'name', 24);</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=eg2.tslint" target="_blank" rel="external">https://marketplace.visualstudio.com/items?itemName=eg2.tslint</a></li>
-<li><a href="https://palantir.github.io/tslint/" target="_blank" rel="external">https://palantir.github.io/tslint/</a></li>
+<li><a href="http://poiemaweb.com/typescript-generic" target="_blank" rel="external">http://poiemaweb.com/typescript-generic</a></li>
+<li><a href="https://www.youtube.com/watch?v=3-nJyzJATq8" target="_blank" rel="external">https://www.youtube.com/watch?v=3-nJyzJATq8</a></li>
+<li><a href="https://hyunseob.github.io/2017/01/14/typescript-generic/" target="_blank" rel="external">https://hyunseob.github.io/2017/01/14/typescript-generic/</a></li>
 </ol>
 
         </div>
@@ -275,7 +264,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/10/Typescript_02/" data-id="cjaiboao10001r32mlx5uuoc2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/23/Typescript_09/" data-id="cjaiboaom000gr32mnkyzjv4l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -393,20 +382,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/12/firebaseStorage/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            Firebase의 storage 연동하기
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/08/Typescript_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/23/Typescript_08-1/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">0/ Typescript?</p>
+        <p class="article-nav-title">7-1/ class 연습</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -603,7 +582,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/10/Typescript_02/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/23/Typescript_09/';
     
     (function() {
     var dsq = document.createElement('script');
