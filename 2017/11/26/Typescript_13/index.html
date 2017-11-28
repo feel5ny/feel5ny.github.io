@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hexo 설치 | 필오의 개발일지</title>
+    <title>React에 typescript 셋팅하기 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="hexo,node.js" />
+        <meta name="keywords" content="til,typescript" />
     
     
-    <meta name="description" content="intro   무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하">
-<meta name="keywords" content="hexo,node.js">
+    <meta name="description" content="실습은 tic-tac-toc이라는 js 프로젝트를 마이그레이션 하면서 typescript를 연습해본다.raect+typescript는 이웅재님의 강의 참고하였습니다.  처음 프로젝트를 생성할 때 부터 타입스크립 버전으로 셋팅하는것이 제일 깔끔하다. 1. create-react-app ts-test --scripts-version=react-scripts-">
+<meta name="keywords" content="til,typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 설치">
-<meta property="og:url" content="http://feel5ny.github.io/2017/09/10/aboutHEXO/index.html">
+<meta property="og:title" content="React에 typescript 셋팅하기">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/26/Typescript_13/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="intro   무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하">
+<meta property="og:description" content="실습은 tic-tac-toc이라는 js 프로젝트를 마이그레이션 하면서 typescript를 연습해본다.raect+typescript는 이웅재님의 강의 참고하였습니다.  처음 프로젝트를 생성할 때 부터 타입스크립 버전으로 셋팅하는것이 제일 깔끔하다. 1. create-react-app ts-test --scripts-version=react-scripts-">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/01/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-13T10:16:59.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/27/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-28T07:43:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo 설치">
-<meta name="twitter:description" content="intro   무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/01/thumb_default.jpg">
+<meta name="twitter:title" content="React에 typescript 셋팅하기">
+<meta name="twitter:description" content="실습은 tic-tac-toc이라는 js 프로젝트를 마이그레이션 하면서 typescript를 연습해본다.raect+typescript는 이웅재님의 강의 참고하였습니다.  처음 프로젝트를 생성할 때 부터 타입스크립 버전으로 셋팅하는것이 제일 깔끔하다. 1. create-react-app ts-test --scripts-version=react-scripts-">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/27/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/09/10/aboutHEXO/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/26/Typescript_13/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/blog/hexo/">hexo</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-aboutHEXO" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Typescript_13" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Hexo 설치
+        React에 typescript 셋팅하기
         </h1>
     
 
@@ -177,15 +177,15 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/09/10/aboutHEXO/" class="article-date">
-            <time datetime="2017-09-10T11:46:25.000Z" itemprop="datePublished">2017-09-10</time>
+        <a href="/2017/11/26/Typescript_13/" class="article-date">
+            <time datetime="2017-11-26T11:13:22.000Z" itemprop="datePublished">2017-11-26</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/hexo/">hexo</a>, <a class="tag-link" href="/tags/node-js/">node.js</a>
+        <a class="tag-link" href="/tags/til/">til</a>, <a class="tag-link" href="/tags/typescript/">typescript</a>
     </div>
 
             </div>
@@ -193,116 +193,31 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p>intro</p>
+<p>실습은 <a href="https://github.com/saystone/tic-tac-toe" target="_blank" rel="external">tic-tac-toc</a>이라는 js 프로젝트를 마이그레이션 하면서 typescript를 연습해본다.<br>raect+typescript는 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a> 참고하였습니다.</p>
 </blockquote>
-<p> 무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하기 때문에 블로깅 자체가 공부가 됩니다.</p>
-<p> 이왕 <code>node.js</code>까지 배우고 있으니, <code>jekyll</code>이 아닌, <code>hexo</code>를 사용해서 블로그를 만들었습니다. </p>
-<p><img src="/images/post_img/01/post_1-10.jpg"></p>
-<hr>
-
-<blockquote>
-<p>목차</p>
-</blockquote>
-<ol>
-<li>Github 간단 소개<ol>
-<li>원격 저장소</li>
-<li>원격저장소 Github이 제공하는 정적웹사이트, Github Pages</li>
-<li>호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO</li>
-</ol>
-</li>
-<li>Github Pages로 정적 페이지 Hosting하기<ol>
-<li>로컬에 저장소 생성하기</li>
-<li>원격 저장소 생성하기 (Github Repository)</li>
-<li>원격 저장소와 로컬 저장소 연결하기</li>
-</ol>
-</li>
-<li>Hexo 설치하기<ol>
-<li>Hexo 설치 전 준비</li>
-<li>Hexo npm 설치하기</li>
-<li>설정파일 업데이트</li>
-</ol>
-</li>
-<li>Github에 배포하기<ol>
-<li>hexo 설정을 통해 정적 리소스를 생성하기</li>
-<li>배포하기</li>
-</ol>
-</li>
-<li>anatol 테마적용하기</li>
-</ol>
-<hr>
-
-<h2 id="0-Github-간단-소개"><a href="#0-Github-간단-소개" class="headerlink" title="0. Github 간단 소개"></a>0. Github 간단 소개</h2><p>깃에 대해서 잘 알고 있다면 1번으로 넘어가도 됩니다.</p>
-<h3 id="0-1-원격저장소"><a href="#0-1-원격저장소" class="headerlink" title="0-1. 원격저장소"></a>0-1. 원격저장소</h3><p><img src="/images/post_img/01/post_1-01.svg" width="600px"><br><a href="https://backlogtool.com/git-tutorial/kr/intro/intro1_1.html" target="_blank" rel="external">Git</a>이란 소스코드를 효과적으로 관리하기 위해 개발된 ‘분산형 버전 관리 시스템’입니다.<br>git은 저장소에서 관리를 하는데, 내 컴퓨터에 있는 저장소를 <code>로컬저장소</code>라고 하고, 웹 상에 있는 저장소를 <code>원격저장소</code>라고 합니다. 우리가 흔히 알고 있는 원격저장소를 제공하는 서비스에는 <strong>깃헙, 비트버킷, 깃랩</strong>등이 있습니다다. 헥소를 이용한 블로그 개설을 위해서는 <strong>깃헙</strong>을 사용해야합니다.</p>
-<h3 id="0-2-원격저장소-Github이-제공하는-정적웹사이트-Github-Pages"><a href="#0-2-원격저장소-Github이-제공하는-정적웹사이트-Github-Pages" class="headerlink" title="0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages"></a>0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages</h3><p><img src="/images/post_img/01/post_1-02.svg" width="600px"><br>Github에서 제공하는 Static Website, Github Pages가 있다. 깃헙 저장소에 리소스를 <code>push</code>만 해도(push란 저장소에 리소스를 넣을때 사용하는 명령어) 간단하게 웹사이트를 만들 수 있다. 즉, 다른 호스팅 서비스의 도움없이, 원격저장소에 올리기만해도 호스팅이 가능하다.</p>
-<h3 id="0-3-호스팅을-편리하게-만들어주는-generator-Jekyll-amp-HEXO"><a href="#0-3-호스팅을-편리하게-만들어주는-generator-Jekyll-amp-HEXO" class="headerlink" title="0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO"></a>0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll &amp; HEXO</h3><p><img src="/images/post_img/01/post_1-04.svg" width="600px"></p>
-<p>사실, hexo나 jekyll이 없이도, html,css,javascript를 통해서도 호스팅이 가능하나, 블로그 구성상 <strong>글을 등록하고, 리스트를 보여주며, 댓글을 달 수 있는, 블로그가 갖고 있는 기능을 편라히게 사용하기 위해서</strong> hexo나 jekyll과 같은 generator를 사용해야 한다.</p>
-<p>Static Website generator는 마크다운을(.md 파일)로 편집 후 html로 변환할 수 있도록 돕는다. generator에는 jekyll과 HEXO가 있는데, jekyll은 <code>ruby</code>기반, HEXO는 <code>node.js</code>기반이다.</p>
-<hr>
-
-<p>그럼 generator을 셋팅하기 전, 내 컴퓨터에 디렉토리(폴더)를 생성하고, 원격저장소(github)에 연결을 시켜보자.</p>
-<h2 id="1-Github-Pages로-정적-페이지-호스팅하기"><a href="#1-Github-Pages로-정적-페이지-호스팅하기" class="headerlink" title="1. Github Pages로 정적 페이지 호스팅하기"></a>1. Github Pages로 정적 페이지 호스팅하기</h2><p>Github Pages를 사용하기 위해 Github의 원격저장소에 리소스를 올려야한다는 사실을 잊지말자. 아래 그림의 저장소들이 필요하다.</p>
-<p><img src="/images/post_img/01/post_1-05.svg" width="600px"></p>
-<h3 id="1-1-로컬에-저장소-생성하기"><a href="#1-1-로컬에-저장소-생성하기" class="headerlink" title="1-1. 로컬에 저장소 생성하기"></a>1-1. 로컬에 저장소 생성하기</h3><p>내 컴퓨터 원하는 장소에 폴더를 생성한다.<br>terminal없이도 생성해도 된다.<br>아래는 terminal을 이용한 생성방법</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 바탕화면에 생성한다는 가정 </span><br><span class="line">(글쓴이는 운영체제가 mac입니다.) --&gt;</span><br><span class="line">$ <span class="built_in">cd</span> Desktop</span><br><span class="line">$ mkdir github-blog</span><br></pre></td></tr></table></figure>
-<p>바탕화면에 <code>github-blog</code>라는 이름의 폴더가 생성이 되었다.</p>
-<h3 id="1-2-원격-저장소-생성하기-Github-Repository"><a href="#1-2-원격-저장소-생성하기-Github-Repository" class="headerlink" title="1-2. 원격 저장소 생성하기 (Github Repository)"></a>1-2. 원격 저장소 생성하기 (Github Repository)</h3><p><img src="/images/post_img/01/post_1-11.jpg" width="600px"><br>github pages를 통해 손쉽게 <code>USERNAME.github.io</code>를 통해 정적 페이지를 호스팅 할 수 있다. </p>
-<blockquote>
-<p>번외 &gt; gh-pages 브랜치를 생성하면, 각 repository마다 <code>USERNAME.github.io/레포이름</code>으로 호스팅이 가능하다.</p>
-</blockquote>
-<p>지금부터 말하는 USERNAME은, 당신의 아이디이다. 깃헙주소 뒷부분 <code>/</code>이후 붙는 유저네임을 붙이면된다. 아래 순서로 깃 저장소를 생성한다.</p>
-<ol>
-<li>New Repository &gt; 이름은 꼭 <code>USERNAME.github.io</code>로 적용한다. </li>
-<li>Public선택.</li>
-<li>원격저장소 생성 완료</li>
-</ol>
-<p><img src="/images/post_img/01/post_1-12.jpg" width="600px"></p>
-<h3 id="1-3-원격-저장소와-로컬-저장소-연결하기"><a href="#1-3-원격-저장소와-로컬-저장소-연결하기" class="headerlink" title="1-3. 원격 저장소와 로컬 저장소 연결하기"></a>1-3. 원격 저장소와 로컬 저장소 연결하기</h3><p><img src="/images/post_img/01/post_1-06.svg" width="600px"><br>내 컴퓨터에 저장소를 만들고, 원격에도 만들었으니, 연결을 해야한다. 연결하는 방법은 간단하다. 지금은 터미널을 열고 명령어를 입력해야하는 타이밍이다.</p>
-<ol>
-<li>1번에서 만들었던 디렉토리로 이동한다.</li>
-<li>해당 디렉토리에서 원격저장소의 git을 clone한다. clone 뒤에 생성한 원격저장소의 주소를 입력하는데, 이는 remote가 동시에 일어나므로, 따로 remote 명령어를 입력안해도 된다.</li>
-<li>연결 테스트겸, READMD.md 파일을 생성한다.</li>
-<li>생성된 README.md파일을 푸시한다. (commit &gt; push)</li>
-</ol>
-<p>위의 순서를 코드로 옮기면. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 1. 해당 디렉토리로 이동 --&gt;</span><br><span class="line"><span class="built_in">cd</span> Desktop</span><br><span class="line"><span class="built_in">cd</span> github-blog</span><br><span class="line"></span><br><span class="line">&lt;!-- 2. git <span class="built_in">clone</span> --&gt;</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/feel5ny/TEST.github.io.git</span><br><span class="line"><span class="built_in">cd</span> test.github.io</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 3. README.md파일 생성 --&gt;</span><br><span class="line"><span class="built_in">echo</span> README.md</span><br><span class="line"></span><br><span class="line">&lt;!-- 4. 원격저장소에 올리기 --&gt;</span><br><span class="line">git add --all</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>step 1이 끝났다! 그리고 벌써 호스팅이 완료되었다.<br><strong>USERNAME.github.io</strong>에 가보자.</p>
-<hr>
-
-<p>아직 블로그의 형태를 띄지 않았다. 위에서 말했던 generator를 이용하여 블로그의 구조를 짤 예정인데, 우리는 HEXO를 이용할 것이다. </p>
-<h2 id="2-Hexo-설치하기"><a href="#2-Hexo-설치하기" class="headerlink" title="2. Hexo 설치하기"></a>2. Hexo 설치하기</h2><p>Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하다. 다양한 plugin과 테마를 지원하고 있다.<br><img src="/images/post_img/01/post_1-07.svg" width="600px"></p>
-<h3 id="2-1-Hexo-설치-전-준비"><a href="#2-1-Hexo-설치-전-준비" class="headerlink" title="2-1. Hexo 설치 전 준비"></a>2-1. Hexo 설치 전 준비</h3><p>Hexo는 말했다 싶이 node.js 기반이기 때문에 node.js가 로컬에 기본적으로 설치되어있어야 한다. node.js는 <a href="https://nodejs.org/en/" target="_blank" rel="external">공식 사이트</a>에서 설치가 가능하다. stable버전을 추천한다.</p>
-<h3 id="2-2-Hexo-npm-설치하기"><a href="#2-2-Hexo-npm-설치하기" class="headerlink" title="2-2. Hexo npm 설치하기"></a>2-2. Hexo npm 설치하기</h3><p>Node.js를 설치 한 후에 아래 CLI를 순서대로 입력하여 npm을 설치한다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
-<p>node.js를 설치하면 npm을 사용할 수 있는데, 패키지 중에 hexo-cli를 설치한다. blog파일을 생성하여 hexo를 초기화한다. blog 디렉토리로 이동후, npm install을 사용하여, blog에 필요한 파일들을 자동으로 설치한다.</p>
-<h3 id="2-3-설정파일-업데이트"><a href="#2-3-설정파일-업데이트" class="headerlink" title="2-3. 설정파일 업데이트"></a>2-3. 설정파일 업데이트</h3><p>위의 순서가 끝나면, root 디렉토리에 <code>_config.yml</code>이라는 설정파일이 생성된다. (yml파일은 사람이 쉽게 읽을 수 있는 데이터 직력화 양식으로,…<a href="http://www.openthefile.net/ko/extension/yml" target="_blank" rel="external">more</a>) 해당 파일에 블로그 정보를 수정한다. 나머지 정보는 <a href="https://hexo.io/docs/" target="_blank" rel="external">hexo 공식 문서</a>에서.</p>
-<ol>
-<li><p>Site 정보<br>블로그 정보를 수정할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 제목(html head에 들어가는 title태그에 들어가는 제목과 같다.)</span><br><span class="line">subtitle: </span><br><span class="line">description:</span><br><span class="line">author: Nayoung Kim</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>URL 정보<br>블로그 URL 정보를 설정할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://USERNAME.github.io</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Github 정보<br>배포를 위해서 저장소 주소를 추가한다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/feel5ny/TEST.github.io.git</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>테마별로 구성을 수정하는 스타일이 다르다. 테마 적용하기 파트에서 anatol 레이아웃 수정방법을 설명하겠다.</p>
-<h3 id="2-4-로컬에서-테스트하기"><a href="#2-4-로컬에서-테스트하기" class="headerlink" title="2-4. 로컬에서 테스트하기"></a>2-4. 로컬에서 테스트하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p>blog 디렉토리에 위치되어있는 상태에서 서버를 구동한다. blog에 위치되어있지 않으면 서버구동이 안된다. 서버 구동이 완료되면 4000번 포트로 접속이 가능하다. </p>
+<p>처음 프로젝트를 생성할 때 부터 타입스크립 버전으로 셋팅하는것이 제일 깔끔하다.</p>
+<h3 id="1-create-react-app-ts-test-scripts-version-react-scripts-ts"><a href="#1-create-react-app-ts-test-scripts-version-react-scripts-ts" class="headerlink" title="1. create-react-app ts-test --scripts-version=react-scripts-ts"></a>1. <code>create-react-app ts-test --scripts-version=react-scripts-ts</code></h3><p>  create-react-app + 프로젝트 이름 + <code>--scripts-version=react-scripts-ts</code> 추가</p>
+<p><img src="/images/post_img/27/01.jpg"></p>
 <ul>
-<li><a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></li>
+<li>react에서 사용하는 PropTypes를 사용하지 않아도 된다.</li>
 </ul>
-<p>테스트시 구동이 잘 안될 경우, 서버를 껐다가 다시 실행해 보면된다. 서버를 끄는 방법은 터미널에서 <code>ctrl+c</code>를 두번 입력하면 된다. </p>
+<blockquote>
+<h3 id="PropTypes"><a href="#PropTypes" class="headerlink" title="PropTypes"></a><code>PropTypes</code></h3><p>컴포넌트 에서 원하는 props 의 Type 과 전달 된 props 의 Type 이 일치하지 않을 때 콘솔에서 오류 메시지가 나타나게 하고 싶을 땐, 컴포넌트 클래스의 propTypes 객체를 설정하면 됩니다. 또한, 이를 통하여 필수 props 를 지정할 수 있습니다. 즉, props 를 지정하지 않으면 콘솔에 오류 메시지가 나타납니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Content.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Content</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h2&gt;&#123; <span class="keyword">this</span>.props.title &#125;&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">                &lt;p&gt; &#123; this.props.body &#125; &lt;/</span>p&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Content.propTypes = &#123;</span></span><br><span class="line"><span class="regexp">    title: React.PropTypes.string,</span></span><br><span class="line"><span class="regexp">    body: React.PropTypes.string.isRequired /</span><span class="regexp">/ isRequired는 필수의 의미이다.</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Content;</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="2-state와-props는-interface로-처리를-해야한다"><a href="#2-state와-props는-interface로-처리를-해야한다" class="headerlink" title="2. state와 props는 interface로 처리를 해야한다."></a>2. state와 props는 interface로 처리를 해야한다.</h3><p>class에서 입출력되는 타입을 검토하기 위해서</p>
+<ol>
+<li><p>배열의 요소가 객체일 경우</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> GameState &#123;</span><br><span class="line">  history: <span class="built_in">Array</span>&lt;&#123; squares: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt; &#125;&gt; <span class="comment">// Array 요소가 객체일 경우 이렇게 타입을 지정해준다.</span></span><br><span class="line">  stepNumber: <span class="built_in">number</span></span><br><span class="line">  xIsNext: <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> Game <span class="keyword">extends</span> React.Component&lt;GameProps, GameState&gt; &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>()</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      history: [</span><br><span class="line">        &#123;</span><br><span class="line">          squares: <span class="built_in">Array</span>(<span class="number">9</span>).fill(<span class="literal">null</span>),</span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line">      stepNumber: <span class="number">0</span>,</span><br><span class="line">      xIsNext: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>return에 대한 출력값을 타입으로 명시할때</p>
+<h3 id="JSX-Element"><a href="#JSX-Element" class="headerlink" title="JSX.Element"></a><code>JSX.Element</code></h3><p>return 내부가 JSX문법이므로 JSX.Element로 명시하였다.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> Game <span class="keyword">extends</span> React.Component&lt;GameProps, GameState&gt; &#123;</span><br><span class="line">  render(): JSX.Element &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"game"</span>&gt;</span><br><span class="line">        &lt;div className=<span class="string">"game-board"</span>&gt;</span><br><span class="line">          &lt;Board squares=&#123;current.squares&#125; onClick=&#123;<span class="function"><span class="params">i</span> =&gt;</span> <span class="keyword">this</span>.handleClick(i)&#125; /&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div className="game-info"&gt;</span></span><br><span class="line"><span class="regexp">          &lt;div&gt;&#123;status&#125;&lt;/</span>div&gt;</span><br><span class="line">          &lt;ol&gt;&#123;moves&#125;&lt;<span class="regexp">/ol&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <hr>
-
-<h2 id="3-Github에-배포하기"><a href="#3-Github에-배포하기" class="headerlink" title="3. Github에 배포하기"></a>3. Github에 배포하기</h2><p>로컬에서 테스트를 완료하면 USERNAME.github.io 주소로 배포해보자.<br><img src="/images/post_img/01/post_1-08.svg" width="600px"></p>
-<h3 id="3-1-hexo-설정을-통해-정적-리소스를-생성하기"><a href="#3-1-hexo-설정을-통해-정적-리소스를-생성하기" class="headerlink" title="3-1. hexo 설정을 통해 정적 리소스를 생성하기"></a>3-1. hexo 설정을 통해 정적 리소스를 생성하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-<p>위 명령어를 입력하면, github에 올라갈 리소스만 정리되어 따로 폴더가 생성된다.</p>
-<h3 id="3-2-배포하기"><a href="#3-2-배포하기" class="headerlink" title="3-2. 배포하기"></a>3-2. 배포하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>위 명령어를 입력하면 배고가 완료된다. generate와 deploy를 한번에 진행하고 싶은 경우 아래 명령어를 입력한다. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
-<p>약자로 <code>hexo d g</code>를 사용해도 됩니다.</p>
-<h3 id="3-3-배포가-잘-안될-경우"><a href="#3-3-배포가-잘-안될-경우" class="headerlink" title="3-3. 배포가 잘 안될 경우"></a>3-3. 배포가 잘 안될 경우</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
-<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="https://velopert.com/921" target="_blank" rel="external">https://velopert.com/921</a></li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -310,7 +225,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/09/10/aboutHEXO/" data-id="cjajbhq2j000x7l2moc96fa88" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/26/Typescript_13/" data-id="cjajbhq2f000q7l2m51zn5pme" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -428,16 +343,12 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/08/Typescript_01/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            0/ Typescript?
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
+        <a href="/2017/11/25/Typescript_10/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">9/ itertor</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
     
 </nav>
 
@@ -632,7 +543,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/09/10/aboutHEXO/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/26/Typescript_13/';
     
     (function() {
     var dsq = document.createElement('script');
