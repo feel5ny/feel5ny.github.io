@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Firebase의 storage 연동하기 | 필오의 개발일지</title>
+    <title>9/ itertor | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,firebase,db" />
+        <meta name="keywords" content="til,typescript" />
     
     
-    <meta name="description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="keywords" content="react,firebase,db">
+    <meta name="description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  for…of for..in Symbol.iterator CustomIterable    1. for…of es3for(var i = 0; i&amp;lt;array.length; i++)">
+<meta name="keywords" content="til,typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase의 storage 연동하기">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/12/firebaseStorage/index.html">
+<meta property="og:title" content="9&#x2F; itertor">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/25/Typescript_10/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
+<meta property="og:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  for…of for..in Symbol.iterator CustomIterable    1. for…of es3for(var i = 0; i&amp;lt;array.length; i++)">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-27T08:56:29.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/23/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-28T05:03:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase의 storage 연동하기">
-<meta name="twitter:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
+<meta name="twitter:title" content="9&#x2F; itertor">
+<meta name="twitter:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  for…of for..in Symbol.iterator CustomIterable    1. for…of es3for(var i = 0; i&amp;lt;array.length; i++)">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/23/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/12/firebaseStorage/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/25/Typescript_10/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-firebaseStorage" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Typescript_10" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Firebase의 storage 연동하기
+        9/ itertor
         </h1>
     
 
@@ -177,42 +177,97 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/12/firebaseStorage/" class="article-date">
-            <time datetime="2017-11-12T01:10:04.000Z" itemprop="datePublished">2017-11-12</time>
+        <a href="/2017/11/25/Typescript_10/" class="article-date">
+            <time datetime="2017-11-25T11:13:22.000Z" itemprop="datePublished">2017-11-25</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/db/">db</a>, <a class="tag-link" href="/tags/firebase/">firebase</a>, <a class="tag-link" href="/tags/react/">react</a>
+        <a class="tag-link" href="/tags/til/">til</a>, <a class="tag-link" href="/tags/typescript/">typescript</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="학교-로고-모음-사이트"><a href="#학교-로고-모음-사이트" class="headerlink" title="학교 로고 모음 사이트"></a>학교 로고 모음 사이트</h2><blockquote>
-<p>현재 상황</p>
+            <blockquote>
+<p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8-15" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
 </blockquote>
-<p>팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.</p>
-<h3 id="DB-구조짜기"><a href="#DB-구조짜기" class="headerlink" title="DB 구조짜기"></a>DB 구조짜기</h3><p>300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건 db에 url 칼럼을 넣는 방식. 파이어베이스에서는 스토리지와 데이터베이스 연결하는 것까지는 제공하지 않는 듯하다. 수동으로 작업해야 하는데 아직 좋은 방법이 떠오르지 않는다. </p>
-<h3 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h3><p>storage에 있는 데이터를 가져오는데, 현재 이슈.</p>
+<p><strong>요약</strong><br>아직 잘 이해가 안간다. &#128565;</p>
 <ol>
-<li>한 디렉토리에 300개를 넣어두고 한 번에 갖고 오는 방식이라 아주 느리다.<ul>
-<li>db 디렉토리를 20개씩 분리한 후, 더 보기 형태의 방식으로 해결해야겠다.<br><br></li>
-</ul>
-</li>
-<li>map을 돌려서 해당 db 인덱스값과 같은 값의 파일을 갖고 오게 하기위해서 파일 이름에 학교 이름이 아닌 PNG_1.png 이런 방식의 파일 이름으로 지정해두었다. 매칭이 잘못된 학교 이름을 찾아 내기도 힘들고, ux도 너무 안 좋을 것 같아서, 파일 이름을 학교 이름으로 바꾸기로 결정했다.<br><br></li>
-<li>생각해 보니 지역별 칼럼을 정리하지 않았다.<br><br></li>
-<li>비록 일일이 검토 후에 로고를 올리는 것이지만, 한 번 더 체킹을 위해 학교 url을 넣는게 좋겠다고 판단. 칼럼을 추가해야겠다.<ul>
-<li>공공api가 있었으면 좋겠다.</li>
-</ul>
-</li>
+<li><a href="#forOf">for…of</a></li>
+<li><a href="#forIn">for..in</a></li>
+<li><a href="#symbol">Symbol.iterator</a></li>
+<li><a href="#Iterable">CustomIterable</a></li>
 </ol>
-<blockquote>
-<p>생각보다 db 짜는건 굉장한 노가다다! dada 프로젝트 할 때 백엔드 분께서 ‘생각보다 노가다도 많이 하게 되는데, 또 생각보다 어렵진 않더라구요!’ 라고 했던 말이 와닿는 하루다. </p>
-</blockquote>
+<hr>
+<h3 id="1-for…of"><a href="#1-for…of" class="headerlink" title=" 1. for…of"></a><a name="forOf"></a> 1. for…of</h3><ul>
+<li>es3<br><code>for(var i = 0; i&lt;array.length; i++)</code></li>
+<li>es5<br><code>array.forEach</code> : return으로 순회를 탈출할 수 없다.</li>
+<li><p>es6<br><code>for..of</code><br><code>for(const item of array)</code><br>원칙적으로는 배열에서만 사용이 가능하다. </p>
+</li>
+<li><p>for-of 루프는 이터러블 객체를 순회한다. for-of 루프는 이터레이터의 next() 메소드를 호출하고 next() 메소드가 반환하는 객체의 done 프로퍼티가 true가 될 때까지 루핑한다.</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-for-in"><a href="#2-for-in" class="headerlink" title=" 2. for..in"></a><a name="forIn"></a> 2. for..in</h3><p>일반적일때는 사용하지 않는 것으로. (엔진에 따라 다르다.)</p>
+<ul>
+<li>배열을 순회할 때는 사용하지 않을 것<ul>
+<li>index 가 number 가 아니라 string 으로 나온다.</li>
+<li>배열의 프로퍼티를 순회할 수도 있다.</li>
+<li>prototype 체인의 프로퍼티를 순회할 수도 있다.</li>
+<li>루프가 무작위로 순회할 수도 있다.</li>
+<li>for..of 를 쓸 것</li>
+</ul>
+</li>
+<li>객체를 순회할 때<ul>
+<li><code>for (const prop of Object.keys(obj))</code> 도 사용할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="string">'first'</span>, <span class="string">'second'</span>];</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    name: <span class="string">'Mark'</span>,</span><br><span class="line">    age: <span class="number">35</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 배열에 for..of 이용</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item of array) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> item + <span class="string">', '</span> + item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 배열에 for..in 이용</span></span><br><span class="line"><span class="comment">// item 이 string 타입의 숫자</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">in</span> array) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> item + <span class="string">', '</span> + item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체에 for..of 이용 =&gt; 오류</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">for (const item of obj) &#123;</span></span><br><span class="line"><span class="comment">    console.log(typeof item + ', ' + item);</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체에 for..in 이용</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> item + <span class="string">', '</span> + item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체의 keys 들에 for..of 이용</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item of <span class="built_in">Object</span>.keys(obj)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> item + <span class="string">', '</span> + item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>target 이 es3 인데도 forEach 는 트랜스파일이 되지 않았음.<br><a href="https://github.com/Microsoft/TypeScript/issues/2410" target="_blank" rel="external">https://github.com/Microsoft/TypeScript/issues/2410</a></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="string">'first'</span>, <span class="string">'second'</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ts</span></span><br><span class="line">array.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// js</span></span><br><span class="line">array.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-Symbol-iterator"><a href="#3-Symbol-iterator" class="headerlink" title=" 3. Symbol.iterator"></a><a name="symbol"></a> 3. Symbol.iterator</h3><h4 id="이터러블-iterable"><a href="#이터러블-iterable" class="headerlink" title="이터러블(iterable)"></a><code>이터러블(iterable)</code></h4><p>iterate = 반복하다<br>이터러블은 <strong>순회 가능한 자료 구조</strong>이다. <code>Symbol.iterator</code>를 프로퍼티 key로 사용한 메소드를 구현하는 것에 의해 순회 가능한 자료 구조인 이터러블이 된다.</p>
+<h4 id="이터레이터"><a href="#이터레이터" class="headerlink" title="이터레이터"></a><code>이터레이터</code></h4><p><code>Symbol.iterator</code>를 프로퍼티 key로 사용한 메소드는 이터레이터로 반환한다. 이터레이터는 순회 가능한 자료 구조인 이터러블의 요소를 탐색하기 위한 포인터로서 <code>next()</code> 메소드를 갖는 객체이다. next() 메소드는 value, done 프로퍼티를 갖는 객체를 반환하며 이 메소드를 통해 이터러블 객체를 순회할 수 있다.</p>
+<p>ES6에서 제공하는 built-in iterable은 아래와 같다.</p>
+<ul>
+<li>Array <code>Array.prototype[Symbol.iterator]</code></li>
+<li>String <code>String.prototype[Symbol.iterator]</code></li>
+<li>Map <code>Map.prototype[Symbol.iterator]</code></li>
+<li>Set <code>Set.prototype[Symbol.iterator]</code></li>
+<li>DOM data structures <code>NodeList.prototype[Symbol.iterator]</code> <code>HTMLCollection.prototype[Symbol.iterator]</code></li>
+</ul>
+<ul>
+<li>프로퍼티이며, 함수가 구현되어있으면, iterable 이라고 한다.</li>
+<li>Array, Map, Set, String, Int32Array, Uint32Array, etc. 에는 내장된 구현체가 있으므로 이터러블 하다.</li>
+<li>그냥 객체는 이터러블하지 않다.</li>
+<li>이터레이터를 통해 이터러블한 객체의 Symbol.iterator 함수를 호출한다.</li>
+<li>target : es3 or es5<ul>
+<li>Array 에만 for..of 사용 가능</li>
+<li>일반 객체에 사용하면 오류</li>
+</ul>
+</li>
+<li>target : es6<ul>
+<li>Symbol.iterator 함수를 구현하면 어떤 객체에도 for..of 사용 가능</li>
+</ul>
+</li>
+</ul>
+<hr>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es6.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> IteratorResult&lt;T&gt; &#123;</span><br><span class="line">    done: <span class="built_in">boolean</span>;</span><br><span class="line">    value: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Iterator&lt;T&gt; &#123;</span><br><span class="line">    next(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;; <span class="comment">// next가 필수로 있어야한다.</span></span><br><span class="line">    <span class="keyword">return</span>?(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">    <span class="keyword">throw</span>?(e?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Iterable&lt;T&gt; &#123;</span><br><span class="line">    [Symbol.iterator](): Iterator&lt;T&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IterableIterator&lt;T&gt; <span class="keyword">extends</span> Iterator&lt;T&gt; &#123;</span><br><span class="line">    [Symbol.iterator](): IterableIterator&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5-CustomIterable"><a href="#5-CustomIterable" class="headerlink" title=" 5. CustomIterable"></a><a name="Iterable"></a> 5. CustomIterable</h3><p>객체는 이터러블이 아니다. 하지만 이터레이션 프로토콜을 준수하여 이터러블 객체를 만들수 있다.</p>
+<ul>
+<li>Symbol.iterator를 key로 사용한 메소드는 next() 함수를 프로퍼티로 가지는 객체를 반환하여야 한다. 그리고 next() 함수는 done과 value 프로퍼티를 가지는 객체를 반환한다. for-of는 done 프로퍼티가 true가 될 때까지 반복하며 done 프로퍼티가 true가 되면 반복을 중지한다.</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> CustomIterable <span class="keyword">implements</span> Iterable&lt;<span class="built_in">string</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> _array: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt; = [<span class="string">'first'</span>, <span class="string">'second'</span>];</span><br><span class="line"></span><br><span class="line">    [Symbol.iterator]() &#123;</span><br><span class="line">        <span class="keyword">var</span> nextIndex = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            next: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    value: <span class="keyword">this</span>._array[nextIndex++],</span><br><span class="line">                    done: nextIndex &gt; <span class="keyword">this</span>._array.length</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cIterable = <span class="keyword">new</span> CustomIterable();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> item of cIterable) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/es6-iteration-for-of" target="_blank" rel="external">http://poiemaweb.com/es6-iteration-for-of</a></li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -220,7 +275,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/12/firebaseStorage/" data-id="cjaj7lteu0010y82m99ojx6ao" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/25/Typescript_10/" data-id="cjaj7lteo000my82muf910ef6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -338,20 +393,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/13/algorithm_01/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            야근지수 (미제)
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/10/Typescript_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/24/Typescript_09/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">1/ Typescript_환경 셋팅</p>
+        <p class="article-nav-title">8/ Generic</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -548,7 +593,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/12/firebaseStorage/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/25/Typescript_10/';
     
     (function() {
     var dsq = document.createElement('script');
