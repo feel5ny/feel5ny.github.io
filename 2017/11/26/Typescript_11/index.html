@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Firebase의 storage 연동하기 | 필오의 개발일지</title>
+    <title>10/ Decorator | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,firebase,db" />
+        <meta name="keywords" content="til,typescript" />
     
     
-    <meta name="description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="keywords" content="react,firebase,db">
+    <meta name="description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
+<meta name="keywords" content="til,typescript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase의 storage 연동하기">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/12/firebaseStorage/index.html">
+<meta property="og:title" content="10&#x2F; Decorator">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/26/Typescript_11/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
+<meta property="og:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-27T08:56:29.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/24/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-29T06:42:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase의 storage 연동하기">
-<meta name="twitter:description" content="학교 로고 모음 사이트 현재 상황  팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다. DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/02/thumb_default.jpg">
+<meta name="twitter:title" content="10&#x2F; Decorator">
+<meta name="twitter:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/24/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/12/firebaseStorage/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/26/Typescript_11/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-firebaseStorage" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Typescript_11" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Firebase의 storage 연동하기
+        10/ Decorator
         </h1>
     
 
@@ -177,42 +177,76 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/12/firebaseStorage/" class="article-date">
-            <time datetime="2017-11-12T01:10:04.000Z" itemprop="datePublished">2017-11-12</time>
+        <a href="/2017/11/26/Typescript_11/" class="article-date">
+            <time datetime="2017-11-26T12:11:09.000Z" itemprop="datePublished">2017-11-26</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/db/">db</a>, <a class="tag-link" href="/tags/firebase/">firebase</a>, <a class="tag-link" href="/tags/react/">react</a>
+        <a class="tag-link" href="/tags/til/">til</a>, <a class="tag-link" href="/tags/typescript/">typescript</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="학교-로고-모음-사이트"><a href="#학교-로고-모음-사이트" class="headerlink" title="학교 로고 모음 사이트"></a>학교 로고 모음 사이트</h2><blockquote>
-<p>현재 상황</p>
+            <blockquote>
+<p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8-15" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
 </blockquote>
-<p>팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.</p>
-<h3 id="DB-구조짜기"><a href="#DB-구조짜기" class="headerlink" title="DB 구조짜기"></a>DB 구조짜기</h3><p>300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건 db에 url 칼럼을 넣는 방식. 파이어베이스에서는 스토리지와 데이터베이스 연결하는 것까지는 제공하지 않는 듯하다. 수동으로 작업해야 하는데 아직 좋은 방법이 떠오르지 않는다. </p>
-<h3 id="데이터-불러오기"><a href="#데이터-불러오기" class="headerlink" title="데이터 불러오기"></a>데이터 불러오기</h3><p>storage에 있는 데이터를 가져오는데, 현재 이슈.</p>
+<p><strong>요약</strong><br>아직 잘 이해가 안간다. &#128565;</p>
 <ol>
-<li>한 디렉토리에 300개를 넣어두고 한 번에 갖고 오는 방식이라 아주 느리다.<ul>
-<li>db 디렉토리를 20개씩 분리한 후, 더 보기 형태의 방식으로 해결해야겠다.<br><br></li>
-</ul>
+<li><a href="#decorator">Decorator 종류</a><ol>
+<li><a href="#ready">Decorator 코드 작성 준비</a></li>
+</ol>
 </li>
-<li>map을 돌려서 해당 db 인덱스값과 같은 값의 파일을 갖고 오게 하기위해서 파일 이름에 학교 이름이 아닌 PNG_1.png 이런 방식의 파일 이름으로 지정해두었다. 매칭이 잘못된 학교 이름을 찾아 내기도 힘들고, ux도 너무 안 좋을 것 같아서, 파일 이름을 학교 이름으로 바꾸기로 결정했다.<br><br></li>
-<li>생각해 보니 지역별 칼럼을 정리하지 않았다.<br><br></li>
-<li>비록 일일이 검토 후에 로고를 올리는 것이지만, 한 번 더 체킹을 위해 학교 url을 넣는게 좋겠다고 판단. 칼럼을 추가해야겠다.<ul>
-<li>공공api가 있었으면 좋겠다.</li>
-</ul>
+<li>Decorator<ol>
+<li>Class Decorator<ol>
+<li><a href="#basic">Class Decorator Basic</a></li>
+<li><a href="#advanced">Class Decorator Advanced</a></li>
+</ol>
+</li>
+<li><a href="#method">Method Decorator</a></li>
+<li><a href="#property">Property Decorator</a></li>
+<li><a href="#prameter">Prameter Decorator</a></li>
+</ol>
 </li>
 </ol>
-<blockquote>
-<p>생각보다 db 짜는건 굉장한 노가다다! dada 프로젝트 할 때 백엔드 분께서 ‘생각보다 노가다도 많이 하게 되는데, 또 생각보다 어렵진 않더라구요!’ 라고 했던 말이 와닿는 하루다. </p>
+<hr>
+<h3 id="1-Decorator-종류"><a href="#1-Decorator-종류" class="headerlink" title=" 1. Decorator 종류"></a><a name="decorator"></a> 1. Decorator 종류</h3><ul>
+<li>Class Decorator</li>
+<li>Method Decorator</li>
+<li>Property Decorator</li>
+<li>Parameter Decorator<blockquote>
+<p>각자 Decorator의 시그니처가 다르다.</p>
 </blockquote>
+</li>
+</ul>
+<p>Decorator?</p>
+<ul>
+<li>함수 표현식에 해당한다.</li>
+<li><code>@</code>와 같이 써서 표현식 뒤에 오는 대상에 더욱 기능적으로 추가하거나 하는 일들을 할 수 있다.</li>
+<li>함수를 선언한 뒤 <code>@</code>키워드를 이용해 선언된 함수를 Decorator로 사용할 수 있다. </li>
+</ul>
+<hr>
+<h4 id="1-1-Decorator-코드-작성-준비"><a href="#1-1-Decorator-코드-작성-준비" class="headerlink" title=" 1-1. Decorator 코드 작성 준비"></a><a name="ready"></a> 1-1. Decorator 코드 작성 준비</h4><p><code>yarn add typescript -D</code>여기서 <code>D</code>는 <code>dev</code>와 같은 명령어다.</p>
+<hr>
+<h3 id="2-Decorator"><a href="#2-Decorator" class="headerlink" title="2. Decorator"></a>2. Decorator</h3><h3 id="2-1-Class-Decorator"><a href="#2-1-Class-Decorator" class="headerlink" title="2-1. Class Decorator"></a>2-1. Class Decorator</h3><h4 id="2-1-1-Class-Decorator-Basic"><a href="#2-1-1-Class-Decorator-Basic" class="headerlink" title=" 2-1-1. Class Decorator Basic"></a><a name="basic"></a> 2-1-1. Class Decorator Basic</h4><p>여기서 helloFactory 는 팩토리 패턴<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">constructorFn: <span class="built_in">Function</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(constructorFn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloFactory</span>(<span class="params">show: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (show) &#123;</span><br><span class="line">        <span class="keyword">return</span> hello;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @hello</span></span><br><span class="line"><span class="meta">@helloFactory</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="2-1-2-Class-Decorator-Advanced"><a href="#2-1-2-Class-Decorator-Advanced" class="headerlink" title=" 2-1-2. Class Decorator Advanced"></a><a name="advanced"></a> 2-1-2. Class Decorator Advanced</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHello</span>(<span class="params">constructorFn: <span class="built_in">Function</span></span>) </span>&#123;</span><br><span class="line">    constructorFn.prototype.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@addHello</span></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">(&lt;<span class="built_in">any</span>&gt;person).hello();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-2-Method-Decorator"><a href="#2-2-Method-Decorator" class="headerlink" title=" 2-2. Method Decorator"></a><a name="method"></a> 2-2. Method Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">editable</span>(<span class="params">canBeEdit: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target: <span class="built_in">any</span>, propName: <span class="built_in">string</span>, description: PropertyDescriptor</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(canBeEdit);</span><br><span class="line">        <span class="built_in">console</span>.log(target);</span><br><span class="line">        <span class="built_in">console</span>.log(propName);</span><br><span class="line">        <span class="built_in">console</span>.log(description);</span><br><span class="line">        description.writable = canBeEdit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@editable</span>(<span class="literal">true</span>)</span><br><span class="line">    hello() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">person.hello();</span><br><span class="line">person.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">&#125;</span><br><span class="line">person.hello();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-3-Property-Decorator"><a href="#2-3-Property-Decorator" class="headerlink" title=" 2-3. Property Decorator"></a><a name="property"></a> 2-3. Property Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writable</span>(<span class="params">canBeWrite: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target: <span class="built_in">any</span>, propName: <span class="built_in">string</span></span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(canBeWrite);</span><br><span class="line">        <span class="built_in">console</span>.log(target);</span><br><span class="line">        <span class="built_in">console</span>.log(propName);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            writable: canBeWrite</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="meta">@writable</span>(<span class="literal">false</span>)</span><br><span class="line">    name: <span class="built_in">string</span> = <span class="string">'Mark'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-4-Prameter-Decorator"><a href="#2-4-Prameter-Decorator" class="headerlink" title=" 2-4. Prameter Decorator"></a><a name="prameter"></a> 2-4. Prameter Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printInfo</span>(<span class="params">target: <span class="built_in">any</span>, methodName: <span class="built_in">string</span>, paramIndex: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(target);</span><br><span class="line">    <span class="built_in">console</span>.log(methodName);</span><br><span class="line">    <span class="built_in">console</span>.log(paramIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">private</span> _name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">private</span> _age: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span>, @printInfo age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">        <span class="keyword">this</span>._age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    hello(<span class="meta">@printInfo</span> message: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Person &#123; hello: [Function] &#125;</span></span><br><span class="line"><span class="comment">hello</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">[Function: Person]</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/es6-class" target="_blank" rel="external">http://poiemaweb.com/es6-class</a></li>
+<li><a href="https://javarouka.github.io/blog/2016/09/30/decorator-exploring/" target="_blank" rel="external">https://javarouka.github.io/blog/2016/09/30/decorator-exploring/</a></li>
+<li><a href="http://blog-kr.zoyi.co/channel-frontend-decorator/" target="_blank" rel="external">http://blog-kr.zoyi.co/channel-frontend-decorator/</a></li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -220,7 +254,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/12/firebaseStorage/" data-id="cjakq5lf5001ge32mnyfn1tzt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/26/Typescript_11/" data-id="cjakq5leq000ee32myhpn57uy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -338,20 +372,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/13/algorithm_01/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/11/27/Typescript_12/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            야근지수 (미제)
+            11/ Type Inference
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/11/10/Typescript_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/25/Typescript_10/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">1/ Typescript_환경 셋팅</p>
+        <p class="article-nav-title">9/ itertor</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -548,7 +582,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/12/firebaseStorage/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/26/Typescript_11/';
     
     (function() {
     var dsq = document.createElement('script');
