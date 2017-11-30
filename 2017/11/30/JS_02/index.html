@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>persistor.purge() | 필오의 개발일지</title>
+    <title>2/ 메모리 관리와 가비지 콜렉션 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,persis" />
+        <meta name="keywords" content="til,react" />
     
     
-    <meta name="description" content="https://github.com/rt2zz/redux-persist  상황 작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작  에러 메세지1TypeError: In this environment the sources for assign MUST be an o">
-<meta name="keywords" content="react,persis">
+    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   가비지 콜렉션   자바스크립트는 인터프리터 언어이다.(인터프리터 언어란 목적 파일 산출과정이 없이 실행과 동시에 줄 단위로 번역이 된고, 저용량 소스에 적합하다. 코드가 실행되는 시점이 런타임이다. 인터프리터와 컴파일러의 차이점)">
+<meta name="keywords" content="til,react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="persistor.purge()">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/08/log_001/index.html">
+<meta property="og:title" content="2&#x2F; 메모리 관리와 가비지 콜렉션">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/30/JS_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="https://github.com/rt2zz/redux-persist  상황 작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작  에러 메세지1TypeError: In this environment the sources for assign MUST be an o">
+<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   가비지 콜렉션   자바스크립트는 인터프리터 언어이다.(인터프리터 언어란 목적 파일 산출과정이 없이 실행과 동시에 줄 단위로 번역이 된고, 저용량 소스에 적합하다. 코드가 실행되는 시점이 런타임이다. 인터프리터와 컴파일러의 차이점)">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/11/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-28T09:08:43.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/34/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-11-30T14:23:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="persistor.purge()">
-<meta name="twitter:description" content="https://github.com/rt2zz/redux-persist  상황 작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작  에러 메세지1TypeError: In this environment the sources for assign MUST be an o">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/11/thumb_default.jpg">
+<meta name="twitter:title" content="2&#x2F; 메모리 관리와 가비지 콜렉션">
+<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   가비지 콜렉션   자바스크립트는 인터프리터 언어이다.(인터프리터 언어란 목적 파일 산출과정이 없이 실행과 동시에 줄 단위로 번역이 된고, 저용량 소스에 적합하다. 코드가 실행되는 시점이 런타임이다. 인터프리터와 컴파일러의 차이점)">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/34/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/08/log_001/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/30/JS_02/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -97,7 +97,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">Home</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/LOG/">LOG</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/LOG/">LOG</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-log_001" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-JS_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        persistor.purge()
+        2/ 메모리 관리와 가비지 콜렉션
         </h1>
     
 
@@ -177,15 +177,15 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/08/log_001/" class="article-date">
-            <time datetime="2017-11-08T09:23:55.000Z" itemprop="datePublished">2017-11-08</time>
+        <a href="/2017/11/30/JS_02/" class="article-date">
+            <time datetime="2017-11-30T09:23:55.000Z" itemprop="datePublished">2017-11-30</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/persis/">persis</a>, <a class="tag-link" href="/tags/react/">react</a>
+        <a class="tag-link" href="/tags/react/">react</a>, <a class="tag-link" href="/tags/til/">til</a>
     </div>
 
             </div>
@@ -193,18 +193,27 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="external">https://github.com/rt2zz/redux-persist</a></p>
+<p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=" target="_blank" rel="external">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
-<h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul>
-<li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li>
-</ul>
-<p>에러 메세지<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure></p>
-<h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p>
-<h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="external">https://github.com/rt2zz/redux-persist/issues/536</a></p>
+<p>목차 </p>
 <ol>
-<li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li>
-<li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행</li>
-<li>잘 싱행된다면 해당 코드는 삭제하세요.</li>
+<li>가비지 콜렉션</li>
+</ol>
+<hr>
+<p>자바스크립트는 <span style="color:tomato">인터프리터</span> 언어이다.<br>(인터프리터 언어란 목적 파일 산출과정이 없이 실행과 동시에 줄 단위로 번역이 된고, 저용량 소스에 적합하다. 코드가 실행되는 시점이 런타임이다. <a href="https://feel5ny.github.io/2017/11/08/Typescript_01/">인터프리터와 컴파일러의 차이점</a>)</p>
+<p><img src="/images/post_img/34/cleaner-01.jpg" width="50%"></p>
+<p>고급 언어 인터프리터는 가비지 콜렉터 라는 소프트웨어를 가지고 있다. 가비지 컬렉터란 <strong>메모리 할당을 추적하고 할당된 메모리가 더 이상 필요 없어졌을 때 해체하는 작업이다.</strong> 이 프로세스는 주기적으로 실행되는데 코드 실행 중에 특정 시점에서 메모리를 회수하도록 지정할 수도 있다. C나 C++같은 언어에서는 메모리 추적이 매우 중요하기 때문에 메모리 관리가 힘들지만, 자바스크립트는 필요한 메모리를 자동으로 할당하고 더 이상 사용하지 않는 메모리는 자동으로 회수하므로 개발자가 직접 메모리를 관리하지 않아도 된다.<br>가비지 컬렉터는 항상 필요없어진 메모리만을 해제하지만, 모든 필요없어진 메모리를 해제하는 건 아니다. 즉, ‘더 이상 필요없는 모든 메모리’가 아니라 ‘더 이상 필요 없는 몇몇 메모리’를 찾아낸다. 이는 가비지 콜렉션 알고리즘의 한계점이 있기 때문이다.<br>무튼, 어떤 변수가 더 이상 사용되지 않는지, 사용될 가능성이 있는 변수는 무엇인지 추적해야 메모리 회수 대상을 정할 수 있다. 식별 기준은 2가지이다.</p>
+<ol>
+<li>표시하고 지우기 Mark and Sweep</li>
+<li>참조 카운팅 Reference counting</li>
+</ol>
+<hr>
+<p>가비지 컬레터의 성능</p>
+<hr>
+<p>메모리 관리</p>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management" target="_blank" rel="external">https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management</a></li>
 </ol>
 
         </div>
@@ -213,7 +222,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/08/log_001/" data-id="cjakq6jq2001lgk2mg6a23jic" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/30/JS_02/" data-id="cjamkmcxv0000qu2m6k1yo669" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -331,20 +340,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/08/Typescript_01/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            0/ Typescript?
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/09/10/aboutHEXO/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/11/29/log_001/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">Hexo 설치</p>
+        <p class="article-nav-title">persistor.purge()</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -359,6 +358,46 @@ ga('send', 'pageview');
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/30/JS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/34/thumb_default.jpg)" alt="2/ 메모리 관리와 가비지 콜렉션" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/11/30/JS_02/" class="title">2/ 메모리 관리와 가비지 콜렉션</a></p>
+                            <p class="item-date"><time datetime="2017-11-30T09:23:55.000Z" itemprop="datePublished">2017-11-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/29/log_001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
+                            <p class="item-title"><a href="/2017/11/29/log_001/" class="title">persistor.purge()</a></p>
+                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -420,46 +459,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/25/Typescript_10/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/23/thumb_default.jpg)" alt="9/ itertor" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a></p>
-                            <p class="item-title"><a href="/2017/11/25/Typescript_10/" class="title">9/ itertor</a></p>
-                            <p class="item-date"><time datetime="2017-11-25T11:13:22.000Z" itemprop="datePublished">2017-11-25</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/24/Typescript_09/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/22/thumb_default.jpg)" alt="8/ Generic" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a></p>
-                            <p class="item-title"><a href="/2017/11/24/Typescript_09/" class="title">8/ Generic</a></p>
-                            <p class="item-date"><time datetime="2017-11-24T06:42:10.000Z" itemprop="datePublished">2017-11-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -469,7 +468,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/LOG/">LOG</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -479,7 +478,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -489,7 +488,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/til/" style="font-size: 20px;">til</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/til/" style="font-size: 20px;">til</a> <a href="/tags/typescript/" style="font-size: 17.5px;">typescript</a>
         </div>
     </div>
 
@@ -541,7 +540,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/08/log_001/';
+    var disqus_url = 'http://feel5ny.github.io/2017/11/30/JS_02/';
     
     (function() {
     var dsq = document.createElement('script');
