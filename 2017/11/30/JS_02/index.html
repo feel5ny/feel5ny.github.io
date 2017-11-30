@@ -11,19 +11,19 @@
         <meta name="keywords" content="react" />
     
     
-    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마킹을">
+    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더 이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야 하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2&#x2F; 메모리 관리와 가비지 콜렉션">
 <meta property="og:url" content="http://feel5ny.github.io/2017/11/30/JS_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마킹을">
+<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더 이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야 하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/34/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-30T16:52:07.000Z">
+<meta property="og:updated_time" content="2017-11-30T17:05:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2&#x2F; 메모리 관리와 가비지 콜렉션">
-<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마킹을">
+<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  요약가비지 콜렉션은 더 이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야 하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/34/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -195,7 +195,7 @@ ga('send', 'pageview');
             <blockquote>
 <p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=" target="_blank" rel="external">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
-<p><strong>요약</strong><br>가비지 콜렉션은 더이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야하는데 이때 <code>표시하고 지우기</code> 방법과 <code>참조 카운팅</code>이 있다. <code>표시하고 지우기 방법</code>은 처음 컨텍스트의 모든 변수에 마킹을 한 후, 값이 할당되어있거나 참조되어있는 변수의 마킹을 지운다. 지웠음에도 마킹이 남아있는 변수를 회수하는 방식이다. <code>참조 카운팅</code>은 참조 카운트가 0인 변수를 회수하는 방식인데 순환참조의 카운팅 한계가 있기 때문에 주로 표시하고 지우가 방법을 사용한다. 가비지 콜렉터 사이클이 도는 것은 상당한 비용이 발생한다. 메모리 누수 관리를 위해서는 사용하지 않는 변수나 객체는 모두 null을 재할당하여 가비지 컬렉터가 다음 사이클때 회수하도록 하는 방법, 크롬 개발자도구의 퍼포먼스 탭에서 확인하는 방법등이 있ek.</p>
+<p><strong>요약</strong><br>가비지 콜렉션은 더 이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야 하는데 이때 <code>표시하고 지우기</code> 방법과 <code>참조 카운팅</code>이 있다. <code>표시하고 지우기 방법</code>은 처음 컨텍스트의 모든 변수에 마킹을 한 후, 값이 할당되어있거나 참조되어있는 변수의 마킹을 지운다. 지웠음에도 마킹이 남아있는 변수를 회수하는 방식이다. <code>참조 카운팅</code>은 참조 카운트가 0인 변수를 회수하는 방식인데 순환참조의 카운팅 한계가 있기 때문에 주로 표시하고 지우기 방법을 사용한다. 가비지 콜렉터 사이클이 도는 것은 상당한 비용이 발생한다. 메모리 누수 관리를 위해서는 사용하지 않는 변수나 객체는 모두 null로 재할당하여 가비지 컬렉터가 다음 사이클 때 회수하도록 하는 방법, 크롬 개발자도구의 퍼포먼스 탭에서 확인하는 방법 등이 있다.</p>
 <p><strong>목차</strong> </p>
 <ol>
 <li>가비지 콜렉션</li>
