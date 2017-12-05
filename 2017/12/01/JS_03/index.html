@@ -3,28 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>필오의 개발일지</title>
+    <title>3/ 실행 컨텍스트와 스코프 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+        <meta name="keywords" content="javascript" />
     
-      <meta name="description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="필오의 개발일지">
-<meta property="og:url" content="http://feel5ny.github.io/page/2/index.html">
+    
+    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3&#x2F; 실행 컨텍스트와 스코프">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/01/JS_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
+<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/preview.jpg">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-05T15:36:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="필오의 개발일지">
-<meta name="twitter:description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/preview.jpg">
+<meta name="twitter:title" content="3&#x2F; 실행 컨텍스트와 스코프">
+<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/page/2/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/01/JS_03/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -152,535 +156,197 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="home">Home</em>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-JS_03" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/22/Typescript_08/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/21/thumb_default.jpg)" alt="7/ class(2)" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/22/Typescript_08/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-22T01:32:11.000Z" itemprop="datePublished">2017-11-22</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/22/Typescript_08/">7/ class(2)</a>
+        3/ 실행 컨텍스트와 스코프
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/01/JS_03/" class="article-date">
+            <time datetime="2017-12-01T01:13:55.000Z" itemprop="datePublished">2017-12-01</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=" target="_blank" rel="external">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
+</blockquote>
+<p>목차 </p>
+<ol>
+<li><a href="#Execution_context">실행컨텍스트란?</a></li>
+<li><a href="#Execution_object">실행컨텍스트의 3가지 객체</a></li>
+<li><a href="#Scope_chain">스코프 체인</a></li>
+</ol>
+<hr>
+<h2 id="1-실행-컨텍스트"><a href="#1-실행-컨텍스트" class="headerlink" title=" 1. 실행 컨텍스트"></a><a name="Execution_context"></a> 1. 실행 컨텍스트</h2><p>실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념이라고 정의한다. 즉, 실행 컨텍스트는 <code>실행 가능한 코드가 실행되는 환경</code>이라고 말할 수 있다.<br>실행 가능한 코드란</p>
+<ul>
+<li>전역코드 : 전역 영역에 존재하는 코드</li>
+<li>함수코드 : 함수 내에 존재하는 코드</li>
+<li>Eval코드 : Eval 함수로 실행되는 코드</li>
+</ul>
+<p>일반적으로는 전역코드와 함수코드. </p>
+<p>자바스크립트 엔진은 코드를 실행하기 위해 실행에 필요한 여러가지 정보를 알고 있어야 한다.</p>
+<ul>
+<li>변수: 전역변수, 지역변수, 매개변수, 객체의 프로퍼티</li>
+<li>함수 선언</li>
+<li>변수의 유효범위 (Scope)</li>
+<li>this</li>
+</ul>
+<p>자바스크립트 엔진은 실행 컨텍스트를 물리적 객체의 형태로 관리한다.</p>
+<hr>
+<h2 id="2-실행-컨텍스트의-3가지-객체"><a href="#2-실행-컨텍스트의-3가지-객체" class="headerlink" title=" 2. 실행 컨텍스트의 3가지 객체"></a><a name="Execution_object"></a> 2. 실행 컨텍스트의 3가지 객체</h2><p>객체의 형태를 가지며 아래의 3가지 프로퍼티를 소유한다.</p>
+<ul>
+<li>Variable object</li>
+<li>Scope chain</li>
+<li>thisValue</li>
+</ul>
+<h3 id="2-1-Variable-object-VO-변수객체"><a href="#2-1-Variable-object-VO-변수객체" class="headerlink" title="2-1. Variable object (VO 변수객체)"></a>2-1. Variable object (VO 변수객체)</h3><p>변수나 함수의 실행 컨텍스트는 <strong>다른 데이터에 접근할 수 있는지, 어떻게 행동하는지를 규정합니다.</strong> 각 실행 컨텍스트에는 변수객체(variable object:VO)가 연결되어 있으며, 해당 컨텍스트에서 정의된 모든 <code>변수</code>와 <code>함수</code>는 이 객체에 존재한다. 코드로는 접근할 수 없다.</p>
+<ul>
+<li>변수</li>
+<li>parameter arguments</li>
+<li>함수 선언 (함수 표현식은 제외)</li>
+</ul>
+<p>Variable Object는 실행 컨텍스트의 프로퍼티이기 때문에 값을 갖는데, 이 값은 다른 객체를 가리킨다.<br>전역 컨텍스트와 함수 컨텍스트가 가리키는 객체는 다르다. 함수에만 파라미터가 존재한다.</p>
+<h4 id="전역-컨텍스트인-경우"><a href="#전역-컨텍스트인-경우" class="headerlink" title="전역 컨텍스트인 경우"></a><code>전역 컨텍스트인 경우</code></h4><p>Variable Object는 전역 변수, 전역 함수 등을 포함하는 전역 객체(Global Object/GO)를 가리킨다. 전역변수와 전역함수는 전역 객체의 프로퍼티이다.</p>
+<p><img src="/images/post_img/36/ec-vo-global.png"></p>
+<p>전역 컨텍스트란</p>
+<ul>
+<li>가장 바깥쪽에 존재하는 실행 컨텍스트이다.</li>
+<li><p>ECMAScript를 구현한 환경에 따라 이 컨텍스트를 부르는 이름이 다르다.</p>
+<ul>
+<li>웹 ()<ul>
+<li>전역컨텍스트 : <code>window</code></li>
+<li>전역변수와 전역함수는 모두 window의 프로퍼티 및 메서드로 생성된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>전역컨텍스트는 애플리케이션이 종료될 때, 웹페이지를 나가거나 브라우저를 닫을 때까지 유지된다.</p>
+</li>
+</ul>
+<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO/활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br> s/post_img/36/ec-vo-foo.png”&gt;</p>
+<h4 id="실행컨텍스트-스택"><a href="#실행컨텍스트-스택" class="headerlink" title="실행컨텍스트 스택"></a><code>실행컨텍스트 스택</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="string">'yyy'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="string">'zzz'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(x + y + z);</span><br><span class="line">  &#125;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p><img src="/images/post_img/36/ec_1.png"></p>
+<ol>
+<li>컨트롤이 실행 가능한 코드로 이동하면 논리적 스택 구조를 가지는 새로운 실행 컨텍스트 스택이 생성된다. 스택은 LIFO(Last In First Out, 후입 선출)의 구조를 가지는 나열 구조이다.</li>
+<li>전역 코드(Global code)로 컨트롤이 진입하면 전역 실행 컨텍스트가 생성되고 실행 컨텍스트 스택에 쌓인다. 전역 실행 컨텍스트는 애플리케이션이 종료될 때(웹 페이지에서 나가거나 브라우저를 닫을 때)까지 유지된다.</li>
+<li>함수를 호출하면 해당 함수의 실행 컨택스트가 생성되며 직전에 실행된 코드블럭의 실행 컨텍스트 위에 쌓인다.</li>
+<li>함수 실행이 끝나면 해당 함수의 실행 컨텍스트를 파기하고 직전의 실행 컨텍스트에 컨트롤을 반환한다.<br>ECMAScript 프로그램은 모두 이런 식으로 실행된다.</li>
+</ol>
+<hr>
+<h2 id="3-스코프-체인-SC"><a href="#3-스코프-체인-SC" class="headerlink" title=" 3. 스코프 체인 SC"></a><a name="Scope_chain"></a> 3. 스코프 체인 SC</h2><p>스코프 체인은 일종의 리스트로서 중첩된 함수의 <strong>스코프의 레퍼런스를 차례로 저장하고 있는 개념</strong>이다.<br>즉, 현재 실행컨텍스트의 활성객체(AO)를 선두로하여 순차적으로 상위 컨텍스트의 AO를 가리키며 마지막 리스트는 전역 객체를 가리킨다.</p>
+<p><strong>스코프 체인의 목적은 실행 컨텍스트가 접근할 수 있는 모든 변수와 함수에 <code>순서</code>를 정의하는 것.</strong></p>
+<blockquote>
+<p>스코프 체인이 생성되는 과정을 … 좀 더 정리할 예정</p>
+</blockquote>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/js-execution-context" target="_blank" rel="external">http://poiemaweb.com/js-execution-context</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
             
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
 
-요약class에서 선언된 멤버변수와 멤버함수를 외부에서 접근이 가능하게 하는 방법, 재선언할 수 있도록 컨트롤하는 방법을 배웁니다. 생성자에도 private화하여 class 내부에서만 선언이 가능하도록 하며, 이는 singleTo
-        </p>
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjatsg6tq0000qs2mdg9ur6c1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/21/Typescript_07/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/20/thumb_default.jpg)" alt="6/ class(1)" class="thumbnail-image"></span>
-    
+    <section id="comments">
     
         
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/21/Typescript_07/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-21T01:32:11.000Z" itemprop="datePublished">2017-11-21</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/21/Typescript_07/">6/ class(1)</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
-
-요약타입스크립트에서 주로 사용되는 class의 기초에 대해서 배웁니다. es6에 도입된 class와, public, private, protected 키워드로 class에 접근제어하는 방법을 배우고, class간의 상속 개념을 배
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
-        </div>
-    
 
     
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/20/Typescript_06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/18/thumb_default.jpg)" alt="5/ interface" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/20/Typescript_06/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-20T13:10:56.000Z" itemprop="datePublished">2017-11-20</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/20/Typescript_06/">5/ interface</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
-
-요약inteface에 대해서 배웁니다. interface 내부에서 타입선언 후 변수에서 사용하며, 함수에서는 implements 키워드를 사용하여 interface를 상속받아 사용합니다. property를 ?를 사용하여 옵셔널하게
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/18/Typescript_05/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/17/thumb_default.jpg)" alt="4/ 타입추론, Type assertions, Type alias" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/18/Typescript_05/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-18T06:13:11.000Z" itemprop="datePublished">2017-11-18</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/18/Typescript_05/">4/ 타입추론, Type assertions, Type alias</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
-
-목표이 포스팅과 interface 포스팅에서는 타입을 명시하는 방법을 배웁니다. 타입을 명시하지 않아도 추론이 가능하며, 강제 타입선언, 별명을 붙여가며 타입을 선언하는 방식 등을 배웁니다.
-
-let과 const의 타입 추론변수를
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/17/Typescript_04/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/14/thumb_default.jpg)" alt="3/ Typescript_기본 데이터 타입" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/17/Typescript_04/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-17T03:33:40.000Z" itemprop="datePublished">2017-11-17</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/17/Typescript_04/">3/ Typescript_기본 데이터 타입</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            기본 데이터 타입 🌱타입스크립트에서 기본 자료형을 잘! 숙지해야 한다. 타입스크립트는 타입을 새로 만들면서 짜는 방식인데, 특정한 골격을 갖출 때 결국 남는건 기본 자료형들이 남는다. 이때 기본 자료형이 정확히 어떤 것들이 있는지 인지하고 있어야, 그 기본 자료형들을 잘 조합해서 내가 사용할 인터페이스를 만들어 낼 수 있고, 타입을 만들 수 있다. 자바스
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/16/algorithm_02/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/15/thumb_default.gif)" alt="2016년 A월 B일" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/16/algorithm_02/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm-128583/Level2/">Level2</a>
-            </div>
-            <div class="date"><time datetime="2017-11-16T04:42:33.000Z" itemprop="datePublished">2017-11-16</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/16/algorithm_02/">2016년 A월 B일</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            2016년 A월 B일2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각SUN,MON,TUE,WED,THU,FRI,SAT를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 2
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/15/Typescript_03/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/13/thumb_default.jpg)" alt="2/ Typescript_tsconfig.json 프로퍼티의 종류" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/15/Typescript_03/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-15T10:30:01.000Z" itemprop="datePublished">2017-11-15</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/15/Typescript_03/">2/ Typescript_tsconfig.json 프로퍼티의 종류</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            컴파일러 옵션실제 프로젝트에서는 컴파일러 옵션을 그렇게 많이 셋팅하진 않는다 . 옵션을 셋팅할 수 있는 전체 스펙은 이 링크로 가면 확인가능하다 .
-
-
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
-
-
-최상위 프로퍼티
-compileOnSave
-extends
-files, inclu
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/14/dada_06week/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/10/thumb_default.jpg)" alt="overview" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/14/dada_06week/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Project-127939/DA-DA/">DA, DA</a>
-            </div>
-            <div class="date"><time datetime="2017-11-14T01:10:04.000Z" itemprop="datePublished">2017-11-14</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/14/dada_06week/">overview</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            식단 다이어리 서비스, DA,DA프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 프론트엔드 중심으로 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/13/algorithm_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/03/thumb_default.jpg)" alt="야근지수 (미제)" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/13/algorithm_01/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Algorithm-128583/Level3/">Level3</a>
-            </div>
-            <div class="date"><time datetime="2017-11-13T08:10:04.000Z" itemprop="datePublished">2017-11-13</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/13/algorithm_01/">야근지수 (미제)</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            야근 지수회사원인 수민이는 많은 일이 쌓여 있습니다. 수민이는 야근을 최소화하기 위해 남은 일의 작업량을 숫자로 메기고, 일에 대한 야근 지수를 줄이기로 결정했습니다. 야근 지수는 남은 일의 작업량을 제곱하여 더한 값을 의미합니다. 수민이는 1시간 동안 남은 일 중 하나를 골라 작업량 1만큼 처리할 수 있습니다. 수민이의 퇴근까지 남은 N 시간과 각 일에 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/12/firebaseStorage/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/02/thumb_default.jpg)" alt="Firebase의 storage 연동하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/12/firebaseStorage/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a>
-            </div>
-            <div class="date"><time datetime="2017-11-12T01:10:04.000Z" itemprop="datePublished">2017-11-12</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/12/firebaseStorage/">Firebase의 storage 연동하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            학교 로고 모음 사이트
-현재 상황
-
-팀 프로젝트인 식단 다이어리 서비스 dada 프로젝트에서는 db 설계에 대한 이슈가 없었다. 당연히 난 프론트엔드다보니.. db 설계를 담당하지 않아서인 건데, 현재 개인 프로젝트에서는 db 구조까지 짜는 작업을 하고 있다.
-DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파일들이 있는데, 제일 좋은 건
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">Page 2 of 3</span>
-        <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
-    </nav>
+    </section>
 
 
                         </div>
@@ -722,6 +388,19 @@ DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파�
             </li>
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/11/30/JS_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">2/ 메모리 관리와 가비지 콜렉션</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -913,11 +592,13 @@ DB 구조짜기300개의 데이터와 개당 storage에 연동되어있는 파�
     var disqus_shortname = 'feel5ny';
     
     
+    var disqus_url = 'http://feel5ny.github.io/2017/12/01/JS_03/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
