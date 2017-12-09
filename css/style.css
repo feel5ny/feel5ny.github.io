@@ -1840,55 +1840,87 @@ i.icon:before {
   height: 1.6em;
 }
 .highlight {
-  color: #fff;
-  background: #002451;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #282a36;
+  color: #f8f8f2;
 }
-.highlight .code .comment,
-.highlight .code .quote {
-  color: #7285b7;
+.highlight .line {
+  min-height: 1.5em;
 }
-.highlight .code .variable,
-.highlight .code .template-variable,
-.highlight .code .tag,
-.highlight .code .name,
-.highlight .code .selector-id,
-.highlight .code .selector-class,
-.highlight .code .regexp,
-.highlight .code .deletion {
-  color: #ff9da4;
+.highlight .subst {
+  color: #f8f8f2;
 }
-.highlight .code .number,
-.highlight .code .built_in,
-.highlight .code .builtin-name,
-.highlight .code .literal,
-.highlight .code .type,
-.highlight .code .params,
-.highlight .code .meta,
-.highlight .code .link {
-  color: #ffc58f;
+.highlight .keyword,
+.highlight .selector-tag,
+.highlight .section,
+.highlight .link {
+  color: #ff79c6;
 }
-.highlight .code .attribute {
-  color: #ffeead;
+.highlight .literal,
+.highlight .number {
+  color: #bd93f9;
 }
-.highlight .code .string,
-.highlight .code .symbol,
-.highlight .code .bullet,
-.highlight .code .addition {
-  color: #d1f1a9;
+.highlight .function .keyword {
+  color: #8be9fd;
 }
-.highlight .code .title,
-.highlight .code .section {
-  color: #bbdaff;
+.highlight .title {
+  color: #50fa7b;
 }
-.highlight .code .keyword,
-.highlight .code .selector-tag {
-  color: #ebbbff;
+.highlight .params {
+  color: #ffb86c;
 }
-.highlight .code .emphasis {
+.highlight .string,
+.highlight .name,
+.highlight .type,
+.highlight .symbol,
+.highlight .bullet,
+.highlight .addition,
+.highlight .variable,
+.highlight .template-tag,
+.highlight .template-variable {
+  color: #f1fa8c;
+}
+.highlight .string .subst {
+  color: #ff79c6;
+}
+.highlight .comment,
+.highlight .quote,
+.highlight .deletion,
+.highlight .meta {
+  color: #6272a4;
+}
+.highlight .keyword,
+.highlight .selector-tag,
+.highlight .literal,
+.highlight .title,
+.highlight .section,
+.highlight .doctag,
+.highlight .type,
+.highlight .name,
+.highlight .strong {
+  font-weight: bold;
+}
+.highlight .emphasis,
+.highlight .built_in {
   font-style: italic;
 }
-.highlight .code .strong {
-  font-weight: bold;
+.highlight .built_in {
+  color: #8be9fd;
+}
+.highlight .tag .name {
+  color: #ff79c6;
+}
+.highlight .tag .attr {
+  color: #50fa7b;
+}
+.highlight .selector-id,
+.highlight .selector-class {
+  color: #50fa7b;
+}
+.highlight .attribute {
+  color: #8be9fd;
 }
 @media only screen and (min-width: 960px) {
   .nav-container-inner {

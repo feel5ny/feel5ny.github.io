@@ -20,7 +20,7 @@
 <meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-05T15:36:59.000Z">
+<meta property="og:updated_time" content="2017-12-05T18:15:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3&#x2F; 실행 컨텍스트와 스코프">
 <meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
@@ -212,7 +212,10 @@ ga('send', 'pageview');
 <p>자바스크립트 엔진은 코드를 실행하기 위해 실행에 필요한 여러가지 정보를 알고 있어야 한다.</p>
 <ul>
 <li>변수: 전역변수, 지역변수, 매개변수, 객체의 프로퍼티</li>
-<li>함수 선언</li>
+<li>함수 선언<ul>
+<li>함수 표현식은 호이스팅이 안되는 이유. (함수 표현식은 변수에 할당되는 방식이기 때문에)</li>
+</ul>
+</li>
 <li>변수의 유효범위 (Scope)</li>
 <li>this</li>
 </ul>
@@ -227,7 +230,11 @@ ga('send', 'pageview');
 <h3 id="2-1-Variable-object-VO-변수객체"><a href="#2-1-Variable-object-VO-변수객체" class="headerlink" title="2-1. Variable object (VO 변수객체)"></a>2-1. Variable object (VO 변수객체)</h3><p>변수나 함수의 실행 컨텍스트는 <strong>다른 데이터에 접근할 수 있는지, 어떻게 행동하는지를 규정합니다.</strong> 각 실행 컨텍스트에는 변수객체(variable object:VO)가 연결되어 있으며, 해당 컨텍스트에서 정의된 모든 <code>변수</code>와 <code>함수</code>는 이 객체에 존재한다. 코드로는 접근할 수 없다.</p>
 <ul>
 <li>변수</li>
-<li>parameter arguments</li>
+<li>parameter arguments<ul>
+<li>parameter, 매개변수 : 함수 원형 작성시 사용되는 변수를 인자 (이름보다는 타입이 중요)</li>
+<li>argument, 실행인자 : 코딩 중 함수 호출시 사용되는 변수 또는 실제 값을 인수</li>
+</ul>
+</li>
 <li>함수 선언 (함수 표현식은 제외)</li>
 </ul>
 <p>Variable Object는 실행 컨텍스트의 프로퍼티이기 때문에 값을 갖는데, 이 값은 다른 객체를 가리킨다.<br>전역 컨텍스트와 함수 컨텍스트가 가리키는 객체는 다르다. 함수에만 파라미터가 존재한다.</p>
@@ -248,7 +255,7 @@ ga('send', 'pageview');
 <li><p>전역컨텍스트는 애플리케이션이 종료될 때, 웹페이지를 나가거나 브라우저를 닫을 때까지 유지된다.</p>
 </li>
 </ul>
-<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO/활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br> s/post_img/36/ec-vo-foo.png”&gt;</p>
+<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO/활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br><img src="/images/post_img/36/ec-vo-foo.png"></p>
 <h4 id="실행컨텍스트-스택"><a href="#실행컨텍스트-스택" class="headerlink" title="실행컨텍스트 스택"></a><code>실행컨텍스트 스택</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="string">'yyy'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="string">'zzz'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(x + y + z);</span><br><span class="line">  &#125;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
 <p><img src="/images/post_img/36/ec_1.png"></p>
 <ol>
@@ -266,6 +273,8 @@ ga('send', 'pageview');
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="http://poiemaweb.com/js-execution-context" target="_blank" rel="external">http://poiemaweb.com/js-execution-context</a></li>
+<li><a href="http://nerissa.tistory.com/entry/Parameter%EC%99%80-Argument%EC%9D%98-%EC%B0%A8%EC%9D%B4" target="_blank" rel="external">http://nerissa.tistory.com/entry/Parameter%EC%99%80-Argument%EC%9D%98-%EC%B0%A8%EC%9D%B4</a></li>
+<li><a href="http://poiemaweb.com/js-function" target="_blank" rel="external">http://poiemaweb.com/js-function</a></li>
 </ol>
 
         </div>
@@ -274,7 +283,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjatsg6tq0000qs2mdg9ur6c1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjaza5x6n0005dx2mb5vzekw5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -392,6 +401,16 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
+        <a href="/2017/12/02/JS_04/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            4/ 참조타입_Function 타입
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
     
         <a href="/2017/11/30/JS_02/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
@@ -410,6 +429,26 @@ ga('send', 'pageview');
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/02/JS_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/02/JS_04/" class="title">4/ 참조타입_Function 타입</a></p>
+                            <p class="item-date"><time datetime="2017-12-02T02:20:12.000Z" itemprop="datePublished">2017-12-02</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -454,26 +493,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/11/29/log_001/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
-                            <p class="item-title"><a href="/2017/11/29/log_001/" class="title">persistor.purge()</a></p>
-                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2017/11/29/JS_01/" class="thumbnail">
     
     
@@ -494,10 +513,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/11/28/Typescript_13/" class="thumbnail">
+                            <a href="/2017/11/29/log_001/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/27/thumb_default.jpg)" alt="React에 typescript 셋팅하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
     
     
 </a>
@@ -505,9 +524,9 @@ ga('send', 'pageview');
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a></p>
-                            <p class="item-title"><a href="/2017/11/28/Typescript_13/" class="title">React에 typescript 셋팅하기</a></p>
-                            <p class="item-date"><time datetime="2017-11-28T11:13:22.000Z" itemprop="datePublished">2017-11-28</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
+                            <p class="item-title"><a href="/2017/11/29/log_001/" class="title">persistor.purge()</a></p>
+                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
                         </div>
                     </li>
                 
@@ -520,7 +539,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -530,7 +549,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -540,7 +559,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
         </div>
     </div>
 
