@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>4/ 참조타입_Function 타입 (1) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   Function 타입 함수 선언 vs 함수 표현식 값처럼 쓰는 함수(일급객체) 함수의 내부 구조 함수 프로퍼티와 메서드 4,5번은 Function 2편에서    1. Function 타입함수는 객체이다. 모든 함수는 Funct">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4&#x2F; 참조타입_Function 타입 (1)">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/02/JS_04_1/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   Function 타입 함수 선언 vs 함수 표현식 값처럼 쓰는 함수(일급객체) 함수의 내부 구조 함수 프로퍼티와 메서드 4,5번은 Function 2편에서    1. Function 타입함수는 객체이다. 모든 함수는 Funct">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/38/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-10T13:33:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4&#x2F; 참조타입_Function 타입 (1)">
+<meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   Function 타입 함수 선언 vs 함수 표현식 값처럼 쓰는 함수(일급객체) 함수의 내부 구조 함수 프로퍼티와 메서드 4,5번은 Function 2편에서    1. Function 타입함수는 객체이다. 모든 함수는 Funct">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/38/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/02/JS_04_1/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JS_04_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        4/ 참조타입_Function 타입 (1)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/02/JS_04_1/" class="article-date">
+            <time datetime="2017-12-02T02:20:12.000Z" itemprop="datePublished">2017-12-02</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
+</blockquote>
+<p>목차 </p>
+<ol>
+<li><a href="#Function">Function 타입</a></li>
+<li><a href="#declarations_expressions">함수 선언 vs 함수 표현식</a></li>
+<li><a href="#First_class_object">값처럼 쓰는 함수(일급객체)</a></li>
+<li><span style="color:lightgray">함수의 내부 구조</span></li>
+<li><span style="color:lightgray">함수 프로퍼티와 메서드</span><br> <span style="color:gray">4,5번은 Function 2편에서</span></li>
+</ol>
+<hr>
+<h2 id="1-Function-타입"><a href="#1-Function-타입" class="headerlink" title=" 1. Function 타입"></a><a name="Function"></a> 1. Function 타입</h2><p>함수는 객체이다. 모든 함수는 Function타입의 인스턴스이며, 프로퍼티와 메서드가 있다.<br>함수란 어떤 특정 작업을 수행하기 위해 필요한 일련의 구문들을 그룹화하기 위한 개념이다.</p>
+<h3 id="함수-정의"><a href="#함수-정의" class="headerlink" title="함수 정의"></a>함수 정의</h3><ol>
+<li><p>함수 선언식</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>함수 표현식 Function expression</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>일급객체라는 함수의 특징 때문에 함수 리터럴 방식으로 선언 후 변수에 할당할 수 있다.</li>
+<li>할당된 함수를 가리키는 참조값을 저장하게 된다.</li>
+<li>이렇게 생성된 함수는 function 키워드 다음에 함수 이름이 없으므로 <code>익명 함수</code>로 간주한다. <ul>
+<li>익명함수(anonymous function) = 람다함수(lambda)</li>
+<li>name 프로퍼티는 빈 문자열이다.</li>
+<li>함수표현식으로 재귀, 클로저, 고유변수 등을 설명할 수 있다.<br><br></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Function 생성자 사용 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'num1'</span>,<span class="string">'num2'</span>,<span class="string">'return num1 + num2'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>함수 리터럴 방식</li>
+<li>당연히 권장하지 않는다.</li>
+<li>ECMAScript 생성자에 전달할 문자열을 다시 평가해야 하므로 성능에 영향이 있다.</li>
+</ul>
+</li>
+</ol>
+<p><strong><code>괄호를 쓰지않는 sum</code></strong><br>괄호를 쓰지 않고 함수 이름만 쓰면 함수를 실행하지 않고 <strong>함수를 가리키는 포인터에 접근(만)하는 것</strong>이다.</p>
+<hr>
+<h2 id="2-함수-선언-vs-함수-표현식"><a href="#2-함수-선언-vs-함수-표현식" class="headerlink" title=" 2. 함수 선언 vs 함수 표현식"></a><a name="declarations_expressions"></a> 2. 함수 선언 vs 함수 표현식</h2><p>자바스크립트 엔진이 <a href="https://feel5ny.github.io/2017/12/01/JS_03/">실행 컨텍스트</a>에 데이터를 불러올 때 중요한 차이가 하나 있다.<br><span style="color: tomato">함수 선언</span>은 어떤 코드도 실행하기 전에 이미 모든 실행 컨텍스트에서 접근하고 실행할 수 있지만<br><span style="color: blue">함수 표현식</span>은 코드 실행이 해당 줄까지 진행하기 전에는 사용할 수 없다.</p>
+<p>실행 컨텍스트와 같이 생각해보자!<br><strong>자바스크립트 엔진은 코드를 평가할 때 제일 먼저 함수 선언을 찾은 다음 이들을 맨 위로 올린다 (함수 호이스팅). <code>함수 표현식</code>은 변수에 함수가 할당된 개념이기 때문에, 해당 변수에 값(함수)이 들어오기 전까지는 <code>undefined</code>로만 선언되어있는 상태이다.(변수 호이스팅)</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(sum(<span class="number">10</span>,<span class="number">10</span>));</span><br><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>즉, 위 코드를 보면 에러가 나는데, sum은 컨텍스트에 있지만 매개변수를 넘길 수 있는 형태가 아니기 때문에(2번째 줄 오기 전까지는 <code>undefined</code>) 해당 코드까지 실행하기 전에는 <code>unexpected identifier</code> 에러를 낸다.<br>(예기치 못한 식별자 = <code>sum(10,10)</code>을 보고 함수형태의 식별자 sum을 기대하고 찾았는데, 함수형태가 아니라서) </p>
+<h4 id="함수-표현식만-사용하자고-권고한다-참고"><a href="#함수-표현식만-사용하자고-권고한다-참고" class="headerlink" title="함수 표현식만 사용하자고 권고한다 : 참고"></a>함수 표현식만 사용하자고 권고한다 : <a href="http://poiemaweb.com/js-function#2-함수-호이스팅function-hoisting" target="_blank" rel="external">참고</a></h4><p>JavaScript : The Good Parts의 저자이며 자바스크립트의 권위자인 더글러스 크락포드(Douglas Crockford)는 이와 같은 문제 때문에 <code>함수표현식만을 사용할 것을 권고하고 있다.</code> 함수 호이스팅이 함수 호출 전 반드시 함수를 선언하여야 한다는 규칙을 무시하므로 <strong>1. 코드의 구조를 엉성하게 만들 수 있다고 지적한다.</strong></p>
+<p>또한 함수선언식으로 함수를 정의하면 사용하기에 쉽지만 대규모 애플리케이션을 개발하는 경우 <strong>2. 인터프리터가 너무 많은 코드를 변수 객체(VO)에 저장하므로 애플리케이션의 응답속도는 현저히 떨어질 수 있으므로 주의해야 할 필요가 있다.</strong></p>
+<hr>
+<h2 id="3-값처럼-쓰는-함수-일급객체"><a href="#3-값처럼-쓰는-함수-일급객체" class="headerlink" title=" 3. 값처럼 쓰는 함수 (일급객체)"></a><a name="First_class_object"></a> 3. 값처럼 쓰는 함수 (일급객체)</h2><p>자바스크립트 함수는 <strong>일급 객체</strong>이다. </p>
+<p>일급객체란 </p>
+<ol>
+<li>생성(인스턴스 생성가능), </li>
+<li>대입, </li>
+<li>연산, </li>
+<li>인자 또는 반환값으로서의 전달 등 </li>
+</ol>
+<p><strong>프로그래밍 언어의 기본적 조작을 제한없이 사용할 수 있는 대상</strong>을 의미한다.<br>일급객체일 경우 아래와 같은 특징을 갖는다.</p>
+<div style="background-color: #f1f1f1; padding: 21px;"> 1. 무명의 <a href="https://feel5ny.github.io/2017/11/17/Typescript_04/#literal">리터럴</a>로 표현이 가능하다.<br>2. 변수나 자료구조 (객체, 배열…)에 저장할 수 있다.<br>3. 함수의 파라미터로 전달할 수 있다.<br>4. 반환값(return value)으로 사용할 수 있다. (내부함수)<br></div>
+
+<p>함수와 다른 객체를 구분 짓는 특징은 호출할 수 있다는 것이다.</p>
+<ol>
+<li>함수가 다른 함수를 반환하는 상황<br>예시1_callSomeFunction<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sample example</span></span><br><span class="line"><span class="comment">// callSomeFuncion은 범용함수이다. 범용함수란 더 많은 상황에서 더 잘 적용할 수 있는 함수를 말한다.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSomeFunction</span>(<span class="params">someFunction, someArgument</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someFunction(someArgument) <span class="comment">// 반환값으로 사용됨</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add10</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result1 = callSomeFunction(add10, <span class="number">19</span>);</span><br><span class="line">alert(result); <span class="comment">//20</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>예시2_sort의 createComparisonFunction함수</p>
+<ul>
+<li>해당 객체의 프로퍼티 이름을 확인하여 순서를 배치하는 함수를 반환하는 비교함수이다.</li>
+<li>개체는 해당 속성 중 하나의 값을 기준으로 정렬 할 수 있습니다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sort</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparisonFunction</span>(<span class="params">propertyName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">object1, object2</span>)</span>&#123; <span class="comment">// return 연산자 뒤에 내부함수</span></span><br><span class="line">    <span class="keyword">let</span> value1 = object1[propertyName]</span><br><span class="line">    <span class="keyword">let</span> value2 = object2[propertyName]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// value1이 앞에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// value1이 뒤에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = [&#123;<span class="attr">name</span>: <span class="string">'Joy'</span>, <span class="attr">age</span>: <span class="number">27</span>&#125;, &#123;<span class="attr">name</span>:<span class="string">'Clara'</span>, <span class="attr">age</span>:<span class="number">28</span>&#125;]</span><br><span class="line">data.sort(createComparisonFunction(<span class="string">'name'</span>))</span><br><span class="line"><span class="built_in">console</span>.log(data[<span class="number">0</span>].name) <span class="comment">// Clara</span></span><br><span class="line">data.sort(createComparisonFunction(<span class="string">'age'</span>))</span><br><span class="line"><span class="built_in">console</span>.log(data[<span class="number">0</span>].age) <span class="comment">// 27</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="sort-compareFunction"><a href="#sort-compareFunction" class="headerlink" title="sort(compareFunction)"></a><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort" target="_blank" rel="external"><strong><code>sort(compareFunction)</code></strong></a></h3><p>compareFunction이 제공되지 않으면 <strong>요소를 문자열(toString)로 변환하고 유니 코드 코드 포인트 순서로 문자열을 비교하여 정렬</strong>됩니다. 예를 들어 “바나나”는 “체리”앞에옵니다. 숫자 정렬에서는 9가 80보다 앞에 오지만 숫자는 문자열로 변환되기 때문에 <strong>“80”은 유니 코드 순서에서 “9”앞에옵니다.</strong></p>
+<p>문자열 대신 숫자일 경우 value1과 value2를 빼는방법으로 색인을 반환한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numbers = [<span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">3</span>];</span><br><span class="line">numbers.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(numbers);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/js-function" target="_blank" rel="external">http://poiemaweb.com/js-function</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/02/JS_04_1/" data-id="cjb0th0950006p72mqmfexr4w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/03/JS_04_2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            4/ 참조타입_Function 타입 (2)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/12/01/JS_03/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">3/ 실행 컨텍스트와 스코프</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/07/JS_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/43/thumb_default.jpg)" alt="6/ 함수표현식의 다른 용도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/07/JS_06/" class="title">6/ 함수표현식의 다른 용도</a></p>
+                            <p class="item-date"><time datetime="2017-12-07T12:20:19.000Z" itemprop="datePublished">2017-12-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/03/JS_04_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/39/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/03/JS_04_2/" class="title">4/ 참조타입_Function 타입 (2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T11:11:53.000Z" itemprop="datePublished">2017-12-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/02/JS_04_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/02/JS_04_1/" class="title">4/ 참조타입_Function 타입 (1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-02T02:20:12.000Z" itemprop="datePublished">2017-12-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/01/JS_03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/36/thumb_default.jpg)" alt="3/ 실행 컨텍스트와 스코프" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/01/JS_03/" class="title">3/ 실행 컨텍스트와 스코프</a></p>
+                            <p class="item-date"><time datetime="2017-12-01T01:13:55.000Z" itemprop="datePublished">2017-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/30/JS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/34/thumb_default.jpg)" alt="2/ 메모리 관리와 가비지 콜렉션" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/11/30/JS_02/" class="title">2/ 메모리 관리와 가비지 콜렉션</a></p>
+                            <p class="item-date"><time datetime="2017-11-30T09:23:55.000Z" itemprop="datePublished">2017-11-30</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/12/02/JS_04_1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

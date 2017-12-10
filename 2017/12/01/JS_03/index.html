@@ -11,19 +11,19 @@
         <meta name="keywords" content="javascript" />
     
     
-    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
+    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3&#x2F; 실행 컨텍스트와 스코프">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/01/JS_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
+<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-05T18:15:20.000Z">
+<meta property="og:updated_time" content="2017-12-09T17:30:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3&#x2F; 실행 컨텍스트와 스코프">
-<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는">
+<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -200,6 +200,7 @@ ga('send', 'pageview');
 <li><a href="#Execution_context">실행컨텍스트란?</a></li>
 <li><a href="#Execution_object">실행컨텍스트의 3가지 객체</a></li>
 <li><a href="#Scope_chain">스코프 체인</a></li>
+<li><a href="#this">this value</a></li>
 </ol>
 <hr>
 <h2 id="1-실행-컨텍스트"><a href="#1-실행-컨텍스트" class="headerlink" title=" 1. 실행 컨텍스트"></a><a name="Execution_context"></a> 1. 실행 컨텍스트</h2><p>실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념이라고 정의한다. 즉, 실행 컨텍스트는 <code>실행 가능한 코드가 실행되는 환경</code>이라고 말할 수 있다.<br>실행 가능한 코드란</p>
@@ -267,9 +268,21 @@ ga('send', 'pageview');
 <hr>
 <h2 id="3-스코프-체인-SC"><a href="#3-스코프-체인-SC" class="headerlink" title=" 3. 스코프 체인 SC"></a><a name="Scope_chain"></a> 3. 스코프 체인 SC</h2><p>스코프 체인은 일종의 리스트로서 중첩된 함수의 <strong>스코프의 레퍼런스를 차례로 저장하고 있는 개념</strong>이다.<br>즉, 현재 실행컨텍스트의 활성객체(AO)를 선두로하여 순차적으로 상위 컨텍스트의 AO를 가리키며 마지막 리스트는 전역 객체를 가리킨다.</p>
 <p><strong>스코프 체인의 목적은 실행 컨텍스트가 접근할 수 있는 모든 변수와 함수에 <code>순서</code>를 정의하는 것.</strong></p>
-<blockquote>
-<p>스코프 체인이 생성되는 과정을 … 좀 더 정리할 예정</p>
-</blockquote>
+<ul>
+<li>함수가 중첩 상태일 때 하위함수 내에서 상위함수의 유효범위까지 참조할 수 있는데 이것는 스코프 체인을 검색하였기 때문이다. </li>
+<li>함수가 중첩되어 있으면 중첩될 때마다 부모 함수의 Scope가 자식 함수의 스코프 체인에 포함된다. </li>
+<li>함수 실행중에 변수를 만나면 그 변수를 우선 현재 Scope, 즉 Activation Object에서 검색해보고, </li>
+<li>만약 검색에 실패하면 스코프 체인에 담겨진 순서대로 그 검색을 이어가게 되는 것이다. </li>
+</ul>
+<p><strong>이것이 스코프 체인이라고 불리는 이유이다.</strong></p>
+<p>이와 같이 순차적으로 스코프 체인에서 변수를 검색하는데 결국 검색에 실패하면 정의되지 않은 변수에 접근하는 것으로 판단하여 Reference 에러를 발생시킨다.<br>스코프 체인은 <code>[[scope]]</code> 프로퍼티로 참조할 수 있다.</p>
+<hr>
+<h2 id="4-this-value"><a href="#4-this-value" class="headerlink" title=" 4. this value"></a><a name="this"></a> 4. this value</h2><p>this 프로퍼티에는 this 값이 할당된다. this에 할당되는 값은 함수 호출 패턴에 의해 결정되는데, 이는 Function 글에서 자세히 다루겠다.</p>
+<hr>
+<h2 id="5-실행-컨텍스트의-생성과정"><a href="#5-실행-컨텍스트의-생성과정" class="headerlink" title=" 5. 실행 컨텍스트의 생성과정"></a><a name="this"></a> 5. 실행 컨텍스트의 생성과정</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="string">'yyy'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="string">'zzz'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(x + y + z);</span><br><span class="line">  &#125;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>전역 코드에 진입<br>컨트롤이 실행 컨텍스트에 진입하기 이전에 유일한 전역 객체(Global Object)가 생성된다. 초기 상태의 전역 객체에는 빌트인 객체(Math, String, Array 등)와 BOM, DOM이 설정되어 있다.</li>
+</ol>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="http://poiemaweb.com/js-execution-context" target="_blank" rel="external">http://poiemaweb.com/js-execution-context</a></li>
@@ -283,7 +296,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjaza5x6n0005dx2mb5vzekw5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjb0th0930004p72meqvsed74" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -401,11 +414,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/12/02/JS_04/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/12/02/JS_04_1/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            4/ 참조타입_Function 타입
+            4/ 참조타입_Function 타입 (1)
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -433,10 +446,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/02/JS_04/" class="thumbnail">
+                            <a href="/2017/12/07/JS_06/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/43/thumb_default.jpg)" alt="6/ 함수표현식의 다른 용도" class="thumbnail-image"></span>
     
     
 </a>
@@ -445,7 +458,47 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/02/JS_04/" class="title">4/ 참조타입_Function 타입</a></p>
+                            <p class="item-title"><a href="/2017/12/07/JS_06/" class="title">6/ 함수표현식의 다른 용도</a></p>
+                            <p class="item-date"><time datetime="2017-12-07T12:20:19.000Z" itemprop="datePublished">2017-12-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/03/JS_04_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/39/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/03/JS_04_2/" class="title">4/ 참조타입_Function 타입 (2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T11:11:53.000Z" itemprop="datePublished">2017-12-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/02/JS_04_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/02/JS_04_1/" class="title">4/ 참조타입_Function 타입 (1)</a></p>
                             <p class="item-date"><time datetime="2017-12-02T02:20:12.000Z" itemprop="datePublished">2017-12-02</time></p>
                         </div>
                     </li>
@@ -490,46 +543,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/29/JS_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/33/thumb_default.jpg)" alt="1/ 변수, 원시 값과 참조 값" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/11/29/JS_01/" class="title">1/ 변수, 원시 값과 참조 값</a></p>
-                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/29/log_001/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
-                            <p class="item-title"><a href="/2017/11/29/log_001/" class="title">persistor.purge()</a></p>
-                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -539,7 +552,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -549,7 +562,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

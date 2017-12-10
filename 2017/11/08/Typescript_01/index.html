@@ -20,7 +20,7 @@
 <meta property="og:description" content="자바스크립트 말고 타입스크립트 ?최근 프로젝트를 진행하면서나도 모르는 사이에 타입이 자주 바뀌는 자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그 순간에 내 머릿속에서만 생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발생하면, 삽질 후에 원인이 타입 때문이라는 것을 알게 되고.. 이는 생각보다 빈번하게 일어났다">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/11/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-30T16:43:11.000Z">
+<meta property="og:updated_time" content="2017-12-10T13:40:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="0&#x2F; Typescript?">
 <meta name="twitter:description" content="자바스크립트 말고 타입스크립트 ?최근 프로젝트를 진행하면서나도 모르는 사이에 타입이 자주 바뀌는 자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그 순간에 내 머릿속에서만 생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발생하면, 삽질 후에 원인이 타입 때문이라는 것을 알게 되고.. 이는 생각보다 빈번하게 일어났다">
@@ -207,8 +207,7 @@ ga('send', 'pageview');
 <h2 id="2-컴파일러-트랜스파일러-인터프리터"><a href="#2-컴파일러-트랜스파일러-인터프리터" class="headerlink" title="2. 컴파일러? 트랜스파일러? 인터프리터 ?"></a>2. 컴파일러? 트랜스파일러? 인터프리터 ?</h2><p>간단하게 3가지를 비교해보면 아래 그림과 같다.<br><img src="/images/post_img/11/CompileTranspileInterpreter.jpg"></p>
 <ul>
 <li><strong>transpiler</strong> 하나의 <strong>언어</strong>를 다른 형태의 <strong>언어</strong>로 변환해 주는 기능을 <code>부각</code>시키는 표현으로 compiler라는 표현보다 transpiler라는 표현을 쓴다. ( 번역이라는 말과 합쳐진 듯 하다 .) ex. Typescript, Babel <br></li>
-<li><strong>compiler</strong> 한 번 컴파일 하게 되면, 별도 생성된 목적 파일을 통해 빠르게 실행할 수 있다. 대용량 소스에 적합</li>
-</ul>
+<li><p><strong>compiler</strong> 한 번 컴파일 하게 되면, 별도 생성된 목적 파일을 통해 빠르게 실행할 수 있다. 대용량 소스에 적합</p>
 <ul>
 <li>컴파일이 필요 O </li>
 <li>컴파일러가 필요 O </li>
@@ -216,9 +215,14 @@ ga('send', 'pageview');
 <li>컴파일된 결과물을 실행 </li>
 <li>컴파일된 결과물을 실행하는 시점 ex. C, Go, C#, JAVA, … <br></li>
 </ul>
+</li>
+<li><p><strong>interpreter</strong> 목적 파일 산출 과정이 없이 실행과 동시에 줄 단위로 번역이 된<br>다. 저용량 소스에 적합</p>
 <ul>
-<li><strong>interpreter</strong> 목적 파일 산출 과정이 없이 실행과 동시에 줄 단위로 번역이 된<br>다. 저용량 소스에 적합\<ul>
-<li>컴파일이 필요 X - 컴파일러가 필요 X - 컴파일하는 시점 X - 코드 자체를 실행 -<br>코드를 실행하는 시점 o = 런타임 ex. javascript</li>
+<li>컴파일이 필요 X </li>
+<li>컴파일러가 필요 X </li>
+<li>컴파일하는 시점 X </li>
+<li>코드 자체를 실행 </li>
+<li>코드를 실행하는 시점 o = 런타임 ex. javascript</li>
 </ul>
 </li>
 </ul>
@@ -270,7 +274,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/08/Typescript_01/" data-id="cjaza5x6r000adx2m7mp6k4nt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/08/Typescript_01/" data-id="cjb0th0940005p72myjxl5x41" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -420,10 +424,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/02/JS_04/" class="thumbnail">
+                            <a href="/2017/12/07/JS_06/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/43/thumb_default.jpg)" alt="6/ 함수표현식의 다른 용도" class="thumbnail-image"></span>
     
     
 </a>
@@ -432,7 +436,47 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/02/JS_04/" class="title">4/ 참조타입_Function 타입</a></p>
+                            <p class="item-title"><a href="/2017/12/07/JS_06/" class="title">6/ 함수표현식의 다른 용도</a></p>
+                            <p class="item-date"><time datetime="2017-12-07T12:20:19.000Z" itemprop="datePublished">2017-12-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/03/JS_04_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/39/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/03/JS_04_2/" class="title">4/ 참조타입_Function 타입 (2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T11:11:53.000Z" itemprop="datePublished">2017-12-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/02/JS_04_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/38/thumb_default.jpg)" alt="4/ 참조타입_Function 타입 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/02/JS_04_1/" class="title">4/ 참조타입_Function 타입 (1)</a></p>
                             <p class="item-date"><time datetime="2017-12-02T02:20:12.000Z" itemprop="datePublished">2017-12-02</time></p>
                         </div>
                     </li>
@@ -477,46 +521,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/29/JS_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/33/thumb_default.jpg)" alt="1/ 변수, 원시 값과 참조 값" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/11/29/JS_01/" class="title">1/ 변수, 원시 값과 참조 값</a></p>
-                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/11/29/log_001/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
-                            <p class="item-title"><a href="/2017/11/29/log_001/" class="title">persistor.purge()</a></p>
-                            <p class="item-date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -526,7 +530,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -536,7 +540,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
