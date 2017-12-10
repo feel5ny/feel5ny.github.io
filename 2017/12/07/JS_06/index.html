@@ -20,7 +20,7 @@
 <meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수와 재귀 클로저2-1. 클로저 사용 (반복문)2-2. 클로저의 메모리 누수2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)   = 은닉화    1. 함수의 재귀함수의">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/43/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-10T13:34:50.000Z">
+<meta property="og:updated_time" content="2017-12-10T15:15:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6&#x2F; 함수표현식의 다른 용도">
 <meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수와 재귀 클로저2-1. 클로저 사용 (반복문)2-2. 클로저의 메모리 누수2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)   = 은닉화    1. 함수의 재귀함수의">
@@ -208,7 +208,7 @@ ga('send', 'pageview');
 </ul>
 <p>f라는 이름은 함수를 다른 변수에 할당하더라도 그대로 유지되므로 재귀 호출은 정확히 실행됨.</p>
 <hr>
-<h2 id="2-클로저"><a href="#2-클로저" class="headerlink" title=" 2. 클로저"></a><a name="closure"></a> 2. 클로저</h2><p>클로저란 <strong>다른 함수의 스코프에 있는 변수에 접근 가능한 함수</strong>이다.(내부함수가 외부함수의 변수에 접근가능). 즉, <strong>내부함수가 참조하는 외부함수의 지역변수가 외부함수에 의해 내부함수가 반환된 이후에도 life-cycle이 유지되는65 것을 의미</strong>한다. 클로저를 잘 이해하기 위해서는 스코프 체인이 어떻게 생성되고 사용되는지 자세히 알아야 한다.</p>
+<h2 id="2-클로저"><a href="#2-클로저" class="headerlink" title=" 2. 클로저"></a><a name="closure"></a> 2. 클로저</h2><p>클로저란 <strong>다른 함수의 스코프에 있는 변수에 접근 가능한 함수</strong>이다.(내부함수가 외부함수의 스코프에 접근가능). 즉, <strong>내부함수가 참조하는 외부함수의 지역변수가 외부함수에 의해 내부함수가 반환된 이후에도 life-cycle이 유지되는 것을 의미</strong>한다.<br><strong><code>생성될 당시의 환경을 기억하는 함수를 말한다.</code></strong> 클로저를 잘 이해하기 위해서는 스코프 체인이 어떻게 생성되고 사용되는지 자세히 알아야 한다.</p>
 <p>함수에서 변수에 접근할 때마다 스코프 체인에서 해당 이름의 변수를 검색한다. 함수 실행이 끝나면 로컬 활성화 객체는 파괴되고 메모리에는 전역 스코프만 남는다. 하지만 클로저는 외부함수가 실행을 마쳐도 활성화 객체는 내부함수가 파괴될 때가지 메모리에 남는다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparisonFunction</span>(<span class="params">propertyName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">object1, object2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> value1 = object1[propertyName]</span><br><span class="line">    <span class="keyword">const</span> value2 = object1[propertyName]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(value1 &lt; value2) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> compare = createComparisonFunction(<span class="string">"name"</span>)</span><br><span class="line"><span class="keyword">const</span> result = compare(&#123;<span class="attr">name</span>: <span class="string">"Nicholas"</span>&#125;, &#123;<span class="attr">name</span>:<span class="string">"Greg"</span>&#125;)</span><br><span class="line">compare = <span class="literal">null</span>; <span class="comment">// 함수파괴 - GC이 메모리 회수가능</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/post_img/43/01"><br>내부 함수가 반환되어 다른 컨텍스트에서 실행되는 동안에도 <code>propertyName</code>에 접근하 수 있다. 이런 일이 가능한 것은 내부 함수의 스코프 체인에 <code>createComparisonFunction()</code>의 스코프가 포함되기 때문이다.</p>
@@ -222,11 +222,11 @@ ga('send', 'pageview');
 </ul>
 </li>
 </ol>
-<h3 id="중간지점-개념정리"><a href="#중간지점-개념정리" class="headerlink" title="중간지점..개념정리"></a>중간지점..개념정리</h3><p>자신을 포함하고 있는 외부함수보다 내부함수가 더 오래 유지되는 경우,<br>내부함수가 외부함수의 지역변수에 접근할 수 있고,<br>외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 못하고 상태가 유지되며<br>내부함수에 의해서 소멸하게 되는 특성을 클로저라고 부른다.</p>
+<h3 id="중간지점-개념정리"><a href="#중간지점-개념정리" class="headerlink" title="중간지점..개념정리"></a>중간지점..개념정리</h3><p>자신을 포함하고 있는 외부함수보다 내부함수가 더 오래 유지되는 경우,<br>내부함수가 외부함수의 스코프에 접근할 수 있고,<br>외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 못하고 상태가 유지되며<br>내부함수에 의해서 소멸하게 되는 특성을 클로저라고 부른다.</p>
 <p>외부함수의 지역변수를 Free variable(자유변수)이라고 부르는데, 클로저라는 이름은 <strong>자유변수에 함수가 닫혀있다(Closed)라는 의미로, 자유변수에 엮여있는 함수라는 뜻</strong>이다.</p>
 <p>외부함수가 이미 반환되었어도 <strong>외부함수 내의 변수는 이를 필요로 하는 내부함수가 하나 이상 존재하는 경우, 계속 유지된다.</strong> (내부함수가 외부함수에 있는 변수의 복사본이 아니라 실제변수에 접근한다.)</p>
 <p>클로저는 외부함수의 스코프를 보관해야하므로 다른 함수에 비해 메모리를 많이 요구한다. 클로저를 과용하면 메모리 문제가 생길 수 있으니, 반드시 필요할 때만 사용하길 권장한다.</p>
-<h3 id="2-1-클로저-사용-반복문"><a href="#2-1-클로저-사용-반복문" class="headerlink" title="2-1. 클로저 사용 (반복문)"></a>2-1. 클로저 사용 (반복문)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-클로저-사용-반복문"><a href="#2-1-클로저-사용-반복문" class="headerlink" title="2-1. 클로저 사용 (반복문)"></a>2-1. 클로저 사용 (반복문)</h3><p>함수 안에 함수를 정의하고 내부에 정의한 함수를 노출시키면, 클로저를 사용할 수 있다. 함수를 노출시키기 위해서는 함수를 반환하거나 다른 함수로 전달하면 됩니다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFunctions</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">    result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>result 배열에 들어가는 모든 함수가 스코프체인에 <code>createFunctions()</code>의 활성화객체를 포함하므로, 이들은 모두 같은 변수, i를 참조한다. 때문에 마지막에 할당된 i가 저장이 되는것이다. </p>
 <p><img src="/images/post_img/43/02-1.jpg" witdth="700"></p>
 <p>이는 for루프의 초기문에 사용된 var키워드 변수의 스코프가 전역이기 때문에 발생하는 현상이므로, ES6의 <code>let</code>키워드를 이용하여 블록레벨 스코프 개념을 만들면 원하는 결과값이 나오긴한다.</p>
@@ -240,11 +240,6 @@ ga('send', 'pageview');
 <li>num에 i를 매개변수로 넘기기 때문에(복사) result에 들어가는 익명함수에는 자유변수 num이 생겼다고 보면되다.</li>
 <li>배열에 들어가는 함수는 즉시실행함수 매개변수로 i를 받는다. i는 num에 매개변수로 <strong>복사</strong>가되고, num은 해당 함수의 자유변수가 된다. 반환된 내부함수는 자유변수 num에 엮여있는 함수 클로저가 된다. 때문에 외부함수에서 매개변수로 받는 i값에 따라 고유한 num과 클로저를 갖게 된다.</li>
 </ol>
-<h3 id="클로저는-언제-사용하게-될까"><a href="#클로저는-언제-사용하게-될까" class="headerlink" title="클로저는 언제 사용하게 될까?"></a>클로저는 언제 사용하게 될까?</h3><ul>
-<li>변수의 값이 유지되면서 변화를 주어야 할때</li>
-<li>하지만 외부함수의 스코프를 갖고 있어야한다는 손해가 있기 때문에 득보다 실이 많다.</li>
-<li><code>let</code> 키워드로 최대한 해결해보기  </li>
-</ul>
 <h3 id="2-2-클로저의-메모리-누수"><a href="#2-2-클로저의-메모리-누수" class="headerlink" title="2-2. 클로저의 메모리 누수"></a>2-2. 클로저의 메모리 누수</h3><p>클로저는 외부함수의 활성화객체 참조를 계속 유지하기 때문에 참조카운트가 줄지 않는다. (가비지컬렉션이 잡지 치우지 못한다.) 필요하다면 클로저를 갖고 있는 변수에 null을 할당하여 참조를 끊어야한다.</p>
 <h3 id="2-3-클로저를-통한-은닉화-고유변수"><a href="#2-3-클로저를-통한-은닉화-고유변수" class="headerlink" title="2-3. 클로저를 통한 은닉화 (고유변수)"></a>2-3. 클로저를 통한 은닉화 (고유변수)</h3><hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
@@ -258,7 +253,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/07/JS_06/" data-id="cjb0th09a000cp72m2148aq07" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/07/JS_06/" data-id="cjb0wuyn20004ng2m2djstb72" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
