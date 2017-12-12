@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>overview | 필오의 개발일지</title>
+    <title>5/ 객체 지향 프로그래밍 (1) | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="react,DADA" />
+        <meta name="keywords" content="javascript" />
     
     
-    <meta name="description" content="식단 다이어리 서비스, DA,DA프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 프론트엔드 중심으로 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이">
-<meta name="keywords" content="react,DADA">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.이 주제는 조금 더 공부를 해야할 듯 하다.  목차   프로퍼티 타입 데이터 프로퍼티 접근자 프로퍼티   다중 프로퍼티 정의 프로퍼티 속성 읽기   객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="overview">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/14/dada_06week/index.html">
+<meta property="og:title" content="5&#x2F; 객체 지향 프로그래밍 (1)">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/04/JS_05_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="식단 다이어리 서비스, DA,DA프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 프론트엔드 중심으로 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.이 주제는 조금 더 공부를 해야할 듯 하다.  목차   프로퍼티 타입 데이터 프로퍼티 접근자 프로퍼티   다중 프로퍼티 정의 프로퍼티 속성 읽기   객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/10/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-27T08:56:23.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/40/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-12T10:07:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="overview">
-<meta name="twitter:description" content="식단 다이어리 서비스, DA,DA프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 프론트엔드 중심으로 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/10/thumb_default.jpg">
+<meta name="twitter:title" content="5&#x2F; 객체 지향 프로그래밍 (1)">
+<meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.이 주제는 조금 더 공부를 해야할 듯 하다.  목차   프로퍼티 타입 데이터 프로퍼티 접근자 프로퍼티   다중 프로퍼티 정의 프로퍼티 속성 읽기   객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/40/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/14/dada_06week/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/04/JS_05_1/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project-127939/DA-DA/">DA, DA</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-dada_06week" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-JS_05_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        overview
+        5/ 객체 지향 프로그래밍 (1)
         </h1>
     
 
@@ -177,36 +177,97 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/14/dada_06week/" class="article-date">
-            <time datetime="2017-11-14T01:10:04.000Z" itemprop="datePublished">2017-11-14</time>
+        <a href="/2017/12/04/JS_05_1/" class="article-date">
+            <time datetime="2017-12-04T05:53:22.000Z" itemprop="datePublished">2017-12-04</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/DADA/">DADA</a>, <a class="tag-link" href="/tags/react/">react</a>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h1 id="식단-다이어리-서비스-DA-DA"><a href="#식단-다이어리-서비스-DA-DA" class="headerlink" title="식단 다이어리 서비스, DA,DA"></a>식단 다이어리 서비스, DA,DA</h1><p>프론트엔드 스쿨을 마지막 달에는 그동안 배운 기술을 토대로 프로젝트를 필수적으로 진행해야 했다. node.js 스쿨과 함께 5명으로 이루어진 우리 조는 33일간의 대장정을 끝으로, 알바퍼전의 웹서비스가 배포할 수 있게 되었다. 블로그에서는 <strong>프론트엔드 중심으로</strong> 이번 프로젝트에 대한 개인적인 후기와 더불어 전반적인 진행과정, 이슈에 대해서 5가지 챕터로 포스팅하려고 한다.</p>
-<hr>
-<p>chapter 1 : 기획 및 프로토타입 및 디자인<br>chapter 2 : 퍼블리싱<br>chapter 3 : 핵심기능 개발<br>chapter 4 : 리팩토링 및 테스트<br>chapter 5 : 추가개발 및 배포</p>
-<hr>
-<p>이번 프로젝트를 통해서 크게 3가지를 얻을 수 있었다.</p>
+            <blockquote>
+<p>‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.<br>이 주제는 조금 더 공부를 해야할 듯 하다.</p>
+</blockquote>
+<p>목차 </p>
 <ol>
-<li>비동기통신</li>
-<li>redux 자유로운 사용</li>
-<li>react 라이프사이클과 한계</li>
+<li>프로퍼티 타입<ul>
+<li>데이터 프로퍼티</li>
+<li>접근자 프로퍼티</li>
+</ul>
+</li>
+<li>다중 프로퍼티 정의</li>
+<li>프로퍼티 속성 읽기</li>
 </ol>
 <hr>
+<p>객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만든다는 특징이 있다. ECMAScript에는 클래스라는 개념이 없으며 이에 따라 ECMAScript의 객체는 다른 클래스 기반 언어와 다르다. (ES6에는 class라는 개념이 도입되었다.)</p>
+<p>ECMAScript에서 객체는 순서가 없는 값의 배열이다. 각 프로퍼티와 메서드는 이름으로 구별하며 값에 대응한다. 객체는 이름-값 쌍의 그룹이며 각 값은 데이터나 함수가 될 수 있다.</p>
+<hr>
+<hr>
+<h2 id="1-프로퍼티-타입"><a href="#1-프로퍼티-타입" class="headerlink" title=" 1. 프로퍼티 타입"></a><a name="oop"></a> 1. 프로퍼티 타입</h2><p>객체 리터럴 방식으로 객체를 생성할 때 프로퍼티와 메서드를 생성할 수 있다. 이러한 프로퍼티는 모두 자바스크립트에서 <code>프로퍼티의 행동을 정의하는 특징</code>에 따라 생성된다.<br>이들 속성이 자바스크립트 엔진 내부에서 구현하는 것으로 정의했고, 이들 송성을 자바스크립트에서 직접적으로 접근할 수 있는 방법은 없다.<br>이들 속성은 <code>[[Enumerable]]</code>처럼 속성 이름을 대괄호로 감싸서 내부 속성임을 나타낸다. </p>
+<p>데이터 프로퍼티와 접근자 프로퍼티 두가지 타입이 있다.</p>
+<hr>
+<h3 id="1-1-데이터-프로퍼티"><a href="#1-1-데이터-프로퍼티" class="headerlink" title="1-1. 데이터 프로퍼티"></a>1-1. 데이터 프로퍼티</h3><p>데이터 값에 대한 단 하나의 위치를 포함하여 이 위치에서 값을 읽고 쓴다.(무슨말이지?)</p>
+<ol>
+<li><p><code>[[Configurable]]</code><br>프로퍼티가 delete를 통해 삭제하거나, 속성을 바꾸거나 접근자 프로퍼티로 변활할 수 있음을 나타낸다.<br>객체에서 직접 정의한 모든 프로퍼티에서 이 속성은 기본적으로 true</p>
+</li>
+<li><p><code>[[Enumerable]]</code><br><code>for-in</code>루프에서 해당 프로퍼티를 반환함을 나타낸다.<br>기본은 true</p>
+</li>
+<li><p><code>[[Writable]]</code><br>프로퍼티 값을 바꿀 수 있음을 나타낸다.<br>기본은 true</p>
+</li>
+<li><p><code>[[Value]]</code><br>프로퍼티의 실제 데이터 값을 포함한다. 프로퍼티의 값을 읽는 위치이고, 새로운 값을 쓰는 위치.<br>기본값은 <code>undefined</code></p>
+<blockquote>
+<p>프로퍼티를 선언만 하고 값을 할당하지 않으면 <code>undefined</code></p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person =&#123;</span><br><span class="line">  name: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기서 “Nicholas”가 [[Value]] 데이터 프로퍼티에 저장된다는 말이다.</p>
+<hr>
+<h4 id="기본-프로퍼티-속성을-바꾸기-위해서는"><a href="#기본-프로퍼티-속성을-바꾸기-위해서는" class="headerlink" title="기본 프로퍼티 속성을 바꾸기 위해서는?"></a>기본 프로퍼티 <strong>속성</strong>을 바꾸기 위해서는?</h4><p><code>Object.defineProperty()</code>메서드를 사용하면 된다.</p>
 <ul>
-<li>github : <a href="https://github.com/huusz/Da-Da" target="_blank" rel="external">https://github.com/huusz/Da-Da</a></li>
-<li>DA,DA : <a href="https://dada.downmix.net" target="_blank" rel="external">https://dada.downmix.net</a> (카카오 아이디로 로그인)</li>
+<li>Object.defineProperty() 처럼 강력한 옵션을 사용할 일이 드물겠지만, 자바스크립트 객체를 잘 이해하려면 알고 있으면 좋다. </li>
+<li>전반적인 자바스크립트의 문법을 변화시키고 코드에 대한 해석을 기존처럼 할 수 없는 컨텍스트를 제공한다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(프로퍼티를 추가하거나 수정할 객체, 프로퍼티 이름, 서술자 객체)</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<h4 id="서술자-객체가-뭐지-descriptor-객체"><a href="#서술자-객체가-뭐지-descriptor-객체" class="headerlink" title="서술자 객체가 뭐지? descriptor 객체"></a>서술자 객체가 뭐지? descriptor 객체</h4><p>해당 속성에 대한 특성을 의미.<br>내부 속성 이름과 같다. 서술자 객체에는 <code>configurable</code>, <code>enumerable</code>, <code>writable</code>, <code>value</code> 4가지 프로퍼티가 있다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperyt(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">  writable: <span class="literal">false</span>, <span class="comment">// readOnly 형식으로 바꿨다고 생각하자. </span></span><br><span class="line">  value: <span class="string">"Nicholas"</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name) <span class="comment">// "Nicholas"</span></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name) <span class="comment">// "Nicholas"</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="1-2-접근자-프로퍼티-accessor-함수"><a href="#1-2-접근자-프로퍼티-accessor-함수" class="headerlink" title="1-2. 접근자 프로퍼티 (accessor 함수)"></a>1-2. 접근자 프로퍼티 (accessor 함수)</h3><p>데이터 값이 들어있지 않고, <code>getter</code>함수와 <code>setter</code>함수로 구성된다. (옵셔널)<br>접근자 프로퍼티를 읽을 때는 getter함수가 호출</p>
+<ul>
+<li>유효한 값을 반환할 책임은 이 함수에 있다.</li>
+</ul>
+<p>접근자 프로퍼티의 4가지 속성</p>
+<ol>
+<li><p><code>[[Configurable]]</code><br>프로퍼티가 delete를 통해 삭제하거나, 속성을 바꾸거나 접근자 프로퍼티로 변활할 수 있음을 나타낸다.<br>기본은 true</p>
+</li>
+<li><p><code>[[Enumerable]]</code><br><code>for-in</code>루프에서 해당 프로퍼티를 반환함을 나타낸다.<br>기본은 true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> person = &#123;</span><br><span class="line">  <span class="string">'first-name'</span>: <span class="string">'Joy'</span>,</span><br><span class="line">  <span class="string">'last-name'</span>: <span class="string">'Kim'</span>,</span><br><span class="line">  gender: <span class="string">'female'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// prop에 객체의 프로퍼티 이름이 반환된다. 단, 순서는 보장되지 않는다.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> person) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(prop + <span class="string">': '</span> + person[prop]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">first-name: Joy</span></span><br><span class="line"><span class="comment">last-name: Kim</span></span><br><span class="line"><span class="comment">gender: female</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>[[Get]]</code><br>프로퍼티를 <strong>읽을</strong> 때 호출할 함수.<br>기본은 undefined</p>
+</li>
+<li><p><code>[[Set]]</code><br>프로퍼티를 <strong>바꿀</strong> 때 호출할 함수.<br>기본은 undefined</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> book = &#123;</span><br><span class="line">  _year: <span class="number">2004</span>, </span><br><span class="line">  <span class="comment">// 밑줄(_)은 이 프로퍼티는 객체의 메서드를 통해서만 접근할 것이고 객체 외부에서는 접근하지 않겠다는 의도를 나타낼 때 흔히 쓰는 표기법 (private와 같은 개념)</span></span><br><span class="line">  edition: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">"year"</span>, &#123;</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._year</span><br><span class="line">  &#125;,</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>._year = newValue;</span><br><span class="line">      <span class="keyword">this</span>.edition += newValue <span class="number">-2004</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line">alert(book.edition) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>setter의 경우는 프로퍼티의 값을 바꿨을 때 해당 프로퍼티만 바뀌는 게 아니라 부수적인 절차가 필요한 경우에 사용한다.</p>
+<p>getter만 셋팅할 경우 읽기전용<br>setter만 셋팅될 경우 undefined</p>
+<hr>
+<h2 id="2-다중-프로퍼티-정의"><a href="#2-다중-프로퍼티-정의" class="headerlink" title=" 2. 다중 프로퍼티 정의"></a><a name="oop"></a> 2. 다중 프로퍼티 정의</h2><p>여러개의 프로퍼티를 동시에 수정해야할 경우 <code>Object.defineProperties()</code><br>configurable의 기본값은 true이지만, defineProperties나 defineProperty은 공통적으로 호출만 되면 true로 재지정하지 않는 이상 false가 된다. </p>
+<hr>
+<h2 id="3-프로퍼티-속성-읽기"><a href="#3-프로퍼티-속성-읽기" class="headerlink" title=" 3. 프로퍼티 속성 읽기"></a><a name="oop"></a> 3. 프로퍼티 속성 읽기</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(읽어올 프로퍼티가 포함된 객체, 서술자를 가져올 프로퍼티 이름)</span><br></pre></td></tr></table></figure>
+<p>원하는 프로퍼티의 서술자 프로퍼티를 읽을 수 있다.<br>모든 객체에서 사용가능하며, DOM이나 BOM 객체에서도 가능하다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> book = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperties(book, &#123;</span><br><span class="line">  _year: &#123;</span><br><span class="line">    value: <span class="number">2004</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  edition: &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  year: &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">newValue</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>._year = newValue;</span><br><span class="line">        <span class="keyword">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">"_year"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value) <span class="comment">// 2004</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get) <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">"year"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> descriptor.get) <span class="comment">// "function"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://www.bsidesoft.com/?p=1878#%25ec%25a0%2595%25ec%25a0%2581%25ec%258b%259c%25ec%25a0%2590%25ea%25b3%25bc-%25ec%258b%25a4%25ed%2596%2589%25ec%258b%259c%25ec%25a0%2590" target="_blank" rel="external">http://www.bsidesoft.com/?p=1878#%25ec%25a0%2595%25ec%25a0%2581%25ec%258b%259c%25ec%25a0%2590%25ea%25b3%25bc-%25ec%258b%25a4%25ed%2596%2589%25ec%258b%259c%25ec%25a0%2590</a></li>
+<li><a href="http://poiemaweb.com/js-object" target="_blank" rel="external">http://poiemaweb.com/js-object</a></li>
+</ol>
 
         </div>
         <footer class="article-footer">
@@ -214,7 +275,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/14/dada_06week/" data-id="cjb3gsbnx0022632m5mq7ju86" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/04/JS_05_1/" data-id="cjb3gsbms0004632m9cj3shzr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -332,20 +393,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/15/Typescript_03/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/12/07/JS_06/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            2/ Typescript_tsconfig.json 프로퍼티의 종류
+            6/ 함수표현식의 다른 용도
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/11/13/algorithm_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/03/JS_04_2/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">야근지수 (미제)</p>
+        <p class="article-nav-title">4/ 참조타입_Function 타입 (2)</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -542,7 +603,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/14/dada_06week/';
+    var disqus_url = 'http://feel5ny.github.io/2017/12/04/JS_05_1/';
     
     (function() {
     var dsq = document.createElement('script');
