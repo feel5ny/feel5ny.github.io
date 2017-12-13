@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>알고리즘과 시간 복잡도 | 필오의 개발일지</title>
+    <title>소팅 알고리즘 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,19 +11,19 @@
         <meta name="keywords" content="CS" />
     
     
-    <meta name="description" content="정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Quick sort   1.">
+    <meta name="description" content="아직 정리 덜 됨.  정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Qui">
 <meta name="keywords" content="CS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="알고리즘과 시간 복잡도">
+<meta property="og:title" content="소팅 알고리즘">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/10/CS_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Quick sort   1.">
+<meta property="og:description" content="아직 정리 덜 됨.  정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Qui">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/50/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-13T08:43:37.000Z">
+<meta property="og:updated_time" content="2017-12-13T18:50:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="알고리즘과 시간 복잡도">
-<meta name="twitter:description" content="정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Quick sort   1.">
+<meta name="twitter:title" content="소팅 알고리즘">
+<meta name="twitter:description" content="아직 정리 덜 됨.  정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.  목차   버블 정렬 bubble sort 선택 정렬 Selection sort 삽입 정렬 Insertion sort 병합 정렬 Merge sort 퀵 정렬 Qui">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/50/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -167,7 +167,7 @@ ga('send', 'pageview');
                 
     
         <h1 class="article-title" itemprop="name">
-        알고리즘과 시간 복잡도
+        소팅 알고리즘
         </h1>
     
 
@@ -192,7 +192,10 @@ ga('send', 'pageview');
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.</p>
+            <blockquote>
+<p>아직 정리 덜 됨.</p>
+</blockquote>
+<p>정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.</p>
 <hr>
 <p>목차 </p>
 <ol>
@@ -212,8 +215,48 @@ ga('send', 'pageview');
 <h2 id="3-삽입정렬-Insertion-Sort"><a href="#3-삽입정렬-Insertion-Sort" class="headerlink" title="3. 삽입정렬(Insertion Sort)"></a>3. 삽입정렬(Insertion Sort)</h2><p>삽입정렬은 1부터 n까지 Index를 설정하여 현재위치보다 아래쪽을 순회하며 현재위치의 값을 현재위치보다 아래쪽으로 순회하며 알맞은 위치에 넣어주는 정렬알고리즘이다.<br>삽입정렬은 이미 정렬이 되어있다면 O(n)의 시간복잡도를 가지게된다. 정렬이 되어있는 경우라면 한번 순회하며 체크만 하기 때문이며 Big-O 시간복잡도는 O(n²)이다.</p>
 <p><img src="/images/post_img/50/insertion.gif"></p>
 <hr>
-<h2 id="4-병합정렬-Merge-sort"><a href="#4-병합정렬-Merge-sort" class="headerlink" title="4.병합정렬 (Merge sort)"></a>4.병합정렬 (Merge sort)</h2><p>병합정렬은 정렬할 리스트를 반으로 쪼개나가며 좌측과 우측 리스트를 계속하여 분할해 나간 후 각 리스트내에서 정렬 후 병합(merge) 정렬 후 병합하는 과정을 통해 정렬하는 알고리즘이다.<br>병합정렬은 가장 많이 쓰이는 정렬 알고리즘 중 하나 이며 시간복잡도는 최소 O(nlogn)을 보장하게 된다.</p>
+<h2 id="4-병합정렬-Merge-sort"><a href="#4-병합정렬-Merge-sort" class="headerlink" title="4.병합정렬 (Merge sort)"></a>4.병합정렬 (Merge sort)</h2><ul>
+<li>재귀의 이해가 있어야한다.</li>
+</ul>
+<p>병합정렬은 정렬할 리스트를 반으로 쪼개나가며 좌측과 우측 리스트를 계속하여 분할해 나간 후 각 리스트내에서 정렬 후 병합(merge) 정렬 후 병합하는 과정을 통해 정렬하는 알고리즘이다.<br>병합정렬은 가장 많이 쓰이는 정렬 알고리즘 중 하나 이며 시간복잡도는 최소 O(nlogn)을 보장하게 된다.</p>
+<ol>
+<li>Divide</li>
+<li>Conquer</li>
+<li>Combine</li>
+</ol>
 <p><img src="/images/post_img/50/merge.gif"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4. 합병정렬 </span></span><br><span class="line"><span class="comment">// 퀵정렬과 마찬가지로 분할 정복 알고리즘중 하나이다.</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">console.log(MergeSort([234, 45634, 23, 41, 2345, 34, 23, 1, 4, 3, 6, 234, 4536, 55, 234, 23, 456, 45, 234, 1, 856, 9, 67, 56, 7]))</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> len = arr.length;</span><br><span class="line">  <span class="keyword">if</span> (len == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> middle = <span class="built_in">Math</span>.floor(len / <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">const</span> left = arr.slice(<span class="number">0</span>, middle);</span><br><span class="line">  <span class="keyword">const</span> right = arr.slice(middle, len);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">      <span class="keyword">if</span> (left[<span class="number">0</span>] &lt;= right[<span class="number">0</span>]) &#123;</span><br><span class="line">        result.push(left.shift());</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result.push(right.shift());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (left.length) &#123;</span><br><span class="line">      result.push(left.shift());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (right.length) &#123;</span><br><span class="line">      result.push(right.shift());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> merge(MergeSort(left), MergeSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Divide-amp-Conquer"><a href="#Divide-amp-Conquer" class="headerlink" title="Divide &amp; Conquer"></a>Divide &amp; Conquer</h3><p>전략</p>
+<ul>
+<li>주어진 문제를 작은 문제들로 분할하고</li>
+<li>작은 문제에서 해를 구한 후</li>
+<li>구한 해를 이용해서 주어진 문제의 해를 구하는 방법</li>
+</ul>
+<p>특징</p>
+<ul>
+<li>주어진 문제를 동일한 종류의 작은 문제로 분할</li>
+<li>문제 분할 과정이 <strong><code>재귀적</code></strong>으로 처리됨</li>
+</ul>
+<blockquote>
+<p>Fractal같은 문제라고 생각하면 된다.</p>
+</blockquote>
+<p>구성</p>
+<ol>
+<li><p>Divide<br>문제를 크기가 작은 동일한 종류의 sub problems로 분할</p>
+</li>
+<li><p>Conquer<br>재귀적으로 subproblems</p>
+</li>
+<li></li>
+</ol>
+<p>시간복잡도 구성요소</p>
+<ol>
+<li>문제를 분할하는 시간</li>
+<li>분할된 문제 수 * 분할된 문제의 시간 복잡도</li>
+<li>분할된 문제의 결과를 combine하는 시간</li>
+</ol>
+<p>sequence : 연속된 데이터의 집단</p>
+<p><img src="/images/post_img/50/merge.png"><br>MERGE-SORT는 combine하는 함수이다.</p>
+<h3 id="배열-요소가-홀수일-경우-어떻게-반을-나눌까"><a href="#배열-요소가-홀수일-경우-어떻게-반을-나눌까" class="headerlink" title="배열 요소가 홀수일 경우 어떻게 반을 나눌까.?"></a>배열 요소가 홀수일 경우 어떻게 반을 나눌까.?</h3><p>크게 고려하지 않아도 되지만, 타입캐스팅 방법처럼 계산 후 앞부분이 하나를 더 가져갈지를 판단한다.</p>
+<h3 id="타입캐스팅"><a href="#타입캐스팅" class="headerlink" title="타입캐스팅"></a>타입캐스팅</h3><p>  타입을 바꿔주는. </p>
 <hr>
 <h2 id="5-퀵정렬-Quick-sort"><a href="#5-퀵정렬-Quick-sort" class="headerlink" title="5. 퀵정렬(Quick sort)"></a>5. 퀵정렬(Quick sort)</h2><p>퀵정렬은 real-world 데이터에서 빠르다고 알려져 있어 <code>가장 많이 쓰는</code> 정렬알고리즘이다.<br>퀵정렬은 pivot을 선정하여 pivot을 기준으로 좌측과 우측으로 pivot보다 작은값은 왼쪽 pivot보다 큰값은 오른쪽으로 재배치를 하고 계속하여 분할하여 정렬하는 알고리즘이다.<br>최악의 경우에는 O(n²)의 비교를 수행하지만 일반적으로 O(nlogn)의 시간복잡도를 가진다.</p>
 <p><img src="/images/post_img/50/quick.gif"></p>
@@ -235,7 +278,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/10/CS_02/" data-id="cjb4t8r6z0000r62mcsh30jez" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/10/CS_02/" data-id="cjb5fdny80001n52msvqp3ns2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -353,10 +396,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
+        <a href="/2017/12/13/React_02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            1/ React router
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
     
-        <a href="/2017/12/10/CS_01/" id="article-nav-older" class="article-nav-link-wrap">
+    
+        <a href="/2017/12/09/Refactoring/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">알고리즘과 시간 복잡도</p>
+        <p class="article-nav-title">클린코드를 위한 리팩토링</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -375,10 +428,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/10/CS_02/" class="thumbnail">
+                            <a href="/2017/12/13/React_02/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/52/thumb_default.jpg)" alt="1/ React router" class="thumbnail-image"></span>
     
     
 </a>
@@ -386,19 +439,19 @@ ga('send', 'pageview');
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
-                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">알고리즘과 시간 복잡도</a></p>
-                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
+                            <p class="item-title"><a href="/2017/12/13/React_02/" class="title">1/ React router</a></p>
+                            <p class="item-date"><time datetime="2017-12-13T00:21:19.000Z" itemprop="datePublished">2017-12-13</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/10/CS_01/" class="thumbnail">
+                            <a href="/2017/12/10/CS_02/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="소팅 알고리즘" class="thumbnail-image"></span>
     
     
 </a>
@@ -407,7 +460,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
-                            <p class="item-title"><a href="/2017/12/10/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">소팅 알고리즘</a></p>
                             <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
                         </div>
                     </li>
@@ -435,6 +488,26 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/12/09/CS_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/09/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T09:23:55.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/12/08/TDD_01/" class="thumbnail">
     
     
@@ -452,26 +525,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/07/React_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/44/thumb_default.jpg)" alt="0/ React" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
-                            <p class="item-title"><a href="/2017/12/07/React_01/" class="title">0/ React</a></p>
-                            <p class="item-date"><time datetime="2017-12-07T12:20:19.000Z" itemprop="datePublished">2017-12-07</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -481,7 +534,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -491,7 +544,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

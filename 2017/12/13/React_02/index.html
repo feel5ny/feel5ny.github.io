@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>1/ React router | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="react" />
+    
+    
+    <meta name="description" content="스터디 공유용 자료입니다.http://slides.com/woongjae/react-router#/ 참고하였습니다.  리액트는 SPA위한 자바스크립트 라이브러리이기 때문에, 클라이언트 사이드 렌더링과 클라이언트 사이드 라우팅이 필요합니다.  react-router는 하나의 라이브러리이다. + 다른 router라이브러리도 있고, 직접 만들 수 있다. 페이스">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1&#x2F; React router">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/13/React_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="스터디 공유용 자료입니다.http://slides.com/woongjae/react-router#/ 참고하였습니다.  리액트는 SPA위한 자바스크립트 라이브러리이기 때문에, 클라이언트 사이드 렌더링과 클라이언트 사이드 라우팅이 필요합니다.  react-router는 하나의 라이브러리이다. + 다른 router라이브러리도 있고, 직접 만들 수 있다. 페이스">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/52/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-13T18:54:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1&#x2F; React router">
+<meta name="twitter:description" content="스터디 공유용 자료입니다.http://slides.com/woongjae/react-router#/ 참고하였습니다.  리액트는 SPA위한 자바스크립트 라이브러리이기 때문에, 클라이언트 사이드 렌더링과 클라이언트 사이드 라우팅이 필요합니다.  react-router는 하나의 라이브러리이다. + 다른 router라이브러리도 있고, 직접 만들 수 있다. 페이스">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/52/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/13/React_02/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/React/">React</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-React_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        1/ React router
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/13/React_02/" class="article-date">
+            <time datetime="2017-12-13T00:21:19.000Z" itemprop="datePublished">2017-12-13</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>스터디 공유용 자료입니다.<br><a href="http://slides.com/woongjae/react-router#/" target="_blank" rel="external">http://slides.com/woongjae/react-router#/</a> 참고하였습니다.</p>
+</blockquote>
+<p>리액트는 SPA위한 자바스크립트 라이브러리이기 때문에, 클라이언트 사이드 렌더링과 클라이언트 사이드 라우팅이 필요합니다.</p>
+<ul>
+<li>react-router는 하나의 라이브러리이다. <a href="https://reacttraining.com/" target="_blank" rel="external">+</a></li>
+<li>다른 router라이브러리도 있고, 직접 만들 수 있다.</li>
+<li>페이스북에서 공식적으로 나온 라이브러리는 아니지만, 많은 사람들이 쓰고 있는 라우터 라이브러리이다. </li>
+<li>react router v3는 다르다고 봐야한다.</li>
+<li>react-router와 react-router-dom이 나눠져 있는 이유는 리액트 네이티브에서도 사용하기 위해서이다.</li>
+</ul>
+<h3 id="리액트-라우터를-사용하는-이유"><a href="#리액트-라우터를-사용하는-이유" class="headerlink" title="리액트 라우터를 사용하는 이유"></a>리액트 라우터를 사용하는 이유</h3><ul>
+<li>여러 페이지들이 존재하는 서비스를 만들때 필요. </li>
+<li>url 주소나 특정상태에 따라서 view를 나누기 위해서 사용한다. </li>
+</ul>
+<hr>
+<h3 id="라우터의-여러-API"><a href="#라우터의-여러-API" class="headerlink" title="라우터의 여러 API"></a>라우터의 여러 API</h3><p>자주 사용하는 API를 봅시다.</p>
+<p>가장 기본셋팅 </p>
+<ol>
+<li><code>BrowserRouter</code></li>
+<li><code>Link</code></li>
+<li><code>Route</code></li>
+</ol>
+<h2 id="셋팅하기"><a href="#셋팅하기" class="headerlink" title="셋팅하기"></a>셋팅하기</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app 프로젝트이름 --scripts-version=react-scripts-ts</span><br></pre></td></tr></table></figure>
+<p>react-router-dom을 설치하자.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add react-router-dom</span><br></pre></td></tr></table></figure></p>
+<p>type definition 추가.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @types/react-router-dom</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>css 프레임워크를 붙여봅시다.<br><a href="https://react.semantic-ui.com/" target="_blank" rel="external">https://react.semantic-ui.com/</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add semantic-ui-react</span><br><span class="line">yarn add semantic-ui-css</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>css import는 최상위 컴포넌트에서</p>
+<ul>
+<li>css는 전역으로 설정됩니다.</li>
+</ul>
+<ol>
+<li>import 허락<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"allowSyntheticDefaultImports": true</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="1-lt-BrowserRouter-gt"><a href="#1-lt-BrowserRouter-gt" class="headerlink" title="1. &lt;BrowserRouter&gt;"></a>1. <code>&lt;BrowserRouter&gt;</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Route, Link&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>브라우저 히스토리를 이용해서 구현할 라우터</li>
+<li>하나의 자식만을 가질 수 있기 때문에, div로 감싸야한다. 아니면 자식이 여러명이라는 에러가 뜸.</li>
+<li>다른 라우팅 컴포넌트(Route, Link)를 사용하기 위해서 기본적으로 감싸줘야 함</li>
+<li><code>window.history.pushState()</code>로 동작하는 라우터 (리로드 없이 주소만 갱신하는 함수)</li>
+<li>이와 비슷하게 HashRouter는 Hash(#/)으로 동작하는 Router임</li>
+</ul>
+<h4 id="2-lt-Link-gt"><a href="#2-lt-Link-gt" class="headerlink" title="2. &lt;Link&gt;"></a>2. <code>&lt;Link&gt;</code></h4><p>HTML의 a태그와 유사하다.</p>
+<ul>
+<li><a>로 렌더링되고 사용법도 비슷하지만,</a></li>
+<li>실제 동작은 <a>와 다르게 페이지 전체를 리로드하지 않고</a></li>
+<li>필요한 부분만 리로드하게 됨<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link to=<span class="string">"/"</span> /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-lt-Route-gt"><a href="#3-lt-Route-gt" class="headerlink" title="3. &lt;Route&gt;"></a>3. <code>&lt;Route&gt;</code></h4><ul>
+<li>path 속성으로 경로지정</li>
+<li>render, component, children 속성으로 렌더링</li>
+<li>실제 경로가 지정한 경로와 완벽히 매치되지 않더라도, 경로를 포함만 해도 렌더링</li>
+<li>정확히 매칭될 때만 렌더하고 싶은 경우 exact 옵션 사용</li>
+<li>컴포넌트에 <code>match, location, history</code>라는 객체를 넘김</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exact=&#123;<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-Route-gt-props-알아보기"><a href="#lt-Route-gt-props-알아보기" class="headerlink" title="&lt;Route&gt; props 알아보기"></a><code>&lt;Route&gt;</code> props 알아보기</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Post = <span class="function">(<span class="params">props: RouteComponentProps&lt;&#123; postId: <span class="built_in">string</span> &#125;&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;h3&gt;Post: &#123;props.match.params.postId&#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br></pre></td></tr></table></figure>
+<h4 id="match-객체"><a href="#match-객체" class="headerlink" title="match 객체"></a>match 객체</h4><p><route>의 <code>path</code>에 정의한 것과 매치된 정보를 담고있음</route></p>
+<h3 id="location-객체"><a href="#location-객체" class="headerlink" title="location 객체"></a>location 객체</h3><p>브라우저의 window.location 객체와 비슷함<br>URL을 다루기 쉽게 쪼개서 가지고 있음</p>
+<h3 id="history-객체"><a href="#history-객체" class="headerlink" title="history 객체"></a>history 객체</h3><p>브라우저의 window.history 객체와 비슷함<br>주소를 임의로 변경하거나 되돌아갈 수 있음<br>주소를 변경하더라도 SPA 동작방식에 맞게 페이지 일부만 리로드</p>
+<h4 id="4-lt-Redirect-gt"><a href="#4-lt-Redirect-gt" class="headerlink" title="4. &lt;Redirect&gt;"></a>4. <code>&lt;Redirect&gt;</code></h4><ul>
+<li>말그대로 Redirect를 하는 컴포넌트</li>
+<li>마운트 되면 지정한 경로로 이동함</li>
+<li>기본적으로 replace 방식</li>
+<li>location 객체를 통해 리다이렉트 할 수도 있음<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">window</span>.localStorage.token) &#123;</span><br><span class="line">      <span class="keyword">return</span> &lt;Redirect to="/login" /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Switch&gt;</span><br><span class="line">          &lt;Route</span><br><span class="line">            exact</span><br><span class="line">            path="/"</span><br><span class="line">            component=&#123;HomePage&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">          ...</span><br><span class="line">        &lt;/Switch&gt;</span><br><span class="line">      &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="5-withRouter"><a href="#5-withRouter" class="headerlink" title="5. withRouter"></a>5. <code>withRouter</code></h4><p>withRouter HOC를 통해 히스토리 객체의 속성과 <route>의 match에 액세스 할 수 있습니다. withRouter는 <route> render props : {match, location, history}와 동일한 소품으로 경로가 변경 될 때마다 해당 구성 요소를 다시 렌더링합니다.</route></route></p>
+<h4 id="6-Switch"><a href="#6-Switch" class="headerlink" title="6. Switch"></a>6. <code>Switch</code></h4><ul>
+<li><code>&lt;Route&gt;</code>를 감싸서 사용</li>
+<li>JavaScript의 switch 문과 비슷</li>
+<li><route>중 매치되는 <code>첫번째</code>만 렌더</route></li>
+<li><route>에 path를 지정하지 않은 경우, 매치되는 <route> 컴포넌트가 없을 때 렌더</route></route></li>
+<li>따라서 순서에 유의해야함<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &#123;<span class="comment">/* intro페이지 &amp; 네비게이션 없는 페이지 */</span>&#125;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/login"</span></span><br><span class="line">    component=&#123;LoginPage&#125;</span><br><span class="line">  /&gt;w</span><br><span class="line">  &#123;<span class="comment">/* 서비스 페이지 (로그인 이후 접근 가능) &amp; 네비게이션 있는 페이지*/</span>&#125;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/share"</span></span><br><span class="line">    component=&#123;SharePage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route path=<span class="string">"/"</span> component=&#123;App&#125; /&gt;</span><br><span class="line">&lt;<span class="regexp">/Switch&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;Switch&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    exact</span><br><span class="line">    path=<span class="string">"/"</span></span><br><span class="line">    component=&#123;HomePage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/diary"</span></span><br><span class="line">    component=&#123;DiaryPage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/report"</span></span><br><span class="line">    component=&#123;ReportPage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/weight"</span></span><br><span class="line">    component=&#123;WeightPage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/search/:sc"</span></span><br><span class="line">    component=&#123;SearchResultPage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/search"</span></span><br><span class="line">    component=&#123;SearchPage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route</span><br><span class="line">    path=<span class="string">"/recipe/:id"</span></span><br><span class="line">    component=&#123;RecipePage&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">  &lt;Route component=&#123;NotFoundPage&#125; /&gt;</span><br><span class="line">&lt;<span class="regexp">/Switch&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="7-NavLink"><a href="#7-NavLink" class="headerlink" title="7. NavLink"></a>7. <code>NavLink</code></h4><ul>
+<li>조금 특별한 <link></li>
+<li><code>to</code>에 지정한 path와 URL이 매칭되는 경우,</li>
+<li>특별한 스타일, 클래스를 적용할 수 있음</li>
+</ul>
+<h3 id="쉬어가기"><a href="#쉬어가기" class="headerlink" title="쉬어가기"></a>쉬어가기</h3><ul>
+<li>모달을 달아보면서 state개념잡기.</li>
+</ul>
+<hr>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/13/React_02/" data-id="cjb5fdnyp000mn52mz8pb01sd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/12/10/CS_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">소팅 알고리즘</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/13/React_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/52/thumb_default.jpg)" alt="1/ React router" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
+                            <p class="item-title"><a href="/2017/12/13/React_02/" class="title">1/ React router</a></p>
+                            <p class="item-date"><time datetime="2017-12-13T00:21:19.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/10/CS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="소팅 알고리즘" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">소팅 알고리즘</a></p>
+                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/Refactoring/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/46/thumb_default.jpg)" alt="클린코드를 위한 리팩토링" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/09/Refactoring/" class="title">클린코드를 위한 리팩토링</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T11:12:34.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/CS_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/09/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T09:23:55.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/08/TDD_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/45/thumb_default.jpg)" alt="단위 테스트는 왜 해야할까" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/08/TDD_01/" class="title">단위 테스트는 왜 해야할까</a></p>
+                            <p class="item-date"><time datetime="2017-12-08T09:23:55.000Z" itemprop="datePublished">2017-12-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 12.5px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 12.5px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/12/13/React_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
