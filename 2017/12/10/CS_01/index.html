@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>알고리즘과 시간 복잡도 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="CS" />
+    
+    
+    <meta name="description" content="목차   알고리즘 시간 복잡도 Big O 표기법 Asymptotic Complexity 점근적 분석 재귀함수 합 구하기 피보나치 수열     좋은 알고리즘의 필요 요건과, 알고리즘의 실행 속도를 평가하는 방법을 알아본다. 1. 알고리즘우리는 finite amount of space and time에 집중해야한다.알고리즘은 유한한 자원을 가진 환경에서 주어진">
+<meta name="keywords" content="CS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="알고리즘과 시간 복잡도">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/10/CS_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="목차   알고리즘 시간 복잡도 Big O 표기법 Asymptotic Complexity 점근적 분석 재귀함수 합 구하기 피보나치 수열     좋은 알고리즘의 필요 요건과, 알고리즘의 실행 속도를 평가하는 방법을 알아본다. 1. 알고리즘우리는 finite amount of space and time에 집중해야한다.알고리즘은 유한한 자원을 가진 환경에서 주어진">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/48/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-13T08:43:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="알고리즘과 시간 복잡도">
+<meta name="twitter:description" content="목차   알고리즘 시간 복잡도 Big O 표기법 Asymptotic Complexity 점근적 분석 재귀함수 합 구하기 피보나치 수열     좋은 알고리즘의 필요 요건과, 알고리즘의 실행 속도를 평가하는 방법을 알아본다. 1. 알고리즘우리는 finite amount of space and time에 집중해야한다.알고리즘은 유한한 자원을 가진 환경에서 주어진">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/48/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/10/CS_01/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/CS/">CS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-CS_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        알고리즘과 시간 복잡도
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/10/CS_01/" class="article-date">
+            <time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CS/">CS</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>목차 </p>
+<ol>
+<li>알고리즘</li>
+<li>시간 복잡도</li>
+<li>Big O 표기법</li>
+<li>Asymptotic Complexity 점근적 분석</li>
+<li>재귀함수<ul>
+<li>합 구하기</li>
+<li>피보나치 수열</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>좋은 알고리즘의 필요 요건과, 알고리즘의 실행 속도를 평가하는 방법을 알아본다.</p>
+<h2 id="1-알고리즘"><a href="#1-알고리즘" class="headerlink" title="1. 알고리즘"></a>1. 알고리즘</h2><p>우리는 <code>finite amount of space and time</code>에 집중해야한다.<br>알고리즘은 <strong>유한한</strong> 자원을 가진 환경에서 주어진 문제를 푸는 동작의 모임이다.<br>적은 시간과 적은 자원(공간)을 이용해 문제를 해결하는 알고리즘이 좋은 알고리즘이다.</p>
+<blockquote>
+<p><a href="https://feel5ny.github.io/2017/11/30/JS_02/">+</a> 웹 브라우저에서 사용할 수 있는 메모리는 일반적인 데스크톱 애플리케이션의 가용 메모리에 비해 매우 적다. 적은 메모리만 할당받는 주된 이유는 웹 페이지에서 실행하는 자바스크립트가 시스템 메모리를 전부 사용해서 운영체제를 다운시키는 일을 방지하기 위함이다.<br>메모리 제한은 변수 할당 뿐만 아니라 호출스택, 스레드에서 실행할 수 있는 문장수에도 영향을 미친다.<br>즉! 가능한 최소한의 메모리만 사용해야 페이지의 성능을 올릴 수 있다. </p>
+</blockquote>
+<h3 id="예제-Facebook-친구-2명이-가진-공통-친구-리스트를-만드는-가장-빠르-방법은"><a href="#예제-Facebook-친구-2명이-가진-공통-친구-리스트를-만드는-가장-빠르-방법은" class="headerlink" title="예제_Facebook 친구 2명이 가진 공통 친구 리스트를 만드는 가장 빠르 방법은?"></a>예제_Facebook 친구 2명이 가진 공통 친구 리스트를 만드는 가장 빠르 방법은?</h3><p>n명의 페이스북 친구를 가진 A와 m명의 페이스북 친구를 가진 B의 공통 친구의 수는</p>
+<ul>
+<li>단순하게 생각한다면 n*m</li>
+<li>800명, 400명이라면 320,000번의 비교로 찾을 수 있다.</li>
+<li>시간복잡도를 배우고, 연산횟수를 줄이는 방법을 생각해보자.</li>
+</ul>
+<hr>
+<h2 id="2-시간복잡도"><a href="#2-시간복잡도" class="headerlink" title="2. 시간복잡도 +"></a>2. 시간복잡도 <a href="https://en.wikipedia.org/wiki/Time_complexity" target="_blank" rel="external">+</a></h2><p>시간복잡도란 알고리즘이 문제를 해결하기 위한 <strong><code>시간(연산)의 횟수</code></strong>를 말한다.<br>computational complexity that measures or estimates the time<br>taken for running an algorithm.<br>Time complexity is commonly estimated by counting the number of <code>elementary operations</code> performed by the algorithm, supposing that an elementary operation takes a fixed amount of time to perform. </p>
+<p>알고리즘을 평가하는데 있어 수행시간과 메모리 사용량을 평가기준으로 두는데<br>수행시간에 해당하는 것이 <code>시간 복잡도</code> Time Complexity,<br>메모리 사용량에 해당하는 것이 <code>공간 복잡도</code> Space Complexity이다.</p>
+<p>연산 횟수를 카운팅 할때 3가지 경우가 있다.</p>
+<ol>
+<li>최선의 경우 Best Case</li>
+<li>최악의 경우 Worst Case</li>
+<li>평균적인 경우 Average Case</li>
+</ol>
+<p>평균적인 경우가 가장 이상적으로 보이겠지만 알고리즘이 복잡해 질수록 평균적인 경우는 구하기가 매우 어려워 진다. 그러므로 <strong>최악의 경우</strong>로 알고리즘의 성능을 파악한다.</p>
+<h3 id="2-1-Program-Step에서-Elementary-Operation이란"><a href="#2-1-Program-Step에서-Elementary-Operation이란" class="headerlink" title="2-1. Program Step에서 Elementary Operation이란?"></a>2-1. Program Step에서 Elementary Operation이란?</h3><ul>
+<li>프로그램의 진행 정도를 나타내는 기본 단위이다.</li>
+</ul>
+<ol>
+<li>대입연산</li>
+<li>덧셈, 뺄셈, 곱셈, 나눗셈</li>
+<li>비교구문</li>
+<li>함수호출</li>
+</ol>
+<p>즉, 알고리즘의 실행 순서를 따라가며 Elementary Operation이 일어나느 수를 측정한다.</p>
+<h3 id="2-2-어떻게-카운팅할까"><a href="#2-2-어떻게-카운팅할까" class="headerlink" title="2-2. 어떻게 카운팅할까."></a>2-2. 어떻게 카운팅할까.</h3><ol>
+<li>전역변수를 이용하여 Elementary Operation을 카운팅한다.</li>
+<li>각 실행문 별로 Step수와 실행 횟수를 분석한다.</li>
+</ol>
+<h3 id="2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅"><a href="#2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅" class="headerlink" title="2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅"></a>2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">list, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> tempSum = <span class="number">0</span>; <span class="comment">// 대입연산</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    count++;   <span class="comment">// loop 한번 돌 때마다</span></span><br><span class="line">    tempSum += list[i];</span><br><span class="line">    count++;  <span class="comment">// 대입연산</span></span><br><span class="line">  &#125;</span><br><span class="line">  count++;  <span class="comment">// for loop 끝날 때 한번</span></span><br><span class="line">  count++;  <span class="comment">// return 수행</span></span><br><span class="line">  <span class="keyword">return</span> tempSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-2-2-각-실행문-별로-Step수와-실행-횟수를-분석한다"><a href="#2-2-2-각-실행문-별로-Step수와-실행-횟수를-분석한다" class="headerlink" title="2-2-2. 각 실행문 별로 Step수와 실행 횟수를 분석한다."></a>2-2-2. 각 실행문 별로 Step수와 실행 횟수를 분석한다.</h3><p><img src="/images/post_img/48/01.png"></p>
+<p>주어진 프로그램 2개의 성능 비교 및 분석</p>
+<ul>
+<li>프로그램 P1의 성능 : C1 <em> n^2 + C2 </em> n</li>
+<li>프로그램 P2의 성능 : C3 * n</li>
+</ul>
+<p>C1, C2, C3에 따라서 대소 비교 결과가 다름.<br>어떤 C1, C2, C3에 대해서도 C1 <em> n^2 &gt; C3 </em> n을 만족하는 n은 존재함.</p>
+<p>n이 작으면 프로그램 P1의 성능이 더 좋을 수도 있다.<br>n이 충분히 <code>크면</code> 항상 프로그램 P2의 성능이 좋다. (P1에는 n이 제곱이기 때문에)</p>
+<p>작은 경우 모두 성능이 좋으므로 문제될 것은 없다.<br><strong>따라서 n이 큰 경우의 처리가 중요하다.</strong></p>
+<hr>
+<h2 id="3-Big-O-표기법"><a href="#3-Big-O-표기법" class="headerlink" title="3. Big O 표기법"></a>3. Big O 표기법</h2><p>Big O가 중요한 이유를 알기 위해서는 Asymptotic Complexity에 대해 알야아한다.<br>알고리즘의 성능평가는 시간복잡도와 공간복잡도를 계산하고, 적 표기법으로 나타내면 된다. </p>
+<p><img src="/images/post_img/48/02.png"></p>
+<p>위 예와 같이 T(n)으로 표현한 함수의 <code>최고차항의 차수</code>가 빅오가 된다.<br>빅오의 순서는 아래와 같고 커질수록 좋지 않다.<br>보통 O(n^2)이상의 복잡도를 가지는 알고리즘은 좋지 않다.</p>
+<p><img src="/images/post_img/48/03.png"><br><img src="/images/post_img/48/05.png"><br><img src="/images/post_img/48/04.png"></p>
+<hr>
+<h2 id="4-Asymptotic-Complexity"><a href="#4-Asymptotic-Complexity" class="headerlink" title="4. Asymptotic Complexity"></a>4. Asymptotic Complexity</h2><p>입력의 크기가 충분히 클 때의 <code>시간복잡도</code>와 <code>공간복잡도</code>를 분석하는 것. </p>
+<p>프로그램 성능이 Asymptotic(점진적인) Complexity </p>
+<ul>
+<li>프로그램의 입력 크기 등 성능을 결정하는 주요 특성 값이 매우 클 때의 프로그램의 성능.</li>
+<li>프로그램의 실행 속도가 어떤 경향을 가지는지를 평가한다고 생각하면 된다.</li>
+<li>ex. 입력의 크기가 n이고 n이 매우 큰 경우</li>
+<li>프로그램 성능 평가의 매우 중요한 기준.</li>
+</ul>
+<h3 id="4-1-점근적-분석의-필요성"><a href="#4-1-점근적-분석의-필요성" class="headerlink" title="4-1. 점근적 분석의 필요성"></a>4-1. 점근적 분석의 필요성</h3><p>어떠한 문제 해결을 위한 알고리즘의 성능분석을 할 때, 주어지는 데이터의 형태나 실험을 수행하는 환경, 또는 실험에 사용한 시스템의 성능등 다양한 요소에 의해 공평한 결과가 나오기 힘들고 비교 결과가 항상 일정하지 않을 수 있다.</p>
+<p>이를 효과적으로 해결하는 방법이 점근적 분석법이다. 점근적 분석법은 <code>각 알고리즘이 주어진 데이터의 크기를 기준으로 수행시간 혹은 사용공간이 얼마나 되는지를 객관적으로 비교할 수 있는 기준을 제시해 준다.</code><br>O(빅오), Ω(오메가), Θ(세타)등이 있다. 일반적으로 빅오와 세타표기가 많이 사용된다.</p>
+<h3 id="4-2-빅오-표기법-O-Notation"><a href="#4-2-빅오-표기법-O-Notation" class="headerlink" title="4-2. 빅오 표기법 O Notation"></a>4-2. 빅오 표기법 O Notation</h3><ul>
+<li>점근적 상한선(Asymptotic upper bound)</li>
+<li>주어진 알고리즘이 아무리 나빠도 비교하는 함수와 같거나 좋다.</li>
+<li>정의 : O(g(n)) = {f(n) : there exist positive constants c and n0 such that 0≤f(n)≤cg(n) for all n≥n0}<br><img src="/images/post_img/48/o_notation.png"><br>n0를 기준으로 n0보다 오른쪽에 있는 모든 n 값에 대해 함수 f(n)은 함수 cg(n)보다 작거나 같다는 의미이다. 그래프가 아래에 있을 수록 수행시간이 짧은 것이므로 성능이 좋은 것이다.</li>
+</ul>
+<h3 id="4-3-오메가-표기법-Ω-Notation"><a href="#4-3-오메가-표기법-Ω-Notation" class="headerlink" title="4-3. 오메가 표기법 Ω Notation"></a>4-3. 오메가 표기법 Ω Notation</h3><ul>
+<li>점근적 하한선(Asymptotic lower bound)</li>
+<li>주어진 알고리즘이 아무리 좋아도 비교하는 함수와 같거나 나쁘다.</li>
+<li>정의 : Ω(g(n)) = {f(n) : there exist positive constants c and n0 such that 0≤cg(n)≤f(n) for all n≥n0}<br><img src="/images/post_img/48/omega_notation.png"><br>n0를 기준으로 n0보다 오른쪽에 있는 모든 n 값에 대해 함수 f(n)은 함수 cg(n)보다 크거나 같다는 의미이다.</li>
+</ul>
+<h3 id="4-4-세타-표기법-Θ-Notation"><a href="#4-4-세타-표기법-Θ-Notation" class="headerlink" title="4-4. 세타 표기법 Θ Notation"></a>4-4. 세타 표기법 Θ Notation</h3><ul>
+<li>점근선 상한선과 점근적 하한선의 교집합(Asymptotic tighter bound)</li>
+<li>주어진 알고리즘이 아무리 좋아지거나 나빠지더라도 비교하는 함수의 범위안에 있다.</li>
+<li>정의 : Θ(g(n)) = {f(n) : there exist positive constants c1, c2 and n0 such that 0≤c1g(n)≤f(n)≤c2g(n) for all n≥n0}<br><img src="/images/post_img/48/theta_notation.png"><br>n0를 기준으로 n0보다 오른쪽에 있는 모든 n 값에 대해 함수 f(n)은 함수 c1g(n)보다 크거나 같거나 c2g(n)보다 작거나 같다는 의미이다</li>
+</ul>
+<hr>
+<h4 id="cf-의사코드란-pseudo-code"><a href="#cf-의사코드란-pseudo-code" class="headerlink" title="cf. 의사코드란? pseudo-code +"></a>cf. 의사코드란? pseudo-code <a href="https://medium.com/djangogirlsseoul-codecamp/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C-pseudo-code-%EB%9E%80-d892a3479b1d" target="_blank" rel="external">+</a></h4><p>의사(疑似: 비교할 의, 비슷할 사 | Pseudo: 가짜의- ) 코드는 컴퓨터 프로그램이나 알고리즘이 수행해야할 내용을 우리가 사용하는 언어 (한국어 또는 영어 등)로 간략히 서술해 놓은 것을 말합니다. 왜 의사코드를 사용해야 하나요?</p>
+<p>의사코드는 코딩 입력을 시작하기 전, <code>사고를 좀더 명확히 정립하게 만들어주어</code> 프로그램을 설계하는데 도움이 됩니다. 실제 코드 입력을 처음 시작할 때가 제일 힘듭니다! 단순히 소스코드를 입력하는 것보다 함수(function) 프로그램을 만들 때 많은 시간을 낭비할 수 있습니다. 약 10분 정도 각 풀이법의 장점과 단점을 주도면밀하게 살펴보면서 의사코드 작성한다면, 이후 디버그를 수정하고 코드를 재분해 하는데 걸리는 시간을 단축할 수 있습니다.</p>
+<blockquote>
+<p>모델링이라고 생각해보자.</p>
+</blockquote>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://ledgku.tistory.com/33" target="_blank" rel="external">http://ledgku.tistory.com/33</a></li>
+<li><a href="http://bigocheatsheet.com/" target="_blank" rel="external">http://bigocheatsheet.com/</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/10/CS_01/" data-id="cjb4t8r730001r62m6g48ttj6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/10/CS_02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            알고리즘과 시간 복잡도
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/12/09/Refactoring/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">클린코드를 위한 리팩토링</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/10/CS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/10/CS_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/Refactoring/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/46/thumb_default.jpg)" alt="클린코드를 위한 리팩토링" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/09/Refactoring/" class="title">클린코드를 위한 리팩토링</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T11:12:34.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/08/TDD_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/45/thumb_default.jpg)" alt="단위 테스트는 왜 해야할까" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/08/TDD_01/" class="title">단위 테스트는 왜 해야할까</a></p>
+                            <p class="item-date"><time datetime="2017-12-08T09:23:55.000Z" itemprop="datePublished">2017-12-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/07/React_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/44/thumb_default.jpg)" alt="0/ React" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
+                            <p class="item-title"><a href="/2017/12/07/React_01/" class="title">0/ React</a></p>
+                            <p class="item-date"><time datetime="2017-12-07T12:20:19.000Z" itemprop="datePublished">2017-12-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 12.5px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 12.5px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/12/10/CS_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
