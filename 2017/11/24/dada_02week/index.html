@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>08 days/ 협업규칙 정하기, 초기 셋팅, 퍼블리싱 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="react,publishing" />
+    
+    
+    <meta name="description" content="Daily scrum(김나영) +Github +  목차(2017.10.01 ~ 2017.10.09)  프로젝트 매니징을 위한 셋팅 깃헙 셋팅 깃헙 프로젝트 탭으로 매니징 테스크 관련 규칙 정하기   프로젝트 초기 셋팅 의존모듈 셋팅 css 프레임워크 선택 css styling 방법   퍼블리싱 &amp;#128153; (feat.추석)    1. 프로젝트 매니징">
+<meta name="keywords" content="react,publishing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="08 days&#x2F; 협업규칙 정하기, 초기 셋팅, 퍼블리싱">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/24/dada_02week/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="Daily scrum(김나영) +Github +  목차(2017.10.01 ~ 2017.10.09)  프로젝트 매니징을 위한 셋팅 깃헙 셋팅 깃헙 프로젝트 탭으로 매니징 테스크 관련 규칙 정하기   프로젝트 초기 셋팅 의존모듈 셋팅 css 프레임워크 선택 css styling 방법   퍼블리싱 &amp;#128153; (feat.추석)    1. 프로젝트 매니징">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/06/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-14T13:54:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="08 days&#x2F; 협업규칙 정하기, 초기 셋팅, 퍼블리싱">
+<meta name="twitter:description" content="Daily scrum(김나영) +Github +  목차(2017.10.01 ~ 2017.10.09)  프로젝트 매니징을 위한 셋팅 깃헙 셋팅 깃헙 프로젝트 탭으로 매니징 테스크 관련 규칙 정하기   프로젝트 초기 셋팅 의존모듈 셋팅 css 프레임워크 선택 css styling 방법   퍼블리싱 &amp;#128153; (feat.추석)    1. 프로젝트 매니징">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/06/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/24/dada_02week/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project-127939/DA-DA/">DA, DA</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-dada_02week" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        08 days/ 협업규칙 정하기, 초기 셋팅, 퍼블리싱
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/24/dada_02week/" class="article-date">
+            <time datetime="2017-11-24T01:10:04.000Z" itemprop="datePublished">2017-11-24</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/publishing/">publishing</a>, <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p>Daily scrum(김나영) <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR57PrRMvXjFa1sHCtLX-ifjMt8VEoiPuzKa0ErH-h787p4MqxssYJKt7QaYCReGVIaJEu_HgpMBGRC/pubhtml" target="_blank" rel="external">+</a><br>Github <a href="https://github.com/huusz/Da-Da" target="_blank" rel="external">+</a></p>
+<hr>
+<p>목차<br>(2017.10.01 ~ 2017.10.09)</p>
+<ol>
+<li><a href="#managing">프로젝트 매니징을 위한 셋팅</a><ul>
+<li>깃헙 셋팅</li>
+<li>깃헙 프로젝트 탭으로 매니징</li>
+<li>테스크 관련 규칙 정하기</li>
+</ul>
+</li>
+<li><a href="#init">프로젝트 초기 셋팅</a><ul>
+<li>의존모듈 셋팅</li>
+<li>css 프레임워크 선택</li>
+<li>css styling 방법</li>
+</ul>
+</li>
+<li><a href="#publishing">퍼블리싱 &#128153;</a> (feat.추석)</li>
+</ol>
+<hr>
+<h2 id="1-프로젝트-매니징을-위한-셋팅"><a href="#1-프로젝트-매니징을-위한-셋팅" class="headerlink" title=" 1. 프로젝트 매니징을 위한 셋팅"></a><a name="managing"></a> 1. 프로젝트 매니징을 위한 셋팅</h2><h3 id="깃헙-셋팅"><a href="#깃헙-셋팅" class="headerlink" title="깃헙 셋팅"></a>깃헙 셋팅</h3><ul>
+<li>깃헙 레포에는 백엔드, 프론트엔드 폴더를 초반에 나누어서 진행하였다.<ul>
+<li><span style="color:blue"><strong>troubleShoot</strong></span><br>위험 상황을 피하는 차원에서 백엔드와 프론트엔드는 레포를 따로 생성하는게 좋다고 하셨음.</li>
+</ul>
+</li>
+<li>처음 시작 시에는 master브랜치에서 브랜치를 각자 생성하여 진행, 풀리케스트 없이 바로 바로 merge하며 진행. (지금 생각하니 헉;)</li>
+<li>퍼블리싱 이후에는 master는 절대적으로 배포용으로만 사용하기로 정함. (브랜치 rock 설정)</li>
+<li>develop-backend, develop-frontend 브랜치를 main브랜치로 정함. </li>
+<li>퍼블리싱 단계에서는 <code>각자 이름-페이지이름</code>으로 브랜치를 생성하기로 정하였다.</li>
+</ul>
+<p><img src="/images/post_img/06/01.png"></p>
+<blockquote>
+<p>퍼블리싱 끝나고 merge 후</p>
+</blockquote>
+<ul>
+<li><span style="color:blue"><strong>troubleShoot</strong></span><br>위의 이미지는 1주일만에 merge한 상황. merge는 자주자주 하는게 좋다.</li>
+</ul>
+<hr>
+<h3 id="깃헙-프로젝트-탭"><a href="#깃헙-프로젝트-탭" class="headerlink" title="깃헙 프로젝트 탭"></a>깃헙 프로젝트 탭</h3><p><img src="/images/post_img/06/02.png"><br>프로젝트 탭은 총 5가지로 구성하였다.</p>
+<ol>
+<li>규칙</li>
+<li>할 일</li>
+<li>진행 중인 작업</li>
+<li>마친 작업</li>
+</ol>
+<p>규칙의 경우 예전에 참여했던 프로젝트의 규칙을 light하게 가져왔다.<br><img src="/images/post_img/06/03.png"></p>
+<p>규칙은 아래와 같이 가볍게 정했다!</p>
+<ol>
+<li>급한 이슈의 경우 라벨 붙이기</li>
+<li>카드당 assign 필수</li>
+<li>작성 규칙<ul>
+<li>[페이지명] 작업 설명<ul>
+<li>EX. [Diary] 식단 추가 작업</li>
+</ul>
+</li>
+<li>페이지가 구분 되지 않는 경우는 [Global]로 한다.<ul>
+<li>EX. [Global] 페이지 라우팅</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>카드 하나당 1개의 작업만 등록한다.</li>
+</ol>
+<ul>
+<li>테스크의 경우 매주 진행했던 오프라인 회의 때 코드리뷰 이후 할일 카드를 같이 생성하기로 정했다.</li>
+</ul>
+<hr>
+<p><span style="color:blue"><strong>Tip</strong></span></p>
+<ul>
+<li>깃헙 프로젝트에서 카드를 이슈로 만들면, 이슈탭에도 자동 등록 가능하다.</li>
+<li>해당 이슈의 커밋이 진행 될 경우, 커밋 메세지에 이슈 number와 명령어를 추가하면 이슈가 자동으로 close나 등등의 작업이 자동화되면서, 이슈에도 log가 남는다.<ul>
+<li>Close: <code>close</code>, <code>closes</code>, <code>closed</code>, <code>fix</code>, <code>fixes</code>, <code>fixed</code>, <code>resolve</code>, <code>resolves</code>, <code>resolved</code></li>
+<li>Reopen: <code>reopen</code>, <code>reopens</code>, <code>reopened</code></li>
+</ul>
+</li>
+</ul>
+<p><span style="color:blue"><strong>Issue</strong></span></p>
+<ul>
+<li>slack notation을 걸어놓지 않아서 이메일로 확인해야했다.</li>
+<li>카드를 close로 옮겨야하는 번거로움이 있었다.<br>(지라같은 툴은 옮기지 이슈가 닫히면 자동으로 옮기짐)</li>
+</ul>
+<hr>
+<hr>
+<h2 id="2-프로젝트-초기-셋팅"><a href="#2-프로젝트-초기-셋팅" class="headerlink" title=" 2. 프로젝트 초기 셋팅"></a><a name="init"></a> 2. 프로젝트 초기 셋팅</h2><h3 id="1-create-react-app"><a href="#1-create-react-app" class="headerlink" title="1. create-react-app"></a>1. create-react-app</h3><hr>
+<h3 id="2-폴더-구조-셋팅"><a href="#2-폴더-구조-셋팅" class="headerlink" title="2. 폴더 구조 셋팅"></a>2. 폴더 구조 셋팅</h3><p>  <code>components/</code> global하게 사용되는 container 컴포넌트<br>  <code>pages/</code> container component와 presentational component를 함께 두었다.</p>
+<hr>
+<h3 id="3-CSS-프레임워크-선택"><a href="#3-CSS-프레임워크-선택" class="headerlink" title="3. CSS 프레임워크 선택 +"></a>3. CSS 프레임워크 선택 <a href="https://www.vobour.com/book/view/LCETueEN7i3MjvEcz" target="_blank" rel="external">+</a></h3><p>  <strong>Semantic-UI-React</strong><br>  서비스 컨셉과 유사한 디자인을 갖고 있고 여러 종류의 컴포넌트들이 있어서 사용.</p>
+<hr>
+<h3 id="4-css-styling-방법"><a href="#4-css-styling-방법" class="headerlink" title="4. css styling 방법"></a>4. css styling 방법</h3><h4 id="4-1-첫번째-이슈-디자인-커스텀"><a href="#4-1-첫번째-이슈-디자인-커스텀" class="headerlink" title="4-1. 첫번째 이슈_디자인 커스텀"></a>4-1. 첫번째 이슈_디자인 커스텀</h4><ul>
+<li>시맨틱 프레임워크를 사용해도, 디자인 시안이 있었기 때문에 약간의 커스텀이 필요했다. </li>
+<li>이미 셋팅되어있는 컴포넌트를 커스텀을 해야했기 때문에 css로는 적용이 불가능했다. 인라인으로 적용해야 덮어씌어졌음.</li>
+<li><code>!important</code>로 되어있는 css를 제외하고는 inline 형식으로 작성하기로 결정</li>
+</ul>
+<h4 id="4-2-두번째-이슈-스타일드-컴포넌트-인라인-스타일"><a href="#4-2-두번째-이슈-스타일드-컴포넌트-인라인-스타일" class="headerlink" title="4-2. 두번째 이슈_스타일드 컴포넌트? 인라인 스타일"></a>4-2. 두번째 이슈_스타일드 컴포넌트? 인라인 스타일</h4><p>핫한 스타일드 컴포넌트를 쓸까 인라인 스타일로 작업을 할까 고민했었다. 지금 생각해보면 과감하게 쓸껄…이라고 생각이 든다. 러닝커브가 있을 듯 하여 <code>인라인 스타일</code>로 작업하게 되었다. </p>
+<p><span style="color:blue"><strong>Issue</strong></span><br>인라인스타일로 작업하다보니 <code>:hover</code>, <code>:before</code>, <code>:after</code>과 같은 셀렉터를 사용하지 못했고, css를 부분 부분 섞어 쓰게 되었다. 스타일드 컴포넌트는 이를 해결해주는데.. 그냥 쓸껄!</p>
+<p><img src="/images/post_img/06/04.png" width="150px"></p>
+<hr>
+<h3 id="5-의존모듈-셋팅"><a href="#5-의존모듈-셋팅" class="headerlink" title="5. 의존모듈 셋팅"></a>5. 의존모듈 셋팅</h3><p>디자인 시안을 보면, 필요한 서드파티는 </p>
+<ol>
+<li>일기탭의 에디터</li>
+<li>그래프 차트</li>
+</ol>
+<hr>
+<h4 id="5-1-일기탭-에디터"><a href="#5-1-일기탭-에디터" class="headerlink" title="5-1. 일기탭 에디터"></a>5-1. 일기탭 에디터</h4><ul>
+<li>개인적으로 <a href="https://summernote.org/" target="_blank" rel="external">summernote</a>를 좋아하는데, 리액트 친화적이지 않아서 포기</li>
+<li>리액트 친화적인 모듈을 찾다가 페이스북에서 만든 <a href="https://draftjs.org/" target="_blank" rel="external">draft.js</a>를 사용하기로 결정.</li>
+<li>나중에 설명하겠지만, 에디터는 post로 보내기 전에 html 형식으로 export했어야 했고, 이 부분에서 많은 난관에 봉착했었다.<ul>
+<li><code>draft-js-export-html</code>로 해결</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="5-2-그래프-차트"><a href="#5-2-그래프-차트" class="headerlink" title="5-2. 그래프 차트"></a>5-2. 그래프 차트</h4><ul>
+<li>react d3를 사용하려고 했으나, 디자인 시안과 비슷하지 않다는 점, 커스텀이 어려운 점이 있었다.</li>
+<li>두번째 찾은 차트는 Uber에서 나온 <a href="https://uber.github.io/react-vis/" target="_blank" rel="external"><code>react-vis</code></a> 리액트 친화적.</li>
+<li>세번째 찾은 차트는 <a href="https://github.com/recharts/recharts" target="_blank" rel="external"><strong>rechart</strong></a><ul>
+<li>react와 d3로 만들어졌고, UI가 서비스 컨셉과 잘 어울려서 선택하게 됨.</li>
+</ul>
+</li>
+<li>이또한 나중에 설명하겠지만, 그래프에 데이터를 넣는 구조와 서버에서 날라오는 데이터 구조가 많이 달랐기 때문에 프론트에서 다시 셋팅하는 작업이 필요했음.</li>
+</ul>
+<hr>
+<hr>
+<h2 id="3-퍼블리싱-128153"><a href="#3-퍼블리싱-128153" class="headerlink" title=" 3. 퍼블리싱 &#128153;"></a><a name="publishing"></a> 3. 퍼블리싱 &#128153;</h2><p>프론트엔드는 2명이었다. 각자 하고싶은 페이지를 맡아서 진행했다. 퍼블리싱은 항상 즐겁다! &#128582; 퍼블리싱하면서 발생한 이슈만 정리하겠다.</p>
+<h3 id="간단-라우팅-작업"><a href="#간단-라우팅-작업" class="headerlink" title="+ 간단 라우팅 작업"></a>+ 간단 라우팅 작업</h3><ul>
+<li><code>react-router-dom</code> 의존모듈</li>
+<li>주 사용 API<ul>
+<li>BrowserRouter</li>
+<li>Route</li>
+<li>Link</li>
+<li>Switch (로그인 이후 바꾸주는 역할, 404페이지 라우팅)</li>
+<li>withRouter (중첩 라우팅할 때 사용)</li>
+</ul>
+</li>
+<li><p><code>App.js</code>에 셋팅</p>
+</li>
+<li><p>path</p>
+<ul>
+<li><code>/</code></li>
+<li><code>/diary</code><ul>
+<li>tab용 router파일 따로 셋팅</li>
+<li><code>/diary/food</code></li>
+<li><code>/diary/fitness</code></li>
+<li><code>/diary/review</code></li>
+</ul>
+</li>
+<li><code>/report</code></li>
+<li><code>/weight</code></li>
+<li><code>/search/:sc</code></li>
+<li><code>/recipe/:id</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/11/24/dada_02week/" data-id="cjb6lu8y3002ws92mcfgwyw0u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/24/Typescript_09/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            8/ Generic
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/23/Typescript_08-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">7-1/ class 연습</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/13/React_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/52/thumb_default.jpg)" alt="1/ React router" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
+                            <p class="item-title"><a href="/2017/12/13/React_02/" class="title">1/ React router</a></p>
+                            <p class="item-date"><time datetime="2017-12-13T00:21:19.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/10/CS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="소팅 알고리즘" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">소팅 알고리즘</a></p>
+                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/Refactoring/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/46/thumb_default.jpg)" alt="클린코드를 위한 리팩토링" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/09/Refactoring/" class="title">클린코드를 위한 리팩토링</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T11:12:34.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/CS_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/09/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T09:23:55.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/08/TDD_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/45/thumb_default.jpg)" alt="단위 테스트는 왜 해야할까" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/08/TDD_01/" class="title">단위 테스트는 왜 해야할까</a></p>
+                            <p class="item-date"><time datetime="2017-12-08T09:23:55.000Z" itemprop="datePublished">2017-12-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 13.33px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 13.33px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/11/24/dada_02week/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

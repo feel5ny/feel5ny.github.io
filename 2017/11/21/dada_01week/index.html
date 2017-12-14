@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>03 days/ 기획 및 프로토타입, 그리고 디자인 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="react,plan,design,prototype" />
+    
+    
+    <meta name="description" content="Daily scrum +Github +  개발부분부터 보길 원하신다면 다음 포스팅부터 읽으셔도 됩니다.   정말 3일만에 끝내신건가요?개발 공부를 하고 있던 만큼, 개발 이외의 시간들은 최대한 단축하고 싶었다. 우리 모두 비슷한 마음이었고, 다행히 이 부분의 스케줄을 잘 조정할 수 있었다. 사실 기획 스탭은 굉장히 중요한 시간이라는건 안다.. 한달이라는">
+<meta name="keywords" content="react,plan,design,prototype">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03 days&#x2F; 기획 및 프로토타입, 그리고 디자인">
+<meta property="og:url" content="http://feel5ny.github.io/2017/11/21/dada_01week/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="Daily scrum +Github +  개발부분부터 보길 원하신다면 다음 포스팅부터 읽으셔도 됩니다.   정말 3일만에 끝내신건가요?개발 공부를 하고 있던 만큼, 개발 이외의 시간들은 최대한 단축하고 싶었다. 우리 모두 비슷한 마음이었고, 다행히 이 부분의 스케줄을 잘 조정할 수 있었다. 사실 기획 스탭은 굉장히 중요한 시간이라는건 안다.. 한달이라는">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/05/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-14T10:23:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="03 days&#x2F; 기획 및 프로토타입, 그리고 디자인">
+<meta name="twitter:description" content="Daily scrum +Github +  개발부분부터 보길 원하신다면 다음 포스팅부터 읽으셔도 됩니다.   정말 3일만에 끝내신건가요?개발 공부를 하고 있던 만큼, 개발 이외의 시간들은 최대한 단축하고 싶었다. 우리 모두 비슷한 마음이었고, 다행히 이 부분의 스케줄을 잘 조정할 수 있었다. 사실 기획 스탭은 굉장히 중요한 시간이라는건 안다.. 한달이라는">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/05/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/21/dada_01week/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Project-127939/">Project &#127939;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Project-127939/DA-DA/">DA, DA</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-dada_01week" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        03 days/ 기획 및 프로토타입, 그리고 디자인
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/11/21/dada_01week/" class="article-date">
+            <time datetime="2017-11-21T01:10:04.000Z" itemprop="datePublished">2017-11-21</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/design/">design</a>, <a class="tag-link" href="/tags/plan/">plan</a>, <a class="tag-link" href="/tags/prototype/">prototype</a>, <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p>Daily scrum +<br>Github <a href="https://github.com/huusz/Da-Da" target="_blank" rel="external">+</a></p>
+<blockquote>
+<p>개발부분부터 보길 원하신다면 다음 포스팅부터 읽으셔도 됩니다.</p>
+</blockquote>
+<hr>
+<h3 id="정말-3일만에-끝내신건가요"><a href="#정말-3일만에-끝내신건가요" class="headerlink" title="정말 3일만에 끝내신건가요?"></a>정말 3일만에 끝내신건가요?</h3><p>개발 공부를 하고 있던 만큼, 개발 이외의 시간들은 최대한 단축하고 싶었다. 우리 모두 비슷한 마음이었고, 다행히 이 부분의 스케줄을 잘 조정할 수 있었다. 사실 기획 스탭은 굉장히 중요한 시간이라는건 안다.. 한달이라는 기간이 주어졌기 때문에 선택과 집중을 해야하는 상황에서 우리는 개발기간을 선택했다. 다행히 각 스탭별로 능력을 갖고 있던 팀원들이 모였기 때문에, 이 부분에 대한 커뮤니케이션은 잘 진행되었고, 모두가 물어보는 그 3일만에 개발에 들어갈 수 있었다.<br>(여기서 말한 3일은 아이데이션 기간은 제외한 기간이다.)</p>
+<hr>
+<p>목차</p>
+<ol>
+<li><a href="#ideation">아이데이션</a></li>
+<li><a href="#storyboard">와이어프레임 및 스토리보드</a></li>
+<li><a href="#prototype">프로토타입</a></li>
+<li><a href="#design">디자인</a></li>
+</ol>
+<hr>
+<h2 id="1-아이데이션"><a href="#1-아이데이션" class="headerlink" title=" 1. 아이데이션"></a><a name="ideation"></a> 1. 아이데이션</h2><p>아이디어 논의 회의는 3일 중에.. 끝낸건 아니다ㅎ 그래도 2번의 회의 끝에 확정하게 되었다.<br>9월 7일 팀빌딩을 마치고, 25일 첫 팀프로젝트 오리엔테이션 전까지 2번의 회의를 진행했다.</p>
+<h3 id="1차회의"><a href="#1차회의" class="headerlink" title="1차회의"></a>1차회의</h3><p> 서비스 주제의 경우, <code>요리</code>에 관심이 많던 팀원의 의견에서부터 시작했다. 요리로 키워드가 좁혀지고, 요리로 끊임없는 마인드맵을 그리다가, 첫 회의때는 주제는 결정하지 못했다.<br>그리고 첫 회의 때인만큼, 각자 하고 해보고싶은 테크에 대해서도 같이 얘기해보았는데, 그중 Google Cloud Platform (이하 GCP)의 <strong><a href="https://cloud.google.com/vision/" target="_blank" rel="external"><code>Vision api</code></a></strong>를 사용하자는 의견이 나왔다. 간단하게 얘기하자면 사진을 분석하여 어떤 물체가 있는 사진인지 단어를 여러가지 던져주는 api이다. 사실 이외에도 여러 의견들이 나왔었다. 일랙트론, 얼굴인식 api, 등등.. </p>
+<ul>
+<li>1차회의의 결론은 <code>요리</code>로 좁혀졌다는 것.</li>
+</ul>
+<p><img src="/images/post_img/05/05.png"></p>
+<h3 id="2차회의"><a href="#2차회의" class="headerlink" title="2차회의"></a>2차회의</h3><p> 1차회의가 끝난 후 2차회의 전까지 집에서 이것저것 생각 해보았다. </p>
+<ol>
+<li>요리와 사진을 접목시켜서 나올 수 있는 서비스가 무엇일까.</li>
+<li>요리를 사진 찍어서 올릴 상황은 언제인거지.<br>그러다 문득 네이버 블로그 이웃은 <code>다이어트 컨설팅</code>을 하는 언니가 떠올랐다. 그분이 주로 컨설팅 하는 방식은 컨설팅 받은 사람이 칼로리 계산과 영양소를 잘 조절해서 건강한 식사를 해 줄 수 있도록 도와주는 방식인데, 이때 사용하는 방법은 그 사람의 SNS에 무조건 식단 사진을 올리고 칼로리, 영상소를 기록하게 한다. 컨설턴트는 그 내용을 확인하고 1:1로 상담을 진행한다.</li>
+</ol>
+<p>오케이.</p>
+<p>무조건 사진을 올려야한다는 조건과 음식이라는 조건이 일치했고, 2차 회의 때 제시해보았다. 저번 회의때 요리라는 키워드 때문에 레시피 서비스도 얘기했었는데, 레퍼런스를 찾다가 <code>로푸드 레시피</code>를 제공하는 해외사이트를 공유한적이 있었다. 그때의 레퍼런스와 건강함을 추구하는 몇몇 팀원들 덕분에 ㅎㅎ 식단 다이어리 서비스로 확정.<br>바로 러프한 아키텍처를 구상하고 회의를 마무리했다.</p>
+<hr>
+<h2 id="2-와이어프레임-및-스토리보드"><a href="#2-와이어프레임-및-스토리보드" class="headerlink" title=" 2. 와이어프레임 및 스토리보드"></a><a name="wireframe"></a> 2. 와이어프레임 및 스토리보드</h2><ul>
+<li>팀프로젝트 오리엔테이션 및 3차회의</li>
+<li>4차 회의</li>
+<li>기획안 발표</li>
+</ul>
+<h3 id="팀-프로젝트-오리엔테이션-3차회의"><a href="#팀-프로젝트-오리엔테이션-3차회의" class="headerlink" title="팀 프로젝트 오리엔테이션 3차회의"></a>팀 프로젝트 오리엔테이션 3차회의</h3><p>팀 오리엔테이션때는 여러 재밌는 시간을 가졌는데, 프로젝트 시작 전 생각할 수 있는 위험요소를 공유하고, 어떻게 해결할지에 대해서 공유하는 시간을 가졌다. 지금 보니.. 귀여운 리스크들이네.</p>
+<p><strong>Risk</strong></p>
+<ul>
+<li>각자의 욕심을 내세우는 커뮤니케이션 문제로 팀원 간의 관계 악화</li>
+<li>충분한 테스트를 거치지 못해 최종 결과물이 오작동하거나 오류 발생</li>
+<li>환경적 문제 : 소스 손실, 장비 고장</li>
+</ul>
+<p><strong>Solution</strong></p>
+<ul>
+<li>충분한 대화, 타협되지 않을 경우 각자 해당 부분을 담당</li>
+<li>테스트 기간을 무조건 확보한다.</li>
+<li>백업을 자주 한다.</li>
+</ul>
+<p>간단 오리엔테이션과 전체 진행 일정을 들은 후, 팀 회의 시간을 갖게 되었다. 이날은 저번에 짠 아키텍처를 시각화하고, 구체적으로 어떻게 컨셉을 잡을지와 UI구성, 서비스 네이밍, 등을 정했다. 이번 회의때는 몇몇 이슈들이 있었는데 저번 회의가 끝나고, 각자 머리 속으로 구성한 부분이 조금씩 달랐다는 점이었다. 이 날은 그런 생각의 차이를 조정하는 시간을 가졌다.<br>그리고 <strong>건강한 <code>다</code>이어트를 위한 식단 <code>다</code>이어리 서비스, DA DA</strong> 가 확정 되었다.</p>
+<h3 id="스토리보드-작업-소요기간-1일"><a href="#스토리보드-작업-소요기간-1일" class="headerlink" title=" 스토리보드 작업 (소요기간: 1일)"></a><a name="storyboard"></a> 스토리보드 작업 (소요기간: 1일)</h3><p>와이어프레임 ( PDF version <a href="https://github.com/huusz/Da-Da/blob/master/static/dada-wireframe.pdf" target="_blank" rel="external">+</a> / Web version <a href="https://docs.google.com/presentation/d/e/2PACX-1vRgjDbUHXEy2dDrOFUiSDvOQ2hTvXXMSGbRQw3Bakq3Xh7Jcw5sVTkolmp-XKsWISoXxpxI6EjV6twg/pub?start=false&amp;loop=false&amp;delayms=3000" target="_blank" rel="external">+</a> )</p>
+<ol>
+<li>Information Architecture</li>
+<li>구조도</li>
+<li>화면별 스토리보드</li>
+<li>시나리오</li>
+</ol>
+<hr>
+<h2 id="3-프로토타입"><a href="#3-프로토타입" class="headerlink" title=" 3. 프로토타입 +"></a><a name="prototype"></a> 3. 프로토타입 <a href="https://projects.invisionapp.com/share/2GDPBHAT5" target="_blank" rel="external">+</a></h2><p>프로토타입은 Invision, Sketch를 사용했다. 스토리보드를 참고하여 간단 목업스타일로 시안 작업을 진행했고, 인터렉션은 invision에서 작업, 전체 느낌과 컨셉을 확인하는 시간을 가졌다.</p>
+<p><img src="/images/post_img/05/04.png"></p>
+<hr>
+<h2 id="4-디자인"><a href="#4-디자인" class="headerlink" title=" 4. 디자인  +"></a><a name="design"></a> 4. 디자인  <a href="https://projects.invisionapp.com/share/DCE154SUH#/screens" target="_blank" rel="external">+</a></h2><p>디자인은 간단하게 키워드를 잡고 진행했다. 심플 + 모던 + 산뜻<br>최대한 음식을 먹고싶은 욕구를 억제했으면 좋겠다는 생각이 들어서 붉은 계열의 색상은 피했다. 식욕억제를 목적으로 블루계열 색상으로 key color를 잡았고, 블랙과 키칼리가 비슷한 비율로 사용되었기 때문에 강약조절이 필요했고, 키칼라에 좀더 힘을 주려기 위해 그라데이션을 사용하였다.<br>프로토타입에서 목업작업을 잘 해놓았기 때문에 그래픽 작업에서는 수월하게 진행할 수 있었다. 역시 기초작업이 제일 중요.<br><img src="/images/post_img/05/03.png"></p>
+<p>최종 디자인 사안 이후 zeplin을 사용해서 팀원 전체와 공유하였다.</p>
+<p><img src="/images/post_img/05/01.png"></p>
+<hr>
+<p><a href="">다음편! &gt;</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/11/21/dada_01week/" data-id="cjb6lu8y0002ps92mwhbtfhxm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/21/Typescript_07/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            6/ class(1)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/11/20/Typescript_06/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">5/ interface</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/13/React_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/52/thumb_default.jpg)" alt="1/ React router" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/React/">React</a></p>
+                            <p class="item-title"><a href="/2017/12/13/React_02/" class="title">1/ React router</a></p>
+                            <p class="item-date"><time datetime="2017-12-13T00:21:19.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/10/CS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/50/thumb_default.jpg)" alt="소팅 알고리즘" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/10/CS_02/" class="title">소팅 알고리즘</a></p>
+                            <p class="item-date"><time datetime="2017-12-10T09:23:55.000Z" itemprop="datePublished">2017-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/Refactoring/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/46/thumb_default.jpg)" alt="클린코드를 위한 리팩토링" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/09/Refactoring/" class="title">클린코드를 위한 리팩토링</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T11:12:34.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/09/CS_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/48/thumb_default.jpg)" alt="알고리즘과 시간 복잡도" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2017/12/09/CS_01/" class="title">알고리즘과 시간 복잡도</a></p>
+                            <p class="item-date"><time datetime="2017-12-09T09:23:55.000Z" itemprop="datePublished">2017-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/08/TDD_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/45/thumb_default.jpg)" alt="단위 테스트는 왜 해야할까" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/TDD/">TDD</a></p>
+                            <p class="item-title"><a href="/2017/12/08/TDD_01/" class="title">단위 테스트는 왜 해야할까</a></p>
+                            <p class="item-date"><time datetime="2017-12-08T09:23:55.000Z" itemprop="datePublished">2017-12-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 13.33px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 13.33px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 13.33px;">algorithm</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 16.67px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/persis/" style="font-size: 10px;">persis</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/11/21/dada_01week/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
