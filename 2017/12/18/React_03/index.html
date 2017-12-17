@@ -3,32 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>10/ Decorator | 필오의 개발일지</title>
+    <title>2/ React data 처리 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="typescript" />
+        <meta name="keywords" content="react" />
     
     
-    <meta name="description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
-<meta name="keywords" content="typescript">
+    <meta name="description" content="스터디 공유용 자료입니다.   목차  fetch API 실습   1. fatch apiaxios와 비슷한 promise 기반의 HTTP REQUEST API참고 1234567fetch(url).then(() =&amp;gt; &amp;#123;  // 응답 data를 받고 싶은 곳.&amp;#125;).catch(() =&amp;gt; &amp;#123;  // 에러를 받고 싶은 곳.&amp;#1">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="10&#x2F; Decorator">
-<meta property="og:url" content="http://feel5ny.github.io/2017/11/26/Typescript_11/index.html">
+<meta property="og:title" content="2&#x2F; React data 처리">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/18/React_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
+<meta property="og:description" content="스터디 공유용 자료입니다.   목차  fetch API 실습   1. fatch apiaxios와 비슷한 promise 기반의 HTTP REQUEST API참고 1234567fetch(url).then(() =&amp;gt; &amp;#123;  // 응답 data를 받고 싶은 곳.&amp;#125;).catch(() =&amp;gt; &amp;#123;  // 에러를 받고 싶은 곳.&amp;#1">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/24/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-11-30T16:43:55.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/53/thumb_default.jpg">
+<meta property="og:updated_time" content="2017-12-17T17:09:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="10&#x2F; Decorator">
-<meta name="twitter:description" content="타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.  요약아직 잘 이해가 안간다. &amp;#128565;  Decorator 종류 Decorator 코드 작성 준비   Decorator Class Decorator Class Decorator Basic Class Decorator Adv">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/24/thumb_default.jpg">
+<meta name="twitter:title" content="2&#x2F; React data 처리">
+<meta name="twitter:description" content="스터디 공유용 자료입니다.   목차  fetch API 실습   1. fatch apiaxios와 비슷한 promise 기반의 HTTP REQUEST API참고 1234567fetch(url).then(() =&amp;gt; &amp;#123;  // 응답 data를 받고 싶은 곳.&amp;#125;).catch(() =&amp;gt; &amp;#123;  // 에러를 받고 싶은 곳.&amp;#1">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/53/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/26/Typescript_11/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/18/React_03/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,18 +156,18 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/React/">React</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Typescript_11" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-React_03" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        10/ Decorator
+        2/ React data 처리
         </h1>
     
 
@@ -177,15 +177,15 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/11/26/Typescript_11/" class="article-date">
-            <time datetime="2017-11-26T12:11:09.000Z" itemprop="datePublished">2017-11-26</time>
+        <a href="/2017/12/18/React_03/" class="article-date">
+            <time datetime="2017-12-17T16:21:19.000Z" itemprop="datePublished">2017-12-18</time>
         </a>
     </div>
 
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/typescript/">typescript</a>
+        <a class="tag-link" href="/tags/react/">react</a>
     </div>
 
             </div>
@@ -193,60 +193,35 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p>타입스크립트 정리 글은 이웅재님의 <a href="https://www.youtube.com/user/2woongjae/videos" target="_blank" rel="external">강의</a>와 <a href="http://slides.com/woongjae/deck-8-15" target="_blank" rel="external">강의록</a>을 참고하여 작성하였습니다. (짱짱)<br><strong>오류</strong>가 있다면 언제든지 댓글 부탁드립니다.</p>
+<p>스터디 공유용 자료입니다.</p>
 </blockquote>
-<p><strong>요약</strong><br>아직 잘 이해가 안간다. &#128565;</p>
+<hr>
+<p>목차</p>
 <ol>
-<li><a href="#decorator">Decorator 종류</a><ol>
-<li><a href="#ready">Decorator 코드 작성 준비</a></li>
-</ol>
-</li>
-<li>Decorator<ol>
-<li>Class Decorator<ol>
-<li><a href="#basic">Class Decorator Basic</a></li>
-<li><a href="#advanced">Class Decorator Advanced</a></li>
-</ol>
-</li>
-<li><a href="#method">Method Decorator</a></li>
-<li><a href="#property">Property Decorator</a></li>
-<li><a href="#prameter">Prameter Decorator</a></li>
-</ol>
-</li>
+<li>fetch API</li>
+<li>실습</li>
 </ol>
 <hr>
-<h3 id="1-Decorator-종류"><a href="#1-Decorator-종류" class="headerlink" title=" 1. Decorator 종류"></a><a name="decorator"></a> 1. Decorator 종류</h3><ul>
-<li>Class Decorator</li>
-<li>Method Decorator</li>
-<li>Property Decorator</li>
-<li>Parameter Decorator<blockquote>
-<p>각자 Decorator의 시그니처가 다르다.</p>
-</blockquote>
-</li>
+<h2 id="1-fatch-api"><a href="#1-fatch-api" class="headerlink" title="1. fatch api"></a>1. fatch api</h2><p>axios와 비슷한 promise 기반의 HTTP REQUEST API<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank" rel="external">참고</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetch(url)</span><br><span class="line">.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 응답 data를 받고 싶은 곳.</span></span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 에러를 받고 싶은 곳.</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="https://medium.com/little-big-programming/%EB%82%B4%EA%B0%80-fetch-api%EB%A5%BC-%EC%93%B0%EC%A7%80-%EB%AA%BB%ED%96%88%EB%8D%98-%EC%9D%B4%EC%9C%A0-3c23f0ec6b82" target="_blank" rel="external">fatch api의 단점을 경험한 포스팅</a></p>
+<hr>
+<h2 id="2-실습"><a href="#2-실습" class="headerlink" title="2. 실습"></a>2. 실습</h2><p>api주소 <a href="https://api.github.com/users" target="_blank" rel="external">https://api.github.com/users</a></p>
+<ol>
+<li>시맨틱 셋팅</li>
+<li>Lifecycle Hook 중 한 곳에 get method 셋팅</li>
+<li>받은 데이터 저장</li>
+<li>로딩처리<ul>
+<li><a href="https://codepen.io/" target="_blank" rel="external">codepen</a></li>
 </ul>
-<p>Decorator?</p>
+</li>
+<li>view</li>
+</ol>
+<hr>
+<h2 id="3-Lodash"><a href="#3-Lodash" class="headerlink" title="3. Lodash"></a>3. Lodash</h2><p>A modern JavaScript utility library delivering modularity, performance &amp; extras.</p>
 <ul>
-<li>함수 표현식에 해당한다.</li>
-<li><code>@</code>와 같이 써서 표현식 뒤에 오는 대상에 더욱 기능적으로 추가하거나 하는 일들을 할 수 있다.</li>
-<li>함수를 선언한 뒤 <code>@</code>키워드를 이용해 선언된 함수를 Decorator로 사용할 수 있다. </li>
+<li>주로 서버에서 오는 데이터 구조가 렌더해야할 구조와 다를 때 사용합니다.<br><a href="https://lodash.com/docs/4.17.4" target="_blank" rel="external">https://lodash.com/docs/4.17.4</a></li>
 </ul>
-<hr>
-<h4 id="1-1-Decorator-코드-작성-준비"><a href="#1-1-Decorator-코드-작성-준비" class="headerlink" title=" 1-1. Decorator 코드 작성 준비"></a><a name="ready"></a> 1-1. Decorator 코드 작성 준비</h4><p><code>yarn add typescript -D</code>여기서 <code>D</code>는 <code>dev</code>와 같은 명령어다.</p>
-<hr>
-<h3 id="2-Decorator"><a href="#2-Decorator" class="headerlink" title="2. Decorator"></a>2. Decorator</h3><h3 id="2-1-Class-Decorator"><a href="#2-1-Class-Decorator" class="headerlink" title="2-1. Class Decorator"></a>2-1. Class Decorator</h3><h4 id="2-1-1-Class-Decorator-Basic"><a href="#2-1-1-Class-Decorator-Basic" class="headerlink" title=" 2-1-1. Class Decorator Basic"></a><a name="basic"></a> 2-1-1. Class Decorator Basic</h4><p>여기서 helloFactory 는 팩토리 패턴<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">constructorFn: <span class="built_in">Function</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(constructorFn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloFactory</span>(<span class="params">show: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (show) &#123;</span><br><span class="line">        <span class="keyword">return</span> hello;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @hello</span></span><br><span class="line"><span class="meta">@helloFactory</span>(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h4 id="2-1-2-Class-Decorator-Advanced"><a href="#2-1-2-Class-Decorator-Advanced" class="headerlink" title=" 2-1-2. Class Decorator Advanced"></a><a name="advanced"></a> 2-1-2. Class Decorator Advanced</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHello</span>(<span class="params">constructorFn: <span class="built_in">Function</span></span>) </span>&#123;</span><br><span class="line">    constructorFn.prototype.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@addHello</span></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">(&lt;<span class="built_in">any</span>&gt;person).hello();</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2-2-Method-Decorator"><a href="#2-2-Method-Decorator" class="headerlink" title=" 2-2. Method Decorator"></a><a name="method"></a> 2-2. Method Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">editable</span>(<span class="params">canBeEdit: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target: <span class="built_in">any</span>, propName: <span class="built_in">string</span>, description: PropertyDescriptor</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(canBeEdit);</span><br><span class="line">        <span class="built_in">console</span>.log(target);</span><br><span class="line">        <span class="built_in">console</span>.log(propName);</span><br><span class="line">        <span class="built_in">console</span>.log(description);</span><br><span class="line">        description.writable = canBeEdit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@editable</span>(<span class="literal">true</span>)</span><br><span class="line">    hello() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">person.hello();</span><br><span class="line">person.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">&#125;</span><br><span class="line">person.hello();</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2-3-Property-Decorator"><a href="#2-3-Property-Decorator" class="headerlink" title=" 2-3. Property Decorator"></a><a name="property"></a> 2-3. Property Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writable</span>(<span class="params">canBeWrite: <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target: <span class="built_in">any</span>, propName: <span class="built_in">string</span></span>): <span class="title">any</span> </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(canBeWrite);</span><br><span class="line">        <span class="built_in">console</span>.log(target);</span><br><span class="line">        <span class="built_in">console</span>.log(propName);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            writable: canBeWrite</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="meta">@writable</span>(<span class="literal">false</span>)</span><br><span class="line">    name: <span class="built_in">string</span> = <span class="string">'Mark'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'new Person()'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2-4-Prameter-Decorator"><a href="#2-4-Prameter-Decorator" class="headerlink" title=" 2-4. Prameter Decorator"></a><a name="prameter"></a> 2-4. Prameter Decorator</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printInfo</span>(<span class="params">target: <span class="built_in">any</span>, methodName: <span class="built_in">string</span>, paramIndex: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(target);</span><br><span class="line">    <span class="built_in">console</span>.log(methodName);</span><br><span class="line">    <span class="built_in">console</span>.log(paramIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Person &#123;</span><br><span class="line">    <span class="keyword">private</span> _name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">private</span> _age: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name: <span class="built_in">string</span>, @printInfo age: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = name;</span><br><span class="line">        <span class="keyword">this</span>._age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    hello(<span class="meta">@printInfo</span> message: <span class="built_in">string</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Person &#123; hello: [Function] &#125;</span></span><br><span class="line"><span class="comment">hello</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">[Function: Person]</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">1</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://poiemaweb.com/es6-class" target="_blank" rel="external">http://poiemaweb.com/es6-class</a></li>
-<li><a href="https://javarouka.github.io/blog/2016/09/30/decorator-exploring/" target="_blank" rel="external">https://javarouka.github.io/blog/2016/09/30/decorator-exploring/</a></li>
-<li><a href="http://blog-kr.zoyi.co/channel-frontend-decorator/" target="_blank" rel="external">http://blog-kr.zoyi.co/channel-frontend-decorator/</a></li>
-</ol>
 
         </div>
         <footer class="article-footer">
@@ -254,7 +229,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/26/Typescript_11/" data-id="cjbb126mc0020ci2mf86xqwjj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/18/React_03/" data-id="cjbb126lo000gci2mqe8sgr6q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -372,20 +347,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/11/27/Typescript_12/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            11/ Type Inference
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2017/11/25/Typescript_10/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/13/React_02/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">9/ itertor</p>
+        <p class="article-nav-title">1/ React router</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -582,7 +547,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/11/26/Typescript_11/';
+    var disqus_url = 'http://feel5ny.github.io/2017/12/18/React_03/';
     
     (function() {
     var dsq = document.createElement('script');
