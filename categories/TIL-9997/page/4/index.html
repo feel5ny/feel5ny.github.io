@@ -3,32 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>3/ 실행 컨텍스트와 스코프 | 필오의 개발일지</title>
+    <title>Category: TIL &amp;#9997; | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="javascript" />
     
-    
-    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
-<meta name="keywords" content="javascript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="3&#x2F; 실행 컨텍스트와 스코프">
-<meta property="og:url" content="http://feel5ny.github.io/2017/12/01/JS_03/index.html">
+    <meta name="description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="필오의 개발일지">
+<meta property="og:url" content="http://feel5ny.github.io/categories/TIL-9997/page/4/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
+<meta property="og:description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-18T10:33:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3&#x2F; 실행 컨텍스트와 스코프">
-<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
+<meta name="twitter:title" content="필오의 개발일지">
+<meta name="twitter:description" content="프론트엔드 공부를 하며 기록하는 공간입니다.">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/01/JS_03/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/categories/TIL-9997/page/4/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -156,219 +150,79 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    <i class="icon fa fa-folder-open"></i>Category: <em class="page-title-link">TIL &#9997;</em>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-JS_03" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            
+
+    
+    
         
-            <header class="article-header">
-                
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2017/11/08/Typescript_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/11/thumb_default.jpg)" alt="0/ Typescript?" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/08/Typescript_01/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
+            </div>
+            <div class="date"><time datetime="2017-11-08T09:23:55.000Z" itemprop="datePublished">2017-11-08</time></div>
+        </div>
+        
     
         <h1 class="article-title" itemprop="name">
-        3/ 실행 컨텍스트와 스코프
+        <a href="/2017/11/08/Typescript_01/">0/ Typescript?</a>
         </h1>
     
 
-            </header>
-        
-        
-            <div class="article-meta">
-                
-    <div class="article-date">
-        <a href="/2017/12/01/JS_03/" class="article-date">
-            <time datetime="2017-12-01T01:13:55.000Z" itemprop="datePublished">2017-12-01</time>
-        </a>
-    </div>
-
-                
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/javascript/">javascript</a>
-    </div>
-
-            </div>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            <blockquote>
-<p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=" target="_blank" rel="external">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
-</blockquote>
-<p>목차 </p>
-<ol>
-<li><a href="#Execution_context">실행컨텍스트란?</a></li>
-<li><a href="#Execution_object">실행컨텍스트의 3가지 객체</a></li>
-<li><a href="#Scope_chain">스코프 체인</a></li>
-<li><a href="#this">this value</a></li>
-</ol>
-<hr>
-<h2 id="1-실행-컨텍스트"><a href="#1-실행-컨텍스트" class="headerlink" title=" 1. 실행 컨텍스트"></a><a name="Execution_context"></a> 1. 실행 컨텍스트</h2><p>실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념이라고 정의한다. 즉, 실행 컨텍스트는 <code>실행 가능한 코드가 실행되는 환경</code>이라고 말할 수 있다.<br>실행 가능한 코드란</p>
-<ul>
-<li>전역코드 : 전역 영역에 존재하는 코드</li>
-<li>함수코드 : 함수 내에 존재하는 코드</li>
-<li>Eval코드 : Eval 함수로 실행되는 코드</li>
-</ul>
-<p>일반적으로는 전역코드와 함수코드. </p>
-<p>자바스크립트 엔진은 코드를 실행하기 위해 실행에 필요한 여러가지 정보를 알고 있어야 한다.</p>
-<ul>
-<li>변수: 전역변수, 지역변수, 매개변수, 객체의 프로퍼티</li>
-<li>함수 선언<ul>
-<li>함수 표현식은 호이스팅이 안되는 이유. (함수 표현식은 변수에 할당되는 방식이기 때문에)</li>
-</ul>
-</li>
-<li>변수의 유효범위 (Scope)</li>
-<li>this</li>
-</ul>
-<p>자바스크립트 엔진은 실행 컨텍스트를 물리적 객체의 형태로 관리한다.</p>
-<hr>
-<h2 id="2-실행-컨텍스트의-3가지-객체"><a href="#2-실행-컨텍스트의-3가지-객체" class="headerlink" title=" 2. 실행 컨텍스트의 3가지 객체"></a><a name="Execution_object"></a> 2. 실행 컨텍스트의 3가지 객체</h2><p>객체의 형태를 가지며 아래의 3가지 프로퍼티를 소유한다.</p>
-<ul>
-<li>Variable object</li>
-<li>Scope chain</li>
-<li>thisValue</li>
-</ul>
-<h3 id="2-1-Variable-object-VO-변수객체"><a href="#2-1-Variable-object-VO-변수객체" class="headerlink" title="2-1. Variable object (VO 변수객체)"></a>2-1. Variable object (VO 변수객체)</h3><p>변수나 함수의 실행 컨텍스트는 <strong>다른 데이터에 접근할 수 있는지, 어떻게 행동하는지를 규정합니다.</strong> 각 실행 컨텍스트에는 변수객체(variable object:VO)가 연결되어 있으며, 해당 컨텍스트에서 정의된 모든 <code>변수</code>와 <code>함수</code>는 이 객체에 존재한다. 코드로는 접근할 수 없다.</p>
-<ul>
-<li>변수</li>
-<li>parameter arguments<ul>
-<li>parameter, 매개변수 : 함수 원형 작성시 사용되는 변수를 인자 (이름보다는 타입이 중요)</li>
-<li>argument, 실행인자 : 코딩 중 함수 호출시 사용되는 변수 또는 실제 값을 인수</li>
-</ul>
-</li>
-<li>함수 선언 (함수 표현식은 제외)</li>
-</ul>
-<p>Variable Object는 실행 컨텍스트의 프로퍼티이기 때문에 값을 갖는데, 이 값은 다른 객체를 가리킨다.<br>전역 컨텍스트와 함수 컨텍스트가 가리키는 객체는 다르다. 함수에만 파라미터가 존재한다.</p>
-<h4 id="전역-컨텍스트인-경우"><a href="#전역-컨텍스트인-경우" class="headerlink" title="전역 컨텍스트인 경우"></a><code>전역 컨텍스트인 경우</code></h4><p>Variable Object는 전역 변수, 전역 함수 등을 포함하는 전역 객체(Global Object/GO)를 가리킨다. 전역변수와 전역함수는 전역 객체의 프로퍼티이다.</p>
-<p><img src="/images/post_img/36/ec-vo-global.png"></p>
-<p>전역 컨텍스트란</p>
-<ul>
-<li>가장 바깥쪽에 존재하는 실행 컨텍스트이다.</li>
-<li><p>ECMAScript를 구현한 환경에 따라 이 컨텍스트를 부르는 이름이 다르다.</p>
-<ul>
-<li>웹 ()<ul>
-<li>전역컨텍스트 : <code>window</code></li>
-<li>전역변수와 전역함수는 모두 window의 프로퍼티 및 메서드로 생성된다.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>전역컨텍스트는 애플리케이션이 종료될 때, 웹페이지를 나가거나 브라우저를 닫을 때까지 유지된다.</p>
-</li>
-</ul>
-<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO/활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br><img src="/images/post_img/36/ec-vo-foo.png"></p>
-<h4 id="실행컨텍스트-스택"><a href="#실행컨텍스트-스택" class="headerlink" title="실행컨텍스트 스택"></a><code>실행컨텍스트 스택</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="string">'yyy'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="string">'zzz'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(x + y + z);</span><br><span class="line">  &#125;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
-<p><img src="/images/post_img/36/ec_1.png"></p>
-<ol>
-<li>컨트롤이 실행 가능한 코드로 이동하면 논리적 스택 구조를 가지는 새로운 실행 컨텍스트 스택이 생성된다. 스택은 LIFO(Last In First Out, 후입 선출)의 구조를 가지는 나열 구조이다.</li>
-<li>전역 코드(Global code)로 컨트롤이 진입하면 전역 실행 컨텍스트가 생성되고 실행 컨텍스트 스택에 쌓인다. 전역 실행 컨텍스트는 애플리케이션이 종료될 때(웹 페이지에서 나가거나 브라우저를 닫을 때)까지 유지된다.</li>
-<li>함수를 호출하면 해당 함수의 실행 컨택스트가 생성되며 직전에 실행된 코드블럭의 실행 컨텍스트 위에 쌓인다.</li>
-<li>함수 실행이 끝나면 해당 함수의 실행 컨텍스트를 파기하고 직전의 실행 컨텍스트에 컨트롤을 반환한다.<br>ECMAScript 프로그램은 모두 이런 식으로 실행된다.</li>
-</ol>
-<hr>
-<h2 id="3-스코프-체인-SC"><a href="#3-스코프-체인-SC" class="headerlink" title=" 3. 스코프 체인 SC"></a><a name="Scope_chain"></a> 3. 스코프 체인 SC</h2><p>스코프 체인은 일종의 리스트로서 중첩된 함수의 <strong>스코프의 레퍼런스를 차례로 저장하고 있는 개념</strong>이다.<br>즉, 현재 실행컨텍스트의 활성객체(AO)를 선두로하여 순차적으로 상위 컨텍스트의 AO를 가리키며 마지막 리스트는 전역 객체를 가리킨다.</p>
-<p><strong>스코프 체인의 목적은 실행 컨텍스트가 접근할 수 있는 모든 변수와 함수에 <code>순서</code>를 정의하는 것.</strong></p>
-<ul>
-<li>함수가 중첩 상태일 때 하위함수 내에서 상위함수의 유효범위까지 참조할 수 있는데 이것는 스코프 체인을 검색하였기 때문이다. </li>
-<li>함수가 중첩되어 있으면 중첩될 때마다 부모 함수의 Scope가 자식 함수의 스코프 체인에 포함된다. </li>
-<li>함수 실행중에 변수를 만나면 그 변수를 우선 현재 Scope, 즉 Activation Object에서 검색해보고, </li>
-<li>만약 검색에 실패하면 스코프 체인에 담겨진 순서대로 그 검색을 이어가게 되는 것이다. </li>
-</ul>
-<p><strong>이것이 스코프 체인이라고 불리는 이유이다.</strong></p>
-<p>이와 같이 순차적으로 스코프 체인에서 변수를 검색하는데 결국 검색에 실패하면 정의되지 않은 변수에 접근하는 것으로 판단하여 Reference 에러를 발생시킨다.<br>스코프 체인은 <code>[[scope]]</code> 프로퍼티로 참조할 수 있다.</p>
-<hr>
-<h2 id="4-this-value"><a href="#4-this-value" class="headerlink" title=" 4. this value"></a><a name="this"></a> 4. this value</h2><p>this 프로퍼티에는 this 값이 할당된다. this에 할당되는 값은 함수 호출 패턴에 의해 결정되는데, 이는 Function 글에서 자세히 다루겠다.</p>
-<hr>
-<h2 id="5-실행-컨텍스트의-생성과정"><a href="#5-실행-컨텍스트의-생성과정" class="headerlink" title=" 5. 실행 컨텍스트의 생성과정"></a><a name="this"></a> 5. 실행 컨텍스트의 생성과정</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;<span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function foo () &#123;</span></span><br><span class="line"><span class="string">  var y = 'yyy';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  function bar () &#123;</span></span><br><span class="line"><span class="string">    var z = 'zzz';</span></span><br><span class="line"><span class="string">    console.log(x + y + z);</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  bar();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">foo();</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>전역 코드에 진입<br>컨트롤이 실행 컨텍스트에 진입하기 이전에 유일한 전역 객체(Global Object)가 생성된다. 초기 상태의 전역 객체에는 빌트인 객체(Math, String, Array 등)와 BOM, DOM이 설정되어 있다.</li>
-</ol>
-<hr>
-<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://poiemaweb.com/js-execution-context" target="_blank" rel="external">http://poiemaweb.com/js-execution-context</a></li>
-<li><a href="http://nerissa.tistory.com/entry/Parameter%EC%99%80-Argument%EC%9D%98-%EC%B0%A8%EC%9D%B4" target="_blank" rel="external">http://nerissa.tistory.com/entry/Parameter%EC%99%80-Argument%EC%9D%98-%EC%B0%A8%EC%9D%B4</a></li>
-<li><a href="http://poiemaweb.com/js-function" target="_blank" rel="external">http://poiemaweb.com/js-function</a></li>
-</ol>
-
-        </div>
-        <footer class="article-footer">
-            
-
-
-
-    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjbm7hn5l000a1o2mu6a5nxoc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
+        <p class="article-excerpt">
+            자바스크립트 말고 타입스크립트 ?최근 프로젝트를 진행하면서나도 모르는 사이에 타입이 자주 바뀌는 자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그 순간에 내 머릿속에서만 생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발생하면, 삽질 후에 원인이 타입 때문이라는 것을 알게 되고.. 이는 생각보다 빈번하게 일어났다
+        </p>
     </div>
 </article>
-
-    <section id="comments">
     
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
+        </div>
     
-    </section>
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 4 of 4</span>
+        <a class="extend prev" rel="prev" href="/categories/TIL-9997/page/3/">&laquo;</a><a class="page-number" href="/categories/TIL-9997/">1</a><a class="page-number" href="/categories/TIL-9997/page/2/">2</a><a class="page-number" href="/categories/TIL-9997/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+
 
 
                         </div>
@@ -410,29 +264,6 @@ ga('send', 'pageview');
             </li>
         </ul>
     </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2017/12/02/JS_04_1/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            4/ 참조타입_Function 타입 (1)
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
-    
-    
-        <a href="/2017/11/30/JS_02/" id="article-nav-older" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">2/ 메모리 관리와 가비지 콜렉션</p>
-        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
-        </a>
-    
-</nav>
-
     
     <div class="widgets-container">
         
@@ -624,13 +455,11 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/12/01/JS_03/';
-    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
