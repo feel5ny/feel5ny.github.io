@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>8/ DOM(1) - 노드의 계층 구조(1) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.넘나 많은 프로퍼티와 메서드들 @_@    목차  Node 타입 nodeName, nodeValue 요소의 경우 nodeName은 태그명, nodeValue는 null   노드 사이의 관계 ChildNodes / ParentNodes /">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(1)">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/30/JS_08_1/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.넘나 많은 프로퍼티와 메서드들 @_@    목차  Node 타입 nodeName, nodeValue 요소의 경우 nodeName은 태그명, nodeValue는 null   노드 사이의 관계 ChildNodes / ParentNodes /">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/58/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-01-01T12:31:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(1)">
+<meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.넘나 많은 프로퍼티와 메서드들 @_@    목차  Node 타입 nodeName, nodeValue 요소의 경우 nodeName은 태그명, nodeValue는 null   노드 사이의 관계 ChildNodes / ParentNodes /">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/58/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/30/JS_08_1/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발일지
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-JS_08_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        8/ DOM(1) - 노드의 계층 구조(1)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/30/JS_08_1/" class="article-date">
+            <time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.<br>넘나 많은 프로퍼티와 메서드들 @_@</p>
+</blockquote>
+<hr>
+<hr>
+<p><strong>목차</strong></p>
+<ol>
+<li><a href="#node">Node 타입</a><ul>
+<li>nodeName, nodeValue<ul>
+<li>요소의 경우 nodeName은 태그명, nodeValue는 null</li>
+</ul>
+</li>
+<li>노드 사이의 관계<ul>
+<li>ChildNodes / ParentNodes / firstChild / lastChild / hasChildNodes(), ownerDocument 프로퍼티</li>
+</ul>
+</li>
+<li>노드 조작<ul>
+<li>appendChild() / insertBefore() / replaceChild() / removeChild()</li>
+</ul>
+</li>
+<li>기타 메서드<ul>
+<li>cloneNode() / nomalize()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#document">Document 타입</a><ul>
+<li>Document 자식 노드<ul>
+<li>documentElement(=<code>&lt;html&gt;</code>)</li>
+</ul>
+</li>
+<li>문서 정보<ul>
+<li>document.title / document.URL / document.domain / document.referrer</li>
+</ul>
+</li>
+<li>요소 위치<ul>
+<li>getElementById() / getElementByTagName() (namedItem) / getElementByName()</li>
+</ul>
+</li>
+<li>특별한 컬렉션<ul>
+<li>document.anchors / document.applets / document.forms / document.images / document.links</li>
+</ul>
+</li>
+<li>DOM 준수 탐지<ul>
+<li>hasFeature()</li>
+</ul>
+</li>
+<li>문서에 쓰기<ul>
+<li>write() / writeIn() / open() / close()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#element">Element 타입</a><ul>
+<li>HTML 요소<ul>
+<li>id / title / lang / dir / className</li>
+</ul>
+</li>
+<li>속성 얻기<ul>
+<li>getAttribute()</li>
+</ul>
+</li>
+<li>속성 설정<ul>
+<li>setAttribute()</li>
+</ul>
+</li>
+<li>속성 제거<ul>
+<li>removeAttribute()</li>
+</ul>
+</li>
+<li>attributes 프로퍼티<ul>
+<li>getNamedItem() / removeNamedItem(name) / setNamedItem(), item()</li>
+</ul>
+</li>
+<li>요소 생성<ul>
+<li>createElement()</li>
+</ul>
+</li>
+<li>요소의 자식<br>—- 2편 &#128071;</li>
+</ul>
+</li>
+<li>Text 타입</li>
+<li>Comment 타입</li>
+<li>CDATASection 타입</li>
+<li>DocumentType 타입</li>
+<li>DocumentFragment 타입</li>
+<li>Attr 타입</li>
+</ol>
+<hr>
+<hr>
+<h1 id="노드의-계층-구조"><a href="#노드의-계층-구조" class="headerlink" title="노드의 계층 구조"></a>노드의 계층 구조</h1><ul>
+<li>문서 객체 모델 DOM은 HTML과 XML 문서에 대한 애플리케이션 프로그래밍 인터페이스이다. (api)</li>
+<li>DOM은 문서를 노드의 계층 구조 트리로 표현한다.</li>
+<li>개발자는 이를 통해 페이지 각 부분을 추가, 제거, 수정한다.</li>
+</ul>
+<hr>
+<ul>
+<li>노드 타입에는 여러 가지가 있으며 각 타입은 문서에서 서로 다른 정보나 마크업을 표현한다.</li>
+<li>노드 타입은 서로 다른 특징, 데이터, 메서드를 가지며 각 노드는 다른 노드와 관계가 있을 수 있다.</li>
+<li>특정 노드에 뿌리를 둔 트리 구조로 표현된다.</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Sample Pate<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/post_img/58/01.jpg"></p>
+<ul>
+<li>여기서 문서(Document) 노드가 루트이다.</li>
+<li>문서 요소 : 문서 노드의 자식. 여기서는 <code>&lt;html&gt;</code><ul>
+<li>문서 하나에 문서 요소 하나만 있을 수 있다.</li>
+<li>HTML페이지에서 문서요소는 항상 <code>&lt;html&gt;</code> 요소이다.</li>
+</ul>
+</li>
+<li>각 마크업은 트리에서 노드로 표현된다.</li>
+<li>총 12가지 노드 타입이 있으며 모든 노드틑 <code>기반 타입</code>(base type)을 상속한다.</li>
+</ul>
+<hr>
+<hr>
+<h2 id="1-Node-타입"><a href="#1-Node-타입" class="headerlink" title=" 1. Node 타입"></a><a name="node"></a> <span style="color:#1a2980">1. Node 타입<span></span></span></h2><ul>
+<li>DOM 레벨 1에는 Node라는 인터페이스가 있다.</li>
+<li>DOM에 존재하는 <code>노드 타입</code>은 모두 이 인터페이스를 구현한다.</li>
+<li>모든 브라우저에서는 Node 타입에 접근할 수 있다.</li>
+<li>자바스크립트 노드 타입은 모두 Node를 상속하므로 모든 노드 타입에서 같은 기본 프로퍼티와 메서드를 고융한다.</li>
+</ul>
+<p>모든 노드에는 타입을 나타내는 nodeType 프로퍼티가 있다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Node.ELEMENT_NODE (<span class="number">1</span>)</span><br><span class="line">Node.ATTRIBUTE_NODE (<span class="number">2</span>)</span><br><span class="line">Node.TEXT_NODE (<span class="number">3</span>)</span><br><span class="line">Node.CDATA_SECTION_NODE (<span class="number">4</span>)</span><br><span class="line">Node.ENTITY_REFERENCE_NODE (<span class="number">5</span>)</span><br><span class="line">Node.ENTITY_NODE (<span class="number">6</span>)</span><br><span class="line">Node.PROCESSING_INSTRUCTION_NODE (<span class="number">7</span>)</span><br><span class="line">Node.COMMENT_NODE (<span class="number">8</span>)</span><br><span class="line">Node.DOCUMENT_NODE (<span class="number">9</span>)</span><br><span class="line">Node.DOCUMENT_TYPE_NODE (<span class="number">10</span>)</span><br><span class="line">Node.DOCUMENT_FRAGMENT_NODE (<span class="number">11</span>)</span><br><span class="line">Node.NOTATION_NODE (<span class="number">12</span>)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (someNode.nodeType == Node.ELEMENT_NODE)&#123;</span><br><span class="line">  alert(<span class="string">"Node is an element."</span>)</span><br><span class="line">&#125; <span class="comment">// IE에서는 오류</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (someNode.nodeType == <span class="number">1</span>)&#123;</span><br><span class="line">  alert(<span class="string">"Node is an element."</span>)</span><br><span class="line">&#125; <span class="comment">// 모든 브라우저에서 동작</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="1-1-nodeName-nodeValue"><a href="#1-1-nodeName-nodeValue" class="headerlink" title="1-1. nodeName, nodeValue"></a><span style="color:#26d0ce">1-1. nodeName, nodeValue</span></h3><ul>
+<li>nodeName과 nodeValue는 해당 노드의 정보를 제공한다.</li>
+<li>요소(element)의 nodeName은 요소의 태그명과 일치하고, nodeValue는 <code>null</code>이다.</li>
+<li>텍스트 노드일 경우 nodeValue는 문자열이다.</li>
+</ul>
+<hr>
+<h3 id="1-2-노드-사이의-관계"><a href="#1-2-노드-사이의-관계" class="headerlink" title="1-2. 노드 사이의 관계"></a><span style="color:#26d0ce">1-2. 노드 사이의 관계</span></h3><h4 id="1-2-1-ChildNodes-프로퍼티"><a href="#1-2-1-ChildNodes-프로퍼티" class="headerlink" title="1-2-1. ChildNodes 프로퍼티"></a>1-2-1. ChildNodes 프로퍼티</h4><p><code>NodeList</code>가 저장된다.</p>
+<ul>
+<li>유사배열 객체<br><img src="/images/post_img/58/02.png"></li>
+<li>노드를 순서 있는 목록으로 저장하여 위치 기반으로 접근 가능.</li>
+<li><code>length</code> 프로퍼티 : <strong>호출 당시</strong> 노드리스트에 담긴 노드 숫자임을 기억하자.</li>
+<li>Array의 인스턴스는 아니다.</li>
+<li><strong>DOM 구조의 쿼리 결과</strong></li>
+<li>계속 바뀌므로 살아있는 객체라고도 부른다.</li>
+<li><p>노드 리스트에 저장된 노드를 접근하는 방법 (어느쪽을 더 권잔하진 않는다.)</p>
+<ul>
+<li>대괄호 표기법</li>
+<li>item() 메서드<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> firstChild = someNode.childNodes[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">const</span> secondChild = someNode.childNodes.item(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> count = someNode.childNodes.length;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="/images/post_img/58/03.png"></p>
+</li>
+</ul>
+<h4 id="1-2-2-parentNode-프로퍼티"><a href="#1-2-2-parentNode-프로퍼티" class="headerlink" title="1-2-2. parentNode 프로퍼티"></a>1-2-2. parentNode 프로퍼티</h4><ul>
+<li>childNodes 목록에 포함된 노드는 모두 부모가 같으므로 각각의 parentNode 프로퍼티는 같은 노드를 가리킨다.</li>
+<li>childeNOdes 목록의 각 노드들은 형제관계이며 <code>previousSibling</code> 및 <code>nextSibling</code> 프로퍼티로 이동할 수 있다.</li>
+<li>자식 노드가 하나 뿐이라면 해당 노드의 nextSibling과 previousSibling은 모두 null이다.<br><img src="/images/post_img/58/04.png"></li>
+</ul>
+<h4 id="1-2-3-firstChild-프로퍼티"><a href="#1-2-3-firstChild-프로퍼티" class="headerlink" title="1-2-3. firstChild 프로퍼티"></a>1-2-3. firstChild 프로퍼티</h4><p>childNodes 목록에서 첫번째 노드를 가리킨다.<br>someNode.firstChild = someNode.childNodes[0]</p>
+<h4 id="1-2-4-lastChild-프로퍼티"><a href="#1-2-4-lastChild-프로퍼티" class="headerlink" title="1-2-4. lastChild 프로퍼티"></a>1-2-4. lastChild 프로퍼티</h4><p>childNodes 목록에서 마지막 노드를 가리킨다.<br>someNode.lastChild = someNode.childNodes[someNode.childNodes.length-1]</p>
+<p><img src="/images/post_img/58/05.jpg"></p>
+<h4 id="1-2-5-hasChildNodes-메서드"><a href="#1-2-5-hasChildNodes-메서드" class="headerlink" title="1-2-5. hasChildNodes() 메서드"></a>1-2-5. hasChildNodes() 메서드</h4><p>노드에 자식 노드가 있으면 true를 반환.<br>length로 자식 노드 확인하는 것보다 효과적.</p>
+<h4 id="1-2-6-ownerDocument-프로퍼티"><a href="#1-2-6-ownerDocument-프로퍼티" class="headerlink" title="1-2-6. ownerDocument 프로퍼티"></a>1-2-6. ownerDocument 프로퍼티</h4><p>전체 문서를 표현하는 문서 노드에 대한 포인터<br>노드 계층 구조를 따라 위로 거슬러 올라갈 필요 없이 문서 노드에 빠르게 접근 가능하다.</p>
+<hr>
+<h3 id="1-3-노드-조작"><a href="#1-3-노드-조작" class="headerlink" title="1-3. 노드 조작"></a><span style="color:#26d0ce">1-3. 노드 조작</span></h3><ul>
+<li>노드 사이의 관계 포인터는 모두 읽기 전용</li>
+<li>아래 4가지 메서드는 <strong>자식</strong>에서만 동작하므로 <strong>부모 노드를 정확히 알아야한다.</strong></li>
+</ul>
+<h4 id="1-3-1-appendChild"><a href="#1-3-1-appendChild" class="headerlink" title="1-3-1. appendChild()"></a>1-3-1. <code>appendChild()</code></h4><ul>
+<li>childNodes 목록 마지막에 노드를 추가한다. </li>
+<li>새로 추가한 노드, 부모 노드, childNodes 목록에 포함된 이전의 마지막 자식 노드에서 모든 관계 포인터가 업데이트 된다.</li>
+<li>이미 문서에 존재하고 있는 노드를 추가한다면, 해당 노드는 이전 위치에서 추가된 위치로 옮겨진다.</li>
+</ul>
+<h4 id="1-3-2-insertBefore-삽입할-노드-기준-노드"><a href="#1-3-2-insertBefore-삽입할-노드-기준-노드" class="headerlink" title="1-3-2. insertBefore(삽입할 노드, 기준 노드)"></a>1-3-2. <code>insertBefore(삽입할 노드, 기준 노드)</code></h4><ul>
+<li>삽입할 노드와 기준 노드 2가지를 매개변수로 받는다.</li>
+<li>삽입한 노드는 기준 노드의 <strong>이전</strong>형제가 되며, 이동이 끝나면 메서드는 <strong>삽입한 노드를 반환</strong>한다.</li>
+</ul>
+<p><img src="/images/post_img/58/insertBefore.png"></p>
+<h4 id="1-3-3-replaceChild-삽입할-노드-교체할-노드"><a href="#1-3-3-replaceChild-삽입할-노드-교체할-노드" class="headerlink" title="1-3-3. replaceChild(삽입할 노드, 교체할 노드)"></a>1-3-3. <code>replaceChild(삽입할 노드, 교체할 노드)</code></h4><ul>
+<li>기존 노드를 교체한다.</li>
+<li>교체할 노드(B)에 있던 자리에 삽입할 노드(A)가 들어간다.</li>
+<li><strong>B의 관계 표인터는 모두 A에 복사한다.</strong><ul>
+<li>B는 같은 문서 소유이긴 하지만 문서에서 위치를 지정받지 못한 채 붕 떠 있는 상태이다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-4-removeChild"><a href="#1-3-4-removeChild" class="headerlink" title="1-3-4. removeChild()"></a>1-3-4. <code>removeChild()</code></h4><ul>
+<li>제거할 노드 하나만 매개변수로 받는다.</li>
+<li>제거된 노드는 아직 해당 문서 소유이긴 하지만 문서에서 위치를 지정받지는 못했다.</li>
+</ul>
+<hr>
+<h3 id="1-4-기타-메서드"><a href="#1-4-기타-메서드" class="headerlink" title="1-4. 기타 메서드"></a><span style="color:#26d0ce">1-4. 기타 메서드</span></h3><h4 id="1-4-1-cloneNode-boolean"><a href="#1-4-1-cloneNode-boolean" class="headerlink" title="1-4-1. cloneNode(boolean)"></a>1-4-1. <code>cloneNode(boolean)</code></h4><ul>
+<li>자신을 호출한 노드의 복제본을 생성한다.</li>
+<li>매개변수로는 자손 노드까지 복제할지 나타내는 불리언이다.<ul>
+<li>true : 자손 노드 전체를 복제</li>
+<li>false : 해당 노드 하나만 복제</li>
+</ul>
+</li>
+<li>복제된 노드를 반환하는데, 이는 여전히 문서 소유이지만 부모 노드가 할당되지 않는다.<ul>
+<li><code>고아노드</code>라고 한다.</li>
+<li>appendChild()나 insertBefore(), replaceChild()를 통해 문서에 추가하기 전에는 <strong>트리 안에 존재하지 않는다.</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> deepList = myList.cloneNode(<span class="literal">true</span>) <span class="comment">// myList에 ul요소에 대한 참조를 저장했다고 가정</span></span><br><span class="line"><span class="built_in">console</span>.log(deepList.childNodes.length) <span class="comment">// 3 or 7(공백포함)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shallowList = myList.cloneNode(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(shallowList.childNodes.length) <span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-4-2-nomalize"><a href="#1-4-2-nomalize" class="headerlink" title="1-4-2. nomalize()"></a>1-4-2. <code>nomalize()</code></h4><ul>
+<li>문서 서브트리에 존재하는 텍스트 노드를 다루는 것 뿐.</li>
+<li>파서의 구현 방식이나 DOM 조작 결과로 텍스트 없는 텍스트 노드가 생기거나 텍스트 노드끼리 형제 노드가 될 가능성이 있다.</li>
+<li><code>nomalize</code>를 호출하면 노드의 자손에서 이 두가지 상황이 생기지 않았는지 검색한다.</li>
+<li>빈 텍스트 노드를 찾으면 제거하고 텍스트 노드끼리 형제인 경우를 발견하면 두 노드를 하나로 합친다.</li>
+</ul>
+<hr>
+<hr>
+<h2 id="2-Document-타입"><a href="#2-Document-타입" class="headerlink" title=" 2. Document 타입"></a><a name="document"></a> <span style="color:#1a2980">2. Document 타입</span></h2><ul>
+<li>자바스크립트는 문서 노드를 Document 타입으로 표현한다.</li>
+<li>브라우저에서 전체 HTML 페이지를 표현하는 문서 객체는 <code>HTMLDocument</code>의 인스턴스</li>
+<li>HTMLDocument는 Document를 상속한다.</li>
+<li>document 객체는 window의 프로퍼티이므로 전역에서 접근할 수 있다.</li>
+<li>Document 타입은 HTML 페이지 또는 XML 기반 문서를 표현한다.</li>
+<li>document 객체를 통해 페이지에 대한 정보를 얻고 구조 및 외관을 조작한다.</li>
+</ul>
+<p>Document 노드의 특징</p>
+<ul>
+<li>nodeType은 9</li>
+<li>nodeName은 “#document”</li>
+<li>nodeValue는 null</li>
+<li>parentNode는 null</li>
+<li>ownerDocument는 null</li>
+<li>자식 노드로 DocumentType(최대 1개) Element(최대 1개), Processing Instruction, Comment를 가질 수 있다.</li>
+</ul>
+<hr>
+<h3 id="2-1-Document-자식-노드"><a href="#2-1-Document-자식-노드" class="headerlink" title="2-1. Document 자식 노드"></a><span style="color:#26d0ce">2-1. Document 자식 노드<span></span></span></h3><p>Document 자식으로</p>
+<ul>
+<li>DocumentType</li>
+<li>Element</li>
+<li>ProcessingInstruction</li>
+<li>Comment</li>
+</ul>
+<h4 id="2-1-1-documentElement-프로퍼티"><a href="#2-1-1-documentElement-프로퍼티" class="headerlink" title="2-1-1. documentElement 프로퍼티"></a>2-1-1. <code>documentElement</code> 프로퍼티</h4><ul>
+<li>HTML페이지의 <code>&lt;html&gt;</code>요소를 가리킨다.</li>
+<li><p>childNodes의 document 요소보다 documentElement프로퍼티가 해당 요소에 더 빨리, 더 직접적으로 접근한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> html = <span class="built_in">document</span>.documentElement;</span><br><span class="line"><span class="built_in">console</span>.log(html === <span class="built_in">document</span>.childNodes[<span class="number">0</span>] === <span class="built_in">document</span>.firstChild)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>document 객체는 HTMLDocument의 인스턴스이므로 <code>&lt;body&gt;</code>요소를 직접적으로 가리키는 body 프로퍼티를 갖는다.</strong></p>
+</li>
+</ul>
+<p>document 객체<br><img src=" /images/post_img/58/document.jpg"></p>
+<h4 id="2-1-2-DocumentType"><a href="#2-1-2-DocumentType" class="headerlink" title="2-1-2. DocumentType"></a>2-1-2. <code>DocumentType</code></h4><p><code>&lt;!DOCTYPE&gt;</code> 태그는 문서의 다른 부분과는 별도의 엔티티로 간주하며 포함된 정보는 다음과 같이 doctype 프로퍼티를 통해 접근할 수 있다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doctype = <span class="built_in">document</span>.doctype</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="2-2-문서-정보"><a href="#2-2-문서-정보" class="headerlink" title="2-2. 문서 정보"></a><span style="color:#26d0ce">2-2. 문서 정보</span></h3><ul>
+<li>document 객체는 HTMLDocument의 인스턴스이므로 표준 Document 객체에는 존재하지 않는 프로퍼티를 여럿 가진다.</li>
+<li>이들 프로퍼티는 현재 불러들인 웹 페이지에 대한 정보이다.</li>
+</ul>
+<h4 id="2-2-1-document-title"><a href="#2-2-1-document-title" class="headerlink" title="2-2-1. document.title"></a>2-2-1. <code>document.title</code></h4><ul>
+<li><code>&lt;title&gt;</code> 요소 텍스트가 들어있다.</li>
+<li>읽을 수도 있고 재설정도 가능하다.</li>
+</ul>
+<h4 id="2-2-2-웹페이지-요청과-관련한-프로퍼티"><a href="#2-2-2-웹페이지-요청과-관련한-프로퍼티" class="headerlink" title="2-2-2. 웹페이지 요청과 관련한 프로퍼티"></a>2-2-2. 웹페이지 요청과 관련한 프로퍼티</h4><p>HTTP 헤더에 들어있다.</p>
+<ul>
+<li>URL : 페이지의 완전한 URL</li>
+<li>domain : 페이지의 도메인 이름,</li>
+<li>referrer : 이 페이지를 링크한 페이지의 URL. 없으면 빈 문자열</li>
+</ul>
+<hr>
+<h3 id="2-3-요소-위치"><a href="#2-3-요소-위치" class="headerlink" title="2-3. 요소 위치"></a><span style="color:#26d0ce">2-3. 요소 위치</span></h3><p>특정 요소나 요소 그룹에 대한 참조를 얻는 일을 자주한다.<br>대표적인 2가지 메서드. <code>getElementById()</code>, <code>getElementByTagName()</code></p>
+<h4 id="2-3-1-getElementById"><a href="#2-3-1-getElementById" class="headerlink" title="2-3-1. getElementById()"></a>2-3-1. <code>getElementById()</code></h4><ul>
+<li>찾으려는 요소 ID를 매개변수로 받고 해다 요소를 찾아 반환하며 그런 ID의 요소가 존재하지 않으면 null반환.</li>
+<li>소문자와 대문자를 구분해야한다.</li>
+<li>같은 요소가 2개 이상 존재하면 첫 번째 요소를 반환한다.</li>
+</ul>
+<h4 id="2-3-2-getElementByTagName"><a href="#2-3-2-getElementByTagName" class="headerlink" title="2-3-2. getElementByTagName()"></a>2-3-2. <code>getElementByTagName()</code></h4><ul>
+<li>요소의 태그 이름을 매개변수로 받고 해당하는 요소가 담긴 NodeList를 반환한다.<ul>
+<li>HTML 문서에서는 HTMLCollection 객체를 반환한다.</li>
+</ul>
+</li>
+</ul>
+<p><img src=" /images/post_img/58/HTMLCollection.png"></p>
+<ul>
+<li>NodeList 객체와 마찬가지로 HTMLCollection 객체의 데이터 역시 대괄호기법과 item() 메서드로 접근 가능하다.  </li>
+<li><p>HTMLCollection의 <code>namedItem()</code> 메서드</p>
+<ul>
+<li>name 속성을 통해 컬렉션 데이터에 대한 참조를 얻는다.</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"myimage.jpg"</span> <span class="attr">name</span>=<span class="string">"myImage"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> images = <span class="built_in">document</span>.getElementByTagName(<span class="string">"img"</span>)</span><br><span class="line"><span class="keyword">const</span> myImage = images.namedItem(<span class="string">"myImage"</span>)</span><br><span class="line"><span class="keyword">const</span> myImage = images[<span class="string">"myImage"</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTMLCollection 객체에서는 대괄호 표기법에 <ul>
+<li>숫자형 색인과 =&gt; <code>item()</code>사용</li>
+<li>문자형 색은을 모두 사용할 수 있다. =&gt; <code>namedItme()</code> 사용</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>문서 전체는 아리테스크<code>*</code>를 사용한다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allElements = <span class="built_in">document</span>.getElementByTagName(<span class="string">"*"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-3-4-getElementByName"><a href="#2-3-4-getElementByName" class="headerlink" title="2-3-4. getElementByName()"></a>2-3-4. <code>getElementByName()</code></h4><p>name 속성 값이 주어진 문자열에 일치하는 요소를 반환한다.</p>
+<ul>
+<li>라디오 버튼에 자주 사용한다.</li>
+<li>id 속성은 label요소와 연결하는 역할을 하며</li>
+<li>name 속석은 값을 서버에 보낼 때 이중 단 하나만 보내는 역할을 한다. (체크된)<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Which color do you prefer?<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"red"</span> <span class="attr">name</span>=<span class="string">"color"</span> <span class="attr">id</span>=<span class="string">"colorRed"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"colorRed"</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"green"</span> <span class="attr">name</span>=<span class="string">"color"</span> <span class="attr">id</span>=<span class="string">"colorGreen"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"colorGreen"</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">value</span>=<span class="string">"blue"</span> <span class="attr">name</span>=<span class="string">"color"</span> <span class="attr">id</span>=<span class="string">"colorBlue"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"colorBlue"</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="2-4-특별한-컬렉션"><a href="#2-4-특별한-컬렉션" class="headerlink" title="2-4. 특별한 컬렉션"></a><span style="color:#26d0ce">2-4. 특별한 컬렉션</span></h3><p>document객체에는 특별하 컬렉션이 몇가지 있다.<br>각 컬렉션은 모두 HTML Collection 객체이고,<br>문서에 공통된 요소들에 빠르게 접근할 수 있도록 만들어졌다.</p>
+<ul>
+<li><code>document.anchors</code> : name속성이 있는 <code>&lt;a&gt;</code> 요소를 모두 갖고온다.</li>
+<li>(폐기)<code>document.applets</code> : <code>&lt;applet&gt;</code> 요소를 모두 갖고온다. </li>
+<li><code>document.forms</code> : <code>&lt;form&gt;</code> 요소를 모두 가져온다. (document.getElementsByTagName(“form”)과 같다.)</li>
+<li><code>document.images</code> : <code>&lt;img&gt;</code> 요소를 모두 갖고온다.</li>
+<li><code>document.links</code> : href속성이 있는 <code>&lt;a&gt;</code>요소를 모두 가져온다.</li>
+</ul>
+<hr>
+<h3 id="2-5-DOM-준수-탐지"><a href="#2-5-DOM-준수-탐지" class="headerlink" title="2-5. DOM 준수 탐지"></a><span style="color:#26d0ce">2-5. DOM 준수 탐지</span></h3><p><code>hasFeature()</code></p>
+<hr>
+<h3 id="2-6-문서에-쓰기"><a href="#2-6-문서에-쓰기" class="headerlink" title="2-6. 문서에 쓰기"></a><span style="color:#26d0ce">2-6. 문서에 쓰기</span></h3><p><code>write()</code> : 넘겨 받은 텍스트를 그대로 추가하고<br><code>writeIn()</code> : 줄바꿈을 문자(<code>\n</code>)를 문자열 마지막에 추가한다.<br><code>open()</code> : 페이지 스트림을 열고<br><code>close()</code> : 페이지 스트림을 닫습니다.</p>
+<hr>
+<hr>
+<h2 id="3-Element-타입"><a href="#3-Element-타입" class="headerlink" title=" 3. Element 타입"></a><a name="element"></a> <span style="color:#1a2980">3. Element 타입</span></h2><p>Element 요소의 특징</p>
+<ul>
+<li>nodeType은 1이다.</li>
+<li>nodeName은 요소의 태그 이름이다.</li>
+<li>nodeValue는 null이다.</li>
+<li>parentNode는 Document 또는 Element이다.</li>
+<li>자식노드로 Element나 Text, Comment, ProcessingInstruction, CDATASection, EntityReference를 가질 수 있다.</li>
+</ul>
+<hr>
+<h3 id="3-1-HTML-요소"><a href="#3-1-HTML-요소" class="headerlink" title="3-1. HTML 요소"></a><span style="color:#26d0ce">3-1. HTML 요소</span></h3><p>HTMLElement 타입을 통해 표현된다.<br>HTMLElement는 Element를 직접적으로 상속한다.</p>
+<p><code>id</code> : 요소의 고유한 식별자<br><code>title</code> : 요소에 대한 추가 정보, 일반적으로 툴팁으로 표현됨<br><code>lang</code> : 요소 콘텐츠의 언어 코드. 거의 사용되지 않는다.<br><code>dir</code> : 언어의 표기 반향. <code>ltr</code>은 왼쪽 =&gt; 오른쪽, <code>rtl</code>은 오른쪽 =&gt; 왼쪽. 거의 사용되지 않는다.<br><code>className</code> : CSS 클래스인 class 속성을 나타낸다. class가 ECMAScript의 예약어이기 때문에 className이라고 사용한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myDiv"</span> <span class="attr">class</span>=<span class="string">"bd"</span> <span class="attr">title</span>=<span class="string">"Body text"</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">dir</span>=<span class="string">"ltr"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src=" /images/post_img/58/HTMLElement.jpg"></p>
+<hr>
+<h3 id="3-2-속성-얻기-getAttribute"><a href="#3-2-속성-얻기-getAttribute" class="headerlink" title="3-2. 속성 얻기 (getAttribute())"></a><span style="color:#26d0ce">3-2. 속성 얻기</span> (<code>getAttribute()</code>)</h3><p><code>getAttribute(속성이름)</code> : 공식 속성 이외에 커스텀 속성을 가져오는데도 쓸 수 있다.<br><code>setAttribute(속성이름, 속성이름의 값)</code><br><code>removeAttribute(속성이름)</code></p>
+<ul>
+<li>속성이름은 대소문자를 구분하지 않는다.</li>
+<li><strong>HTML5 명세에서는 커스텀 속성 앞에 전치사 <code>data-</code>를 붙여야 유효한 것으로 인정한다.</strong></li>
+<li>getAttribute(“style”)은 객체를 반환, getAttribute(“onclick”)은 함수를 반환한다.</li>
+<li>위의 속성과 차이점때문에 개발자들은 getAttribute()는 거의 사용하지 않고 객체 프로퍼티를 사용한다.</li>
+<li>getAttribute() 메서드는 <strong>주로 커스텀 속성의 값을 가져올 때 사용하다.</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> four = <span class="built_in">document</span>.getElementById(<span class="string">'four'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// class 어트리뷰트가 존재하지 않으면</span></span><br><span class="line"><span class="keyword">if</span> (!four.hasAttribute(<span class="string">'class'</span>)) &#123;</span><br><span class="line">  <span class="comment">// four에 class 어트리뷰트를 추가하고 값으로 'blue'를 설정</span></span><br><span class="line">  four.setAttribute(<span class="string">'class'</span>, <span class="string">'blue'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="comment">// four에 class 어트리뷰트가 존재하면</span></span><br><span class="line">  four.className = <span class="string">'blue'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class 어트리뷰트의 값을 취득</span></span><br><span class="line"><span class="built_in">console</span>.log(four.getAttribute(<span class="string">'class'</span>)); <span class="comment">// blue</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// class 어트리뷰트를 제거</span></span><br><span class="line">four.removeAttribute(<span class="string">'class'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// class 어트리뷰트의 존재를 확인</span></span><br><span class="line"><span class="built_in">console</span>.log(four.hasAttribute(<span class="string">'class'</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-3-속성-설정-setAttribute"><a href="#3-3-속성-설정-setAttribute" class="headerlink" title="3-3. 속성 설정 (setAttribute())"></a><span style="color:#26d0ce">3-3. 속성 설정</span> (<code>setAttribute()</code>)</h3><ul>
+<li>속성 이름과 설정할 값 두가지를 매개변수로 받는다.</li>
+<li>해당 속성이 존재하지 않으면 솏어을 새로 생성하고 값을 설정한다.</li>
+<li>속성 이름은 소문자로 통일된다.</li>
+</ul>
+<hr>
+<h3 id="3-4-속성-제거-removeAttribute"><a href="#3-4-속성-제거-removeAttribute" class="headerlink" title="3-4. 속성 제거 (removeAttribute())"></a><span style="color:#26d0ce">3-4. 속성 제거</span> (<code>removeAttribute()</code>)</h3><ul>
+<li>속성의 값만 지우는 것이 아니라 요소에서 속성을 완전히 제거한다.</li>
+<li>자주 쓰이지는 않는다.</li>
+</ul>
+<hr>
+<h3 id="3-5-attributes-프로퍼티"><a href="#3-5-attributes-프로퍼티" class="headerlink" title="3-5. attributes 프로퍼티"></a><span style="color:#26d0ce">3-5. attributes 프로퍼티</span></h3><ul>
+<li>Element 타입은 DOM 노드 타입 중에서 attributes 프로퍼티를 갖는 유일한 타입이다.</li>
+<li>attributes 프로퍼티에는 NodeList처럼 살아있는 컬렉션 <code>NamedNodeMap</code>이 저장된다.</li>
+<li>요소 속성은 모두 Attr 노드로 표현되며 각 Attr노드는 NamedNodeMap 객체에 저장된다.</li>
+<li>attributes 프로퍼티 안의 각 노드는 <ul>
+<li>nodeName이 속성 이름</li>
+<li>nodeValue는 속성 값</li>
+</ul>
+</li>
+<li>보통은 아래 메서드들 보다는 <code>getAttribute()</code>, <code>removeAttribute()</code>, <code>setAttribute()</code> 메서드가 더 많이 사용된다.</li>
+</ul>
+<p>NamedNodeMap 객체의 메서드들</p>
+<ul>
+<li><code>getNamedItem(name)</code> : nodeName 프로퍼티가 name인 노드를 반환한다.</li>
+<li><code>removeNamedItem(name)</code> : nodeName 프로퍼티가 name인 노드를 목록에서 제거한다.</li>
+<li><code>setNamedItem(node)</code> : node를 목록에 추가하고 nodeName 프로퍼티에 따라 색인한다. </li>
+<li><code>item(pos)</code> : 인덱스가 pos인 노드를 반환한다.</li>
+</ul>
+<p><img src=" /images/post_img/58/getNamedItem.png"></p>
+<p>attributes 메서드들이 유용한 경우는 요소의 속성을 대상으로 루프가 필요할 때.<br>각 속성의 이름과 값을 문자열에 추가한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputAttributes</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> pairs = <span class="keyword">new</span> <span class="built_in">Array</span>(),</span><br><span class="line">    attrName,</span><br><span class="line">    attrValue,</span><br><span class="line">    i,</span><br><span class="line">    len;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>, len = element.attributes.length.length; i &lt; len; i++) &#123;</span><br><span class="line">    attrName = element.attributes[i].nodeName;</span><br><span class="line">    attrValue = element.attributes[i].nodeValue;</span><br><span class="line">    pairs.push(attrName + <span class="string">"=\""</span> + attrValue + <span class="string">"\""</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> pairs.join(<span class="string">" "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-6-요소-생성-document-createElement"><a href="#3-6-요소-생성-document-createElement" class="headerlink" title="3-6. 요소 생성 (document.createElement())"></a><span style="color:#26d0ce">3-6. 요소 생성</span> (<code>document.createElement()</code>)</h3><p><img src=" /images/post_img/58/createElement.png" width="400px"></p>
+<ul>
+<li>createElement() 메서드는 새 요소를 생성하고 ownerDocument 프로퍼티를 설정한다.</li>
+<li>생성 이후에는 문서 트리의 일부가 아니므로 appendChild(), insertBefore(), replaceChild() 메서드를 통해 요소를 문서 트리에 추가해야한다.</li>
+<li>IE7이전 버전에는 HTML을 통으로 인자로 넘길 수 있다.</li>
+</ul>
+<hr>
+<h3 id="3-7-요소의-자식"><a href="#3-7-요소의-자식" class="headerlink" title="3-7. 요소의 자식"></a><span style="color:#26d0ce">3-7. 요소의 자식</span></h3><ul>
+<li><p>요소는 자식 요소나 자손 요소를 가질 수 있고, 그 숫자는 제한이 없다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>&lt;ul&gt;</code>요소 자식 노드가 7개 생긴다.</p>
+<ul>
+<li><code>&lt;li&gt;</code>는 3개, <code>&lt;text&gt;</code> 4개 (<code>&lt;li&gt;</code>와 텍스트 사이의 공백)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/js-dom" target="_blank" rel="external">http://poiemaweb.com/js-dom</a></li>
+</ol>
+<h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3><ol>
+<li>MIME타입</li>
+<li>Gecko</li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/30/JS_08_1/" data-id="cjbw6rtfd000r4h2misptkd67" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/12/29/JS_07_2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">7/ BOM (브라우저 객체 모델)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/30/JS_08_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/58/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/30/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/29/JS_07_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/57/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/29/JS_07_2/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
+                            <p class="item-date"><time datetime="2017-12-29T12:20:19.000Z" itemprop="datePublished">2017-12-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/28/JS_07_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/56/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/28/JS_07_1/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
+                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/23/log_002/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/55/thumb_default.jpg)" alt="componentDidUpdate" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
+                            <p class="item-title"><a href="/2017/12/23/log_002/" class="title">componentDidUpdate</a></p>
+                            <p class="item-date"><time datetime="2017-12-23T09:23:55.000Z" itemprop="datePublished">2017-12-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/19/DB_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/47/thumb_default.jpg)" alt="Database basic" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Database/">Database</a></p>
+                            <p class="item-title"><a href="/2017/12/19/DB_01/" class="title">Database basic</a></p>
+                            <p class="item-date"><time datetime="2017-12-19T09:23:55.000Z" itemprop="datePublished">2017-12-19</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">34</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 12.5px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 12.5px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 12.5px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/12/30/JS_08_1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
