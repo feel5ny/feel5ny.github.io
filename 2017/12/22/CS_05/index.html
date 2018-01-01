@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>OSI 7 Layer &amp; TCP/IP Model Layer | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="CS,network" />
+    
+    
+    <meta name="description" content="OSI 7 Layer &amp;amp; TCP/IP Model LayerTCP / IP 는 60년대 후반 부터 장비와 장비간에 통신을 위해 미 국방성 ( DoD : Department of Defense ) 에서 개발하여 만들어진 프로토콜 입니다.  TCP / IP 는 거의 모든 컴퓨터가 기본으로 제공하여 인터넷 표준 프로토콜입니다.TCP/IP 역사를 보면 197">
+<meta name="keywords" content="CS,network">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSI 7 Layer &amp; TCP&#x2F;IP Model Layer">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/22/CS_05/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="OSI 7 Layer &amp;amp; TCP/IP Model LayerTCP / IP 는 60년대 후반 부터 장비와 장비간에 통신을 위해 미 국방성 ( DoD : Department of Defense ) 에서 개발하여 만들어진 프로토콜 입니다.  TCP / IP 는 거의 모든 컴퓨터가 기본으로 제공하여 인터넷 표준 프로토콜입니다.TCP/IP 역사를 보면 197">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/67/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-01-01T14:41:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OSI 7 Layer &amp; TCP&#x2F;IP Model Layer">
+<meta name="twitter:description" content="OSI 7 Layer &amp;amp; TCP/IP Model LayerTCP / IP 는 60년대 후반 부터 장비와 장비간에 통신을 위해 미 국방성 ( DoD : Department of Defense ) 에서 개발하여 만들어진 프로토콜 입니다.  TCP / IP 는 거의 모든 컴퓨터가 기본으로 제공하여 인터넷 표준 프로토콜입니다.TCP/IP 역사를 보면 197">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/67/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/22/CS_05/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/CS/">CS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-CS_05" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        OSI 7 Layer &amp; TCP/IP Model Layer
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2017/12/22/CS_05/" class="article-date">
+            <time datetime="2017-12-22T09:23:55.000Z" itemprop="datePublished">2017-12-22</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CS/">CS</a>, <a class="tag-link" href="/tags/network/">network</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="OSI-7-Layer-amp-TCP-IP-Model-Layer"><a href="#OSI-7-Layer-amp-TCP-IP-Model-Layer" class="headerlink" title="OSI 7 Layer &amp; TCP/IP Model Layer"></a>OSI 7 Layer &amp; TCP/IP Model Layer</h2><p>TCP / IP 는 60년대 후반 부터 장비와 장비간에 통신을 위해 미 국방성 ( DoD : Department of Defense ) 에서 개발하여 만들어진 프로토콜 입니다. </p>
+<p>TCP / IP 는 거의 모든 컴퓨터가 기본으로 제공하여 인터넷 표준 프로토콜입니다.<br>TCP/IP 역사를 보면 1974년 전송제어프로토콜 ( TCP : Transmission  Control Protocol ) 이 나오면서 1981년 IP ( Internet Protocol )이 RFC791 표준으로 1982년 TCP/IP 가 표준 프로토콜로 지정 되었습니다.</p>
+<p>우선 TCP/IP 를 보면 Open Protocol 로써 특정 기업이나 개인이 아닌 오픈되어 누구나 적용하고 보안 할 수 있으며 4개의 계층적 구조를 가지며 각 계층마다 독립적인 기능을 가지면서 다른 계층에 영향을 미치지 않는 구조입니다.</p>
+<p>또한 다수의 네트워크와 장비에 대해 논리적 주소를 사용하면서 네트워트 ID와 호스트 ID를 구분하여 네트워크에서 장비를 구별할수 있게 됩니다. </p>
+<p>TCP/IP 에는 계층적 구조를 가진다라고 했는데 그 구조를 보면 Application , Transport , Internet , Network, Interface 의 4계층을 대표하며 이를 좀더 세분화하여 계층화 한것이 OSI 7 Layer 입니다</p>
+<p><img src="/images/post_img/67/tcpipprotocols.png"></p>
+<h3 id="3-Layer-Internet-Layer"><a href="#3-Layer-Internet-Layer" class="headerlink" title="3 Layer : Internet Layer"></a>3 Layer : Internet Layer</h3><p>인터넷 계층이라고 하며 이때 대표적인 녀석 IP, IGMP, ICMP, Routing Protocol, ARP</p>
+<ul>
+<li>IP ( Internet Protocol ) 로써 논리적 주소를 통해 최적 경로를 선택하여 데이터를 전송할수 있게 합니다.</li>
+<li>이떄 Routed Protocol(IP, IPX, Apple Talk) 와 Routing Protocol ( RIP, IGRP, EIGRP, OSPF, IS-IS, BGP)를 제공</li>
+<li>ICMP ( Internet Control Message Protocol ) 은 패킷 전송시 발생한 메세지와 에러 정보를 알려주게 됩니다.</li>
+<li>ARP ( Address Resolution Protocol) 은 논리적 주소 ( IP 와 같은 ) 을 통해 상대의 MAC Address 을 찾습니다.</li>
+<li>RARP ( Reverse ARP ) 는 ARP 반대 개념으로 물리적 주소를 통해 논리적 주소를 알려줍니다.</li>
+</ul>
+<h3 id="4-Layer-Transport-Layer"><a href="#4-Layer-Transport-Layer" class="headerlink" title="4 Layer : Transport Layer"></a>4 Layer : Transport Layer</h3><p>전송 계층이라 하며 데이터 전송시 전송 방식을 결정 합니다. 전송 방식 TCP, UDP </p>
+<ul>
+<li><p>TCP ( Transmission Control Protocol ) 이며 Connection-Oriented 패킷 전송을 제어하며 데이터 전송시 에러를 복수 할수 있으며 신뢰성을 가지게 됩니다.</p>
+</li>
+<li><p>UDP ( User Datagram Protocol ) 로써 Connectionless 패킷 전송 제어하며 데이터 전송시 발생한 에러를 복수 할수는 없으나 오버헤드가 적어 속도가 빠른 편입니다.</p>
+</li>
+</ul>
+<h3 id="OSI-모델"><a href="#OSI-모델" class="headerlink" title="OSI 모델"></a>OSI 모델</h3><p>Open Systems Interconnection Reference Model 의 약자로써 국제 표준화 기구(ISO) 에서 개발한 모델로, 컴퓨터 네트워크 프로토콜 디자인과 통신을 계층별로 나누어 설명한 것입니다.</p>
+<h4 id="왜-복잡한-계층-구조를-알아야할까"><a href="#왜-복잡한-계층-구조를-알아야할까" class="headerlink" title="왜 복잡한 계층 구조를 알아야할까?"></a>왜 복잡한 계층 구조를 알아야할까?</h4><p>편지를 친구에게 보낼때 단순한 과정을 보면 편지 쓰고 보내고 받아서 읽으면 그만인데, </p>
+<ol>
+<li>편지지 위에 </li>
+<li>편지를 써서 </li>
+<li>편지 봉투에 담아 </li>
+<li>주소를 적고  </li>
+<li>우체국에 가서 </li>
+<li>일반인지, 등기인지 결정하여 </li>
+<li>우표를 붙여</li>
+<li>우체국 아저씨는 </li>
+<li>적혀져있는 주소를 확인하여 </li>
+<li>친구네에게 편지를 배달하고 </li>
+<li>친구가 자기한테 온 편지가 맞다면</li>
+<li>편지봉투를 열어 </li>
+<li>안에 있는 내용물, 즉 편지지를 읽게 되는 것입니다.</li>
+</ol>
+<p>우리가 전송버튼을 통해 또는 통신을 통해 전달되는 메세지는 여러 절차를 걸쳐 전달한다는 것인데 이런 절차를 OSI 7 계층에서 다룬다고 생각하시면 된다.</p>
+<ol>
+<li>데이터 흐름을 알 수 있다.</li>
+<li>Trouble Shooting(문제해결)하기가 쉽다.</li>
+<li>Standard 표준화이다.</li>
+</ol>
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://www.jidum.com/" target="_blank" rel="external">네트워크 쉽게 이해하기-전편</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2017/12/22/CS_05/" data-id="cjbwe1nx10009a62m9lzhvhsa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/12/23/log_002/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            componentDidUpdate
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2017/12/21/CS_04/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">TCP / UDP</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/02/CS_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/69/thumb_default.jpg)" alt="기타 용어들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/02/CS_07/" class="title">기타 용어들</a></p>
+                            <p class="item-date"><time datetime="2018-01-02T09:23:55.000Z" itemprop="datePublished">2018-01-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/01/CS_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/68/thumb_default.jpg)" alt="3 way handshake" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/01/CS_06/" class="title">3 way handshake</a></p>
+                            <p class="item-date"><time datetime="2018-01-01T01:23:55.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/30/JS_08_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/58/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/30/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/29/JS_07_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/57/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/29/JS_07_2/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
+                            <p class="item-date"><time datetime="2017-12-29T12:20:19.000Z" itemprop="datePublished">2017-12-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/28/JS_07_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/56/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/28/JS_07_1/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
+                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">39</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 11.67px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2017/12/22/CS_05/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
