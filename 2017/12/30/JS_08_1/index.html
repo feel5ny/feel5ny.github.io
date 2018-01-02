@@ -20,7 +20,7 @@
 <meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.넘나 많은 프로퍼티와 메서드들 @_@    목차  Node 타입 nodeName, nodeValue 요소의 경우 nodeName은 태그명, nodeValue는 null   노드 사이의 관계 ChildNodes / ParentNodes /">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/58/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-01-01T12:31:44.000Z">
+<meta property="og:updated_time" content="2018-01-01T17:47:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(1)">
 <meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.넘나 많은 프로퍼티와 메서드들 @_@    목차  Node 타입 nodeName, nodeValue 요소의 경우 nodeName은 태그명, nodeValue는 null   노드 사이의 관계 ChildNodes / ParentNodes /">
@@ -160,6 +160,16 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
                             <article id="post-JS_08_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -286,6 +296,7 @@ ga('send', 'pageview');
 <li>문서 객체 모델 DOM은 HTML과 XML 문서에 대한 애플리케이션 프로그래밍 인터페이스이다. (api)</li>
 <li>DOM은 문서를 노드의 계층 구조 트리로 표현한다.</li>
 <li>개발자는 이를 통해 페이지 각 부분을 추가, 제거, 수정한다.</li>
+<li>자바스크립트를 통해 HTML에 접근이 가능한 이유는 html이 document object model에 따라 기술되고 이 dom 인터페이스를 통해 기술된 html element가 <strong>객체</strong>로써 자바스크립트와 연결되기 때문에 접근이 가능한 것이다.</li>
 </ul>
 <hr>
 <ul>
@@ -322,14 +333,15 @@ ga('send', 'pageview');
 <li>텍스트 노드일 경우 nodeValue는 문자열이다.</li>
 </ul>
 <hr>
-<h3 id="1-2-노드-사이의-관계"><a href="#1-2-노드-사이의-관계" class="headerlink" title="1-2. 노드 사이의 관계"></a><span style="color:#26d0ce">1-2. 노드 사이의 관계</span></h3><h4 id="1-2-1-ChildNodes-프로퍼티"><a href="#1-2-1-ChildNodes-프로퍼티" class="headerlink" title="1-2-1. ChildNodes 프로퍼티"></a>1-2-1. ChildNodes 프로퍼티</h4><p><code>NodeList</code>가 저장된다.</p>
-<ul>
+<h3 id="1-2-노드-사이의-관계"><a href="#1-2-노드-사이의-관계" class="headerlink" title="1-2. 노드 사이의 관계"></a><span style="color:#26d0ce">1-2. 노드 사이의 관계</span></h3><h4 id="1-2-1-ChildNodes-프로퍼티"><a href="#1-2-1-ChildNodes-프로퍼티" class="headerlink" title="1-2-1. ChildNodes 프로퍼티"></a>1-2-1. ChildNodes 프로퍼티</h4><h5 id="NodeList가-저장된다"><a href="#NodeList가-저장된다" class="headerlink" title="NodeList가 저장된다."></a><code>NodeList</code>가 저장된다.</h5><ul>
 <li>유사배열 객체<br><img src="/images/post_img/58/02.png"></li>
 <li>노드를 순서 있는 목록으로 저장하여 위치 기반으로 접근 가능.</li>
 <li><code>length</code> 프로퍼티 : <strong>호출 당시</strong> 노드리스트에 담긴 노드 숫자임을 기억하자.</li>
 <li>Array의 인스턴스는 아니다.</li>
 <li><strong>DOM 구조의 쿼리 결과</strong></li>
 <li>계속 바뀌므로 살아있는 객체라고도 부른다.</li>
+<li>childNodes는 모든 자식요소 찾기</li>
+<li>children은 모든 자식요소 찾기이지만 요소노드만 찾는다.</li>
 <li><p>노드 리스트에 저장된 노드를 접근하는 방법 (어느쪽을 더 권잔하진 않는다.)</p>
 <ul>
 <li>대괄호 표기법</li>
@@ -400,11 +412,12 @@ ga('send', 'pageview');
 </ul>
 <hr>
 <hr>
-<h2 id="2-Document-타입"><a href="#2-Document-타입" class="headerlink" title=" 2. Document 타입"></a><a name="document"></a> <span style="color:#1a2980">2. Document 타입</span></h2><ul>
+<h2 id="2-Document-타입"><a href="#2-Document-타입" class="headerlink" title=" 2. Document 타입"></a><a name="document"></a> <span style="color:#1a2980">2. Document 타입</span></h2><p>&lt;img src=”/images/post_img/58/06.png&gt;</p>
+<ul>
 <li>자바스크립트는 문서 노드를 Document 타입으로 표현한다.</li>
 <li>브라우저에서 전체 HTML 페이지를 표현하는 문서 객체는 <code>HTMLDocument</code>의 인스턴스</li>
 <li>HTMLDocument는 Document를 상속한다.</li>
-<li>document 객체는 window의 프로퍼티이므로 전역에서 접근할 수 있다.</li>
+<li>document 객체는 window의 프로퍼티이므로 전역에서 접근할 수 있다. <code>window.document</code></li>
 <li>Document 타입은 HTML 페이지 또는 XML 기반 문서를 표현한다.</li>
 <li>document 객체를 통해 페이지에 대한 정보를 얻고 구조 및 외관을 조작한다.</li>
 </ul>
@@ -456,6 +469,11 @@ ga('send', 'pageview');
 <li>찾으려는 요소 ID를 매개변수로 받고 해다 요소를 찾아 반환하며 그런 ID의 요소가 존재하지 않으면 null반환.</li>
 <li>소문자와 대문자를 구분해야한다.</li>
 <li>같은 요소가 2개 이상 존재하면 첫 번째 요소를 반환한다.</li>
+<li>document.getElementBy~ : 단일 엘리먼트를 선택하는 메소드</li>
+<li>document.getElementsBy~ : 다중 엘리먼트를 선택하는 메소드<ul>
+<li>배열형태로 받아진다.</li>
+</ul>
+</li>
 </ul>
 <h4 id="2-3-2-getElementByTagName"><a href="#2-3-2-getElementByTagName" class="headerlink" title="2-3-2. getElementByTagName()"></a>2-3-2. <code>getElementByTagName()</code></h4><ul>
 <li>요소의 태그 이름을 매개변수로 받고 해당하는 요소가 담긴 NodeList를 반환한다.<ul>
@@ -582,6 +600,7 @@ ga('send', 'pageview');
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="http://poiemaweb.com/js-dom" target="_blank" rel="external">http://poiemaweb.com/js-dom</a></li>
+<li><a href="http://webclub.tistory.com/339" target="_blank" rel="external">http://webclub.tistory.com/339</a></li>
 </ol>
 <h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3><ol>
 <li>MIME타입</li>
@@ -589,12 +608,22 @@ ga('send', 'pageview');
 </ol>
 
         </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/30/JS_08_1/" data-id="cjbwe3gwh0019es2m3kux8il5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/30/JS_08_1/" data-id="cjbx62rdk001i3q2m8ob41z0e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -712,11 +741,11 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2018/01/01/CS_06/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/12/30/JS_08_2/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            3 way handshake
+            8/ DOM(1) - 노드의 계층 구조(1)
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -747,7 +776,7 @@ ga('send', 'pageview');
                             <a href="/2018/01/02/CS_07/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/69/thumb_default.jpg)" alt="기타 용어들" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/02/thumb_default.jpg)" alt="기타 용어들" class="thumbnail-image"></span>
     
     
 </a>
@@ -767,7 +796,7 @@ ga('send', 'pageview');
                             <a href="/2018/01/01/CS_06/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/68/thumb_default.jpg)" alt="3 way handshake" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/01/thumb_default.jpg)" alt="3 way handshake" class="thumbnail-image"></span>
     
     
 </a>
@@ -778,6 +807,46 @@ ga('send', 'pageview');
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
                             <p class="item-title"><a href="/2018/01/01/CS_06/" class="title">3 way handshake</a></p>
                             <p class="item-date"><time datetime="2018-01-01T01:23:55.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/31/JS_08_3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/60/thumb_default.jpg)" alt="8/ DOM(2) - DOM 다루기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/31/JS_08_3/" class="title">8/ DOM(2) - DOM 다루기</a></p>
+                            <p class="item-date"><time datetime="2017-12-31T12:20:19.000Z" itemprop="datePublished">2017-12-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/30/JS_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/30/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
                         </div>
                     </li>
                 
@@ -801,46 +870,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/29/JS_07_2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/57/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/29/JS_07_2/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
-                            <p class="item-date"><time datetime="2017-12-29T12:20:19.000Z" itemprop="datePublished">2017-12-29</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/28/JS_07_1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/56/thumb_default.jpg)" alt="7/ BOM (브라우저 객체 모델)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/28/JS_07_1/" class="title">7/ BOM (브라우저 객체 모델)</a></p>
-                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -850,7 +879,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">39</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -860,7 +889,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -898,6 +927,16 @@ ga('send', 'pageview');
             
         
     </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </aside>
                 </div>
             </div>
