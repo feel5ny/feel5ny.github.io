@@ -20,7 +20,7 @@
 <meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태3-1. 즉시실행함수3-2. 내부함수3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.   요약  arguments 함수에 전달된 파라미터를 모">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/39/thumb_default.jpg">
-<meta property="og:updated_time" content="2017-12-10T06:55:48.000Z">
+<meta property="og:updated_time" content="2018-01-03T06:58:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4&#x2F; 참조타입_Function 타입 (2)">
 <meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태3-1. 즉시실행함수3-2. 내부함수3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.   요약  arguments 함수에 전달된 파라미터를 모">
@@ -253,12 +253,17 @@ ga('send', 'pageview');
 </blockquote>
 <p>즉시실행함수 내에 처리 로직을 모아 두면 혹시 있을 수도 있는 변수명 충돌을 방지할 수 있어 이를 위한 목적으로 사용되기도 한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기명 즉시실행함수(named immediately-invoked function expression)</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 익명 즉시실행함수(immediately-invoked function expression)</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
 <h3 id="3-2-내부함수"><a href="#3-2-내부함수" class="headerlink" title="3-2. 내부함수"></a>3-2. 내부함수</h3><p>함수 내부에 정의된 함수를 내부함수라 한다.<br>내부함수는 부모함수의 변수에 접근할 수 있지만, 부모함수는 자식함수의 변수에 접근할 수 없다.<br><img src="/images/post_img/39/03.jpg" width="400"></p>
-<h3 id="3-3-콜백함수"><a href="#3-3-콜백함수" class="headerlink" title="3-3. 콜백함수"></a>3-3. 콜백함수</h3><p>콜백함수는 함수를 명시적으로 호출하는 방식이 아니라 특정 이벤트가 발생했을 때 시스템에 의해 호출되는 함수를 말한다. 보통 이벤트 핸들러 처리때, 비동기식 처리모델에 사용된다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'1초 후 출력된다.'</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-3-콜백함수"><a href="#3-3-콜백함수" class="headerlink" title="3-3. 콜백함수"></a>3-3. 콜백함수</h3><p>콜백함수는 함수를 명시적으로 호출하는 방식이 아니라 특정 이벤트가 발생했을 때 시스템에 의해 호출되는 함수를 말한다. 보통 이벤트 핸들러 처리때, 비동기식 처리모델에 사용된다. 옵저버(Observer) 디자인 패턴에서 나온 개념이다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'1초 후 출력된다.'</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 <p>비동기식 처리 모델이란 처리가 종료하면 호출될 함수(콜백함수)를 미리 매개변수에 전달하고 처리가 종료하면 콜백함수를 호출하는 것이다.</p>
 <p>콜백함수는 <strong>콜백 큐</strong>에 들어가 있다가 해당 이벤트가 발생하면 호출된다.<br>콜백 함수는 <strong>클로저</strong>이므로 콜백 큐에 단독으로 존재하다가 호출되어도 콜백함수를 전달받은 함수의 변수에 접근할 수 있다. (<a href="http://meetup.toast.com/posts/89" target="_blank" rel="external">참고</a>)</p>
+<p><strong>그런데 왜 이름이 callback 일까?</strong><br>설명1 -<br>선언된 함수를 이용하는 것을 호출 (call) 한다고 표현 한다. 콜백 함수는 운영체제(혹은 웹)에 의해 호출되는 응용 프로그램의 함수라 할 수 있다. 호출되는 방향이 정상적인 호출과 달리 <strong>반대된다는 의미</strong>에서 콜백이라고 한다. 정상적인 함수 호출 방법과는 다르게 운영체제 ( 시스템 ) 측에서 이벤트를 발생시켜서 이에 대한 처리를 해달라고 요청해 오는 과정이 있기 때문에 이와 같은 이름이 붙여졌다고 할 수 있다.</p>
+<p>설명2 -<br>콜백함수란 API 의 반대개념이라고 볼 수 있습니다.<br>또한 말그대로 콜백! CallBack &gt; 반대로 부른다고 해석할 수 있지요.<br>우리는 작성하는 일반 코드내에서<br>보통 API나 SDK에서 제공해주는 함수(Function)들을 호출(Call)하여 사용하곤 한다.<br>이런 방식의 경우, 어떤 이벤트를 제어하기 위해서는 별도의 쓰레드를 생성하여 무한루프로 실시간 검사하는 꽤나 무겁고 살짝 무식한 프로그램들을 만들어야한다.</p>
+<p>보통 이럴때, 사용하는 것이 콜백(CallBack) 함수.<br>물론 시스템상 CallBack함수를 만들어 등록하는 방식이 제공되어야 한다.<br>Windows 프로그램상에서 On??Event()를 통해 등록하는 방식이나, 안드로이드 상에서 Listener를 등록하는 방식이 이와 같다.<br>콜백함수라는 말 그대로 일반 Call의 반대 방향을 말한다.<br>통상적으로 쓰듯이 우리가 시스템상의 함수를 Call하는 것이 아니라, 시스템에서 우리가 만들고 등록한 함수를 Call하는 방식.</p>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="http://poiemaweb.com/js-function" target="_blank" rel="external">http://poiemaweb.com/js-function</a></li>
+<li><a href="http://shinluckyarchive.tistory.com/479" target="_blank" rel="external">shinlucky’s Archive</a></li>
 </ol>
 
         </div>
@@ -277,7 +282,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/03/JS_04_2/" data-id="cjbx62rda000n3q2m94orjo6q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/03/JS_04_2/" data-id="cjbyuee1v000psm2mppzg3uaf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -467,30 +472,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/31/JS_08_3/" class="thumbnail">
+                            <a href="/2017/12/28/JS_08_4/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/60/thumb_default.jpg)" alt="8/ DOM(2) - DOM 다루기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/31/JS_08_3/" class="title">8/ DOM(2) - DOM 다루기</a></p>
-                            <p class="item-date"><time datetime="2017-12-31T12:20:19.000Z" itemprop="datePublished">2017-12-31</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/61/thumb_default.jpg)" alt="8/ DOM 확장" class="thumbnail-image"></span>
     
     
 </a>
@@ -499,15 +484,35 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/28/JS_08_4/" class="title">8/ DOM 확장</a></p>
+                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_1/" class="thumbnail">
+                            <a href="/2017/12/27/JS_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/27/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-27T12:20:19.000Z" itemprop="datePublished">2017-12-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/26/JS_08_1/" class="thumbnail">
     
     
         <span style="background-image:url(/images/post_img/58/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
@@ -519,8 +524,8 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/26/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-26T12:20:19.000Z" itemprop="datePublished">2017-12-26</time></p>
                         </div>
                     </li>
                 

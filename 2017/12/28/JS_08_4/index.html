@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>8/ DOM(2) - DOM 다루기 | 필오의 개발일지</title>
+    <title>8/ DOM 확장 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,24 +11,24 @@
         <meta name="keywords" content="javascript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  동적 스크립트 동적 스타일 테이블 조작 노드리스트 사용     2. location 객체 참고링크 http://meetup.toast.com/posts/89  생소했던 단어 MIME타입 Gecko">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelecotrAll() 메서드 matchesSelector() 메서드   요소 간 이동 HTML5 클래스 관련 추가사항 getElementsByClassName()">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="8&#x2F; DOM(2) - DOM 다루기">
-<meta property="og:url" content="http://feel5ny.github.io/2017/12/31/JS_08_3/index.html">
+<meta property="og:title" content="8&#x2F; DOM 확장">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/28/JS_08_4/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  동적 스크립트 동적 스타일 테이블 조작 노드리스트 사용     2. location 객체 참고링크 http://meetup.toast.com/posts/89  생소했던 단어 MIME타입 Gecko">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelecotrAll() 메서드 matchesSelector() 메서드   요소 간 이동 HTML5 클래스 관련 추가사항 getElementsByClassName()">
 <meta property="og:locale" content="korea">
-<meta property="og:image" content="http://feel5ny.github.io/images/post_img/60/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-01-01T16:31:03.000Z">
+<meta property="og:image" content="http://feel5ny.github.io/images/post_img/61/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-01-03T09:09:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="8&#x2F; DOM(2) - DOM 다루기">
-<meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  동적 스크립트 동적 스타일 테이블 조작 노드리스트 사용     2. location 객체 참고링크 http://meetup.toast.com/posts/89  생소했던 단어 MIME타입 Gecko">
-<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/60/thumb_default.jpg">
+<meta name="twitter:title" content="8&#x2F; DOM 확장">
+<meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelecotrAll() 메서드 matchesSelector() 메서드   요소 간 이동 HTML5 클래스 관련 추가사항 getElementsByClassName()">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/61/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/31/JS_08_3/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/28/JS_08_4/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -170,14 +170,14 @@ ga('send', 'pageview');
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-                            <article id="post-JS_08_3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-JS_08_4" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        8/ DOM(2) - DOM 다루기
+        8/ DOM 확장
         </h1>
     
 
@@ -187,8 +187,8 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/12/31/JS_08_3/" class="article-date">
-            <time datetime="2017-12-31T12:20:19.000Z" itemprop="datePublished">2017-12-31</time>
+        <a href="/2017/12/28/JS_08_4/" class="article-date">
+            <time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time>
         </a>
     </div>
 
@@ -209,22 +209,238 @@ ga('send', 'pageview');
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li>동적 스크립트</li>
-<li>동적 스타일</li>
-<li>테이블 조작</li>
-<li>노드리스트 사용</li>
+<li>선택자 API<ol>
+<li>querySelector() 메서드</li>
+<li>querySelecotrAll() 메서드</li>
+<li>matchesSelector() 메서드</li>
+</ol>
+</li>
+<li>요소 간 이동</li>
+<li>HTML5<ol>
+<li>클래스 관련 추가사항<ul>
+<li>getElementsByClassName() 메서드</li>
+<li>classList 프로퍼티</li>
+</ul>
+</li>
+<li>포커스 관리</li>
+<li>HTMLDocument의 변화<ul>
+<li>readyState 프로퍼티</li>
+<li>호환성 모드</li>
+</ul>
+</li>
+<li>문자셋 프로퍼티</li>
+<li>커스텀 데이터 속성</li>
+<li>마크업 삽입<ul>
+<li>innerHTML</li>
+<li>outerHTML</li>
+<li>insertAdjacentHTML() 메서드</li>
+<li>메모리와 성능 문제</li>
+</ul>
+</li>
+<li>scrollIntoView() 메서드</li>
+</ol>
+</li>
+<li>전용 확장<ol>
+<li>문서모드</li>
+<li>children 프로퍼티</li>
+<li>contains() 메서드</li>
+<li>마크업 삽입<ul>
+<li>innerText 프로퍼티</li>
+<li>outerText 프로퍼티</li>
+</ul>
+</li>
+<li>스크롤</li>
+</ol>
+</li>
 </ol>
 <hr>
 <hr>
-<h2 id="2-location-객체"><a href="#2-location-객체" class="headerlink" title=" 2. location 객체"></a><a name="location"></a> 2. location 객체</h2><hr>
+<p>DOM은 그 자체로도 매우 잘 정의된 API이긴 하지만, 특정 브라우저 전용 방법으로 확장하여 기능을 추가할 때도 많다.</p>
+<h2 id="1-선택자-API"><a href="#1-선택자-API" class="headerlink" title=" 1. 선택자 API"></a><a name="location"></a> 1. 선택자 API</h2><ul>
+<li>자바스크립트 라이브러리 중에 가장 인기 있는 기능은 CSS 선택자로 패턴을 만들고 그에 맞는 DOM 요소를 선택하는 능력이다. </li>
+<li>선택자 API는 CSS 쿼리에 대한 브라우저의 네이티브 지원으로 W3C에서 명세화를 시작햇다.</li>
+<li>이 기능을 구현한 자바스크립트 라이브러리들은 모두 기초적인 CSS 파서를 직접 만들고, 기존의 DOM 메서드를 이용해 문서 노드를 이동하며 <strong>패턴에 일치하는 노드를 골라내는 방식</strong>을 사용했다.</li>
+<li><code>querySelector()</code></li>
+<li><code>querySelectorAll()</code></li>
+<li>Document 타입과 Element타입에서 사용가능하다.</li>
+</ul>
+<h3 id="1-1-querySelector-메서드"><a href="#1-1-querySelector-메서드" class="headerlink" title="1-1. querySelector() 메서드"></a>1-1. querySelector() 메서드</h3><ul>
+<li>매개변수로 CSS 쿼리를 받는다.</li>
+<li>패턴에 일치하는 첫번째 자손 요소를 반환한다. 없으면 null</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// body 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.querySelector(<span class="string">"body"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ID가 "myDiv"인 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> myDiv = <span class="built_in">document</span>.querySelector(<span class="string">"#myDiv"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 "selected"인 요소 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> selected = <span class="built_in">document</span>.querySelector(<span class="string">".selected"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 "button"인 이미지 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> img = <span class="built_in">document</span>.querySelector(<span class="string">"img.button"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-querySelecotrAll-메서드"><a href="#1-2-querySelecotrAll-메서드" class="headerlink" title="1-2. querySelecotrAll() 메서드"></a>1-2. querySelecotrAll() 메서드</h3><ul>
+<li>querySelector()와 유사한데, 일치하는 노드 전체를 반환한다.</li>
+<li>즉, NodeList의 정적 인스턴스를 반환한다. (유사배열 형태)</li>
+</ul>
+<h3 id="1-3-matchesSelector-메서드-matches-로-변경됨"><a href="#1-3-matchesSelector-메서드-matches-로-변경됨" class="headerlink" title="1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) +"></a>1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) <a href="https://developer.mozilla.org/ko/docs/Web/API/Element/matches" target="_blank" rel="external">+</a></h3><ul>
+<li>선택자 API 레벨2 명세</li>
+<li>매개변수로 CSS 선택자를 받고 요소가 그에 일치하면 true, 일치하지 않으면 false</li>
+</ul>
+<hr>
+<hr>
+<h2 id="2-요소-간-이동"><a href="#2-요소-간-이동" class="headerlink" title=" 2. 요소 간 이동"></a><a name="location"></a> 2. 요소 간 이동</h2><ul>
+<li>버전 9 미만의 IE는 타 브라우저와 달리 요소 사이의 공백을 텍스트 노드로 반환하지 않는다. </li>
+<li>이 때문에 childNodes나 firstChild 같은 프로퍼티를 사용할 때 차이가 발생한다. </li>
+<li>DOM 명세를 유지하면서 브라우저 사이의 차이를 극복하려는 노력으로 요소간 이동 명세에서는 새 프로퍼티 그룹을 정의햇다.</li>
+</ul>
+<p>요소간 이동 API에서 추가된 새 프로퍼티들</p>
+<ul>
+<li><code>childElementCount</code> : <strong>자식 요소 숫자</strong>를 반환하되 텍스트 노드와 주석은 제외한다.</li>
+<li><code>firstElementChild</code> : 첫번째 자식 요소를 가리킨다. </li>
+<li><code>lastElementChild</code> : 마지막 자식 요소를 가리킨다.</li>
+<li><code>previousElementSibling</code> : 이전 형제 요소를 가리킨다. </li>
+<li><code>nextElementSibling</code> : 다음 형제 요소를 가리킨다. </li>
+</ul>
+<hr>
+<hr>
+<h2 id="3-HTML5"><a href="#3-HTML5" class="headerlink" title=" 3. HTML5"></a><a name="location"></a> 3. HTML5</h2><ul>
+<li>이전의 HTML 명세는 자바스크립트 인터페이스에 대해서는 간단히만 설명하고 마크업 언어에만 집중했으며 자바스크립트와의 연결은 DOM으로 미뤘다. </li>
+<li>HTML5 명세는 마크업 언어와 함께 사용하도록 디자인된 자바스크립트 API를 상세히 설명하고 정의한다.</li>
+</ul>
+<h3 id="3-1-클래스-관련-추가사항"><a href="#3-1-클래스-관련-추가사항" class="headerlink" title="3-1. 클래스 관련 추가사항"></a>3-1. 클래스 관련 추가사항</h3><h4 id="getElementsByClassName-메서드"><a href="#getElementsByClassName-메서드" class="headerlink" title="getElementsByClassName() 메서드"></a><code>getElementsByClassName()</code> 메서드</h4><ul>
+<li>클래스 이름 문자열을 매개변수로 받는다.</li>
+<li>NodeList 반환</li>
+<li>호출한 요소의 자손만 쿼리하여 반환한다.</li>
+</ul>
+<h4 id="classList-프로퍼티"><a href="#classList-프로퍼티" class="headerlink" title="classList 프로퍼티"></a>classList 프로퍼티</h4><ul>
+<li>클래스 이름을 조작할 때는 <code>className</code> 프로퍼티를 이용해 클래스 이름을 추가하거나 제거, 교체했다.<ul>
+<li>한 요소에 클래스가 3가지가 적용되어 있을 경우 이름 변경에 불편함이 있다.</li>
+</ul>
+</li>
+<li>classList 프로퍼티는 <a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList" target="_blank" rel="external">DOMTokenList</a>란 새 컬렉션 타입의 인스턴스이다.<ul>
+<li>다른 DOM 컬렉션과 마찬가지로 length존재 item() 메서드나 대괄호 표기법을 통해 데이터를 갖고올 수 있다.</li>
+</ul>
+</li>
+<li>크롬과 파폭3.6이상 가능</li>
+</ul>
+<p><img src="/images/post_img/61/01.png"></p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList" target="_blank" rel="external">DOMTokenList</a>의 메서드</p>
+<ul>
+<li>add(value) : 주어진 문자열 값을 목록에 추가한다.</li>
+<li>contains(value) : 주어진 값이 목록에 존재하면 true, 그렇지 않으면 false</li>
+<li>remove(value) : 주어진 문자열 값을 목록에서 제거</li>
+<li>toggle(value) : 값이 목록에 존재하면 제거하고 그렇지 않으면 추가</li>
+</ul>
+<hr>
+<h3 id="3-2-포커스-관리"><a href="#3-2-포커스-관리" class="headerlink" title="3-2. 포커스 관리"></a>3-2. 포커스 관리</h3><ul>
+<li>어느 요소에 포커스가 있는지, 현재 문서에 포커스가 있는지 판단하는 능력은 웹 접근성에 대단히 중요.</li>
+</ul>
+<h4 id="document-activeElement"><a href="#document-activeElement" class="headerlink" title="document.activeElement"></a><code>document.activeElement</code></h4><ul>
+<li>항상 현재 포커스를 가진 DOM 요소를 가리키는 포인터를 포함한다.</li>
+<li>키보드 탭 키를 통한 포커스, focus() 메서드로 자동 포커스를 받는다.</li>
+</ul>
+<h4 id="document-hasFocus"><a href="#document-hasFocus" class="headerlink" title="document.hasFocus()"></a><code>document.hasFocus()</code></h4><ul>
+<li>문서에 포커스가 있는지 나타내는 불리언 값을 반환한다.</li>
+</ul>
+<hr>
+<h3 id="3-3-HTMLDocument의-변화"><a href="#3-3-HTMLDocument의-변화" class="headerlink" title="3-3. HTMLDocument의 변화"></a>3-3. HTMLDocument의 변화</h3><h4 id="readyState-프로퍼티"><a href="#readyState-프로퍼티" class="headerlink" title="readyState 프로퍼티"></a>readyState 프로퍼티</h4><ul>
+<li>readyState 프로퍼티에 가능한 값은 2가지 이다.<ul>
+<li>loading</li>
+<li>complete</li>
+</ul>
+</li>
+<li>문서를 불러왔는지 확인하는 것</li>
+<li>보통은 onload 이벤트 핸들러를 사용했다.</li>
+</ul>
+<h4 id="lt-head-gt-프로퍼티"><a href="#lt-head-gt-프로퍼티" class="headerlink" title="&lt;head&gt; 프로퍼티"></a><code>&lt;head&gt;</code> 프로퍼티</h4><ul>
+<li><code>document.head</code>로도 <code>&lt;head&gt;</code>요소 참조가 가능하다.</li>
+<li>크롬과 사파리 5 가능</li>
+</ul>
+<hr>
+<h3 id="3-4-문자셋-프로퍼티"><a href="#3-4-문자셋-프로퍼티" class="headerlink" title="3-4. 문자셋 프로퍼티"></a>3-4. 문자셋 프로퍼티</h3><ul>
+<li>문서의 문자셋을 다루는 프로퍼티</li>
+</ul>
+<h4 id="document-charset"><a href="#document-charset" class="headerlink" title="document.charset"></a><code>document.charset</code></h4><ul>
+<li>문서의 문자셋을 나타내며, 새 문자셋 지정도 가능</li>
+<li>파폭, 사파리, 오페라, 크롬</li>
+</ul>
+<h4 id="document-defaultCharset"><a href="#document-defaultCharset" class="headerlink" title="document.defaultCharset"></a><code>document.defaultCharset</code></h4><ul>
+<li>브라우저 및 시스템의 기본 설정에 따라 문서에 기본적으로 적용해야 할 문자셋을 나타낸다.</li>
+<li>IE, 사파리, 크롬</li>
+</ul>
+<hr>
+<h3 id="3-5-커스텀-데이터-속성-data"><a href="#3-5-커스텀-데이터-속성-data" class="headerlink" title="3-5. 커스텀 데이터 속성 data-"></a>3-5. 커스텀 데이터 속성 <code>data-</code></h3><ul>
+<li>HTML5 요소에서는 요소의 렌더링에 필요한 정보나 시맨틱 값이 아닌 데이터를 접두사 <strong>data-</strong>가 붙은 비표준 속성에 제공하도록 한다.</li>
+<li>data- 뒤에는 자유롭게 네이밍</li>
+<li>요소의 <strong>dataset</strong>프로퍼티를 통해 접근할 수 있다.</li>
+<li>이름-값 쌍으로 이루어진 <code>DOMStringMap</code> 인스턴스이다.</li>
+<li>커스텀 데이터 속성은 요소에 데이터를 연결해야 하지만 사용자에게는 보이고 싶지 않을 때 유용하다.</li>
+<li>이 테크닉은 링크 추적, 매시업에서 페이지 각 부분의 식별자로 흔히 쓰인다.</li>
+</ul>
+<p><img src="/images/post_img/61/03.png"><br><img src="/images/post_img/61/02.png"></p>
+<hr>
+<h3 id="3-6-마크업-삽입"><a href="#3-6-마크업-삽입" class="headerlink" title="3-6. 마크업 삽입"></a>3-6. 마크업 삽입</h3><p>마크업이 포함된 콘텐츠를 추가하는 것은 <a href="https://namu.wiki/w/XSS" target="_blank" rel="external">크로스 스크립팅 공격</a>(XSS: Cross-Site Scripting Attacks)에 취약하다.</p>
+<hr>
+<h4 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h4><ol>
+<li>읽기모드 : 요소와 주석, 텍스트 노드 등의 자식 노드를 모두 나타내는 HTML 표현을 반환한다.<ul>
+<li>innerHTML이 어떤 텍스트를 반활할지는 브라우저마다 다르다.</li>
+</ul>
+</li>
+<li>쓰기모드 : 주어진 값을 바탕으로 새 DOM 서브트리를 만들어서 요소의 잣기 노드를 완전히 교체한다.<ul>
+<li>주어진 문자열을 DOM 서브트리로 파싱해 이미 존재하는 자식 노드를 모두 교체한다.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>모든 요소가 innerHTML을 지원하지 않는다. <ul>
+<li>col, colgroup, framset, head, html, style, table, tbody, thead, tfoot, tr, title도 지원하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="outerHTML"><a href="#outerHTML" class="headerlink" title="outerHTML"></a>outerHTML</h4><ol>
+<li>읽기모드 : 호출한 HTML 요소를 자식 노드와 <strong>함께</strong> 반환</li>
+<li>쓰기모드 : 주어진 HTML 문자열을 파싱하여 DOM 서브트리를 생성하고 호출한 노드 전체를 교환하다.</li>
+</ol>
+<ul>
+<li>나머지 특징은 innerHTML과 동일</li>
+</ul>
+<hr>
+<h4 id="insertAdjacentHTML-메서드"><a href="#insertAdjacentHTML-메서드" class="headerlink" title="insertAdjacentHTML() 메서드"></a>insertAdjacentHTML() 메서드</h4><ul>
+<li>삽입할 위치와 HTML 텍스트 두 가지를 매개변수로 받는다.</li>
+</ul>
+<p>삽입할 위치 매개변수</p>
+<ul>
+<li><code>beforebegin</code> : 호출한 요소 바로 앞에 삽입</li>
+<li><code>afterbegin</code> : 호출한 요소 첫번째 자식 요소 바로 앞에 삽입</li>
+<li><code>beforeend</code> : 호출한 요소 마지막 자식 요소 바로 다음에 삽입</li>
+<li><code>afterend</code> : 호출한 요소 바로 다음에 삽입</li>
+</ul>
+<p><img src="/images/post_img/61/04.png"></p>
+<hr>
+<h4 id="메모리와-성능-문제"><a href="#메모리와-성능-문제" class="headerlink" title="메모리와 성능 문제"></a>메모리와 성능 문제</h4><ul>
+<li>위의 메서드들로 자식 노드를 교체하면 메모리에 문제가 생길 수 있는데 IE가 특히 심하다.<br>문제가 발생하는 지점</li>
+<li>제거한 서브트리 요소에 이벤트 핸들러나 기타 자바스크립트 객체가 할당되어 있을 때</li>
+<li>위의 상태에서 해당 핸들러나 프로퍼티를 사용하여 요소를 문서트리에서 제거한다면, 요소와 이벤트 핸들러 사이의 연결이 메모리에 남는다.<ul>
+<li>이른 작업이 계속되면 메모리 사용량이 점점 늘어난다.</li>
+<li>innerHTML, insertAdjacentHTML() 사용할 때는 제거할 요소의 이벤트 핸들러나 자바스크립트 객체 프로퍼티를 모두 제거하길 권한다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-7-scrollIntoView-메서드"><a href="#3-7-scrollIntoView-메서드" class="headerlink" title="3-7. scrollIntoView() 메서드"></a>3-7. scrollIntoView() 메서드</h3><p>모든 HTML요소에 존재하며 브라우저 창이나 컨테이너 요소를 스크롤해서 해당 요소가 뷰포트에 보이게 한다.</p>
+<ul>
+<li>매개변수로 true나 생략하면 창 전체를 스크롤하여 요소 상단과 뷰포트 상단을 맞춘다.</li>
+</ul>
+<hr>
+<hr>
+<h2 id="4-전용-확장"><a href="#4-전용-확장" class="headerlink" title=" 4. 전용 확장"></a><a name="location"></a> 4. 전용 확장</h2><ol>
+<li>문서모드</li>
+<li>children 프로퍼티</li>
+<li>contains() 메서드</li>
+<li>마크업 삽입<ul>
+<li>innerText 프로퍼티</li>
+<li>outerText 프로퍼티</li>
+</ul>
+</li>
+<li>스크롤</li>
+</ol>
+<hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://meetup.toast.com/posts/89" target="_blank" rel="external">http://meetup.toast.com/posts/89</a></li>
+<li><a href="http://poiemaweb.com/js-dom" target="_blank" rel="external">http://poiemaweb.com/js-dom</a></li>
 </ol>
-<h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3><ol>
-<li>MIME타입</li>
-<li>Gecko</li>
-</ol>
-
+<h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3>
         </div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- firstAd -->
@@ -241,7 +457,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/31/JS_08_3/" data-id="cjbx62rdj001d3q2m3o2c6vz2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/28/JS_08_4/" data-id="cjbyuee200015sm2mhg5nv0ve" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -370,9 +586,9 @@ ga('send', 'pageview');
     </a>
     
     
-        <a href="/2017/12/30/JS_08_2/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/27/JS_08_2/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">8/ DOM(1) - 노드의 계층 구조(1)</p>
+        <p class="article-nav-title">8/ DOM(1) - 노드의 계층 구조(2)</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -431,30 +647,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/31/JS_08_3/" class="thumbnail">
+                            <a href="/2017/12/28/JS_08_4/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/60/thumb_default.jpg)" alt="8/ DOM(2) - DOM 다루기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/31/JS_08_3/" class="title">8/ DOM(2) - DOM 다루기</a></p>
-                            <p class="item-date"><time datetime="2017-12-31T12:20:19.000Z" itemprop="datePublished">2017-12-31</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/61/thumb_default.jpg)" alt="8/ DOM 확장" class="thumbnail-image"></span>
     
     
 </a>
@@ -463,15 +659,35 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/28/JS_08_4/" class="title">8/ DOM 확장</a></p>
+                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_1/" class="thumbnail">
+                            <a href="/2017/12/27/JS_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/27/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-27T12:20:19.000Z" itemprop="datePublished">2017-12-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/26/JS_08_1/" class="thumbnail">
     
     
         <span style="background-image:url(/images/post_img/58/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
@@ -483,8 +699,8 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/26/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-26T12:20:19.000Z" itemprop="datePublished">2017-12-26</time></p>
                         </div>
                     </li>
                 
@@ -579,7 +795,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/12/31/JS_08_3/';
+    var disqus_url = 'http://feel5ny.github.io/2017/12/28/JS_08_4/';
     
     (function() {
     var dsq = document.createElement('script');

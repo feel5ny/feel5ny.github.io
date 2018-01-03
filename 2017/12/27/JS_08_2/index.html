@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>8/ DOM(1) - 노드의 계층 구조(1) | 필오의 개발일지</title>
+    <title>8/ DOM(1) - 노드의 계층 구조(2) | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,21 +14,21 @@
     <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  Node 타입 Document 타입 Element 타입 Text 타입 텍스트 노드 생성 텍스트 노드 통일 텍스트 노드 분할   Comment 타입 CDATASection 타입 DocumentType 타입 DocumentFra">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(1)">
-<meta property="og:url" content="http://feel5ny.github.io/2017/12/30/JS_08_2/index.html">
+<meta property="og:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(2)">
+<meta property="og:url" content="http://feel5ny.github.io/2017/12/27/JS_08_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
 <meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  Node 타입 Document 타입 Element 타입 Text 타입 텍스트 노드 생성 텍스트 노드 통일 텍스트 노드 분할   Comment 타입 CDATASection 타입 DocumentType 타입 DocumentFra">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/59/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-01-01T16:30:38.000Z">
+<meta property="og:updated_time" content="2018-01-03T07:08:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(1)">
+<meta name="twitter:title" content="8&#x2F; DOM(1) - 노드의 계층 구조(2)">
 <meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  Node 타입 Document 타입 Element 타입 Text 타입 텍스트 노드 생성 텍스트 노드 통일 텍스트 노드 분할   Comment 타입 CDATASection 타입 DocumentType 타입 DocumentFra">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/59/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/30/JS_08_2/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/27/JS_08_2/"/>
     
         <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -177,7 +177,7 @@ ga('send', 'pageview');
                 
     
         <h1 class="article-title" itemprop="name">
-        8/ DOM(1) - 노드의 계층 구조(1)
+        8/ DOM(1) - 노드의 계층 구조(2)
         </h1>
     
 
@@ -187,8 +187,8 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2017/12/30/JS_08_2/" class="article-date">
-            <time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time>
+        <a href="/2017/12/27/JS_08_2/" class="article-date">
+            <time datetime="2017-12-27T12:20:19.000Z" itemprop="datePublished">2017-12-27</time>
         </a>
     </div>
 
@@ -226,7 +226,42 @@ ga('send', 'pageview');
 </ol>
 <hr>
 <hr>
-<h1 id="노드의-계층-구조"><a href="#노드의-계층-구조" class="headerlink" title="노드의 계층 구조"></a>노드의 계층 구조</h1><h2 id="4-Text-타입"><a href="#4-Text-타입" class="headerlink" title=" 4. Text 타입"></a><a name="text"></a> 4. Text 타입</h2><h3 id="텍스트-노드-생성"><a href="#텍스트-노드-생성" class="headerlink" title="텍스트 노드 생성"></a>텍스트 노드 생성</h3><h3 id="텍스트-노드-통일"><a href="#텍스트-노드-통일" class="headerlink" title="텍스트 노드 통일"></a>텍스트 노드 통일</h3><h3 id="텍스트-노드-분할"><a href="#텍스트-노드-분할" class="headerlink" title="텍스트 노드 분할"></a>텍스트 노드 분할</h3><hr>
+<h2 id="4-Text-타입"><a href="#4-Text-타입" class="headerlink" title=" 4. Text 타입"></a><a name="text"></a> 4. Text 타입</h2><ul>
+<li>이 노드에는 평범한 텍스트가 포함되고 글자 그대로 사용된다.</li>
+<li>이스케이프된 HTML 문자는 포함할 수 있지만 HTML 코드는 포함할 수 없다.</li>
+</ul>
+<h4 id="Text-노드의-특징"><a href="#Text-노드의-특징" class="headerlink" title="Text 노드의 특징"></a>Text 노드의 특징</h4><ul>
+<li>nodeType은 <strong>3</strong></li>
+<li>nodeType은 <strong>“#text”</strong></li>
+<li>parentNode는 <strong>Element</strong></li>
+<li><strong>자식 노드를 가질 수 없다.</strong></li>
+</ul>
+<p><img src="/images/post_img/59/textNode.jpg"></p>
+<ul>
+<li>Text 노드에 포함된 텍스트는 nodeValue 프로퍼티나 data 프로퍼티로 가져올 수 있다.</li>
+<li>둘중에 하나를 바꾸면 노드에 반영된다.</li>
+<li>공백도 length값에 포함된다.</li>
+<li>텍스트 노드의 값을 바꿀때 알아둬야 할 점은 문자열이 문서 타입에 따라 HTML 또는 XML에 맞게 인코드 된다.</li>
+</ul>
+<h4 id="텍스트를-조작하는-메서드"><a href="#텍스트를-조작하는-메서드" class="headerlink" title="텍스트를 조작하는 메서드"></a>텍스트를 조작하는 메서드</h4><ul>
+<li>appendData(text) : 노드 마지막에 text 추가.</li>
+<li>deleteData(offset, count) : offset부터 count만큼 삭제</li>
+<li>insertData(offset, count, text) : offset 위치에 text 삽입</li>
+<li>replaceData(offset, count, text) : offset부터 (offset + count) 까지의 텍스트를 text로 교체</li>
+<li>splitText(offset) : offset 위치를 기준으로 텍스트 노드를 둘로 나눈다.</li>
+<li>substringData(offset, count) : offset위치부터 (offset + count)까지의 텍스트를 꺼낸다.</li>
+</ul>
+<h3 id="텍스트-노드-생성-document-createTextNode"><a href="#텍스트-노드-생성-document-createTextNode" class="headerlink" title="텍스트 노드 생성 document.createTextNode()"></a>텍스트 노드 생성 <code>document.createTextNode()</code></h3><ul>
+<li>매개변수로 삽입할 텍스트를 받는다.</li>
+<li>새 텍스트 노드를 생성하면 ownerDocument 프로퍼티가 설정되지만 문서 트리에 삽입하기 전에는 브라우저 창에 표시되지 않는다.</li>
+<li>일반적으로 요소는 단 하나의 자식 텍스트 토드만 가진다.<ul>
+<li>여러 개를 가질 때도 있다.</li>
+<li>이때 <code>normalize()</code>를 사용하면 두 가지 텍스트가 공백없이 합쳐진다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">element.className = <span class="string">"message"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>)</span><br><span class="line">element.appendChild(textNode);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(element);</span><br></pre></td></tr></table></figure>
+<h3 id="텍스트-노드-통일-normalize"><a href="#텍스트-노드-통일-normalize" class="headerlink" title="텍스트 노드 통일 normalize()"></a>텍스트 노드 통일 <code>normalize()</code></h3><h3 id="텍스트-노드-분할-splitText"><a href="#텍스트-노드-분할-splitText" class="headerlink" title="텍스트 노드 분할 splitText()"></a>텍스트 노드 분할 <code>splitText()</code></h3><hr>
 <hr>
 <h2 id="5-Comment-타입"><a href="#5-Comment-타입" class="headerlink" title=" 5. Comment 타입"></a><a name="Comment"></a> 5. Comment 타입</h2><hr>
 <hr>
@@ -261,7 +296,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/30/JS_08_2/" data-id="cjbx62rdi001a3q2m31q09hgk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/27/JS_08_2/" data-id="cjbyuee26001ism2mdh6tglvl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -379,18 +414,18 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2017/12/31/JS_08_3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/12/28/JS_08_4/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            8/ DOM(2) - DOM 다루기
+            8/ DOM 확장
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2017/12/30/JS_08_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/12/26/JS_08_1/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
         <p class="article-nav-title">8/ DOM(1) - 노드의 계층 구조(1)</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
@@ -451,30 +486,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/31/JS_08_3/" class="thumbnail">
+                            <a href="/2017/12/28/JS_08_4/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/post_img/60/thumb_default.jpg)" alt="8/ DOM(2) - DOM 다루기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/31/JS_08_3/" class="title">8/ DOM(2) - DOM 다루기</a></p>
-                            <p class="item-date"><time datetime="2017-12-31T12:20:19.000Z" itemprop="datePublished">2017-12-31</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/post_img/61/thumb_default.jpg)" alt="8/ DOM 확장" class="thumbnail-image"></span>
     
     
 </a>
@@ -483,15 +498,35 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/28/JS_08_4/" class="title">8/ DOM 확장</a></p>
+                            <p class="item-date"><time datetime="2017-12-28T12:20:19.000Z" itemprop="datePublished">2017-12-28</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/12/30/JS_08_1/" class="thumbnail">
+                            <a href="/2017/12/27/JS_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/59/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2017/12/27/JS_08_2/" class="title">8/ DOM(1) - 노드의 계층 구조(2)</a></p>
+                            <p class="item-date"><time datetime="2017-12-27T12:20:19.000Z" itemprop="datePublished">2017-12-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/26/JS_08_1/" class="thumbnail">
     
     
         <span style="background-image:url(/images/post_img/58/thumb_default.jpg)" alt="8/ DOM(1) - 노드의 계층 구조(1)" class="thumbnail-image"></span>
@@ -503,8 +538,8 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2017/12/30/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
-                            <p class="item-date"><time datetime="2017-12-30T12:20:19.000Z" itemprop="datePublished">2017-12-30</time></p>
+                            <p class="item-title"><a href="/2017/12/26/JS_08_1/" class="title">8/ DOM(1) - 노드의 계층 구조(1)</a></p>
+                            <p class="item-date"><time datetime="2017-12-26T12:20:19.000Z" itemprop="datePublished">2017-12-26</time></p>
                         </div>
                     </li>
                 
@@ -599,7 +634,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2017/12/30/JS_08_2/';
+    var disqus_url = 'http://feel5ny.github.io/2017/12/27/JS_08_2/';
     
     (function() {
     var dsq = document.createElement('script');
