@@ -20,7 +20,7 @@
 <meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체1.1 전역 스코프 : window.전역변수명, window.전역함수명1.2 창 사이의 관계와 프레임1.3 창의 위치 : screenLeft, screenTop1.4 창의 크기 : innerWidth, out">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/56/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-01-03T07:08:20.000Z">
+<meta property="og:updated_time" content="2018-01-04T04:47:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7&#x2F; BOM (브라우저 객체 모델)">
 <meta name="twitter:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체1.1 전역 스코프 : window.전역변수명, window.전역함수명1.2 창 사이의 관계와 프레임1.3 창의 위치 : screenLeft, screenTop1.4 창의 크기 : innerWidth, out">
@@ -337,7 +337,7 @@ ga('send', 'pageview');
 <blockquote>
 <p>큐?  Task 큐와 이벤트 루프이다. Task 큐는 말 그대로 콜백 함수들이 대기하는 큐(FIFO) 형태의 배열이라 할 수 있고, 이벤트 루프는 호출 스택이 비워질 때마다 큐에서 콜백 함수를 꺼내와서 실행하는 역할을 해 준다.</p>
 </blockquote>
-<p><code>clearTimeout(setTimeout이 할당된 변수이름)</code> : 타임아웃을 취소할 때 사용한다.</p>
+<p><code>clearTimeout(setTimeout이 할당된 변수이름. 혹은 id값)</code> : 타임아웃을 취소할 때 사용한다.</p>
 <h4 id="128171-setInterval"><a href="#128171-setInterval" class="headerlink" title="&#128171; setInterval()"></a>&#128171; <code>setInterval()</code></h4><p>페이지가 종료되거나 인터벌을 취소하기 전에는 일정 시간마다 코드를 반복 실행한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'test'</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure></p>
 <p><code>clearInterval()</code> : 인터벌을 취소한다.<br>인터벌을 취소하지 않으면 페이지가 떠 있는 동안은 계속 실행되므로 <strong>인터벌 취소는 timeout 취소보다 중요</strong></p>
 <hr>
@@ -369,7 +369,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cjbyuee1z0012sm2m93bzdtio" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cjc0rg3ob0012fl2m6bhr6lme" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -274,14 +274,14 @@ code {
 .logo {
   display: block;
   padding: 10px 0;
-  width: 375px;
-  height: 216px;
-  background-image: url("/images/logo_typing.gif");
+  width: 200px;
+  height: 200px;
+  background-image: url("/images/logo-ny.jpg");
   background-position: 0px 10px;
   background-repeat: no-repeat;
-  -webkit-background-size: 375px 216px;
-  -moz-background-size: 375px 216px;
-  background-size: 375px 216px;
+  -webkit-background-size: 200px 200px;
+  -moz-background-size: 200px 200px;
+  background-size: 200px 200px;
 }
 .main-body {
   margin-top: -60px;
@@ -387,7 +387,7 @@ code {
 }
 #header-title .subtitle {
   font-size: 16px;
-  line-height: 226px;
+  line-height: 210px;
   color: #16325c;
 }
 .nav-container .nav-icon,
@@ -1655,11 +1655,11 @@ a.article-title:hover {
   line-height: 22px;
 }
 #footer .logo {
-  width: 300px;
-  height: 172.8px;
-  -webkit-background-size: 300px 172.8px;
-  -moz-background-size: 300px 172.8px;
-  background-size: 300px 172.8px;
+  width: 160px;
+  height: 160px;
+  -webkit-background-size: 160px 160px;
+  -moz-background-size: 160px 160px;
+  background-size: 160px 160px;
 }
 i.icon {
   display: inline-block;

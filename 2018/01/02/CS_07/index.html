@@ -20,7 +20,7 @@
 <meta property="og:description" content="목록  dns subnet NAT port socket mac address    1. dnsDNS(도메인 네임 시스템)는 .com 또는 .net과 같은 특정 최상위 도메인(TLD)의 모든 도메인 네임 및 해당하는 IP 주소를 저장하는 데이터베이스입니다. DNS는 인터넷에서 컴퓨터 시스템과 리소스를 식별하고 찾습니다. 예를 들어, 웹 주소 또는 URL을 입">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/02/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-01-01T16:12:05.000Z">
+<meta property="og:updated_time" content="2018-01-03T12:32:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="기타 용어들">
 <meta name="twitter:description" content="목록  dns subnet NAT port socket mac address    1. dnsDNS(도메인 네임 시스템)는 .com 또는 .net과 같은 특정 최상위 도메인(TLD)의 모든 도메인 네임 및 해당하는 IP 주소를 저장하는 데이터베이스입니다. DNS는 인터넷에서 컴퓨터 시스템과 리소스를 식별하고 찾습니다. 예를 들어, 웹 주소 또는 URL을 입">
@@ -225,7 +225,10 @@ ga('send', 'pageview');
 <li>커뮤니케이션을 위해서는 양측의 사용자 또는 호스트가 관련되어 있는 발신지와 도착지 네트웍, 그리고 네트웍 내의 특정한 컴퓨터의 주소가 있어야 한다. 이 주소를 IP 주소라고 부른다. </li>
 <li>32 비트의 IP 주소는 크게 두 부분으로 나뉘는데, 하나는 네트웍을 식별하는 네트웍 번호이고, 다른 하나는 네트웍 내의 특정한 컴퓨터나 호스트를 식별하는 호스트 번호이다. </li>
 <li>한 기관에서 특정한 서브넷을 확인시키기 위해 컴퓨터나 호스트를 식별하는 주소 내의 비트들을 일부 사용할 수 있다. </li>
-<li>그러므로 실제로는 IP 주소에는 네트웍 번호, 서브넷 번호, 그리고 컴퓨터 번호 등 세 부분이 포함되어 있는 셈이다.<br><img src="/images/2018/02/ipaddress.jpg"></li>
+<li><p>그러므로 실제로는 IP 주소에는 네트웍 번호, 서브넷 번호, 그리고 컴퓨터 번호 등 세 부분이 포함되어 있는 셈이다.<br><img src="/images/2018/02/ipaddress.jpg"></p>
+</li>
+<li><p><a href="https://www.icann.org/" target="_blank" rel="external">https://www.icann.org/</a></p>
+</li>
 </ul>
 <hr>
 <h1 id="3-NAT-Network-Address-Translation"><a href="#3-NAT-Network-Address-Translation" class="headerlink" title=" 3. NAT (= Network Address Translation)"></a><a name="NAT"></a> 3. NAT (= Network Address Translation)</h1><ul>
@@ -265,7 +268,7 @@ ga('send', 'pageview');
 </ol>
 <hr>
 <h1 id="5-socket"><a href="#5-socket" class="headerlink" title=" 5. socket"></a><a name="socket"></a> 5. socket</h1><ul>
-<li>두 프로그램이 네트워크를 통해 서로 통신을 수행할 수 있도록 양쪽에 생성되는 링크의 단자입니다.</li>
+<li>두 프로그램이 네트워크를 통해 서로 통신을 수행할 수 있도록 양쪽에 생성되는 <strong>링크의 단자</strong>입니다.</li>
 <li>두 소켓이 연결되면 서로 다른 프로세스끼리 데이터를 전달할 수 있습니다.</li>
 <li>결국 소켓이 구현됨으로써 네트워크 및 전송 계층의 캡슐화가 가능해집니다. </li>
 <li><p>소켓은 원래 캘리포니아 버클리 대학 분교에서 UNIX용으로 개발되었으며,  UNIX에서의 입출력 메소드의 표준인 개방/읽기/쓰기/닫기 메커니즘을 따릅니다.</p>
@@ -278,6 +281,17 @@ ga('send', 'pageview');
 <li>그리고 직접적인 소켓 통신을 처리하는 함수는 아니지만 소켓 처리에 대해서 Multiplex처리(하나의 쓰레드, 혹은 적은 수의 쓰레드에서 여러 개의 소켓을 처리)를 해주는 select , epoll , IOCP 같은 기능적인 함수군도 염두해 두어야겠습니다.</li>
 </ul>
 <h2 id="6-MAC-address-Media-Access-Control-Address"><a href="#6-MAC-address-Media-Access-Control-Address" class="headerlink" title=" 6. MAC address (= Media Access Control Address)"></a><a name="mac-address"></a> 6. MAC address (= Media Access Control Address)</h2><p>MAC 주소는, 무선 LAN 카드 또는 무선 LAN 기능 내장 기기에 개별적으로 부여되는 16진수 12자리의 단말 식별 번호(예:12:34:56:78:90:AB)입니다. OS에 따라 “물리적 주소” 또는”Wi-Fi 주소”라고 표시됩니다.</p>
+<h2 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h2><ul>
+<li>동적 IP 할당</li>
+</ul>
+<ol>
+<li>특정 IP에서 오는 것 차단<ul>
+<li>ex. 특정 사이트 차단. 접속을 못하게 함. </li>
+<li>공유기 안에 혹은 라우팅 컴퓨터 안에서 설정.</li>
+</ul>
+</li>
+<li>특정 포트만 전송 가능</li>
+</ol>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="https://www.verisign.com/ko_KR/website-presence/online/domain-name-system/index.xhtml" target="_blank" rel="external">https://www.verisign.com/ko_KR/website-presence/online/domain-name-system/index.xhtml</a></li>
@@ -306,7 +320,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="cjbyuee1m000bsm2mqz4zfj6q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="cjc0rg3nx000afl2mynsd88gb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
