@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>11/ 정규표현식 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="목차  정규표현식 플래그 패턴 자주사용하는 정규표현식   JS Regular Expression RegExp Constructor RegExp Method RegExp.prototype.exec() RegExp.prototype.test()         1. 정규표현식RegExp.prototype.exec(text) :RegExp.prototype.te">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11&#x2F; 정규표현식">
+<meta property="og:url" content="http://feel5ny.github.io/2018/01/20/JS_11/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="목차  정규표현식 플래그 패턴 자주사용하는 정규표현식   JS Regular Expression RegExp Constructor RegExp Method RegExp.prototype.exec() RegExp.prototype.test()         1. 정규표현식RegExp.prototype.exec(text) :RegExp.prototype.te">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/06/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-01-21T14:09:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11&#x2F; 정규표현식">
+<meta name="twitter:description" content="목차  정규표현식 플래그 패턴 자주사용하는 정규표현식   JS Regular Expression RegExp Constructor RegExp Method RegExp.prototype.exec() RegExp.prototype.test()         1. 정규표현식RegExp.prototype.exec(text) :RegExp.prototype.te">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/06/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/01/20/JS_11/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-JS_11" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        11/ 정규표현식
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/01/20/JS_11/" class="article-date">
+            <time datetime="2018-01-20T12:20:19.000Z" itemprop="datePublished">2018-01-20</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p><strong>목차</strong></p>
+<ol>
+<li>정규표현식<ol>
+<li>플래그</li>
+<li>패턴</li>
+<li>자주사용하는 정규표현식</li>
+</ol>
+</li>
+<li>JS Regular Expression<ol>
+<li>RegExp Constructor</li>
+<li>RegExp Method<ol>
+<li>RegExp.prototype.exec()</li>
+<li>RegExp.prototype.test()</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<hr>
+<h2 id="1-정규표현식"><a href="#1-정규표현식" class="headerlink" title=" 1. 정규표현식"></a><a name="RegExp"></a> 1. 정규표현식</h2><p><img src="/images/2018/06/regular_expression.png" width="400px"><br><code>RegExp.prototype.exec(text)</code> :<br><code>RegExp.prototype.test(text)</code> : boolean값이 반환된다.<br><code>String.prototype.match(rxgexr)</code> : 매치되는 문자열들을 반환한다.<br><code>String.prototype.replace(rxgexr, &#39;&#39;)</code> : 첫번째 인자로 찾아진 문자열을 두번째 인자로 교체한다.<br><code>String.prototype.search(rxgexr)</code> : 배열의 길이<br><code>String.prototype.split(rxgexr)</code> : 인자값을 제외하고, 인자값을 기준으로 split된 배열이 반환됨.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'This is a pen.'</span>;</span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/is/ig</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// RegExp 객체의 메소드</span></span><br><span class="line"><span class="built_in">console</span>.log(regexr.exec(targetStr)); <span class="comment">// [ 'is', index: 2, input: 'This is a pen.' ]</span></span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// String 객체의 메소드</span></span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'is', 'is' ]</span></span><br><span class="line"><span class="built_in">console</span>.log(targetStr.replace(regexr, <span class="string">'IS'</span>)); <span class="comment">// ThIS IS a pen.</span></span><br><span class="line"><span class="built_in">console</span>.log(targetStr.search(regexr)); <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(targetStr.split(regexr));  <span class="comment">// [ 'Th', ' ', ' a pen.' ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-1-플래그"><a href="#1-1-플래그" class="headerlink" title="1.1 플래그"></a>1.1 플래그</h3><p>플래그는 옵션이므로 선택적으로 사용한다.<br>플래그를 사용하지 않은 경우 문자열 내 검색 매칭 대상이 1개 이상이더라도 <strong>첫번째 매칭한 대상만</strong>을 검색하고 종료한다.</p>
+<ul>
+<li><code>i</code> : ignore Case : <strong>대소문자를 구별하지 않고 검색한다.</strong></li>
+<li><code>g</code> : Global : <strong>문자열 내의 모든 패턴을 검색한다.</strong></li>
+<li><code>m</code> : Multi Line : <strong>문자열의 행이 바뀌더라도 검색을 계속한다.</strong></li>
+</ul>
+<hr>
+<hr>
+<h3 id="1-2-패턴"><a href="#1-2-패턴" class="headerlink" title="1.2 패턴"></a>1.2 패턴</h3><p>패턴에는 찾고자 하는 대상을 문자열로 지정한다.<br>또한 패턴은 특별한 의미를 가지는 메타문자(Metacharacter) 또는 기호로 표현할 수 있다. </p>
+<hr>
+<h4 id="1-2-1"><a href="#1-2-1" class="headerlink" title="1.2.1 /.../"></a>1.2.1 <code>/.../</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 임의의 문자 3개</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/.../</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA ', index: 0, input: 'AA BB Aa Bb' ]</span></span><br></pre></td></tr></table></figure>
+<p><code>.</code>은 임의의 문자 한 개를 의미한다. 문자의 내용은 무엇이든지 상관없다. 위의 경우 <code>.</code>를 3개 연속하여 패턴을 생성하였으므로 패턴과 일치하는 3자리 문자를 추출한다.<br>플래그가 없으므로 추출을 반복하지 않는다. 문자열 내의 모든 패턴을 검색하기 위해 <code>g</code>사용<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 임의의 문자 3개를 반복하여 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/.../g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA ', 'BB ', 'Aa ' ]</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="1-2-2-일치하는-문자-또는-문자열-추출"><a href="#1-2-2-일치하는-문자-또는-문자열-추출" class="headerlink" title="1.2.2 일치하는 문자 또는 문자열 추출 + | []"></a>1.2.2 일치하는 문자 또는 문자열 추출 <code>+</code> <code>|</code> <code>[]</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A'를 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr1 = <span class="regexp">/A/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr1)); <span class="comment">// 'A'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> regexr2 = <span class="regexp">/A/ig</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr2)); <span class="comment">// [ 'A', 'A', 'A', 'a' ]</span></span><br></pre></td></tr></table></figure>
+<p>앞선 패턴을 최소 한번 반복하려면 앞선 패턴 뒤에 <code>+</code>를 붙인다. 아래의 경우 앞선 패턴는 A이므로 A+는 AA 또는 A를 의미한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA AAA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/A+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'AAA', 'A' ]</span></span><br></pre></td></tr></table></figure></p>
+<p><code>|</code>를 사용하면 or의 의미를 가지게 된다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A' 또는 'B'를 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/A|B/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'A', 'A', 'B', 'B', 'A', 'B' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>분해되지 않은 단어 레벨로 추출하기 위해서는 +를 같이 사용하면 된다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA AAA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A' 또는 'B'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/A+|B+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'AAA', 'BB', 'A', 'B' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>위 예제는 패턴을 or로 한번 이상 반복하는 것인데 간단히 표현하면 아래와 같다.<br><code>[]</code>내의 문자는 or로 동작한다. 그 뒤에 <code>+</code>를 사용하여 앞선 패턴을 한번 이상 반복하게 한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A' 또는 'B'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[AB]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'BB', 'A', 'B' ]</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="1-2-3-범위지정"><a href="#1-2-3-범위지정" class="headerlink" title="1.2.3 범위지정"></a>1.2.3 범위지정</h4><h5 id="대문자-알파벳"><a href="#대문자-알파벳" class="headerlink" title="대문자 알파벳"></a>대문자 알파벳</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB ZZ Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A' ~ 'Z'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[A-Z]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'BB', 'ZZ', 'A', 'B' ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="대소문자-구별없는-알파벳-w"><a href="#대소문자-구별없는-알파벳-w" class="headerlink" title="대소문자 구별없는 알파벳 \w"></a>대소문자 구별없는 알파벳 <code>\w</code></h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb'</span>;</span><br><span class="line"><span class="comment">// 'A' ~ 'Z' 또는 'a' ~ 'z'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[A-Za-z]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'BB', 'Aa', 'Bb' ]</span></span><br></pre></td></tr></table></figure>
+<p><code>\w</code>는 알파벳과 숫자를 의미한다. <code>\W</code>는 <code>\w</code>와 반대로 동작한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb 24,000'</span>;</span><br><span class="line"><span class="comment">// 알파벳과 숫자 또는 ','가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[\w,]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA', 'BB', 'Aa', 'Bb', '24,000' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 알파벳과 숫자가 아닌 문자 또는 ','가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[\W,]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ ' ', ' ', ' ', ' ', ',' ]</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h5 id="숫자-추출하기"><a href="#숫자-추출하기" class="headerlink" title="숫자 추출하기"></a>숫자 추출하기</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb 24,000'</span>;</span><br><span class="line"><span class="comment">// '0' ~ '9'가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[0-9]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ '24', '000' ]</span></span><br></pre></td></tr></table></figure>
+<p><code>,</code>때문에 분리되는 것을 막기 위해 <code>,</code>를 범위 안에 포함시킨다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb 24,000'</span>;</span><br><span class="line"><span class="comment">// '0' ~ '9' 또는 ','가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[0-9,]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ '24,000' ]</span></span><br></pre></td></tr></table></figure></p>
+<p>숫자 추출하기를 간단하게 표현하면 아래와 같다.<br><code>\d</code>는 숫자를 의미한다. <code>\D</code>는 <code>\d</code>와 반대로 동작한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'AA BB Aa Bb 24,000'</span>;</span><br><span class="line"><span class="comment">// '0' ~ '9' 또는 ','가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[\d,]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ '24,000' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// '0' ~ '9'가 아닌 문자(숫자가 아닌 문자) 또는 ','가 한번이상 반복되는 문자열을 반복 검색</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[\D,]+/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(targetStr.match(regexr)); <span class="comment">// [ 'AA BB Aa Bb ', ',' ]</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<hr>
+<h3 id="1-3-자주-사용하는-정규표현식"><a href="#1-3-자주-사용하는-정규표현식" class="headerlink" title="1.3 자주 사용하는 정규표현식"></a>1.3 자주 사용하는 정규표현식</h3><h4 id="1-3-1-특정단어로-시작"><a href="#1-3-1-특정단어로-시작" class="headerlink" title="1.3.1 특정단어로 시작? ^"></a>1.3.1 특정단어로 시작? <code>^</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'abcdef'</span>;</span><br><span class="line"><span class="comment">// 'abc'로 시작하지 검사</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^abc/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-2-특정단어로-끝나나"><a href="#1-3-2-특정단어로-끝나나" class="headerlink" title="1.3.2 특정단어로 끝나나? $"></a>1.3.2 특정단어로 끝나나? <code>$</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'abcdef'</span>;</span><br><span class="line"><span class="comment">// 'ef'로 끝나는지 검사</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/ef$/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-3-숫자인가"><a href="#1-3-3-숫자인가" class="headerlink" title="1.3.3 숫자인가?"></a>1.3.3 숫자인가?</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'12345'</span>;</span><br><span class="line"><span class="comment">// 모두 숫자인지 검사</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^\d+$/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-4-공백인가-s"><a href="#1-3-4-공백인가-s" class="headerlink" title="1.3.4 공백인가? \s"></a>1.3.4 공백인가? <code>\s</code></h4><p><code>\s</code>는 공백을 의미한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">' Hi!'</span>;</span><br><span class="line"><span class="comment">// 1개 이상의 공백으로 시작하는지 검사</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^[\s]+/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-5-아이디로-사용-가능한가"><a href="#1-3-5-아이디로-사용-가능한가" class="headerlink" title="1.3.5 아이디로 사용 가능한가? {}"></a>1.3.5 아이디로 사용 가능한가? <code>{}</code></h4><p><code>{}</code> : 자리수를 의미한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'abc123'</span>;</span><br><span class="line"><span class="comment">// 알파벳 대소문자 또는 숫자로 시작하고 끝나며 4 ~10자리인지 검사</span></span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^[A-Za-z0-9]&#123;4,10&#125;$/</span></span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="1-3-6-메일주소-형식인가"><a href="#1-3-6-메일주소-형식인가" class="headerlink" title="1.3.6 메일주소 형식인가?"></a>1.3.6 메일주소 형식인가?</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'ungmo2@gmail.com'</span>;</span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]&#123;2,3&#125;$/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-7-현드폰-번호-형식인가"><a href="#1-3-7-현드폰-번호-형식인가" class="headerlink" title="1.3.7 현드폰 번호 형식인가?"></a>1.3.7 현드폰 번호 형식인가?</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'010-1234-5678'</span>;</span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/^\d&#123;3&#125;-\d&#123;3,4&#125;-\d&#123;4&#125;$/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-8-특수문자-포함인가"><a href="#1-3-8-특수문자-포함인가" class="headerlink" title="1.3.8 특수문자 포함인가?"></a>1.3.8 특수문자 포함인가?</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> targetStr = <span class="string">'abc#123'</span>;</span><br><span class="line"><span class="keyword">var</span> regexr = <span class="regexp">/[\&#123;\&#125;\[\]\/?.,;:|\)*~`!^\-_+&lt;&gt;@\#$%&amp;\\\=\(\'\"]/gi</span></span><br><span class="line"><span class="built_in">console</span>.log(regexr.test(targetStr)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h2 id="2-JS-Regular-Expression"><a href="#2-JS-Regular-Expression" class="headerlink" title=" 2. JS Regular Expression"></a><a name="RegExp"></a> 2. JS Regular Expression</h2><hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://poiemaweb.com/js-regexp" target="_blank" rel="external">http://poiemaweb.com/js-regexp</a></li>
+</ol>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/01/20/JS_11/" data-id="cjcov1wf5001dph2mg8ico275" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/01/21/jquery/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            jquery 뽀개기(1)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/01/05/log_003/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">git rebase와 삽질</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/21/jquery/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/05/thumb_default.jpg)" alt="jquery 뽀개기(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Jquery/">Jquery</a></p>
+                            <p class="item-title"><a href="/2018/01/21/jquery/" class="title">jquery 뽀개기(1)</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T01:10:04.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/20/JS_11/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/06/thumb_default.jpg)" alt="11/ 정규표현식" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/01/20/JS_11/" class="title">11/ 정규표현식</a></p>
+                            <p class="item-date"><time datetime="2018-01-20T12:20:19.000Z" itemprop="datePublished">2018-01-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/05/log_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/04/thumb_default.jpg)" alt="git rebase와 삽질" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
+                            <p class="item-title"><a href="/2018/01/05/log_003/" class="title">git rebase와 삽질</a></p>
+                            <p class="item-date"><time datetime="2018-01-05T14:23:55.000Z" itemprop="datePublished">2018-01-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/02/CS_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/02/thumb_default.jpg)" alt="기타 용어들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/02/CS_07/" class="title">기타 용어들</a></p>
+                            <p class="item-date"><time datetime="2018-01-02T09:23:55.000Z" itemprop="datePublished">2018-01-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/01/CS_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/01/thumb_default.jpg)" alt="3 way handshake" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/01/CS_06/" class="title">3 way handshake</a></p>
+                            <p class="item-date"><time datetime="2018-01-01T01:23:55.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">43</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 11.67px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/01/20/JS_11/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

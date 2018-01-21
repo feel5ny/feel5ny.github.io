@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>jquery 뽀개기(1) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="jquery" />
+    
+    
+    <meta name="description" content="basic html은 위에서 아래로 순차적으로 실행된다. jquery의 ready나 load메서드가 있을 경우 위에서 아래로 순차적으로 실행되지 않고 각 메서드의 특징별로 순서가 진행된다.  1. ready()제이쿼리 ready 메서드는 DOM이 완전히 로드되었을 때 코드를 실행하도록 구현되어있다.(리액트의 componentDidMount) 제이쿼리 3.0">
+<meta name="keywords" content="jquery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery 뽀개기(1)">
+<meta property="og:url" content="http://feel5ny.github.io/2018/01/21/jquery/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="basic html은 위에서 아래로 순차적으로 실행된다. jquery의 ready나 load메서드가 있을 경우 위에서 아래로 순차적으로 실행되지 않고 각 메서드의 특징별로 순서가 진행된다.  1. ready()제이쿼리 ready 메서드는 DOM이 완전히 로드되었을 때 코드를 실행하도록 구현되어있다.(리액트의 componentDidMount) 제이쿼리 3.0">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/05/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-01-21T12:58:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery 뽀개기(1)">
+<meta name="twitter:description" content="basic html은 위에서 아래로 순차적으로 실행된다. jquery의 ready나 load메서드가 있을 경우 위에서 아래로 순차적으로 실행되지 않고 각 메서드의 특징별로 순서가 진행된다.  1. ready()제이쿼리 ready 메서드는 DOM이 완전히 로드되었을 때 코드를 실행하도록 구현되어있다.(리액트의 componentDidMount) 제이쿼리 3.0">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/05/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/01/21/jquery/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs
+                        &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Jquery/">Jquery</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-jquery" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        jquery 뽀개기(1)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/01/21/jquery/" class="article-date">
+            <time datetime="2018-01-21T01:10:04.000Z" itemprop="datePublished">2018-01-21</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/jquery/">jquery</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><ul>
+<li>html은 위에서 아래로 순차적으로 실행된다.</li>
+<li>jquery의 ready나 load메서드가 있을 경우 위에서 아래로 순차적으로 실행되지 않고 각 메서드의 특징별로 순서가 진행된다.</li>
+</ul>
+<h2 id="1-ready"><a href="#1-ready" class="headerlink" title="1. ready()"></a>1. <code>ready()</code></h2><p>제이쿼리 <code>ready</code> 메서드는 <strong>DOM이 완전히 로드되었을 때 코드를 실행하도록 구현되어있다.</strong><br>(리액트의 <code>componentDidMount</code>)</p>
+<p>제이쿼리 3.0 이전 버전에서는, ready 메서드를 호출할 수 있는 몇 가지 방법이 있다.</p>
+<ul>
+<li><code>document</code> 엘리먼트로 호출 : <code>$(document).ready(handler);</code></li>
+<li>빈 엘리먼트로 호출 : <code>$().ready(handler);</code></li>
+<li>또는 특정 엘리먼트 없이 바로 호출 : <code>$(handler);</code></li>
+</ul>
+<h3 id="1-1-ready와-load-이벤트의-차이점"><a href="#1-1-ready와-load-이벤트의-차이점" class="headerlink" title="1-1. ready와 load 이벤트의 차이점"></a>1-1. ready와 load 이벤트의 차이점</h3><p>ready 이벤트는 DOM이 로드되고 <strong>엘리먼트 접근이 안전할 때</strong> 발생한다.<br>(= ready는 document 객체에 한해서만 적용되는 메소드.)<br>반대로 load 이벤트는 DOM과 모든 어셋들이 <strong>로드된 이후에</strong> 발생한다.</p>
+<ul>
+<li>모든 어셋들이 로드되기까지 로딩스피너를 보여주거나 이미지 사이즈를 계산하려고 한다면 load이벤트는 적절하다.</li>
+<li>외부자원 접근(images, scripts, frames, iframes 등)과 window 객체에 대해 적용되는 메소드이며 </li>
+</ul>
+<h2 id="2-입력값을-확인하고-변경하기-GET-SET"><a href="#2-입력값을-확인하고-변경하기-GET-SET" class="headerlink" title="2. 입력값을 확인하고 변경하기 (GET/SET)"></a>2. 입력값을 확인하고 변경하기 (GET/SET)</h2><h3 id="input의-hidden"><a href="#input의-hidden" class="headerlink" title="input의 hidden"></a>input의 hidden</h3><p>form태그 안에 hidden타입 input을 넣어 폼전송에 필요한 데이터를 담아 사용합니다. 혹은 보이지 않는 변수를 선언할 때 사용.</p>
+<h3 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h3><p><code>$(셀렉터).함수();</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// alert(document.getElementById("txt1").value);</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// var txt1 = $("#txt1").val()</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// var hdn1 = $("#hdn1").val()</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> slct1 = $(<span class="string">"#slct1"</span>).val()</span></span><br><span class="line"><span class="javascript">      <span class="comment">// alert(txt1)</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// alert(hdn1)</span></span></span><br><span class="line"><span class="undefined">      alert(slct1)</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txt1"</span> <span class="attr">value</span>=<span class="string">"제이쿼리를 뽀게버리겠다"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">id</span>=<span class="string">"hdn1 "</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"slct1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"select1"</span>&gt;</span>셀렉트1<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"select2"</span> <span class="attr">selected</span>=<span class="string">"selected"</span>&gt;</span>셀렉트2<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"select3"</span>&gt;</span>셀렉트3<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#txt1"</span>).val(<span class="string">"text2"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-내가-원하는-태그-속성과-HTML-값을-확인하고-변경하기"><a href="#3-내가-원하는-태그-속성과-HTML-값을-확인하고-변경하기" class="headerlink" title="3. 내가 원하는 태그 속성과 HTML 값을 확인하고 변경하기"></a>3. 내가 원하는 태그 속성과 HTML 값을 확인하고 변경하기</h2><h3 id="속성값-변경하기"><a href="#속성값-변경하기" class="headerlink" title="속성값 변경하기"></a>속성값 변경하기</h3><p><code>$(&#39;#div1&#39;).attr(&quot;style&quot;, &quot;color:red;&quot;)</code></p>
+<h3 id="자식-엘리먼트-트리-갖고오기"><a href="#자식-엘리먼트-트리-갖고오기" class="headerlink" title="자식 엘리먼트 트리 갖고오기"></a>자식 엘리먼트 트리 갖고오기</h3><p>GET: <code>$(&quot;#node1&quot;).html()</code><br>SET(html): <code>$(&quot;#node1&quot;).html(&quot;&lt;h1&gt;테스트&lt;/h1&gt;&quot;)</code><br>SET(text): <code>$(&quot;#node1&quot;).text(&quot;&lt;h1&gt;테스트&lt;/h1&gt;&quot;)</code> : html화 하지 않고 텍스트로만 출력된다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"node1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h2</span>&gt;</span>테이블입니다.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="4-내가-원하는-위치에-HTML-삽입하기"><a href="#4-내가-원하는-위치에-HTML-삽입하기" class="headerlink" title="4. 내가 원하는 위치에 HTML 삽입하기"></a>4. 내가 원하는 위치에 HTML 삽입하기</h2><p><code>before()</code><br><code>after()</code><br><code>prepend()</code><br><code>append()</code></p>
+<h2 id="5-셀렉터-알아보기"><a href="#5-셀렉터-알아보기" class="headerlink" title="5. 셀렉터 알아보기"></a>5. 셀렉터 알아보기</h2><p><code>$(&quot;input[name=rad]:checked&quot;).val()</code></p>
+<h3 id="input의-타입종류"><a href="#input의-타입종류" class="headerlink" title="input의 타입종류"></a>input의 타입종류</h3><ul>
+<li><code>text</code> : 기본값. 한 줄의 텍스트 입력 칸을 만듦 (기본 너비 문자는 20)</li>
+<li><code>password</code> : text 속성과 같지만, 문자를 숨겨서 표시 (별표)</li>
+<li><code>checkbox</code> : 체크박스를 만듦</li>
+<li><code>radio</code> : 라디오 버튼 만듦</li>
+<li><code>button</code> : 누름 버튼</li>
+<li><code>submit</code> : 전송 버튼</li>
+<li><code>reset</code> : 재설정 버튼</li>
+<li><code>file</code> : 파일 선택 창을 만듦.</li>
+<li><code>hidden</code> : 사용자에게 보이지 않는 숨김 창을 만듦.</li>
+<li><p><code>image</code> : 이미지로 된 전송 버튼을 만듦 (src 속성으로 이미지 url 지정)</p>
+</li>
+<li><p><code>color</code> : 색상 선택 창을 만듦.</p>
+</li>
+<li><code>date</code> : 날짜 입력 창을 만듦 (년/월/일)</li>
+<li><code>datetime</code> : 날짜 시간 창을 만듦 (년/월/일/시/분/초/초의 분할) 표준시간</li>
+<li><code>datetime-local</code> : 날짜 시간 차응ㄹ 만듦 (년/월/일/시/분/초/초의 분할) 표준시간 없음</li>
+<li><code>email</code> : email 주소 창을 만듦</li>
+<li><code>month</code> : 달과 년 창을 만듦 (표준 시간 없음)</li>
+<li><code>number</code> : 숫자 입력을 위한 창을 만듦(숫자 제한을 둘 수도 있음)<ul>
+<li>max : 최대값 / min: 최소값 / step: 허락하는 숫자간격 / value: 기본값</li>
+</ul>
+</li>
+<li><code>range</code> : 정확한 값이 중요하지 않는 숫자를 입력하는 창을 만듦 (슬라이더 장치처럼)</li>
+<li><code>search</code> : 검색 창을 만듦</li>
+<li><code>tel</code> : 전화번호 입력창을 만듦</li>
+<li><code>time</code> : 시간 입력 창을 만듦 (표준 시간 없음)</li>
+<li><code>url</code> : 주소 입력 창</li>
+<li><code>week</code> : 주와 년 입력 창 (표준시간 없음)</li>
+</ul>
+<h2 id="6-내가-원하는대로-태그에-스타일을-제어해보자"><a href="#6-내가-원하는대로-태그에-스타일을-제어해보자" class="headerlink" title="6. 내가 원하는대로 태그에 스타일을 제어해보자."></a>6. 내가 원하는대로 태그에 스타일을 제어해보자.</h2><p><code>$(&quot;div:eq(0)&quot;).css(&quot;color:red;&quot;)</code> : <code>div:eq(0)</code>란, div엘리먼트들 중에서 첫번째 div요소</p>
+<p>클래스 제어하기</p>
+<ul>
+<li><code>addClass(&quot;클래스명&quot;)</code> 클래스명을 지정된 셀렉터에 추가한다.</li>
+<li><code>removeClass(&quot;클래스명&quot;)</code> 클래스명을 지정된 셀렉터로부터 지운다.</li>
+<li><code>hasClass(&quot;클래스명&quot;)</code> 클래스명이 지정된 셀렉터로부터 존재하는지 여부를 판단. (return으로 boolean값)</li>
+</ul>
+<h2 id="7-traversing-함수-셀렉터를-시작으로-내가-추적하고자-하는-태그-알아내기"><a href="#7-traversing-함수-셀렉터를-시작으로-내가-추적하고자-하는-태그-알아내기" class="headerlink" title="7. traversing 함수. 셀렉터를 시작으로 내가 추적하고자 하는 태그 알아내기."></a>7. traversing 함수. 셀렉터를 시작으로 내가 추적하고자 하는 태그 알아내기.</h2><p><code>parent()</code> : 부모노드<br><code>find()</code> : 자식노드중 태그명을 찾는다.<br><code>prev()</code> : 같은 레벨에서의 직전 노드<br><code>next()</code> : 같은 레벨에서 다음 노드 (직후)</p>
+<h2 id="8-jquery용-for문인-each-함수에-대해서-알아보자"><a href="#8-jquery용-for문인-each-함수에-대해서-알아보자" class="headerlink" title="8. jquery용 for문인 each()함수에 대해서 알아보자."></a>8. jquery용 for문인 <code>each()</code>함수에 대해서 알아보자.</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./jquery-1.12.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">"div"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> a = $(<span class="keyword">this</span>).find(<span class="string">"input[type=text]"</span>).val()</span></span><br><span class="line"><span class="javascript">        <span class="comment">// $("div").eq(index) == $(this)</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// $(this)는 each문이나 이벤트에서 자주 사용한다.</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (index == <span class="number">1</span>)&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="undefined">        &#125; </span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(a)</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">      )</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"첫번째값"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"두번째값"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"세번째값"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"네번째값"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="9-마우스-키보드-이벤트-함수-사용해보고-이해하기-1"><a href="#9-마우스-키보드-이벤트-함수-사용해보고-이해하기-1" class="headerlink" title="9. 마우스 + 키보드 이벤트 함수 사용해보고 이해하기 (1)"></a>9. 마우스 + 키보드 이벤트 함수 사용해보고 이해하기 (1)</h2><h3 id="1-click"><a href="#1-click" class="headerlink" title="1. click"></a>1. <code>click</code></h3><ul>
+<li><code>on(&#39;click&#39;)</code>과의 차이점 : on을 사용하게되면, 추가된 요소에 더 적은 메모리를 사용하고 작업할 수 있기 때문에 <code>.click</code>보다 더 선호한다. (<a href="https://code.i-harness.com/ko/q/8b311e" target="_blank" rel="external">참고</a>)</li>
+</ul>
+<h3 id="1-1-click을-사용할-때"><a href="#1-1-click을-사용할-때" class="headerlink" title="1.1 click을 사용할 때"></a>1.1 <code>click</code>을 사용할 때</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button.alert"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>위와 같이 선택기와 일치하는 모든 단일 요소에 대해 <strong>별도의 처리기</strong>가 만들어집니다. 그 의미는<ul>
+<li>일치하는 요소가 많으면 많은 동일한 처리기가 만들어 지므로 메모리 사용 공간이 증가합니다.</li>
+<li>동적으로 추가 된 항목에는 처리기가 없습니다. 즉, 위의 html에 새로 추가 된 “경고!” 핸들러를 <strong>리 바인드</strong>하지 않으면 버튼이 작동하지 않습니다.  (= 동적으로 생성된 요소에는 먹히지 않는다는 말)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-on을-사용할-때"><a href="#1-2-on을-사용할-때" class="headerlink" title="1.2 .on을 사용할 때"></a>1.2 <code>.on</code>을 사용할 때</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"div#container"</span>).on(<span class="string">'click'</span>, <span class="string">'button.alert'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>동적으로 생성 된 요소를 포함하여 선택기와 일치하는 모든 요소에 대한 단일 처리기이다.</p>
+<ol>
+<li><code>keypress</code> : 콜백함수에서 이벤트 객체를 받을 수 있는데, 내부에 keyCode값이 있어서 어떤 키보드를 누르는지에대한 정보를 얻을 수 있다. </li>
+<li><code>keyup</code> : esc의 경우에는 keypress가 아니라 keyup에서 작동된다.</li>
+</ol>
+<h2 id="10-Ajax"><a href="#10-Ajax" class="headerlink" title="10. Ajax"></a>10. Ajax</h2><p>html로 받는 형태로만 정리하겠음.</p>
+<ul>
+<li>form action(url)과 url값은 같다. type(method), (post/get/put/delete/…)</li>
+<li>form은 알아서 input 태그들을 전송하지만, ajax는 data 속성을 줘야한다.</li>
+<li>data에는 post로 보낼때 보낼 data를 넣는다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  url: <span class="string">''</span>, </span><br><span class="line">  type: <span class="string">''</span>,</span><br><span class="line">  dataType: <span class="string">''</span>,</span><br><span class="line">  <span class="comment">// data: &#123;&#125;,</span></span><br><span class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>json 렌더하기<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      $(<span class="string">"#loadButton"</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">          url: <span class="string">"https://api.github.com/users"</span>,</span><br><span class="line">          type: <span class="string">'GET'</span>,</span><br><span class="line">          dataType: <span class="string">'json'</span>,</span><br><span class="line">          success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">            $.map(data, <span class="function"><span class="keyword">function</span> (<span class="params">data, i</span>) </span>&#123;</span><br><span class="line">              $(<span class="string">'#table'</span>).append(<span class="string">`&lt;tr&gt;&lt;td&gt;<span class="subst">$&#123;data.login&#125;</span>&lt;/td&gt;&lt;td&gt;&lt;img src=<span class="subst">$&#123;data.avatar_url&#125;</span>/&gt;&lt;/td&gt;&lt;/tr&gt;`</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="11-기타"><a href="#11-기타" class="headerlink" title="11. 기타"></a>11. 기타</h2><ol>
+<li><code>trim()</code><br>앞뒤의 공백제거만 가능하다.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = $(<span class="string">'#test'</span>).val()</span><br><span class="line">$.tring(text)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><code>remove()</code> <code>empty()</code><br><code>$(&quot;#showhide&quot;).empty();</code> : showhide라는 아이디값을 갖고 있는 요소의 자식요소들이 비워진다.<br><code>$(&quot;#showhide&quot;).remove();</code> : showhide라는 아이디값을 갖고 있는 요소가 삭제된다.(아예)</p>
+</li>
+<li><p>선택한 태그의 인덱스값만 알고싶을 때</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./jquery-1.12.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      $(<span class="string">'.btn'</span>).on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index = $(<span class="string">".btn"</span>).index(<span class="keyword">this</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 각 버튼을 누르면 해당되는 index의 레이어를 출력시켜라.</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 단, 다른 영역들은 닫혀야하고 클릭된 영역만을 보여줘야한다.</span></span></span><br><span class="line"><span class="javascript">        $(<span class="string">".layer"</span>).hide();</span></span><br><span class="line"><span class="javascript">        $(<span class="string">".layer"</span>).eq(index).show();</span></span><br><span class="line"><span class="undefined">      &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">value</span>=<span class="string">"버튼1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">value</span>=<span class="string">"버튼2"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">value</span>=<span class="string">"버튼3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layer"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">    레이어1입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어1입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어1입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어1입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layer"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">    레이어2입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어2입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어2입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어2입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layer"</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">    레이어3입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어3입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어3입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span> 레이어3입니다.</span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/01/21/jquery/" data-id="cjcov1wgl0045ph2m3aj7p83n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/01/20/JS_11/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">11/ 정규표현식</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/21/jquery/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/05/thumb_default.jpg)" alt="jquery 뽀개기(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Jquery/">Jquery</a></p>
+                            <p class="item-title"><a href="/2018/01/21/jquery/" class="title">jquery 뽀개기(1)</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T01:10:04.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/20/JS_11/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/06/thumb_default.jpg)" alt="11/ 정규표현식" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/01/20/JS_11/" class="title">11/ 정규표현식</a></p>
+                            <p class="item-date"><time datetime="2018-01-20T12:20:19.000Z" itemprop="datePublished">2018-01-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/05/log_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/04/thumb_default.jpg)" alt="git rebase와 삽질" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a></p>
+                            <p class="item-title"><a href="/2018/01/05/log_003/" class="title">git rebase와 삽질</a></p>
+                            <p class="item-date"><time datetime="2018-01-05T14:23:55.000Z" itemprop="datePublished">2018-01-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/02/CS_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/02/thumb_default.jpg)" alt="기타 용어들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/02/CS_07/" class="title">기타 용어들</a></p>
+                            <p class="item-date"><time datetime="2018-01-02T09:23:55.000Z" itemprop="datePublished">2018-01-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/01/CS_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/01/thumb_default.jpg)" alt="3 way handshake" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CS/">CS</a></p>
+                            <p class="item-title"><a href="/2018/01/01/CS_06/" class="title">3 way handshake</a></p>
+                            <p class="item-date"><time datetime="2018-01-01T01:23:55.000Z" itemprop="datePublished">2018-01-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">43</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 11.67px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/01/21/jquery/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
