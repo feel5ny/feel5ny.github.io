@@ -283,8 +283,8 @@ code {
   -moz-background-size: 200px 200px;
   background-size: 200px 200px;
 }
-#bm {
-  width: 200px;
+#bm svg {
+  width: 200px !important;
   margin: 0 auto;
 }
 .main-body {
