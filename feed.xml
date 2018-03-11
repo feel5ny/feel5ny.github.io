@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://feel5ny.github.io/"/>
-  <updated>2018-02-25T16:37:52.000Z</updated>
+  <updated>2018-03-11T13:35:23.000Z</updated>
   <id>http://feel5ny.github.io/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Angular 프로젝트에 prettier 코드포매터 세팅하기</title>
+    <link href="http://feel5ny.github.io/2018/03/11/angular_prettier/"/>
+    <id>http://feel5ny.github.io/2018/03/11/angular_prettier/</id>
+    <published>2018-03-11T09:23:55.000Z</published>
+    <updated>2018-03-11T13:35:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)</p></blockquote><hr><p><strong>목차</strong></p><ol><li><p>모듈 세팅</p><ul><li>프리티어 설치하기<ul><li>에디터에만 세팅하기</li><li>프로젝트에 세팅하기</li></ul></li><li>프리티어 옵션 값</li></ul></li><li><p>precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.</p><ul><li>lint stage</li><li>husky</li></ul></li></ol><hr><p>한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드 스타일이 다르기 때문에 <strong>통일성</strong>을 위해 코드 포메터를 사용하면 코드를 깔끔하게 공유할 수 있다. 현재 진행 중인 angular 프로젝트에 react 프로젝트에서 사용했었던 <strong>Prettier</strong>라는 포매터를 사용하기로 결정했다. 초반에 어떻게 세팅할지만 논의하면 된다.</p><p>프리티어를 엥귤러 프로젝트에 적용하면서 겪었던 부분을 글로 공유하고자 한다.<br>참고로 에디터는 <code>vscode</code>를 사용하고 있다.</p><p><img src="/images/2018/08/prettier.gif"></p><hr><h2 id="1-모듈-세팅"><a href="#1-모듈-세팅" class="headerlink" title="1. 모듈 세팅"></a>1. 모듈 세팅</h2><p>angular cli 로 프로젝트를 생성하면 기본 구조가 세팅이 되는데, 엥귤러는 타입스크립트가 주력 언어이므로 타입스크립트를 위한 tslint.json 파일과 tsconfig.json 파일이 함께 세팅된다.<br><code>tslint.json</code> 파일은 tslint 가 사용하는 linting(구문 체크) 설정 파일이다. tslint 란 An extensible linter for the TypeScript language. 즉 타입스크립트 린터이다!<br><img src="/images/2018/08/05.png" align="right" width="250px" style="margin-left: 10px;"><br>vscode 에서는 tslint 확장 프로그램을 설치하면 구문과 다른 곳을 빨간 줄로 표시해준다.<br><code>tsconfig.json</code>파일은 타입스크립트 컴파일 옵션 설정 파일이다.</p><h4 id="우리는-tslint의-옵션-포맷에-Prettier의-커스텀-옵션을-추가하기로-결정하였다"><a href="#우리는-tslint의-옵션-포맷에-Prettier의-커스텀-옵션을-추가하기로-결정하였다" class="headerlink" title="우리는 tslint의 옵션 포맷에 + Prettier의 커스텀 옵션을 추가하기로 결정하였다."></a>우리는 <strong>tslint</strong>의 옵션 포맷에 + <strong>Prettier</strong>의 커스텀 옵션을 추가하기로 결정하였다.</h4><hr><h3 id="1-1-프리티어-설치하기"><a href="#1-1-프리티어-설치하기" class="headerlink" title="1-1. 프리티어 설치하기"></a>1-1. 프리티어 설치하기</h3><p><img src="/images/2018/08/03.png"></p><p><strong>* 에디터에만 적용하기</strong><br>프리티어 <code>패키지</code>를 설치하는 방법과 <code>플러그인</code>으로 세팅하는 방법이 있다.<br>개인적으로만 사용하거나 다른 개발자들이 모두 vscode 를 사용한다면 프리티어 플러그인을 설치하고 workspace settings 에만 설정해도 프리티어 세팅은 완료된다.<br><code>Code &gt; Preference &gt; Settings &gt; Workspace Settings</code></p><p><img src="/images/2018/08/01.png" width="250px" align="left" style="margin-bottom:10px"><br><img src="/images/2018/08/02.png"><br>위처럼 폴더가 생성된다. 폴더를 팀원들과 공유해도 괜찮고, 혹은 아래 옵션 객체만 팀 내의 docs에 공유해도 괜찮다. (나중에 들어올 팀원이 vscode를 쓴다는 전제가 있어야..ㅎ)</p><hr><p><strong>* 프로젝트에 적용하기</strong><br>패키지 매니저로 프리티어를 설치한다.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prettier -D</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;prettier.printWidth&quot;: 80,</span><br><span class="line">  &quot;prettier.useTabs&quot;: false,</span><br><span class="line">  &quot;prettier.tabWidth&quot;: 2,</span><br><span class="line">  &quot;prettier.bracketSpacing&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>프리티어 옵션은 여러 가지 방식으로 세팅이 가능하다. rc 파일을 따로 만들어서 관리할 수도 있고, json 파일로 만들어서 관리를 할 수 있다. 우리 프로젝트에서는 package.json 파일에 포함시키기로 했다.</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    ...</span><br><span class="line">    "typescript": "~2.4.2"</span><br><span class="line">  &#125;,</span><br><span class="line">  "prettier": &#123;</span><br><span class="line">    "printWidth": 80,</span><br><span class="line">    "useTabs": false,</span><br><span class="line">    "tabWidth": 2,</span><br><span class="line">    "bracketSpacing": true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>vscode 세팅에서 <code>&quot;editor.formatOnSave&quot;: true</code>를 설정하면 저장하는 것과 동시에 프리티어가 적용된다.</p><hr><h3 id="1-2-프리티어-옵션-값"><a href="#1-2-프리티어-옵션-값" class="headerlink" title="1-2. 프리티어 옵션 값"></a>1-2. 프리티어 옵션 값</h3><p>프리티어에는 여러 가지 기본 옵션 값들이 있다. <a href="https://prettier.io/docs/en/options.html" target="_blank" rel="external">Prettier</a> 자세한 내용은 홈페이지에서 확인 가능하다.</p><ol><li>Print Width<ul><li>한 줄에서 wrap 이 되는 기준의 글자 수를 정한다.</li><li>default <code>80</code></li></ul></li><li>Tab Width<ul><li>탭의 스페이스 사이즈</li><li>default <code>2</code></li></ul></li><li>Tabs<ul><li>탭을 쓸 건지 안 쓸 건지</li><li>boolean</li></ul></li><li>Semicolons<ul><li>문장 마지막에 세미콜론을 붙일지 안 붙일지</li><li>boolean</li></ul></li><li>Quotes<ul><li>true 이면 single quate</li></ul></li><li>Trailing Commas<ul><li>마지막에 콤마 붙이기</li><li>none / es5 / all</li></ul></li><li>Bracket Spacing</li><li>JSX Brackets</li><li>Arrow Function Parentheses</li><li>Range</li><li>Parser</li><li>FilePath</li><li>Require pragma</li><li>Insert Pragma</li><li>Prose Wrap</li></ol><p>우리의 프로젝트에서는 아래의 옵션을 세팅했다.</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"printWidth"</span>: <span class="number">80</span>,</span><br><span class="line">  <span class="attr">"useTabs"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"tabWidth"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"bracketSpacing"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>printWidth 를 120 으로 하기도 하던데, 그건 취향껏! (에어비엔비는 80)</p><hr><h2 id="2-precommit-커밋-전-재포맷-하는-hook-추가"><a href="#2-precommit-커밋-전-재포맷-하는-hook-추가" class="headerlink" title="2. precommit, 커밋 전 재포맷 하는 hook 추가."></a>2. precommit, 커밋 전 재포맷 하는 hook 추가.</h2><p>개발자마다 쓰는 에디터가 다르고, 각자가 각자 에디터에 세팅하는 부분에서 나올 수 있는 에러들을 방지하기 위해 프로젝트 자체에 세팅한 후 커밋 할 때마다 세팅하는 방법이 있다.<br>pre-commit 툴과 함께 사용하면 되는데 많이들 사용하는 <code>husky</code>와 <code>lint-staged</code> 모듈을 사용하면 된다.</p><p>프리커밋 툴을 사용하면 git add 을 입력할 때 (<code>husky</code> : hook) 린트 옵션에 맞춰서 재포맷을(<code>lint-staged</code> : 재포맷) 시켜준다. 이때 옵션에 tslint 옵션도 재포맷 설정에 넣어줄 수 있으므로 git add 명령어 만으로 tslint 와 prettier 의 옵션들을 적용시킬 수 있다.</p><p><img src="/images/2018/08/04.png"></p><hr><p><strong>모듈 설치</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev lint-staged husky</span><br></pre></td></tr></table></figure><ol><li>package.json 에 precommit 스크립트를 추가하고</li><li>lint-staged 옵션을 추가하면 된다.<br>이때 prettier 를 읽는 스크립트와<br>tslint 를 검사하고 fix 하는 스크립트를 추가한다.</li></ol><p><code>tslint --fix -c tslint.json -p tsconfig.json</code><br>c 는 config 의 약어. tslint.json 파일의 옵션들을 확인하고 규칙에 맞춰서 fix 한다.<br>p 는 project 의 약어. tsconfig.json 파일에 적힌 파일 경로에서 린트될 파일을 찾는다.</p><hr><p><strong>package.json</strong></p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    ...,</span><br><span class="line">    "precommit": "lint-staged"</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">    "lint-staged": &#123;</span><br><span class="line">        "*.&#123;ts,tsx&#125;": [</span><br><span class="line">        "prettier --write",</span><br><span class="line">        "tslint --fix -c tslint.json -p tsconfig.json",</span><br><span class="line">        <span class="string">"git add"</span></span><br><span class="line">        ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>Reference</p><ul><li><a href="https://medium.com/@victormejia/setting-up-prettier-in-an-angular-cli-project-2f50c3b9a537" target="_blank" rel="external">Setting up Prettier in an Angular CLI Project</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;모듈 세팅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li
+      
+    
+    </summary>
+    
+      <category term="TIL &amp;#9997;" scheme="http://feel5ny.github.io/categories/TIL-9997/"/>
+    
+      <category term="Angular" scheme="http://feel5ny.github.io/categories/TIL-9997/Angular/"/>
+    
+    
+      <category term="angular" scheme="http://feel5ny.github.io/tags/angular/"/>
+    
+      <category term="prettier" scheme="http://feel5ny.github.io/tags/prettier/"/>
+    
+      <category term="formatter" scheme="http://feel5ny.github.io/tags/formatter/"/>
+    
+  </entry>
   
   <entry>
     <title>Airbnb - lottie - bodymovin 웹에서 사용해보기</title>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Angular 프로젝트에 prettier 코드포매터 세팅하기 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="angular,prettier,formatter" />
+    
+    
+    <meta name="description" content="개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)   목차  모듈 세팅  프리티어 설치하기 에디터에만 세팅하기 프로젝트에 세팅하기   프리티어 옵션 값   precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.  lint stage husky     한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드">
+<meta name="keywords" content="angular,prettier,formatter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 프로젝트에 prettier 코드포매터 세팅하기">
+<meta property="og:url" content="http://feel5ny.github.io/2018/03/11/angular_prettier/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)   목차  모듈 세팅  프리티어 설치하기 에디터에만 세팅하기 프로젝트에 세팅하기   프리티어 옵션 값   precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.  lint stage husky     한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/08/thumb_default.gif">
+<meta property="og:updated_time" content="2018-03-11T13:35:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular 프로젝트에 prettier 코드포매터 세팅하기">
+<meta name="twitter:description" content="개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)   목차  모듈 세팅  프리티어 설치하기 에디터에만 세팅하기 프로젝트에 세팅하기   프리티어 옵션 값   precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.  lint stage husky     한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/08/thumb_default.gif">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/03/11/angular_prettier/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    
+      <link rel="stylesheet" href="/css/style_night.css">
+    
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        
+                        <div style="color: #fcfafc; padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs
+                        &#10024;&#9994;</div> 
+                        
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Angular/">Angular</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-angular_prettier" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Angular 프로젝트에 prettier 코드포매터 세팅하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/03/11/angular_prettier/" class="article-date">
+            <time datetime="2018-03-11T09:23:55.000Z" itemprop="datePublished">2018-03-11</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/angular/">angular</a>, <a class="tag-link" href="/tags/formatter/">formatter</a>, <a class="tag-link" href="/tags/prettier/">prettier</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)</p>
+</blockquote>
+<hr>
+<p><strong>목차</strong></p>
+<ol>
+<li><p>모듈 세팅</p>
+<ul>
+<li>프리티어 설치하기<ul>
+<li>에디터에만 세팅하기</li>
+<li>프로젝트에 세팅하기</li>
+</ul>
+</li>
+<li>프리티어 옵션 값</li>
+</ul>
+</li>
+<li><p>precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.</p>
+<ul>
+<li>lint stage</li>
+<li>husky</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드 스타일이 다르기 때문에 <strong>통일성</strong>을 위해 코드 포메터를 사용하면 코드를 깔끔하게 공유할 수 있다. 현재 진행 중인 angular 프로젝트에 react 프로젝트에서 사용했었던 <strong>Prettier</strong>라는 포매터를 사용하기로 결정했다. 초반에 어떻게 세팅할지만 논의하면 된다.</p>
+<p>프리티어를 엥귤러 프로젝트에 적용하면서 겪었던 부분을 글로 공유하고자 한다.<br>참고로 에디터는 <code>vscode</code>를 사용하고 있다.</p>
+<p><img src="/images/2018/08/prettier.gif"></p>
+<hr>
+<h2 id="1-모듈-세팅"><a href="#1-모듈-세팅" class="headerlink" title="1. 모듈 세팅"></a>1. 모듈 세팅</h2><p>angular cli 로 프로젝트를 생성하면 기본 구조가 세팅이 되는데, 엥귤러는 타입스크립트가 주력 언어이므로 타입스크립트를 위한 tslint.json 파일과 tsconfig.json 파일이 함께 세팅된다.<br><code>tslint.json</code> 파일은 tslint 가 사용하는 linting(구문 체크) 설정 파일이다. tslint 란 An extensible linter for the TypeScript language. 즉 타입스크립트 린터이다!<br><img src="/images/2018/08/05.png" align="right" width="250px" style="margin-left: 10px;"><br>vscode 에서는 tslint 확장 프로그램을 설치하면 구문과 다른 곳을 빨간 줄로 표시해준다.<br><code>tsconfig.json</code>파일은 타입스크립트 컴파일 옵션 설정 파일이다.</p>
+<h4 id="우리는-tslint의-옵션-포맷에-Prettier의-커스텀-옵션을-추가하기로-결정하였다"><a href="#우리는-tslint의-옵션-포맷에-Prettier의-커스텀-옵션을-추가하기로-결정하였다" class="headerlink" title="우리는 tslint의 옵션 포맷에 + Prettier의 커스텀 옵션을 추가하기로 결정하였다."></a>우리는 <strong>tslint</strong>의 옵션 포맷에 + <strong>Prettier</strong>의 커스텀 옵션을 추가하기로 결정하였다.</h4><hr>
+<h3 id="1-1-프리티어-설치하기"><a href="#1-1-프리티어-설치하기" class="headerlink" title="1-1. 프리티어 설치하기"></a>1-1. 프리티어 설치하기</h3><p><img src="/images/2018/08/03.png"></p>
+<p><strong>* 에디터에만 적용하기</strong><br>프리티어 <code>패키지</code>를 설치하는 방법과 <code>플러그인</code>으로 세팅하는 방법이 있다.<br>개인적으로만 사용하거나 다른 개발자들이 모두 vscode 를 사용한다면 프리티어 플러그인을 설치하고 workspace settings 에만 설정해도 프리티어 세팅은 완료된다.<br><code>Code &gt; Preference &gt; Settings &gt; Workspace Settings</code></p>
+<p><img src="/images/2018/08/01.png" width="250px" align="left" style="margin-bottom:10px"><br><img src="/images/2018/08/02.png"><br>위처럼 폴더가 생성된다. 폴더를 팀원들과 공유해도 괜찮고, 혹은 아래 옵션 객체만 팀 내의 docs에 공유해도 괜찮다. (나중에 들어올 팀원이 vscode를 쓴다는 전제가 있어야..ㅎ)</p>
+<hr>
+<p><strong>* 프로젝트에 적용하기</strong><br>패키지 매니저로 프리티어를 설치한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prettier -D</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;prettier.printWidth&quot;: 80,</span><br><span class="line">  &quot;prettier.useTabs&quot;: false,</span><br><span class="line">  &quot;prettier.tabWidth&quot;: 2,</span><br><span class="line">  &quot;prettier.bracketSpacing&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>프리티어 옵션은 여러 가지 방식으로 세팅이 가능하다. rc 파일을 따로 만들어서 관리할 수도 있고, json 파일로 만들어서 관리를 할 수 있다. 우리 프로젝트에서는 package.json 파일에 포함시키기로 했다.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    ...</span><br><span class="line">    "typescript": "~2.4.2"</span><br><span class="line">  &#125;,</span><br><span class="line">  "prettier": &#123;</span><br><span class="line">    "printWidth": 80,</span><br><span class="line">    "useTabs": false,</span><br><span class="line">    "tabWidth": 2,</span><br><span class="line">    "bracketSpacing": true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>vscode 세팅에서 <code>&quot;editor.formatOnSave&quot;: true</code>를 설정하면 저장하는 것과 동시에 프리티어가 적용된다.</p>
+<hr>
+<h3 id="1-2-프리티어-옵션-값"><a href="#1-2-프리티어-옵션-값" class="headerlink" title="1-2. 프리티어 옵션 값"></a>1-2. 프리티어 옵션 값</h3><p>프리티어에는 여러 가지 기본 옵션 값들이 있다. <a href="https://prettier.io/docs/en/options.html" target="_blank" rel="external">Prettier</a> 자세한 내용은 홈페이지에서 확인 가능하다.</p>
+<ol>
+<li>Print Width<ul>
+<li>한 줄에서 wrap 이 되는 기준의 글자 수를 정한다.</li>
+<li>default <code>80</code></li>
+</ul>
+</li>
+<li>Tab Width<ul>
+<li>탭의 스페이스 사이즈</li>
+<li>default <code>2</code></li>
+</ul>
+</li>
+<li>Tabs<ul>
+<li>탭을 쓸 건지 안 쓸 건지</li>
+<li>boolean</li>
+</ul>
+</li>
+<li>Semicolons<ul>
+<li>문장 마지막에 세미콜론을 붙일지 안 붙일지</li>
+<li>boolean</li>
+</ul>
+</li>
+<li>Quotes<ul>
+<li>true 이면 single quate</li>
+</ul>
+</li>
+<li>Trailing Commas<ul>
+<li>마지막에 콤마 붙이기</li>
+<li>none / es5 / all</li>
+</ul>
+</li>
+<li>Bracket Spacing</li>
+<li>JSX Brackets</li>
+<li>Arrow Function Parentheses</li>
+<li>Range</li>
+<li>Parser</li>
+<li>FilePath</li>
+<li>Require pragma</li>
+<li>Insert Pragma</li>
+<li>Prose Wrap</li>
+</ol>
+<p>우리의 프로젝트에서는 아래의 옵션을 세팅했다.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"printWidth"</span>: <span class="number">80</span>,</span><br><span class="line">  <span class="attr">"useTabs"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"tabWidth"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"bracketSpacing"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>printWidth 를 120 으로 하기도 하던데, 그건 취향껏! (에어비엔비는 80)</p>
+<hr>
+<h2 id="2-precommit-커밋-전-재포맷-하는-hook-추가"><a href="#2-precommit-커밋-전-재포맷-하는-hook-추가" class="headerlink" title="2. precommit, 커밋 전 재포맷 하는 hook 추가."></a>2. precommit, 커밋 전 재포맷 하는 hook 추가.</h2><p>개발자마다 쓰는 에디터가 다르고, 각자가 각자 에디터에 세팅하는 부분에서 나올 수 있는 에러들을 방지하기 위해 프로젝트 자체에 세팅한 후 커밋 할 때마다 세팅하는 방법이 있다.<br>pre-commit 툴과 함께 사용하면 되는데 많이들 사용하는 <code>husky</code>와 <code>lint-staged</code> 모듈을 사용하면 된다.</p>
+<p>프리커밋 툴을 사용하면 git add 을 입력할 때 (<code>husky</code> : hook) 린트 옵션에 맞춰서 재포맷을(<code>lint-staged</code> : 재포맷) 시켜준다. 이때 옵션에 tslint 옵션도 재포맷 설정에 넣어줄 수 있으므로 git add 명령어 만으로 tslint 와 prettier 의 옵션들을 적용시킬 수 있다.</p>
+<p><img src="/images/2018/08/04.png"></p>
+<hr>
+<p><strong>모듈 설치</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev lint-staged husky</span><br></pre></td></tr></table></figure>
+<ol>
+<li>package.json 에 precommit 스크립트를 추가하고</li>
+<li>lint-staged 옵션을 추가하면 된다.<br>이때 prettier 를 읽는 스크립트와<br>tslint 를 검사하고 fix 하는 스크립트를 추가한다.</li>
+</ol>
+<p><code>tslint --fix -c tslint.json -p tsconfig.json</code><br>c 는 config 의 약어. tslint.json 파일의 옵션들을 확인하고 규칙에 맞춰서 fix 한다.<br>p 는 project 의 약어. tsconfig.json 파일에 적힌 파일 경로에서 린트될 파일을 찾는다.</p>
+<hr>
+<p><strong>package.json</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    ...,</span><br><span class="line">    "precommit": "lint-staged"</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">    "lint-staged": &#123;</span><br><span class="line">        "*.&#123;ts,tsx&#125;": [</span><br><span class="line">        "prettier --write",</span><br><span class="line">        "tslint --fix -c tslint.json -p tsconfig.json",</span><br><span class="line">        <span class="string">"git add"</span></span><br><span class="line">        ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Reference</p>
+<ul>
+<li><a href="https://medium.com/@victormejia/setting-up-prettier-in-an-angular-cli-project-2f50c3b9a537" target="_blank" rel="external">Setting up Prettier in an Angular CLI Project</a></li>
+</ul>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/03/11/angular_prettier/" data-id="cjemuduqx003k0b2mvseznmb2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/02/25/interaction_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Airbnb - lottie - bodymovin 웹에서 사용해보기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/11/angular_prettier/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/08/thumb_default.gif)" alt="Angular 프로젝트에 prettier 코드포매터 세팅하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/03/11/angular_prettier/" class="title">Angular 프로젝트에 prettier 코드포매터 세팅하기</a></p>
+                            <p class="item-date"><time datetime="2018-03-11T09:23:55.000Z" itemprop="datePublished">2018-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/25/interaction_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/07/thumb_default.gif)" alt="Airbnb - lottie - bodymovin 웹에서 사용해보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog/style/">style</a></p>
+                            <p class="item-title"><a href="/2018/02/25/interaction_01/" class="title">Airbnb - lottie - bodymovin 웹에서 사용해보기</a></p>
+                            <p class="item-date"><time datetime="2018-02-25T12:20:19.000Z" itemprop="datePublished">2018-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/15/Angular_practice/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/35/thumb_default.jpg)" alt="앵귤러 미리 예습해보기_ToDoList" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/02/15/Angular_practice/" class="title">앵귤러 미리 예습해보기_ToDoList</a></p>
+                            <p class="item-date"><time datetime="2018-02-15T09:23:55.000Z" itemprop="datePublished">2018-02-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/21/jquery/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/05/thumb_default.jpg)" alt="jquery 뽀개기(1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Jquery/">Jquery</a></p>
+                            <p class="item-title"><a href="/2018/01/21/jquery/" class="title">jquery 뽀개기(1)</a></p>
+                            <p class="item-date"><time datetime="2018-01-21T01:10:04.000Z" itemprop="datePublished">2018-01-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/20/JS_11/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/06/thumb_default.jpg)" alt="11/ 정규표현식" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/01/20/JS_11/" class="title">11/ 정규표현식</a></p>
+                            <p class="item-date"><time datetime="2018-01-20T12:20:19.000Z" itemprop="datePublished">2018-01-20</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">45</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 11.67px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 10px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 18.33px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10px;">prettier</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/03/11/angular_prettier/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+  <script src="/js/lottie_night.js"></script>
+  <script src="/js/lottie_index_night.js"></script>
+
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>
