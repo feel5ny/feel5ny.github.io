@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Angular의 observable을 이해하고, 생성하고, 구독해보기 | 필오의 개발일지</title>
+    <title>(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,15 +14,15 @@
     <meta name="description" content="원문 : https://medium.com/@luukgruijs/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3   엥귤러 version2가 나왔을때, 엥귤러는 옵저버블을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관">
 <meta name="keywords" content="angular,prettier,formatter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular의 observable을 이해하고, 생성하고, 구독해보기">
+<meta property="og:title" content="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기">
 <meta property="og:url" content="http://feel5ny.github.io/2018/03/25/angular_observable/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
 <meta property="og:description" content="원문 : https://medium.com/@luukgruijs/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3   엥귤러 version2가 나왔을때, 엥귤러는 옵저버블을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/09/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-03-24T17:53:56.861Z">
+<meta property="og:updated_time" content="2018-03-24T18:01:42.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular의 observable을 이해하고, 생성하고, 구독해보기">
+<meta name="twitter:title" content="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기">
 <meta name="twitter:description" content="원문 : https://medium.com/@luukgruijs/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3   엥귤러 version2가 나왔을때, 엥귤러는 옵저버블을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2018/09/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
@@ -175,7 +175,7 @@ ga('send', 'pageview');
                 
     
         <h1 class="article-title" itemprop="name">
-        Angular의 observable을 이해하고, 생성하고, 구독해보기
+        (번역) Angular의 observable을 이해하고, 생성하고, 구독해보기
         </h1>
     
 
@@ -242,9 +242,9 @@ ga('send', 'pageview');
 <li><code>complete</code> : 어떤 값도 보내지 않는다.</li>
 </ul>
 <p><strong><code>next</code> 콜은 구독자에게 실제로 데이터를 전달할 때 가장 일반적이다.</strong> 옵저버블의 실행 중에는 <code>observer.next()</code>의 무한 호출이있을 수 있지만 <code>observer.error()</code> 또는 <code>observer.complete()</code>가 호출되면 실행이 중지되고 더 이상 데이터가 subscribers에게 전달되지 않는다.</p>
-<h3 id="옵저버블-처분"><a href="#옵저버블-처분" class="headerlink" title="옵저버블 처분"></a>옵저버블 처분</h3><p>옵저버블의실행은 무한한 시간 동안 실행될 수 있기 때문에, 실행을 막을 수있는 방법이 필요합니다. 각 구독자마다 각 실행이 실행되기 때문에, 메모리와 컴퓨팅 성능이 낭비, 즉 더 이상 데이터가 필요없는 구독자는 구독을 멈추는 것이 중요하다.!</p>
+<h3 id="옵저버블-처분"><a href="#옵저버블-처분" class="headerlink" title="옵저버블 처분"></a>옵저버블 처분</h3><p>옵저버블의실행은 무한한 시간 동안 실행될 수 있기 때문에, 실행을 막을 수있는 방법이 필요하다. 각 구독자마다 각 실행이 실행되기 때문에, 메모리와 컴퓨팅 성능이 낭비, 즉 더 이상 데이터가 필요없는 구독자는 구독을 멈추는 것이 중요하다.!</p>
 <p>옵저버블을 구독할 때, 진행중인 실행을 취소하면 구독이 반환된다. 실행을 취소하려면 <code>unsubscribe()</code>를 호출하면 됨.</p>
-<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p>이 게시물을 통해 옵저버블이 실제로 어떻게 작동하는지 더 잘 이해할 수 있습니다. 다음 시간에 옵저버블에 대해서 더 많이 얻기 위해서 Rxjs의 파워를 이해하는 것과 그들이 제공하는 모든 헬퍼 함수를 이해하는 것입니다.</p>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p>이 게시물을 통해 옵저버블이 실제로 어떻게 작동하는지 더 잘 이해할 수 있다. 다음 시간에 옵저버블에 대해서 더 많이 얻기 위해서 Rxjs의 파워를 이해하는 것과 그들이 제공하는 모든 헬퍼 함수를 이해하는 것이다.</p>
 
         </div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -262,7 +262,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/03/25/angular_observable/" data-id="cjf5od7uy003qgr2mk5plcc2c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/03/25/angular_observable/" data-id="cjf5ombwd003h492mixclmmqt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -405,7 +405,7 @@ ga('send', 'pageview');
                             <a href="/2018/03/25/angular_observable/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/09/thumb_default.jpg)" alt="Angular의 observable을 이해하고, 생성하고, 구독해보기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/09/thumb_default.jpg)" alt="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기" class="thumbnail-image"></span>
     
     
 </a>
@@ -414,7 +414,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
-                            <p class="item-title"><a href="/2018/03/25/angular_observable/" class="title">Angular의 observable을 이해하고, 생성하고, 구독해보기</a></p>
+                            <p class="item-title"><a href="/2018/03/25/angular_observable/" class="title">(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기</a></p>
                             <p class="item-date"><time datetime="2018-03-25T01:23:55.000Z" itemprop="datePublished">2018-03-25</time></p>
                         </div>
                     </li>
