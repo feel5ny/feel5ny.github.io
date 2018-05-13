@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>(mobile) device-pixel-ratio계산 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="css,media-query,mobile,log" />
+    
+    
+    <meta name="description" content="목차 &amp;#128075;&amp;#128075;0. 서론1. @media 대하여..2. -webkit-device-pixel-ratio  - 2-1. 픽셀비율 계산하기  - 2-2. device width와 height 계산하기   0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히">
+<meta name="keywords" content="css,media-query,mobile,log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(mobile) device-pixel-ratio계산">
+<meta property="og:url" content="http://feel5ny.github.io/2018/05/13/mediaQuery_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="목차 &amp;#128075;&amp;#128075;0. 서론1. @media 대하여..2. -webkit-device-pixel-ratio  - 2-1. 픽셀비율 계산하기  - 2-2. device width와 height 계산하기   0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/11/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-05-13T14:50:41.865Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(mobile) device-pixel-ratio계산">
+<meta name="twitter:description" content="목차 &amp;#128075;&amp;#128075;0. 서론1. @media 대하여..2. -webkit-device-pixel-ratio  - 2-1. 픽셀비율 계산하기  - 2-2. device width와 height 계산하기   0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/11/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/05/13/mediaQuery_01/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/CSS/">CSS</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-mediaQuery_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        (mobile) device-pixel-ratio계산
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/05/13/mediaQuery_01/" class="article-date">
+            <time datetime="2018-05-13T12:20:19.000Z" itemprop="datePublished">2018-05-13</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/log/">log</a>, <a class="tag-link" href="/tags/media-query/">media-query</a>, <a class="tag-link" href="/tags/mobile/">mobile</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <div style="padding: 0px 40px 20px 40px;background: #cbd3da22;margin-top:20px"><br><strong>목차</strong> &#128075;&#128075;<br><br>0. 서론<br>1. @media 대하여..<br>2. -webkit-device-pixel-ratio<br>  - 2-1. 픽셀비율 계산하기<br>  - 2-2. device width와 height 계산하기<br></div>
+
+<hr>
+<h2 id="0-서론"><a href="#0-서론" class="headerlink" title="0. 서론"></a>0. 서론</h2><p> 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히 대응해야하지만!! 기기의 종류들의 크기가 다양해짐에 따라서 미디어쿼리를 적절히 사용해야할 필요가 생겼다.(아이폰X나 갤럭시S9같은.. 스크린이 긴 단말기ㅜ) 게다가 네이티브앱에서 웹뷰를 이용하는 일이 빈번했기 때문에 더더욱..</p>
+<hr>
+<h2 id="1-특정-모바일-디바이스-대응-media"><a href="#1-특정-모바일-디바이스-대응-media" class="headerlink" title="1. 특정 모바일 디바이스 대응 @media"></a>1. 특정 모바일 디바이스 대응 <code>@media</code></h2><p>CSS3의 @media 쿼리를 이용해서 screen의 크기에 따라서 레이아웃 구성을 다르게하는 방법을 구현할 수 있다. 반응형 웹에서는 다른 특별한 설정 없이 max-width같은 media features를 추가하여 브라우저의 width값마다 스타일을 조정할 수 있다. </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*syntax*/</span></span><br><span class="line">@<span class="keyword">media</span> not|only (media type) and (media feature) &#123;</span><br><span class="line">    <span class="selector-tag">CSS-Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="media-type"><a href="#media-type" class="headerlink" title="media type"></a>media type</h3><ul>
+<li><code>all</code> : 모든 디바이스에 적용</li>
+<li><code>print</code> : printer에 사용</li>
+<li><code>screen</code> : 컴퓨터 스크린, 태블릿, 스마트폰 등에 쓰임</li>
+<li><code>speech</code> : 스크린 리더기에 사용, 스크린 내용을 읽어주는 미디어 일때</li>
+</ul>
+<h3 id="media-features-조건문"><a href="#media-features-조건문" class="headerlink" title="media features(조건문)"></a>media features(조건문)</h3><p>(정말 많군요! &#128064;)</p>
+<ul>
+<li><code>height, width</code> : 둘 다 해당, 둘 다 미디어에 따라 다른 값들이 검출 됨</li>
+<li><code>width : 320px</code> : 미디어가 320px일때</li>
+<li><code>max-width : 320px</code> : 320px 이하의 미디어 일 때</li>
+<li><code>min-width : 320px</code> : 320px 이상의 미디어 일 때</li>
+<li><code>device</code> : device의 물리적인 값들을 기준으로(해상도와 너비는 같지 않을 수 있다)</li>
+<li><code>device-width : 320px</code> : 기기의 너비가 320px일때</li>
+<li><code>max-device-width : 320px</code> : 320px 이하의 화면일 때</li>
+<li><code>min-device-width : 320px</code> : 320px 이상의 화면일 때</li>
+<li><code>orientation</code> :<br>화면 회전 width, height가 아닌 portrait, landscape값으로 구분한다.<br>대부분 세로로 긴 핸드폰의 형태이기 때문에 기본상태는 portrait, 가로로 돌렸을 때는 landscape.<br>데스크톱에는 가로 세로 개념이 없음. <strong>그렇다고 이 개념이 모바일 개념은 아니다.</strong></li>
+</ul>
+<hr>
+<ul>
+<li><code>aspect-ratio</code>, <code>min-aspect-ratio</code>, <code>max-aspect-ratio</code>(화면비율) : width/height (가로 나누기 세로)</li>
+<li><code>aspect-ratio:1</code> : 화면 비율이 1:1인경우</li>
+<li><code>aspect-ratio:16/9</code> : 일반적인 화면 비율인 16:9를 의미합니다(1920*1080)</li>
+<li><code>device-aspect-ratio</code>, <code>min-device-aspect-ratio</code>, <code>max-device-aspect-ratio</code> : 단말기의 물리적인 화면 비율</li>
+</ul>
+<hr>
+<ul>
+<li><code>color</code>, <code>min-color</code>, <code>max-color</code> : 단말기에서 사용하는 최대 색상 비트 수에 대응(단위는 자연수)</li>
+<li><code>color:3</code> : 2³ = 8개의 색상 사용</li>
+<li><code>color-index</code>, <code>min-color-index</code>, <code>max-color-index</code> : 최대 색상 수에 대응</li>
+</ul>
+<hr>
+<ul>
+<li><code>monochrome</code>, <code>min-monochrome</code>, <code>max-monochrome</code> : 흑백만 사용하는 단말기에서의 픽셀당 비트수, 얼마나 자유롭게 표현되는지를 확인함</li>
+<li><code>resolution</code>, <code>min-resolution</code>, <code>max-resolution</code> : 단말기의 해상도</li>
+</ul>
+<hr>
+<ul>
+<li><code>grid</code> : 단말기가 grid방식인지 bitmap방식인지</li>
+<li><code>grid:1</code> ⇒ 문자로만 표기되는 tty, 주로 터미널, 전화액정</li>
+<li><code>grid:0</code> ⇒ 대부분의 컴퓨터와 스마트폰 웹 브라우저에 해당</li>
+</ul>
+<hr>
+<ul>
+<li><code>-webkit-min-device-pixel-ratio</code> : 단말기의 화소와 실제 화면의 pixel간의 비율</li>
+</ul>
+<hr>
+<hr>
+<h2 id="2-webkit-device-pixel-ratio"><a href="#2-webkit-device-pixel-ratio" class="headerlink" title="2. -webkit-device-pixel-ratio"></a>2. -webkit-device-pixel-ratio</h2><p>사실 단말기에 따른 media query는 인터넷 서핑을 잘 하다보면 구할 수 있다.<br>(<a href="http://vizdevices.yesviz.com/" target="_blank" rel="external">여긴</a> 내가 좋아하는 정리 사이트)<br>나 또한 정리되어있는 자료에서 device width와 height, -webkit-min-device-pixel-ratio를 구할 수 있었다. 정리된 수치로 잘 사용하고 있었지만, 종종 서치하기 힘든 디바이스까지 대응해야할 경우도 생기곤 한다. 그리고 나에게도 그런 상황이 다가왔다!</p>
+<h3 id="1-픽셀-비율을-계산해보자"><a href="#1-픽셀-비율을-계산해보자" class="headerlink" title="1. 픽셀 비율을 계산해보자."></a>1. 픽셀 비율을 계산해보자.</h3><p>내가 대응해야할 폰은 LG X400이라는 디바이스였다. 최근에 나온 기종이고, 내가 알 수 있는 정보는 아래 표밖에 없었다.<br><img src="/images/2018/11/image.png"></p>
+<p><img style="border-radius: 6px;" src="/images/2018/11/image02.png"></p>
+<h3 id="5-3인치-1280-720-294ppi"><a href="#5-3인치-1280-720-294ppi" class="headerlink" title="5.3인치 1280*720, 294ppi"></a><u style="background: #222222;color: white;padding: 10px 20px;"><strong>5.3인치 1280*720, 294ppi</strong></u></h3><p>@media only screen and<br>(<code>device-width: ?px</code>) and<br>(<code>device-height: ?px</code>) and<br>(<code>-webkit-device-pixel-ratio: ?</code>) {</p>
+<p>위의 값들이 필요하다. 먼저 픽셀 비율부터 구해보자.<br>디바이스 픽셀 비율을 계산하는 데는 세 단계가 필요하다. </p>
+<h4 id="1-1-들고있는-디바이스로부터-시야까지의-실제-거리와-레퍼런스-픽셀의-거리를-비교"><a href="#1-1-들고있는-디바이스로부터-시야까지의-실제-거리와-레퍼런스-픽셀의-거리를-비교" class="headerlink" title="1-1. 들고있는 디바이스로부터 시야까지의 실제 거리와 레퍼런스 픽셀의 거리를 비교."></a>1-1. 들고있는 디바이스로부터 시야까지의 실제 거리와 레퍼런스 픽셀의 거리를 비교.</h4><p>  스펙에 따르면 28인치에서 이상적인 것은 <strong>인치 당 96 픽셀</strong>이다.(표준밀도는 96ppi) 그러나 스마트 폰이기때문에 사람들은 노트북을 들고 다니는 것보다 디바이스를 얼굴에 가깝게 들고있는다. 그 거리를 18 인치로 추정 해본다.<br>  <img src="/images/2018/11/image01.png"></p>
+<h4 id="1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다"><a href="#1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다" class="headerlink" title="1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다."></a>1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다.</h4><p>idealPixelDensity = (28/18) * 96 = 150 픽셀/인치 (대략) </p>
+<h4 id="1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다"><a href="#1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다" class="headerlink" title="1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다."></a>1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다.</h4><p>devicePixelRatio = 294/150 = 1.96 =&gt; 반올림 =&gt; <strong>2</strong></p>
+<hr>
+<h3 id="2-device-width와-height"><a href="#2-device-width와-height" class="headerlink" title="2. device-width와 height"></a>2. device-width와 height</h3><p>현재 알 수 있었던 해상도는 표에서 1280*720 라고 알 수 있었다.<br>device의 너비와 height는 픽셀 비율을 해상도에서 나누면 된다.</p>
+<ul>
+<li><strong>device-width</strong> = 720/2 = 360</li>
+<li><strong>device-height</strong> = 1280/2 = 640</li>
+</ul>
+<hr>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> only screen and</span><br><span class="line">(device-width: <span class="number">360px</span>) and</span><br><span class="line">(device-height: <span class="number">640px</span>) and</span><br><span class="line">(-webkit-device-pixel-ratio: <span class="number">2</span>) &#123;</span><br><span class="line">  💅💅💅💅</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="요약"><a href="#요약" class="headerlink" title="요약"></a>요약</h3><ul>
+<li>해당기기의 ppi와 해상도를 알고 있다면,<br>devicePixelRatio = 해당 기기의 ppi / 150 (왜 150인지는 위에 설명)<br>deviceWidth = 해당기기의 해상도 / devicePixelRatio</li>
+<li>특정 기기 이외에는 min이나 max를 이용하여 정의하면 비슷한 해상도와 픽셀비율을 가진 디바이스에 적용가능하다. </li>
+</ul>
+<hr>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="https://medium.com/@junghan_61455/css-media-query-5969b004bd7" target="_blank" rel="external">https://medium.com/@junghan_61455/css-media-query-5969b004bd7</a><br><a href="https://www.html5rocks.com/en/mobile/high-dpi/" target="_blank" rel="external">https://www.html5rocks.com/en/mobile/high-dpi/</a></p>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/05/13/mediaQuery_01/" data-id="cjh4xtgby004nkf2mca1q2auj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/03/25/angular_observable/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/13/mediaQuery_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/11/thumb_default.jpg)" alt="(mobile) device-pixel-ratio계산" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CSS/">CSS</a></p>
+                            <p class="item-title"><a href="/2018/05/13/mediaQuery_01/" class="title">(mobile) device-pixel-ratio계산</a></p>
+                            <p class="item-date"><time datetime="2018-05-13T12:20:19.000Z" itemprop="datePublished">2018-05-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/25/angular_observable/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/09/thumb_default.jpg)" alt="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/03/25/angular_observable/" class="title">(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기</a></p>
+                            <p class="item-date"><time datetime="2018-03-25T01:23:55.000Z" itemprop="datePublished">2018-03-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/11/angular_prettier/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/08/thumb_default.gif)" alt="Angular 프로젝트에 prettier 코드포매터 세팅하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/03/11/angular_prettier/" class="title">Angular 프로젝트에 prettier 코드포매터 세팅하기</a></p>
+                            <p class="item-date"><time datetime="2018-03-11T09:23:55.000Z" itemprop="datePublished">2018-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/25/interaction_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/07/thumb_default.gif)" alt="Airbnb - lottie - bodymovin 웹에서 사용해보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog/style/">style</a></p>
+                            <p class="item-title"><a href="/2018/02/25/interaction_01/" class="title">Airbnb - lottie - bodymovin 웹에서 사용해보기</a></p>
+                            <p class="item-date"><time datetime="2018-02-25T12:20:19.000Z" itemprop="datePublished">2018-02-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/15/Angular_practice/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/35/thumb_default.jpg)" alt="앵귤러 미리 예습해보기_ToDoList" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/02/15/Angular_practice/" class="title">앵귤러 미리 예습해보기_ToDoList</a></p>
+                            <p class="item-date"><time datetime="2018-02-15T09:23:55.000Z" itemprop="datePublished">2018-02-15</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">48</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.71px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/TDD/" style="font-size: 11.43px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.43px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.86px;">angular</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.43px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.43px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 18.57px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 14.29px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.43px;">prettier</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.14px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/05/13/mediaQuery_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>
