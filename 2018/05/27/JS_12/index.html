@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>12/ File Api와 이미지 용량 줄이기 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,File API,canvas" />
+    
+    
+    <meta name="description" content="오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다. 로컬에서 이미지 파일을 올리는 것부터 시작하려고 합니다. 이를 위해서는 HTML5관련 API 중 하나인 파일 API를 이용하고, 이미지 리사이징을 위해서 캔버스를 이용할 것입니다. 파일API를 다뤄보고 Blob에 대해서도 알아보죠..(Blob의 더 자세한 내">
+<meta name="keywords" content="javascript,File API,canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12&#x2F; File Api와 이미지 용량 줄이기">
+<meta property="og:url" content="http://feel5ny.github.io/2018/05/27/JS_12/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다. 로컬에서 이미지 파일을 올리는 것부터 시작하려고 합니다. 이를 위해서는 HTML5관련 API 중 하나인 파일 API를 이용하고, 이미지 리사이징을 위해서 캔버스를 이용할 것입니다. 파일API를 다뤄보고 Blob에 대해서도 알아보죠..(Blob의 더 자세한 내">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/12/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-05-27T14:53:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12&#x2F; File Api와 이미지 용량 줄이기">
+<meta name="twitter:description" content="오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다. 로컬에서 이미지 파일을 올리는 것부터 시작하려고 합니다. 이를 위해서는 HTML5관련 API 중 하나인 파일 API를 이용하고, 이미지 리사이징을 위해서 캔버스를 이용할 것입니다. 파일API를 다뤄보고 Blob에 대해서도 알아보죠..(Blob의 더 자세한 내">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/12/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/05/27/JS_12/"/>
+    
+        <link rel="alternate" href="/" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-JS_12" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        12/ File Api와 이미지 용량 줄이기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/05/27/JS_12/" class="article-date">
+            <time datetime="2018-05-27T12:20:19.000Z" itemprop="datePublished">2018-05-27</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/File-API/">File API</a>, <a class="tag-link" href="/tags/canvas/">canvas</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/2018/12/3.jpg"></p>
+<p>오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다. 로컬에서 이미지 파일을 올리는 것부터 시작하려고 합니다. 이를 위해서는 HTML5관련 API 중 하나인 <strong>파일 API</strong>를 이용하고, 이미지 리사이징을 위해서 <strong>캔버스</strong>를 이용할 것입니다. 파일API를 다뤄보고 Blob에 대해서도 알아보죠..(Blob의 더 자세한 내용을 위해 포스팅을 따로 해야 할 것 같습니다.) ( + 제이커리 사용했습니다.)</p>
+<p>게시글에 이미지를 첨부해야 하는 기능에는 용량 축소가 기본적으로 들어가야 하는데 이는 프론트단에서 작업해주어야 합니다. 유저들이 보통 올리는 이미지는 스마트폰 사진이 일반적일 텐데, 요즘 스마트폰 카메라 성능이 좋아지면서 많게는 개당 8MB까지 나오는 경우도 있죠. 서버단에서 리사이징할 경우 비용이 아깝게 들기 때문에.. 클라이언트에서 이를 작업합니다. 전체 플로우는 이렇습니다.</p>
+<ol>
+<li>File API를 이용하여 이미지 파일 접근 (FileReader)</li>
+<li>img 엘리먼트 생성, dataUrl 삽입</li>
+<li>canvas 생성, img를 다시 리사이징하여 drawing</li>
+<li>canvas의 dataURL를 이용하여 Blob 객체 생성</li>
+<li>전송</li>
+</ol>
+<hr>
+<h2 id="1-File-API-FileReader"><a href="#1-File-API-FileReader" class="headerlink" title="1. File API, FileReader"></a>1. File API, FileReader</h2><p>input의 <code>type=file</code>를 이용해서 이미지 파일에 접근, file 객체들을 files 컬렉션에 담습니다. 각 객체가 파일 하나를 나타냅니다.(Blob)<br>파일 객체에는 여러가지 읽기 전용 프로퍼티가 존재합니다.</p>
+<ul>
+<li>name: 로컬 시스템의 파일 이름</li>
+<li>size: 바이트 단위인 파일 크기</li>
+<li>type: 파일의 망미 타입을 나타내는 문자열 (ex_ “image/png”)</li>
+<li>lastModifiedDate: 파일이 마지막으로 수정된 시점을 나타내는 문자열입니다. 이 프로퍼티는 크롬에만 구현되어있습니다.</li>
+</ul>
+<p><img src="/images/2018/12/01.png"></p>
+<p>파일 API는 FileReader 타입을 통해 파일 데이터를 읽을 수 있습니다.</p>
+<h3 id="1-1-FileReader-타입"><a href="#1-1-FileReader-타입" class="headerlink" title="1-1. FileReader 타입"></a>1-1. FileReader 타입</h3><p>FileReader 타입은 비동기적으로 파일을 읽는 메커니즘입니다. 서버에서 파일을 읽는 것이 아닌, 파일 시스템에서 파일을 읽는 것이라고 이해하자.<br>FileReader 타입에는 파일 데이터를 읽는 여러 가지 메서드가 존재합니다.</p>
+<ul>
+<li>readAsText(file, encoding) : 파일을 평범한 텍스트로 읽고 그 텍스트를 result 프로퍼티에 저장한다. 두 번째 매개변수는 옵션.</li>
+<li>readAsDataURL(file) : 파일을 읽은 다음 이를 표현하는 데이터 URI를 result 프로퍼티에 저장.</li>
+<li>readAsBinarString(file) : 파일을 읽은 다음 각 문자가 1바이트를 나타내는 문자열을 result 프로퍼티에 저장.</li>
+<li>readAsArrayBuffer(file) : 파일을 읽은 다음 파일 콘텐츠를 포함하는 ArrayBuffer를 result 프로퍼티에 저장.</li>
+</ul>
+<p>읽는 과정은 <strong>비동기</strong>적이므로 FileReader는 <strong>progress, error, load</strong> 이벤트를 일으킵니다.</p>
+<ul>
+<li>progres : 읽어올 데이터가 더 있을 때<ul>
+<li>50밀리 초마다 발생, lengthComputable, loaded, total 같은 정보를 제공한다.</li>
+<li><strong>loaded / total = 버퍼링</strong></li>
+</ul>
+</li>
+<li>error : 에러 생겼을 때<ul>
+<li><code>1</code> : 파일을 찾을 수 없음</li>
+<li><code>2</code> : 보안 에러</li>
+<li><code>3</code> : 읽기 거부</li>
+<li><code>4</code> : 파일을 읽을 수 없음</li>
+<li><code>5</code> : 인코딩 에러</li>
+</ul>
+</li>
+<li>load : 파일을 완전히 읽었을 때</li>
+</ul>
+<p><strong>load 이후에는 readAsDataURL 메서드를 통해 result 프로퍼티에 데이터 URI가 저장되도록 해야 합니다.</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- html 🚀🚀 --&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"upload-wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"upload"</span> <span class="attr">class</span>=<span class="string">"upload-label"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>✨UPLOAD IMAGE ✨<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"upload-imgBtn"</span> <span class="attr">src</span>=<span class="string">"https://uploads.codesandbox.io/uploads/user/1dcc6c5f-ac13-4c27-b2e3-32ade1d213e9/2Go1-photo.svg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- fileReader를 통해 읽은 파일을 넣는 부분 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"image-preview"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">accept</span>=<span class="string">"image/*"</span> <span class="attr">id</span>=<span class="string">"upload"</span> <span class="attr">class</span>=<span class="string">"image-upload"</span> <span class="attr">style</span>=<span class="string">"display:none;"</span> <span class="attr">multiple</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>(제이커리를 사용했습니다.)</p>
+<ul>
+<li>input type=”file” 태그에 onchange 이벤트를 걸어둡니다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> load_image = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> files = e.target.files;</span><br><span class="line">  <span class="keyword">const</span> filesArr = <span class="built_in">Array</span>.prototype.slice.call(files);</span><br><span class="line">  <span class="comment">// 여러장의 이미지를 불러올 경우, 배열화</span></span><br><span class="line"></span><br><span class="line">  filesArr.forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.onload = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 뭔가 썸팅 할 것을 넣습니다.</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    reader.readAsDataURL(file); ✨✨</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$(<span class="string">".image-upload"</span>).on(<span class="string">"change"</span>, e =&gt; load_image(e));</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-img-엘리먼트-생성-dataUrl-삽입"><a href="#2-img-엘리먼트-생성-dataUrl-삽입" class="headerlink" title="2. img 엘리먼트 생성, dataUrl 삽입"></a>2. img 엘리먼트 생성, dataUrl 삽입</h2><p>이미지는 용량에 따라 로드 속도가 다릅니다. 웹은 이미지에 대해서 비동기적으로 동작하는데 완전히 로드될 때까지 기다리지 않고 웹 페이지를 일단 표시한 후 <strong>이미지는 따로 읽습니다.</strong> 때문에 이미지를 읽은 직후 바로 출력하면 제대로 동작하지 않습니다. filereader를 통해서 파일을 읽은 이후 이미지 리사이징을 하려고 했지만, 이미지가 아직 로드되지 않았는데 리사이징하면 당연히 canvas의 이미지는 존재하지 않겠죠? </p>
+<p>image가 읽혀진 후에 리사이징이 이루어지도록 하기 위해서 filereader와 마찬가지로 load 콜백 내부에 리사이징 함수를 넣어둘 것입니다.<br>load 이벤트를 사용하기 위해 Image 인스턴스를 생성합니다.<br>reader.onload의 콜백 내부에 image 인스턴스를 생성하고, image가 읽을 수 있는 형태가 되면 image.onload가 발생되도록 합니다. (자세한건 코드..!)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> load_image = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> files = e.target.files;</span><br><span class="line">  <span class="keyword">const</span> filesArr = <span class="built_in">Array</span>.prototype.slice.call(files);</span><br><span class="line">  <span class="comment">// 여러장의 이미지를 불러올 경우, 배열화</span></span><br><span class="line"></span><br><span class="line">  filesArr.forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.onload = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.className = <span class="string">"img-item"</span>; <span class="comment">// 스타일 적용을 위해</span></span><br><span class="line">        image.src = e.target.result;</span><br><span class="line">        image.onload = <span class="function"><span class="params">imageEvent</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 이미지가 로드가 되면! 리사이즈 함수가 실행되도록 합니다.</span></span><br><span class="line">          resize_image(image);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    reader.readAsDataURL(file); ✨✨</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$(<span class="string">".image-upload"</span>).on(<span class="string">"change"</span>, e =&gt; load_image(e));</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-canvas-생성-img를-다시-리사이징하여-drawing"><a href="#3-canvas-생성-img를-다시-리사이징하여-drawing" class="headerlink" title="3. canvas 생성, img를 다시 리사이징하여 drawing"></a>3. canvas 생성, img를 다시 리사이징하여 drawing</h2><p>resize_image 함수에 인자로 앞서 생성한 image 요소를 넘겨받게 했습니다.<br>리사이징을 위해서 캔버스 엘리먼트를 생성한 후, 캔버스에 2d 컨텍스트의 image를 리사이징된 폭과 높이로 그릴 것입니다.</p>
+<ol>
+<li>캔버스 엘리먼트를 생성.</li>
+<li>해당 image의 높이와 폭을 측정한 후, </li>
+<li>원하는 최대 사이즈의 크기보다 높이가 클 경우 리사이징할 비율을 폭에 곱하고, 반대의 경우 반대로 적용합니다. ( 폭이 클 경우 비율을 높에 곱한다. )</li>
+<li>리사이징된 폭과 높이를 canvas의 높이와 폭이 할당한 후 </li>
+<li>drawing 합니다. canvas의 drawImage() 사용합니다. 매개변수로는 이미지/ 원본의 x y 좌표 / 너비와 높이 / 컨텍스트의 x y 좌표 / 컨텍스트 너비/ 높이</li>
+<li>canvas의 dataURL을 toDataURL 메서드를 이용하여 구합니다. toDataURL 메서드에 이미지 마임 타입을 매개변수로 전달하여 data URI를 받습니다.</li>
+</ol>
+<ul>
+<li>getContext()는 브라우저 별로 지원 범위가 있습니다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resize_image = <span class="function"><span class="params">image</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>),</span><br><span class="line">    max_size = <span class="number">1280</span>,</span><br><span class="line">    width = image.width,</span><br><span class="line">    height = image.height;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (width &gt; height) &#123;</span><br><span class="line">    <span class="keyword">if</span> (width &gt; max_size) &#123;</span><br><span class="line">      height *= max_size / width;</span><br><span class="line">      width = max_size;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (height &gt; max_size) &#123;</span><br><span class="line">      width *= max_size / height;</span><br><span class="line">      height = max_size;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  canvas.width = width;</span><br><span class="line">  canvas.height = height;</span><br><span class="line">  canvas.getContext(<span class="string">"2d"</span>).drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">  <span class="keyword">const</span> dataUrl = canvas.toDataURL(<span class="string">"image/jpeg"</span>);</span><br><span class="line">  <span class="comment">// 미리보기 위해서 마크업 추가.</span></span><br><span class="line">  $(<span class="string">".image-preview"</span>).append(<span class="string">'&lt;img src="'</span> + dataUrl + <span class="string">'" class="img-item"&gt;'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-canvas의-dataURL를-이용하여-Blob-객체-생성"><a href="#4-canvas의-dataURL를-이용하여-Blob-객체-생성" class="headerlink" title="4. canvas의 dataURL를 이용하여 Blob 객체 생성"></a>4. canvas의 dataURL를 이용하여 Blob 객체 생성</h2><p>Data URIs는 네 가지 파트로 구성됩니다<br><code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code></p>
+<ol>
+<li>접두사(data:)</li>
+<li>데이터의 타입을 가리키는 MIME 타입</li>
+<li>텍스트가 아닌 경우 사용될 부가적인 base64 토큰 그리고 데이터 자체</li>
+</ol>
+<blockquote>
+<p><strong>Base64</strong><br>바이너리 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 문자로 표현하기 위해 만들어진 인코딩이다. 네이버 지식iN 등의 URL에서 자주 볼 수 있는 형태의 바로 그것.<br>ASCII 문자 하나가 <strong>64진법의 숫자 하나를 의미</strong>하기 때문에 BASE64라는 이름을 가졌다.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Blob</strong><br>Blob은 일련의 데이터를 처리하거나 간접 참조하는 객체다. Blob이란 이름은 SQL 데이터베이스에서 유래하였으며 ‘대형 이진 객체(Binary Large Object)’를 의미한다. 자바스크립트에서 Blob은 흔히 이진 데이터를 나타내며 해당 데이터의 크기가 매우 클 수 있지만, 두 가지 특징 모두 강제된 사항은 아니다. 즉, 작은 텍스트 파일의 내용도 Blob으로 나타낼 수 있다. Blob은 대개 바이트의 크기를 알아내거나, 해당 MIME 타입이 무엇인지 요청하며, 데이터를 작은 Blob으로 잘게 나누는 등의 작업에 사용된다. <strong>즉, 데이터 자체라기보다는 데이터를 간접적으로 접근하기 위한 객체인 것이다.</strong></p>
+<p><strong>Blob.size</strong><br>  Blob 객체에 포함된 데이터의 <strong>바이트</strong> 단위의 사이즈를 의미한다.<br><strong>Blob.type</strong><br>  Blob에 포함된 데이터의 MIME 타입을 의미한다. 만약 unknown으로 나올 경우, 이 문자열은 비어있는 것이다.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dataURLToBlob = <span class="function"><span class="params">dataURL</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> BASE64_MARKER = <span class="string">";base64,"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// base64로 인코딩 되어있지 않을 경우</span></span><br><span class="line">  <span class="keyword">if</span> (dataURL.indexOf(BASE64_MARKER) === <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> parts = dataURL.split(<span class="string">","</span>);</span><br><span class="line">    <span class="keyword">const</span> contentType = parts[<span class="number">0</span>].split(<span class="string">":"</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">const</span> raw = parts[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Blob([raw], &#123;</span><br><span class="line">      type: contentType</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// base64로 인코딩 된 이진데이터일 경우</span></span><br><span class="line">  <span class="keyword">const</span> parts = dataURL.split(BASE64_MARKER);</span><br><span class="line">  <span class="keyword">const</span> contentType = parts[<span class="number">0</span>].split(<span class="string">":"</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">const</span> raw = <span class="built_in">window</span>.atob(parts[<span class="number">1</span>]);</span><br><span class="line">  <span class="comment">// atob()는 Base64를 디코딩하는 메서드</span></span><br><span class="line">  <span class="keyword">const</span> rawLength = raw.length;</span><br><span class="line">  <span class="comment">// 부호 없는 1byte 정수 배열을 생성 </span></span><br><span class="line">  <span class="keyword">const</span> uInt8Array = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(rawLength); <span class="comment">// 길이만 지정된 배열</span></span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt; rawLength) &#123;</span><br><span class="line">    uInt8Array[i] = raw.charCodeAt(i);</span><br><span class="line">    i++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Blob([uInt8Array], &#123;</span><br><span class="line">    type: contentType</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/12/02.png"></p>
+<hr>
+<h2 id="5-전송"><a href="#5-전송" class="headerlink" title="5. 전송"></a>5. 전송</h2><p>ajax로 보낼 경우 FormData 생성후 최종 생성한 Blob 객체를 추가하면 됩니다.</p>
+<iframe src="https://codesandbox.io/embed/9jvp2o30zo" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+
+
+<hr>
+<h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
+<li><a href="http://mohwa.github.io/blog/javascript/2015/08/31/binary-inJS/" target="_blank" rel="external">http://mohwa.github.io/blog/javascript/2015/08/31/binary-inJS/</a></li>
+<li><a href="http://www.soen.kr/html5/html3/3-1-3.htm" target="_blank" rel="external">http://www.soen.kr/html5/html3/3-1-3.htm</a></li>
+<li>프론트엔드개발자를 위한 자바스크립트 - File API</li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank" rel="external">https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Data_URIs</a></li>
+<li><a href="https://namu.wiki/w/BASE64" target="_blank" rel="external">https://namu.wiki/w/BASE64</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/API/Blob" target="_blank" rel="external">https://developer.mozilla.org/ko/docs/Web/API/Blob</a></li>
+<li><a href="https://firejune.com/1787/HTML5+ArrayBuffer+API+%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0" target="_blank" rel="external">https://firejune.com/1787/HTML5+ArrayBuffer+API+%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</a> (ArrayBuffer - 추후 더 공부하기)</li>
+<li><a href="http://iamawebdeveloper.tistory.com/106" target="_blank" rel="external">http://iamawebdeveloper.tistory.com/106</a> [나는 웹개발자!]</li>
+</ol>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/05/27/JS_12/" data-id="cjhoy2w5f001kf02mfsjq9cn5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/05/13/mediaQuery_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">(mobile) device-pixel-ratio계산</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/27/JS_12/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/12/thumb_default.jpg)" alt="12/ File Api와 이미지 용량 줄이기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/05/27/JS_12/" class="title">12/ File Api와 이미지 용량 줄이기</a></p>
+                            <p class="item-date"><time datetime="2018-05-27T12:20:19.000Z" itemprop="datePublished">2018-05-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/13/mediaQuery_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/11/thumb_default.jpg)" alt="(mobile) device-pixel-ratio계산" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CSS/">CSS</a></p>
+                            <p class="item-title"><a href="/2018/05/13/mediaQuery_01/" class="title">(mobile) device-pixel-ratio계산</a></p>
+                            <p class="item-date"><time datetime="2018-05-13T12:20:19.000Z" itemprop="datePublished">2018-05-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/25/angular_observable/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/09/thumb_default.jpg)" alt="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/03/25/angular_observable/" class="title">(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기</a></p>
+                            <p class="item-date"><time datetime="2018-03-25T01:23:55.000Z" itemprop="datePublished">2018-03-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/03/11/angular_prettier/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/08/thumb_default.gif)" alt="Angular 프로젝트에 prettier 코드포매터 세팅하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/03/11/angular_prettier/" class="title">Angular 프로젝트에 prettier 코드포매터 세팅하기</a></p>
+                            <p class="item-date"><time datetime="2018-03-11T09:23:55.000Z" itemprop="datePublished">2018-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/02/25/interaction_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/07/thumb_default.gif)" alt="Airbnb - lottie - bodymovin 웹에서 사용해보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog/">blog</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog/style/">style</a></p>
+                            <p class="item-title"><a href="/2018/02/25/interaction_01/" class="title">Airbnb - lottie - bodymovin 웹에서 사용해보기</a></p>
+                            <p class="item-date"><time datetime="2018-02-25T12:20:19.000Z" itemprop="datePublished">2018-02-25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">49</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.67px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/File-API/" style="font-size: 10px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.67px;">TDD</a> <a href="/tags/algorithm/" style="font-size: 11.67px;">algorithm</a> <a href="/tags/angular/" style="font-size: 13.33px;">angular</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.67px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.67px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 15px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.67px;">prettier</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 18.33px;">react</a> <a href="/tags/refactoring/" style="font-size: 10px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 20px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 clara Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/05/27/JS_12/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>
