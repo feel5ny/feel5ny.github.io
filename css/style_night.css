@@ -230,7 +230,7 @@ body,
 }
 body {
   background: #231f20;
-  font: 14px "Titillium Web", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 code {
@@ -551,7 +551,7 @@ code {
   -moz-transition: 0.2s ease-in;
   -ms-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
-  font: 16px "Titillium Web", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   color: rgba(255,255,255,0.7);
 }
 .search-form-input:focus,
@@ -930,6 +930,9 @@ code {
 .tagcloud a {
   margin-right: 5px;
 }
+.fa {
+  margin-top: 0.6em;
+}
 .article-single {
   padding: 30px 30px 20px;
 }
@@ -1198,26 +1201,31 @@ a.article-title:hover {
 .article-entry blockquote {
   color: #777;
   quote: none;
-  margin: 0 0 20px 0;
+  margin: 0.6em 0 20px 0;
   position: relative;
   font-style: italic;
-  padding-left: 50px;
+  padding-left: 36px;
 }
 .article-entry blockquote:before {
   top: 0;
   left: 0;
   color: #ccc;
-  font-size: 32px;
-  content: "\f10d";
+  font-size: 20px;
+  content: "\f0d0";
   position: absolute;
   text-align: center;
   font-style: normal;
   font-family: 'FontAwesome';
 }
+.article-entry blockquote p {
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+}
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "Titillium Web", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1329,7 +1337,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "Titillium Web", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   padding: 0 15px;
   color: #555;
   outline: none;

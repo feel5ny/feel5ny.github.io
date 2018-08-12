@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>chap02.원칙 - 프로그래밍의 가이드라인 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="programming,principle" />
+    
+    
+    <meta name="description" content="[프로그래밍의 정석]을 보고 메모한 부분을 정리했습니다.  목차 KISS   :: Keep It Simple, Stupid 오컴의 면도날   DRY   :: Don’t Repeat Yourself YAGNI  :: You Aren’t Going to Need it PIE    :: Program Intently and Expressively (의도를 표현">
+<meta name="keywords" content="programming,principle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chap02.원칙 - 프로그래밍의 가이드라인">
+<meta property="og:url" content="http://feel5ny.github.io/2018/08/12/principle_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="[프로그래밍의 정석]을 보고 메모한 부분을 정리했습니다.  목차 KISS   :: Keep It Simple, Stupid 오컴의 면도날   DRY   :: Don’t Repeat Yourself YAGNI  :: You Aren’t Going to Need it PIE    :: Program Intently and Expressively (의도를 표현">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/26/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-08-12T14:00:00.184Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chap02.원칙 - 프로그래밍의 가이드라인">
+<meta name="twitter:description" content="[프로그래밍의 정석]을 보고 메모한 부분을 정리했습니다.  목차 KISS   :: Keep It Simple, Stupid 오컴의 면도날   DRY   :: Don’t Repeat Yourself YAGNI  :: You Aren’t Going to Need it PIE    :: Program Intently and Expressively (의도를 표현">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/26/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/08/12/principle_02/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Programing/">Programing</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-principle_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        chap02.원칙 - 프로그래밍의 가이드라인
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/08/12/principle_02/" class="article-date">
+            <time datetime="2018-08-12T03:12:34.000Z" itemprop="datePublished">2018-08-12</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/principle/">principle</a>, <a class="tag-link" href="/tags/programming/">programming</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><strong>[프로그래밍의 정석]</strong>을 보고 메모한 부분을 정리했습니다.</p>
+</blockquote>
+<h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
+<li><a href="#first">KISS</a>   :: Keep It Simple, Stupid<ul>
+<li>오컴의 면도날</li>
+</ul>
+</li>
+<li><a href="#second">DRY</a>   :: Don’t Repeat Yourself</li>
+<li><a href="#third">YAGNI</a>  :: You Aren’t Going to Need it</li>
+<li><a href="#forth">PIE</a>    :: Program Intently and Expressively (의도를 표현해서 프로그래밍하라)</li>
+<li><a href="#fifth">SLAP</a>   :: Single Level of Abstraction Principle (추상화 수준의 통일)</li>
+<li><a href="#sixth">OCP</a>    :: Open-Closed Principle (개방-폐쇄의 원칙) </li>
+</ol>
+<hr>
+<h4 id="서론"><a href="#서론" class="headerlink" title="서론"></a>서론</h4><hr>
+<p><a id="first"></a></p>
+<h2 id="1-KISS-Keep-It-Simple-Stupid"><a href="#1-KISS-Keep-It-Simple-Stupid" class="headerlink" title="1. KISS _Keep It Simple, Stupid"></a>1. KISS _Keep It Simple, Stupid</h2><h3 id="코드는-단순하게-유지한다"><a href="#코드는-단순하게-유지한다" class="headerlink" title="*코드는 단순하게 유지한다."></a>*코드는 단순하게 유지한다.</h3><h3 id="why-아무생각-없이-수정하게-되면-코드는-무질서로-향한다"><a href="#why-아무생각-없이-수정하게-되면-코드는-무질서로-향한다" class="headerlink" title="*why_아무생각 없이 수정하게 되면 코드는 무질서로 향한다."></a>*why_아무생각 없이 수정하게 되면 코드는 무질서로 향한다.</h3><p>함수의 경우 관심사 분리를 목표로 간결하게 유지한다.</p>
+<ul>
+<li>단순한 코드는 읽기 쉽고 수정이 용이하다.</li>
+<li>의사소통 유지비용을 절약할 수 있다.</li>
+</ul>
+<h3 id="how-코드에-불필요한-것을-하지-않는다"><a href="#how-코드에-불필요한-것을-하지-않는다" class="headerlink" title="*how_코드에 불필요한 것을 하지 않는다."></a>*how_코드에 불필요한 것을 하지 않는다.</h3><p><u style="color:blue"><strong>단순함</strong>을 프로그래밍의 <strong>나침반</strong>으로 삼자.</u></p>
+<p>아래 상황을 경계하자.</p>
+<ol>
+<li>새롭게 배운 기술을 사용하고 싶다.</li>
+<li>장래의 필요에 대비하고 싶다.<br>지금 필요할게 아니면 지금 작성할 것이 아니다.</li>
+<li>멋대로 요구사항을 추가한다.<br>요구사항을 결정하는 쪽은 사용자다. 프로그래머가 요구사항을 결정해서는 안된다.<blockquote>
+<p>케바케일듯</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Less-is-more-단순한-것이-더-아름답다"><a href="#Less-is-more-단순한-것이-더-아름답다" class="headerlink" title="*Less is more 단순한 것이 더 아름답다."></a>*Less is more 단순한 것이 더 아름답다.</h3><p>지금 작성하는 코드가 정말로 필요한지를 항상 자문자답해야한다.</p>
+<h3 id="오컴의-면도날"><a href="#오컴의-면도날" class="headerlink" title="*오컴의 면도날"></a>*오컴의 면도날</h3><p>어떤 상황을 설명하는 데 필요 이상으로 많은 전제를 가정해서는 안된다는 사고방식.<br><u>= 뭔가에 관해 여러 가지 설명이 가능하다면 <strong>가장 단순한 방식이 옳다.</strong></u></p>
+<hr>
+<p><a id="second"></a></p>
+<h2 id="2-DRY"><a href="#2-DRY" class="headerlink" title="2. DRY"></a>2. DRY</h2><h3 id="코드-복사는-금물"><a href="#코드-복사는-금물" class="headerlink" title="*코드 복사는 금물"></a>*코드 복사는 금물</h3><ul>
+<li>로직 한 덩어리를 다른 부분에 복붙<ul>
+<li>같은 로직이 여러 군데로 흩어진다.</li>
+</ul>
+</li>
+<li>같은 조건을 다루는 제어문 블록이 여러군데 중복</li>
+<li>같은 의미의 값(상수, 정수..)</li>
+</ul>
+<h3 id="why-코드를-개선할-수-없다"><a href="#why-코드를-개선할-수-없다" class="headerlink" title="*why_코드를 개선할 수 없다"></a>*why_코드를 개선할 수 없다</h3><ol>
+<li><strong>코드를 읽는 작업이 어려워진다.</strong><br>양적으로 많아지고 질적으로 복잡해진다.</li>
+<li><strong>코드를 수정하는 작업이 어려워진다.</strong><br>신중하게 수정하지 않으면 <strong>수정에 누락이 생길 위험성</strong>이 있다.<br>미세한 차이가 있다면 코드를 더욱 깊게 읽어야한다.</li>
+<li><strong>테스트가 없다.</strong><br>열심히 수정하더라도 테스트가 없는 상태에서는 새로운 오류가 발생할 위험이 커진다.</li>
+</ol>
+<h3 id="how-코드를-추상화한다"><a href="#how-코드를-추상화한다" class="headerlink" title="*how_코드를 추상화한다."></a>*how_코드를 추상화한다.</h3><p>코드를 추상화함으로써 중복을 제거하자.<br>코드 로직을 추상화하려면<br><u style="color:blue">처리하는 코드를 묶고 이름을 붙여 함수화, 모듈화한다.</u></p>
+<h4 id="추상화의-장점"><a href="#추상화의-장점" class="headerlink" title="추상화의 장점"></a>추상화의 장점</h4><ul>
+<li>코드의 양이 줄어 읽는 양을 줄일 수 있다.</li>
+<li>이름을 붙였으므로 코드가 읽기 쉽다.</li>
+<li>같은 코드를 한군데 집약했기 때문에 코드 수정이 용이, 품질을 담보하기 쉽다.</li>
+<li>추상화한 부분은 재사용하기 쉬워진다.</li>
+</ul>
+<h3 id="DRY의-적용범위"><a href="#DRY의-적용범위" class="headerlink" title="*DRY의 적용범위"></a>*DRY의 적용범위</h3><h4 id="구체적으로-반복되는-작업은-자동화"><a href="#구체적으로-반복되는-작업은-자동화" class="headerlink" title="구체적으로 반복되는 작업은  자동화"></a>구체적으로 반복되는 작업은 <i class="fa fa-long-arrow-right"> <span style="color:blue">자동화</span></i></h4><ul>
+<li>자동화의 대표적인 작업 <i class="fa fa-long-arrow-right"> <strong>테스트, 빌드, 배포</strong> (지속적인 통합)</i></li>
+<li>빌드, 테스트, 배포 등을 정확하고 빈번하게 자동 실행하는 것.</li>
+<li>장점<ul>
+<li>반복 수작업이 없어진다.</li>
+<li>빌드 <strong>품질</strong>이 안정된다.</li>
+<li>빌드가 속인화하지 않는다.</li>
+<li>문제를 조기에 발견할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="DRY와-프로그래밍-기술"><a href="#DRY와-프로그래밍-기술" class="headerlink" title="*DRY와 프로그래밍 기술"></a>*DRY와 프로그래밍 기술</h3><p>코드 중복을 제거하는 것을 목적 중 하나로 삼고 있다.</p>
+<ul>
+<li>구조화 프로그래밍</li>
+<li>객체지향 프로그래밍 기술<br>: 함수나 모듈 구성을 통해 중복을 제거하기 위한 기법이 내제되어있음.</li>
+<li><p>디자인 패턴<br>: 코드를 재사용 가능(확장가능)하게 하려고 코드 구조 패턴을 제공한다.<br>: <strong>사고의 중복</strong>이 일어나지 않게 하는 기법이라고도 할 수 있다.</p>
+</li>
+<li><p><strong>일반적으로 기술이나 기법은 특정 목적을 갖고 고안된다.</strong><br>: 기법을 배울 때는 방식 자체만을 모방하지말고<br>: <span style="color:blue"><strong>목적을 파악하는 것이 습득에 이르는 지름길이다.</strong><span></span></span></p>
+</li>
+</ul>
+<h3 id="WET-Write-Every-Tiem-Write-EveryThing-Twice"><a href="#WET-Write-Every-Tiem-Write-EveryThing-Twice" class="headerlink" title="*WET (Write Every Tiem, Write EveryThing Twice)"></a>*WET (Write Every Tiem, Write EveryThing Twice)</h3><p>DRY가 되어 있지 않은 코드에 대해 비꼬는 표현이다.</p>
+<h3 id="OFOP-One-Fact-in-One-Place"><a href="#OFOP-One-Fact-in-One-Place" class="headerlink" title="*OFOP (One Fact in One Place)"></a>*OFOP (One Fact in One Place)</h3><p>한 곳에는 하나의 사실<br>: 데이터베이스 논리 설계에서 테이블 설계의 핵심이 되는 원칙이다.</p>
+<h3 id="OAOO-Once-and-Only-Once"><a href="#OAOO-Once-and-Only-Once" class="headerlink" title="*OAOO (Once and Only Once)"></a>*OAOO (Once and Only Once)</h3><p>한번만, 단 한번만<br>DRY와 유사한 의미</p>
+<hr>
+<p><a id="third"></a></p>
+<h2 id="3-YAGNI-You-Are-Not-Going-to-Need-It"><a href="#3-YAGNI-You-Are-Not-Going-to-Need-It" class="headerlink" title="3. YAGNI You Are Not Going to Need It"></a>3. YAGNI You Are Not Going to Need It</h2><h3 id="코드는-필요할-때-최소한으로"><a href="#코드는-필요할-때-최소한으로" class="headerlink" title="*코드는 필요할 때 최소한으로!"></a>*코드는 필요할 때 최소한으로!</h3><h3 id="why-코드의-예측은-빗나간다"><a href="#why-코드의-예측은-빗나간다" class="headerlink" title="*why_코드의 예측은 빗나간다."></a>*why_코드의 예측은 빗나간다.</h3><p>시간이 지날수록 이렇게 사용하지도 않는 코드가 있는 것인지 영문을 알 수 없다. 오히려 방해물이 된다.</p>
+<h3 id="코드는-지금-필요한-것만"><a href="#코드는-지금-필요한-것만" class="headerlink" title="*코드는 지금 필요한 것만"></a>*코드는 지금 필요한 것만</h3><p><strong>우선 사용할 수 있는 데 가치를 주자.</strong><br>범용성보다는 <strong>단순성</strong>이라는 가치에 기준을 두고 고른다.<br>단순한 방식이 사실 범용성이 더 높을 때가 많다.</p>
+<hr>
+<p><a id="forth"></a></p>
+<h2 id="4-PIE"><a href="#4-PIE" class="headerlink" title="4. PIE"></a>4. PIE</h2><p>Program Intently and Expressively<br><strong>의도를 표현해서 프로그래밍하라</strong></p>
+<h3 id="코드의-의도를-전한다"><a href="#코드의-의도를-전한다" class="headerlink" title="*코드의 의도를 전한다."></a>*코드의 의도를 전한다.</h3><p>블로그에 글을 쓰듯이 명확한 의도<br><i class="fa fa-long-arrow-right">사람이 읽기 위한 것이기 때문</i></p>
+<h3 id="why-코드가-유일한-실마리"><a href="#why-코드가-유일한-실마리" class="headerlink" title="*why_코드가 유일한 실마리"></a>*why_코드가 유일한 실마리</h3><p>코드는 소프트웨어 동작을 정확하고 완벽하게 알기 위한 유일한 실마리</p>
+<ul>
+<li>요구사항 정의서 : 어떤 기능을 원하는지가 적혀 있을 뿐</li>
+<li>기본 설계서 : 어떤 식의 소프트웨어로 요구사항을 실현할지 적혀있을 뿐</li>
+<li>상세 설계서 : 어떤 식의 구조로 소프트웨어를 작서할지에 관한 예정</li>
+</ul>
+<p><i class="fa fa-long-arrow-right"> 코드와 가장 밀접하지만, 실시간으로 코드와 동기화되지 않는다.<br><i class="fa fa-long-arrow-right"> 결국 코드가 유일한 실마리</i></i></p>
+<h3 id="코드는-읽기-쉬운-것이-최우선"><a href="#코드는-읽기-쉬운-것이-최우선" class="headerlink" title="*코드는 읽기 쉬운 것이 최우선"></a>*코드는 읽기 쉬운 것이 최우선</h3><p><strong>읽기 쉬움</strong>을 중시하자.<br>작성효율보다는 <strong>읽는 효율</strong>이 우선시된다.!!<br>읽기 쉽다면 나중에 실행 효율을 높이기는 간단하다.</p>
+<blockquote>
+<p>다른 사람이 내 코드를 볼 때 이해가 잘 되도록 노력하자.</p>
+</blockquote>
+<h3 id="두더지-잡기식-개발은-피한다"><a href="#두더지-잡기식-개발은-피한다" class="headerlink" title="*두더지 잡기식 개발은 피한다."></a>*두더지 잡기식 개발은 피한다.</h3><p>읽기 쉽고<br>오류가 없으며<br>품질이 좋은 코드와<br>테스트를 작성하려면 시간이 걸린다.</p>
+<p>이는 단기적으로 손실로 보이지만, 두더지 잡기식 개발이 되지 않으므로<br><span style="color:blue">장기적으로 반드시 이익을 가져다 준다.</span></p>
+<h3 id="주석을-작성한다"><a href="#주석을-작성한다" class="headerlink" title="*주석을 작성한다."></a>*주석을 작성한다.</h3><p>주석으로 설명하지 않아도 되는 이해하기 쉬운 코드를 지향하면서,<br>표현할 수 없는 부분에는 주석을 활용하는 식으로<br>균형잡힌 코드를 작성하도록 하자.</p>
+<h3 id="문학적-프로그래밍"><a href="#문학적-프로그래밍" class="headerlink" title="*문학적 프로그래밍"></a>*문학적 프로그래밍</h3><p>literate programming<br>코드 자체를 문서화하는 기법<br>문서를 기술하기 위한 언어가 프로그래밍 언어와 결함되어 있다.<br>코드는 곧 문서이며, 문서는 곧 코드다.</p>
+<blockquote>
+<p><a href="http://nevir.github.io/groc/languages.html" target="_blank" rel="noopener">groc</a></p>
+</blockquote>
+<hr>
+<p><a id="fifth"></a></p>
+<h2 id="5-SLAP"><a href="#5-SLAP" class="headerlink" title="5. SLAP"></a>5. SLAP</h2><p>Single Level of Abstraction Principle :: 추상화 수준의 통일</p>
+<h3 id="코드-수준을-맞춘다"><a href="#코드-수준을-맞춘다" class="headerlink" title="*코드 수준을 맞춘다."></a>*코드 수준을 맞춘다.</h3><p><strong>고수준 추상화</strong> 개념과 <strong>저수준 추상화</strong> 개념을 분리해야한다.<br>상하 2계층이 아니라 기능의 복잡도에 따라 여러 계층으로 분리한다.<br>각 계층에서는 추상화 수준을 일치시킨다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> 고수준(<span class="params"></span>) </span>&#123; <span class="comment">//수준 1의 목차</span></span><br><span class="line">    중수준<span class="number">1</span>();</span><br><span class="line">    중수준<span class="number">2</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 중수준1(<span class="params"></span>) </span>&#123; <span class="comment">//수준2의 목차-1</span></span><br><span class="line">    저수준<span class="number">1</span>();</span><br><span class="line">    저수준<span class="number">2</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 저수준1(<span class="params"></span>) </span>&#123; <span class="comment">//본문 내용</span></span><br><span class="line">  <span class="comment">//처리</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 저수준2(<span class="params"></span>) </span>&#123; <span class="comment">//본문 내용</span></span><br><span class="line">  <span class="comment">//처리</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 중수준2(<span class="params"></span>) </span>&#123; <span class="comment">//수준2의 목차-2</span></span><br><span class="line">  저수준<span class="number">3</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> 저수준3(<span class="params"></span>) </span>&#123; <span class="comment">//본문 내용</span></span><br><span class="line">  <span class="comment">//처리</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="why-코드에-요약성과-열람성을-가져다준다"><a href="#why-코드에-요약성과-열람성을-가져다준다" class="headerlink" title="*why_코드에 요약성과 열람성을 가져다준다"></a>*why_코드에 요약성과 열람성을 가져다준다</h3><ul>
+<li>함수의 일람 : 목차, 요약성을 지님</li>
+<li>분할된 함수 : 작은 코드 묶음, 열람성이 좋아짐.</li>
+</ul>
+<h3 id="how-함수를-구조화한다"><a href="#how-함수를-구조화한다" class="headerlink" title="*how_함수를 구조화한다."></a>*how_함수를 구조화한다.</h3><p><strong>함수를 구조화하자.</strong><br>함수를 구조화하면 각 함수는 자신보다 한 단계 낮은 수준의 함수를 호출하는 처리가 중심이 된다.<br><i class="fa fa-long-arrow-right"> 다른 함수를 호출하는 코드로 구성된 함수 : 복합함수 (composed method)</i></p>
+<p>복합함수</p>
+<ul>
+<li>최대한 작게 만든다.</li>
+<li>추상화 수준이 다른 함수를 호출하지 않도록 한다.</li>
+</ul>
+<h3 id="SLAP의-적용범위"><a href="#SLAP의-적용범위" class="headerlink" title="*SLAP의 적용범위"></a>*SLAP의 적용범위</h3><p>함수 뿐만 아니라 모듈 등에도 적용된다.</p>
+<ul>
+<li>개념을 저장할 저장소는 추상클래스와 해당 상속클래스가 된다.<ul>
+<li>추상클래스 : 무엇인가 덜 구체화 된 것</li>
+<li>객체 : 상태와 행동을 가진 것</li>
+<li>클래스 : 객체를 만들기 위한 틀</li>
+<li>초기화 : 클래스를 이용하여 객체를 생성</li>
+</ul>
+</li>
+<li><strong>추상 클래스</strong>에 높은 수준의 개념을 갖게 하고</li>
+<li><strong>상속 클래스</strong>에 낮은 수준의 개념을 갖게 한다.</li>
+</ul>
+<h3 id="SLAP의-순서"><a href="#SLAP의-순서" class="headerlink" title="*SLAP의 순서"></a>*SLAP의 순서</h3><p>글을 쓸때는<br><strong>내용을 쓰는 것</strong>과<br><strong>내용을 이해하기 쉽게 전하기 위한 구성을 생각하는 것</strong>을 별개의 작업으로 본다.</p>
+<ul>
+<li>구체적인 처리를 작성하는 작업</li>
+<li>추상화 수준을 일치시키는 작업은<br>모드를 전환해서 별개의 작업으로 수행하도록 하자.<br>그래야 작업이 쉬워지고 결과적으로 더 좋은 코드가 만들어진다.</li>
+</ul>
+<hr>
+<p><a id="sixth"></a></p>
+<h2 id="6-OCP"><a href="#6-OCP" class="headerlink" title="6. OCP"></a>6. OCP</h2><p>Open-Closed Principle : 개방-폐쇠의 원칙</p>
+<h3 id="코드의-변경은-파급시키지-않는다"><a href="#코드의-변경은-파급시키지-않는다" class="headerlink" title="*코드의 변경은 파급시키지 않는다."></a>*코드의 변경은 파급시키지 않는다.</h3><p>코드는 확장에 대해서 열려 있고<br>수정에 대해서 닫혀 있는<br>2가지 속성을 동시게 충족하도록 설계한다.</p>
+<ul>
+<li>확장에 열려있다. : 코드의 동작을 확장할 수 있다</li>
+<li>수정에 닫혀있다. : 코드의 동작을 확장하더라도 그 밖의 코드는 전혀 영향을 받지 않는다는 의미</li>
+</ul>
+<h3 id="why-코드의-변경에-유연하게-대응한다"><a href="#why-코드의-변경에-유연하게-대응한다" class="headerlink" title="*why_코드의 변경에 유연하게 대응한다."></a>*why_코드의 변경에 유연하게 대응한다.</h3><p>변경에 대해 유연하게 대응할 수 있는 유연한 설계가 요구된다.</p>
+<h3 id="OCP의-적용-범위"><a href="#OCP의-적용-범위" class="headerlink" title="*OCP의 적용 범위"></a>*OCP의 적용 범위</h3><p>코드의 모든 부분에 OCP를 적용하는 것은 과한 방식이다.<br>코드의 단순함을 우지할 수 없다.</p>
+<p>변경내용을 지나치게 예측하지 말아야 한다.<br><strong style="color:blue">실제 변경이 발생하기를 기다리는 전략.</strong><br>첫번째 변경을 감수하고, 두번째부터 OCP를 적용한다.<br>기본적으로 예측 가능한 부분에는 확장성 있게 작업한다.</p>
+<h3 id="OCP의-구현과-설계"><a href="#OCP의-구현과-설계" class="headerlink" title="*OCP의 구현과 설계"></a>*OCP의 구현과 설계</h3><p><strong>대표적인 기술 : 객체지향의</strong> <strong style="color:blue">다향성</strong></p>
+<ul>
+<li>다향성(polymorphism)은 특정 기능을 <strong>선언(설계)부분</strong>(=인터페이스)과 <strong>구현(동작)부분</strong>으로 분리한 후 구현부분을 다양한 방법으로 만들어 선택해서 사용할 수 있게 하는 기능.</li>
+<li>선언부분과 구현부분은 1:N의 다향성 관계가 형성</li>
+<li>다향성 <strong>선언</strong>부분: 인터페이스(interface)와 추상클래스(abstract class)</li>
+<li>다향성 <strong>구현</strong>부분: 클래스(class)</li>
+</ul>
+<p><strong>대표적인 디자인 패턴</strong></p>
+<ul>
+<li>strategy pattern<ul>
+<li>교환 가능한 행동을 캡슐화하고 위임을 통해서 어떤 행동을 사용할지 결정한다.</li>
+<li>애플리케이션에서 달라지는 부분을 찾아내고, 달라지지 않는 부분으로부터 분리 시킨다.</li>
+<li>바뀌는 부분은 따로 뽑아서 <strong>캡슐화</strong> 시킨다.</li>
+</ul>
+</li>
+<li>Observer<ul>
+<li>한 객체의 상태가 바뀌면 그 객체에 의존하는 다른 객체들한테 연락이 가고 자동으로 내용이 갱신되는 방식으로 일대다 의존성을 정의한다.</li>
+</ul>
+</li>
+<li>template method pattern</li>
+<li>decorater pattern</li>
+</ul>
+<hr>
+<hr>
+<p>참고링크<br>객체지향의 다향성 : <a href="http://webclub.tistory.com/406" target="_blank" rel="noopener">http://webclub.tistory.com/406</a><br>strategy pattern : <a href="http://hyeonstorage.tistory.com/146" target="_blank" rel="noopener">http://hyeonstorage.tistory.com/146</a></p>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/08/12/principle_02/" data-id="cjkqyr0fn00aamubm3c8o22b6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/08/11/principle_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">chap01.전제 - 프로그래밍 불변의 진실</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/12/principle_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/26/thumb_default.jpg)" alt="chap02.원칙 - 프로그래밍의 가이드라인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
+                            <p class="item-title"><a href="/2018/08/12/principle_02/" class="title">chap02.원칙 - 프로그래밍의 가이드라인</a></p>
+                            <p class="item-date"><time datetime="2018-08-12T03:12:34.000Z" itemprop="datePublished">2018-08-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/11/principle_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/25/thumb_default.jpg)" alt="chap01.전제 - 프로그래밍 불변의 진실" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
+                            <p class="item-title"><a href="/2018/08/11/principle_01/" class="title">chap01.전제 - 프로그래밍 불변의 진실</a></p>
+                            <p class="item-date"><time datetime="2018-08-11T11:12:34.000Z" itemprop="datePublished">2018-08-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/06/JS_13/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/22/thumb_default.jpg)" alt="13/ Image 업로드 시 회전에 대하여 (feat. exif 메타데이터 - Orientation)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/06/JS_13/" class="title">13/ Image 업로드 시 회전에 대하여 (feat. exif 메타데이터 - Orientation)</a></p>
+                            <p class="item-date"><time datetime="2018-08-06T12:20:19.000Z" itemprop="datePublished">2018-08-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/03/Clean_code_3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/21/thumb_default.jpg)" alt="📓 읽기 좋은 코드가 좋은 코드다. || part3. 코드 재작성하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></p>
+                            <p class="item-title"><a href="/2018/08/03/Clean_code_3/" class="title">📓 읽기 좋은 코드가 좋은 코드다. || part3. 코드 재작성하기</a></p>
+                            <p class="item-date"><time datetime="2018-08-03T11:12:34.000Z" itemprop="datePublished">2018-08-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/02/Clean_code_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/20/thumb_default.jpg)" alt="📓 읽기 좋은 코드가 좋은 코드다. || part2. 루프와 논리를 단순화하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></p>
+                            <p class="item-title"><a href="/2018/08/02/Clean_code_2/" class="title">📓 읽기 좋은 코드가 좋은 코드다. || part2. 루프와 논리를 단순화하기</a></p>
+                            <p class="item-date"><time datetime="2018-08-02T11:12:34.000Z" itemprop="datePublished">2018-08-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.71px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.43px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.43px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.86px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.43px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.86px;">angular</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.86px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.86px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.43px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.43px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 14.29px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.43px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.43px;">principle</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.14px;">react</a> <a href="/tags/refactoring/" style="font-size: 14.29px;">refactoring</a> <a href="/tags/typescript/" style="font-size: 18.57px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/08/12/principle_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>
