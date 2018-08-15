@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="async,rxjs" />
+    
+    
+    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
+<meta name="keywords" content="async,rxjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
+<meta property="og:url" content="http://feel5ny.github.io/2018/08/15/Async_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-08-15T14:44:24.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
+<meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/08/15/Async_01/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Angular/">Angular</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-Async_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/08/15/Async_01/" class="article-date">
+            <time datetime="2018-08-15T02:12:34.000Z" itemprop="datePublished">2018-08-15</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/async/">async</a>, <a class="tag-link" href="/tags/rxjs/">rxjs</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><strong>[📕 퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+</blockquote>
+<h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
+<li>웹 어플리케이션의 입력 데이터</li>
+<li>입력 데이터의 <strong>전달 시점</strong>이 다양하다. - 동기/비동기</li>
+<li>동기와 비동기를 함께 사용할 수 밖에 없는가?</li>
+<li>rxjs는 어떻게 개선하였나? <ul>
+<li>Observable</li>
+<li>모든 데이터는 Observable 인스턴스로 만들 수 있다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<hr>
+<hr>
+<h2 id="1-웹-어플리케이션의-입력-데이터"><a href="#1-웹-어플리케이션의-입력-데이터" class="headerlink" title="1. 웹 어플리케이션의 입력 데이터"></a>1. 웹 어플리케이션의 입력 데이터</h2><p>게시판을 예로 생각.<br>목록화면 : 서버에 저장된 글을 보여주는<br>상세화면 : 게시글의 내용을 보여주는 상세화면</p>
+<ul>
+<li>서버로부터 저장된 글에 대한 정보를 받아서 </li>
+<li>화면과 관련 UI작업을 한다.</li>
+<li>게시글 등록/수정하는 편집화면</li>
+<li>수정이 끝나면 서버에 저장</li>
+</ul>
+<ol>
+<li>게시글 / 서버 -&gt; 브라우저 / <strong>비동기</strong> / ajax통신으로 json데이터를 받는다.</li>
+<li>게시글 / 브라우저 -&gt; 브라우저 UI객체 / <strong>동기</strong> / json 데이터를 ui에 반영한다.</li>
+<li>사용자가 입력한 내용 / 사용자 -&gt; 브라우저 UI 객체 / <strong>비동기</strong> / <code>&lt;textarea&gt;</code>를 통해 사용자 입력을 받는다.</li>
+<li>사용자가 입력한 내용 / 브라우저 UI객체 -&gt; 브라우저 -&gt; 서버 / <strong>동기, 비동기</strong> / <code>&lt;textarea&gt;</code>에 있는 데이터를 json객체로 저장 후, 서버로 ajax요청을 한다.</li>
+</ol>
+<hr>
+<h2 id="2-입력-데이터의-전달-시점이-다양하다"><a href="#2-입력-데이터의-전달-시점이-다양하다" class="headerlink" title="2. 입력 데이터의 전달 시점이 다양하다."></a>2. 입력 데이터의 전달 시점이 다양하다.</h2><h3 id="동기-synchronous"><a href="#동기-synchronous" class="headerlink" title="동기 synchronous"></a>동기 synchronous</h3><p>: 작업이 들어온 순서에 맞게 차근차근 하나씩 진행되는 것을 의미한다.</p>
+<ul>
+<li>장점 : 개발이 쉬움</li>
+<li>단점 : 속도가 느려짐.</li>
+<li>웹 브라우저는 단일 UI 스레이드 이므로 해당 작업이 끝날때까지 브라우저는 대기해야한다.</li>
+</ul>
+<h3 id="비동기-asynchronous"><a href="#비동기-asynchronous" class="headerlink" title="비동기 asynchronous"></a>비동기 asynchronous</h3><p>: 작업이 들어온 순서에 상관없이 산발적으로 작업이 진행된다.</p>
+<ul>
+<li>별도의 이벤트나 콜백함수를 통해 결과를 전달하는 방식</li>
+<li>장점 : 효율적인 작업 진행</li>
+<li>개발은 복잡해지고 오류 확률이 높아질 우려가 있다.</li>
+</ul>
+<hr>
+<h2 id="3-동기와-비동기를-함께-사용할-수-밖에-없는가"><a href="#3-동기와-비동기를-함께-사용할-수-밖에-없는가" class="headerlink" title="3. 동기와 비동기를 함께 사용할 수 밖에 없는가?"></a>3. 동기와 비동기를 함께 사용할 수 밖에 없는가?</h2><ul>
+<li>동기 방식은 프로세스를 독점하기 때문에 효율적인 작업이 불가능.</li>
+<li>비동기 방식은 효율적으로 작업할 수 있지만 <span style="color:blue"><strong>호출순서를 보장하기 어렵다.</strong><span></span></span></li>
+<li>웹 브라우저는 단일 스레드 기반이기때문에 성능상 문제가 발생한다.</li>
+</ul>
+<hr>
+<h2 id="4-rxjs는-어떻게-개선하였나"><a href="#4-rxjs는-어떻게-개선하였나" class="headerlink" title="4. rxjs는 어떻게 개선하였나?"></a>4. rxjs는 어떻게 개선하였나?</h2><p>입력데이터에 대한 구조적 문제를 개선하고자 하였다.<br>rxjs는 동기와 비동기의 차이점을 <strong>시간</strong>이라는 개념을 도입함으로써 해결하려고 했다.</p>
+<p><img src="/images/2018/24/01.png" width="300px" style="margin-left: 0;"></p>
+<blockquote>
+<p>비동기</p>
+</blockquote>
+<p><img src="/images/2018/24/02.png" width="300px" style="margin-left: 0;"></p>
+<blockquote>
+<p>동기</p>
+</blockquote>
+<p>동기와 비동기는 시간의 축으로 봤을 때는 같은 형태이다.<br>=&gt; <strong>시간을 인덱스로 둔 컬렉션으로 생각할 수 있다.</strong><br>=&gt; Rxjs는 이를 <strong>스트림</strong>이라고 표현한다.<br>=&gt; Rxjs는 이런 스트림($)을 표현하는 Observable 클래스를 제공한다.</p>
+<h3 id="4-1-Observable"><a href="#4-1-Observable" class="headerlink" title="4.1 Observable"></a>4.1 Observable</h3><p><strong>시간을 인덱스로 둔 컬렉션을 추상화한 클래스이다.</strong><br>동기나 비동기 동작 방식으로 전달된 데이터를 하나의 컬렉션으로 바라볼 수 있게 해준다.<br>개발자는 데이터가 어떤 형태로 전달되는지에 대해 더이상 고민할 필요가 없어진다.<br>Observable을 통해 데이터를 전달받기만 하면된다.</p>
+<blockquote>
+<p>동기던 비동기던 옵저버블로 데이터를 받긔</p>
+</blockquote>
+<h3 id="4-2-모든-데이터는-Observable-인스턴스로-만들-수-있다"><a href="#4-2-모든-데이터는-Observable-인스턴스로-만들-수-있다" class="headerlink" title="4.2 모든 데이터는 Observable 인스턴스로 만들 수 있다."></a>4.2 모든 데이터는 Observable 인스턴스로 만들 수 있다.</h3><ul>
+<li>키보드를 눌러서 입력된 데이터</li>
+<li>마우스를 이동하거나 클릭해서 입력된 데이터</li>
+<li>ajax/fetch 요청을 통해 얻은 데이터</li>
+<li>web socket을 통해 전달된 데이터</li>
+<li>messages를 통해 전달된 데이터<br>…</li>
+</ul>
+<p>rxjs는 observable을 만들기 위해 rxjs 네임스페이스에 다양한 함수를 제공한다.(오퍼레이터)<br>이벤트를 observable로 만들때 <code>fromEvent</code>를 사용한다.<br>단일데이터를 연속으로 전달하는 경우는 <code>of</code></p>
+<p><strong>Observable 객체의 변수명은 관용적으로 접미사로 $를 붙인다.</strong><br>Observable 객체는 스트림(stream)이다. 따라서 Stream을 뜻하는 S와 유사한 $를 Stream의 약어로 사용한다.</p>
+<hr>
+<hr>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cjkv95nya0001m4bma3hjne3h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/08/15/Async_02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/08/12/principle_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">chap02.원칙 - 프로그래밍의 가이드라인</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/15/Async_03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/28/thumb_default.jpg)" alt="chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/08/15/Async_03/" class="title">chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류</a></p>
+                            <p class="item-date"><time datetime="2018-08-15T11:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/15/Async_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/27/thumb_default.jpg)" alt="chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/08/15/Async_02/" class="title">chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제</a></p>
+                            <p class="item-date"><time datetime="2018-08-15T05:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/15/Async_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/24/thumb_default.jpg)" alt="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/08/15/Async_01/" class="title">chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류</a></p>
+                            <p class="item-date"><time datetime="2018-08-15T02:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/12/principle_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/26/thumb_default.jpg)" alt="chap02.원칙 - 프로그래밍의 가이드라인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
+                            <p class="item-title"><a href="/2018/08/12/principle_02/" class="title">chap02.원칙 - 프로그래밍의 가이드라인</a></p>
+                            <p class="item-date"><time datetime="2018-08-12T03:12:34.000Z" itemprop="datePublished">2018-08-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/11/principle_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/25/thumb_default.jpg)" alt="chap01.전제 - 프로그래밍 불변의 진실" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
+                            <p class="item-title"><a href="/2018/08/11/principle_01/" class="title">chap01.전제 - 프로그래밍 불변의 진실</a></p>
+                            <p class="item-date"><time datetime="2018-08-11T11:12:34.000Z" itemprop="datePublished">2018-08-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">62</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.71px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.43px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.43px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.86px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.43px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.86px;">angular</a> <a href="/tags/async/" style="font-size: 14.29px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.86px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.86px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.43px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.43px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 14.29px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.43px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.43px;">principle</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.14px;">react</a> <a href="/tags/refactoring/" style="font-size: 14.29px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.29px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.57px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/08/15/Async_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>

@@ -493,6 +493,9 @@ code {
 .nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-link.current {
   color: #fff;
 }
+.nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-link:hover {
+  background: rgba(239,237,247,0.8);
+}
 .nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-child {
   top: 100%;
   display: none;
@@ -500,7 +503,12 @@ code {
   overflow: hidden;
   position: absolute;
   width: 180px;
-  background: url("images/opacity-10.png") #16325c repeat;
+  background: url("images/opacity-10.png") #fcfafc repeat;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+.nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-child a.main-nav-list-link {
+  color: #16325c;
 }
 .nav-container .nav-container-inner #main-nav .main-nav-list-item .main-nav-list-child li {
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.06);
@@ -652,6 +660,9 @@ code {
   display: block;
   position: absolute;
   z-index: 2;
+}
+#sidebar .sidebar-top .social-links .social-tooltip i {
+  margin: 0;
 }
 #sidebar .sidebar-top i {
   color: rgba(255,255,255,0.7);
@@ -930,6 +941,15 @@ code {
 .tagcloud a {
   margin-right: 5px;
 }
+span.orange {
+  background-color: #ffe4c4;
+}
+span.mint {
+  background-color: #7fffd4;
+}
+span.pink {
+  background-color: #ffc0cb;
+}
 .fa {
   margin-top: 0.6em;
 }
@@ -1086,8 +1106,8 @@ a.article-title:hover {
   clear: both;
 }
 .article-meta > div {
-  float: left;
   margin-right: 10px;
+  display: inline-block;
 }
 .article-meta > div .fa {
   margin-right: 3px;
@@ -1107,13 +1127,14 @@ a.article-title:hover {
   margin-right: 6px;
 }
 .article-summary .article-meta {
-  height: 1.6em;
+  height: 2em;
   overflow: hidden;
 }
 .article-summary .article-meta a {
   color: #16325c;
 }
 .article-summary .article-meta > div {
+  display: inline-block;
   margin-right: 0;
 }
 .article-tag .tag-link:before {
