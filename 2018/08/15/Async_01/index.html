@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류 | 필오의 개발일지</title>
+    <title>1부/ chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,15 +14,15 @@
     <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
 <meta name="keywords" content="async,rxjs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
+<meta property="og:title" content="1부&#x2F; chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/15/Async_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
 <meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-08-15T14:44:24.579Z">
+<meta property="og:updated_time" content="2018-08-16T15:13:57.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
+<meta name="twitter:title" content="1부&#x2F; chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
 <meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
@@ -43,6 +43,8 @@
     
     <link rel="stylesheet" href="/css/style.css">
     <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
     
     
         <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
@@ -176,7 +178,7 @@ ga('send', 'pageview');
                 
     
         <h1 class="article-title" itemprop="name">
-        chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류
+        1부/ chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류
         </h1>
     
 
@@ -198,6 +200,7 @@ ga('send', 'pageview');
     </div>
 
             </div>
+        
         
         
         <div class="article-entry" itemprop="articleBody">
@@ -292,7 +295,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cjkv95nya0001m4bma3hjne3h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cjlaxebpk0001aabm3xhuf5v2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -353,6 +356,12 @@ ga('send', 'pageview');
 </script>
 
         </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                
+            </div>
+            
+        </div>
     </div>
 </article>
 
@@ -414,7 +423,7 @@ ga('send', 'pageview');
         <strong class="article-nav-caption">newer</strong>
         <p class="article-nav-title">
         
-            chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제
+            1부/ chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
@@ -442,10 +451,70 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/08/25/JS_16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/32/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/25/JS_16/" class="title">4/ 함수와 프로토타입 체이닝 (2)</a></p>
+                            <p class="item-date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/25/JS_15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/31/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/25/JS_15/" class="title">4/ 함수와 프로토타입 체이닝 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/23/JS_14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/30/thumb_default.jpg)" alt="3/ 자바스크립트 데이터 타입과 연산자" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/23/JS_14/" class="title">3/ 자바스크립트 데이터 타입과 연산자</a></p>
+                            <p class="item-date"><time datetime="2018-08-23T12:20:19.000Z" itemprop="datePublished">2018-08-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/08/15/Async_03/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/28/thumb_default.jpg)" alt="chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/28/thumb_default.jpg)" alt="1부/ chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류" class="thumbnail-image"></span>
     
     
 </a>
@@ -454,7 +523,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
-                            <p class="item-title"><a href="/2018/08/15/Async_03/" class="title">chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류</a></p>
+                            <p class="item-title"><a href="/2018/08/15/Async_03/" class="title">1부/ chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류</a></p>
                             <p class="item-date"><time datetime="2018-08-15T11:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
                         </div>
                     </li>
@@ -462,30 +531,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/08/15/Async_02/" class="thumbnail">
+                            <a href="/2018/08/15/Async_04/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/27/thumb_default.jpg)" alt="chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
-                            <p class="item-title"><a href="/2018/08/15/Async_02/" class="title">chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제</a></p>
-                            <p class="item-date"><time datetime="2018-08-15T05:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/08/15/Async_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/24/thumb_default.jpg)" alt="chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/29/thumb_default.jpg)" alt="2부/ chap01. RxJs란 무엇인가?" class="thumbnail-image"></span>
     
     
 </a>
@@ -494,48 +543,8 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Angular/">Angular</a></p>
-                            <p class="item-title"><a href="/2018/08/15/Async_01/" class="title">chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류</a></p>
-                            <p class="item-date"><time datetime="2018-08-15T02:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/08/12/principle_02/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/26/thumb_default.jpg)" alt="chap02.원칙 - 프로그래밍의 가이드라인" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
-                            <p class="item-title"><a href="/2018/08/12/principle_02/" class="title">chap02.원칙 - 프로그래밍의 가이드라인</a></p>
-                            <p class="item-date"><time datetime="2018-08-12T03:12:34.000Z" itemprop="datePublished">2018-08-12</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/08/11/principle_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/25/thumb_default.jpg)" alt="chap01.전제 - 프로그래밍 불변의 진실" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Programing/">Programing</a></p>
-                            <p class="item-title"><a href="/2018/08/11/principle_01/" class="title">chap01.전제 - 프로그래밍 불변의 진실</a></p>
-                            <p class="item-date"><time datetime="2018-08-11T11:12:34.000Z" itemprop="datePublished">2018-08-11</time></p>
+                            <p class="item-title"><a href="/2018/08/15/Async_04/" class="title">2부/ chap01. RxJs란 무엇인가?</a></p>
+                            <p class="item-date"><time datetime="2018-08-15T11:12:34.000Z" itemprop="datePublished">2018-08-15</time></p>
                         </div>
                     </li>
                 
@@ -548,7 +557,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">62</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">66</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -558,7 +567,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -568,7 +577,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CS/" style="font-size: 15.71px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.43px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.43px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.86px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.43px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.86px;">angular</a> <a href="/tags/async/" style="font-size: 14.29px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.86px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.86px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.43px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.43px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 14.29px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.43px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.43px;">principle</a> <a href="/tags/programming/" style="font-size: 11.43px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.14px;">react</a> <a href="/tags/refactoring/" style="font-size: 14.29px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.29px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.57px;">typescript</a>
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a>
         </div>
     </div>
 

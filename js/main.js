@@ -4,6 +4,14 @@
         $('body, html').animate({ scrollTop: 0 }, 600);
     });
 
+    // To top button
+    $("#article-list-popup__btn").on('click', function () {
+        // $('.article-list-popup__box').slideToggle();
+        var options = { direction: "right" }
+        $('.article-list-popup__box').toggle( "drop", options, 500 );
+    });
+
+
     // Nav bar toggle
     $('#main-nav-toggle').on('click', function () {
         $('.nav-container-inner').slideToggle();
