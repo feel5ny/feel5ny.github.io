@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>2/ 루틴 심화 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.    1. 참조 전파의 문제  LA는 간접적으로 B를 물고 있다. 상호 참조(연쇄참조)가 되어서 서로 오염이 된다.. 디버깅이 어려워진다.   참조값은 전체를 오염시키기 쉽다. 복사본을 넘겨야한다.    2. 서브루틴의 체인  keep">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2&#x2F; 루틴 심화">
+<meta property="og:url" content="http://feel5ny.github.io/2018/09/07/JS_19/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.    1. 참조 전파의 문제  LA는 간접적으로 B를 물고 있다. 상호 참조(연쇄참조)가 되어서 서로 오염이 된다.. 디버깅이 어려워진다.   참조값은 전체를 오염시키기 쉽다. 복사본을 넘겨야한다.    2. 서브루틴의 체인  keep">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/35/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-09-17T13:25:07.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2&#x2F; 루틴 심화">
+<meta name="twitter:description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.    1. 참조 전파의 문제  LA는 간접적으로 B를 물고 있다. 상호 참조(연쇄참조)가 되어서 서로 오염이 된다.. 디버깅이 어려워진다.   참조값은 전체를 오염시키기 쉽다. 복사본을 넘겨야한다.    2. 서브루틴의 체인  keep">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/35/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/09/07/JS_19/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+                            <article id="post-JS_19" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        2/ 루틴 심화
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/09/07/JS_19/" class="article-date">
+            <time datetime="2018-09-07T12:20:19.000Z" itemprop="datePublished">2018-09-07</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 참조 전파의 문제</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 서브루틴의 체인</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 재귀 꼬리 최적화</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 재귀를 루프로</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. ✨클로저✨</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#5-1">5.1 Static state</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#5-2">5.2 Runtime state</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#6">6. 중첩 클로저</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#7">7. 쉐도잉</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#8">8. 코루틴</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.<br>공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.</p>
+</blockquote>
+<hr>
+<p><a name="1"></a></p>
+<h1 id="1-참조-전파의-문제"><a href="#1-참조-전파의-문제" class="headerlink" title="1. 참조 전파의 문제"></a>1. 참조 전파의 문제</h1><p><img src="/images/2018/35/03.png"></p>
+<ul>
+<li>LA는 간접적으로 B를 물고 있다.<ul>
+<li>상호 참조(연쇄참조)가 되어서 서로 오염이 된다..</li>
+<li>디버깅이 어려워진다.</li>
+</ul>
+</li>
+<li>참조값은 전체를 오염시키기 쉽다.</li>
+<li><span class="mint"><strong>복사본</strong>을 넘겨야한다.</span></li>
+</ul>
+<hr>
+<p><a name="2"></a></p>
+<h1 id="2-서브루틴의-체인"><a href="#2-서브루틴의-체인" class="headerlink" title="2. 서브루틴의 체인"></a>2. 서브루틴의 체인</h1><p><img src="/images/2018/35/04.png"><br><img src="/images/2018/35/05.png"><br><img src="/images/2018/35/06.png"></p>
+<blockquote>
+<p>keep의 정확한 대상</p>
+</blockquote>
+<ul>
+<li>인자와 지역변수를 포함하는 곳: 실행컨택스트</li>
+</ul>
+<p><img src="/images/2018/35/07.png"></p>
+<ul>
+<li>함수 콜을 return 이후로 옮겼다.</li>
+</ul>
+<p><img src="/images/2018/35/08.png"></p>
+<ul>
+<li>메모리를 유지할 필요가 없으니, 리턴포인트를 다른 곳으로 지정해주면 어떨까?</li>
+<li>리턴포인트는 언어 수준에서 정해져있다.</li>
+<li>리턴포인트를 처음 호출한 함수로 옮긴다 =&gt; tail recursion </li>
+<li>언어수준에서 리턴포인트를 지정하기 때문에 언어마다 재귀꼬리 최적화를 지원하는 언어도 있고, 없기도 하다.</li>
+<li>제어문의 loop 처럼 옮긴다.<ul>
+<li>처리하고 =&gt; 해제하고</li>
+<li>제어문은 for문을 돌때마다 메모리를 유지하지 않는다.</li>
+<li>index 변수만 남아 있다.</li>
+<li>제어문의 <strong><code>stack clear</code></strong> 구문.</li>
+<li>for문은 처음 loop돌리는 블럭에 대해서 스택영역에 대해서 실행한 다음에 점프시, 앞의 stack 메모리를 전부 해제한다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a name="3"></a></p>
+<h1 id="3-재귀-꼬리-최적화-Tail-Recursion"><a href="#3-재귀-꼬리-최적화-Tail-Recursion" class="headerlink" title="3. 재귀 꼬리 최적화 Tail Recursion"></a>3. 재귀 꼬리 최적화 <code>Tail Recursion</code></h1><ul>
+<li>for문의 도움을 받지 않고도 고성능의 루프를 만들어 낼 수 있다.</li>
+<li>사파리가 지원하고 있다. 크롬 X, 엣지 X</li>
+<li>tail recursion을 지원한다. <ul>
+<li>script time out만 난다.</li>
+<li>stack over flow는 일어나지 않는다. </li>
+</ul>
+</li>
+<li>언어마다 tail recursion이 이뤄지는 조건을 정의해 둔다.</li>
+<li>효율적인 재귀함수를 짤 수 있다.</li>
+</ul>
+<p><strong> *예시 </strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="params">v</span> =&gt;</span> v + (v ? sum(v<span class="number">-1</span>) : <span class="number">0</span>);</span><br><span class="line">sum(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 3 + sum(2)</span></span><br><span class="line"><span class="comment">// 2. 2 + sum(1)</span></span><br><span class="line"><span class="comment">// 3. 1 + 0</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>더하기 <span class="mint"><strong>연산자</strong>는 꼬리물기 최적화를 방해한다.</span></li>
+<li>모든 연산자는 스택메모리를 유뱔한다.</li>
+</ul>
+<blockquote>
+<p>인자로 옮겨서 스택메모리가 생기지 않도록 하였다.</p>
+</blockquote>
+<h2 id="연산을-인자로-옮긴다"><a href="#연산을-인자로-옮긴다" class="headerlink" title="연산을 인자로 옮긴다!!"></a>연산을 <span class="mint">인자</span>로 옮긴다!!</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">v, prev = <span class="number">0</span></span>) =&gt;</span> &#123;</span><br><span class="line">  prev += v;</span><br><span class="line">  <span class="keyword">return</span> (v &gt; <span class="number">1</span> ? sum(v<span class="number">-1</span>, prev) : prev);</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">3</span>);</span><br><span class="line"><span class="comment">// 1. sum(v:3, prev:0) return sum(2,3)</span></span><br><span class="line"><span class="comment">// 2. sum(v:2, prev:3) return sum(1,5)</span></span><br><span class="line"><span class="comment">// 3. sum(v:1, prev:5) reutrn 6</span></span><br><span class="line"><span class="comment">// 3번째 return값이 첫번째 sum(3)의 리턴포인트로 리턴된다.</span></span><br></pre></td></tr></table></figure>
+<h3 id="자바스크립트에서-tail-recursion-안-일으키는-연산자-언어수준에서-정의되어있음"><a href="#자바스크립트에서-tail-recursion-안-일으키는-연산자-언어수준에서-정의되어있음" class="headerlink" title="자바스크립트에서 tail recursion 안 일으키는 연산자 (언어수준에서 정의되어있음)"></a>자바스크립트에서 tail recursion 안 일으키는 연산자 (언어수준에서 정의되어있음)</h3><ul>
+<li>삼항연산자</li>
+<li><code>&amp;&amp;</code>연산자</li>
+<li><code>||</code>연산자</li>
+</ul>
+<blockquote>
+<p>자바스크립트는 이미 ES6에서는 tail recursive를 지원하게끔 스펙으로 지정해놓았다.<br>JVM은 지원하지 않는다.</p>
+</blockquote>
+<ul>
+<li>내 메모리는 다 해제하고 다음쪽 함수메모리의 인자메모리를 사용함으로써 해결한다.</li>
+<li>함수 외적 메모리를 알 수 있다.<ul>
+<li>위의 prev는 외적 메모리라는 것을 알 수 있다.</li>
+<li>for문의 지역변수도 외적 메모리라고 볼 수 있다.</li>
+<li>for문의 지역변수에 갱신하는 로직과 같은개념이다.</li>
+</ul>
+</li>
+</ul>
+<p><a name="4"></a></p>
+<h1 id="4-🚀🚀-재귀를-루프로-Tail-Recursion-to-loop"><a href="#4-🚀🚀-재귀를-루프로-Tail-Recursion-to-loop" class="headerlink" title="4. 🚀🚀 재귀를 루프로 Tail Recursion to loop"></a>4. 🚀🚀 재귀를 루프로 Tail Recursion to loop</h1><ul>
+<li>자유롭게 변환할 수 있어야 한다.</li>
+<li>자동으로 변환할 수 있어야 한다..</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">v, prev = <span class="number">0</span> </span>) =&gt;</span> &#123;</span><br><span class="line">  prev += v;</span><br><span class="line">  <span class="keyword">return</span> (v &gt; <span class="number">1</span> ? sum(v<span class="number">-1</span>, prev) : prev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> prev = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(v &gt; <span class="number">1</span>)&#123;</span><br><span class="line">    prev += v;</span><br><span class="line">    v--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="5"></a></p>
+<h1 id="5-✨클로저✨"><a href="#5-✨클로저✨" class="headerlink" title="5. ✨클로저✨"></a>5. ✨클로저✨</h1><ul>
+<li>언어적인 장치라고 생각하자.</li>
+</ul>
+<p><a name="5-1"></a></p>
+<h2 id="5-1-Static-state"><a href="#5-1-Static-state" class="headerlink" title="5-1. Static state"></a>5-1. Static state</h2><p><img src="/images/2018/35/03.png"></p>
+<ul>
+<li>이렇게 작동하는 대표적인 언어가 C언어이다.</li>
+<li>루틴을 만드는 것이 <strong>문</strong>으로 되어있다. 자바스크립트처럼 변수에 대입할 수 있는 값이 아니다.<ul>
+<li>서브루틴을 값의 형태로 만들어내는 언어가 있고, 문으로 만들어내는 언어가 있다.</li>
+<li>자바의 메소드는 문이다. 클래스 내부에서만 선언되어야한다. 외부에서 대입될 수 없다.</li>
+</ul>
+</li>
+<li>값으로 만들 수 있으면 실행 중간에 루틴을 만들어 낼 수 있다.</li>
+<li>람다<ul>
+<li>루틴을 람다로 볼래. </li>
+<li>c언어의 함수포인터에서 발전해온 개념.</li>
+<li>런타임에 서브루틴을 만들 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2018/35/01.png"><br><strong>클로저는 오직 런타임 중에 루틴을 만들 수 있는 언어에서 생겨난다.</strong></p>
+<ul>
+<li>c에서는 static 메모리</li>
+<li>그렇다고 이런상황에서 모든 언어가 클로저를 생산하진 않는다..<ul>
+<li>언어 디자이너가 어떻게 결정했냐에 따라 다르다.</li>
+</ul>
+</li>
+<li>함수를 문으로 만드는 언어의 특성</li>
+</ul>
+<p><a name="5-2"></a></p>
+<h2 id="5-2-Runtime-state"><a href="#5-2-Runtime-state" class="headerlink" title="5-2. Runtime state"></a>5-2. Runtime state</h2><p><img src="/images/2018/35/09.png"><br>=&gt; 우리가 짠 코드를 만나면 =&gt;<br><img src="/images/2018/35/10.png"></p>
+<ul>
+<li>실행 중간(런타임)에 루틴의 정의 자체가 태어난다.</li>
+</ul>
+<p><img src="/images/2018/35/02.png"></p>
+<ul>
+<li>자기가 태어났을 때의 <strong>자기가 갇혀있던 박스</strong>를 바라볼 수 있는 여지가 생긴다.</li>
+<li>런타임에 루틴을 만들 수 있는 언어들은 루틴을 만들면 루틴정보 안에 자기가 어디서 태어났는지를 기록한다. =&gt; 자바스크립트에서는 <strong>스코프</strong>라고 정의한다.</li>
+<li><strong>메인 루틴의 flow를 기억한다.</strong> main flow가 흘러가는 상황을 알고 있다.<ul>
+<li>flow상에 있는 아이들을 기억하게 된다.</li>
+<li>노란박스에 등장하지 않는 모든 변수를 <strong>자유변수</strong>라고 한다.</li>
+</ul>
+</li>
+<li>자유변수들은 routine과 무관하게 존재하지만 routine에서 참조할 수 있다.<ul>
+<li>routine이 한번이라도 자유변수를 갖고오게 되면 자유변수들은 마음대로 해지되거나 조작되지 못한다. <strong>=&gt; routine이 물고 있기 때문</strong></li>
+<li>routine을 자유변수가 갇히는 공간이라고 할 수 있다. </li>
+<li>free variables close =&gt; closure</li>
+</ul>
+</li>
+<li>만약 이 상황에서 F 메소드가 외부로 유출될 경우 main flow의 메모리가 다 해지되지 못한다.</li>
+<li>클로저는 자유변수의 클로저이다.</li>
+</ul>
+<hr>
+<p><a name="6"></a></p>
+<h1 id="6-중첩-클로저-nested-closure"><a href="#6-중첩-클로저-nested-closure" class="headerlink" title="6. 중첩 클로저 nested closure"></a>6. 중첩 클로저 nested closure</h1><ul>
+<li>클로저는 루틴만이 만들어 내는 것이 아니다.</li>
+<li>ES6에서는 block만 주어도 스코프가 생성된다.</li>
+<li>스코프 생성은 클로저를 만드는 행위이다.</li>
+<li>block만 주어도 클로저가 생성된다.</li>
+</ul>
+<p><img src="/images/2018/35/11.png"><br><img src="/images/2018/35/12.png"></p>
+<ul>
+<li>연속적인 클로저가 탄생한다.</li>
+<li>중첩되어 있는 클로저를 마구마구 생성된다.</li>
+</ul>
+<blockquote>
+<p>위 그림을 코드로 표현한다면..<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a = <span class="number">3</span>; <span class="comment">// main flow의 전역: global</span></span><br><span class="line"><span class="keyword">if</span>(a == <span class="number">3</span>) &#123; <span class="comment">// 첫번째 block</span></span><br><span class="line">  <span class="keyword">const</span> b = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">const</span> f1 = <span class="function"><span class="params">v</span> =&gt;</span> &#123; <span class="comment">// 첫번째 routine</span></span><br><span class="line">    <span class="keyword">const</span> c = <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">if</span> (a +b &gt; c)&#123; <span class="comment">// 두번째 block</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="params">p</span> =&gt;</span> v + p  + a + b; </span><br><span class="line">      <span class="comment">// 두번째 routine</span></span><br><span class="line">      <span class="comment">// 자유변수를 물고 있음 =&gt; 클로저</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="params">p</span> =&gt;</span> v + p  + a + b; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<p><a name="7"></a> </p>
+<h1 id="7-쉐도잉"><a href="#7-쉐도잉" class="headerlink" title="7. 쉐도잉"></a>7. 쉐도잉</h1><p><img src="/images/2018/35/13.png"></p>
+<ul>
+<li>층층이 중첩되어있는 클로저가 있는데 각각의 클로저에서 똑같은 이름의 변수를 소유하고 있을때 일어난다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">3</span>; <span class="comment">// main flow에 A</span></span><br><span class="line"><span class="keyword">if</span>(a == <span class="number">3</span>)&#123; <span class="comment">// block scope</span></span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>; <span class="comment">// ?! a가 또 있음.</span></span><br><span class="line">  <span class="keyword">const</span> f1 = <span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">7</span>; <span class="comment">// ???!! a가 또있음!!</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>쉐도잉을 지원하는 언어는 가장 가까이에 있는 클로저를 사용한다.</li>
+<li>서브루틴이 밖에 있는 자유변수를 안건드리게 하기 위해서는(보호하기 위해서는) 쉐도잉 방식을 사용한다.<ul>
+<li>유일한 방법은 변경하고픈 스코프의 상위에 지키고픈 변수명을 같은 변수명을 사용하여 지킨다.</li>
+<li>위의 코드는 서브루틴에서 더 상위로 못가도록 막음<br><img src="/images/2018/35/14.png"></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">3</span>; <span class="comment">// main flow에 A</span></span><br><span class="line"><span class="keyword">if</span>(a == <span class="number">3</span>)&#123; <span class="comment">// block scope</span></span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">5</span>; <span class="comment">// 보호막을 만든 개념</span></span><br><span class="line">  <span class="keyword">const</span> f1 = <span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 서브루틴 상위의 a에 접근</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/35/15.png"></p>
+<hr>
+<p><a name="8"></a></p>
+<h1 id="8-코루틴"><a href="#8-코루틴" class="headerlink" title="8. 코루틴"></a>8. 코루틴</h1><!-- - 커맨드 패턴 -->
+<ul>
+<li><strong>실행하다가 중간에 멈출 수 있지 않을까?</strong> 라는 생각에 도달함</li>
+<li>실행하다가 중간에 멈추고 =&gt; 리턴포인트로 보내자!</li>
+<li>main flow에서 sub routine에 갔다가 20번째에서 멈춤 =&gt; 다시 main flow로 흐름 =&gt; 또 다시 sub routine의 21번째에서 시작 =&gt; 다시 main flow로 흐름 =&gt; 또 다시 sub routine의 50번째에서 멈춤 </li>
+<li></li>
+</ul>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/09/07/JS_19/" data-id="cjm6bpmqp00balhbmb7r271c0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 참조 전파의 문제</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 서브루틴의 체인</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 재귀 꼬리 최적화</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 재귀를 루프로</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. ✨클로저✨</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#5-1">5.1 Static state</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#5-2">5.2 Runtime state</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#6">6. 중첩 클로저</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#7">7. 쉐도잉</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#8">8. 코루틴</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+            </div>
+            
+                <span id="article-list-popup__btn">📚</span>
+            
+        </div>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/08/30/JS_18/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">1/ 루틴과 결합도-응집도 모델</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/07/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/35/thumb_default.jpg)" alt="2/ 루틴 심화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/09/07/JS_19/" class="title">2/ 루틴 심화</a></p>
+                            <p class="item-date"><time datetime="2018-09-07T12:20:19.000Z" itemprop="datePublished">2018-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/30/JS_18/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/34/thumb_default.jpg)" alt="1/ 루틴과 결합도-응집도 모델" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/30/JS_18/" class="title">1/ 루틴과 결합도-응집도 모델</a></p>
+                            <p class="item-date"><time datetime="2018-08-30T12:20:19.000Z" itemprop="datePublished">2018-08-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/27/JS_17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/33/thumb_default.jpg)" alt="5/ 실행 컨텍스트와 클로저" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/27/JS_17/" class="title">5/ 실행 컨텍스트와 클로저</a></p>
+                            <p class="item-date"><time datetime="2018-08-27T12:20:19.000Z" itemprop="datePublished">2018-08-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/25/JS_15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/31/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/25/JS_15/" class="title">4/ 함수와 프로토타입 체이닝 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/25/JS_16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/32/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/25/JS_16/" class="title">4/ 함수와 프로토타입 체이닝 (2)</a></p>
+                            <p class="item-date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">69</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://dada.downmix.net">DA,DA</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/09/07/JS_19/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+<script src="/js/logo_ny.json"></script>
+
+    </div>
+</body>
+</html>
