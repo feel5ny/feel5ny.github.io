@@ -2051,87 +2051,61 @@ i.icon:before {
   height: 1.6em;
 }
 .highlight {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #282a36;
-  color: #f8f8f2;
+  color: #ddd;
+  background: #272822;
 }
-.highlight .line {
-  min-height: 1.5em;
+.highlight .code .tag,
+.highlight .code .keyword,
+.highlight .code .selector-tag,
+.highlight .code .literal,
+.highlight .code .strong,
+.highlight .code .name {
+  color: #f92672;
 }
-.highlight .subst {
-  color: #f8f8f2;
+.highlight .code .code {
+  color: #66d9ef;
 }
-.highlight .keyword,
-.highlight .selector-tag,
-.highlight .section,
-.highlight .link {
-  color: #ff79c6;
+.highlight .code .class .title {
+  color: #fff;
 }
-.highlight .literal,
-.highlight .number {
-  color: #bd93f9;
+.highlight .code .attribute,
+.highlight .code .symbol,
+.highlight .code .regexp,
+.highlight .code .link {
+  color: #bf79db;
 }
-.highlight .function .keyword {
-  color: #8be9fd;
+.highlight .code .string,
+.highlight .code .bullet,
+.highlight .code .subst,
+.highlight .code .title,
+.highlight .code .section,
+.highlight .code .emphasis,
+.highlight .code .type,
+.highlight .code .built_in,
+.highlight .code .builtin-name,
+.highlight .code .selector-attr,
+.highlight .code .selector-pseudo,
+.highlight .code .addition,
+.highlight .code .variable,
+.highlight .code .template-tag,
+.highlight .code .template-variable {
+  color: #a6e22e;
 }
-.highlight .title {
-  color: #50fa7b;
+.highlight .code .comment,
+.highlight .code .quote,
+.highlight .code .deletion,
+.highlight .code .meta {
+  color: #75715e;
 }
-.highlight .params {
-  color: #ffb86c;
-}
-.highlight .string,
-.highlight .name,
-.highlight .type,
-.highlight .symbol,
-.highlight .bullet,
-.highlight .addition,
-.highlight .variable,
-.highlight .template-tag,
-.highlight .template-variable {
-  color: #f1fa8c;
-}
-.highlight .string .subst {
-  color: #ff79c6;
-}
-.highlight .comment,
-.highlight .quote,
-.highlight .deletion,
-.highlight .meta {
-  color: #6272a4;
-}
-.highlight .keyword,
-.highlight .selector-tag,
-.highlight .literal,
-.highlight .title,
-.highlight .section,
-.highlight .doctag,
-.highlight .type,
-.highlight .name,
-.highlight .strong {
+.highlight .code .keyword,
+.highlight .code .selector-tag,
+.highlight .code .literal,
+.highlight .code .doctag,
+.highlight .code .title,
+.highlight .code .section,
+.highlight .code .type,
+.highlight .code .selector-id {
   font-weight: bold;
-}
-.highlight .emphasis,
-.highlight .built_in {
-  font-style: italic;
-}
-.highlight .built_in {
-  color: #8be9fd;
-}
-.highlight .tag .name {
-  color: #ff79c6;
-}
-.highlight .tag .attr {
-  color: #50fa7b;
-}
-.highlight .selector-id,
-.highlight .selector-class {
-  color: #50fa7b;
-}
-.highlight .attribute {
-  color: #8be9fd;
 }
 @media only screen and (min-width: 960px) {
   .nav-container-inner {
