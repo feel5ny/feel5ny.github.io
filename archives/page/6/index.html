@@ -163,7 +163,9 @@ ga('send', 'pageview');
      data-ad-slot="6920417216"
      data-ad-format="auto"></ins>
 <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
 </script>
                             
 
@@ -180,6 +182,66 @@ ga('send', 'pageview');
     
     
         <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2017/12/04/JS_05_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/40/thumb_default.jpg)" alt="5/ 객체 지향 프로그래밍 (1)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/12/04/JS_05_1/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+            </div>
+            <div class="date"><time datetime="2017-12-04T05:53:22.000Z" itemprop="datePublished">2017-12-04</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2017/12/04/JS_05_1/">5/ 객체 지향 프로그래밍 (1)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.이 주제는 조금 더 공부를 해야할 듯 하다.
+
+목차 
+
+프로퍼티 타입
+데이터 프로퍼티
+접근자 프로퍼티
+
+
+다중 프로퍼티 정의
+프로퍼티 속성 읽기
+
+
+객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -236,10 +298,14 @@ arguments 함수에 전달된 파라미터를 모
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -294,14 +360,10 @@ Function 타입
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -355,10 +417,14 @@ this value
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -400,62 +466,6 @@ this value
 프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.
 
 요약가비지 콜렉션은 더 이상 사용하지 않는 메모리를 회수하는 역할을 한다. 메모리를 회수하기 전 사용하지 않는 변수를 체킹해야 하는데 이때 표시하고 지우기 방법과 참조 카운팅이 있다. 표시하고 지우기 방법은 처음 컨텍스트의 모든 변수에 마
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/29/log_001/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/29/log_001/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a>
-            </div>
-            <div class="date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/29/log_001/">persistor.purge()</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-https://github.com/rt2zz/redux-persistredux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.
-
-상황
-작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작
-
-에러 메세지1TypeError: In this e
         </p>
     </div>
 </article>
@@ -526,6 +536,58 @@ https://github.com/rt2zz/redux-persistredux-persist 정리할 때 purge에 대�
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2017/11/29/log_001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/post_img/32/thumb_default.jpg)" alt="persistor.purge()" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/29/log_001/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/log/">log</a>
+            </div>
+            <div class="date"><time datetime="2017-11-29T09:23:55.000Z" itemprop="datePublished">2017-11-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2017/11/29/log_001/">persistor.purge()</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+https://github.com/rt2zz/redux-persistredux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.
+
+상황
+작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작
+
+에러 메세지1TypeError: In this e
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2017/11/28/Typescript_13/" class="thumbnail">
     
     
@@ -568,10 +630,14 @@ https://github.com/rt2zz/redux-persistredux-persist 정리할 때 purge에 대�
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -627,14 +693,10 @@ https://github.com/rt2zz/redux-persistredux-persist 정리할 때 purge에 대�
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -685,65 +747,6 @@ Decorator
 Class Decorator
 Class Decorator Basic
 Class Decorator Adv
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2017/11/25/Typescript_10/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/post_img/23/thumb_default.jpg)" alt="9/ itertor" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2017/11/25/Typescript_10/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Typescript/">Typescript</a>
-            </div>
-            <div class="date"><time datetime="2017-11-25T11:13:22.000Z" itemprop="datePublished">2017-11-25</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2017/11/25/Typescript_10/">9/ itertor</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)오류가 있다면 언제든지 댓글 부탁드립니다.
-
-요약아직 잘 이해가 안간다. &#128565;
-
-for…of
-for..in
-Symbol.iterator
-CustomIterable
-
-
- 1. for…of
-es3for(var i = 0; i&lt;array.length; i++)
-
         </p>
     </div>
 </article>
@@ -809,6 +812,26 @@ es3for(var i = 0; i&lt;array.length; i++)
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/01/JS_21/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/37/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/10/01/JS_21/" class="title">4/ OOAD와 테트리스 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -890,26 +913,6 @@ es3for(var i = 0; i&lt;array.length; i++)
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/08/25/JS_16/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/32/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (2)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2018/08/25/JS_16/" class="title">4/ 함수와 프로토타입 체이닝 (2)</a></p>
-                            <p class="item-date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -919,7 +922,7 @@ es3for(var i = 0; i&lt;array.length; i++)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">69</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">70</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -929,7 +932,7 @@ es3for(var i = 0; i&lt;array.length; i++)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -975,7 +978,9 @@ es3for(var i = 0; i&lt;array.length; i++)
      data-ad-slot="6920417216"
      data-ad-format="auto"></ins>
 <script>
-(adsbygoogle = window.adsbygoogle || []).push({});
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
 </script>
 </aside>
                 </div>
@@ -1037,7 +1042,6 @@ es3for(var i = 0; i&lt;array.length; i++)
 <script src="/js/main.js"></script>
 <script src="/js/lottie.js"></script>
 <script src="/js/lottie_index.js"></script>
-<script src="/js/logo_ny.json"></script>
 
     </div>
 </body>

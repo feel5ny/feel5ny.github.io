@@ -2159,7 +2159,9 @@ i.icon:before {
   }
   .main-body-inner #sidebar .sidebar-top {
     padding: 10px 30px;
-    background: none;
+    background: #16325c;
+    opacity: 0.9;
+    color: #fff;
     border-bottom: 1px solid #ddd;
   }
   .main-body-inner #sidebar .sidebar-top p,
