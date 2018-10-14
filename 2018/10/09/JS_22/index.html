@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>5/ OOAD와 테트리스 (2) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판마지막 판이 몇 판일까? = 몇 판까지 있을까? 속도 판마다 속도가 증가한다.  최소 속도 최대 속도   속도는 어떤 객체가 가져가야할까?  Game보다는 Stage가 적합. 캡슐화와 은닉화의 속성을 이용하여,속도의 처리">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5&#x2F; OOAD와 테트리스 (2)">
+<meta property="og:url" content="http://feel5ny.github.io/2018/10/09/JS_22/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판마지막 판이 몇 판일까? = 몇 판까지 있을까? 속도 판마다 속도가 증가한다.  최소 속도 최대 속도   속도는 어떤 객체가 가져가야할까?  Game보다는 Stage가 적합. 캡슐화와 은닉화의 속성을 이용하여,속도의 처리">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/37/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-10-14T11:07:27.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5&#x2F; OOAD와 테트리스 (2)">
+<meta name="twitter:description" content="🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판마지막 판이 몇 판일까? = 몇 판까지 있을까? 속도 판마다 속도가 증가한다.  최소 속도 최대 속도   속도는 어떤 객체가 가져가야할까?  Game보다는 Stage가 적합. 캡슐화와 은닉화의 속성을 이용하여,속도의 처리">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/37/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/10/09/JS_22/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" id="bm"></a>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+                            <article id="post-JS_22" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        5/ OOAD와 테트리스 (2)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/10/09/JS_22/" class="article-date">
+            <time datetime="2018-10-09T12:20:19.000Z" itemprop="datePublished">2018-10-09</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. Stage</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Score</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Block</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Renderer</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.<br>아직 정리중..</p>
+</blockquote>
+<hr>
+<p><a name="1"></a></p>
+<h2 id="1-Stage"><a href="#1-Stage" class="headerlink" title="1. Stage"></a>1. Stage</h2><h3 id="Stage-클래스는-뭘-필요로-할까"><a href="#Stage-클래스는-뭘-필요로-할까" class="headerlink" title="Stage 클래스는 뭘 필요로 할까?"></a>Stage 클래스는 뭘 필요로 할까?</h3><ol>
+<li>판<br>마지막 판이 몇 판일까? = 몇 판까지 있을까?</li>
+<li><p>속도<br><strong> 판마다 속도가 증가한다.</strong></p>
+<ul>
+<li>최소 속도</li>
+<li>최대 속도</li>
+</ul>
+<p><strong> 속도는 어떤 객체가 가져가야할까?</strong></p>
+<ul>
+<li>Game보다는 Stage가 적합.</li>
+<li>캡슐화와 은닉화의 속성을 이용하여,<br>속도의 처리는 stage내에서만 처리하게 한 후,<br>외부에서는 최종 속도만 받을 수 있도록 한다. (getter)<ul>
+<li>초기 속도</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>자기의 변화를 listener한테 통보하는 것으로 처리만 하고 <ul>
+<li>listner의 형태를 직접 알 필요는 없게 한다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object.assign 쓰기 번거로워서 함수 만들긔</span></span><br><span class="line"><span class="keyword">const</span> prop = <span class="function">(<span class="params">target, v</span>) =&gt;</span> <span class="built_in">Object</span>.assign(target, v);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Stage = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(last, min, max, listener)&#123;</span><br><span class="line">    <span class="comment">// last는 마지막 판</span></span><br><span class="line">    <span class="comment">// min,max는 속도</span></span><br><span class="line">    <span class="comment">// listener: 다른 객체와 관계를 맺지 않게 해주는 역할</span></span><br><span class="line">    <span class="comment">// 게임 패널들의 스테이지 그래픽이 갱신을 위해서 listener를 달아줌.</span></span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;last, min, max, listener&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  clear() &#123; </span><br><span class="line">    <span class="comment">//초기화</span></span><br><span class="line">    <span class="keyword">this</span>.curr = <span class="number">0</span>; <span class="comment">// 현재 스테이지 넘버</span></span><br><span class="line">    <span class="keyword">this</span>.next();</span><br><span class="line">  &#125;</span><br><span class="line">  next() &#123;</span><br><span class="line">    <span class="comment">// 속도 비율 = 현재판 - 1 / 마지막 판 - 1</span></span><br><span class="line">    <span class="comment">// 블럭 내려올 때 딜레이 속도 = (this.max - this.min) * (1 - rate); </span></span><br><span class="line">    <span class="comment">// =&gt; 점점 작아진다. =&gt; 최종 속도는 빨라짐</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.curr++ <span class="xml"><span class="tag">&lt; <span class="attr">Stage.last</span>) &#123;</span></span></span><br><span class="line"><span class="xml">      const rate = (this.curr - 1) / (this.last - 1);</span></span><br><span class="line"><span class="xml">      this.speed = this.min + (this.max - this.min) * (1 - rate);</span></span><br><span class="line"><span class="xml">      this.listener();</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-Score"><a href="#2-Score" class="headerlink" title="2. Score"></a>2. Score</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Score = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(listener)&#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;listener&#125;);</span><br><span class="line">    <span class="comment">// 스코어의 그래픽을 갱신시키기 위해서 통보용으로 listener 추가</span></span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="keyword">this</span>.curr = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">this</span>.total = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  add(line, stage)&#123;</span><br><span class="line">    <span class="comment">// line이 지워지는 갯수를 포인트 증가율</span></span><br><span class="line">    <span class="comment">// stage 마다 line하나 지울때마다 점수가 다름</span></span><br><span class="line">    <span class="keyword">const</span> score = ???;</span><br><span class="line">    <span class="keyword">this</span>.curr += score; <span class="comment">// 현재 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.total += score; <span class="comment">// 전체 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.listener();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h3 id="cf-1-역할-책임-협력"><a href="#cf-1-역할-책임-협력" class="headerlink" title="cf__1 역할, 책임, 협력"></a>cf__1 역할, 책임, 협력</h3><p>프로그래밍의 실체는 <strong>수행해야하는 job이 누구의 역할과 책임으로 넘어가야하는지를 의사결정하는 행위.</strong></p>
+<h4 id="🍡-객체지향"><a href="#🍡-객체지향" class="headerlink" title="🍡 객체지향"></a>🍡 객체지향</h4><p>객체지향에서는 <strong>컨텍스트</strong>라는 방법이 있다.<br>인스턴스별로 컨텍스트라는 유지한다. (컨텍스트: 인스턴스마다 고유하게 부여되어 있는 메모리). </p>
+<p><strong>함수에서 값을 가져오는 방법 2가지. </strong></p>
+<ol>
+<li>내가 인자로 값을 가져올지, </li>
+<li>컨텍스트로 가져올지.</li>
+</ol>
+<hr>
+<h4 id="🍢-함수형-프로그래밍과-객체지향-프로그래밍의-차이점"><a href="#🍢-함수형-프로그래밍과-객체지향-프로그래밍의-차이점" class="headerlink" title="🍢 함수형 프로그래밍과 객체지향 프로그래밍의 차이점."></a>🍢 함수형 프로그래밍과 객체지향 프로그래밍의 차이점.</h4><ul>
+<li>함수형 프로그래밍에서는 <strong>자유변수를 통해서 함수를 유지한다.</strong></li>
+<li>자유변수를 유지하기 위해서는 새로운 함수 생성이 필요하다. (클로저)</li>
+<li>why? 함수가 태어날때 마다 자유변수로 인지하기 때문에.</li>
+</ul>
+<hr>
+<h4 id="🍭-객체지향을-통해서-클래스의-인스턴스를-만드는-행위를-함수형으로-바꾸면"><a href="#🍭-객체지향을-통해서-클래스의-인스턴스를-만드는-행위를-함수형으로-바꾸면" class="headerlink" title="🍭 객체지향을 통해서 클래스의 인스턴스를 만드는 행위를 함수형으로 바꾸면?"></a>🍭 객체지향을 통해서 클래스의 인스턴스를 만드는 행위를 함수형으로 바꾸면?</h4><ul>
+<li>필요한 자유변수를 함수를 만들어서 리턴하는 행위와 같다.  </li>
+<li>그 함수가 컨텍스트 대신 <strong>자유변수로 해당 상태를 기억하고 있을테니까.</strong></li>
+<li><span class="mint"><strong>객체지향</strong></span>에서 인스턴스의 수만큼 =&gt;  함수를 생성하는 걸로 <span class="orange"><strong>함수지향</strong></span>으로 바꿀 수 있다. </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Score = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(listener)&#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;listener&#125;);</span><br><span class="line">    <span class="comment">// 스코어의 그래픽을 갱신시키기 위해서 통보용으로 listener 추가</span></span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="keyword">this</span>.curr = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">this</span>.total = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  add(line, stage)&#123;</span><br><span class="line">    <span class="comment">// score 계산을 위해서는 stage만 알 수 있는 값을 이용해야하기 때문에</span></span><br><span class="line">    <span class="comment">// stage 내부에 score를 계산하는 책임을 주고,(위임)</span></span><br><span class="line">    <span class="comment">// Score의 add함수에서는 score를 호출, 점수만 더하는 책임만 준다.(협력) </span></span><br><span class="line">    <span class="keyword">const</span> score = stage.score(line);</span><br><span class="line">    <span class="keyword">this</span>.curr += score; <span class="comment">// 현재 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.total += score; <span class="comment">// 전체 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.listener();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> Stage = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  score(line) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>((<span class="keyword">this</span>.curr * <span class="number">5</span>) * (<span class="number">2</span> ** line))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="스코어와-스테이지-간의-coupling-관계"><a href="#스코어와-스테이지-간의-coupling-관계" class="headerlink" title="스코어와 스테이지 간의 coupling 관계"></a>스코어와 스테이지 간의 coupling 관계</h4><p>현재는 <strong>약한 바인딩.</strong><br>add 함수 호출시에만 임시적으로 외부 인자로 들어오기때문에</p>
+<p>But,<br>하나의 게임 안에서는<br>스테이지와 스코어를 동시에 소유하고 바뀌지 않는다.</p>
+<ul>
+<li><strong>게임에서의 스테이지 관리자와 스코어 관리자는 관계가 항구적.</strong> 즉, 게임이 진행되는 동안. 즉 매번 인자로 보내면 안된다. </li>
+<li>맥락상 맞지 않다는 말. stage를 add함수의 인자로 보낸다는 것은 스코어를 더 할때마다 임시적으로 바인딩한다는 것인데 이는 위의 항구적인 관계와 맞지 않음. (코드의 의미가 맞지 않음.)</li>
+<li>때문에 add의 인자가 아니라 컨텍스트 변수로 옮겨줘야한다.</li>
+</ul>
+<p><strong>도메인을 바라보고 어디 쪽의 역할이 맞는지 항상 의사결정을 해야한다.</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Score = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(👉stage, listener)&#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;stage, listener&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="keyword">this</span>.curr = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">this</span>.total = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  add(line)&#123;</span><br><span class="line">    <span class="keyword">const</span> score = 👉<span class="keyword">this</span>.stage.score(line);</span><br><span class="line">    <span class="keyword">this</span>.curr += score; <span class="comment">// 현재 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.total += score; <span class="comment">// 전체 점수값에도 반영</span></span><br><span class="line">    <span class="keyword">this</span>.listener();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> Stage = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  score(line) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>((<span class="keyword">this</span>.curr * <span class="number">5</span>) * (<span class="number">2</span> ** line))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/38/01.png" style="width:100%"><br>score와 stage간의 의존성이 생김</p>
+<blockquote>
+<p>코드는 여러분들이 모국어로 쓰지 않기 때문에<br>동작만 하면 다 똑같은 코드로 보인다.<br>코드도 언어이기 때문에 한국어의 미묘한 늬앙스를 다양한 형사와 동사로 표현하는 것처럼,<br><strong>코드도 동작해도 표현방법에 따라서 늬앙스를 다 표현할 수 있다.</strong></p>
+</blockquote>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-Block"><a href="#3-Block" class="headerlink" title="3. Block"></a>3. Block</h2><h4 id="클래스일까-인스턴스일까"><a href="#클래스일까-인스턴스일까" class="headerlink" title="클래스일까 인스턴스일까."></a>클래스일까 인스턴스일까.</h4><ul>
+<li>찍어낼 수 있어야 한다. =&gt; 클래스 </li>
+<li>부모클래스 &gt;&gt; 자식클래스</li>
+</ul>
+<h4 id="블럭-정의"><a href="#블럭-정의" class="headerlink" title="블럭 정의"></a>블럭 정의</h4><ul>
+<li>테트리스 블럭은 회전을 할 수 있다.<br><strong>회전축, 회전점</strong>을 정의하자.<br><img src="/images/2018/38/02.png" style="width: 120px; margin: 0"><br>세로와 가로의 모습을 보면 <strong>2차원 배열</strong>로 구현할 수 있다는 것이 보인다. (행과 열)</li>
+</ul>
+<p>cf__2 연산은 데이터로 바꿀 수 있다.<br><code>데이터 하나로 연산화 시킴</code> or <code>데이터 2개로 연산비용을 낮춤.</code></p>
+<ul>
+<li>예전에는 머신이 낮고 메모리가 낮았기 때문에 연산을 중심으로 움직이고 메모리 비용을 낮추는 방향으로 갔음.</li>
+<li>cpu 비용을 아끼고(연산비용을 줄이고) 메모리 비용을 사용하는 방향이 요즘 추세 </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Block 클래스 : 카테고라이제이션 하는 중.. </span></span><br><span class="line"><span class="comment">// =&gt; 모든 자식 블럭들이 공통으로 가져야하는 속성들 </span></span><br><span class="line"><span class="keyword">const</span> Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(color) &#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;color, <span class="attr">rotate</span>:<span class="number">0</span>&#125;;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// rotate: CW, CCW (시계방향, 시계반대방향 개념)</span></span><br><span class="line">  left() &#123;</span><br><span class="line">    <span class="keyword">if</span>(--<span class="keyword">this</span>.rotate &lt; <span class="number">0</span>) <span class="keyword">this</span>.rotate = <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  right() &#123;</span><br><span class="line">    <span class="keyword">if</span>(++<span class="keyword">this</span>.rotate &gt; <span class="number">3</span>) <span class="keyword">this</span>.rotate = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  getBlock()&#123;<span class="keyword">throw</span> <span class="string">'override!'</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line">const blocks = [class extends Block, ...]</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/38/02.png" style="width: 120px; margin: 0"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Block</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="string">'#f8cbad'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  getBlock()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.rotate % <span class="number">2</span> ?</span><br><span class="line">      [[<span class="number">1</span>], [<span class="number">1</span>], [<span class="number">1</span>], [<span class="number">1</span>]] : </span><br><span class="line">      [[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</span><br><span class="line">      <span class="comment">// [[1], [1], [1], [1]] 컬럼이 하나만 있는 row가 4개인 배열 : |</span></span><br><span class="line">      <span class="comment">// [[1,1,1,1]] row가 하나만 있는 컬럼이 4개인 배열: ----</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/2018/38/03.png" style="width: 150px; margin: 0"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Block</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="string">'#f8cbad'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  getBlock()&#123;</span><br><span class="line">    <span class="keyword">switch</span>(<span class="keyword">this</span>.rotate)&#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">return</span> [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>], [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">return</span> [[<span class="number">1</span>,<span class="number">0</span>], [<span class="number">1</span>,<span class="number">1</span>], [<span class="number">1</span>,<span class="number">0</span>]]</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span> [[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>], [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>]]</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">return</span> [[<span class="number">0</span>,<span class="number">1</span>], [<span class="number">1</span>,<span class="number">1</span>], [<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="충분히-추상화가-되었을까"><a href="#충분히-추상화가-되었을까" class="headerlink" title="충분히 추상화가 되었을까?"></a>충분히 추상화가 되었을까?</h3><p>rotation은 부모클래스인 Block에서 관리<br>자식이 부모의 속성을 갖는 것은 <strong>은닉을 깨고 있는 것</strong></p>
+<ul>
+<li>부모 자식간에도 캡슐화와 은닉화가 성립해야한다.</li>
+<li><code>this.rotate</code>로 접근하고 있다.</li>
+<li><code>this.rotate % 2</code> 부모의 rotate 정의에 자식이 맞추고 있다.<blockquote>
+<p>코드의 책임, 역할을 의인화 시켜서 생각하는 것이 좋다.</p>
+</blockquote>
+</li>
+</ul>
+<p>getBlcok()을 호출할 때마다 <strong>배열을 매번 생성하고 있다.</strong></p>
+<ul>
+<li>컨텍스트 데이터가 되어야한다.</li>
+</ul>
+<p>다시 개선</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(color, ✨✨...blocks) &#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;</span><br><span class="line">      color, </span><br><span class="line">      rotate:<span class="number">0</span>, </span><br><span class="line">      ✨✨blocks, </span><br><span class="line">      ✨✨count: blocks.length - <span class="number">1</span> <span class="comment">// 회전 카운트</span></span><br><span class="line">    &#125;;)</span><br><span class="line">  &#125;</span><br><span class="line">  left() &#123;</span><br><span class="line">    <span class="keyword">if</span>(--<span class="keyword">this</span>.rotate &lt; <span class="number">0</span>) <span class="keyword">this</span>.rotate = <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  right() &#123;</span><br><span class="line">    <span class="keyword">if</span>(++<span class="keyword">this</span>.rotate &gt; ✨✨count) <span class="keyword">this</span>.rotate = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  getBlock()&#123; ✨✨</span><br><span class="line">    <span class="comment">// 클래스를 반환</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.blocks[<span class="keyword">this</span>.rotate];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> blocks = [</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Block</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123; </span><br><span class="line">      <span class="keyword">super</span>(<span class="string">'#f8cbad'</span>, </span><br><span class="line">        [[<span class="number">1</span>], [<span class="number">1</span>], [<span class="number">1</span>], [<span class="number">1</span>]], </span><br><span class="line">        [[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><a name="4"></a></p>
+<h2 id="4-Renderer"><a href="#4-Renderer" class="headerlink" title="4. Renderer"></a>4. Renderer</h2><p>렌더러는 stage, score, block을 몰라도, data만 알아도 되는 구조<br><img src="/images/2018/38/04.png"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Renderer = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(col, row)&#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;col, row, <span class="attr">blocks</span>:[]&#125;);</span><br><span class="line">    <span class="keyword">while</span>(row--) <span class="keyword">this</span>.blocks.push([]);</span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;<span class="keyword">throw</span> <span class="string">'override'</span>;&#125; </span><br><span class="line">  <span class="comment">// 자식이 클리어 해야한다.</span></span><br><span class="line">  <span class="comment">// 대체가능성(상속성)과 내적동질성(다형성). </span></span><br><span class="line">  <span class="comment">// 자식을 다 부모로 보게 하고 싶다.</span></span><br><span class="line">  <span class="comment">// 어떤 자식이 와도 clear를 호출할 수 있다.</span></span><br><span class="line">  <span class="comment">// 부모의 clear를 호출해도 내적동질성때문에 자식의 clear가 호출된다.</span></span><br><span class="line">  <span class="comment">// 명시적으로 clear라는 method를 부모에 할당해주지만, 자식들이 렌더링 하는 방식이 다르기 때문에 실제 clear는 다형성에 의해서 자식들의 clear 메서드가 호출된다. == 무의미한 코드가 아니다.</span></span><br><span class="line">  render(data)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(data <span class="keyword">instanceof</span> Data)) <span class="keyword">throw</span> <span class="string">'invalid data'</span>;</span><br><span class="line">    <span class="comment">// 프로토콜 확인만 해준다.</span></span><br><span class="line">    <span class="keyword">this</span>._render(data);</span><br><span class="line">    <span class="comment">// 내적동질성(다형성)에 의해서 자식의 _render가 호출된다.</span></span><br><span class="line">    <span class="comment">// 디자인 패턴 중: 템플릿 메서드 패턴 (객체지향 언어가 내적동질성을 보장해주어야한다)</span></span><br><span class="line">    <span class="comment">// 템플릿 메서드를 사옹하는 이유</span></span><br><span class="line">    <span class="comment">// 부모쪽에 있는 메서드가 많은 서비스를 제공하고 실제 할 일을 후킹하고 있는 자식클래스에게 위임하기 위해</span></span><br><span class="line">  &#125;</span><br><span class="line">  _render(data)&#123;<span class="keyword">throw</span> <span class="string">'override!'</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Template Method Pattern</strong><br>어떤 작업 알고리즘의 골격을 정의한다. 일부 단계는 서브 클래스에서 구현하도록 할 수 있다. 템플릿 메서드를 이용하면 알고리즘의 구조는 그대로 유지하면서 특정 단계만 서브 클래스에서 새로 정의하도록 할 수 있다.</p>
+</blockquote>
+<p><a name="4-0"></a></p>
+<h2 id="4-0-Data-protocol"><a href="#4-0-Data-protocol" class="headerlink" title="4-0. Data(protocol)"></a>4-0. Data(protocol)</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Array를 상속 받는 이유는 형을 확인하기 위해 강제로 만듦.</span></span><br><span class="line"><span class="comment">// 마크업 클래스</span></span><br><span class="line"><span class="comment">// Array객체를 베이스로 하는 객체가 만들어진다.</span></span><br><span class="line"><span class="keyword">const</span> Data = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123; </span><br><span class="line">  <span class="keyword">constructor</span>(row, col)&#123;prop(<span class="keyword">this</span>, &#123;row, col&#125;);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>es6는 클래스 내부에서 this를 바꿔 줄 수 있다.</p>
+</blockquote>
+<p><a name="4-1"></a></p>
+<h2 id="4-1-Table-Renderer"><a href="#4-1-Table-Renderer" class="headerlink" title="4-1. Table Renderer"></a>4-1. Table Renderer</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utility</span></span><br><span class="line"><span class="keyword">const</span> el = <span class="function"><span class="params">el</span> =&gt;</span> <span class="built_in">document</span>.createElement(el);</span><br><span class="line"><span class="keyword">const</span> back = <span class="function">(<span class="params">s: pixel, v: color</span>) =&gt;</span> s.backgroundColor = v;</span><br><span class="line"><span class="comment">// 배경 색 변경으로 움직임을 표현한다.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TableRenderer = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Renderer</span> </span>&#123;</span><br><span class="line">  <span class="comment">// base: 테이블 element</span></span><br><span class="line">  <span class="comment">// back: background 칼라</span></span><br><span class="line">  <span class="keyword">constructor</span>(base, back, col, row)&#123;</span><br><span class="line">    <span class="keyword">super</span>(col, row);</span><br><span class="line">    <span class="keyword">this</span>.back = back;</span><br><span class="line">    white(row--)&#123;</span><br><span class="line">      <span class="keyword">const</span> tr = base.appendChild(el(<span class="string">'tr'</span>)), curr = []; <span class="comment">// row만큼 tr을 만들어서 넣기.</span></span><br><span class="line">      <span class="keyword">this</span>.blocks.push(curr); <span class="comment">// 빈 블럭 배열을 blocks에 넣어준다. this.blocks는 Renderer의 blocks</span></span><br><span class="line">      <span class="keyword">let</span> i = col;</span><br><span class="line">      <span class="keyword">while</span>(i--) curr.push(tr.appendChild(<span class="string">'td'</span>).style); </span><br><span class="line">      <span class="comment">// 스타일 객체만 넣는다.</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.clear();</span><br><span class="line">  &#125;</span><br><span class="line">  clear()&#123;</span><br><span class="line">    <span class="keyword">this</span>.blocks.forEach(</span><br><span class="line">      curr =&gt; curr.forEach(<span class="function"><span class="params">s</span> =&gt;</span> back(s, <span class="keyword">this</span>.back))</span><br><span class="line">    ) </span><br><span class="line">    <span class="comment">// back함수는 utility의 back</span></span><br><span class="line">    <span class="comment">// back함수에 현재 back 칼라를 전부 할당한다.</span></span><br><span class="line">  &#125;</span><br><span class="line">  _render(v: Data)&#123;</span><br><span class="line">    <span class="keyword">this</span>.blocks.forEach(</span><br><span class="line">      (curr, row) =&gt; curr.forEach(<span class="function">(<span class="params">s, col</span>) =&gt;</span> back(s, v[row][col]))</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>변수 사용시 한 번 밖에 사용되지 않는데 변수로 잡는 것은 사실은 중복</strong></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><span class="mint"><strong>for와 forEach 중 어떤걸 사용할까?</strong></span><br>언어스팩에서 정의되어있는 메서드를 사용하자. <strong>forEach</strong><br>성능문제는 우선 고려하지 말자.</p>
+</blockquote>
+<p><a name="4-2"></a></p>
+<h2 id="4-2-Canvas-Renderer"><a href="#4-2-Canvas-Renderer" class="headerlink" title="4-2. Canvas Renderer"></a>4-2. Canvas Renderer</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CanvasRenderer = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Renderer</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(base, back, col, row)&#123;</span><br><span class="line">    suepr(col, row);</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;</span><br><span class="line">      width: base.width = <span class="built_in">parseInt</span>(base.style.width),</span><br><span class="line">      height: base.height = <span class="built_in">parseInt</span>(base.style.height),</span><br><span class="line">      cellSize: [base.width/col, base.height/row],</span><br><span class="line">      ctx: base.getContext(<span class="string">'2d'</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  _render(v)&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;ctx, <span class="attr">cellSize</span>:[w, h]&#125; = <span class="keyword">this</span>;</span><br><span class="line">    ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>.width, <span class="keyword">this</span>.height);</span><br><span class="line">    <span class="keyword">let</span> i = <span class="keyword">this</span>.row;</span><br><span class="line">    <span class="keyword">while</span>(i--)&#123;</span><br><span class="line">      <span class="keyword">let</span> j = <span class="keyword">this</span>.col;</span><br><span class="line">      <span class="keyword">while</span>(j--)&#123;</span><br><span class="line">        ctx.fillStyle = v[i][j];</span><br><span class="line">        ctx.fillRect(j *w, j*h, w, h);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>참고자료</strong><br><a href="https://www.bsidesoft.com/?p=2827" target="_blank" rel="noopener">https://www.bsidesoft.com/?p=2827</a><br><a href="https://github.com/abhbtbb/tetris1" target="_blank" rel="noopener">https://github.com/abhbtbb/tetris1</a></p>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/10/09/JS_22/" data-id="cjn8rnqpg0035s5bmi4ryr2bn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. Stage</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Score</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Block</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Renderer</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+            </div>
+            
+                <span id="article-list-popup__btn">📚</span>
+            
+        </div>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/10/01/JS_21/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">4/ OOAD와 테트리스 (1)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/09/JS_22/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/37/thumb_default.jpg)" alt="5/ OOAD와 테트리스 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/10/09/JS_22/" class="title">5/ OOAD와 테트리스 (2)</a></p>
+                            <p class="item-date"><time datetime="2018-10-09T12:20:19.000Z" itemprop="datePublished">2018-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/01/JS_21/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/10/01/JS_21/" class="title">4/ OOAD와 테트리스 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/24/JS_20/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/36/thumb_default.jpg)" alt="3/ (stack 구조) HTML parser ✨✨" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/09/24/JS_20/" class="title">3/ (stack 구조) HTML parser ✨✨</a></p>
+                            <p class="item-date"><time datetime="2018-09-24T12:20:19.000Z" itemprop="datePublished">2018-09-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/07/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/35/thumb_default.jpg)" alt="2/ 루틴 심화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/09/07/JS_19/" class="title">2/ 루틴 심화</a></p>
+                            <p class="item-date"><time datetime="2018-09-07T12:20:19.000Z" itemprop="datePublished">2018-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/30/JS_18/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/34/thumb_default.jpg)" alt="1/ 루틴과 결합도-응집도 모델" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2018/08/30/JS_18/" class="title">1/ 루틴과 결합도-응집도 모델</a></p>
+                            <p class="item-date"><time datetime="2018-08-30T12:20:19.000Z" itemprop="datePublished">2018-08-30</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">71</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/10/09/JS_22/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script>
+
+    </div>
+</body>
+</html>
