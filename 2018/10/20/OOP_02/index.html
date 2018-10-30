@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>6/ OOP (ES5 기준) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,OOP,closure" />
+    
+    
+    <meta name="description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.    0. 클래스 기반의 언어 - 프로토타입기반의 언어클래스 기반의 언어 클래스로 객체의 기본적인 형태와 기능을 정의하고, 생성자로 인스턴스를 만들어서 사용할 수 있다. 런타임에 바꿀 수 없다. 정확성, 안전성, 예측성등의 관점에서는 프로토타입기반의 언어보다 좀더 나은 결과를 보장. JAVA,">
+<meta name="keywords" content="javascript,OOP,closure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6&#x2F; OOP (ES5 기준)">
+<meta property="og:url" content="http://feel5ny.github.io/2018/10/20/OOP_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.    0. 클래스 기반의 언어 - 프로토타입기반의 언어클래스 기반의 언어 클래스로 객체의 기본적인 형태와 기능을 정의하고, 생성자로 인스턴스를 만들어서 사용할 수 있다. 런타임에 바꿀 수 없다. 정확성, 안전성, 예측성등의 관점에서는 프로토타입기반의 언어보다 좀더 나은 결과를 보장. JAVA,">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/39/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-10-28T11:34:25.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6&#x2F; OOP (ES5 기준)">
+<meta name="twitter:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.    0. 클래스 기반의 언어 - 프로토타입기반의 언어클래스 기반의 언어 클래스로 객체의 기본적인 형태와 기능을 정의하고, 생성자로 인스턴스를 만들어서 사용할 수 있다. 런타임에 바꿀 수 없다. 정확성, 안전성, 예측성등의 관점에서는 프로토타입기반의 언어보다 좀더 나은 결과를 보장. JAVA,">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/39/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/10/20/OOP_02/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div class="logo-wrap__box">
+                            <a href="/">
+                                <img src="/images/logo_head.png" alt="">
+                            </a>
+                            <a href="/" class="logo"></a>
+                        </div>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/OOP/">OOP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+                            <article id="post-OOP_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        6/ OOP (ES5 기준)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/10/20/OOP_02/" class="article-date">
+            <time datetime="2018-10-20T12:20:19.000Z" itemprop="datePublished">2018-10-20</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OOP/">OOP</a>, <a class="tag-link" href="/tags/closure/">closure</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#0">0. 개요</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#1">1. 클래스, 생성자, 메서드</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 상속</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 프로토타입을 이용한 상속</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 클래스 기반의 상속</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 캡슐화 (feat. 클로저)</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 객체지향 프로그래밍 응용 예제</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.</p>
+</blockquote>
+<hr>
+<p><a name="0"></a></p>
+<h2 id="0-클래스-기반의-언어-프로토타입기반의-언어"><a href="#0-클래스-기반의-언어-프로토타입기반의-언어" class="headerlink" title="0. 클래스 기반의 언어 - 프로토타입기반의 언어"></a>0. 클래스 기반의 언어 - 프로토타입기반의 언어</h2><h4 id="클래스-기반의-언어"><a href="#클래스-기반의-언어" class="headerlink" title="클래스 기반의 언어"></a>클래스 기반의 언어</h4><ul>
+<li>클래스로 객체의 기본적인 형태와 기능을 정의하고, 생성자로 인스턴스를 만들어서 사용할 수 있다.</li>
+<li>런타임에 바꿀 수 없다.</li>
+<li>정확성, 안전성, 예측성등의 관점에서는 프로토타입기반의 언어보다 좀더 나은 결과를 보장.</li>
+<li>JAVA, C++</li>
+</ul>
+<h4 id="프로토타입-기반의-언어"><a href="#프로토타입-기반의-언어" class="headerlink" title="프로토타입 기반의 언어"></a>프로토타입 기반의 언어</h4><ul>
+<li>객체의 자료구조, 메서드 등을 동적으로 바꿀 수 있다.</li>
+<li>자바스크립트</li>
+</ul>
+<hr>
+<p><a name="1"></a></p>
+<h2 id="1-클래스-생성자-메서드"><a href="#1-클래스-생성자-메서드" class="headerlink" title="1. 클래스, 생성자, 메서드"></a>1. 클래스, 생성자, 메서드</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">arg</span>) </span>&#123; <span class="comment">// 클래스이자, 생성자의 역할을 함. </span></span><br><span class="line">  <span class="keyword">this</span>.name = arg;</span><br><span class="line">  <span class="keyword">this</span>.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>):<span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person(<span class="string">"Kim"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.getName()); <span class="comment">// Kim</span></span><br><span class="line">me.setName(<span class="string">"Joy"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.getName()) <span class="comment">// Joy</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> you = <span class="keyword">new</span> Person(<span class="string">"Gray"</span>);</span><br><span class="line"><span class="keyword">const</span> him = <span class="keyword">new</span> Person(<span class="string">"Lee"</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>공통적으로 사용될 수 있는 setName과 getName 메서드가 중복으로 메모리에 올려놓게 된다.</li>
+<li>setName과 getName을 재사용하쟈!</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = arg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.setName = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> you = <span class="keyword">new</span> Person(<span class="string">"Gray"</span>);</span><br><span class="line"><span class="keyword">const</span> him = <span class="keyword">new</span> Person(<span class="string">"Lee"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(you.getName()) <span class="comment">// this는 자신을 호출한 객체에 바인딩된다.</span></span><br><span class="line"><span class="built_in">console</span>.log(him.getName()) <span class="comment">// 프로토타입 체인으로 접근할 수 있다.</span></span><br></pre></td></tr></table></figure>
+<p><strong>프로토타입 메서드를 만드는 루틴을<br>함수체인의 더 상위인 Function 프로토타입에 method라는 이름으로 만들어놓고<br>재사용하는 방법도 있다.</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.method = <span class="function"><span class="keyword">function</span>(<span class="params">name, function</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!<span class="keyword">this</span>.prototpye[name]) &#123;</span><br><span class="line">    <span class="keyword">this</span>.prototype[name] = <span class="function"><span class="keyword">function</span>;</span></span><br><span class="line"><span class="function">  &#125;// 프로토타입에 같은 이름의 메서드가 없다면</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Person</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = arg;</span><br><span class="line">&#125;</span><br><span class="line">Person.method(<span class="string">'setName'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = value;</span><br><span class="line">&#125;)</span><br><span class="line">Person.method(<span class="string">'getName'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person(<span class="string">"me"</span>);</span><br><span class="line"><span class="keyword">const</span> you = <span class="keyword">new</span> Person(<span class="string">"you"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.getName());</span><br><span class="line"><span class="built_in">console</span>.log(you.getName());</span><br></pre></td></tr></table></figure></p>
+<hr>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-상속"><a href="#2-상속" class="headerlink" title="2. 상속"></a>2. 상속</h2><ul>
+<li>자바스크립트는 클래스를 기반으로 하는 전통적인 상속을 지원하지 않는다.</li>
+<li>자바스크립트 특성 중 <strong>객체 프로토타입 체인</strong>을 이용하여 상속을 구현해낼 수 있다.</li>
+</ul>
+<h4 id="상속-구현방법"><a href="#상속-구현방법" class="headerlink" title="상속 구현방법"></a>상속 구현방법</h4><ol>
+<li>클래스 기반 전통적인 상속 방식을 흉내냄 (컨텍스트 자체를 상속받음)</li>
+<li>클래스 개념 없이 객체의 프로토타입으로 상속을 구현하는 방식 =&gt; <strong>Prototypeal inheritance</strong></li>
+</ol>
+<hr>
+<p><a name="2-1"></a></p>
+<h3 id="2-1-프로토타입을-이용한-상속"><a href="#2-1-프로토타입을-이용한-상속" class="headerlink" title="2-1. 프로토타입을 이용한 상속"></a>2-1. 프로토타입을 이용한 상속</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125; <span class="comment">// Obejct.create() 함수로 제공된다.</span></span><br></pre></td></tr></table></figure>
+<p>인자로 들어온 객체(o)를 부모로 하는<br>자식 객체(F)를 생성하여<br>반환한다.<br>=&gt; 프로토타입의 특성을 활용하여 상속을 구현하는것 = 프로토타입 기반의 상속</p>
+<p>예시<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">"Joy"</span></span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">// ES6의 getter 개념</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">  setName: <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// ES6의 setter 개념</span></span><br><span class="line">    <span class="keyword">this</span>.name = arg;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> me = create_object(person)</span><br><span class="line">me.name <span class="comment">// Joy</span></span><br><span class="line">me.getName() <span class="comment">// Joy</span></span><br><span class="line">me.setName(<span class="string">"Kim"</span>)</span><br><span class="line">me.name <span class="comment">// Kim</span></span><br><span class="line">me.getName() <span class="comment">// Kim</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>클래스에 해당하는 생성자 함수를 만들지도 않았고,</li>
+<li>그 클래스의 인스턴스를 따로 생성하지도 않았다.</li>
+<li>person 객체와 이 객체를 프로토타입 체인으로 참조할 수 있는 자식 객체 me를 만들어서 사용함.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">me.setAge = <span class="function"><span class="keyword">function</span>(<span class="params">age</span>) </span>&#123;...&#125;</span><br><span class="line">me.getAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>위의 방식으로 확장할 수 있지만, 코드가 지저분해질 수 있다.<br><strong><span class="mint">extend()</span></strong>라는 이름의 함수로 객체에 자신이 원하는 객체 혹은 함수를 추가시킨다.</p>
+<p>__jQuery의 extend 함수<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend = jQuery.fn.extend = <span class="function"><span class="keyword">function</span>(<span class="params">obj: 자식, prop: 부모</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!prop) &#123;</span><br><span class="line">    prop = obj; <span class="comment">// 부모가 없으면 자식이 부모</span></span><br><span class="line">    obj = <span class="keyword">this</span>; <span class="comment">// this를 자식에게 할당</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i <span class="keyword">in</span> prop ) &#123; <span class="comment">// deep copy</span></span><br><span class="line">    ob[i] = prop[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>jQuery.fn</code>은 jQuery의 프로토타입</li>
+<li>$.extend()나 <code>var elem = new jQuery(...); elem.extend()</code>형태로 호출가능</li>
+<li><code>ob[i] = prop[i];</code>은 얕은 복사 (shallow copy) =&gt; 참조값을 복사하는 경우 영향이 생긴다.<br>이를 방지하기 위해 깊은 복사를 해야함.</li>
+<li>깊은 복사를 위해서<br><strong>빈 객체를 만들어서 extend 함수를 재귀적으로 호출</strong></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery extend 함수 중 일부</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> (; i &lt; length; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>( (options = <span class="built_in">arguments</span>[i]) != <span class="literal">null</span>) &#123; </span><br><span class="line">    <span class="comment">/* 인자로 넘어온 객체의 프로퍼티를 options로 참조시키고, </span></span><br><span class="line"><span class="comment">      그 프로퍼티가 null이 아닌 경우 블록 안으로 진입한다. */</span></span><br><span class="line">    <span class="keyword">for</span> (name <span class="keyword">in</span> options)&#123; <span class="comment">// options를 deep 카피한다.</span></span><br><span class="line">      src = target[name]; <span class="comment">// src는 반활될 복사본 target을 가리킴</span></span><br><span class="line">      copy = options[name]; <span class="comment">// copy는 복사할 원본 프로퍼티를 가리킴</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (target === copy)&#123; <span class="comment">// 무한루프 방지</span></span><br><span class="line">        <span class="keyword">continue</span>; <span class="comment">// continue는 루프의 실행을 완전히 종료하지 않고 for 루프에서는 업데이트 표현식으로 점프함.</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (deep &amp;&amp; copy &amp;&amp; (jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy))) )&#123;</span><br><span class="line">        <span class="comment">// deep 플래그:boolean: extend에서 인자로 받음 : 깊은 복사를 할 것인지 선택 할 수 있게 한다.</span></span><br><span class="line">        <span class="comment">// copy: 참조형식인 경우 (객체나 배열인 경우) 무조건 deep copy 시작</span></span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> ( copyIsArray ) &#123;</span><br><span class="line">          copyIsArray = <span class="literal">false</span>;</span><br><span class="line">          clone = src &amp;&amp; jQuery.isArray(src) ? src : []; </span><br><span class="line">          <span class="comment">// 배열 복사일 경우 빈 배열 생성</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          clone = src &amp;&amp; jQuery.isPlainObject(src) ? src : &#123;&#125;;</span><br><span class="line">          <span class="comment">// 객체 복사일 경우 빈 객체 생성</span></span><br><span class="line">        &#125;</span><br><span class="line">        target[name] = jQuery.extend(deep, clone, copy); <span class="comment">// 재귀..</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (copy !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">        target[name] = copy;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  name: <span class="string">'joy'</span>,</span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.name; &#125;,</span><br><span class="line">  setName: <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;<span class="keyword">this</span>.name = arg;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_object</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  F.prototype = o;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">obj, prop</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!prop) &#123;prop = obj; obj = <span class="keyword">this</span>;&#125; </span><br><span class="line">  <span class="comment">/* 인자가 하나만 들어오는 경우, </span></span><br><span class="line"><span class="comment">    prop 인자에 obj를 할당하고, </span></span><br><span class="line"><span class="comment">    현재객체(this)에 객체의 프로퍼티를 복사한다.... */</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> prop) obj[i] = prop[i]; <span class="comment">// 얕은 복사임.</span></span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> student = create_object(person);</span><br><span class="line"><span class="keyword">const</span> added = &#123;</span><br><span class="line">  setAge: <span class="function"><span class="keyword">function</span>(<span class="params">age</span>)</span>&#123; <span class="keyword">this</span>.age = age; &#125;</span><br><span class="line">  getAge: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.age;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extend(student, added); <span class="comment">// 1</span></span><br><span class="line">student.setAge(<span class="number">25</span>);</span><br><span class="line"><span class="built_in">console</span>.log(student.getAge());</span><br></pre></td></tr></table></figure>
+<ol>
+<li>person객체를 갖고있는 프로토타입을 갖고있는 student 인스턴스(컨텍스트)가 added를 상속받는다. (deep copy함)</li>
+<li>student 인스턴스에는 added 객체가 복사된다.</li>
+</ol>
+<hr>
+<p><a name="2-2"></a></p>
+<h3 id="2-2-클래스-기반의-상속"><a href="#2-2-클래스-기반의-상속" class="headerlink" title="2-2. 클래스 기반의 상속"></a>2-2. 클래스 기반의 상속</h3><p>1번은 객체의 상속이었고, 지금은 클래스의 역할을 하는 함수를 상속하는 것을 설명한다. (컨텍스트 상속)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">arg</span>) </span>&#123; <span class="keyword">this</span>.name = arg;&#125;</span><br><span class="line">Person.prototype.setName = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123; <span class="keyword">this</span>.name = value; &#125;;</span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.name; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">arg</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> you = <span class="keyword">new</span> Person(<span class="string">'JoyKim'</span>); </span><br><span class="line">Student.prototype = you;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Student(<span class="string">'NaYoung'</span>);</span><br><span class="line">me.setName(<span class="string">'Kim'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.getName());</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>you는 Person의 인스턴스 (name: JoyKim)</li>
+<li>Student의 프로토타입은 you를 가리킨다.</li>
+<li><p>me는 Student의 인스턴스</p>
+<ul>
+<li>Student에는 인자를 받을 name이 없으므로 ‘NaYoung’을 넣어줘도 아무런 적용 안됨</li>
+<li>이를 위해서 인스턴스가 생성될때 부모함수가 바로 실행될 수 있도록 Student에 실행코드를 넣는다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">arg</span>)</span>&#123; </span><br><span class="line">  Person.apply(<span class="keyword">this</span>, arg) <span class="comment">// 부모함수 Pseron을 실행하고 this는 arg에 바인딩!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>me객체에서 setName을 호출하면 프로토타입체이닝에 의해서 Person까지올라간다.</p>
+</li>
+</ol>
+<p>이 로직의 단점은 me의 prototype이 Student.prototype이고, 이는 곳 you를 가리킨다는 것인데,<br>이렇게 되면 me가 you의 자식 개념이 되면서 잘못된 설계가 된다.</p>
+<p>me와 you의 독립성을 위해서 중간 역할을 해주는 프로토콜 빈 함수 F()를 추가한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">arg</span>) </span>&#123; <span class="keyword">this</span>.name = arg;&#125;</span><br><span class="line"><span class="built_in">Function</span>.prototype.method = <span class="function"><span class="keyword">function</span>(<span class="params">name, func</span>) </span>&#123; <span class="keyword">this</span>.prototype[name] = func &#125;;</span><br><span class="line">Person.method(<span class="string">'setName'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123; <span class="keyword">this</span>.name = value; &#125;;)</span><br><span class="line">Person.method(<span class="string">'getName'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.name; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">arg</span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">F.prototype = Person.prototype;</span><br><span class="line">Student.prototype = <span class="keyword">new</span> F();</span><br><span class="line">Student.prototype.constructor = Student;</span><br><span class="line">Student.super = Person.prototype; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Student(<span class="string">'NaYoung'</span>);</span><br><span class="line"><span class="keyword">const</span> you = <span class="keyword">new</span> Person(<span class="string">'YoungRan'</span>);</span><br><span class="line">me.setName(<span class="string">'Kim'</span>);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>Function 프로토타입에 프로토타입 함수를 만들어주는, 재사용할 수 있는 method라는 메서드를 추가한다. (아오 네이밍 예시 헷갈)</li>
+<li>F의 프로토타입을 Person의 프로토타입을 참조하게 함으로써 중간역할을 하게함</li>
+<li>그 중간역할을 하는 F의 인스턴스를 Student의 프로토타입이 참조하도록 함.<br>(현재 Student =&gt; F =&gt; Person)<ul>
+<li>프로토타입 체인을 위해서 Student 프로토타입의 생성자를 Student로 할당.</li>
+</ul>
+</li>
+<li>Student가 Person.prototype에도 접근하기 위해서 super라는 메서드 생성</li>
+</ol>
+<p>me는 Person을 상속받은 Student의 인스턴스이고<br>you는 Person의 인스턴스.</p>
+<p>위 로직을 모듈화 시키면..(by.스토얀 스테파노프[Javascript Pattersn])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inherit = <span class="function"><span class="keyword">function</span>(<span class="params">Parent, Child</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">Paretn, Child</span>)</span>&#123;</span><br><span class="line">    F.prototype = Parent.prototype;</span><br><span class="line">    Child.prototype = <span class="keyword">new</span> F();</span><br><span class="line">    Child.prototype.constructor = Child;</span><br><span class="line">    Child.super = Parent.prototype;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>클로저는 F()함수를 지속적으로 참조한다.<br>F()는 가비지 컬렉션의 대상이 되지 않고 계속 남아 있다.<br>이를 이용해 함수 F()의 생성은 단 한 번 이루어지고 inherit함수가 계속해서 호출되어도 함수 F()의 생성을 새로 할 필요가 없다.</p>
+<hr>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-캡슐화-feat-클로저"><a href="#3-캡슐화-feat-클로저" class="headerlink" title="3. 캡슐화 (feat. 클로저)"></a>3. 캡슐화 (feat. 클로저)</h2><ul>
+<li>정보 공개의 여부. 정보 은닉 개념<br>(Typescript에서는 <code>public</code>, <code>private</code>, <code>protected</code> 멤버를 선언함으로써 해당 정보를 외부로 노출시킬지 여부를 결정)</li>
+<li>자바스크립트 es6에서는 get, set 키워드로 외부에서 해당 클래스 혹은 함수 내부에 접근 할 수 있다.<br>(get은 readonly)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> name = arg? arg: <span class="string">"joy"</span>;</span><br><span class="line">  <span class="keyword">this</span>.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">    name = arg;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(me.getName());</span><br><span class="line">me.setName(<span class="string">'NaYoung'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.getName());</span><br><span class="line"><span class="built_in">console</span>.log(me.name);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Person의 내부 public 함수들은 <strong><a href="&#39;https://feel5ny.github.io//2017/12/07/JS_06/#closure&#39;">클로저</a></strong>역할을 하면서 name에 접근하고 있다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 모듈패턴</span></span><br><span class="line"><span class="keyword">const</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = arg? arg: <span class="string">'joy'</span>; </span><br><span class="line">  <span class="comment">// name은 private 멤버</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> name;&#125;,</span><br><span class="line">    setName: fucntion(arg)&#123; name = arg;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> me = Person()</span><br><span class="line"><span class="built_in">console</span>.log(me.getName())</span><br></pre></td></tr></table></figure>
+<ul>
+<li>접근하는 private 멤버가 <strong>객체나 배열</strong>이면(레퍼런스) <strong>얕은 복사로 참조만을 반환</strong>하므로 사용자가 이후 이를 쉽게 변경할 수 있다. (Deep copy, Shallow copy)</li>
+<li>객체만을 반환하기 때문에 Person 함수의 프로토타입에 접근할 수 없다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person3 = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> name = arg? arg: <span class="string">'joy'</span>; </span><br><span class="line">  <span class="keyword">var</span> Func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">  Func.prototype = &#123;</span><br><span class="line">    getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> name; &#125;,</span><br><span class="line">    setName: <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>) </span>&#123;name = arg;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Func;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<hr>
+<p><a name="4"></a></p>
+<h2 id="4-객체지향-프로그래밍-응용-예제"><a href="#4-객체지향-프로그래밍-응용-예제" class="headerlink" title="4. 객체지향 프로그래밍 응용 예제"></a>4. 객체지향 프로그래밍 응용 예제</h2><blockquote>
+<p>함수의 프로토타입 체인<br>extend 함수<br>인스턴스를 생성할 때 생성자 호출을 이용해서 자바스크립트로 클래스 기능을 하는 함수 만들기</p>
+</blockquote>
+<h3 id="4-1-1-subClass-함수-구조"><a href="#4-1-1-subClass-함수-구조" class="headerlink" title="4-1-1. subClass 함수 구조"></a>4-1-1. subClass 함수 구조</h3><p>subClass함수는<br>변수 및 메서드가 담긴 객체를 인자로 받은<br>부모 함수를 상속받는 자식 클래스를 만든다.</p>
+<p>부모함수는 subClass() 함수를 호출할 때 this 객체를 의미한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SuperClass = subClass(obj); <span class="comment">// 상속받을 클래스</span></span><br><span class="line"><span class="keyword">const</span> SubClass = SuperClass.subClass(obj); <span class="comment">// SubClass는 SuperClass를 상속받는다.</span></span><br></pre></td></tr></table></figure></p>
+<p>이처럼 SuperClass를 상속받는 subClass를 만들고자 할 때,<br>SuperClass.subClass()의 형식으로 호출하게 구현한다.<br>참고로 최상위 클래스인 SuperClass는 자바스크립트의 Fucntion을 상속받게 한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subClass</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1. 자식 클래스 (함수객체) 생성</span></span><br><span class="line"><span class="comment">    2. 생성자 호출 (클래스 함수를 생성하기 위해서)</span></span><br><span class="line"><span class="comment">    3. 프로토타입 체인을 활용한 상속 구현</span></span><br><span class="line"><span class="comment">    4. obj를 통해 들어온 변수 및 메서드를 자식 클래스에 추가</span></span><br><span class="line"><span class="comment">    5. 자식 함수 객체 반환</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="4-1-2-자식-클래스-생성-및-상속"><a href="#4-1-2-자식-클래스-생성-및-상속" class="headerlink" title="4-1-2. 자식 클래스 생성 및 상속"></a>4-1-2. 자식 클래스 생성 및 상속</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subClass</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">const</span> parent = <span class="keyword">this</span>; <span class="comment">// 부모클래스를 가리키는 parent는 this를 그대로 참조</span></span><br><span class="line">  <span class="keyword">const</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// 중간역할</span></span><br><span class="line">  <span class="keyword">const</span> child = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// 자식객체</span></span><br><span class="line">  F.prototype = parent.prototype; </span><br><span class="line">  child.prototype = <span class="keyword">new</span> F(); <span class="comment">// 부모의 프로토타입을 참조하는 프로토타입을 갖고있는 F로부터 만들어진 생성자 함수를 child 프로토타입이 참조하도록한다.ㅇ</span></span><br><span class="line">  child.prototype.constructor = child;</span><br><span class="line">  child.parent = parent.prototype;</span><br><span class="line">  child.parent_constructor = parent;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> child;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>자식 클래스는 child 라는 이름의 함수 객체를 생성함으로써 만들어졌다.</p>
+<p><img src="/images/2018/39/01.jpeg"></p>
+<hr>
+<h3 id="4-1-3-자식-클래스-확장"><a href="#4-1-3-자식-클래스-확장" class="headerlink" title="4-1-3. 자식 클래스 확장"></a>4-1-3. 자식 클래스 확장</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.hasOwnProperty(i))&#123;</span><br><span class="line">    child.prototype[i] = obj[i];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>hasOwnProperty</code><br>인자로 넘기는 이름에 해당하는 프로퍼티가 객체 내에 있는지를 판다.</p>
+<blockquote>
+<p>프로토타입 체인을 타고 올라가지 않고 해당객체 내에서만 찾는다는 것에 유의<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.prop = <span class="string">'exists'</span>;</span><br><span class="line">o.hasOwnProperty(<span class="string">'prop'</span>); <span class="comment">// true</span></span><br><span class="line">o.hasOwnProperty(<span class="string">'toString'</span>); <span class="comment">// false</span></span><br><span class="line">o.hasOwnProperty(<span class="string">'hasOwnProperty'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="4-1-4-생성자-호출"><a href="#4-1-4-생성자-호출" class="headerlink" title="4-1-4. 생성자 호출"></a>4-1-4. 생성자 호출</h3><p>클래스의 인스턴스가 생성될 때, 클래스 내에 정의된 생성자가 호출돼야하다.<br>부모 클래스의 생성자 역시 호출되어야한다. (초기화를 위해서)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> child = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (parent.hasOwnProperty(<span class="string">'_init'</span>))&#123; parent._init.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); &#125;</span><br><span class="line">  <span class="keyword">if</span> (child.prototype.hasOwnProperty(<span class="string">'_init'</span>))&#123;child.prototype._init.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SuperClass = subClass();</span><br><span class="line"><span class="keyword">const</span> SubClass = SuperClass.subClass();</span><br><span class="line"><span class="keyword">const</span> Sub_SubClass = SubClass.subClass();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> Sub_SubClass();</span><br></pre></td></tr></table></figure>
+<p>instance 생성시 SuperClass 생성자가 호출되지 않는다.<br>=&gt; 부모클래스의 생성자를 호출하는 코드를 재귀적으로 구현하여 해결한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> child = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> _parent = child.parent_constructor;</span><br><span class="line">  <span class="keyword">if</span> (_parent &amp;&amp; _parent !== <span class="built_in">Function</span>)&#123; _parent.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); &#125;</span><br><span class="line">  <span class="keyword">if</span> (child.prototype.hasOwnProperty(<span class="string">'_init'</span>))&#123;child.prototype._init.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>현재 클래스의 부모 생성자가 있으면, 그 함수를 호출하다. 다만 부모가 Function이 경우는 최상위 클래스에 도달했으므로 실행하지 않는다.</li>
+</ul>
+<p><strong>최종</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subClass</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">    1. 자식 클래스 (함수객체) 생성</span></span><br><span class="line"><span class="comment">    2. 생성자 호출 (클래스 함수를 생성하기 위해서)</span></span><br><span class="line"><span class="comment">    3. 프로토타입 체인을 활용한 상속 구현</span></span><br><span class="line"><span class="comment">    4. obj를 통해 들어온 변수 및 메서드를 자식 클래스에 추가</span></span><br><span class="line"><span class="comment">    5. 자식 함수 객체 반환</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">const</span> parent = <span class="keyword">this</span> === <span class="built_in">window</span> ? <span class="built_in">Function</span> : <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">const</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  <span class="keyword">const</span> child = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> _parent = child.parent;</span><br><span class="line">    <span class="keyword">if</span>(_parent &amp;&amp; _parent !== <span class="built_in">Function</span>)&#123; </span><br><span class="line">      parent.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(child.prototype._init))&#123;</span><br><span class="line">        child.prototype._init.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  F.prototype = parent.prototype; </span><br><span class="line">  child.prototype = <span class="keyword">new</span> F();</span><br><span class="line">  child.prototype.constructor = child;</span><br><span class="line">  child.parent = parent;</span><br><span class="line">  child.subClass = <span class="built_in">arguments</span>.callee;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.hasOwnProperty(i))&#123;</span><br><span class="line">      child.prototype[i] = obj[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> child</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>By Joy.</p>
+<ul>
+<li>내부함수를 선언할때와 this로 바인딩된 함수를 선언하는 것의 차이점? 기준?</li>
+<li>프로토타입 체이닝을 만든 이유<br>객체지향 프로그래밍을 지원하기 위해<br>부모객체를 가리키는 참조링크 형태로 숨겨진 프로퍼티.</li>
+<li>(Naming)<br>복사시 복사할 대상을 copy, 복사의 결과물을 clone</li>
+<li>shallow copy와 다르게<br>deep copy는 재귀적으로 호출해야함.<br><strong>(다시 정리)</strong></li>
+</ul>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/10/20/OOP_02/" data-id="cjnvvulyy0037sgbmvtssskxy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#0">0. 개요</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#1">1. 클래스, 생성자, 메서드</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 상속</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 프로토타입을 이용한 상속</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 클래스 기반의 상속</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 캡슐화 (feat. 클로저)</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 객체지향 프로그래밍 응용 예제</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+            </div>
+            
+                <span id="article-list-popup__btn">📚</span>
+            
+        </div>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/10/09/OOP_07/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">5/ OOAD와 테트리스 (2)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/20/OOP_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/39/thumb_default.jpg)" alt="6/ OOP (ES5 기준)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/20/OOP_02/" class="title">6/ OOP (ES5 기준)</a></p>
+                            <p class="item-date"><time datetime="2018-10-20T12:20:19.000Z" itemprop="datePublished">2018-10-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/09/OOP_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/37/thumb_default.jpg)" alt="5/ OOAD와 테트리스 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/09/OOP_07/" class="title">5/ OOAD와 테트리스 (2)</a></p>
+                            <p class="item-date"><time datetime="2018-10-09T12:20:19.000Z" itemprop="datePublished">2018-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/24/OOP_05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/36/thumb_default.jpg)" alt="3/ (stack 구조) HTML parser ✨✨" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/09/24/OOP_05/" class="title">3/ (stack 구조) HTML parser ✨✨</a></p>
+                            <p class="item-date"><time datetime="2018-09-24T12:20:19.000Z" itemprop="datePublished">2018-09-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/07/OOP_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/35/thumb_default.jpg)" alt="2/ 루틴 심화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/09/07/OOP_04/" class="title">2/ 루틴 심화</a></p>
+                            <p class="item-date"><time datetime="2018-09-07T12:20:19.000Z" itemprop="datePublished">2018-09-07</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/OOP/" style="font-size: 12.5px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">72</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a>
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/10/20/OOP_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

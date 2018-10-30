@@ -253,7 +253,7 @@ body,
 }
 ::selection {
   color: #fff;
-  background: #16325c;
+  background: #4688aa;
 }
 body {
   background: #fcfafc;
@@ -303,7 +303,7 @@ code {
   padding: 10px 0;
   width: 200px;
   height: 200px;
-  background-image: url("/images/logo-ny.svg");
+  background-image: url("/images/logo_bg.png");
   background-position: 0px 10px;
   background-repeat: no-repeat;
   -webkit-background-size: 200px 200px;
@@ -625,7 +625,7 @@ span.menu_label > img {
   display: none;
 }
 #sidebar .sidebar-top {
-  background: #16325c;
+  background: #4688aa;
   padding: 15px 30px;
 }
 #sidebar .sidebar-top:before,
@@ -747,7 +747,7 @@ span.menu_label > img {
   background: rgba(0,0,0,0.02);
 }
 .article-nav-link-wrap:hover .icon {
-  color: #16325c;
+  color: #4688aa;
 }
 .article-nav-caption {
   display: block;
@@ -923,7 +923,7 @@ span.menu_label > img {
 }
 #recent-post li .item-inner a a,
 #recent-post li .item-inner .item-category a {
-  color: #16325c;
+  color: #4688aa;
 }
 #recent-post li .item-inner a a:hover,
 #recent-post li .item-inner .item-category a:hover {
@@ -954,7 +954,7 @@ span.menu_label > img {
   opacity: 0.8;
 }
 #recent-post li:hover .item-title a {
-  color: #16325c;
+  color: #4688aa;
 }
 .category-list-count,
 .tag-list-count,
@@ -1052,7 +1052,7 @@ span.pink:hover {
 }
 .article-summary a {
   text-decoration: none;
-  color: #16325c;
+  color: #4688aa;
 }
 .article-summary .article-summary-inner {
   margin-right: 30px;
@@ -1135,7 +1135,7 @@ span.pink:hover {
   opacity: 0.7;
 }
 .article-summary:hover .article-title a {
-  color: #16325c;
+  color: #4688aa;
 }
 .article-category {
   float: left;
@@ -1160,7 +1160,7 @@ span.pink:hover {
   margin-bottom: 10px;
 }
 a.article-title:hover {
-  color: #16325c;
+  color: #4688aa;
 }
 .article-meta {
   line-height: 1.6em;
@@ -1200,7 +1200,7 @@ a.article-title:hover {
   overflow: hidden;
 }
 .article-summary .article-meta a {
-  color: #16325c;
+  color: #4688aa;
 }
 .article-summary .article-meta > div {
   display: inline-block;
@@ -1424,10 +1424,10 @@ a.article-title:hover {
   text-decoration: none;
 }
 .article-more-link a:hover {
-  background: #16325c;
+  background: #4688aa;
   color: #fff;
   text-decoration: none;
-  text-shadow: 0 1px #12284a;
+  text-shadow: 0 1px #386d88;
 }
 .article-footer {
   font-size: 14px;
@@ -1691,7 +1691,7 @@ a.article-title:hover {
   padding: 30px 30px 20px;
 }
 #comments a {
-  color: #16325c;
+  color: #4688aa;
 }
 .archives-wrap {
   margin: block-margin 0;
@@ -1747,7 +1747,7 @@ a.article-title:hover {
   line-height: 1.6em;
 }
 .archive-article-title:hover {
-  color: #16325c;
+  color: #4688aa;
 }
 .archive-article-footer {
   margin-top: 1em;
@@ -1790,7 +1790,7 @@ a.article-title:hover {
 }
 #page-nav .page-number,
 #page-nav .extend {
-  color: #16325c;
+  color: #4688aa;
   position: relative;
   overflow: hidden;
   font-size: 16px;
@@ -1813,7 +1813,7 @@ a.article-title:hover {
 #page-nav .page-number.current,
 #page-nav .extend.current {
   color: #444;
-  border-bottom: 3px solid #16325c;
+  border-bottom: 3px solid #4688aa;
   border-top: 1px solid #f1f1f1;
 }
 #page-nav .space {
@@ -1937,7 +1937,7 @@ i.icon:before {
   display: inline-block;
 }
 .ins-close:hover {
-  color: #16325c;
+  color: #4688aa;
 }
 .ins-search-container {
   left: 50%;
@@ -2012,7 +2012,7 @@ i.icon:before {
 .ins-section .ins-search-item:hover,
 .ins-section .ins-search-item.active {
   color: #fff;
-  background: #16325c;
+  background: #4688aa;
 }
 .ins-section .ins-search-item:hover .ins-slug,
 .ins-section .ins-search-item.active .ins-slug,
@@ -2160,7 +2160,7 @@ i.icon:before {
     color: rgba(255,255,255,0.7);
     text-align: center;
     height: 50px;
-    background: #16325c;
+    background: #4688aa;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
