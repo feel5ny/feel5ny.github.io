@@ -4,13 +4,16 @@
         $('body, html').animate({ scrollTop: 0 }, 600);
     });
 
-    // To top button
     $("#article-list-popup__btn").on('click', function () {
-        // $('.article-list-popup__box').slideToggle();
         var options = { direction: "right" }
-        $('.article-list-popup__box').toggle( "drop", options, 500 );
+        $('.article-list-popup__box').toggle( "slide", options, 500 );
     });
-
+    
+    $(document).click(function(event) {
+        if (!$(event.target).closest(".article-list-popup").length) {
+            $("body").find(".article-list-popup__box").hide( "slide", { direction: "right" }, 500 );
+        }
+    });
 
     // Nav bar toggle
     $('#main-nav-toggle').on('click', function () {

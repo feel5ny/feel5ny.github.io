@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>1/ 함수형 프로그래밍 (🙄) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript" />
+    
+    
+    <meta name="description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.  TL;DR  Higher-Order Functions (고계 함수, 계산의 효율성) Purity (순수성, 데이터 플로우의 취급) Immutable Data (불변성) Referential Tr">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1&#x2F; 함수형 프로그래밍 (🙄)">
+<meta property="og:url" content="http://feel5ny.github.io/2018/11/04/FP_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.  TL;DR  Higher-Order Functions (고계 함수, 계산의 효율성) Purity (순수성, 데이터 플로우의 취급) Immutable Data (불변성) Referential Tr">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2018/40/thumb_default.jpg">
+<meta property="og:updated_time" content="2018-11-04T16:27:41.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1&#x2F; 함수형 프로그래밍 (🙄)">
+<meta name="twitter:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.  TL;DR  Higher-Order Functions (고계 함수, 계산의 효율성) Purity (순수성, 데이터 플로우의 취급) Immutable Data (불변성) Referential Tr">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2018/40/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2018/11/04/FP_01/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div class="logo-wrap__box">
+                            <a href="/">
+                                <img src="/images/logo_head.png" alt="">
+                            </a>
+                            <a href="/" class="logo"></a>
+                        </div>
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/FP/">FP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+                            <article id="post-FP_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        1/ 함수형 프로그래밍 (🙄)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/11/04/FP_01/" class="article-date">
+            <time datetime="2018-11-04T12:20:19.000Z" itemprop="datePublished">2018-11-04</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 함수형 프로그래밍의 개념</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#cf__1">cf__명령형 프로그래밍</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 자바스크립트에서 함수형 프로그래밍</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 배열의 각 원소 총합 구하기(reduce)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 팩토리얼</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-3">2.3 피보나치 수열</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 함수 적용(Function.prototype.apply)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#cf__3">cf__함수호출(괄호연산자 vs call/apply)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 커링</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#cf__4">cf__slice 메서드</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-3">3.3 bind</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-4">3.4 래퍼 🙄🙄</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-5">3.5 반복 함수</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.<br>함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.</p>
+</blockquote>
+<p>TL;DR</p>
+<ul>
+<li>Higher-Order Functions (고계 함수, 계산의 효율성)</li>
+<li>Purity (순수성, 데이터 플로우의 취급)<ul>
+<li>Immutable Data (불변성)</li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1" target="_blank" rel="noopener">Referential Transparency</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1" target="_blank" rel="noopener">Lazy Evaluation</a> </li>
+</ul>
+</li>
+<li>Recursion</li>
+<li>커링</li>
+<li>bind (with call/apply)</li>
+<li>래퍼</li>
+<li>반복함수</li>
+</ul>
+<hr>
+<p><a name="1"></a></p>
+<h2 id="1-함수형-프로그래밍의-개념"><a href="#1-함수형-프로그래밍의-개념" class="headerlink" title="1. 함수형 프로그래밍의 개념"></a>1. 함수형 프로그래밍의 개념</h2><p>함수의 조합으로 작업을 수행함을 의미한다.<br><strong>이 작업이 이루어지는 동안 작업에 필요한 데이터와 상태는 변하지 않는다는 점.</strong><br>함수가 바로 연산의 대상이 된다.</p>
+<p>함수형 프로그래밍이 수학에서 출발한 문제 해결 방법론이므로 수학문제를 프로그래밍으로 해결하는 데 있어서 상당한 이득을 볼 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f1 = encrypt1;</span><br><span class="line">f2 = encrypt2;</span><br><span class="line">f3 = encrypt3;</span><br><span class="line"></span><br><span class="line">pure_value = &apos;zzon&apos;;</span><br><span class="line">encrypted_value = get_encrypted(x);</span><br><span class="line"></span><br><span class="line">encrypted_value = get_encrypted(f1);</span><br><span class="line">encrypted_value = get_encrypted(f2);</span><br><span class="line">encrypted_value = get_encrypted(f3);</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2018/40/01.jpeg"></p>
+<p><strong>순수함수 Pure fucntion</strong><br>외부에 영향을 미치지 않는 함수</p>
+<p><strong>고계 함수 Higher-order function</strong><br>함수를 또 하나의 값으로 간주하여 함수의 인자 혹은 반환값으로 사용할 수 있는 함수</p>
+<h3 id="내부-데이터-및-상태는-그대로-둔-채-pure-value-제어할-함수를-변경-및-조합함으로써-encrypt1-2-3-원하는-결과를-얻어내는-것이-함수형-프로그래밍의-중요한-특성"><a href="#내부-데이터-및-상태는-그대로-둔-채-pure-value-제어할-함수를-변경-및-조합함으로써-encrypt1-2-3-원하는-결과를-얻어내는-것이-함수형-프로그래밍의-중요한-특성" class="headerlink" title="내부 데이터 및 상태는 그대로 둔 채 (pure_value) 제어할 함수를 변경 및 조합함으로써 (encrypt1,2,3) 원하는 결과를 얻어내는 것이 함수형 프로그래밍의 중요한 특성"></a>내부 데이터 및 상태는 그대로 둔 채 (pure_value) <span class="mint">제어할 함수를 변경 및 조합</span>함으로써 (encrypt1,2,3) 원하는 결과를 얻어내는 것이 함수형 프로그래밍의 중요한 특성</h3><ul>
+<li>높은 수준의 모듈화가 가능하다.</li>
+</ul>
+<p><strong>주요키워드</strong></p>
+<ul>
+<li>Higher-Order Functions (고계 함수, 계산의 효율성)</li>
+<li>Purity (순수성, 데이터 플로우의 취급)<ul>
+<li>Immutable Data (불변성)</li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1" target="_blank" rel="noopener">Referential Transparency</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1" target="_blank" rel="noopener">Lazy Evaluation</a> </li>
+</ul>
+</li>
+<li>Recursion</li>
+</ul>
+<p><a name="cf__1"></a></p>
+<h3 id="cf-명령형-프로그래밍"><a href="#cf-명령형-프로그래밍" class="headerlink" title="cf__명령형 프로그래밍"></a>cf__명령형 프로그래밍</h3><p>순수함수도 있지만,<br>특정 작업을 수행하는 여러가지 명령이 기술되어 있는 함수도 있다.<br>=&gt; <strong>프로시저</strong>라고 한다. Procedure</p>
+<hr>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-자바스크립트에서-함수형-프로그래밍"><a href="#2-자바스크립트에서-함수형-프로그래밍" class="headerlink" title="2. 자바스크립트에서 함수형 프로그래밍"></a>2. 자바스크립트에서 함수형 프로그래밍</h2><p>자바스크립트는 다음을 지원하기때문에 함수형 프로그래밍이 가능</p>
+<ol>
+<li>일급객체로서의 함수 _ 함수의 인자로 함수를 넘길 수 있는 특징</li>
+<li>클로저 _은닉화</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> f1 = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  result = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  result = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> f3 = <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  result = <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> get_encrypted = <span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> str  <span class="string">'zzoon'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> func.call(<span class="literal">null</span>, str);&#125; <span class="comment">// 클로저, 자유변수 str</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> encrypted_value = get_encrypted(f1)();</span><br><span class="line"><span class="built_in">console</span>.log(encrypted_value) <span class="comment">//1</span></span><br><span class="line"><span class="keyword">const</span> encrypted_value = get_encrypted(f2)();</span><br><span class="line"><span class="built_in">console</span>.log(encrypted_value) <span class="comment">//2</span></span><br><span class="line"><span class="keyword">const</span> encrypted_value = get_encrypted(f3)();</span><br><span class="line"><span class="built_in">console</span>.log(encrypted_value) <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="2-1"></a></p>
+<h3 id="2-1-배열의-각-원소-총합-구하기-reduce"><a href="#2-1-배열의-각-원소-총합-구하기-reduce" class="headerlink" title="2-1. 배열의 각 원소 총합 구하기(reduce)"></a>2-1. 배열의 각 원소 총합 구하기(reduce)</h3><p>명령형 프로그래밍으로 작성된 코드.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> len = arr.length;</span><br><span class="line">  <span class="keyword">let</span> i =<span class="number">0</span>, sum =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(; i&lt;len; i++)&#123;</span><br><span class="line">    sum += arr[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="built_in">console</span>.log(sum(arr))</span><br></pre></td></tr></table></figure>
+<p>함수형 프로그래밍<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reduce</span>(<span class="params">func, arr, memo</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// memo: cache 값</span></span><br><span class="line">  <span class="keyword">const</span> len = arr.length;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>, accum = memo;</span><br><span class="line">  <span class="keyword">for</span>(; i&lt;len; i++)&#123;</span><br><span class="line">    accum = func(accum, arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123; <span class="keyword">return</span> x+y; &#125;</span><br><span class="line"><span class="keyword">const</span> multiply = <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123; <span class="keyword">return</span> x*y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(reduce(sum, arr, <span class="number">0</span>);)</span><br><span class="line"><span class="built_in">console</span>.log(reduce(multiply, arr, <span class="number">1</span>);)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><a name="2-2"></a></p>
+<h3 id="2-2-팩토리얼"><a href="#2-2-팩토리얼" class="headerlink" title="2-2. 팩토리얼"></a>2-2. 팩토리얼</h3><p>명령형 프로그래밍<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> val = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">2</span>; i&lt;=num; i++) val = val*i;</span><br><span class="line">  <span class="keyword">return</span> val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>혹은 재귀호출<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> num*fact(num<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>앞서 연산한 결과를 캐시에 저장하여 사용하여 함수를 작성한다면 성능 향상에 도움이 된다.</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fact = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> cache = &#123;<span class="string">'0'</span>: <span class="number">1</span>&#125;</span><br><span class="line">  <span class="keyword">const</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123; <span class="comment">// 클로저</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span>(cache[n] === <span class="string">'number'</span>))&#123;</span><br><span class="line">      result = cache[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = cache[n] = n * func(n<span class="number">-1</span>); <span class="comment">// 10 * 9 * 8 * ... * 1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> func;</span><br><span class="line">&#125;();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(fact(<span class="number">10</span>));</span><br><span class="line"><span class="built_in">console</span>.log(fact(<span class="number">20</span>));</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><a name="cf__2"></a></p>
+<h3 id="cf-2-메모이제이션-패턴-memoization-패턴"><a href="#cf-2-메모이제이션-패턴-memoization-패턴" class="headerlink" title="cf__2 메모이제이션 패턴 memoization 패턴"></a>cf__2 메모이제이션 패턴 memoization 패턴</h3><p><strong>memoize</strong></p>
+<ul>
+<li>계산 결과를 저장해 놓아 이후 다시 계산할 필요 없이 사용할 수 있게 한다는 컴퓨터 용어</li>
+</ul>
+<p><strong>메모이제이션 패턴</strong></p>
+<ul>
+<li>기본적으로 계산된 결과를 함수 프로퍼티값으로 담아 놓고 나중에 사용한다.</li>
+<li>jQuery에는 data()라는 메모이제이션 패턴을 사용하는 메서드가 있다.<blockquote>
+<p>data : 해당 엘리먼트에 Javascript Type의 value를 저장할 수 있으며, 값으로 저장되어 있는 데이터를 읽습니다.<br>data-XXX</p>
+</blockquote>
+</li>
+<li>함수의 성능향상을 위해 <code>Function.prototype</code>에 메모이제이션 패턴을 사용할 수 있는 함수를 넣으면 사용가능하다.<br>주의할 점은 한 번 값이 들어간 경우 계속 유지되므로 이를 <strong>초기화</strong>하는 방법 역시 제공돼야 한다.<blockquote>
+<p>jQuery에서는 cleanData라는 메서드를 제공한다.</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Calculate</span>(<span class="params">key, input, func</span>)</span>&#123;</span><br><span class="line">  Calculate.data = Calculate.data || &#123;&#125;; <span class="comment">//cache</span></span><br><span class="line">  <span class="keyword">if</span>(!Calculate.data[key])&#123;</span><br><span class="line">    <span class="keyword">let</span> result;</span><br><span class="line">    result = func(input);</span><br><span class="line">    Calculate.data[key] = result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Calculate.data[key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = Calculate(<span class="number">1</span>, <span class="number">5</span>, <span class="function"><span class="keyword">function</span>(<span class="params">input</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> input * input;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line">result = Calculate(<span class="number">2</span>, <span class="number">5</span>, <span class="function"><span class="keyword">function</span>(<span class="params">input</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> input*input/<span class="number">4</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);</span><br><span class="line"><span class="built_in">console</span>.log(Calculate(<span class="number">1</span>));</span><br><span class="line"><span class="built_in">console</span>.log(Calculate(<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+<p>Function 프로토타입에 <code>memoization()</code>함수 넣기<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.memoization = <span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> arg = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>); </span><br><span class="line">  <span class="comment">// key에 들어온 인자값의 2번째인자</span></span><br><span class="line">  <span class="keyword">this</span>.data = <span class="keyword">this</span>.data || &#123;&#125;; <span class="comment">// data객체 있으면 그대로, 없으면 초기화</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data[key] !== <span class="literal">undefined</span> ? </span><br><span class="line">    <span class="keyword">this</span>.data[key] : </span><br><span class="line">    <span class="keyword">this</span>.data[key] = <span class="keyword">this</span>.apply(<span class="keyword">this</span>,arg); <span class="comment">// 해당함수를 인자값을 넘기며 호출, arg는 input으로 들어감</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myCalculate1</span>(<span class="params">input</span>)</span>&#123; <span class="keyword">return</span> input * input &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myCalculate2</span>(<span class="params">input</span>)</span>&#123; <span class="keyword">return</span> input * input/<span class="number">4</span> &#125;;</span><br><span class="line"></span><br><span class="line">myCalculate1.memoization(<span class="number">1</span>,<span class="number">5</span>);</span><br><span class="line">myCalculate1.memoization(<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line">myCalculate2.memoization(<span class="number">1</span>,<span class="number">6</span>);</span><br><span class="line">myCalculate2.memoization(<span class="number">2</span>,<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myCalculate1.memoization(<span class="number">1</span>));</span><br><span class="line"><span class="built_in">console</span>.log(myCalculate1.memoization(<span class="number">2</span>));</span><br><span class="line"><span class="built_in">console</span>.log(myCalculate2.memoization(<span class="number">1</span>));</span><br><span class="line"><span class="built_in">console</span>.log(myCalculate2.memoization(<span class="number">2</span>));</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/2018/40/2.jpg" style="width:100%"></p>
+<hr>
+<p><a name="2-3"></a></p>
+<h3 id="2-3-피보나치-수열"><a href="#2-3-피보나치-수열" class="headerlink" title="2-3. 피보나치 수열"></a>2-3. 피보나치 수열</h3><p>메모이제이션 기법 사용한 함수형 프로그래밍<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fibo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> cache = &#123;<span class="string">'0'</span>: <span class="number">0</span>, <span class="string">'1'</span>: <span class="number">1</span>&#125;;</span><br><span class="line">  <span class="keyword">const</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span>(cache[n]) === <span class="string">'number'</span>)&#123;</span><br><span class="line">      result = cache[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = cache[n] = func(n<span class="number">-1</span>) + func(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> func;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="built_in">console</span>.log(fibo(<span class="number">10</span>));</span><br></pre></td></tr></table></figure></p>
+<p>팩토리얼 함수와 패턴과 거의 비슷하다.<br><code>cache의 초기값</code>과 함수를 재귀 호출할 때 <code>산술식</code>만 다르다.<br>=&gt; 팩토리얼과 피보나치 수열을 계산하는 함수를 인자로 받는 함수를 모듈화할 수 있다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cacher = <span class="function"><span class="keyword">function</span>(<span class="params">cache, func</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> calculate = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span>(cache[n]) === <span class="string">'number'</span>)&#123;</span><br><span class="line">      result = cache[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = cache[n] = func(calculate, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cacluate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fact = cacher(&#123;<span class="string">'0'</span>: <span class="number">0</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">func,n</span>)</span>&#123; <span class="keyword">return</span> n* func(n<span class="number">-1</span>); &#125;)</span><br><span class="line"><span class="keyword">const</span> fibo = cacher(&#123;<span class="string">'0'</span>: <span class="number">0</span>, <span class="string">'1'</span>: <span class="number">1</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">func,n</span>)</span>&#123; <span class="keyword">return</span> func(n<span class="number">-1</span>) + func(n<span class="number">-2</span>); &#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-자바스크립트에서의-함수형-프로그래밍을-활용한-주요-함수"><a href="#3-자바스크립트에서의-함수형-프로그래밍을-활용한-주요-함수" class="headerlink" title="3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수"></a>3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수</h2><p><a name="3-1"></a></p>
+<h3 id="3-1-함수-적용"><a href="#3-1-함수-적용" class="headerlink" title="3-1. 함수 적용"></a>3-1. 함수 적용</h3><p><code>Function.prototype.apply</code><br><strong>왜 이름이 apply?</strong></p>
+<ul>
+<li>함수 적용(Applying functions)는 함수형 프로그래밍에서 사용되는 용어다.</li>
+<li>함수형 프로그래밍에서는 <strong>특정 데이터를 여러가지 함수를 적용시키는 방식으로 작업을 수행한다.</strong><br>여기서 함수는 단순히 입력을 넣고 출력을 받는 기능을 수행하는것 뿐만 아니라,<br>인자 혹은 반환값으로 전달된 함수를 <strong>특정 데이터에 적용시키는 개념으로 이해해야한다.</strong></li>
+<li><code>func.apply(Obj, Args)</code>와 같은 함수 호출을 <strong>‘func 함수를 Obj객체와 Args인자 배열에 적용시킨다’</strong>라고 표현할 수 있다.</li>
+</ul>
+<p><a name="cf__3"></a><br>cf__3. 함수 호출<br>괄호 연산자 대비 call/apply를 사용할 때의 장점은<br><strong>함수가 실행되는 컨텍스트를 지정할 수 있다는 점</strong>이다(this의 값).<br>이러한 형태는 고차 함수, 특히 이러한 고차 함수가 나중에 실행되는 함수를 소비할 때 볼 수 있다.<br>Function 프로토타입에서 bind 메소드의 내부는 call/apply의 훌륭한 예다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Possible implementation of bind using apply</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">func, context</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  func.apply(context, <span class="built_in">Array</span>.prototype.slice.apply(<span class="built_in">arguments</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="3-2"></a></p>
+<h3 id="3-2-커링"><a href="#3-2-커링" class="headerlink" title="3-2. 커링"></a>3-2. 커링</h3><p>특정 함수에서 정의된 인자의 일부를 넣어 고정시키고,<br>나머지를 인자로 받는 새로운 함수를 만드는 것을 의미한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculate</span>(<span class="params">a,b,c</span>)</span>&#123; <span class="keyword">return</span> a*b+c &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func</span>) </span>&#123; <span class="comment">// 클로저 반환 </span></span><br><span class="line">  <span class="keyword">const</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>); <span class="comment">// 배열의 2번째 인덱스 이후의 값의 배열</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> func.apply(</span><br><span class="line">              <span class="literal">null</span>, </span><br><span class="line">              args.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)) <span class="comment">// 익명함수의 인자</span></span><br><span class="line">          )</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> new_func1 = curry(calculate, <span class="number">1</span>); <span class="comment">// a를 먼저 받음</span></span><br><span class="line"><span class="built_in">console</span>.log(new_func1(<span class="number">2</span>,<span class="number">3</span>)); <span class="comment">// a를 인자와 합치면서(concat)</span></span><br><span class="line"><span class="comment">// === console.log(curry(calculate,1)(2,3));</span></span><br><span class="line"><span class="keyword">const</span> new_func2 = curry(calculate, <span class="number">1</span>, <span class="number">3</span>); <span class="comment">// a,b를 먼저 받음</span></span><br><span class="line"><span class="built_in">console</span>.log(new_func2(<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<p>자바스크립트에서 기본으로 제공하지 않기 때문에 Function.prototype에 정의하여 사용할 수 있다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.curry = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> fn = <span class="keyword">this</span>, args = <span class="built_in">Array</span>.prototype.slice.claa(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><a name="cf__4"></a></p>
+<h4 id="cf-4-slice-메서드"><a href="#cf-4-slice-메서드" class="headerlink" title="cf__4 slice 메서드"></a>cf__4 slice 메서드</h4><p>커링에서 함수의 인자를 arguments 객체로 조작할 때 이 메서드를 이용하여 배열로 만든 후 손쉽게 조작 가능</p>
+<hr>
+<p><a name="3-3"></a></p>
+<h3 id="3-3-bind"><a href="#3-3-bind" class="headerlink" title="3-3. bind"></a>3-3. bind</h3><ul>
+<li>커링기법을 활용한 함수이다.</li>
+<li>사용자가 고정시키고자 하는 인자를<br>bind()함수를 호출할 때 인자로 넘겨주고<br>반환받은 함수를 호출하면서<br>나머지 가변 인자를 넣어줄 수 있다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">thisArg</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> fn = <span class="keyword">this</span>,</span><br><span class="line">  slice = <span class="built_in">Array</span>.prototype.slice,</span><br><span class="line">  args = slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> fn.apply(thisArg, args.concat(slice.call(<span class="built_in">arguments</span>)))&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> print_all = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> <span class="keyword">this</span>) <span class="built_in">console</span>.log(i + <span class="string">':'</span> + <span class="keyword">this</span>[i]);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> <span class="built_in">arguments</span>) <span class="built_in">console</span>.log(i + <span class="string">':'</span> + <span class="built_in">arguments</span>[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> myobj = &#123;<span class="attr">name</span>: <span class="string">'zzoon'</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> myfunc = print_all.bind(myobj);</span><br><span class="line">myfunc(); <span class="comment">// name: zzoon</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myfunc1 = print_all.bind(myobj, <span class="string">'iamjoy'</span>, <span class="string">'others'</span>);</span><br><span class="line">myfunc1(<span class="string">'insidejs'</span>);</span><br><span class="line"><span class="comment">/* name: zzoon</span></span><br><span class="line"><span class="comment">   0: iamjoy</span></span><br><span class="line"><span class="comment">   1: others</span></span><br><span class="line"><span class="comment">   2: insidejs</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>특정 함수에 원하는 객체를 바인딩시켜 새로운 함수를 사용할 때 bind()함수가 사용된다.</li>
+</ul>
+<hr>
+<p><a name="3-4"></a></p>
+<h3 id="3-4-래퍼-클로저를-절묘하게-사용한-함수형-프로그래밍-🙄"><a href="#3-4-래퍼-클로저를-절묘하게-사용한-함수형-프로그래밍-🙄" class="headerlink" title="3-4. 래퍼 (클로저를 절묘하게 사용한 함수형 프로그래밍) 🙄"></a>3-4. 래퍼 (클로저를 절묘하게 사용한 함수형 프로그래밍) 🙄</h3><p>특정함수를 자신의 함수로 덮어쓰는 것</p>
+<blockquote>
+<p>OOP에서 다형성을 위해 오버라이드를 지원하는것과 유사하다.</p>
+</blockquote>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrap</span>(<span class="params">object: <span class="built_in">Object</span>, method: <span class="built_in">string</span>, wrapper</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> fn = object[method]; <span class="comment">// 덮여질 함수</span></span><br><span class="line">  <span class="keyword">return</span> object[method] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">return</span> wrapper.apply(<span class="keyword">this</span>, </span><br><span class="line">                         [fn.bind(<span class="keyword">this</span>)].concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>))</span><br><span class="line">                         <span class="comment">// fn: original 함수</span></span><br><span class="line">                        )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.original = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.value = value;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'value : '</span> + <span class="keyword">this</span>.value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mywrap = wrap(<span class="built_in">Function</span>.prototype, <span class="string">'original'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">orig_func, value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.value = <span class="number">20</span>;</span><br><span class="line">  orig_func(value);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'wrapper value : '</span> + <span class="keyword">this</span>.value)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> mywrap(<span class="string">'joy'</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="3-5"></a></p>
+<h3 id="3-5-반복-함수"><a href="#3-5-반복-함수" class="headerlink" title="3-5. 반복 함수"></a>3-5. 반복 함수</h3><h4 id="3-5-1-each"><a href="#3-5-1-each" class="headerlink" title="3-5-1. each"></a>3-5-1. each</h4><p>jQuery 1.0의 each()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">obj, fn, args</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.length === <span class="literal">undefined</span>) <span class="comment">// 객체로 넘어올 때</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> obj)</span><br><span class="line">      fn.apply(obj[i], args || [i, obj[i]]);</span><br><span class="line">  <span class="keyword">else</span> <span class="comment">// 배열로 넘어올 때 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;obj.length; i++)</span><br><span class="line">      fn.apply(obj[i], args || [i, obj[i]])</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">each([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">idx, num</span>)</span>&#123; <span class="built_in">console</span>.log(idx + <span class="string">':'</span> + num)&#125;)</span><br><span class="line"><span class="keyword">const</span> joy = &#123;</span><br><span class="line">  name: <span class="string">'joy'</span>,</span><br><span class="line">  company: <span class="string">'goodoc'</span>,</span><br><span class="line">  hasBoyfriend: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">each(joy, <span class="function"><span class="keyword">function</span>(<span class="params">idx, value</span>)</span>&#123;<span class="built_in">console</span>.log(idx + <span class="string">':'</span> + value)&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-2-map"><a href="#3-5-2-map" class="headerlink" title="3-5-2. map"></a>3-5-2. map</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.map = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// this가 null인지, 배열인지 체크</span></span><br><span class="line">  <span class="comment">// callback이 함수인지 체크</span></span><br><span class="line">  <span class="keyword">const</span> obj = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> value, mapped_value;</span><br><span class="line">  <span class="keyword">const</span> A = <span class="keyword">new</span> <span class="built_in">Array</span>(obj.length); <span class="comment">//[undefined, undefined, undefined]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;obj.length; i++) &#123;</span><br><span class="line">    value = obj[i];</span><br><span class="line">    mapped_value = callback.call(<span class="literal">null</span>, value);</span><br><span class="line">    A[i] = mapped_value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> A;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> new_arr = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123; <span class="keyword">return</span> value * value; &#125;)</span><br><span class="line">consoel.log(new_arr);</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-3-reduce"><a href="#3-5-3-reduce" class="headerlink" title="3-5-3. reduce"></a>3-5-3. reduce</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.reduce = <span class="function"><span class="keyword">function</span>(<span class="params">callback, memo</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//this가 null인지, 배열인지 체크</span></span><br><span class="line">  <span class="comment">// callback이 함수인지 체크</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> obj = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> value, accumulated_value = <span class="number">0</span>; <span class="comment">//accumulated 뜻* : 축적되다.</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;obj.length; i++)&#123;</span><br><span class="line">    value = obj[i];</span><br><span class="line">    accumulated_value = callback.call(<span class="literal">null</span>, accumulated_value, value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accumulated_value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> accumulated_val = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123; <span class="keyword">return</span> a + b*b; &#125;)</span><br><span class="line">consoel.log(accumulated_val);</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>참고</strong></p>
+<ol>
+<li><a href="https://dave42blog.wordpress.com/2016/08/13/functional%EB%B6%80%ED%84%B0-reactive%EA%B9%8C%EC%A7%80-3-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%9D%98-%EB%B3%80%ED%99%94-oop%EC%99%80-fp/" target="_blank" rel="noopener">프로그래밍 패러다임의 변화</a> </li>
+<li><a href="http://www.itworld.co.kr/news/84870#csidx096c46214e29fe8990fa281c60f968e" target="_blank" rel="noopener">‘제다이급’ 자바스크립트 고수들이 전하는 6가지 개발팁</a></li>
+</ol>
+
+        </div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2018/11/04/FP_01/" data-id="cjo33oh78001k3ybms1xtdzwc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 함수형 프로그래밍의 개념</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#cf__1">cf__명령형 프로그래밍</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 자바스크립트에서 함수형 프로그래밍</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 배열의 각 원소 총합 구하기(reduce)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 팩토리얼</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-3">2.3 피보나치 수열</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 함수 적용(Function.prototype.apply)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#cf__3">cf__함수호출(괄호연산자 vs call/apply)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 커링</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#cf__4">cf__slice 메서드</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-3">3.3 bind</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-4">3.4 래퍼 🙄🙄</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-5">3.5 반복 함수</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+            </div>
+            
+                <span id="article-list-popup__btn">📚</span>
+            
+        </div>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/10/20/OOP_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">6/ OOP (ES5 기준)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/04/FP_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/40/thumb_default.jpg)" alt="1/ 함수형 프로그래밍 (🙄)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/FP/">FP</a></p>
+                            <p class="item-title"><a href="/2018/11/04/FP_01/" class="title">1/ 함수형 프로그래밍 (🙄)</a></p>
+                            <p class="item-date"><time datetime="2018-11-04T12:20:19.000Z" itemprop="datePublished">2018-11-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/20/OOP_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/39/thumb_default.jpg)" alt="6/ OOP (ES5 기준)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/20/OOP_02/" class="title">6/ OOP (ES5 기준)</a></p>
+                            <p class="item-date"><time datetime="2018-10-20T12:20:19.000Z" itemprop="datePublished">2018-10-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/09/OOP_07/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/37/thumb_default.jpg)" alt="5/ OOAD와 테트리스 (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/09/OOP_07/" class="title">5/ OOAD와 테트리스 (2)</a></p>
+                            <p class="item-date"><time datetime="2018-10-09T12:20:19.000Z" itemprop="datePublished">2018-10-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
+                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/09/24/OOP_05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/36/thumb_default.jpg)" alt="3/ (stack 구조) HTML parser ✨✨" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-title"><a href="/2018/09/24/OOP_05/" class="title">3/ (stack 구조) HTML parser ✨✨</a></p>
+                            <p class="item-date"><time datetime="2018-09-24T12:20:19.000Z" itemprop="datePublished">2018-09-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/OOP/" style="font-size: 12.5px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a>
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2018 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2018/11/04/FP_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
