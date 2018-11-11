@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>브렌더링 엔진(1) - 파싱과 DOM트리 구축 | 필오의 개발일지</title>
+    <title>렌더링 엔진(1) - 파싱과 DOM트리 구축 | 필오의 개발일지</title>
     
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,19 +11,19 @@
         <meta name="keywords" content="Web,browser" />
     
     
-    <meta name="description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정  HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식">
+    <meta name="description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정 HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식적">
 <meta name="keywords" content="Web,browser">
 <meta property="og:type" content="article">
-<meta property="og:title" content="브렌더링 엔진(1) - 파싱과 DOM트리 구축">
+<meta property="og:title" content="렌더링 엔진(1) - 파싱과 DOM트리 구축">
 <meta property="og:url" content="http://feel5ny.github.io/2018/06/06/rendering_engine_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정  HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식">
+<meta property="og:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정 HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식적">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/14/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.906Z">
+<meta property="og:updated_time" content="2018-11-11T15:43:48.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="브렌더링 엔진(1) - 파싱과 DOM트리 구축">
-<meta name="twitter:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정  HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식">
+<meta name="twitter:title" content="렌더링 엔진(1) - 파싱과 DOM트리 구축">
+<meta name="twitter:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 렌더링 엔진 동작 과정 HTML 파싱 (for DOM 트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기   파싱과 DOM 트리 구축 파싱에 대하여문법 / 파서-어휘 분석기 조합 / 변환 / 파싱 예 / 어휘와 구문에 대한 공식적">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2018/14/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -185,7 +185,7 @@ window.onload = function() {
                 
     
         <h1 class="article-title" itemprop="name">
-        브렌더링 엔진(1) - 파싱과 DOM트리 구축
+        렌더링 엔진(1) - 파싱과 DOM트리 구축
         </h1>
     
 
@@ -216,7 +216,7 @@ window.onload = function() {
 </blockquote>
 <ol>
 <li><a href="https://feel5ny.github.io/2018/05/29/rendering_engine_0/">브라우저의 주요 기능</a></li>
-<li>렌더링 엔진 동작 과정 <div style="padding: 1em;background-color: lightyellow;"></div></li>
+<li>렌더링 엔진 동작 과정</li>
 <li><a href="#html_parse">HTML 파싱</a> (for DOM 트리 구축)</li>
 <li><a href="#setting">렌더 트리 <strong>구축</strong></a></li>
 <li><a href="#layout">렌더 트리 <strong>배치</strong></a></li>
@@ -510,7 +510,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/06/06/rendering_engine_1/" data-id="cjocvrg4d007b0kbm0y3houc1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/06/06/rendering_engine_1/" data-id="cjod1xzfu007e9pbmtmiy4i3i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -669,7 +669,7 @@ window.onload = function() {
                             <a href="/2018/11/11/Joylog_001/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/42/thumb_default.jpg)" alt="글또 2기_개발자는 무슨 글을 쓰려나 ~.~" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/42/thumb_default.jpg)" alt="글또 2기_개발자는 어떤 글을 쓰게 될까?" class="thumbnail-image"></span>
     
     
 </a>
@@ -678,7 +678,7 @@ window.onload = function() {
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/personal-🙆/">personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/personal-🙆/log/">log</a></p>
-                            <p class="item-title"><a href="/2018/11/11/Joylog_001/" class="title">글또 2기_개발자는 무슨 글을 쓰려나 ~.~</a></p>
+                            <p class="item-title"><a href="/2018/11/11/Joylog_001/" class="title">글또 2기_개발자는 어떤 글을 쓰게 될까?</a></p>
                             <p class="item-date"><time datetime="2018-11-10T16:23:55.000Z" itemprop="datePublished">2018-11-11</time></p>
                         </div>
                     </li>
@@ -841,6 +841,13 @@ window.onload = function() {
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a>
+                        <a href="/" class="logo"></a>
+                    </h1>
                 
                 <p>&copy; 2018 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>

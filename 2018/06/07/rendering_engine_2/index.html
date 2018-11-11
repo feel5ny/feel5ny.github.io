@@ -11,19 +11,19 @@
         <meta name="keywords" content="Web,browser" />
     
     
-    <meta name="description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정  HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고">
+    <meta name="description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정 HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고 C">
 <meta name="keywords" content="Web,browser">
 <meta property="og:type" content="article">
 <meta property="og:title" content="렌더링 엔진(2) - 렌더 트리 구축">
 <meta property="og:url" content="http://feel5ny.github.io/2018/06/07/rendering_engine_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정  HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고">
+<meta property="og:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정 HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고 C">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/15/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.903Z">
+<meta property="og:updated_time" content="2018-11-11T15:44:33.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="렌더링 엔진(2) - 렌더 트리 구축">
-<meta name="twitter:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정  HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고">
+<meta name="twitter:description" content="https://d2.naver.com/helloworld/59361 를 읽고 정리했습니다.   브라우저의 주요 기능 브라우저의 기본 구조 렌더링 엔진 동작 과정 HTML 파싱 (for DOM트리 구축) 렌더 트리 구축 렌더 트리 배치 렌더 트리 그리기     렌더 트리 구축 HTML 마크업을 처리하고 DOM 트리를 빌드합니다. CSS 마크업을 처리하고 C">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2018/15/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -217,14 +217,14 @@ window.onload = function() {
 <ol>
 <li><a href="https://feel5ny.github.io/2018/05/29/rendering_engine_0/">브라우저의 주요 기능</a></li>
 <li>브라우저의 기본 구조</li>
-<li>렌더링 엔진 동작 과정 <div style="padding: 1em;background-color: lightyellow;"><ol>
+<li>렌더링 엔진 동작 과정<ol>
 <li><a href="#html_parse">HTML 파싱</a> (for DOM트리 구축)</li>
 <li><a href="#setting">렌더 트리 <strong>구축</strong></a></li>
 <li><a href="#layout">렌더 트리 <strong>배치</strong></a></li>
-<li><a href="#draw">렌더 트리 <strong>그리기</strong></a><br></li></ol></div></li>
+<li><a href="#draw">렌더 트리 <strong>그리기</strong></a></li>
 </ol>
-
-
+</li>
+</ol>
 <hr>
 <h1 id="렌더-트리-구축"><a href="#렌더-트리-구축" class="headerlink" title="렌더 트리 구축"></a>렌더 트리 구축</h1><ol>
 <li>HTML 마크업을 처리하고 DOM 트리를 빌드합니다.</li>
@@ -323,7 +323,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/06/07/rendering_engine_2/" data-id="cjocvrg4i007f0kbm2jpthtzj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/06/07/rendering_engine_2/" data-id="cjod1xzft00779pbm4ylpvndt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -460,7 +460,7 @@ window.onload = function() {
     
         <a href="/2018/06/06/rendering_engine_1/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">브렌더링 엔진(1) - 파싱과 DOM트리 구축</p>
+        <p class="article-nav-title">렌더링 엔진(1) - 파싱과 DOM트리 구축</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -482,7 +482,7 @@ window.onload = function() {
                             <a href="/2018/11/11/Joylog_001/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2018/42/thumb_default.jpg)" alt="글또 2기_개발자는 무슨 글을 쓰려나 ~.~" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2018/42/thumb_default.jpg)" alt="글또 2기_개발자는 어떤 글을 쓰게 될까?" class="thumbnail-image"></span>
     
     
 </a>
@@ -491,7 +491,7 @@ window.onload = function() {
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/personal-🙆/">personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/personal-🙆/log/">log</a></p>
-                            <p class="item-title"><a href="/2018/11/11/Joylog_001/" class="title">글또 2기_개발자는 무슨 글을 쓰려나 ~.~</a></p>
+                            <p class="item-title"><a href="/2018/11/11/Joylog_001/" class="title">글또 2기_개발자는 어떤 글을 쓰게 될까?</a></p>
                             <p class="item-date"><time datetime="2018-11-10T16:23:55.000Z" itemprop="datePublished">2018-11-11</time></p>
                         </div>
                     </li>
@@ -654,6 +654,13 @@ window.onload = function() {
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a>
+                        <a href="/" class="logo"></a>
+                    </h1>
                 
                 <p>&copy; 2018 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
