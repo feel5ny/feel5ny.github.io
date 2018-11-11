@@ -11,19 +11,19 @@
         <meta name="keywords" content="javascript" />
     
     
-    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
+    <meta name="description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3&#x2F; 실행 컨텍스트와 스코프">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/01/JS_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
+<meta property="og:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-08-15T14:44:07.109Z">
+<meta property="og:updated_time" content="2018-11-11T12:44:46.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3&#x2F; 실행 컨텍스트와 스코프">
-<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   실행컨텍스트란? 실행컨텍스트의 3가지 객체 스코프 체인 this value    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동">
+<meta name="twitter:description" content="프론트엔드 개발자를 위한 자바스크립트 프로그래밍 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    1. 실행 컨텍스트실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/post_img/36/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -103,7 +103,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">Home</a>
                                 </li>
                             
-                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-9997/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li></ul>
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/">Project &#127939;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/">TIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/Web/">Web</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/TIL-✍/log/">log</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/">blog</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/hexo/">hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog/style/">style</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/personal-🙆/">personal 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/personal-🙆/log/">log</a></li></ul></li></ul>
                                       
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
@@ -162,7 +162,7 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-9997/Javascript/">Javascript</a>
+    <a class="page-title-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/TIL-✍/Javascript/">Javascript</a>
     </h1>
 </div>
                         <div class="main-body-content">
@@ -210,19 +210,54 @@ window.onload = function() {
         
         
         
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 실행컨텍스트란?</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 실행컨텍스트의 3가지 객체</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 스코프 체인</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. this value</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. 실행 컨텍스트의 생성과정</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
 <p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=" target="_blank" rel="noopener">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
-<p>목차 </p>
-<ol>
-<li><a href="#Execution_context">실행컨텍스트란?</a></li>
-<li><a href="#Execution_object">실행컨텍스트의 3가지 객체</a></li>
-<li><a href="#Scope_chain">스코프 체인</a></li>
-<li><a href="#this">this value</a></li>
-</ol>
 <hr>
-<h2 id="1-실행-컨텍스트"><a href="#1-실행-컨텍스트" class="headerlink" title=" 1. 실행 컨텍스트"></a><a name="Execution_context"></a> 1. 실행 컨텍스트</h2><p>실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념이라고 정의한다. 즉, 실행 컨텍스트는 <code>실행 가능한 코드가 실행되는 환경</code>이라고 말할 수 있다.<br>실행 가능한 코드란</p>
+<h2 id="1-실행-컨텍스트"><a href="#1-실행-컨텍스트" class="headerlink" title=" 1. 실행 컨텍스트"></a><a name="1"></a> 1. 실행 컨텍스트</h2><p>실행 컨텍스트(Execution Context)는 scope, hoisting, this, function, closure 등의 동작원리를 담고 있는 자바스크립트의 핵심원리이다. ECMAScript 스펙에 따르면 실행 컨텍스트를 실행 가능한 코드를 형상화하고 구분하는 추상적인 개념이라고 정의한다. 즉, 실행 컨텍스트는 <code>실행 가능한 코드가 실행되는 환경</code>이라고 말할 수 있다.<br>실행 가능한 코드란</p>
 <ul>
 <li>전역코드 : 전역 영역에 존재하는 코드</li>
 <li>함수코드 : 함수 내에 존재하는 코드</li>
@@ -241,7 +276,7 @@ window.onload = function() {
 </ul>
 <p>자바스크립트 엔진은 실행 컨텍스트를 물리적 객체의 형태로 관리한다.</p>
 <hr>
-<h2 id="2-실행-컨텍스트의-3가지-객체"><a href="#2-실행-컨텍스트의-3가지-객체" class="headerlink" title=" 2. 실행 컨텍스트의 3가지 객체"></a><a name="Execution_object"></a> 2. 실행 컨텍스트의 3가지 객체</h2><p>객체의 형태를 가지며 아래의 3가지 프로퍼티를 소유한다.</p>
+<h2 id="2-실행-컨텍스트의-3가지-객체"><a href="#2-실행-컨텍스트의-3가지-객체" class="headerlink" title=" 2. 실행 컨텍스트의 3가지 객체"></a><a name="2"></a> 2. 실행 컨텍스트의 3가지 객체</h2><p>객체의 형태를 가지며 아래의 3가지 프로퍼티를 소유한다.</p>
 <ul>
 <li>Variable object</li>
 <li>Scope chain</li>
@@ -285,7 +320,7 @@ window.onload = function() {
 <li>함수 실행이 끝나면 해당 함수의 실행 컨텍스트를 파기하고 직전의 실행 컨텍스트에 컨트롤을 반환한다.<br>ECMAScript 프로그램은 모두 이런 식으로 실행된다.</li>
 </ol>
 <hr>
-<h2 id="3-스코프-체인-SC"><a href="#3-스코프-체인-SC" class="headerlink" title=" 3. 스코프 체인 SC"></a><a name="Scope_chain"></a> 3. 스코프 체인 SC</h2><p>스코프 체인은 일종의 리스트로서 중첩된 함수의 <strong>스코프의 레퍼런스를 차례로 저장하고 있는 개념</strong>이다.<br>즉, 현재 실행컨텍스트의 활성객체(AO)를 선두로하여 순차적으로 상위 컨텍스트의 AO를 가리키며 마지막 리스트는 전역 객체를 가리킨다.</p>
+<h2 id="3-스코프-체인-SC"><a href="#3-스코프-체인-SC" class="headerlink" title=" 3. 스코프 체인 SC"></a><a name="3"></a> 3. 스코프 체인 SC</h2><p>스코프 체인은 일종의 리스트로서 중첩된 함수의 <strong>스코프의 레퍼런스를 차례로 저장하고 있는 개념</strong>이다.<br>즉, 현재 실행컨텍스트의 활성객체(AO)를 선두로하여 순차적으로 상위 컨텍스트의 AO를 가리키며 마지막 리스트는 전역 객체를 가리킨다.</p>
 <p><strong>스코프 체인의 목적은 실행 컨텍스트가 접근할 수 있는 모든 변수와 함수에 <code>순서</code>를 정의하는 것.</strong></p>
 <ul>
 <li>함수가 중첩 상태일 때 하위함수 내에서 상위함수의 유효범위까지 참조할 수 있는데 이것는 스코프 체인을 검색하였기 때문이다. </li>
@@ -296,9 +331,9 @@ window.onload = function() {
 <p><strong>이것이 스코프 체인이라고 불리는 이유이다.</strong></p>
 <p>이와 같이 순차적으로 스코프 체인에서 변수를 검색하는데 결국 검색에 실패하면 정의되지 않은 변수에 접근하는 것으로 판단하여 Reference 에러를 발생시킨다.<br>스코프 체인은 <code>[[scope]]</code> 프로퍼티로 참조할 수 있다.</p>
 <hr>
-<h2 id="4-this-value"><a href="#4-this-value" class="headerlink" title=" 4. this value"></a><a name="this"></a> 4. this value</h2><p>this 프로퍼티에는 this 값이 할당된다. this에 할당되는 값은 함수 호출 패턴에 의해 결정되는데, 이는 Function 글에서 자세히 다루겠다.</p>
+<h2 id="4-this-value"><a href="#4-this-value" class="headerlink" title=" 4. this value"></a><a name="4"></a> 4. this value</h2><p>this 프로퍼티에는 this 값이 할당된다. this에 할당되는 값은 함수 호출 패턴에 의해 결정되는데, 이는 Function 글에서 자세히 다루겠다.</p>
 <hr>
-<h2 id="5-실행-컨텍스트의-생성과정"><a href="#5-실행-컨텍스트의-생성과정" class="headerlink" title=" 5. 실행 컨텍스트의 생성과정"></a><a name="this"></a> 5. 실행 컨텍스트의 생성과정</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;<span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function foo () &#123;</span></span><br><span class="line"><span class="string">  var y = 'yyy';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  function bar () &#123;</span></span><br><span class="line"><span class="string">    var z = 'zzz';</span></span><br><span class="line"><span class="string">    console.log(x + y + z);</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  bar();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">foo();</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-실행-컨텍스트의-생성과정"><a href="#5-실행-컨텍스트의-생성과정" class="headerlink" title=" 5. 실행 컨텍스트의 생성과정"></a><a name="5"></a> 5. 실행 컨텍스트의 생성과정</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'xxx'</span>;<span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function foo () &#123;</span></span><br><span class="line"><span class="string">  var y = 'yyy';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  function bar () &#123;</span></span><br><span class="line"><span class="string">    var z = 'zzz';</span></span><br><span class="line"><span class="string">    console.log(x + y + z);</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  bar();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">foo();</span></span><br></pre></td></tr></table></figure>
 <ol>
 <li>전역 코드에 진입<br>컨트롤이 실행 컨텍스트에 진입하기 이전에 유일한 전역 객체(Global Object)가 생성된다. 초기 상태의 전역 객체에는 빌트인 객체(Math, String, Array 등)와 BOM, DOM이 설정되어 있다.</li>
 </ol>
@@ -327,7 +362,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjo33zycw001ab3bmq6itik2k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cjocvrfqu001h0kbmrjvvkyj1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -391,7 +426,51 @@ window.onload = function() {
         <div class="article-list-popup" href="javascript:;">
             <div class="article-list-popup__box" style="display: none;">
                 
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 실행컨텍스트란?</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 실행컨텍스트의 3가지 객체</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 스코프 체인</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. this value</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. 실행 컨텍스트의 생성과정</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
             </div>
+            
+                <span id="article-list-popup__btn">📚</span>
             
         </div>
     </div>
@@ -483,6 +562,26 @@ window.onload = function() {
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/11/11/Joylog_001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/42/thumb_default.jpg)" alt="글또 2기_개발자는 무슨 글을 쓰려나 ~.~" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/personal-🙆/">personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/personal-🙆/log/">log</a></p>
+                            <p class="item-title"><a href="/2018/11/11/Joylog_001/" class="title">글또 2기_개발자는 무슨 글을 쓰려나 ~.~</a></p>
+                            <p class="item-date"><time datetime="2018-11-10T16:23:55.000Z" itemprop="datePublished">2018-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/11/04/FP_01/" class="thumbnail">
     
     
@@ -494,7 +593,7 @@ window.onload = function() {
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/FP/">FP</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/FP/">FP</a></p>
                             <p class="item-title"><a href="/2018/11/04/FP_01/" class="title">1/ 함수형 프로그래밍 (🙄)</a></p>
                             <p class="item-date"><time datetime="2018-11-04T12:20:19.000Z" itemprop="datePublished">2018-11-04</time></p>
                         </div>
@@ -514,7 +613,7 @@ window.onload = function() {
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
                             <p class="item-title"><a href="/2018/10/20/OOP_02/" class="title">6/ OOP (ES5 기준)</a></p>
                             <p class="item-date"><time datetime="2018-10-20T12:20:19.000Z" itemprop="datePublished">2018-10-20</time></p>
                         </div>
@@ -534,7 +633,7 @@ window.onload = function() {
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
                             <p class="item-title"><a href="/2018/10/09/OOP_07/" class="title">5/ OOAD와 테트리스 (2)</a></p>
                             <p class="item-date"><time datetime="2018-10-09T12:20:19.000Z" itemprop="datePublished">2018-10-09</time></p>
                         </div>
@@ -554,29 +653,9 @@ window.onload = function() {
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
                             <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
                             <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/09/24/OOP_05/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/36/thumb_default.jpg)" alt="3/ (stack 구조) HTML parser ✨✨" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-9997/">TIL &#9997;</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-9997/OOP/">OOP</a></p>
-                            <p class="item-title"><a href="/2018/09/24/OOP_05/" class="title">3/ (stack 구조) HTML parser ✨✨</a></p>
-                            <p class="item-date"><time datetime="2018-09-24T12:20:19.000Z" itemprop="datePublished">2018-09-24</time></p>
                         </div>
                     </li>
                 
@@ -589,7 +668,7 @@ window.onload = function() {
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/OOP/" style="font-size: 12.5px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 11.25px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/OOP/" style="font-size: 12.5px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
         </div>
     </div>
 
@@ -599,7 +678,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/">TIL &#9997;</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Database/">Database</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-9997/log/">log</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/">TIL ✍</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/React/">React</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Typescript/">Typescript</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/log/">log</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/">personal 🙆</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/log/">log</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -609,7 +688,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -658,13 +737,6 @@ window.onload = function() {
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a>
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2018 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
