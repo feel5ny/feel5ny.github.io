@@ -20,7 +20,7 @@
 <meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.792Z">
+<meta property="og:updated_time" content="2018-11-18T12:37:48.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1부&#x2F; chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
 <meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기/비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
@@ -256,11 +256,11 @@ window.onload = function() {
 <hr>
 <h2 id="3-동기와-비동기를-함께-사용할-수-밖에-없는가"><a href="#3-동기와-비동기를-함께-사용할-수-밖에-없는가" class="headerlink" title="3. 동기와 비동기를 함께 사용할 수 밖에 없는가?"></a>3. 동기와 비동기를 함께 사용할 수 밖에 없는가?</h2><ul>
 <li>동기 방식은 프로세스를 독점하기 때문에 효율적인 작업이 불가능.</li>
-<li>비동기 방식은 효율적으로 작업할 수 있지만 <span style="color:blue"><strong>호출순서를 보장하기 어렵다.</strong><span></span></span></li>
+<li>비동기 방식은 효율적으로 작업할 수 있지만 <span class="mint"><strong>호출순서를 보장하기 어렵다.</strong></span></li>
 <li>웹 브라우저는 단일 스레드 기반이기때문에 성능상 문제가 발생한다.</li>
 </ul>
 <hr>
-<h2 id="4-rxjs는-어떻게-개선하였나"><a href="#4-rxjs는-어떻게-개선하였나" class="headerlink" title="4. rxjs는 어떻게 개선하였나?"></a>4. rxjs는 어떻게 개선하였나?</h2><p>입력데이터에 대한 구조적 문제를 개선하고자 하였다.<br>rxjs는 동기와 비동기의 차이점을 <strong>시간</strong>이라는 개념을 도입함으로써 해결하려고 했다.</p>
+<h2 id="4-rxjs는-어떻게-개선하였나"><a href="#4-rxjs는-어떻게-개선하였나" class="headerlink" title="4. rxjs는 어떻게 개선하였나?"></a>4. rxjs는 어떻게 개선하였나?</h2><p>입력데이터에 대한 구조적 문제를 개선하고자 하였다.<br>rxjs는 동기와 비동기의 차이점을 <span class="mint"><strong>시간</strong></span>이라는 개념을 도입함으로써 해결하려고 했다.</p>
 <p><img src="/images/2018/24/01.png" width="300px" style="margin-left: 0;"></p>
 <blockquote>
 <p>비동기</p>
@@ -304,7 +304,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cjod1xzcd00049pbmtgu7un7o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cjon1e9m6000432bml2esgwwp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -460,6 +460,26 @@ window.onload = function() {
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/11/18/Async_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/29/thumb_default.jpg)" alt="2부/ chap01. RxJs란 무엇인가?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/11/18/Async_04/" class="title">2부/ chap01. RxJs란 무엇인가?</a></p>
+                            <p class="item-date"><time datetime="2018-11-18T11:12:34.000Z" itemprop="datePublished">2018-11-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/11/11/Joylog_001/" class="thumbnail">
     
     
@@ -537,26 +557,6 @@ window.onload = function() {
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
-                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
-                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -586,7 +586,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

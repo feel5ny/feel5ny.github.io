@@ -11,24 +11,24 @@
         <meta name="keywords" content="async,rxjs" />
     
     
-    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 RxJS란? RxJS 시작하기2.1 RxJS 첫번째 예제2.2 RxJS 첫번째 예제 개선하기2.3 RxJS 두번째 예제 RxJS 4대 천왕3.1 Observable3.2 오퍼레이터3.3 Observer3.4 Subscription RxJS 개발 방법     1. RxJS란?">
+    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.     1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라">
 <meta name="keywords" content="async,rxjs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2부&#x2F; chap01. RxJs란 무엇인가?">
-<meta property="og:url" content="http://feel5ny.github.io/2018/08/15/Async_04/index.html">
+<meta property="og:url" content="http://feel5ny.github.io/2018/11/18/Async_04/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 RxJS란? RxJS 시작하기2.1 RxJS 첫번째 예제2.2 RxJS 첫번째 예제 개선하기2.3 RxJS 두번째 예제 RxJS 4대 천왕3.1 Observable3.2 오퍼레이터3.3 Observer3.4 Subscription RxJS 개발 방법     1. RxJS란?">
+<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.     1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/29/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.897Z">
+<meta property="og:updated_time" content="2018-11-18T15:17:29.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2부&#x2F; chap01. RxJs란 무엇인가?">
-<meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 RxJS란? RxJS 시작하기2.1 RxJS 첫번째 예제2.2 RxJS 첫번째 예제 개선하기2.3 RxJS 두번째 예제 RxJS 4대 천왕3.1 Observable3.2 오퍼레이터3.3 Observer3.4 Subscription RxJS 개발 방법     1. RxJS란?">
+<meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.     1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2018/29/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2018/08/15/Async_04/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2018/11/18/Async_04/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -195,8 +195,8 @@ window.onload = function() {
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/08/15/Async_04/" class="article-date">
-            <time datetime="2018-08-15T11:12:34.000Z" itemprop="datePublished">2018-08-15</time>
+        <a href="/2018/11/18/Async_04/" class="article-date">
+            <time datetime="2018-11-18T11:12:34.000Z" itemprop="datePublished">2018-11-18</time>
         </a>
     </div>
 
@@ -210,20 +210,170 @@ window.onload = function() {
         
         
         
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. RxJS란?</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. RxJS 시작하기</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 RxJS 첫번째 예제</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 RxJS 첫번째 예제 개선하기</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-3">2.3 RxJS 두번째 예제</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. RxJS 4대 천왕</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 Observable</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 오퍼레이터</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-3">3.3 Observer</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-4">3.4 Subscription</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. RxJS 개발 방법</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
 <p><strong>[📕 퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
-<h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
-<li>RxJS란?</li>
-<li>RxJS 시작하기<br>2.1 RxJS 첫번째 예제<br>2.2 RxJS 첫번째 예제 개선하기<br>2.3 RxJS 두번째 예제</li>
-<li>RxJS 4대 천왕<br>3.1 Observable<br>3.2 오퍼레이터<br>3.3 Observer<br>3.4 Subscription</li>
-<li>RxJS 개발 방법</li>
+<hr>
+<p><a name="1"> </a></p>
+<h2 id="1-RxJS란"><a href="#1-RxJS란" class="headerlink" title="1. RxJS란?"></a>1. RxJS란?</h2><p>RxJS is a library for composing asynchronous and event-based programs by using observable sequences.<br>RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라이브러리이다.<br>(범용적인 데이터 플로우 솔류션을 지향하는 라이브러리라고 책 저자가 정의함)</p>
+<p><a name="2"></a></p>
+<h2 id="2-RxJS-시작하기"><a href="#2-RxJS-시작하기" class="headerlink" title="2. RxJS 시작하기"></a>2. RxJS 시작하기</h2><p><a name="2-1"> </a></p>
+<h3 id="2-1-RxJS-첫번째-예제"><a href="#2-1-RxJS-첫번째-예제" class="headerlink" title="2.1 RxJS 첫번째 예제"></a>2.1 RxJS 첫번째 예제</h3><p>목표: 페이지를 클릭했을 경우 <code>event.currentTarget</code>정보를 콘솔로 출력해보자.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;fromEvent&#125; = rxjs;</span><br><span class="line"><span class="keyword">const</span> click$ = fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</span><br><span class="line"><span class="comment">// 1. fromEvent : 타겟의 이벤트를 옵저버블로 변환한다. </span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="function"><span class="params">event</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(event.currentTarget)&#125;</span><br><span class="line">click$.subscribe(observer);</span><br></pre></td></tr></table></figure></p>
+<p><code>fromEvent(target: EventTargetLike, eventName: string, selector: function): Observable</code><br>click 옵저버블을 구독하고, 옵저버블에서 데이터가 전달되면 옵저버함수가 받는다.<br>이는 addEventListener를 통한 이벤트 핸들러 등록과 유사하다.<br>둘의 차이점은 브라우저를 통해 전달되는 이벤트 정보를 Observable로 변환하는 작업을 추가로 한다는 점<br><a name="2-2"> </a></p>
+<h3 id="2-2-RxJS-첫번째-예제-개선하기"><a href="#2-2-RxJS-첫번째-예제-개선하기" class="headerlink" title="2.2 RxJS 첫번째 예제 개선하기"></a>2.2 RxJS 첫번째 예제 개선하기</h3><p>실제 우리가 필요한 정보는 click이 아니라 click이후의 <code>currentTarget</code>정보</p>
+<p>pluck 오퍼레이터를 이용하자.<br><code>pluck(properties: ...string): Observable</code><br>pluck은 사전적으로 ‘~을 뽑다’라는 의미이다. 추출할 속성들을 ‘문자열’로 지정할 수 있다.</p>
+<p>pipe 오퍼레이터를 사용하여 파라미터로 전달된 오퍼레이터들이 적용된 새로운 Observable 인스턴스를 반환한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;fromEvnet&#125;= rxjs;</span><br><span class="line"><span class="keyword">const</span> &#123;pluck&#125; = rxjs.operators;</span><br><span class="line"><span class="keyword">const</span> currentTarget$ = fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>).pipe( pluck(<span class="string">'currentTarget'</span>) );</span><br><span class="line"><span class="keyword">const</span> observer = <span class="function"><span class="params">currentTarget</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(currentTarget)&#125;</span><br><span class="line">currentTarget$.subscribe(observer)</span><br></pre></td></tr></table></figure>
+<p>cf__1. RxJS에서 pipe 오퍼레이터를 적용하여서 도트 체이닝없이 오퍼레이터를 받는다.<br>pipe는 처리되어야할 작업들을 순차적으로 받아서 처리한다.<br><code>pipe(operations: ...): Observable</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 도트체이닝</span></span><br><span class="line">ajax$</span><br><span class="line">  .switchMap(<span class="function"><span class="params">data</span>=&gt;</span>...)</span><br><span class="line">  .filter(<span class="function"><span class="params">user</span> =&gt;</span> ...)</span><br><span class="line">  .map(<span class="function"><span class="params">user</span> =&gt;</span> ...)</span><br><span class="line"></span><br><span class="line"><span class="comment">// pipe 오프레이터</span></span><br><span class="line">ajax$</span><br><span class="line">  .pipe(</span><br><span class="line">    switchMap(<span class="function"><span class="params">data</span> =&gt;</span> ...),</span><br><span class="line">    filter(<span class="function"><span class="params">user</span> =&gt;</span> ...),</span><br><span class="line">    map(<span class="function"><span class="params">user</span> =&gt;</span> ...)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>도트 체이닝을 구성하기 위해서는 옵저버블 객체가 모든 오퍼레이터를 가지고 있어야한다.</li>
+<li><code>Observable.prototype</code>에 사용하는 모든 오퍼레이터가 추가된다.<ul>
+<li>rxjs사용시 불필요한 오퍼레이터를 모두 가지고 있어야 하기 때문에 파일 사이즈를 증가시킨다.</li>
+</ul>
+</li>
+<li>pipe오퍼레이터를 사용하면 트리세이킹(tree shaking: 사용하지 않는 모듈을 번들링할 때 제거하는 기능)을 자유롭게 할 수 있다.</li>
+<li>pipe 오퍼레이터는 함수형태로만 오퍼레이터가 만들어지기 때문에<br><strong>Observable과의 결합도를 떨어뜨려</strong> 더더욱 쉽게 오퍼레이터를 작성할 수 있다.</li>
+</ul>
+<hr>
+<p><a name="2-3"> </a></p>
+<h3 id="2-3-RxJS-두번째-예제"><a href="#2-3-RxJS-두번째-예제" class="headerlink" title="2.3 RxJS 두번째 예제"></a>2.3 RxJS 두번째 예제</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [ </span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'유비'</span>, <span class="attr">nationality</span>: <span class="string">'촉'</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'손권'</span>, <span class="attr">nationality</span>: <span class="string">'오'</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'관우'</span>, <span class="attr">nationality</span>: <span class="string">'촉'</span>&#125;,</span><br><span class="line">].filter(<span class="function"><span class="params">user</span>=&gt;</span> user.nationality === <span class="string">'촉'</span>)</span><br><span class="line"><span class="keyword">const</span> log = <span class="function"><span class="params">user</span> =&gt;</span> <span class="built_in">console</span>.log(user);</span><br><span class="line">a.forEach(log)</span><br></pre></td></tr></table></figure>
+<p><code>from(ish: ObservableInput, mapFn: function, thisArg: any, scheduler: Scheduler): Observable</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;<span class="keyword">from</span>&#125; = rxjs;</span><br><span class="line"><span class="keyword">const</span> &#123;filter&#125; = rxjs.operators;</span><br><span class="line"><span class="keyword">const</span> a$ = <span class="keyword">from</span>([ </span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'유비'</span>, <span class="attr">nationality</span>: <span class="string">'촉'</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'손권'</span>, <span class="attr">nationality</span>: <span class="string">'오'</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">'관우'</span>, <span class="attr">nationality</span>: <span class="string">'촉'</span>&#125;,</span><br><span class="line">]).pipe(filter(<span class="function"><span class="params">user</span>=&gt;</span> user.nationality === <span class="string">'촉'</span>))</span><br><span class="line"><span class="keyword">const</span> oberver = <span class="function"><span class="params">user</span> =&gt;</span> <span class="built_in">console</span>.log(user);</span><br><span class="line">a$.subscribe(observer);</span><br></pre></td></tr></table></figure></p>
+<h2 id=""><a href="#" class="headerlink" title=" "></a><a name="3"> </a></h2><h2 id="3-RxJS-4대-천왕"><a href="#3-RxJS-4대-천왕" class="headerlink" title="3. RxJS 4대 천왕"></a>3. RxJS 4대 천왕</h2><ol>
+<li>Observable</li>
+<li>오퍼레이터</li>
+<li>Observer</li>
+<li>Subscription</li>
 </ol>
 <hr>
+<ol>
+<li>Subject</li>
+<li>Scheduler<blockquote>
+<p>다른장에서 설명</p>
+</blockquote>
+</li>
+</ol>
 <hr>
+<p><a name="3-1"> </a></p>
+<h3 id="3-1-Observable"><a href="#3-1-Observable" class="headerlink" title="3.1 Observable"></a>3.1 Observable</h3><p><strong>시간을 축</strong>으로 연속적인 데이터를 저장하는 컬렉션을 표현한 객체이다.<br>Observable은 데이터를 제공하는 소스를<br>Observer에게 전달한다.<br>이를 <strong>스트림(stream)</strong>이라고 부른다.<br><a name="3-2"> </a></p>
+<h3 id="3-2-오퍼레이터"><a href="#3-2-오퍼레이터" class="headerlink" title="3.2 오퍼레이터"></a>3.2 오퍼레이터</h3><p><strong>Observable을 생성 및 조작하는 함수</strong>를 오퍼레이터(operator)라고 한다.<br>오퍼레이터는 Observable을 생성하기도 하고,<br>각각의 Observable을 연결하기도 한다.<br>Observable을 분리하거나 합치기도 한다. </p>
+<p>오퍼레이터는 현재의 Observable 인스턴스를 기반으로 항상 새로운 Observable 인스턴스를 반환한다.<br><a name="3-4"> </a></p>
+<h3 id="3-3-Observer"><a href="#3-3-Observer" class="headerlink" title="3.3 Observer"></a>3.3 Observer</h3><p>Observable에 의해 전달된 데이터를 소비하는 주체이다.<br>Observers는 next, error, complete함수를 가진 객체를 가리킨다.</p>
+<p>Observable에 의해<br>데이터가 전달될 때는next함수가 호출되고<br>에러가 발생했을 때는 error함수,<br>데이터 전달이 완료되었을 때는 complete함수가 호출된다.</p>
+<p>Observer과 Observable은 subscribe 메소드를 통해 연겨로딘다.</p>
+<h4 id="Observable-prototype-subscribe-함수"><a href="#Observable-prototype-subscribe-함수" class="headerlink" title="Observable.prototype.subscribe 함수"></a>Observable.prototype.subscribe 함수</h4><p>subscrie는 Observer를 파라미터로 받는다.</p>
+<ol>
+<li><p>Observer객체를 전달하는 subscribe 사용 예</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> observer = &#123;</span><br><span class="line">  next: <span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Observer가 Observable로부터 받은 데이터: '</span> + x),</span><br><span class="line">  error: <span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.error(<span class="string">'Observer가 Observable로부터 받은 에러 데이터: '</span> + err),</span><br><span class="line">  complete: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Observer가 Observable로부터 종료되었다는 알림을 받을 경우'</span>)</span><br><span class="line">&#125;;</span><br><span class="line">click$.subscribe(observer) <span class="comment">// observer객체를 파라미터로 받는다.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><span class="mint">next 콜백함수를 전달하는</span> subscribe 사용 예</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">click$.subscribe(<span class="function"><span class="params">x</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Observer가 Observable로 부터 받은 데이터: '</span> + x))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>next, error, complete 콜백 함수를 전달하는 subscribe 사용 예</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">click$.subscribe(</span><br><span class="line">  x =&gt; <span class="built_in">console</span>.log(<span class="string">'Observer가 Observable로 부터 받은 데이터: '</span> + err),</span><br><span class="line">  err =&gt; <span class="built_in">console</span>.error(<span class="string">'Observer가 Observable로부터 받은 에러 데이터: '</span> + err),</span><br><span class="line">  () =&gt; <span class="built_in">console</span>.log(<span class="string">'Observer가 Observable로부터 종료되었다는 알림을 받을 경우'</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <hr>
-<h2 id="1-RxJS란"><a href="#1-RxJS란" class="headerlink" title="1. RxJS란?"></a>1. RxJS란?</h2>
+<p><a name="3-4"></a></p>
+<h3 id="3-4-Subscription"><a href="#3-4-Subscription" class="headerlink" title="3.4 Subscription"></a>3.4 Subscription</h3><p>Observable.prototype.subscribe의 반환값<br>Subscription은 자원의 해제를 담당<br>unsubscribe 메소드를 호출하여 자원해제 가능<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">const</span> subscription = currentTarget$.subscribe(observer);</span><br><span class="line"></span><br><span class="line"><span class="comment">// subscription으로 자원 해제 가능</span></span><br><span class="line">subscription.unsubscribe();</span><br></pre></td></tr></table></figure></p>
+<p><a name="4"> </a></p>
+<h2 id="4-RxJS-개발-방법"><a href="#4-RxJS-개발-방법" class="headerlink" title="4. RxJS 개발 방법"></a>4. RxJS 개발 방법</h2><p>RxJS를 사용하여 개발할 경우 프로세스는 대부분 다음과 같은 과정</p>
+<ol>
+<li>첫째, 데이터 소스를 Observable로 변경한다.</li>
+<li>둘째, 오퍼레이터를 통해 데이터를 변경하거나 추출한다. 또는 여러개의 Observable을 하나의 Observable로 합치거나 하나의 Observable로 만든다.</li>
+<li>셋째, 원하는 데이터를 받아 처리하는 Observer를 만든다.</li>
+<li>넷째, Observable의 subscribe를 통해 Observer를 등록한다.</li>
+<li>다섯째, Observable 구독을 정지하고 자원을 해지한다.</li>
+</ol>
+
         </div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- firstAd -->
@@ -242,7 +392,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_04/" data-id="cjod1xzcq000a9pbmxnj582po" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/11/18/Async_04/" data-id="cjon1e9mc000632bm2xnfxwih" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -306,7 +456,97 @@ window.onload = function() {
         <div class="article-list-popup" href="javascript:;">
             <div class="article-list-popup__box" style="display: none;">
                 
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. RxJS란?</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. RxJS 시작하기</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 RxJS 첫번째 예제</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 RxJS 첫번째 예제 개선하기</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-3">2.3 RxJS 두번째 예제</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. RxJS 4대 천왕</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 Observable</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 오퍼레이터</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-3">3.3 Observer</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-4">3.4 Subscription</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. RxJS 개발 방법</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
             </div>
+            
+                <span id="article-list-popup__btn">📚</span>
             
         </div>
     </div>
@@ -366,20 +606,10 @@ window.onload = function() {
         
 <nav id="article-nav">
     
-        <a href="/2018/08/23/JS_14/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">newer</strong>
-        <p class="article-nav-title">
-        
-            3/ 자바스크립트 데이터 타입과 연산자
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2018/08/15/Async_03/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/11/11/Joylog_001/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">1부/ chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류</p>
+        <p class="article-nav-title">글또 2기_개발자는 어떤 글을 쓰게 될까?</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -394,6 +624,26 @@ window.onload = function() {
         <h3 class="widget-title">recents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/18/Async_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/29/thumb_default.jpg)" alt="2부/ chap01. RxJs란 무엇인가?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/11/18/Async_04/" class="title">2부/ chap01. RxJs란 무엇인가?</a></p>
+                            <p class="item-date"><time datetime="2018-11-18T11:12:34.000Z" itemprop="datePublished">2018-11-18</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -475,26 +725,6 @@ window.onload = function() {
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
-                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
-                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -524,7 +754,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -593,7 +823,7 @@ window.onload = function() {
     var disqus_shortname = 'feel5ny';
     
     
-    var disqus_url = 'http://feel5ny.github.io/2018/08/15/Async_04/';
+    var disqus_url = 'http://feel5ny.github.io/2018/11/18/Async_04/';
     
     (function() {
     var dsq = document.createElement('script');

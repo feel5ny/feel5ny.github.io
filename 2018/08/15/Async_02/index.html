@@ -20,7 +20,7 @@
 <meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagation 1">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/27/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.992Z">
+<meta property="og:updated_time" content="2018-11-18T12:42:19.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1부&#x2F; chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제">
 <meta name="twitter:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagation 1">
@@ -235,10 +235,10 @@ window.onload = function() {
 <hr>
 <h2 id="3-우리가-이미-알고-있는-솔류션"><a href="#3-우리가-이미-알고-있는-솔류션" class="headerlink" title="3. 우리가 이미 알고 있는 솔류션"></a>3. 우리가 이미 알고 있는 솔류션</h2><h3 id="3-1-Loosely-Coupling"><a href="#3-1-Loosely-Coupling" class="headerlink" title="3.1 Loosely Coupling"></a>3.1 Loosely Coupling</h3><ul>
 <li>옵저버 패턴에서는 상태가 변경될 대상을 Subject라고 한다.<br>그리고, 그 상태 변화를 관찰하는 대상을 Observer라고 한다.</li>
-<li>subject와 observer는 서로 <strong>느슨하게 연결되어 있다.</strong><ul>
+<li>subject와 observer는 서로 <strong>느슨하게 연결되어 있다.</strong> (낮은 결합도)<ul>
 <li>여기서 <strong>느슨하게(Loosely Coupling)</strong>의 의미는 Subject와 Observer가 서로 상호작용을 하지만 <strong>서로 잘 모른다라는 뜻!!</strong></li>
 <li>subject가 observer에 대해서 아는건 <strong>observer가 특정 인터페이스를 구현한다는 것 뿐.</strong></li>
-<li>subject와 observer는 서로 <strong>독립적</strong>ㄴ으로 사용할 수 있으며, observer가 바뀌더라도 서로에게 영향을 미치지 않는다.</li>
+<li>subject와 observer는 서로 <strong>독립적</strong>으로 사용할 수 있으며, observer가 바뀌더라도 서로에게 영향을 미치지 않는다.</li>
 </ul>
 </li>
 </ul>
@@ -254,7 +254,7 @@ window.onload = function() {
 <p>subject와 observer가 <code>1:n</code>의 상황에서는 더욱 효과적이다.<br><strong>다수의 observer를 subject에 등록하기만 하면</strong><br>subject의 변경사항이 등록된 다수의 observer에게 자동으로 전달된다.</p>
 <h3 id="3-3-인터페이스의-단일화"><a href="#3-3-인터페이스의-단일화" class="headerlink" title="3.3 인터페이스의 단일화"></a>3.3 인터페이스의 단일화</h3><p>옵저버 패턴은 Observer.update만 존재하기 때문에 Subject에서는 옵저버 인터페이스에 대한 별도의 비용이 존재하지 않는다.</p>
 <hr>
-<h2 id="4-옵저버-패턴의-흔한-예"><a href="#4-옵저버-패턴의-흔한-예" class="headerlink" title="4. 옵저버 패턴의 흔한 예"></a>4. <span style="color:blue">옵저버 패턴</span>의 흔한 예</h2><p>뉴스를 발행하는 신문사와 이를 구독하는 고객</p>
+<h2 id="4-옵저버-패턴의-흔한-예"><a href="#4-옵저버-패턴의-흔한-예" class="headerlink" title="4. 옵저버 패턴의 흔한 예"></a>4. <span class="mint">옵저버 패턴</span>의 흔한 예</h2><p>뉴스를 발행하는 신문사와 이를 구독하는 고객</p>
 <p>뉴스를 발행하는 신문사 = subject<br>고객 = observer</p>
 <p>신문사는 고객을 등록하고 신문이 발행될 때 각각의 고객에게 신문이 발행되었다고 알려준다.(notify)</p>
 <p>신문이 발행되면<br>어떤 고객은 뉴스를 스크랩하거나,<br>어떤 고객은 뉴스를 읽기 시작한다.</p>
@@ -340,7 +340,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="cjod1xzcg00059pbmtxu4de2l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="cjon1e9mj000a32bm8112142y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -496,6 +496,26 @@ window.onload = function() {
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/11/18/Async_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/29/thumb_default.jpg)" alt="2부/ chap01. RxJs란 무엇인가?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/11/18/Async_04/" class="title">2부/ chap01. RxJs란 무엇인가?</a></p>
+                            <p class="item-date"><time datetime="2018-11-18T11:12:34.000Z" itemprop="datePublished">2018-11-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/11/11/Joylog_001/" class="thumbnail">
     
     
@@ -573,26 +593,6 @@ window.onload = function() {
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
-                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
-                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -622,7 +622,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

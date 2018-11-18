@@ -20,7 +20,7 @@
 <meta property="og:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.  TL;DR  Higher-Order Functions (고계 함수, 계산의 효율성) Purity (순수성, 데이터 플로우의 취급) Immutable Data (불변성) Referential Tr">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/40/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.985Z">
+<meta property="og:updated_time" content="2018-11-18T15:23:01.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1&#x2F; 함수형 프로그래밍 (🙄)">
 <meta name="twitter:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.함수형 프로그래밍에 대해서 더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.  TL;DR  Higher-Order Functions (고계 함수, 계산의 효율성) Purity (순수성, 데이터 플로우의 취급) Immutable Data (불변성) Referential Tr">
@@ -343,10 +343,37 @@ window.onload = function() {
 <hr>
 <p><a name="1"></a></p>
 <h2 id="1-함수형-프로그래밍의-개념"><a href="#1-함수형-프로그래밍의-개념" class="headerlink" title="1. 함수형 프로그래밍의 개념"></a>1. 함수형 프로그래밍의 개념</h2><p>함수의 조합으로 작업을 수행함을 의미한다.<br><strong>이 작업이 이루어지는 동안 작업에 필요한 데이터와 상태는 변하지 않는다는 점.</strong><br>함수가 바로 연산의 대상이 된다.</p>
-<p>함수형 프로그래밍이 수학에서 출발한 문제 해결 방법론이므로 수학문제를 프로그래밍으로 해결하는 데 있어서 상당한 이득을 볼 수 있다.</p>
+<p><strong>FP의 목적</strong></p>
+<ol>
+<li>함수형 프로그래밍이 수학에서 출발한 문제 해결 방법론이므로 수학문제를 프로그래밍으로 해결하는 데 있어서 상당한 이득을 볼 수 있다.</li>
+<li>상태 변경과 가변 데이터를 피하려는.<ul>
+<li>FP의 목적은 상태 변경을 피하는 것이다.</li>
+<li>FP에서는 변수를 모든 오류의 근본적인 원인으로 치부한다.누군가에 의해 변수의 값이 변경되기 때문에 이로 인해 오류가 더욱 빈번하게 발생한다고 생각한다. -</li>
+<li>따라서 함수형 프로그래밍에서는 이런 변수가 외부에서 명확하게 드러나게 하여 통제 가능하게 만드는 것을 지향한다.</li>
+</ul>
+</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f1 = encrypt1;</span><br><span class="line">f2 = encrypt2;</span><br><span class="line">f3 = encrypt3;</span><br><span class="line"></span><br><span class="line">pure_value = &apos;zzon&apos;;</span><br><span class="line">encrypted_value = get_encrypted(x);</span><br><span class="line"></span><br><span class="line">encrypted_value = get_encrypted(f1);</span><br><span class="line">encrypted_value = get_encrypted(f2);</span><br><span class="line">encrypted_value = get_encrypted(f3);</span><br></pre></td></tr></table></figure>
 <p><img src="/images/2018/40/01.jpeg"></p>
 <p><strong>순수함수 Pure fucntion</strong><br>외부에 영향을 미치지 않는 함수</p>
+<ol>
+<li>같은 입력이 주어지면, 항상 같은 출력을 반환한다.</li>
+<li>부작용(side effect)를 발생시키지 않는다.</li>
+<li>외부의 가변(mutable) 데이터에 의존하지 않는다.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentValue</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> processAt(value, <span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 사이드 이팩트 없앰</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentValue</span>(<span class="params">value, time</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> processAt(value, time)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>부원인과 부작용</strong></p>
+<ul>
+<li>new Date는 외부변수 </li>
+<li>함수를 실행하는 시점에 따라 결과를 예측하기 어렵ㄴ다.</li>
+<li><strong>함수의 정의만 보고 추측하기 어려운 함수를 <span class="mint">부원인(side cause)과 부작용(side effect)</span>이 존재하는 함수라고 한다.</strong></li>
+<li>함수에 드러나지 않은 입력값 또는 출력값응ㄹ 부원인(side cause)라고 하고</li>
+<li>이로인해 발생한 결과를 부작용(side effect)라고 한다.<ul>
+<li>부작용은 부정적인 의미는 아니지만 프로그래머가 이를 고려하지 않고 사용했을 경우에는 오류를 유발할 수 있다.</li>
+<li>함수형 프로그래밍에서는 이러한 상황이 궁극적으로 복잡성을 초래하기 때문에 복잡성을 표면으로 드러내도록 권장한다.</li>
+</ul>
+</li>
+</ul>
 <p><strong>고계 함수 Higher-order function</strong><br>함수를 또 하나의 값으로 간주하여 함수의 인자 혹은 반환값으로 사용할 수 있는 함수</p>
 <h3 id="내부-데이터-및-상태는-그대로-둔-채-pure-value-제어할-함수를-변경-및-조합함으로써-encrypt1-2-3-원하는-결과를-얻어내는-것이-함수형-프로그래밍의-중요한-특성"><a href="#내부-데이터-및-상태는-그대로-둔-채-pure-value-제어할-함수를-변경-및-조합함으로써-encrypt1-2-3-원하는-결과를-얻어내는-것이-함수형-프로그래밍의-중요한-특성" class="headerlink" title="내부 데이터 및 상태는 그대로 둔 채 (pure_value) 제어할 함수를 변경 및 조합함으로써 (encrypt1,2,3) 원하는 결과를 얻어내는 것이 함수형 프로그래밍의 중요한 특성"></a>내부 데이터 및 상태는 그대로 둔 채 (pure_value) <span class="mint">제어할 함수를 변경 및 조합</span>함으로써 (encrypt1,2,3) 원하는 결과를 얻어내는 것이 함수형 프로그래밍의 중요한 특성</h3><ul>
 <li>높은 수준의 모듈화가 가능하다.</li>
@@ -478,7 +505,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/11/04/FP_01/" data-id="cjod1xzda00179pbm5rxtsaeb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/11/04/FP_01/" data-id="cjon1e9my001032bmr6ttneyf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -747,6 +774,26 @@ window.onload = function() {
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/11/18/Async_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/29/thumb_default.jpg)" alt="2부/ chap01. RxJs란 무엇인가?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/Angular/">Angular</a></p>
+                            <p class="item-title"><a href="/2018/11/18/Async_04/" class="title">2부/ chap01. RxJs란 무엇인가?</a></p>
+                            <p class="item-date"><time datetime="2018-11-18T11:12:34.000Z" itemprop="datePublished">2018-11-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/11/11/Joylog_001/" class="thumbnail">
     
     
@@ -824,26 +871,6 @@ window.onload = function() {
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/10/01/OOP_06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/OOP/">OOP</a></p>
-                            <p class="item-title"><a href="/2018/10/01/OOP_06/" class="title">4/ OOAD와 테트리스 (1)</a></p>
-                            <p class="item-date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -873,7 +900,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
