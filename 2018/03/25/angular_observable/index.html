@@ -20,7 +20,7 @@
 <meta property="og:description" content="원문 : https://medium.com/@luukgruijs/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3   엥귤러 version2가 나왔을때, 엥귤러는 옵저버블을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/09/thumb_default.jpg">
-<meta property="og:updated_time" content="2018-11-11T04:40:20.993Z">
+<meta property="og:updated_time" content="2018-12-13T15:50:27.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(번역) Angular의 observable을 이해하고, 생성하고, 구독해보기">
 <meta name="twitter:description" content="원문 : https://medium.com/@luukgruijs/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3   엥귤러 version2가 나왔을때, 엥귤러는 옵저버블을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관">
@@ -85,13 +85,13 @@ ga('send', 'pageview');
             <div class="container-inner">
                 <div id="header-title">
                     <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
                         <div class="logo-wrap__box">
-                            <a href="/">
-                                <img src="/images/logo_head.png" alt="">
-                            </a>
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
                             <a href="/" class="logo"></a>
                         </div>
-                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
                     </h1>
                 </div>
                 <div id="header-inner" class="nav-container">
@@ -217,8 +217,8 @@ window.onload = function() {
 <hr>
 <p>엥귤러 version2가 나왔을때, 엥귤러는 <code>옵저버블</code>을 소개했다. 옵저버블은 엥귤러의 특정 기능은 아니고, ES7 릴리스에 포함될 비동기 데이터를 관리하기위한 새로운 표준이다. Angular는 이벤트 시스템과 HTTP 서비스에서 옵저버블을 광범위하게 사용한다. 옵저버블들을 이해하는 건 꽤 중요한 일일 수 있다. 그러므로 쉬운 방법으로 옵저버블을 설명하려고 왔다. </p>
 <p><img src="/images/2018/09/observable (1).png"></p>
-<h2 id="Observables"><a href="#Observables" class="headerlink" title="Observables"></a>Observables</h2><p>옵저버블은 시간이 지남에 따라 여러값을 가질 수 있는 느긋한 콜렉션이다.<br>옵저버블은 사실.. 꽤 쉽습니다.</p>
-<h3 id="1-Observables는-느긋하다-차가운-옵저버블"><a href="#1-Observables는-느긋하다-차가운-옵저버블" class="headerlink" title="1. Observables는 느긋하다. (차가운 옵저버블)"></a>1. Observables는 느긋하다. (차가운 옵저버블)</h3><p>느긋한 옵저버블을 뉴스 레터로 생각할 수 있다. 각 구독자(subscriber)마다 새로운 뉴스 레터가 만들어진다. 그 뉴스레터들은 구독자들에게만 보내고 다른 사람에게는 보내지 않는다.</p>
+<h2 id="Observables"><a href="#Observables" class="headerlink" title="Observables"></a>Observables</h2><p>옵저버블은 시간이 지남에 따라 여러값을 가질 수 있는 지연 콜렉션이다.<br>옵저버블은 사실.. 꽤 쉽습니다.</p>
+<h3 id="1-Observables는-lazy하다"><a href="#1-Observables는-lazy하다" class="headerlink" title="1. Observables는 lazy하다."></a>1. Observables는 lazy하다.</h3><p>지연 옵저버블을 뉴스 레터로 생각할 수 있다. 각 구독자(subscriber)마다 새로운 뉴스 레터가 만들어진다. 그 뉴스레터들은 구독자들에게만 보내고 다른 사람에게는 보내지 않는다.</p>
 <h3 id="2-Observables는-시간이-지남에-따라-여러-값을-가질-수-있다"><a href="#2-Observables는-시간이-지남에-따라-여러-값을-가질-수-있다" class="headerlink" title="2. Observables는 시간이 지남에 따라 여러 값을 가질 수 있다."></a>2. Observables는 시간이 지남에 따라 여러 값을 가질 수 있다.</h3><p>뉴스 레터 구독을 계속 열어두면, 매번 새로운 뉴스 레터를 받게된다. 발신자(sender)는 받은 시간을 결정하지만 받은 편지함에 곧바로 올 때까지 기다려야한다.</p>
 <p>여러분이 <code>promise</code>의 세상에서 왔다면, 옵저버블과 프로미스간의 다른 중요한 차이점이 있는데, <code>promise</code>은 항상 오직 하나의 값만을 반환한다는 점이다. 또 하나는 옵저버블의 구독을 취소 할 수 있다는 점이다. 뉴스 레터를 더 이상 원하지 않으면 구독을 취소하면된다. 프로미스를 사용하면 이점이 다른건데, 프로미스는 취소 할 수 없다. 프라미스가 당신에게 건네지면, 그 프라미스의 resolve가 이미 진행되고 있으며, 일반적으로 프라미스의 resolve가 실행되는 것을 막을 수 있는 권한이 없다.</p>
 <hr>
@@ -253,9 +253,9 @@ window.onload = function() {
 <li><code>complete</code> : 어떤 값도 보내지 않는다.</li>
 </ul>
 <p><strong><code>next</code> 콜은 구독자에게 실제로 데이터를 전달할 때 가장 일반적이다.</strong> 옵저버블의 실행 중에는 <code>observer.next()</code>의 무한 호출이있을 수 있지만 <code>observer.error()</code> 또는 <code>observer.complete()</code>가 호출되면 실행이 중지되고 더 이상 데이터가 subscribers에게 전달되지 않는다.</p>
-<h3 id="옵저버블-처분"><a href="#옵저버블-처분" class="headerlink" title="옵저버블 처분"></a>옵저버블 처분</h3><p>옵저버블의실행은 무한한 시간 동안 실행될 수 있기 때문에, 실행을 막을 수있는 방법이 필요하다. 각 구독자마다 각 실행이 실행되기 때문에, 메모리와 컴퓨팅 성능이 낭비, 즉 더 이상 데이터가 필요없는 구독자는 구독을 멈추는 것이 중요하다.!</p>
+<h3 id="옵저버블-처분"><a href="#옵저버블-처분" class="headerlink" title="옵저버블 처분"></a>옵저버블 처분</h3><p>옵저버블의실행은 무한한 시간 동안 실행될 수 있기 때문에, 실행을 막을 수있는 방법이 필요하다. 각 구독자마다 각 실행이 실행되기 때문에, 메모리와 컴퓨팅 성능이 낭비, 즉 더 이상 데이터가 필요없는 구독자는 구독을 멈추는 것이 중요하다.</p>
 <p>옵저버블을 구독할 때, 진행중인 실행을 취소하면 구독이 반환된다. 실행을 취소하려면 <code>unsubscribe()</code>를 호출하면 됨.</p>
-<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p>이 게시물을 통해 옵저버블이 실제로 어떻게 작동하는지 더 잘 이해할 수 있다. 다음 시간에 옵저버블에 대해서 더 많이 얻기 위해서 Rxjs의 파워를 이해하는 것과 그들이 제공하는 모든 헬퍼 함수를 이해하는 것이다.</p>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p>이 게시물을 통해 옵저버블이 실제로 어떻게 작동하는지 더 잘 이해할 수 있다. 다음 시간에 옵저버블에 대해서 더 많이 알기 위해 Rxjs의 강력함을 이해하고 이 제공하는 모든 헬퍼 함수를 이해하는 것이다. </p>
 
         </div>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -275,7 +275,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/03/25/angular_observable/" data-id="cjpgy01l000686cbmgdk2wij6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/03/25/angular_observable/" data-id="cjppfewtx006fn7bm42qejnyg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -431,6 +431,26 @@ window.onload = function() {
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/12/10/Typescript_15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/45/thumb_default.jpg)" alt="2018 타입스크립트 워크샵 1" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2018/12/10/Typescript_15/" class="title">2018 타입스크립트 워크샵 1</a></p>
+                            <p class="item-date"><time datetime="2018-12-10T04:13:22.000Z" itemprop="datePublished">2018-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/12/09/Typescript_14/" class="thumbnail">
     
     
@@ -508,26 +528,6 @@ window.onload = function() {
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/11/04/FP_01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2018/40/thumb_default.jpg)" alt="1/ 함수형 프로그래밍 (🙄)" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/TIL-✍/">TIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/TIL-✍/FP/">FP</a></p>
-                            <p class="item-title"><a href="/2018/11/04/FP_01/" class="title">1/ 함수형 프로그래밍 (🙄)</a></p>
-                            <p class="item-date"><time datetime="2018-11-04T12:20:19.000Z" itemprop="datePublished">2018-11-04</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -547,7 +547,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/">TIL ✍</a><span class="category-list-count">75</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Typescript/">Typescript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/log/">log</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/">personal 🙆</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/log/">log</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/">Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/">Project &#127939;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/DA-DA/">DA, DA</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Project-127939/Univ-Project/">Univ Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/">TIL ✍</a><span class="category-list-count">76</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Javascript/">Javascript</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Typescript/">Typescript</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/Web/">Web</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TIL-✍/log/">log</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog/style/">style</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/">personal 🙆</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/personal-🙆/log/">log</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -557,7 +557,7 @@ window.onload = function() {
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 

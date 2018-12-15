@@ -299,15 +299,15 @@ code {
 }
 .logo {
   display: block;
-  padding: 10px 0;
-  width: 200px;
-  height: 200px;
-  background-image: url("/images/logo_bg.png");
+  margin-top: 30px;
+  width: 240px;
+  height: 240px;
+  background-image: url("/images/4.gif");
   background-position: 0px 10px;
   background-repeat: no-repeat;
-  -webkit-background-size: 200px 200px;
-  -moz-background-size: 200px 200px;
-  background-size: 200px 200px;
+  -webkit-background-size: 240px 240px;
+  -moz-background-size: 240px 240px;
+  background-size: 240px 240px;
 }
 #bm {
   width: 200px;
@@ -439,7 +439,7 @@ code {
 }
 #header-title .subtitle {
   font-size: 16px;
-  line-height: 210px;
+  line-height: 250px;
   color: #16325c;
 }
 @-webkit-keyframes rotating {
@@ -450,7 +450,7 @@ code {
     -webkit-transform: rotate(360deg);
   }
 }
-.logo {
+.logo--spin {
   -webkit-animation: rotating 10s linear infinite;
 }
 .nav-container .nav-icon,
@@ -1881,11 +1881,11 @@ a.article-title:hover {
   margin: 0;
 }
 #footer .logo {
-  width: 160px;
-  height: 160px;
-  -webkit-background-size: 160px 160px;
-  -moz-background-size: 160px 160px;
-  background-size: 160px 160px;
+  width: 192px;
+  height: 192px;
+  -webkit-background-size: 192px 192px;
+  -moz-background-size: 192px 192px;
+  background-size: 192px 192px;
 }
 #footer .logo-wrap {
   position: relative;
