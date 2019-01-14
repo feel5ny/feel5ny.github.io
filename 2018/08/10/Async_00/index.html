@@ -166,18 +166,6 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script> -->
                             
 
     <div>
@@ -267,24 +255,12 @@ window.onload = function() {
 <p>cf__1. redux의 옵저버 패턴</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStore</span>(<span class="params">reducer, initialState</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> state = initialState; <span class="comment">// 상태 초기화</span></span><br><span class="line">  <span class="comment">// Setup listners to keep track of when the state is changed</span></span><br><span class="line">  <span class="comment">// to triger rerenders (observer pattern)</span></span><br><span class="line">  <span class="keyword">const</span> listeners = []; <span class="comment">// </span></span><br><span class="line">  <span class="keyword">const</span> subscribe = <span class="function">(<span class="params">listener</span>) =&gt;</span> listeners.push(listener); <span class="comment">// 구독함수. listener가 들어오면 listeners에 담는다.</span></span><br><span class="line">  <span class="keyword">const</span> getState = <span class="function"><span class="params">()</span> =&gt;</span> (state); <span class="comment">// get 함수</span></span><br><span class="line">  <span class="keyword">const</span> dispatch = <span class="function">(<span class="params">action</span>) =&gt;</span> &#123;  <span class="comment">// action을 가져다주는 아이..  </span></span><br><span class="line">    state = reducer(state, action); <span class="comment">// state에 초기값, 액션을 넣고 상태값 담겨있는 객체 반환</span></span><br><span class="line">    <span class="comment">// call each listener function when the state is changed</span></span><br><span class="line">    <span class="comment">// its just a notification that state is changed</span></span><br><span class="line">    listeners.forEach(<span class="function"><span class="params">l</span> =&gt;</span> l()); <span class="comment">// </span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    subscribe,</span><br><span class="line">    getState,</span><br><span class="line">    dispatch,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(action.type === <span class="string">'ADD_MESSAGE'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      messages: state.messages.concat(action.message),</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">if</span>(action.type === <span class="string">'DELETE_MESSAGE'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      messages: [</span><br><span class="line">        ...state.messages.slice(<span class="number">0</span>, action.index),</span><br><span class="line">        ...state.messages.slice(action.index + <span class="number">1</span>, state.messages.length),</span><br><span class="line">      ],</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// set initial state to pass into to store</span></span><br><span class="line"><span class="keyword">const</span> initialState = &#123; <span class="attr">messages</span>: [] &#125;;</span><br><span class="line"><span class="comment">// initialize the store</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, initialState);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Messages</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    store.subscribe(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.forceUpdate());</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> messages = store.getState().messages;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">'ui segment'</span>&gt;</span><br><span class="line">        &lt;MessageView messages=&#123;messages&#125; /&gt;</span><br><span class="line">        &lt;MessageInput /&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
         </div>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/10/Async_00/" data-id="cjqwdgy0m00047pbm142wlsxo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/10/Async_00/" data-id="cjqwdwtn30004jjbm84ja2zec" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -347,13 +323,13 @@ window.onload = function() {
         </footer>
         <div class="article-list-popup" href="javascript:;">
             <div class="article-list-popup__box" style="display: none;">
+                    
+                </div>
                 
+                </div>
             </div>
-            
-        </div>
-    </div>
-</article>
-
+        </article>
+        
     <section id="comments">
     
         
@@ -365,6 +341,18 @@ window.onload = function() {
     </section>
 
 
+        <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script> -->
                         </div>
                     </section>
                     <aside id="sidebar">
@@ -594,18 +582,6 @@ window.onload = function() {
             
         
     </div>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script>
 </aside>
                 </div>
             </div>

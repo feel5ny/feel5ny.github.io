@@ -166,18 +166,6 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script> -->
                             
 
     <div>
@@ -434,24 +422,12 @@ window.onload = function() {
 <p><a name="4"></a></p>
 <h2 id="4-최종"><a href="#4-최종" class="headerlink" title="4. 최종"></a>4. 최종</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> parser = <span class="function"><span class="params">input</span> =&gt;</span> &#123;</span><br><span class="line">  input = input.trim();</span><br><span class="line">  <span class="keyword">const</span> result = &#123;<span class="attr">name</span>: <span class="string">'ROOT'</span>, <span class="attr">type</span>: <span class="string">'node'</span>, <span class="attr">children</span>: []&#125;;</span><br><span class="line">  <span class="keyword">const</span> stack = [&#123;<span class="attr">tag</span>: result&#125;]; <span class="comment">// DOM 객체</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> curr, i = <span class="number">0</span>, j = input.length;</span><br><span class="line">  <span class="keyword">while</span>(curr = stack.pop())&#123;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">      <span class="keyword">const</span> cursor = i; <span class="comment">// 헷갈리기때문에 조회용으로 따로</span></span><br><span class="line">      <span class="keyword">if</span>(input[cursor] === <span class="string">'&lt;'</span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> idx = input.indexOf(<span class="string">'&gt;'</span>, cursor);</span><br><span class="line">        i = idx + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(input[cursor + <span class="number">1</span>] === <span class="string">'/'</span>)&#123;</span><br><span class="line">          <span class="comment">// 닫는태그</span></span><br><span class="line">          curr = curr.back;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">if</span>(elementNode(input, cursor, idx, curr, stack)) <span class="keyword">break</span>; <span class="comment">// 두번째 루프 break</span></span><br><span class="line">        &#125; </span><br><span class="line">      &#125; <span class="keyword">else</span> i = textNode(input, cursor, curr)</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> textNode = <span class="function">(<span class="params">input, cursor, curr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> idx = input.indexOf(<span class="string">'&lt;'</span>, cursor);</span><br><span class="line">  curr.tag.children.push(&#123;</span><br><span class="line">    type: <span class="string">'text'</span>, </span><br><span class="line">    text: input.substring(cursor, idx),</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> idx;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> elementNode = <span class="function">(<span class="params">input, cursor, idx, curr, stack</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isClose = input[idx - <span class="number">1</span>] === <span class="string">'/'</span>;</span><br><span class="line">  <span class="keyword">const</span> tag = &#123;<span class="attr">name</span>: input.substring(cursor + <span class="number">1</span>, idx - (isClose ? <span class="number">1</span>: <span class="number">0</span>)), <span class="attr">type</span>: <span class="string">'node'</span>, <span class="attr">children</span>: []&#125;</span><br><span class="line">  curr.tag.children.push(tag);</span><br><span class="line">  <span class="keyword">if</span>(!isClose)&#123;</span><br><span class="line">    stack.push(&#123;tag, <span class="attr">back</span>:curr&#125;);</span><br><span class="line">    <span class="comment">// ✨✨ 리턴포인트를 수동으로 정의하는 상황.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/09/24/OOP_05/" data-id="cjqwdgy2x003b7pbmunujq291" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/09/24/OOP_05/" data-id="cjqwdwtpo003ejjbm68bo7cx7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -514,7 +490,7 @@ window.onload = function() {
         </footer>
         <div class="article-list-popup" href="javascript:;">
             <div class="article-list-popup__box" style="display: none;">
-                
+                    
 <div class="article-index">
   <div class="article-index__title">목차</div>
     <ul class="article-index__list">
@@ -594,14 +570,14 @@ window.onload = function() {
     </ul>
   </div>
 
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
             </div>
-            
-                <span id="article-list-popup__btn">📚</span>
-            
-        </div>
-    </div>
-</article>
-
+        </article>
+        
     <section id="comments">
     
         
@@ -613,6 +589,18 @@ window.onload = function() {
     </section>
 
 
+        <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script> -->
                         </div>
                     </section>
                     <aside id="sidebar">
@@ -842,18 +830,6 @@ window.onload = function() {
             
         
     </div>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- firstAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4635625843749103"
-     data-ad-slot="6920417216"
-     data-ad-format="auto"></ins>
-<script>
-window.onload = function() {
-    (adsbygoogle = window.adsbygoogle || []).push({});
-}
-</script>
 </aside>
                 </div>
             </div>
