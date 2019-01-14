@@ -369,6 +369,9 @@ code {
 #main .main-body-header a {
   color: #aaa;
 }
+#main .main-body-header.list {
+  padding: 18px 30px 18px;
+}
 #main .main-body-content:before,
 #main .main-body-content:after {
   content: "";
