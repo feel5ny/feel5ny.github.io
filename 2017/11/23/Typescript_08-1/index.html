@@ -166,7 +166,7 @@ ga('send', 'pageview');
     </h1>
 </div>
                         <div class="main-body-content">
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- firstAd -->
 <ins class="adsbygoogle"
      style="display:block"
@@ -177,8 +177,14 @@ ga('send', 'pageview');
 window.onload = function() {
     (adsbygoogle = window.adsbygoogle || []).push({});
 }
-</script>
-                            <article id="post-Typescript_08-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+</script> -->
+                            
+
+    <div>
+        <img src="/images/post_img/26/thumb_default.jpg" alt="7-1/ class 연습" style="width:100%">
+    </div>
+
+<article id="post-Typescript_08-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
@@ -209,6 +215,9 @@ window.onload = function() {
             </div>
         
         
+
+        
+        
         
         <div class="article-entry" itemprop="articleBody">
             <h3 id="연습문제-1"><a href="#연습문제-1" class="headerlink" title="연습문제 1"></a>연습문제 1</h3><p>아래 자바스크립트를 타입스크립트로 바꾸시오<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Car</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.speed = <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">this</span>.honk = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"부우우웅"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">this</span>.accelerate = <span class="function"><span class="keyword">function</span>(<span class="params">speed</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.speed = <span class="keyword">this</span>.speed + speed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> car = <span class="keyword">new</span> Car(<span class="string">"BENZ"</span>);</span><br><span class="line">car.honk();</span><br><span class="line"><span class="built_in">console</span>.log(car.speed);</span><br><span class="line">car.accelerate(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(car.speed);</span><br></pre></td></tr></table></figure></p>
@@ -234,7 +243,7 @@ window.onload = function() {
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/23/Typescript_08-1/" data-id="cjqv2tsdm0053wpbmxjn1snnj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/23/Typescript_08-1/" data-id="cjqwdgy3h004p7pbmdinpkdg8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -565,13 +574,6 @@ window.onload = function() {
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
