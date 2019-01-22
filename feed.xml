@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://feel5ny.github.io/"/>
-  <updated>2019-01-13T15:49:50.109Z</updated>
+  <updated>2019-01-22T16:30:03.609Z</updated>
   <id>http://feel5ny.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>코드스피츠77 ES6_1회차</title>
+    <link href="http://feel5ny.github.io/2019/01/22/JS_17/"/>
+    <id>http://feel5ny.github.io/2019/01/22/JS_17/</id>
+    <published>2019-01-22T13:20:19.000Z</published>
+    <updated>2019-01-22T16:30:03.609Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>코드스피츠 강의 정리록</p></blockquote><hr><p><a name="4"></a></p><h2 id="1-왜-이렇게-짰니-개발-기본을-알아보자"><a href="#1-왜-이렇게-짰니-개발-기본을-알아보자" class="headerlink" title="1. 왜 이렇게 짰니. - 개발 기본을 알아보자."></a>1. 왜 이렇게 짰니. - 개발 기본을 알아보자.</h2><p><strong>철학</strong></p><ul><li>상대주의적으로 바라보자.</li></ul><p><strong>기준</strong> (: 왜 이렇게 짰니?.. 이것만 지켜도 비용절감.)</p><ol><li>가치: 이러이러한 가치를 추구했기 때문에 이렇게 작성하였다.<ul><li><strong>의사소통</strong><ul><li>A가 짠 코드를 아무도 못알아보면 비용낭비</li></ul></li><li><strong>단순함</strong><ul><li>A가 짠 코드가 복잡하여 요건 추가시 더 많은 시간낭비</li></ul></li><li><strong>유연함</strong><ul><li>A가 짠 코드에 요건추가시 다 뜯어고쳐야하면 비용낭비</li></ul></li></ul></li><li>원칙 (by <strong>Kent Beck</strong>)<ul><li><strong>지역화</strong><ul><li>A가 짠 코드를 고쳤더니 전체가 영향이 가면 &gt; 비용낭비</li></ul></li><li><strong>중복제거</strong><ul><li>A가 짠 코드를 고쳤더니 다른 곳은 그대로..&gt; 또 시간투자, 비용낭비</li></ul></li><li><strong>대칭성</strong><ul><li>예시_Get/Set</li><li>A가 짠 코드에 get은 있는데 set은 없다. 시간낭비</li></ul></li><li>추상적인 원칙도 있고, 컨벤션과같은 구체적인 원칙도 있다.</li></ul></li><li>패턴 (선배들의 경험기반..경험도 반복되면 진리에 가까워짐.)<ul><li>개발론</li><li>설계론</li><li>각종 적용 패턴</li></ul></li></ol><p><strong>동기</strong> </p><ul><li>비용</li><li>시간</li></ul><h2 id="2-program과-timing"><a href="#2-program과-timing" class="headerlink" title="2. program과 timing"></a>2. program과 timing</h2><blockquote><p>컴퓨터가 뭘까?<br>프로그램이 뭘까?</p></blockquote><h3 id="2-1-program"><a href="#2-1-program" class="headerlink" title="2-1. program"></a>2-1. program</h3><ol><li>language code<ul><li><strong>lint time</strong></li><li>컴파일 전에 많은 에러를 잡을 수 있다.</li><li><code>lint 타임에서 에러를 잡는게 제일 좋다!</code> 당근</li></ul></li><li>machine language(기계어)<ul><li><strong>compile time</strong></li></ul></li><li>file</li><li>load: file이 메모리에 올라가는 과정 <ul><li><strong>여기서부터 프로그램으로 불린다.</strong></li><li>load까지 프로그래머의 역할.</li></ul></li><li>run: 실행<ul><li><strong>run time</strong></li><li>run time에서도 잡지 못하는 에러<br>=&gt; context error<ul><li>개발자들끼리의 의사소통 문제 </li><li>기획서의 오류 </li></ul></li></ul></li><li>terminate: 종료</li></ol><h3 id="2-2-script-program"><a href="#2-2-script-program" class="headerlink" title="2-2. script program"></a>2-2. script program</h3><ul><li>일반 프로그램과 다른점은, machine language가 4단계에 있다는 점.</li><li>자바스크립트도 이에 해당됨</li></ul><ol><li>language code: 코드작성 후 </li><li>file: js파일을</li><li>load: 브라우저에 로드하면</li><li>machine language(기계어): 기계어로 바꿔서</li><li>run: 실행 (매번 기계어를 바꿀 수 없으니, <strong>캐시</strong>를 태워놓기도)</li><li>terminate: 종료</li></ol><h3 id="2-3-program-runtime"><a href="#2-3-program-runtime" class="headerlink" title="2-3. program runtime"></a>2-3. program runtime</h3><p>컴파일 타임이 없어서 런타임이 중요<br>런타임은 메모리에 적재하여 실행하는 것</p><p><img src="/images/2019/02/01.png"></p><ol><li>loading</li><li>instruction fetch &amp; decoding(외부버스에서 명령을 가져와 해석)</li><li>execution (실행)</li></ol><blockquote><p>명령 하나당, 2번과 3번의 반복 </p></blockquote><p>메모리에 적재된 프로그램을 cpu가 소개한다. (노이만 머신의 구조)</p><hr><ul><li>컴파일 타임에는 실제 메모리를 갖고 있지 않는다. 메모리는 런타임때 올려짐.<ul><li>때문에 가짜 메모리 상에서 시뮬레이션 하며 만든다.</li><li>컴파일 타임에 만들어진 파일속의 코드들은 다 가짜 메모리에 올라가져있음.</li></ul></li><li>로드 시 가짜메모리 A와 진짜 메모리 A와 매핑해줘야한다.<br>(virtual memory mapping table == VTable)<ul><li>컴파일러 언어들은 다 갖고있는 순서라고 생각하면된다.</li></ul></li></ul><ol><li>essential definition loading: 가장 중요한 것 부터 프로그램에 적재한다.</li><li>VTable에 매핑한다.</li><li>run</li><li>runtime definition loading<ul><li>자바스크립트에서 런타임 중에 클릭 후 함수를 만들어 낼 수 있다.</li><li>실행 후에도 정의물이 나오는 상황 </li><li>컴파일시점에 확정시키는 것이 아니라 runtime때 </li></ul></li></ol><h3 id="2-4-script-program-runtime"><a href="#2-4-script-program-runtime" class="headerlink" title="2-4. script program runtime"></a>2-4. script program runtime</h3><p><img src="/images/2019/02/02.png"></p><ul><li>여러 레이어로 구성되어있다고 생각해도 된다.</li><li>스크립트 프로그램은 컴파일 단계가 없다보니, 런타임을 레이어로 나눠서 관리한다.</li></ul><!-- ## 3. Memory, Address, Pointer, Variables, Dispatch프로그램 안에서 무슨일이 일어나는지 생각해보자.데이터 부분의 메모리가 어떻게 움직이는지.참조의 참조가  -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;코드스피츠 강의 정리록&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a name=&quot;4&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;1-왜-이렇게-짰니-개발-기본을-알아보자&quot;&gt;&lt;a href=&quot;#1-왜-이렇게-짰니-개발-기본을-알아보자
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="Javascript" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/Javascript/"/>
+    
+    
+      <category term="javascript" scheme="http://feel5ny.github.io/tags/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>안녕 2018, 안녕 2019</title>
