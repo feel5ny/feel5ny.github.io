@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Git Submodule로 공용로직 공유하기 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="git,submodule" />
+    
+    
+    <meta name="description" content="잘못된 점이 있으면 댓글 부탁드립니다 :)  서론한 언어로 여러 프로젝트를 만들다 보면, 공통으로 사용되는 모듈들이 자연스럽게 생성된다. 비즈니스 코어를 모듈화할 수 있고, 또는 언어도 같고, api를 공유하는 프로젝트가 2벌 이상일 경우 http client만 모아있는 모듈을 따로 분리해서 공용화할 수도 있을 것이다. 이렇게 같은 공용 컴포넌트, 공용">
+<meta name="keywords" content="git,submodule">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Submodule로 공용로직 공유하기">
+<meta property="og:url" content="http://feel5ny.github.io/2019/01/27/Git_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="잘못된 점이 있으면 댓글 부탁드립니다 :)  서론한 언어로 여러 프로젝트를 만들다 보면, 공통으로 사용되는 모듈들이 자연스럽게 생성된다. 비즈니스 코어를 모듈화할 수 있고, 또는 언어도 같고, api를 공유하는 프로젝트가 2벌 이상일 경우 http client만 모아있는 모듈을 따로 분리해서 공용화할 수도 있을 것이다. 이렇게 같은 공용 컴포넌트, 공용">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/04/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-01-27T15:06:15.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Submodule로 공용로직 공유하기">
+<meta name="twitter:description" content="잘못된 점이 있으면 댓글 부탁드립니다 :)  서론한 언어로 여러 프로젝트를 만들다 보면, 공통으로 사용되는 모듈들이 자연스럽게 생성된다. 비즈니스 코어를 모듈화할 수 있고, 또는 언어도 같고, api를 공유하는 프로젝트가 2벌 이상일 경우 http client만 모아있는 모듈을 따로 분리해서 공용화할 수도 있을 것이다. 이렇게 같은 공용 컴포넌트, 공용">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/04/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/01/27/Git_01/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-DevLog-👻/">02_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/Git/">Git</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/04/thumb_default.jpg" alt="Git Submodule로 공용로직 공유하기" style="width:100%">
+    </div>
+
+<article id="post-Git_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Git Submodule로 공용로직 공유하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/01/27/Git_01/" class="article-date">
+            <time datetime="2019-01-27T12:23:55.000Z" itemprop="datePublished">2019-01-27</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/git/">git</a>, <a class="tag-link" href="/tags/submodule/">submodule</a>
+    </div>
+
+            </div>
+        
+        
+
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 부모 프로젝트 셋팅하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 자식 프로젝트 셋팅하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 부모 프로젝트에 자식 프로젝트 submodule로 추가하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 자식 프로젝트 수정 후 부모 프로젝트에서 update하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>잘못된 점이 있으면 댓글 부탁드립니다 :)</p>
+</blockquote>
+<p><strong>서론</strong><br>한 언어로 여러 프로젝트를 만들다 보면, 공통으로 사용되는 모듈들이 자연스럽게 생성된다. 비즈니스 코어를 모듈화할 수 있고, 또는 언어도 같고, api를 공유하는 프로젝트가 2벌 이상일 경우 http client만 모아있는 모듈을 따로 분리해서 공용화할 수도 있을 것이다. 이렇게 같은 공용 컴포넌트, 공용 모듈을 만들어서 공유할 수 있는 시스템이 구축된다면 공통으로 사용하고 있는 모듈에서 이슈가 생길 경우 작업은 한 번만 이루어 질 수 있기 때문에 생산성이 높아지고, 관리가 용이해진다.<br>git의 submodule을 사용하면 프로젝트 간 공통 모듈을 공유할 수 있다.<br>이 포스트에서는 submodule에 대해서 간단하게 다룰 것이다. 예시는 react + typescript 기반이다.</p>
+<p><img src="/images/2019/04/03.jpg"></p>
+<hr>
+<p>부모 프로젝트에서 자식프로젝트의<br><strong>validation class</strong>를 사용해 볼 것이다.</p>
+<p><a name="1"></a></p>
+<h2 id="1-부모-프로젝트-셋팅하기"><a href="#1-부모-프로젝트-셋팅하기" class="headerlink" title="1. 부모 프로젝트 셋팅하기"></a>1. 부모 프로젝트 셋팅하기</h2><p>submodule_parent라는 이름의 react+TS 프로젝트를 셋팅한다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app submodule_parent --scripts-version=react-scripts-ts</span><br></pre></td></tr></table></figure></p>
+<p>App.tsx파일에서 form을 생성하여, input의 글자가<br>Email 형식이 아니라면 fail, Email 형식이면 pass 워딩을 보여주는 UI를 만들 것이다.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.tsx</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> App &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> IState &#123;</span><br><span class="line">    isEmail: <span class="built_in">boolean</span>;</span><br><span class="line">    text: <span class="built_in">string</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> App <span class="keyword">extends</span> React.Component&lt;&#123;&#125;, App.IState&gt; &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">prop: React.Component</span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>(prop);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      isEmail: <span class="literal">false</span>,</span><br><span class="line">      text: <span class="string">""</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// validation check </span></span><br><span class="line">  onCheckEmail = <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">    <span class="literal">false</span> 👈👈</span><br><span class="line">      ? <span class="keyword">this</span>.setState(&#123; isEmail: <span class="literal">true</span> &#125;)</span><br><span class="line">      : <span class="keyword">this</span>.setState(&#123; isEmail: <span class="literal">false</span> &#125;);</span><br><span class="line"></span><br><span class="line">  handleChange = <span class="function">(<span class="params">e: React.ChangeEvent&lt;HTMLInputElement&gt;</span>) =&gt;</span> </span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; text: e.target.value &#125;);</span><br><span class="line">    </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">        &lt;input <span class="keyword">type</span>=<span class="string">"text"</span> onChange=&#123;<span class="keyword">this</span>.handleChange&#125; /&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onCheckEmail&#125;&gt;isEamil?&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &#123;this.state.isEmail ? (</span></span><br><span class="line"><span class="regexp">          &lt;h1 style=&#123;&#123; color: "green" &#125;&#125;&gt;Pass&lt;/</span>h1&gt;</span><br><span class="line">        ) : (</span><br><span class="line">          &lt;h1 style=&#123;&#123; color: <span class="string">"red"</span> &#125;&#125;&gt;Fail&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        )&#125;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>email validation 로직은 공통 모듈로 분리해보자.</p>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-자식-프로젝트-셋팅하기"><a href="#2-자식-프로젝트-셋팅하기" class="headerlink" title="2. 자식 프로젝트 셋팅하기"></a>2. 자식 프로젝트 셋팅하기</h2><p>부모 프로젝트에서 submodule로 추가하기 위해서는 자식 프로젝트를 remote repository에 올려야한다. </p>
+<blockquote>
+<p>예시를 위해 submodule_child라는 이름을 사용했지만, 실제 프로젝트에 넣어질 이름으로 짓는게 좋다.<br>ex. validation</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir submodule_child</span><br><span class="line"><span class="built_in">cd</span> submodule_child</span><br><span class="line"></span><br><span class="line"><span class="comment"># 자식 프로젝트</span></span><br><span class="line">git remote add origin &lt;repository 주소&gt;</span><br></pre></td></tr></table></figure>
+<p>해당 폴더에 validation class를 만들었다.<br>현재 예시로 든 부모 프로젝트는 src 아래의 ts파일을 컴파일하도록 설정해놓았다. (src 밖의 ts파일은 컴파일하지 못함.) 만약 js파일로 공통 모듈을 만든다면 상관없지만, ts로 만든다면, src 하위에 submodule을 관리하는 폴더를 두도록 해야 한다. (혹은 경로에 상관없이 tsconfig파일에서 inlcude에 포함하면됨)</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// validation.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> Validation &#123;</span><br><span class="line">  email = (email: <span class="built_in">string</span>): <span class="function"><span class="params">boolean</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> regexr = <span class="regexp">/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]&#123;2,3&#125;$/</span>;</span><br><span class="line">    <span class="keyword">return</span> regexr.test(email);</span><br><span class="line">  &#125;;</span><br><span class="line">  phone = (phone: <span class="built_in">string</span>): <span class="function"><span class="params">boolean</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> regexr = <span class="regexp">/^\d&#123;3&#125;-\d&#123;3,4&#125;-\d&#123;4&#125;$/</span>;</span><br><span class="line">    <span class="keyword">return</span> regexr.test(phone);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>공용으로 사용할 class을 만들었고, push 한다.</p>
+<ul>
+<li>현재는 자식브랜치의 master 브랜치에서 작업 후 올렸지만, 부모프로젝트에서 자식프로젝트의 여러 브랜치에 접근할 수 있으므로, 전략적으로 사용해도 된다.</li>
+<li>개인적으로는 꼬일 수 있기 때문에 공용모듈은 master만 받는 식으로..하는게 좋지 않을까..</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -am <span class="string">"first init"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-부모-프로젝트에-자식-프로젝트-submodule로-추가하기"><a href="#3-부모-프로젝트에-자식-프로젝트-submodule로-추가하기" class="headerlink" title="3. 부모 프로젝트에 자식 프로젝트 submodule로 추가하기"></a>3. 부모 프로젝트에 자식 프로젝트 submodule로 추가하기</h2><p>부모클래스의 경로로 가서 아래의 명령어로 submodule을 추가할 수 있다.</p>
+<ul>
+<li>추가시 따로 submodule을 관리하는 폴더가 있다면 해당 경로로 이동 후 add하면된다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add &lt;자식 프로젝트 repository&gt;</span><br></pre></td></tr></table></figure>
+<p>추가가 되면 자동으로 <code>.gitmodules</code>파일이 생성되고, 해당 경로에 submodule파일이 fetch된다.</p>
+<ul>
+<li>예시의 경우 src 하위에 submodule_child라는 서브모듈을 추가하였다.</li>
+<li><code>.gitmodules</code> 파일에는 프로젝트에서 관리하고 있는 서브모듈 목록에 대한 정보가 들어있다.</li>
+<li>이 파일도 <code>.gitignore</code> 파일처럼 버전 관리된다.</li>
+<li>이 프로젝트를 Clone하는 사람은 .gitmodules 파일을 보고 어떤 서브모듈 프로젝트가 있는지 알 수 있다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule &quot;src/submodule_child&quot;]</span><br><span class="line">path = src/submodule_child</span><br><span class="line">url = git@github.com:feel5ny/submodule_child.git</span><br></pre></td></tr></table></figure>
+<p>깃 크라켄이라는 git client app을 사용하고 있는데, 해당 옵션에도 추가된 것을 확인할 수 있다.</p>
+<p><img src="/images/2019/04/01.png"><br><img src="/images/2019/04/02.png" style="width:250px"></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Validation &#125; <span class="keyword">from</span> <span class="string">"./submodule_child/validation"</span>;</span><br><span class="line"><span class="comment">/********* 👆👆👆 *********/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> App &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> IState &#123;</span><br><span class="line">    isEmail: <span class="built_in">boolean</span>;</span><br><span class="line">    text: <span class="built_in">string</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> App <span class="keyword">extends</span> React.Component&lt;&#123;&#125;, App.IState&gt; &#123;</span><br><span class="line">  validation: Validation;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">prop: React.Component</span>) &#123;</span><br><span class="line">    <span class="keyword">super</span>(prop);</span><br><span class="line">    <span class="keyword">this</span>.validation = <span class="keyword">new</span> Validation();</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      isEmail: <span class="literal">false</span>,</span><br><span class="line">      text: <span class="string">""</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  onCheckEmail = <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">    <span class="keyword">this</span>.validation.email(<span class="keyword">this</span>.state.text) 👈👈</span><br><span class="line">      ? <span class="keyword">this</span>.setState(&#123; isEmail: <span class="literal">true</span> &#125;)</span><br><span class="line">      : <span class="keyword">this</span>.setState(&#123; isEmail: <span class="literal">false</span> &#125;);</span><br><span class="line"></span><br><span class="line">  handleChange = <span class="function">(<span class="params">e: <span class="built_in">any</span></span>) =&gt;</span> <span class="keyword">this</span>.setState(&#123; text: e.target.value &#125;);</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">        &lt;input <span class="keyword">type</span>=<span class="string">"text"</span> onChange=&#123;<span class="keyword">this</span>.handleChange&#125; /&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="keyword">this</span>.onCheckEmail&#125;&gt;isEamil?&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">        &#123;this.state.isEmail ? (</span></span><br><span class="line"><span class="regexp">          &lt;h1 style=&#123;&#123; color: "green" &#125;&#125;&gt;Pass&lt;/</span>h1&gt;</span><br><span class="line">        ) : (</span><br><span class="line">          &lt;h1 style=&#123;&#123; color: <span class="string">"red"</span> &#125;&#125;&gt;Fail&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        )&#125;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="4"></a></p>
+<h2 id="4-자식-프로젝트-수정-후-부모-프로젝트에서-update하기"><a href="#4-자식-프로젝트-수정-후-부모-프로젝트에서-update하기" class="headerlink" title="4. 자식 프로젝트 수정 후 부모 프로젝트에서 update하기"></a>4. 자식 프로젝트 수정 후 부모 프로젝트에서 update하기</h2><p>공용 컴포넌트는 자주 바뀔 일을 없겠지만,<br>한번 add 된 이후 update가 있을면 기존 프로젝트에서 pull하는 방식과 마찬가지로 update하면된다.<br>대신 pull을 이용해 최신 코드를 받길 원한다면 해당 경로로 이동하여 pull을 받아야 한다.</p>
+<ul>
+<li>공식 문서에는 서브 모듈사용 시 수정할 경우 (부모 프로젝트에서 자식 프로젝트 수정할 경우) 주의사항에 대해 자세히 작성되어있으니 읽어보길 권한다. <a href="https://git-scm.com/book/ko/v1/Git-%EB%8F%84%EA%B5%AC-%EC%84%9C%EB%B8%8C%EB%AA%A8%EB%93%88#%EC%84%9C%EB%B8%8C%EB%AA%A8%EB%93%88-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90%EB%93%A4" target="_blank" rel="noopener">서브 모듈 사용할 때 주의할 점들</a></li>
+</ul>
+<hr>
+<p><strong>참고</strong><br><a href="https://git-scm.com/book/ko/v1/Git-%EB%8F%84%EA%B5%AC-%EC%84%9C%EB%B8%8C%EB%AA%A8%EB%93%88" target="_blank" rel="noopener">.6 Git 도구 - 서브모듈</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/01/27/Git_01/" data-id="cjrf1g2pn001md2bmrevqu4og" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 부모 프로젝트 셋팅하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 자식 프로젝트 셋팅하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 부모 프로젝트에 자식 프로젝트 submodule로 추가하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. 자식 프로젝트 수정 후 부모 프로젝트에서 update하기</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+        <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- firstAd -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4635625843749103"
+     data-ad-slot="6920417216"
+     data-ad-format="auto"></ins>
+<script>
+window.onload = function() {
+    (adsbygoogle = window.adsbygoogle || []).push({});
+}
+</script> -->
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/01/22/JS_17/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠77 ES6_1회차</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/27/Git_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/04/thumb_default.jpg)" alt="Git Submodule로 공용로직 공유하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Git/">Git</a></p>
+                            <p class="item-title"><a href="/2019/01/27/Git_01/" class="title">Git Submodule로 공용로직 공유하기</a></p>
+                            <p class="item-date"><time datetime="2019-01-27T12:23:55.000Z" itemprop="datePublished">2019-01-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/22/JS_17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/02/thumb_default.jpg)" alt="코드스피츠77 ES6_1회차" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/01/22/JS_17/" class="title">코드스피츠77 ES6_1회차</a></p>
+                            <p class="item-date"><time datetime="2019-01-22T13:20:19.000Z" itemprop="datePublished">2019-01-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/13/Joylog_002/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/01/thumb_default.jpg)" alt="안녕 2018, 안녕 2019" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/01/13/Joylog_002/" class="title">안녕 2018, 안녕 2019</a></p>
+                            <p class="item-date"><time datetime="2019-01-13T12:23:55.000Z" itemprop="datePublished">2019-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/12/09/Typescript_14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/44/thumb_default.jpg)" alt="Typescript의 Generic을 사용해보자." class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></p>
+                            <p class="item-title"><a href="/2018/12/09/Typescript_14/" class="title">Typescript의 Generic을 사용해보자.</a></p>
+                            <p class="item-date"><time datetime="2018-12-09T06:13:22.000Z" itemprop="datePublished">2018-12-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/11/25/Async_05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/43/thumb_default.jpg)" alt="Redux-observable 예제 따라해보기 (feat. React + Typescript)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/React/">React</a></p>
+                            <p class="item-title"><a href="/2018/11/25/Async_05/" class="title">Redux-observable 예제 따라해보기 (feat. React + Typescript)</a></p>
+                            <p class="item-date"><time datetime="2018-11-25T11:12:34.000Z" itemprop="datePublished">2018-11-25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 12.5px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorithm/" style="font-size: 11.25px;">algorithm</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 16.25px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 11.25px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-DevLog-👻/">02_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/01/27/Git_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
