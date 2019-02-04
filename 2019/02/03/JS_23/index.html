@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>ES6 Symbol 오브젝트 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,symbol" />
+    
+    
+    <meta name="description" content="CommentSymbol에 대해서 이해가 안갔는데 C언어의 enum과 비슷한 개념이라고 설명한 부분에서 살짝 감이 왔다.  ECMAScript6 책 (두고두고 보는 자바스크립트 표준 레퍼런스)    1. primitivestring, number, boolean은 레퍼(Wrapper) 오브젝트가 있다.  string은 String number는 Number">
+<meta name="keywords" content="javascript,symbol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 Symbol 오브젝트">
+<meta property="og:url" content="http://feel5ny.github.io/2019/02/03/JS_23/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="CommentSymbol에 대해서 이해가 안갔는데 C언어의 enum과 비슷한 개념이라고 설명한 부분에서 살짝 감이 왔다.  ECMAScript6 책 (두고두고 보는 자바스크립트 표준 레퍼런스)    1. primitivestring, number, boolean은 레퍼(Wrapper) 오브젝트가 있다.  string은 String number는 Number">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/08/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-02-04T16:49:00.716Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 Symbol 오브젝트">
+<meta name="twitter:description" content="CommentSymbol에 대해서 이해가 안갔는데 C언어의 enum과 비슷한 개념이라고 설명한 부분에서 살짝 감이 왔다.  ECMAScript6 책 (두고두고 보는 자바스크립트 표준 레퍼런스)    1. primitivestring, number, boolean은 레퍼(Wrapper) 오브젝트가 있다.  string은 String number는 Number">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/08/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/JS_23/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/08/thumb_default.jpg" alt="ES6 Symbol 오브젝트" style="width:100%">
+    </div>
+
+<article id="post-JS_23" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ES6 Symbol 오브젝트
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/03/JS_23/" class="article-date">
+            <time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/symbol/">symbol</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. primitive</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Symbol()</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Symbol 값 변경</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Symbol 오브젝트 생성</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. 오브젝트에서 Symbol 사용</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#6">6. Symbol 사용형태</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h3><p>Symbol에 대해서 이해가 안갔는데 C언어의 enum과 비슷한 개념이라고 설명한 부분에서 살짝 감이 왔다.</p>
+<blockquote>
+<p>ECMAScript6 책 (두고두고 보는 자바스크립트 표준 레퍼런스)</p>
+</blockquote>
+<hr>
+<p><a name="1"></a></p>
+<h2 id="1-primitive"><a href="#1-primitive" class="headerlink" title="1. primitive"></a>1. primitive</h2><p>string, number, boolean은 레퍼(Wrapper) 오브젝트가 있다.</p>
+<ul>
+<li>string은 String</li>
+<li>number는 Number</li>
+<li>boolean은 Boolean</li>
+<li>es6에서 symbol의 Symbol 오브젝트가 추가되었다.</li>
+</ul>
+<p>wrapper 오브젝트는 vlaueOf()로 프리미티브 값을 구할 수 있지만, symbol은 값을 반환하지 않는다.</p>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-Symbol"><a href="#2-Symbol" class="headerlink" title="2. Symbol()"></a>2. Symbol()</h2><p><code>Symbol([description])</code></p>
+<ul>
+<li>description: 설명, 주석</li>
+<li>반환값: 유니크한 Symbol 값</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="built_in">Symbol</span>();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>new 연산자를 사용하지 않는다.</li>
+<li>Symbol()로 생성된 값은 프로그램 전체를 통해 유일하고, 값을 변경할 수 없다.(immutable)<ul>
+<li><strong>C언어의 enum과 비슷한 개념이다.</strong></li>
+</ul>
+</li>
+<li>생성한 Symobol에 프로퍼티를 설정할 수 없다.</li>
+<li>반환자가 오브젝트가 아니므로, 오브젝트를 생성한다고 할 수 없다.<ul>
+<li><strong>symbol값을 생성한다</strong>는 표현이 적절하다.</li>
+</ul>
+</li>
+<li>String의 <code>&#39;&#39;</code>, Array의 <code>[]</code> 처럼 Symbol을 생성하는 리터럴이 없다.<ul>
+<li>undefined와 null 처럼 <strong>그 자체가 값이 되는 것도 아니다.</strong></li>
+<li><strong>함수로 호출해야 값을 생성하여 반환한다.</strong> <code>Symbol()</code></li>
+</ul>
+</li>
+<li>Symbol()로 값을 생성하고 출력하면, Symbol()로 생성한 값을 반환하지 않고, Symbol 값을 생성했던 <code>형태를 반환한다.</code> 이는 symbol의 특징이다.</li>
+<li><strong>Symbol값을 외부에 노출시키지 않는 것이 Symbol의 특징이다.</strong></li>
+<li>Symbol()로 생성한 값의 설명이나 주석을 문자열로 작성한다.<br>Symbol값을 외부에 제공하지 않으므로 디버깅할 때 유용하다.<br>파라미터를 작성하지 않으면 <code>undefined</code>로 인식한다.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">feature1: <span class="keyword">const</span> sym = <span class="built_in">Symbol</span>();</span><br><span class="line">feature6: sym              <span class="comment">// Symbol()</span></span><br><span class="line">feature_: <span class="keyword">typeof</span> sym       <span class="comment">// symbol</span></span><br><span class="line">feature8: <span class="built_in">Symbol</span>(<span class="string">"주석"</span>)    <span class="comment">// Symbole(주석)</span></span><br><span class="line">feature2: sym == Symbole() <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-Symbol-값-변경"><a href="#3-Symbol-값-변경" class="headerlink" title="3. Symbol 값 변경"></a>3. Symbol 값 변경</h2><ul>
+<li>Symbol()로 생성한 Symbol값은 변경할 수 없다.</li>
+<li>Symbol값에 문자열을 추가하고 싶을 경우 Symbol을 toString()이나 String()으로 변환한 후 연결해야한다.</li>
+</ul>
+<hr>
+<p><a name="4"></a></p>
+<h2 id="4-Symbol-오브젝트-생성"><a href="#4-Symbol-오브젝트-생성" class="headerlink" title="4. Symbol 오브젝트 생성"></a>4. Symbol 오브젝트 생성</h2><p>Object(123)처럼 Object()의 파라미터에 123을 지정하면 Number 오브젝트를 반환한다.</p>
+<ul>
+<li>Object() 파라미터에 Symbol 값을 지정하면 Symbol 오브젝트를 반환한다.</li>
+<li>Symbol 오브젝트에 Symbol메서드, Symbol.prototype, protototype에 연결된 프로퍼티가 설정된다.</li>
+</ul>
+<hr>
+<p><a name="5"></a></p>
+<h2 id="5-오브젝트에서-Symbol-사용"><a href="#5-오브젝트에서-Symbol-사용" class="headerlink" title="5. 오브젝트에서 Symbol 사용"></a>5. 오브젝트에서 Symbol 사용</h2><p>유일한 값을 갖는 Symbol 특성을 활용하여<br>Symbol 값을 오브젝트의 프로퍼티 키로 사용하면 프로퍼티<br>키가 중복되지 않습니다.</p>
+<h3 id="symbol-keyed-property"><a href="#symbol-keyed-property" class="headerlink" title="symbol-keyed property"></a>symbol-keyed property</h3><p><code>[Symbol()]</code>형태와 같이 대괄호 안에 Symbol()을 작성<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;[<span class="built_in">Symbol</span>()]: <span class="number">123</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>이렇게 프로퍼티 키에 작성한 Symbol()을 <strong><code>symbol-keyed property</code></strong>라고 한다.</p>
+<ul>
+<li><code>{ ABC: 123 }</code>에서 <code>ABC</code>에 Symbol값을 넣은 것이다.<br>여기서 Symbol값은 문자열이 아니라 그냥 <strong>Symbol값</strong>이라고 생각하면된다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="built_in">Symbol</span>(<span class="string">"123"</span>);</span><br><span class="line"><span class="keyword">let</span> obj = &#123;[sym]: <span class="string">"456"</span>&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj);      <span class="comment">// &#123;Symbol(123): "456"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj[sym]); <span class="comment">// 456</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.sym);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>대괄호를 사용하지 않고 <code>obj.sym</code> 형태로 작성하면 에러는 안나지만 <code>undefined</code>가 반환된다.</p>
+<ul>
+<li>Symbol을 키로 갖는 프로퍼티를 <code>&lt;&lt;&gt;&gt;</code>형태로 표기하고 있다.</li>
+</ul>
+<hr>
+<p><a name="6"></a></p>
+<h2 id="6-Symbol-사용형태"><a href="#6-Symbol-사용형태" class="headerlink" title="6. Symbol 사용형태"></a>6. Symbol 사용형태</h2><p>for-in 문에서 symbol-keyed property는 열거되지 않는다.</p>
+<ul>
+<li>Symbol이 <code>[[Enumerable]]: false</code>이기 때문.<br><a href="https://feel5ny.github.io/2017/12/04/JS_05_1/">(객체의 데이터 프로퍼티에서 <code>[[Enumerable]]</code>은 기본적으로 true이다.)</a></li>
+</ul>
+<h3 id="6-1-for-in-문에서-Symbol-사용"><a href="#6-1-for-in-문에서-Symbol-사용" class="headerlink" title="6.1 for-in 문에서 Symbol 사용"></a>6.1 for-in 문에서 Symbol 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">nine</span>: <span class="number">999</span>&#125;;</span><br><span class="line">obj[<span class="built_in">Symbol</span>(<span class="string">"one"</span>)] = <span class="number">111</span>;</span><br><span class="line">obj[<span class="built_in">Symbol</span>(<span class="string">"two"</span>)] = <span class="string">"222"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &#123;nine: 999, Symbol(one): 111, Symbol(two): "222"&#125;</span></span><br><span class="line"><span class="comment">// nine</span></span><br></pre></td></tr></table></figure>
+<p><code>Object.getOwnPropertySymbols()</code>를 사용하여 symbol-keyed property를 열거할 수 있다.</p>
+<h3 id="6-2-클래스-메서드-이름으로-Symbol-사용"><a href="#6-2-클래스-메서드-이름으로-Symbol-사용" class="headerlink" title="6.2 클래스 메서드 이름으로 Symbol 사용"></a>6.2 클래스 메서드 이름으로 Symbol 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> symbolOne = <span class="built_in">Symbol</span>(<span class="string">"symbol one"</span>);</span><br><span class="line"><span class="keyword">const</span> symbolTwo = <span class="built_in">Symbol</span>(<span class="string">"symbol two"</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sports</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> [symbolOne]()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Symbol-1"</span>;</span><br><span class="line">  &#125; </span><br><span class="line">  [symbolTwo]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Symbol-2"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Sports[symbolOne]());</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> Sports();</span><br><span class="line"><span class="built_in">console</span>.log(obj[symbolTwo]());</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-JSON-stringify-에서-Symbol-사용"><a href="#6-3-JSON-stringify-에서-Symbol-사용" class="headerlink" title="6.3 JSON.stringify()에서 Symbol 사용"></a>6.3 JSON.stringify()에서 Symbol 사용</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="built_in">Symbol</span>(<span class="string">"key"</span>);</span><br><span class="line"><span class="keyword">let</span> result = <span class="built_in">JSON</span>.stringify(&#123;[sym]: <span class="string">"값"</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>빈 오브젝트가 반환된다.<br>이는 Symbol 값을 외부에 노출되지 않도록 하기 위한 조치이다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_23/" data-id="cjrqmacmv003vjnbm62t6ci9m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. primitive</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Symbol()</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Symbol 값 변경</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Symbol 오브젝트 생성</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#5">5. 오브젝트에서 Symbol 사용</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#6">6. Symbol 사용형태</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/02/04/JS_24/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            (ing..) ES6 Symbol 프로퍼티
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/02/03/JS_19/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠77 ES6_3회차_Iteration &amp; generator</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/04/JS_24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/09/thumb_default.jpg)" alt="(ing..) ES6 Symbol 프로퍼티" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/04/JS_24/" class="title">(ing..) ES6 Symbol 프로퍼티</a></p>
+                            <p class="item-date"><time datetime="2019-02-04T01:20:19.000Z" itemprop="datePublished">2019-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/08/thumb_default.jpg)" alt="ES6 Symbol 오브젝트" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_23/" class="title">ES6 Symbol 오브젝트</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/07/thumb_default.jpg)" alt="코드스피츠77 ES6_3회차_Iteration &amp; generator" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_19/" class="title">코드스피츠77 ES6_3회차_Iteration &amp; generator</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T09:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/06/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_2/" class="title">CodeSpitz77 2회_Flow control statement (2)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T07:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/05/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_1/" class="title">CodeSpitz77 2회_Flow control statement (1)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T05:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.25px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.25px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 16.25px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.25px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.25px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 12.5px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.25px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">59</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/02/03/JS_23/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

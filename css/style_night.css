@@ -18,59 +18,71 @@
 }
 .widget h1,
 .article-entry h1,
-.article-index h1 {
+.article-index h1,
+.article-tldr h1 {
   font-size: 2em;
 }
 .widget h2,
 .article-entry h2,
-.article-index h2 {
+.article-index h2,
+.article-tldr h2 {
   font-size: 1.5em;
 }
 .widget h3,
 .article-entry h3,
-.article-index h3 {
+.article-index h3,
+.article-tldr h3 {
   font-size: 1.3em;
 }
 .widget h4,
 .article-entry h4,
-.article-index h4 {
+.article-index h4,
+.article-tldr h4 {
   font-size: 1.2em;
 }
 .widget h5,
 .article-entry h5,
-.article-index h5 {
+.article-index h5,
+.article-tldr h5 {
   font-size: 1em;
 }
 .widget h6,
 .article-entry h6,
-.article-index h6 {
+.article-index h6,
+.article-tldr h6 {
   font-size: 1em;
   color: #aaa;
 }
 .widget hr,
 .article-entry hr,
-.article-index hr {
+.article-index hr,
+.article-tldr hr {
   border: 1px dashed #404347;
 }
 .widget strong,
 .article-entry strong,
-.article-index strong {
+.article-index strong,
+.article-tldr strong {
   font-weight: bold;
 }
 .widget em,
 .article-entry em,
 .article-index em,
+.article-tldr em,
 .widget cite,
 .article-entry cite,
-.article-index cite {
+.article-index cite,
+.article-tldr cite {
   font-style: italic;
 }
 .widget sup,
 .article-entry sup,
 .article-index sup,
+.article-tldr sup,
 .widget sub,
 .article-entry sub,
-.article-index sub {
+.article-index sub,
+.article-tldr sub {
   font-size: 0.75em;
   line-height: 0;
   position: relative;
@@ -78,69 +90,84 @@
 }
 .widget sup,
 .article-entry sup,
-.article-index sup {
+.article-index sup,
+.article-tldr sup {
   top: -0.5em;
 }
 .widget sub,
 .article-entry sub,
-.article-index sub {
+.article-index sub,
+.article-tldr sub {
   bottom: -0.2em;
 }
 .widget small,
 .article-entry small,
-.article-index small {
+.article-index small,
+.article-tldr small {
   font-size: 0.85em;
 }
 .widget acronym,
 .article-entry acronym,
 .article-index acronym,
+.article-tldr acronym,
 .widget abbr,
 .article-entry abbr,
-.article-index abbr {
+.article-index abbr,
+.article-tldr abbr {
   border-bottom: 1px dotted;
 }
 .widget ul,
 .article-entry ul,
 .article-index ul,
+.article-tldr ul,
 .widget ol,
 .article-entry ol,
 .article-index ol,
+.article-tldr ol,
 .widget dl,
 .article-entry dl,
-.article-index dl {
+.article-index dl,
+.article-tldr dl {
   line-height: 1.6em;
 }
 .widget ul ul,
 .article-entry ul ul,
 .article-index ul ul,
+.article-tldr ul ul,
 .widget ol ul,
 .article-entry ol ul,
 .article-index ol ul,
+.article-tldr ol ul,
 .widget ul ol,
 .article-entry ul ol,
 .article-index ul ol,
+.article-tldr ul ol,
 .widget ol ol,
 .article-entry ol ol,
-.article-index ol ol {
+.article-index ol ol,
+.article-tldr ol ol {
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 20px;
 }
 .widget ul,
 .article-entry ul,
-.article-index ul {
+.article-index ul,
+.article-tldr ul {
   list-style: disc;
   list-style-position: inside;
 }
 .widget ol,
 .article-entry ol,
-.article-index ol {
+.article-index ol,
+.article-tldr ol {
   list-style: decimal;
   list-style-position: inside;
 }
 .widget dt,
 .article-entry dt,
-.article-index dt {
+.article-index dt,
+.article-tldr dt {
   font-weight: bold;
   list-style-position: inside;
 }
@@ -1443,6 +1470,63 @@ a.article-title:hover {
 }
 .article-index ul.article-index__list {
   padding: 1em 1.5em 1.5em 1.5em;
+}
+.article-tldr {
+  color: #f5f5f5;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6em;
+  padding: 2rem 0;
+  padding-bottom: 6rem;
+}
+.article-tldr:before,
+.article-tldr:after {
+  content: "";
+  display: table;
+}
+.article-tldr:after {
+  clear: both;
+}
+.article-tldr__title {
+  font-weight: bold;
+  padding: 1rem 0;
+}
+.article-tldr__content {
+  opacity: 0.7;
+}
+.article-tldr blockquote {
+  color: rgba(245,245,245,0.5);
+  quote: none;
+  margin: 0.6em 0 20px 0;
+  position: relative;
+  font-style: italic;
+  padding-left: 36px;
+}
+.article-tldr blockquote:before {
+  top: 0;
+  left: 0;
+  color: #ccc;
+  font-size: 20px;
+  content: "\f0d0";
+  position: absolute;
+  text-align: center;
+  font-style: normal;
+  font-family: 'FontAwesome';
+  opacity: 0.4;
+}
+.article-tldr blockquote p {
+  display: inline-block;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+}
+.article-tldr blockquote footer {
+  font-size: 14px;
+  margin: 1.6em 0;
+  font-family: "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+}
+.article-tldr blockquote footer cite:before {
+  content: "—";
+  padding: 0 0.5em;
 }
 .article-more-link a {
   display: inline-block;

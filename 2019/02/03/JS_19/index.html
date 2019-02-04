@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>코드스피츠77 ES6_3회차_Iteration &amp; generator | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,iterator,generator" />
+    
+    
+    <meta name="description" content="자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에 중요하며, loop를 배우기 전">
+<meta name="keywords" content="javascript,iterator,generator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠77 ES6_3회차_Iteration &amp; generator">
+<meta property="og:url" content="http://feel5ny.github.io/2019/02/03/JS_19/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에 중요하며, loop를 배우기 전">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/07/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-02-04T17:32:45.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠77 ES6_3회차_Iteration &amp; generator">
+<meta name="twitter:description" content="자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에 중요하며, loop를 배우기 전">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/07/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/JS_19/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/07/thumb_default.jpg" alt="코드스피츠77 ES6_3회차_Iteration &amp; generator" style="width:100%">
+    </div>
+
+<article id="post-JS_19" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠77 ES6_3회차_Iteration &amp; generator
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/03/JS_19/" class="article-date">
+            <time datetime="2019-02-03T09:20:19.000Z" itemprop="datePublished">2019-02-03</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/generator/">generator</a>, <a class="tag-link" href="/tags/iterator/">iterator</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+<div class="article-tldr">
+  <h3 class="article-tldr__title">TL;DR</h3>
+  <blockquote>개인정리: 오류가 있을 수 있으므로..패스해도 됩니다.</blockquote>
+    <div class="article-tldr__list">
+      
+        <div>es6에는 iterable을 포함한 스펙틀이 많이 등장하였다. iterator의 설명을 위해 스펙의 기본 프로토콜에대해서 설명한다. 프로토콜을 interface 형태로 정의해놓았으며, interface는 사양에 맞는 값과 연결된 속성키의 셋트라고 보면된다. typescript의 interface와 유사하다고.. 생각하기로 했다.</div>
+      
+        <div>iterator과 iterable의 관계를 규격을 통해서 설명할 수 있다. iterator는 next라는 함수를 갖는데 이는 done과 value과 포함된 객체를 반환한다. 이를 iteratorResultObject라고 하며, done은 반복을 끝낼건지 안끝낼건지에 대한 조건, value는 요소라고 생각하면된다. iterable은 Symbol.iterator라는 키를 갖는 함수를 포함한 객체라고 보면되는데, 이 함수는 iterator 객체를 반환하한다. Symbol.iterator라는 키는 loop 상황에서 원본값과의 구분을 위해 고유키를 갖는 사본값을 만들기 위한 것이며, iterator패턴에서 온 개념이다.</div>
+      
+        <div>일반적으로 알고 있는 loop문의 위험을 피하기 위해 반복기와 반복조건을 분리하는 개념으로 이터레이터를 사용한다. 문을 함수형태로 바꿀 수 있기 때문에 원하는 시점에 실행가능하며, flow를 타지 않는다.</div>
+      
+        <div>자바스크립트에서는 iterator와 관련된 표준 스펙이 나왔고, 언어차원에서 지원해주는 혜택이 많은데, iterable 객체에게 spread 연산자, 배열destructuring, for..of 루프등의 기능들을 제공해준다. 이런 혜택을 위해 개발자 스스로 iterable 객체를 만들어도 되지만, iterable객체를 보다 쉽게 만들 수 있는 방법이 generator 함수이다. generator는 iterator임과 동시에 iterable이기도 하다. </div>
+      
+    </div>
+  </div>
+
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. Interface in JS</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 Interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 Iterator interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">1.3 Iterable interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Loop to Iterator</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. ES6+ Loop</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Generator</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p>자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.<br>자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에 중요하며, loop를 배우기 전에 알아보자.</p>
+<p><a name="0"></a></p>
+<h2 id="1-Interface-in-JS"><a href="#1-Interface-in-JS" class="headerlink" title="1. Interface in JS"></a>1. Interface in JS</h2><h3 id="1-1-Interface"><a href="#1-1-Interface" class="headerlink" title="1.1 Interface"></a>1.1 Interface</h3><p>ECMAScript 공식문서에서는 interface에 대한 정의를 명확하게 내리고 있다.</p>
+<ol>
+<li>인터페이스란 사양에 맞는 값과 연결된 속성키의 셋트 </li>
+<li>어떤 Object라도 인터페이스의 정의를 충족시킬 수 있다.</li>
+<li>하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.<ul>
+<li>반환값의 타입까지 정할 수 있다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="interface-예제"><a href="#interface-예제" class="headerlink" title="interface 예제"></a>interface 예제</h4><ol>
+<li>test라는 키를 갖고 </li>
+<li>값으로 문자열인지를 1개 받아 boolean 결과를 반환하는 함수가 온다.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test(str)&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>cf__1. es6 객체리터럴<br>test옆에 바로 괄호?</p>
+<ul>
+<li>es6에서 객체 리터럴에 새로 도입된 문법. </li>
+<li>key에 function을 집어넣는 경우가 생기면, function과 <code>:</code>을 생략하고 바로 괄호를 쓸 수 있는 문법이 추가되었다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  test: <span class="function"><span class="keyword">function</span> (<span class="params">str</span>)</span>&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>자바스크립트 엔진 레벨에서 여러가지 interface를 정의하고 있다.</p>
+</blockquote>
+<hr>
+<h3 id="1-2-Iterator-interface"><a href="#1-2-Iterator-interface" class="headerlink" title="1.2 Iterator interface"></a>1.2 Iterator interface</h3><ol>
+<li>next라는 키를 갖고 </li>
+<li>값으로 인자를 받지 않고<br><code>IteratorResultObject</code>를 반환하는 함수가 온다.<ul>
+<li>IteratorResultObject는 interface이다.<br>(아래의 IteratorResult interface를 확인)</li>
+</ul>
+</li>
+<li>IteratorResultObject는 <code>value</code>와 <code>done</code>이라는 키를 갖고 있다.</li>
+<li>이 중 <code>done</code>은 계속 반복할 수 있을지 없을지에 따라 불린값을 반환한다.</li>
+</ol>
+<p>위 조건만 만족하면 Iterator 객체로 본다.<br>아래는 타입스크립트에서 자바스크립트 내장 객체들을 정의해놓은 type definition 파일의 일부를 가져왔다.<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es2015.iterable.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> IteratorResult&lt;T&gt; &#123;</span><br><span class="line">    done: <span class="built_in">boolean</span>;</span><br><span class="line">    value: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Iterator&lt;T&gt; &#123;</span><br><span class="line">    next(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">    <span class="keyword">return</span>?(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">    <span class="keyword">throw</span>?(e?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="그니까-iterator란"><a href="#그니까-iterator란" class="headerlink" title="그니까 iterator란"></a>그니까 iterator란</h4><p>이터레이터 프로토콜(: 데이터 컬렉션을 순회하기 위한 프로토콜(미리약속된 규칙))은 next메소드를 호출하면 iterable을 순회하며 value, done 프로퍼티를 갖는 iteratorResultObject를 반환한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  data: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      value: <span class="keyword">this</span>.data.pop(),</span><br><span class="line">      done: <span class="keyword">this</span>.data.length == <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="1-3-Iterable-interface"><a href="#1-3-Iterable-interface" class="headerlink" title="1.3 Iterable interface"></a>1.3 Iterable interface</h3><ol>
+<li>Symbol.iterator라는 키를 갖고 </li>
+<li>값으로 인자를 받지 않고 <strong><code>Iterator Object</code>를 반환하는 함수가 온다.</strong><br>Iterator Object 인터페이스는 위 1.2의 interface</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es2015.iterable.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> Iterable&lt;T&gt; &#123;</span><br><span class="line">    [Symbol.iterator](): Iterator&lt;T&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> IterableIterator&lt;T&gt; <span class="keyword">extends</span> Iterator&lt;T&gt; &#123;</span><br><span class="line">    [Symbol.iterator](): IterableIterator&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [Symbole.iterator]()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next()&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="그니까-iterable란"><a href="#그니까-iterable란" class="headerlink" title="그니까 iterable란?"></a>그니까 iterable란?</h4><p>iterable은 Symbol.iterator 메소드를 구현하거나, 프로토타입 체인에 의해 상속한 객체를 말한다.<br>Symbol.iterator 메소드는 이터레이터를 반환한다. </p>
+<blockquote>
+<p><a href="https://poiemaweb.com/es6-symbol" target="_blank" rel="noopener">Symbol</a>?</p>
+<ul>
+<li>ES6 추가된 새로운 primitive type</li>
+<li>객체가 아닌 값으로 인식된다는 말.</li>
+<li>typeof로 보면 Symbole 타입이 나온다.</li>
+<li>primitive이지만 <strong>객체의 키로 사용할 수 있는 특징</strong>이 있다.</li>
+<li>Symbol.iterator는 이터레이터 오브젝트를 생성하면서 반환한다.</li>
+<li>오브젝트의 <code>[Symbol.iterator]</code>를 호출하면 이터레이터 오브젝트를 생성하여 반환한다. <ul>
+<li>심볼은 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키(property key)를 만들기 위해 사용한다. </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>iterator만 있으면 되지 않을까? 왜 iterable이 필요하지?</p>
+<ul>
+<li>loop를 돌 수 있는 reset 타이밍을 위해서</li>
+<li>즉, loop를 돌리는 객체의 사본을 만들기 위해서 iterable형태가 필요한 것이다.<ul>
+<li>위에서 iterable 형태를 보면, Symbole.iterator를 키로 갖는걸 볼 수 있는데,<br>루프 돌 때마다 <strong>루프를 위한 변수</strong>와 <strong>원본데이터 변수</strong>를 구분하면서 iterator를 잘 구축하라고 iterable이 한번 개입하는 것이다.</li>
+<li><a href="https://jusungpark.tistory.com/25" target="_blank" rel="noopener">iterator 패턴</a>에서 온 개념<br></li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-Loop-to-Iterator"><a href="#2-Loop-to-Iterator" class="headerlink" title="2. Loop to Iterator"></a>2. Loop to Iterator</h2><p>왜 for, while, do..while을 쓰지 않게 하고 이런걸 제공할까</p>
+<ul>
+<li>문이기 때문에 한번 실행하고 나면 사라진다.(노이만 머신의 구조)<ul>
+<li>메모리에 남지않고, 실행된 후 사라진다.</li>
+</ul>
+</li>
+<li>두번다시 반복시킬 수 없다.<ul>
+<li>다시 호출을 위해서는 함수로 빼던지, 2번사용하던지 해야한다.</li>
+<li>여러번 다시 사용하는것은 안전하지 않다.. 어딘가 저장해놓고 재사용해야한다.</li>
+<li><strong>loop를 <code>식</code>으로 바꾸고 싶다는 마음이 생김!!</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-1-While문으로-살펴보는-Iterator"><a href="#2-1-While문으로-살펴보는-Iterator" class="headerlink" title="2.1 While문으로 살펴보는 Iterator"></a>2.1 While문으로 살펴보는 Iterator</h3><p>현대언어의 기본적인 패러다임은<br><strong>문을 제거하고 전부 식(값)으로 바꾸버리는 것.</strong></p>
+<p>모든 문을 함수에 집어 넣어버리면<br>함수에서는 값이 반환되는 형태이고, 그 함수를 호출하면 문을 원하는 시점에 실행할 수 있게된다.</p>
+<ul>
+<li>여러번 문을 반복해서 실행할 수 있다.</li>
+<li>문을 메모리에(함수) 담아두면 flow를 타지 않고 원하는 시점에 마음대로 실행할 수 있다.</li>
+<li><strong>commend 패턴</strong><br>: 우리가 원하는 문들을 죄다 값으로 바꿔서 invoke에 저장하고, invoke를 호출할때마다 마음대로 문을 실행했다, 멈췄다, 되돌렸다 를 할 수 있게 만들어주는 패턴 </li>
+</ul>
+<p>for문이나 while문을 <strong>값</strong>으로 바꾸고 싶다.<br>반복 전용에 해당되는 객체로 바꿔주면 된다.</p>
+<h4 id="while-vs-iterator"><a href="#while-vs-iterator" class="headerlink" title="while vs iterator"></a>while vs iterator</h4><ol>
+<li><p>while</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">while</span>(arr.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arr.pop());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>조건문: 계속 반복할지 판단.</li>
+<li>body: 반복시마다 처리할 것.</li>
+</ul>
+</li>
+<li><p>iterator</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>, </span><br><span class="line">      <span class="comment">// while의 조건문에 해당 (계속 반복할지 판단.)</span></span><br><span class="line">      value: <span class="built_in">console</span>.log(<span class="keyword">this</span>.arr.pop())</span><br><span class="line">      <span class="comment">// while의 body에 해당 (반복시 처리할 것.)</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>더 반복할지 말지에 대한 조건문을 while에서는 while문 자체가 들고 있었지만,<br>iterator에서는 iterator의 next 반환값 자체가 갖고 있다.<br>즉, next에 의존적이 된다. </li>
+</ul>
+</li>
+</ol>
+<h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><div style="padding:20px; background-color:rgba(0,0,0,0.2)">1. 반복자체를 하지는 않지만 (: iterator 객체와 next객체가 반복하진 않지만.)<br>  2. 외부에서 반복을 하려고 할 때<br>    3. 반복에 필요한 조건과 실행을<br>    4. 미리 준비해 둔 객체<br>      (self description: 나 자신에 대해서 내부에 설명)<br><br>  즉, 반복행위와 반복을 위한 준비를 분리<br><br>  1. 미리 반복에 대한 준비를 해두고<br>  2. 필요할 때 필요한 만큼 반복<br>  <strong>3. 반복을 재현할 수 있음</strong><br></div>
+
+<p>반복 자체를 하지 않지만,<br>외부에서 iterator를 이용해서 반복하려고 하는 상황을 위해서,<br>반복에 필요한 조건과 실행을 미리 준비해둔 객체를 갖고 있는 것이다. (iteratorResult객체)</p>
+<p>next만 부르면, 몇번이고 반복할 수 있다.<br>이제는 더이상 복잡한 loop의 상태조건이나 문의 실행을 다 빼버리고,<br>외부에서는 반복이라는 행위만 하면된다.<br>=&gt; 반복기와 반복조건을 분리</p>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-ES6-Loop"><a href="#3-ES6-Loop" class="headerlink" title="3. ES6+ Loop"></a>3. ES6+ Loop</h2><h3 id="3-1-사용자-반복-처리기"><a href="#3-1-사용자-반복-처리기" class="headerlink" title="3.1 사용자 반복 처리기"></a>3.1 사용자 반복 처리기</h3><p>직접 Iterator 반복처리기를 구현해보자. 커스텀</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 반복기</span></span><br><span class="line"><span class="keyword">const</span> loop = <span class="function">(<span class="params">iter: IterableIterator&lt;<span class="built_in">number</span>[]&gt;, f: <span class="built_in">Function</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// iterable 가드</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> iter[Symbol.iterator] == <span class="string">'function'</span>) &#123;</span><br><span class="line">    iter = iter[Symbol.iterator]();</span><br><span class="line">      <span class="comment">// next확인하는 가드도 있어야함.</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// iterator 가드</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> iter.next != <span class="string">'function'</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> &#123; </span><br><span class="line">      <span class="keyword">const</span> v = iter.next();</span><br><span class="line">      <span class="keyword">if</span> (v.done) <span class="keyword">return</span>; <span class="comment">// undefined면 종료처리</span></span><br><span class="line">      f(v.value); <span class="comment">// 아니면 f에 value 전달</span></span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="literal">true</span>); <span class="comment">// 반복기일뿐!! 재귀함수로 짜도 상관없다.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 반복되야할 조건이 있는 iterable</span></span><br><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">  arr: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">  [Symbol.iterator]() &#123; <span class="keyword">return</span> <span class="keyword">this</span>; &#125;,</span><br><span class="line">  next() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>,</span><br><span class="line">          value: <span class="keyword">this</span>.arr.pop()</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loop(iter,<span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
+<p>반복되야되는 조건에 해당되는 값들과<br>반복기를 분리했더니<br>반복기쪽에서는 그냥 돌리기만 하면되는 책임으로 확 줄고 (loop함수),<br>나머지 상태관리나 루프에 대한 모든 책임은 다 iterator객체가 가져갔다.</p>
+<ul>
+<li>iterator객체가 굉장히 안전적으로 몇번이라도 이 loop를 성공할 것이다.</li>
+</ul>
+<p>개발자스스로 나름대로의 구조와 이름으로 짤수도 있다.<br>단지 이제는 자바스크립트 표준이 있다.</p>
+<p>이터레이터 패턴을 구현하는데에 있어서 자바스크립트 표준 스펙이 나왔고, 이걸 구현하는 공식적인 방법이 스펙으로 정의되어있다.<br>만약 스스로 나름대로의 이터레이터를 구현해 왔다면, 이제는 자바스크립트 표준 인터페이스에 맞춰서 iterator를 구현하시는 쪽으로 바꿔야한다.<br>언어의 혜택이 많기 때문 </p>
+<hr>
+<h3 id="3-2-내장-반복-처리기"><a href="#3-2-내장-반복-처리기" class="headerlink" title="3.2 내장 반복 처리기"></a>3.2 내장 반복 처리기</h3><p>언어의 지원을 받는다는 것은 무슨뜻일가.<br>언어가 iterator 인터페이스에 대해서 처리해주는 내장 기능이 있다.<br>우리가 만든 모든 객체가 iterator 인터페이스를 충족해주면, 언어가 제공하는 문법적인 요소를 다 사용할 수 있다.<br><strong>iterable객체가 아닌데 아래의 처리기들을 사용하면 스크립트가 죽는다.</strong></p>
+<p>어떤 객체가 Iterable이라면, 그 객체에 대해서 자바스크립트에서는 아래의 기능들을 사용할 수 있다.</p>
+<ul>
+<li>분해대입(destructuring assignment)</li>
+<li>spread 연산자 (…)</li>
+<li>for…of 루프</li>
+<li>기타 iterable을 인수로 받는 함수</li>
+</ul>
+<ol>
+<li><p>Array destructuring 배열해체 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iter는 iterable 객체.</span></span><br><span class="line"><span class="keyword">const</span> iter = &#123; </span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>&#125;,</span><br><span class="line">  arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>,</span><br><span class="line">      value: <span class="keyword">this</span>.arr.pop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [a, ...b] = iter;</span><br><span class="line"><span class="built_in">console</span>.log(a,b); <span class="comment">// 4, [3,2,1]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>해체구분은 보통 변수를 선언하는 쪽에 쓰인다.</li>
+<li>배열은 <code>=</code>의 왼쪽에 오면 변수이름이 된다.</li>
+<li>해당 index에 있는 값을 변수에 담음.</li>
+</ul>
+</li>
+<li><p>Spread 펼치기 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>&#125;,</span><br><span class="line">  arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>,</span><br><span class="line">      value: <span class="keyword">this</span>.arr.pop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = [...iter];</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// [4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rest Parameter (나머지 인자)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;,</span><br><span class="line">  arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>,</span><br><span class="line">      value: <span class="keyword">this</span>.arr.pop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> test = <span class="function">(<span class="params">...arg</span>) =&gt;</span> <span class="built_in">console</span>.log(arg);</span><br><span class="line">test(...iter);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>for ...of</code><br>while, for처럼 권한이 있지않고 권한이 전혀 없는 for.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;,</span><br><span class="line">  arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="keyword">this</span>.arr.length == <span class="number">0</span>,</span><br><span class="line">      value: <span class="keyword">this</span>.arr.pop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> v <span class="keyword">of</span> iter)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><code>for...of</code> iterator에서 value만 받아서 내려준다.</li>
+</ul>
+<p>배열이나 object를 써야지 이 혜택을 받는 것이 아니라, iterator만 만들면 이 혜택을 받을 수 있다.<br>객체 만들때는 괴로울지 몰라도, 사용할때는 예쁘게 작업 가능.</p>
+<blockquote>
+<p>신규로 출시되는 많은 API가 iterable을 포함하고 태어나기때문에<br>iterable interface는 es6세계에서 반드시 이해하고 외우고 있어야 하는 내용이다.</p>
+</blockquote>
+<h4 id="정리-1"><a href="#정리-1" class="headerlink" title="정리"></a>정리</h4><p>자바스크립트 es6이후에는 반복을 위해서 iterable을 만든다.</p>
+<hr>
+<h3 id="3-3-연습"><a href="#3-3-연습" class="headerlink" title="3.3 연습"></a>3.3 연습</h3><p>제곱을 요소로 갖는 가상컬렉션 😵😵😵<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> N2 = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(max)&#123;</span><br><span class="line">    <span class="keyword">this</span>.max = max; <span class="comment">// 무한배열을 막기위해</span></span><br><span class="line">  &#125;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;</span><br><span class="line">    <span class="keyword">let</span> cursor = <span class="number">0</span>, max = <span class="keyword">this</span>.max;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      done: <span class="literal">false</span>,</span><br><span class="line">      next()&#123; <span class="comment">// 반복기일 뿐</span></span><br><span class="line">        <span class="keyword">if</span> (cursor &gt; max) &#123; </span><br><span class="line">          <span class="keyword">this</span>.done = <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.value = cursor * cursor;</span><br><span class="line">          cursor++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log([...new N2(<span class="number">5</span>)]);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> v <span class="keyword">of</span> <span class="keyword">new</span> N2(<span class="number">5</span>))&#123;</span><br><span class="line">  consoel.log(v )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.<br>이 객체는 Iterator객체임과 동시에 iteratorResultObject이기도 하다.</p>
+<ul>
+<li>우리가 만든 loop에는 안전장치가 있어야한다.</li>
+<li>loop조건을 걸때 무조건 max값을 넣는 습관을 들이자.</li>
+<li>symbol iterator를 호출할 때 마다 제각각 다른 지역변수가 만들어질테고,<br>그때마다 태어난 함수도 제각각 다른 지역변수를 자유변수로 캡쳐해둘 것이다.<ul>
+<li>함수호출할때마다 instance가 자기만의 field를 갖고 태어난것과 비슷하네?<blockquote>
+<p>함수형 패러다임에서는 instance를 new 연산자로 생성하는 대신에,<br>함수를 생성함으로써 그때에 있는 자유변수를 instance의 field처럼 쓰게 된다.<br>자바스크립트에서는 instance를 만들면서 field지정할것인지.<br>함수를 생성하면서 자유변수를 지정할 것인지 선택할 수 있다.<br>혹은 섞어 쓰거나.</p>
+<ul>
+<li>이게 자바스크립트가 혼란스러운 이유…  </li>
+<li>비단 자바스크립트만 그렇진 않다..</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="cf-2-함수-함수-스코프-클로저"><a href="#cf-2-함수-함수-스코프-클로저" class="headerlink" title="cf__2. 함수, 함수 스코프, 클로저"></a>cf__2. 함수, 함수 스코프, 클로저</h4><p>함수는 함수가 만들어지는 시점에 바깥쪽에 있는 변수들을 캡쳐해서 마치 지역변수로 쓸 수 있는 권한이 있다.</p>
+<ul>
+<li>함수 입장에서는 지역변수, 인자도 아닌데 참조할 수 있는 변수 =&gt; 자유변수 </li>
+<li>자유변수가 생성되는 원리는 언어마다 다르다.</li>
+<li>자유변수를 함수는 사용할 수 있다.</li>
+<li>자바스크립트 매커니즘에서는 next라는 함수가 탄생할 때, 바깥쪽 함수 둘레에 있는 변수들을 사용할 수 있다.<blockquote>
+<p>자유변수가 잡혀서 사용되는 닫혀진 공간을 클로저라고 한다.<br>함수는 곧 클로저라고 할 수 있다. 자유변수를 가둬둘 수 있기 때문에 </p>
+</blockquote>
+</li>
+</ul>
+<h4 id="cf-3-자바스크립트를-특정버전으로-열심히-공부해도-계속-바뀐다"><a href="#cf-3-자바스크립트를-특정버전으로-열심히-공부해도-계속-바뀐다" class="headerlink" title="cf__3. 자바스크립트를 특정버전으로 열심히 공부해도..계속 바뀐다."></a>cf__3. 자바스크립트를 특정버전으로 열심히 공부해도..계속 바뀐다.</h4><ul>
+<li>자바스크립트 엔진의 구조는 계속 바뀌기 때문에 컴퓨터 사이언스 원론을 이해하는게 훨씬 낫다.</li>
+<li>스코프 체이닝.. 변수를 캡쳐해오고.. 이건 자바스크립트 3.1 engine 원리임.. 지금</li>
+<li>얼마전 크롬 67에서는 새로운 함수 호출 실행 시스템을 만들었기 때문에 함수 호출이 급격하게 빨라졌다.</li>
+<li>요즘 책은 … 모두 자바스크립트 3.1 엔진이야기다….(헐)<ul>
+<li>지금 엔진은 그렇게 움직이지 않는다.</li>
+<li>그냥 컴퓨터 사이언스 원론을 이해하는게 낫다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>자료구조를 iterable로 구축하는 훈련이 되있어야하지만, 문법적인 혜택을 누릴 수 있다.<br>하지만 생각보다 iterable 객체를 만드는 것이 리소스가 많이 든다.<br>generator함수로 해결할 수 있다. </p>
+<hr>
+<p><a name="4"></a></p>
+<h2 id="4-Generator"><a href="#4-Generator" class="headerlink" title="4. Generator"></a>4. Generator</h2><h3 id="Iterator의-구현을-돕는-Generator-IteratorGenerator"><a href="#Iterator의-구현을-돕는-Generator-IteratorGenerator" class="headerlink" title="Iterator의 구현을 돕는 Generator (IteratorGenerator)"></a>Iterator의 구현을 돕는 Generator (IteratorGenerator)</h3><p><code>function*()</code></p>
+<p><strong>generator 함수를 생성하는 리터럴.</strong></p>
+<ul>
+<li>generator함수를 호출할 때마다 iterator가 만들어진다.</li>
+<li>generator는 iterator이며, 동시에 iterable이기도 하다. 😵😵😵<ul>
+<li>반복기와 반복조건부분이 분리되어있지만 함께 갖고 있다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> generator = <span class="function"><span class="keyword">function</span>*(<span class="params">max</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cursor = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(cursor &lt; max)&#123; <span class="comment">// iterator에서 next()와 같은 역할</span></span><br><span class="line">    <span class="keyword">yield</span> cursor * cursor;</span><br><span class="line">    cursor++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log([...generator(<span class="number">5</span>)]);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> v <span class="keyword">of</span> generator(<span class="number">5</span>))&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>yield라는 키워드</p>
+<ul>
+<li>suspense라는 기능: while문이 돌다가 잠깐 멈춘다!</li>
+<li>문은 멈출 수 없지만 yield에서 중지된다.</li>
+<li>iteratorResultObject를 반환한다.<ul>
+<li>루틴이 아니다. <strong>co-routine</strong></li>
+<li>함수는 루틴<br>generator는 코루틴이라고 부른다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/07/01.png"></p>
+<hr>
+<p>참고자료<br><a href="https://helloworldjavascript.net/pages/260-iteration.html" target="_blank" rel="noopener">https://helloworldjavascript.net/pages/260-iteration.html</a><br><a href="https://poiemaweb.com/es6-iteration-for-of" target="_blank" rel="noopener">https://poiemaweb.com/es6-iteration-for-of</a><br><a href="https://jusungpark.tistory.com/25" target="_blank" rel="noopener">https://jusungpark.tistory.com/25</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_19/" data-id="cjrqmacms003njnbmriq28x9a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. Interface in JS</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 Interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 Iterator interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">1.3 Iterable interface</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. Loop to Iterator</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. ES6+ Loop</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4. Generator</a>
+          <ul>
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/02/03/JS_23/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            ES6 Symbol 오브젝트
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/02/03/JS_18_2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">CodeSpitz77 2회_Flow control statement (2)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/04/JS_24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/09/thumb_default.jpg)" alt="(ing..) ES6 Symbol 프로퍼티" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/04/JS_24/" class="title">(ing..) ES6 Symbol 프로퍼티</a></p>
+                            <p class="item-date"><time datetime="2019-02-04T01:20:19.000Z" itemprop="datePublished">2019-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/08/thumb_default.jpg)" alt="ES6 Symbol 오브젝트" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_23/" class="title">ES6 Symbol 오브젝트</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/07/thumb_default.jpg)" alt="코드스피츠77 ES6_3회차_Iteration &amp; generator" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_19/" class="title">코드스피츠77 ES6_3회차_Iteration &amp; generator</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T09:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/06/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_2/" class="title">CodeSpitz77 2회_Flow control statement (2)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T07:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/05/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_1/" class="title">CodeSpitz77 2회_Flow control statement (1)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T05:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.25px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.25px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 16.25px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.25px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.25px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 12.5px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.25px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">59</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/02/03/JS_19/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

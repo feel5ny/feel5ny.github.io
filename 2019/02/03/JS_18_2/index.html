@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>CodeSpitz77 2회_Flow control statement (2) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,flow control" />
+    
+    
+    <meta name="description" content="TL;DRoptional flow control에서는 if문에 대해서 다룬다. if문에서 가장 중요한 것은 모든 상황에 대한 예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는 mandatory 상태의 문이 와야한다. 후방결합이라는 특징때문에 else if 사용을 조심해야한다. 병행조건일때는 switch문을 쓰고 부분집합에서의 조건문이 필요">
+<meta name="keywords" content="javascript,flow control">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CodeSpitz77 2회_Flow control statement (2)">
+<meta property="og:url" content="http://feel5ny.github.io/2019/02/03/JS_18_2/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="TL;DRoptional flow control에서는 if문에 대해서 다룬다. if문에서 가장 중요한 것은 모든 상황에 대한 예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는 mandatory 상태의 문이 와야한다. 후방결합이라는 특징때문에 else if 사용을 조심해야한다. 병행조건일때는 switch문을 쓰고 부분집합에서의 조건문이 필요">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/06/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-02-04T16:50:18.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CodeSpitz77 2회_Flow control statement (2)">
+<meta name="twitter:description" content="TL;DRoptional flow control에서는 if문에 대해서 다룬다. if문에서 가장 중요한 것은 모든 상황에 대한 예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는 mandatory 상태의 문이 와야한다. 후방결합이라는 특징때문에 else if 사용을 조심해야한다. 병행조건일때는 switch문을 쓰고 부분집합에서의 조건문이 필요">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/06/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/JS_18_2/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/06/thumb_default.jpg" alt="CodeSpitz77 2회_Flow control statement (2)" style="width:100%">
+    </div>
+
+<article id="post-JS_18_2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        CodeSpitz77 2회_Flow control statement (2)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/03/JS_18_2/" class="article-date">
+            <time datetime="2019-02-03T07:20:19.000Z" itemprop="datePublished">2019-02-03</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/flow-control/">flow control</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#2">2. Optional Flow Control</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 If, If else</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#2-1-1">2.1.1 Truthy, Falsy</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-2">2.1.2 Optional, Mandatory</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-3">2.1.3 RL Parsing</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-3">2.1.4 Nested, Parallel</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Iterate Flow Control</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 For</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#3-1-1">3.1.1 Limited Statement</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#3-1-2">3.1.2 Empty Truthy</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#3-1-3">3.1.3 Last Execution</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 While, do while</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#3-2-1">3.2.1 Infinite Loop</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p><strong>optional flow control</strong>에서는 <code>if문</code>에 대해서 다룬다. if문에서 가장 중요한 것은 모든 상황에 대한 예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는 <strong>mandatory</strong> 상태의 문이 와야한다. <strong>후방결합</strong>이라는 특징때문에 else if 사용을 조심해야한다. 병행조건일때는 switch문을 쓰고 부분집합에서의 조건문이 필요할 경우에는 if..else를 사용한다.<br>if문의 여러 중첩을 else if문으로 쓰곤했는데, 많은 상황을 예외처리 한것인가에 대해 항상 의문이 들곤했었다. 이번 시간을 통해서 else if문은 지양하기로 하고, else문 뒤에 조건문을 추가하고 싶을 경우 중괄호 이후에 if else문을 써서, else뒤에는 mandatory한 상황을 만들게끔 습관을 들이기로 했다.<br><strong>Iterate Flow Control</strong>에서는 <code>For문</code>과 <code>While, do..while</code>문을 다룬다. For문은 3가지 식을 넣을 수 있는데 첫번째는 <strong>식</strong>과 문 중에는 <strong>선언문</strong>만 올 수 있고, 두번째는 boolean을 반환하는 조건식이 오며, <strong>빈값일 경우 무조건 truthy</strong>라는 특징이 있으므로 무한루프에 빠지지 않게 조심해야한다. 세번째는 식이 오는데, statement의 마지막에 처리되므로 statement 마지막에 두어도된다. w<strong>hile문</strong>은 조건식이 필수이며, 조건식과 관련된 코드가 body에 안나올 경우 무한루프에 빠지게된다. do..while문은 while 조건문 뒤에 <code>;</code>을 붙여야한다.</p>
+<blockquote>
+<p>코드스피츠 강의 정리록<br>77 동영상 음원문제로 77교안을 토대로 73강의를 들으며 작성</p>
+</blockquote>
+<hr>
+<p><a name="2"></a></p>
+<h2 id="2-Optional-flow-control"><a href="#2-Optional-flow-control" class="headerlink" title="2. Optional flow control"></a>2. Optional flow control</h2><p>conditional Statement: 조건문<br><a name="2-1"></a></p>
+<h3 id="2-1-if-if-else"><a href="#2-1-if-if-else" class="headerlink" title="2.1 if, if else"></a>2.1 if, if else</h3><p><code>if (condition)
+   statement1
+[else
+   statement2]</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">switch</span> (c) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">for</span> (;;) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="2-1-1"></a></p>
+<h4 id="2-1-1-Truthy-Falsy"><a href="#2-1-1-Truthy-Falsy" class="headerlink" title="2.1.1 Truthy, Falsy"></a>2.1.1 Truthy, Falsy</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" target="_blank" rel="noopener">mdn</a></p>
+<ul>
+<li>falsy는 <code>0, false, null, undefined,&quot;&quot;, NaN</code>이 있다.</li>
+<li>나머지는 truthy이다. </li>
+</ul>
+<hr>
+<p><a name="2-1-2"></a></p>
+<h4 id="2-1-2-Optional-Mandatory"><a href="#2-1-2-Optional-Mandatory" class="headerlink" title="2.1.2 Optional, Mandatory"></a>2.1.2 Optional, Mandatory</h4><p>특정 상황에 따라 optional한지 mandatoy한지 다르다.</p>
+<ul>
+<li>if절은 optional,</li>
+<li>if else절은 mandatory하다.<ul>
+<li>if else절은 모든 구문이 mandatory여야한다.</li>
+</ul>
+</li>
+<li>optional 상태의 경우는 예외처리가 안되어있다고 생각하면 된다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (expression) <span class="comment">//optional</span></span><br><span class="line"><span class="keyword">if</span> (expression) statement1 <span class="keyword">else</span> statement2 <span class="comment">// Mandatory</span></span><br></pre></td></tr></table></figure>
+<p><strong>암묵적인 오류(context error)</strong><br>예1)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a) <span class="comment">// mandatory</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (b &amp;&amp; a) </span><br><span class="line"><span class="keyword">else</span></span><br></pre></td></tr></table></figure></p>
+<p>위의 코든에서 첫번째 else뒤에는 mandatory되어야하지만, optional하다. </p>
+<ul>
+<li>a와 b의 상태에 따라 <code>b &amp;&amp; a</code>의 값이 다르기 때문 </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a)</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (b &amp;&amp; a)</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!b &amp;&amp; a)</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(b &amp;&amp; !a)</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!b &amp;&amp;!a)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>에2)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(c === <span class="number">1</span>)&#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">  <span class="keyword">if</span> (c === <span class="number">2</span>)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>else 다음에 옵셔널한 if만 놓여있다.<br>else 안에는 mandatory해야한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(c === <span class="number">1</span>)&#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="keyword">if</span> (c === <span class="number">2</span>)&#123;</span><br><span class="line">  </span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>if..else문에서 else if문을 사용할 경우 육안으로는 많은 경우를 대비하는 처리하기 헷갈린다.</li>
+<li>이는 후방 결합때문이다.</li>
+</ul>
+<hr>
+<p><a name="2-1-3"></a></p>
+<h4 id="2-1-3-RL-Parsing"><a href="#2-1-3-RL-Parsing" class="headerlink" title="2.1.3 RL Parsing"></a>2.1.3 RL Parsing</h4><ul>
+<li><code>arrow function</code>과 if else 구문만 오른쪽에서 왼쪽으로 <code>후방 결합</code>한다.<ul>
+<li><strong><code>대부분의 버그는 후방 결합에서 일어난다.</code></strong></li>
+<li><strong>else if문 쓰는 습관을 버리자.</strong></li>
+<li><strong>else 다음에 조건문이 필요할 경우, 중괄호 이후에 if-else문 사용하기</strong></li>
+</ul>
+</li>
+<li>후방결합의 실수를 피하기 위해 중괄호와 괄호를 붙여주는 것이 좋다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c===<span class="number">1</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">  <span class="keyword">if</span> (c===<span class="number">2</span>)&#123;</span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>병렬조건을 선택할 때 절대로 <code>else if</code>를 쓰면 안되는 이유이다.</p>
+<ul>
+<li><code>else if</code>는 원래부터 위험한 코드고,</li>
+<li>남들이 해석할때 난감해 지는 코드일 뿐만아니라,</li>
+<li><strong>else 후방조건이 제대로 붙어있는지 검사하기 굉장히 까다롭다.</strong></li>
+<li>컴파일 에러도 안나고 런타임 다 통과하기 때문..</li>
+<li>런타임때 다 통과하지만 로직이 잘못된 경우가 너무 많다.</li>
+</ul>
+<hr>
+<p><a name="2-1-4"></a></p>
+<h4 id="2-1-4-Nested-Parallel"><a href="#2-1-4-Nested-Parallel" class="headerlink" title="2.1.4 Nested, Parallel"></a>2.1.4 Nested, Parallel</h4><p>이렇게 if else를 봤더니.. </p>
+<ul>
+<li>1차 조건이 분기한 이후에 <code>부분집합</code>에서만 쓰인다.</li>
+<li>병행조건일 때 쓰는 것이 아니라 <code>부분집합을 다시 분기할때</code>..</li>
+<li><strong>nested되어있는 sub집합에 대한 조건일때 사용한다.</strong></li>
+<li>else if는 병행조건일 때 쓰면 원래 안되는 것.</li>
+</ul>
+<h5 id="병행조건-Parallel-일때는-무조건-gt-switch"><a href="#병행조건-Parallel-일때는-무조건-gt-switch" class="headerlink" title="병행조건(Parallel)일때는 무조건! =&gt; switch"></a>병행조건(Parallel)일때는 무조건! =&gt; switch</h5><ul>
+<li><p>switch를 쓴다.</p>
+</li>
+<li><p>내가 평가해야할 식들이 동등할 경우 !!! switch문으로 간다.</p>
+</li>
+<li>내가 평가해야할 식이 nested되어야 할 경우 if중첩.</li>
+<li>병행조건에는 반드시 예외가 생길 수 있는 가능성이 있기 때문에<br><strong>switch에는 default가 필수이다!!</strong></li>
+</ul>
+<h5 id="if-else-안에-switch문은-괜찮을까"><a href="#if-else-안에-switch문은-괜찮을까" class="headerlink" title="if else 안에 switch문은 괜찮을까?"></a>if else 안에 switch문은 괜찮을까?</h5><ul>
+<li>else 에는 mandatory가 되어야 하는데 switch문에서 default 문을 썼다면 mandatory가 보장되기 때문에 사용해도된다.<ul>
+<li>병행조건으로 빠졌지만, dafault가 붙어있는 이상 빠져 나올 구멍이 없다.</li>
+</ul>
+</li>
+<li>조건문을 중첩해서 사용할 때는 mandatory로 빠지는 건지 optional로 빠지는지 확인하면 된다. </li>
+</ul>
+<p>mandatory로 시작했으면 mandatory로 끝내야하고<br>optional로 시작했으면 optional로 끝내야하고<br>optional과 mandatory를 섞어 써야한다면 </p>
+<ul>
+<li>로직분리를 잘하던지 </li>
+<li>완전히 분리해서 함수로 빼던지(격리).</li>
+</ul>
+<blockquote>
+<p>자기 코드의 의도를 명확하게 해서 변화가 일어날 때 어디까지만 수정하고 나머지는 여파가 없게끔 하는 방법에 대해서 익힐 필요가 있다.<br>코드를 짤때 어떻게 섬세하게 짤 것인가.</p>
+</blockquote>
+<hr>
+<hr>
+<p><a name="3"></a></p>
+<h2 id="3-Iterate-Flow-Control"><a href="#3-Iterate-Flow-Control" class="headerlink" title="3. Iterate Flow Control"></a>3. Iterate Flow Control</h2><p>반복문</p>
+<ul>
+<li>for</li>
+<li>while, do..while</li>
+<li>for ( of ); =&gt; for iteration</li>
+<li>for ( in ); =&gt; forEach와 유사 </li>
+</ul>
+<p><a name="3-1"></a></p>
+<h3 id="3-1-For"><a href="#3-1-For" class="headerlink" title="3.1 For"></a>3.1 For</h3><p>for문의 3개의 선택식에 어떤 코드를 넣어야할지 반드시 이해해야한다.</p>
+<p><code>for ([initialization]; [condition]; [final-expression])</code></p>
+<ol>
+<li><p>Initialization<br><code>Limited Statement</code></p>
+<ul>
+<li>원래 식만 와야하는데 선언문 한정으로 문이 올 수 있다.<br>(문중에 선언문만 올 수 있다.)</li>
+</ul>
+<p>선언문 또는 식이 올 수 있다.<br>혹은 <strong>공문</strong>도 올 수 있다.<br>식 또는 변수 선언. 주로 카운터 변수를 초기화할 때 사용한다.</p>
+</li>
+<li><p>condition (:조건)<br>매 반복마다 평가할 식.<br>평가 결과가 참이라면 statement를 실행한다.<br><strong>이 식을 넣지 않을 때(공문) 결과는 언제나 참이다.</strong> (<code>Empty Truthy</code>)</p>
+<ul>
+<li>무한루프</li>
+</ul>
+<p>결과가 거짓이라면 for문의 바로 다음 식으로 건너 뛴다.</p>
+</li>
+<li>final-expression<br>매 반복 후 평가할 식.<br>다음번 condition 평가 이전에 발생한다.<br>statement 끝에 있는것과 같는 상황이다.<br><strong>즉, statement 마지막에 실행된다.</strong> (<code>Last Execution</code>)<br>반복해서 쓰지 않기 위해서 3번째 항목에 넣는것.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">3</span>; <span class="comment">// declare statement. 문이다.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; turthy; ex)&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="3-2"></a></p>
+<h3 id="3-2-While-do-while"><a href="#3-2-While-do-while" class="headerlink" title="3.2 While, do while"></a>3.2 While, do while</h3><p><code>while (condition) statement</code></p>
+<ul>
+<li>condition이 공문일 경우 syntax error를 반환한다.</li>
+<li>while문은 중문이 오는 것이 정상.<br>2줄이 오는 것이 정상이다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(truthy)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while문 보다 1번은 먼저 더 실행하는 꼴</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">while</span> (truthy);</span><br></pre></td></tr></table></figure>
+<p><code>do
+   statement
+while (condition);</code></p>
+<ul>
+<li>do while문은 마지막에 <code>;</code> 붙이는게 공식문서에 명시되어있는 규칙</li>
+<li>do 다음의 statement가 단문일 경우 <code>;</code>붙이면 됨<br><code>do a++; while(a);</code></li>
+</ul>
+<p><a name="3-2-1"></a></p>
+<h4 id="3-2-1-Infinite-Loop"><a href="#3-2-1-Infinite-Loop" class="headerlink" title="3.2.1 Infinite Loop"></a>3.2.1 Infinite Loop</h4><p>while문과 do..while문은 평가식에 관여되어있는<br>상태값을 바꾸지 않으면 무한루프에 빠질 위험이 높다.</p>
+<p><strong><code>식별자와 관련된 코드가 안나온다면 무한루프</code></strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">while</span>(a &gt; <span class="number">2</span>)&#123;</span><br><span class="line">  a++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>조건식(condition)에 나오는 상태가 body에 나오는지 안나오는지부터 봐야한다.</li>
+</ul>
+<hr>
+<blockquote>
+<p>현실코드</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(act.method().c)&#123;</span><br><span class="line">  author.action();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>??? 뭔지 모름.</p>
+<ul>
+<li><p>이런 코드는 무조건 배재해야한다..</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = act.method().c</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(a)&#123;</span><br><span class="line">  author.action();</span><br><span class="line">  a = act.method().c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>적어도 body안에 조건식에 나오는 상태가 되었다..</p>
+</li>
+</ul>
+<hr>
+<p>참고자료<br><a href="https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html" target="_blank" rel="noopener">https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html</a></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_2/" data-id="cjrqmacmq003jjnbmuu5upuyx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#2">2. Optional Flow Control</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 If, If else</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#2-1-1">2.1.1 Truthy, Falsy</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-2">2.1.2 Optional, Mandatory</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-3">2.1.3 RL Parsing</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-1-3">2.1.4 Nested, Parallel</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. Iterate Flow Control</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 For</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#3-1-1">3.1.1 Limited Statement</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#3-1-2">3.1.2 Empty Truthy</a>
+                        </li>
+                      
+                        <li>
+                          <a href="#3-1-3">3.1.3 Last Execution</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 While, do while</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#3-2-1">3.2.1 Infinite Loop</a>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/02/03/JS_19/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            코드스피츠77 ES6_3회차_Iteration &amp; generator
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/02/03/JS_18_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">CodeSpitz77 2회_Flow control statement (1)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/04/JS_24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/09/thumb_default.jpg)" alt="(ing..) ES6 Symbol 프로퍼티" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/04/JS_24/" class="title">(ing..) ES6 Symbol 프로퍼티</a></p>
+                            <p class="item-date"><time datetime="2019-02-04T01:20:19.000Z" itemprop="datePublished">2019-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/08/thumb_default.jpg)" alt="ES6 Symbol 오브젝트" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_23/" class="title">ES6 Symbol 오브젝트</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/07/thumb_default.jpg)" alt="코드스피츠77 ES6_3회차_Iteration &amp; generator" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_19/" class="title">코드스피츠77 ES6_3회차_Iteration &amp; generator</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T09:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/06/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_2/" class="title">CodeSpitz77 2회_Flow control statement (2)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T07:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/05/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (1)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_1/" class="title">CodeSpitz77 2회_Flow control statement (1)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T05:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.25px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.25px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 16.25px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.25px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.25px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 12.5px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.25px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">59</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/02/03/JS_18_2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
