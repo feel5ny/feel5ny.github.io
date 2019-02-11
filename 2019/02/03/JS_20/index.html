@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,yield,generator,loop" />
+    
+    
+    <meta name="description" content="🌕🌑🌑 TL;DR복습할때나 이 문제가 까먹었을 즈음에 풀어보기  iterable객체 완성하기??? 구해보기(2가지 방법으로)1234567&amp;#123;  [Symbol.iterator]()&amp;#123;return this;&amp;#125;  data: [&amp;#123;a:[1,2,3,4], b:&apos;-&apos;&amp;#125;, [5,6,7], 8, 9],  next()&amp;#123;">
+<meta name="keywords" content="javascript,yield,generator,loop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution">
+<meta property="og:url" content="http://feel5ny.github.io/2019/02/03/JS_20/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="🌕🌑🌑 TL;DR복습할때나 이 문제가 까먹었을 즈음에 풀어보기  iterable객체 완성하기??? 구해보기(2가지 방법으로)1234567&amp;#123;  [Symbol.iterator]()&amp;#123;return this;&amp;#125;  data: [&amp;#123;a:[1,2,3,4], b:&apos;-&apos;&amp;#125;, [5,6,7], 8, 9],  next()&amp;#123;">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/10/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-02-11T09:11:34.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution">
+<meta name="twitter:description" content="🌕🌑🌑 TL;DR복습할때나 이 문제가 까먹었을 즈음에 풀어보기  iterable객체 완성하기??? 구해보기(2가지 방법으로)1234567&amp;#123;  [Symbol.iterator]()&amp;#123;return this;&amp;#125;  data: [&amp;#123;a:[1,2,3,4], b:&apos;-&apos;&amp;#125;, [5,6,7], 8, 9],  next()&amp;#123;">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/10/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/JS_20/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/10/thumb_default.jpg" alt="코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution" style="width:100%">
+    </div>
+
+<article id="post-JS_20" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/03/JS_20/" class="article-date">
+            <time datetime="2019-02-03T11:20:19.000Z" itemprop="datePublished">2019-02-03</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/generator/">generator</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>, <a class="tag-link" href="/tags/loop/">loop</a>, <a class="tag-link" href="/tags/yield/">yield</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. abstract loop</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 complex recursion 복잡한 반복</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 abstract loop 추상루프화</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. lazy execution</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 yield</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 yield*</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>🌕🌑🌑</p>
+<h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p>복습할때나 이 문제가 까먹었을 즈음에 풀어보기</p>
+<ol>
+<li>iterable객체 완성하기<br><code>???</code> 구해보기<br>(2가지 방법으로)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;</span><br><span class="line">  data: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> ???</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>코드스피츠 강의 정리록입니다.</p>
+</blockquote>
+<hr>
+<h3 id="4강-키워드-Generator의-지연실행-측면과-이를-위한-추상루프화"><a href="#4강-키워드-Generator의-지연실행-측면과-이를-위한-추상루프화" class="headerlink" title="4강 키워드: Generator의 지연실행 측면과 이를 위한 추상루프화"></a>4강 키워드: Generator의 지연실행 측면과 이를 위한 추상루프화</h3><hr>
+<p><a name="1"></a></p>
+<h2 id="1-abstract-loop-루프의-추상화"><a href="#1-abstract-loop-루프의-추상화" class="headerlink" title="1. abstract loop: 루프의 추상화"></a>1. abstract loop: 루프의 추상화</h2><p><a name="1-1"></a></p>
+<h3 id="1-1-complex-recursion-복잡한-반복"><a href="#1-1-complex-recursion-복잡한-반복" class="headerlink" title="1.1 complex recursion 복잡한 반복"></a>1.1 complex recursion 복잡한 반복</h3><p>단순한 배열 루프인 경우 간단히 이터레이션을 작성할 수 있다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;,</span><br><span class="line">  data:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], </span><br><span class="line">  next()&#123;</span><br><span class="line">     <span class="keyword">return</span> &#123;</span><br><span class="line">       done:<span class="keyword">this</span>.data.length == <span class="number">0</span>,</span><br><span class="line">       value:<span class="keyword">this</span>.data.shift()</span><br><span class="line">    &#125;; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="복잡한-다층형-그래프는-어떻게-이터레이션-할-것인가"><a href="#복잡한-다층형-그래프는-어떻게-이터레이션-할-것인가" class="headerlink" title="복잡한 다층형 그래프는 어떻게 이터레이션 할 것인가?"></a>복잡한 다층형 그래프는 어떻게 이터레이션 할 것인가?</h4><p>es6와 es6이전의 객체 리터럴의 큰 차이점이 무엇인가 </p>
+<ol>
+<li>es6이전<ul>
+<li>기존의 객체 리터럴에서는 객체 리터럴의 순서가 없다.</li>
+<li>자바로 따지면 hash memory로 되어있다.</li>
+</ul>
+</li>
+<li>es6<ul>
+<li>es6의 객체 리터럴은에서는 객체 리터럴의 순서가 있다.</li>
+<li><strong>linked hash memory</strong>로 되어있다.</li>
+<li>반드시 순서대로 해석된다.</li>
+</ul>
+</li>
+</ol>
+<h4 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;</span><br><span class="line">  data: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">return</span> ???</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="생각해보기-글쓴이-생각"><a href="#생각해보기-글쓴이-생각" class="headerlink" title="생각해보기 (글쓴이 생각..)"></a>생각해보기 (글쓴이 생각..)</h5><ol>
+<li>iterable 프로토콜 유지하기 </li>
+<li>배열 요소들의 타입 검사 <ol>
+<li>객체일 경우<br>객체 내부 키값의 요소들의 타입 검사 <ol>
+<li>객체일 경우</li>
+<li>배열일 경우 </li>
+<li>일반 값인 경우<br>=&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다. <ul>
+<li>어떻게 같은 루프를 다시 태우지..</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>배열일 경우<br>배열 요소의 타입 검사<ol>
+<li>객체일 경우</li>
+<li>배열일 경우 </li>
+<li>일반 값인 경우<br>=&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다. <ul>
+<li>어떻게 같은 루프를 다시 태우지..</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>일반 값인 경우<br>값 반환 </li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="cf-1-루프를-어떻게하면-잘-짤-수-있을까"><a href="#cf-1-루프를-어떻게하면-잘-짤-수-있을까" class="headerlink" title="cf__1. 루프를 어떻게하면 잘 짤 수 있을까."></a>cf__1. 루프를 어떻게하면 잘 짤 수 있을까.</h5><p>루프를 잘 짜고<br>보다 어려운 로직을 짜는 방법은<br><strong>내 머리가 선언한 변수만큼을 추적할 수 있어야 한다…</strong></p>
+<p>기본적인 알고리즘 전략은 최대한 상태를 덜쓰는것. 내 머리가 추적할 정도로..</p>
+<hr>
+<h4 id="정답"><a href="#정답" class="headerlink" title="정답"></a>정답</h4><p>각각이 컨테이너 형이라면<br>그 컨테이너를 다시 해체해서 다시 배열에 붙여준다.<br>더 이상 컨테이너 형이 아닐 때까지<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 프로토콜만 맞춰주면 된다.</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   done: boolean,</span></span><br><span class="line"><span class="comment">//   value: 출력값..</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line">&#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;</span><br><span class="line">  data: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">let</span> v;</span><br><span class="line">    <span class="keyword">while</span>(v = <span class="keyword">this</span>.data.shift()) &#123;</span><br><span class="line">      <span class="comment">// shift가 더이상 안되면 undefined</span></span><br><span class="line">      <span class="keyword">switch</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="built_in">Array</span>.isArray(v):</span><br><span class="line">          <span class="comment">// 2번째 케이스문의 객체 타입가드 조건문이 array 타입도 포함되므로, array만을 위한 조거문을 먼저 작성한다.</span></span><br><span class="line">          <span class="keyword">this</span>.data.unshift(...v);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> v &amp;&amp; <span class="keyword">typeof</span> v === <span class="string">'object'</span>:</span><br><span class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v) <span class="keyword">this</span>.data.unshift(...x);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          <span class="keyword">return</span> &#123;<span class="attr">value</span>:v, <span class="attr">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="정답-내의-오류"><a href="#정답-내의-오류" class="headerlink" title="정답 내의 오류"></a>정답 내의 오류</h5><p><code>for(var k in v)</code></p>
+<ol>
+<li><p>for…in문은 <strong>prototype의 key까지 다 나오기 때문에</strong> <code>hasOwnProperty</code>를 조건에 추가해야한다.</p>
+<ul>
+<li>hasOwnProperty는 자신의 고유 속성, 즉 상속받은 프로퍼티가 아닌 순수 자신의 속성인 경우에만 true라는 값을 반환하는 특징이 있습니다.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v)&#123;</span><br><span class="line">  <span class="keyword">if</span>(v.hasOwnProperty(k)) <span class="keyword">this</span>.data.unshift(...x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>현재 상태에서는 순서 보장이 안된다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = [];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v) x.push(v[k])</span><br><span class="line"><span class="keyword">this</span>.data.unshift(...x);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h5 id="한번더-리팩토링"><a href="#한번더-리팩토링" class="headerlink" title="한번더 리팩토링"></a>한번더 리팩토링</h5><p>값인 타입을 <code>v instanceof Object</code>로 판단할 수 있다!<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;<span class="keyword">return</span> <span class="keyword">this</span>;&#125;</span><br><span class="line">  data: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  next()&#123;</span><br><span class="line">    <span class="keyword">let</span> v;</span><br><span class="line">    <span class="keyword">while</span>(v = <span class="keyword">this</span>.data.shift()) &#123;</span><br><span class="line">      <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>)) <span class="keyword">return</span> &#123;<span class="attr">value</span>: v&#125;;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">      <span class="keyword">this</span>.data.unshift(...v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">done</span>: <span class="literal">true</span>&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><p>자바스크립트 언어는 2가지로 되어있다. </p>
+<ol>
+<li>언어자체의 문법적인 내용, </li>
+<li>클래스 라이브러리<br>자바스크립트의 클래스 라이브러리는 <strong>코어객체</strong> (Built-in)<br>Math, Date, RegEx…<br>=&gt; 표준으로 제공되고 있는 언어 표준의 일부<br>=&gt; 언어 스팩의 일부</li>
+</ol>
+<p><strong>코어객체에 있는 메서드들을 사용하는 것이<br>기본 언어자체의 문법을 사용하는 것보다 더 안전하다.</strong><br>ex. for..in보다 Object.values</p>
+<blockquote>
+<p><strong>재사용성 올리기</strong><br><code>unshift</code>나 <code>shift</code>로 인해서 data의 배열이 빈배열이 되는 상황이 된다.<br>클래스로 묶어서 매번 부를때마다 인스턴스를 반환하는 형태로 만들자.</p>
+</blockquote>
+<h5 id="cf-2-함수를-변수에-할당하자"><a href="#cf-2-함수를-변수에-할당하자" class="headerlink" title="cf__2. 함수를 변수에 할당하자."></a>cf__2. 함수를 변수에 할당하자.</h5><p>함수를 정의할때 3가지 스타일</p>
+<ol>
+<li>함수 표현식 </li>
+<li>함수 선언문</li>
+<li>Function…</li>
+</ol>
+<p>함수는 값이기 때문에 변수에 할당하는 형식이 맞다. 더 정확하게 호이스팅에 의존하지 않고 어느 시점에 함수를 만들었다를 명확하게 코드로 인지할 수 있기 때문에 function으로 시작하는 함수 정의방법은 아예 금지시키고 못쓰게 하는 경우가 많다. lint에도 함수선언문 금지룰이 있다.</p>
+<p>클래스도 하나의 값이다. 변수에 할당이 된다. 변수의 할당 없이 class..로 시작하는 선언방법은 이 클래스가 언제 만들어졌는지 모호하게 만드는 관점이 있다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Compx = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(data) &#123;<span class="keyword">this</span>.data = data;&#125;</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]()&#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.data));</span><br><span class="line">    <span class="comment">// 완전한 복사. 가장빨리 복사하는 방법..</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      next()&#123;</span><br><span class="line">        <span class="keyword">let</span> v;</span><br><span class="line">        <span class="keyword">while</span>(v = data.shift())&#123;</span><br><span class="line">          <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>)) <span class="keyword">return</span> &#123;<span class="attr">value</span>:v&#125;;</span><br><span class="line">          <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">          data.unshift(...v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="attr">done</span>:<span class="literal">true</span>&#125;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> Compx([&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>]);</span><br><span class="line"><span class="built_in">console</span>.log([...a]);</span><br><span class="line"><span class="built_in">console</span>.log([...a]);</span><br></pre></td></tr></table></figure>
+<p>shift를 사용하는 것은 data가 배열이 와야하는 조건이 있기 때문에<br>data의 사본을 만들때 아예 배열화시킨다.<br><code>const data = [JSON.parse(JSON.stringify(this.data));]</code></p>
+<p>if절을 보면 mandatory가 아닌 optional.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Compx = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(data) &#123;<span class="keyword">this</span>.data = data;&#125;</span><br><span class="line">  *gene()&#123;</span><br><span class="line">    <span class="keyword">const</span> data = [<span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.data))];</span><br><span class="line">    <span class="keyword">let</span> v;</span><br><span class="line">    <span class="keyword">while</span>(v = data.shift())&#123;</span><br><span class="line">      <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>)) <span class="keyword">yield</span> v;</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">        data.unshift(...v);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> Compx([&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">'-'</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>]);</span><br><span class="line"><span class="built_in">console</span>.log([...a]);</span><br><span class="line"><span class="built_in">console</span>.log([...a]);</span><br></pre></td></tr></table></figure></p>
+<hr>
+<hr>
+<p><a name="1-2"></a></p>
+<h3 id="1-2-abstract-loop"><a href="#1-2-abstract-loop" class="headerlink" title="1.2 abstract loop"></a>1.2 abstract loop</h3><p>위의 루프는 목적이 있는 루프이다.<br>목적이 있는 루프를 만들고 목적을 바꾸면 루프를 다시 짜야한다.</p>
+<h4 id="다양한-구조의-루프와-무관하게-해당-값이나-상황의-개입만-하고-싶은-경우"><a href="#다양한-구조의-루프와-무관하게-해당-값이나-상황의-개입만-하고-싶은-경우" class="headerlink" title="다양한 구조의 루프와 무관하게 해당 값이나 상황의 개입만 하고 싶은 경우"></a>다양한 구조의 루프와 무관하게 해당 값이나 상황의 개입만 하고 싶은 경우</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(data, f) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> v;</span><br><span class="line">  <span class="keyword">while</span>(v = data.shift())&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>))&#123;</span><br><span class="line">      <span class="comment">// v로 뭔가 하는 부분</span></span><br><span class="line">      f(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">      data.unshift(...v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 상황에서 f(v)를 호출하는 body에 본래 목적과 다른 로직이 추가 될 경우,<br>같은 로직을 복사하고 원하는 로직을 추가해야하는 상황이 발생한다.<br>문으로 로직을 작성할 때는 별다른 방법이 없다.<br><strong>=&gt; 제어문을 재활용할 수 없으므로 중복정의할 수 밖에 없다.</strong><br>=&gt; 문은 사용하고 나면 재활용할 수 없는데 이걸 어떻게 객체화하지?</p>
+<h4 id="결국-제어문을-직접-사용할-수-없고-구조객체를-이용해-루프-실행기를-별도로-구현"><a href="#결국-제어문을-직접-사용할-수-없고-구조객체를-이용해-루프-실행기를-별도로-구현" class="headerlink" title="결국 제어문을 직접 사용할 수 없고 구조객체를 이용해 루프 실행기를 별도로 구현"></a>결국 제어문을 직접 사용할 수 없고 구조객체를 이용해 루프 실행기를 별도로 구현</h4><p>구조를 추상화해보자.</p>
+<ul>
+<li>루프 공통 골격 </li>
+<li>개별구조객체</li>
+</ul>
+<h5 id="cf-3-if문을-제거하는-방법"><a href="#cf-3-if문을-제거하는-방법" class="headerlink" title="cf__3. if문을 제거하는 방법"></a>cf__3. if문을 제거하는 방법</h5><p>우리가 배우는 거의 모든 priority 기법은 if를 어떻게하면 제거할까에 대한 연구일 수도 있다. 사람은 if가 많아지면 감당이 안된다. 조건이 많아져서..<br>if를 어떻게하면 제거할 수 있을까?</p>
+<ul>
+<li>정단한 이유라면 바로 제거할 수 없다. 필요에 의해서 태어났기 때문에</li>
+<li>if로 나눠지는 경우의 수만큼의 값을 미리 만들어 놓고, 바깥쪽에서 그 값을 선택해서 들어오게 하는 수밖에 없다.</li>
+</ul>
+<p>아래는 if가 3개이다.</p>
+<ol>
+<li>array일때 </li>
+<li>object일때</li>
+<li>primitive일때<br>3개만큼의 객체를 만들어놓고 바깥쪽에서 객체를 결정하게 끔 만들어 주면 값으로 분리할 수 있게 된다. =&gt; 이렇게 if문이 하나씩 제거된다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(data, f) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> v;</span><br><span class="line">  <span class="keyword">while</span>(v = data.shift())&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>))&#123;</span><br><span class="line">      f(v)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">      data.unshift(...v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/images/2019/10/01.png"></p>
+<h4 id="팩토리-컴포지트"><a href="#팩토리-컴포지트" class="headerlink" title="팩토리 + 컴포지트"></a>팩토리 + 컴포지트</h4><ul>
+<li>선택기는 팩토리 패턴으로</li>
+<li>각각의 조건문을 컴포지트 패턴으로</li>
+</ul>
+<h5 id="cf-4-팩토리-패턴-참고"><a href="#cf-4-팩토리-패턴-참고" class="headerlink" title="cf__4. 팩토리 패턴 참고"></a>cf__4. 팩토리 패턴 <a href="https://joshua1988.github.io/web-development/javascript/javascript-pattern-design/#%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4" target="_blank" rel="noopener">참고</a></h5><ul>
+<li>비슷한 객체를 공장에서 찍어내듯이 반복적으로 생성할 수 있게 하는 패턴</li>
+<li>컴파일 시점에 구체적인 타입(클래스)을 몰라도 객체 생성이 가능하다</li>
+<li>팩토리 패턴의 가장 흔한 사례는 Object() 를 이용한 객체 생성시, 주어지는 값의 타입에 따라 String, Boolean, Number 등으로 객체가 생성되는 것이다.</li>
+</ul>
+<h5 id="cf-5-composite-패턴"><a href="#cf-5-composite-패턴" class="headerlink" title="cf__5. composite 패턴"></a>cf__5. composite 패턴</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 😵😵😵</span></span><br><span class="line"><span class="keyword">const</span> Operator = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> factory(v)&#123;</span><br><span class="line">    <span class="keyword">if</span>(v <span class="keyword">instanceof</span> <span class="built_in">Object</span>)&#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(v)) v = <span class="built_in">Object</span>.values(v);</span><br><span class="line">      <span class="comment">// --- object도 배열로 환원시켰기 때문에 현재 v는 배열임.</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> ArrayOp(v.map(<span class="function"><span class="params">v</span> =&gt;</span> Operator.factory(v)))</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">new</span> PrimaOp(v);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">constructor</span>(v)&#123;<span class="keyword">this</span>.v = v&#125;</span><br><span class="line">  operation(f)&#123;<span class="keyword">throw</span> <span class="string">'override'</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// primitive 타입 처리하는 클래스</span></span><br><span class="line"><span class="keyword">const</span> PrimaOp = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Operator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(v)&#123;<span class="keyword">super</span>(v)&#125;</span><br><span class="line">  operation(f)&#123;f(<span class="keyword">this</span>.v);&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 배열 타입을 처리하는 클래스</span></span><br><span class="line"><span class="keyword">const</span> ArrayOp = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Operator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(v)&#123;<span class="keyword">super</span>(v);&#125;</span><br><span class="line">  operation(f)&#123;<span class="keyword">for</span>(<span class="keyword">const</span> v <span class="keyword">of</span> <span class="keyword">this</span>.v) v.operation(f);&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Operator.factory([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,&#123;<span class="attr">a</span>:<span class="number">4</span>, <span class="attr">b</span>:<span class="number">5</span>&#125;,<span class="number">6</span>,<span class="number">7</span>]).operation(<span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>케이스를 더 많이 늘리는 것도 가능하다..</li>
+</ul>
+<p><a name="2"></a></p>
+<h2 id="2-lazy-execution"><a href="#2-lazy-execution" class="headerlink" title="2. lazy execution"></a>2. lazy execution</h2><p><a name="2-1"></a></p>
+<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p><a name="2-2"></a></p>
+<h3 id="yield-1"><a href="#yield-1" class="headerlink" title="yield*"></a>yield*</h3>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_20/" data-id="cjs0hhfi4003miubmmag0huig" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. abstract loop</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 complex recursion 복잡한 반복</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 abstract loop 추상루프화</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. lazy execution</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 yield</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 yield*</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/02/03/JS_23/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            ES6 Symbol 오브젝트
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/02/03/JS_19/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠77 ES6_3회차_Iteration &amp; generator</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/04/JS_24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/09/thumb_default.jpg)" alt="(ing..) ES6 Symbol 프로퍼티" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/04/JS_24/" class="title">(ing..) ES6 Symbol 프로퍼티</a></p>
+                            <p class="item-date"><time datetime="2019-02-04T01:20:19.000Z" itemprop="datePublished">2019-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/08/thumb_default.jpg)" alt="ES6 Symbol 오브젝트" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_23/" class="title">ES6 Symbol 오브젝트</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_20/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/10/thumb_default.jpg)" alt="코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_20/" class="title">코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T11:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_19/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/07/thumb_default.jpg)" alt="코드스피츠77 ES6_3회차_Iteration &amp; generator" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_19/" class="title">코드스피츠77 ES6_3회차_Iteration &amp; generator</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T09:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_18_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/06/thumb_default.jpg)" alt="CodeSpitz77 2회_Flow control statement (2)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_18_2/" class="title">CodeSpitz77 2회_Flow control statement (2)</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T07:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 16.25px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.25px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.25px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.25px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.5px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.25px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.5px;">angular</a> <a href="/tags/async/" style="font-size: 16.25px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.5px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.5px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.25px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.25px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.25px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.25px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.75px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.25px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.25px;">principle</a> <a href="/tags/programming/" style="font-size: 12.5px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.5px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.75px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 15px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.25px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.75px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">59</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/02/03/JS_20/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

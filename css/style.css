@@ -2050,62 +2050,94 @@ i.icon:before {
 .article-entry .highlight .line {
   height: 1.6em;
 }
+/*
+ * Agate by Taufik Nurrohman <https://github.com/tovic>
+ * ----------------------------------------------------
+ *
+ * #ade5fc
+ * #a2fca2
+ * #c6b4f0
+ * #d36363: 원본 => #52d4ff: 수정
+ * #fcc28c: 원본 => #d388ff: 수정
+ * #fc9b9b
+ * #ffa
+ * #fff
+ * #333
+ * #62c8f3
+ * #888
+ *
+ */
 .highlight {
-  color: #f8f8f8;
-  background: #303337;
-  border-radius: 10px;
+  color: #fff;
+  background: #333;
 }
-.highlight .code .comment,
-.highlight .code .quote,
-.highlight .code .meta {
-  color: #7c7c7c;
+.highlight .code .name,
+.highlight .code .strong {
+  font-weight: bold;
 }
-.highlight .code .keyword,
-.highlight .code .selector-tag,
-.highlight .code .tag,
-.highlight .code .name {
-  color: #96cbfe;
-}
-.highlight .code .attribute,
-.highlight .code .selector-id {
-  color: #ffffb6;
-}
-.highlight .code .string,
-.highlight .code .selector-attr,
-.highlight .code .selector-pseudo,
-.highlight .code .addition {
-  color: #a8ff60;
-}
-.highlight .code .subst {
-  color: #daefa3;
-}
-.highlight .code .regexp,
-.highlight .code .link {
-  color: #e9c062;
-}
-.highlight .code .built_in,
-.highlight .code .title,
-.highlight .code .section,
-.highlight .code .type,
-.highlight .code .doctag {
-  color: #ffffb6;
-}
-.highlight .code .symbol,
-.highlight .code .bullet,
-.highlight .code .variable,
-.highlight .code .template-variable,
-.highlight .code .literal {
-  color: #c6c5fe;
-}
-.highlight .code .number,
-.highlight .code .deletion {
-  color: #ff73fd;
-}
+.highlight .code .code,
 .highlight .code .emphasis {
   font-style: italic;
 }
-.highlight .code .strong {
-  font-weight: bold;
+.highlight .code .tag {
+  color: #62c8f3;
+}
+.highlight .code .variable,
+.highlight .code .template-variable,
+.highlight .code .selector-id,
+.highlight .code .selector-class {
+  color: #ade5fc;
+}
+.highlight .code .string,
+.highlight .code .bullet {
+  color: #a2fca2;
+}
+.highlight .code .type,
+.highlight .code .title,
+.highlight .code .section,
+.highlight .code .attribute,
+.highlight .code .quote,
+.highlight .code .built_in,
+.highlight .code .builtin-name {
+  color: #ffa;
+}
+.highlight .code .number,
+.highlight .code .symbol,
+.highlight .code .bullet {
+  color: #52d4ff;
+}
+.highlight .code .keyword,
+.highlight .code .selector-tag,
+.highlight .code .literal {
+  color: #d388ff;
+}
+.highlight .code .comment,
+.highlight .code .deletion,
+.highlight .code .code {
+  color: #888;
+}
+.highlight .code .regexp,
+.highlight .code .link {
+  color: #c6b4f0;
+}
+.highlight .code .meta {
+  color: #fc9b9b;
+}
+.highlight .code .deletion {
+  background-color: #fc9b9b;
+  color: #333;
+}
+.highlight .code .addition {
+  background-color: #a2fca2;
+  color: #333;
+}
+.highlight .code .highlight a {
+  color: inherit;
+}
+.highlight .code .highlight a:focus,
+.highlight .code .highlight a:hover {
+  color: inherit;
+  text-decoration: underline;
 }
 @media only screen and (min-width: 960px) {
   .nav-container-inner {
