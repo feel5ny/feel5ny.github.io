@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>코드스피츠80_OOP design with game (1)-2 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,OOP" />
+    
+    
+    <meta name="description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.  객체지향 프로그래밍을 배우기 전,프로시저 프로그래밍 형태의 코드를 알아본다.  2. 게임 개요 및 규칙  2.1 앤티티 파악아키텍트나 디자인패턴을 만드는 설계자들은현상을 보고,">
+<meta name="keywords" content="javascript,OOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠80_OOP design with game (1)-2">
+<meta property="og:url" content="http://feel5ny.github.io/2019/02/17/OOP_08_2/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.  객체지향 프로그래밍을 배우기 전,프로시저 프로그래밍 형태의 코드를 알아본다.  2. 게임 개요 및 규칙  2.1 앤티티 파악아키텍트나 디자인패턴을 만드는 설계자들은현상을 보고,">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/12/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-02-24T18:23:34.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠80_OOP design with game (1)-2">
+<meta name="twitter:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.  객체지향 프로그래밍을 배우기 전,프로시저 프로그래밍 형태의 코드를 알아본다.  2. 게임 개요 및 규칙  2.1 앤티티 파악아키텍트나 디자인패턴을 만드는 설계자들은현상을 보고,">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/12/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/17/OOP_08_2/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/12/thumb_default.jpg" alt="코드스피츠80_OOP design with game (1)-2" style="width:100%">
+    </div>
+
+<article id="post-OOP_08_2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠80_OOP design with game (1)-2
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/02/17/OOP_08_2/" class="article-date">
+            <time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OOP/">OOP</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#2">2. 게임 개요 및 규칙</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 엔티티 파악</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 규칙</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#2-2-1">Entity</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-2-2">Core Action</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 어디부터 시작할까?</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 [객체] Block</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 [객체] Game</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4 Game 시나리오</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#4-1">1,2,3 테이블 데이터 정의</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#4-4">4. 테이블 데이터 정의</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#4-5">5. 테이블 이벤트 걸기</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#4-5-1">5.1 이벤트 &gt; 블럭을 누르는 순간: down</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#4-5-2">5.2 이벤트 &gt; 블럭을 떼는 순간: up</a>
+                          <ul>
+                            
+                              
+                                <li>
+                                  <a href="#4-5-2-1">5.2.1 remove 😫</a>
+                                </li>
+                              
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#4-5-3">5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>코드스피츠 강의 정리록</p>
+</blockquote>
+<p>생소한 도메인으로 배우는게 좋다.<br>익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.<br>때문에 80기는 게임을 통해서 진행할 예정.</p>
+<hr>
+<p>객체지향 프로그래밍을 배우기 전,<br><strong>프로시저 프로그래밍</strong> 형태의 코드를 알아본다.</p>
+<p><a name="2"></a></p>
+<h1 id="2-게임-개요-및-규칙"><a href="#2-게임-개요-및-규칙" class="headerlink" title="2. 게임 개요 및 규칙"></a>2. 게임 개요 및 규칙</h1><p><img src="/images/2019/12/01.png"></p>
+<p><a name="2-1"></a></p>
+<h2 id="2-1-앤티티-파악"><a href="#2-1-앤티티-파악" class="headerlink" title="2.1 앤티티 파악"></a>2.1 앤티티 파악</h2><p>아키텍트나 디자인패턴을 만드는 설계자들은<br>현상을 보고, 현상으로부터 프로그램 엔티티를 도출해서 설계를 들어간다.</p>
+<ul>
+<li>블럭에는 타입이 있구나.</li>
+<li>블럭 connect의 최저 갯수 제한이 있겠구나.</li>
+<li>스테이지의 가로 세로 갯수</li>
+<li>선택했던 블럭들을 돌아갈 수 있다.</li>
+<li><p>새로운 블록이 떨어진다.</p>
+<blockquote>
+<p>인지과학<br>  가상세계임에도 불구하고 물리력가 중력을 기대한다 ㅋ</p>
+</blockquote>
+</li>
+</ul>
+<p><a name="2-2"></a></p>
+<h2 id="2-2-규칙"><a href="#2-2-규칙" class="headerlink" title="2.2 규칙"></a>2.2 규칙</h2><p><a name="2-2-1"></a></p>
+<h3 id="Entity"><a href="#Entity" class="headerlink" title="Entity"></a>Entity</h3><ul>
+<li>블럭타입: 5가지 (0,1,2,3,4)</li>
+<li>cell size: 8*8</li>
+</ul>
+<p><a name="2-2-2"></a></p>
+<h3 id="Core-Action"><a href="#Core-Action" class="headerlink" title="Core Action"></a>Core Action</h3><p><img src="/images/2019/12/02.png"></p>
+<ol>
+<li>한번에 3개 이상 같은 색으로 인접한 블록이 선택되면 </li>
+<li>삭제됨</li>
+<li>삭제되면 위의 블록이 내려옴.</li>
+<li>내려온 뒤</li>
+<li>공간의 블록이 생성되어 채워짐</li>
+</ol>
+<blockquote>
+<p>cf__1 <strong>게임이야기</strong> ~<br>모바일시대에서는 복잡한 core action이 많이 들어간 게임은 상품성이 없다. (안좋은 예: 와우)<br>core action이 단순한 게임이 상품성이 좋다. 최근 rpg게임들은 단순하게 변했다. 한붓그리기도 이미 오래전에 누가 찾아낸 코어액션중에 하나이다. 재밌는 반복거리를 찾아내면 벗어나려고 하지 않는다.</p>
+</blockquote>
+<hr>
+<hr>
+<p><a name="3"></a></p>
+<h1 id="3-어디서부터-시작할까"><a href="#3-어디서부터-시작할까" class="headerlink" title="3. 어디서부터 시작할까?"></a>3. 어디서부터 시작할까?</h1><h2 id="프로그램의-핵심은-데이터"><a href="#프로그램의-핵심은-데이터" class="headerlink" title="프로그램의 핵심은 데이터"></a>프로그램의 핵심은 데이터</h2><p>사람은 표면적인 것만 파악하려고 한다.</p>
+<ul>
+<li>표면적인 것과 시각적인 것</li>
+<li>경험에 의존에 의해서 파악하기 때문에 경험한 것만 보인다.</li>
+</ul>
+<p>프로그램의 핵심은 데이터이다.</p>
+<ul>
+<li>거의 대부분의 프로그램들은 다 예쁜 데이터 view.</li>
+<li>개발자의 눈으로 보면 프로그램의 핵심은 데이터이다. </li>
+</ul>
+<h2 id="entity의-종류를-미리-파악하자-👀"><a href="#entity의-종류를-미리-파악하자-👀" class="headerlink" title="entity의 종류를 미리 파악하자. 👀"></a>entity의 종류를 미리 파악하자. 👀</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">column = <span class="number">8</span>;</span><br><span class="line">row = <span class="number">8</span>;</span><br><span class="line">blockTypes = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;&#125;;</span><br><span class="line">  isNext()&#123;&#125;;</span><br><span class="line">  isValid()&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="현실세계-entity에는-이-3가지-이외에는-발견하기-힘들다"><a href="#현실세계-entity에는-이-3가지-이외에는-발견하기-힘들다" class="headerlink" title="현실세계 entity에는 이 3가지 이외에는 발견하기 힘들다."></a>현실세계 entity에는 이 3가지 이외에는 발견하기 힘들다.</h3><ol>
+<li>스칼라 값<ul>
+<li>설정에 따라 자유롭게 크기를 변경할 수 있음.</li>
+<li>단일 값 </li>
+<li>가변적</li>
+<li>(한번에 하나의 값만 보유할 수 있는 원자량 <a href="https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC" target="_blank" rel="noopener">from wiki</a>)</li>
+</ul>
+</li>
+<li>정의값<ul>
+<li>미리 정해진 타입이 존재한다.</li>
+<li>bolckTypes는 콜렉션 개념이 아니다.<br>집합을 정의한 개념이다. 하나의 값인것처럼.</li>
+</ul>
+</li>
+<li>객체값<ul>
+<li>생성되거나 삭제되고, 연결되거나 조건을 파악한다.</li>
+<li>블록을 객체로 보는 이유는 <strong>블록이 자신만의 책임을 위임할 수 있기 때문</strong>이다.<ul>
+<li>다음번에 올 수 있는 블록이니?</li>
+<li>올바른 위치인 상태이니?</li>
+<li>자신의 상태를 은닉하고 캡슐화</li>
+</ul>
+</li>
+<li>블록에는 자신만의 책임을 가질 수 있기 때문에 객체로 평가하게 된다.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>UML을 깊이 공부하면 5가지 종류의 여러가지 entity과 관계가 나온다.</p>
+</blockquote>
+<hr>
+<h3 id="cf-2-클래스이냐-싱글톤-객체이냐-를-항상-고민한다"><a href="#cf-2-클래스이냐-싱글톤-객체이냐-를-항상-고민한다" class="headerlink" title="cf__2. 클래스이냐? 싱글톤 객체이냐?를 항상 고민한다."></a>cf__2. 클래스이냐? 싱글톤 객체이냐?를 항상 고민한다.</h3><blockquote>
+<p>싱글톤 객체<br>  애플리케이션이 시작될 때 어떤 클래스가 최초 한번만 메모리를 할당하고(Static) 그 메모리에 인스턴스를 만들어 사용하는 디자인패턴.<br>  생성자가 여러 차례 호출되더라도 실제로 생성되는 객체는 하나고<br>  최초 생성 이후에 호출된 생성자는 최초에 생성한 객체를 반환한다.<br>  싱글톤 패턴은 단 하나의 인스턴스를 생성해 사용하는 디자인 패턴이다.</p>
+</blockquote>
+<ul>
+<li>객체는 하나만 있거나 여러개 있다.<br>하나만 있는 것인지 여러개 있는 것인지 파악해야한다.</li>
+<li>하나만 있는데 클래스로 정의하거나<br>여러개 있는 것인데 객체로 만들면 반드시 고우투헬..<ul>
+<li>여러개 있는 것을 개별적으로 만들면,<br>여러개 있는 애들은 보통 변화를 한꺼번에 일으켜야하는데<br>개별적으로 만들었기 때문에 한꺼번에 수정할 수 없게 된다. </li>
+<li>하나만 있어야 하는데 클래스로 만들면<br>인스턴스가 여러개 생길 수 있다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<p><a name="3-1"></a></p>
+<h2 id="3-1-객체-Block"><a href="#3-1-객체-Block" class="headerlink" title="3.1 [객체] Block"></a>3.1 [객체] Block</h2><ol>
+<li>클래스? 혹은 싱글톤 객체?<ul>
+<li>블록은 여러개 생성되므로 <strong>클래스</strong></li>
+</ul>
+</li>
+<li>책임</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(type)&#123;</span><br><span class="line">    <span class="keyword">this</span>._type = type;</span><br><span class="line">  &#125;</span><br><span class="line">  get image()&#123;<span class="keyword">return</span> <span class="string">`url('img/<span class="subst">$&#123;<span class="keyword">this</span>._type&#125;</span>.png')`</span>;&#125;</span><br><span class="line">  get type()&#123;<span class="keyword">return</span> <span class="keyword">this</span>._type;&#125;</span><br><span class="line">&#125;</span><br><span class="line">Block.GET = <span class="function">(<span class="params">type = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random(</span>)*5)) =&gt;</span> <span class="keyword">new</span> Block(type);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>자신만의 <strong>타입</strong>을 갖는다.<ul>
+<li><code>parseInt(Math.random()*5)</code>: 0 ~ 4 사이의 타입을 얻게됨</li>
+<li><strong>인자에 초기화 코드를 명시해주면<br>선언과 코드의 내용을 분리할 수 있어서 가독성이 좋아진다.</strong></li>
+</ul>
+</li>
+<li>타입에 따른 <strong>이미지 경로</strong>를 반환한다.<br>(타입에 따른 블록 이미지가 다르니까.. )</li>
+</ol>
+<h3 id="왜-factory-함수로-Block-GET"><a href="#왜-factory-함수로-Block-GET" class="headerlink" title="왜 factory 함수로? (Block.GET)"></a>왜 factory 함수로? (<code>Block.GET</code>)</h3><ul>
+<li>Block 클래스는 <strong>받아온 type을 자기 타입으로 기억하는데</strong>만 관심 있다. </li>
+<li>타입을 전달하지 않았을 때 어떻게 만드는지는<br><strong>엄밀하게 따지면 블럭의 지식은 아니다.</strong><ul>
+<li>블럭을 만드는 쪽이 관심 있다.<ul>
+<li>만드는 쪽이 관심있는 것과<br>만들어 지는 쪽이 관심있는 것이 다르다. </li>
+</ul>
+</li>
+<li>랜덤함수는 팩토리 함수가 가져야할 지식이다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="팩토리-함수는-클래스-내부로-가면-안된다"><a href="#팩토리-함수는-클래스-내부로-가면-안된다" class="headerlink" title="팩토리 함수는 클래스 내부로 가면 안된다."></a>팩토리 함수는 클래스 내부로 가면 안된다.</h3><ul>
+<li><strong>변화율</strong>때문에!</li>
+<li>타입은 stage마다 바뀔꺼고, 아이템 추가되면 더 바뀔 것이다.</li>
+<li>타입은 변화율이 높은 개념이므로 클래스와 분리하여 명확한 의도를 작성하게 한다.</li>
+</ul>
+<blockquote>
+<p><strong>변화율을 평가하는 가장 쉬운 방법</strong><br>  변화율을 잘 디자인 했으면 책임이 없다고 생각됬던 객체는 수정되지 않아야한다.<br>  우리의 목표는 보다 더 많은 파일을 안건드리고<br>  <strong>일부파일만 건드려야한다.</strong></p>
+</blockquote>
+<hr>
+<h4 id="cf-3-Factory-함수"><a href="#cf-3-Factory-함수" class="headerlink" title="cf__3. Factory 함수"></a>cf__3. Factory 함수</h4><p>객체지향할 때 클래스를 사용하는 경우 생성자를 봉인하자.<br><strong>factory함수로 클래스를 얻어가게 하자.</strong></p>
+<ul>
+<li><code>static</code> 키워드 써서 불러오게 해도됨.</li>
+<li>factory 함수의 명칭은 일관되게 모든 클래스에 생성자를 대신하는 스태틱 함수를 만들자.<br>(예제에서는 <code>GET</code>)<blockquote>
+<p>팩토리 함수 : 객체를 반환하는 함수</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h4 id="cf-4-단일-책임원칙-훈련하기"><a href="#cf-4-단일-책임원칙-훈련하기" class="headerlink" title="cf__4. 단일 책임원칙 훈련하기"></a>cf__4. <strong>단일 책임원칙 훈련하기</strong></h4><p>단일 책임원칙은 엄밀하게 지키려면 굉장히 어렵고,<br>섬세하게 바라보는 눈으로<br>언제나 의심해서 관리하지 않으면 실력..키워지지 않는다.<br>(빠르면 3년 늦으면 5년..ㅎ)</p>
+<hr>
+<p><a name="3-2"></a></p>
+<h2 id="3-2-객체-Game"><a href="#3-2-객체-Game" class="headerlink" title="3.2 [객체] Game"></a>3.2 [객체] Game</h2><p>게임이라는 객체는 블록들을 소유하는 마스터 객체</p>
+<ol>
+<li>클래스이냐? 싱글톤 객체이냐?<br>게임은 하나의 객체만 있으면 된다. (바둑판 하나.)<br>구지 클래스로 선언하지 않고, 싱글톤 객체로 만든다.<br>=&gt; 싱글톤 객체</li>
+<li><p>책임<br>2번과 3번은 내부에서만 알면된다.</p>
+<ol>
+<li>초기화<br>필요한 정보를 바탕으로 게임 본체를 생성</li>
+<li>렌더링<br>그림 갱신</li>
+<li>이벤트 걸기<br>각 블록에서 이벤트를 처리</li>
+</ol>
+</li>
+<li><p>외부에서 게임의 어떤 상태만 알면 될까?</p>
+<ul>
+<li>게임 초기화<br>함수만 하나 노출하면 됨</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 게임은 초기화된 게임이 바로 생성되어야 하므로, 즉시실행함수로.</span></span><br><span class="line"><span class="keyword">const</span> Game = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> init = ...</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> init;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="4"></a></p>
+<h1 id="4-Game-시나리오"><a href="#4-Game-시나리오" class="headerlink" title="4. Game 시나리오"></a>4. Game 시나리오</h1><ol>
+<li>테이블 형태 정의</li>
+<li>테이블 생성</li>
+<li>테이블 내에 블록 데이터 채우기 (data)<br>2차원배열을 만들어야하기때문에<br>row와 column을 돌면서 생성한다.</li>
+<li>렌더링<ul>
+<li>data는 inMemory 객체</li>
+<li>render를 따로 호출하는 것은 네이티브 객체이기때문에(dom의 세상..)</li>
+</ul>
+</li>
+<li>렌더링 전 table에 이벤트 걸기.</li>
+</ol>
+<hr>
+<p><a name="4-1"></a></p>
+<h3 id="1-2-3-객체-스칼라값-정의값-테이블-데이터-정의"><a href="#1-2-3-객체-스칼라값-정의값-테이블-데이터-정의" class="headerlink" title="1. + 2. + 3. [객체, 스칼라값, 정의값] 테이블 데이터 정의"></a>1. + 2. + 3. [객체, 스칼라값, 정의값] 테이블 데이터 정의</h3><ol>
+<li>테이블 형태 정의</li>
+<li>테이블 생성</li>
+<li>테이블 내에 블록 데이터 채우기 (data)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Game = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> column = <span class="number">8</span>, row = <span class="number">8</span>, blockSize = <span class="number">80</span>;</span><br><span class="line">  <span class="keyword">const</span> data = [];</span><br><span class="line">  <span class="keyword">let</span> table;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> init = <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">    table = <span class="built_in">document</span>.querySelector(tid);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">      <span class="keyword">const</span> r = [];</span><br><span class="line">      data.push(r);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = Block.GET();</span><br><span class="line">    &#125;</span><br><span class="line">    render();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> render = <span class="function"><span class="params">_</span> =&gt;</span> &#123;...&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<p><a name="4-4"></a></p>
+<h3 id="4-렌더링"><a href="#4-렌더링" class="headerlink" title="4. 렌더링"></a>4. 렌더링</h3><p>데이터를 소비해서<br>표를 다시 그려주는 로직.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Game = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> column = <span class="number">8</span>, row = <span class="number">8</span>, blockSize = <span class="number">80</span>;</span><br><span class="line">  <span class="keyword">const</span> data = [];</span><br><span class="line">  <span class="keyword">let</span> table;</span><br><span class="line">  <span class="keyword">const</span> init = <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    render();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  👇👇👇</span><br><span class="line">  <span class="keyword">const</span> el = <span class="function"><span class="params">tag</span> =&gt;</span> <span class="built_in">document</span>.createElement(tag);</span><br><span class="line">  <span class="keyword">const</span> render = <span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">    table.innerHTML = <span class="string">''</span>;</span><br><span class="line">    data.forEach(<span class="function"><span class="params">row</span> =&gt;</span> table.appendChild(</span><br><span class="line">      row.reduce(<span class="function">(<span class="params">tr, block</span>) =&gt;</span> &#123;</span><br><span class="line">        tr.appendChild(el(<span class="string">'td'</span>)).style.cssText = <span class="string">`</span></span><br><span class="line"><span class="string">          <span class="subst">$&#123;block? <span class="string">`background: <span class="subst">$&#123;block.image&#125;</span>;`</span> : <span class="string">''</span>&#125;</span></span></span><br><span class="line"><span class="string">          width: <span class="subst">$&#123;blockSize&#125;</span>px;</span></span><br><span class="line"><span class="string">          height: <span class="subst">$&#123;blockSize&#125;</span>px</span></span><br><span class="line"><span class="string">          cursor: pointer`</span>;</span><br><span class="line">        <span class="keyword">return</span> tr;</span><br><span class="line">      &#125;, el(<span class="string">'tr'</span>))</span><br><span class="line">    ));</span><br><span class="line">  &#125;;</span><br><span class="line">  👆👆👆</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>배열을 루프돌아서<br>각각의 줄을 td를 갖는 tr로 바꿔서<br>table에 넣고 싶음.</p>
+<ul>
+<li>td를 갖는 tr로<br><img src="/images/2019/12/04.png" style="width:20rem;"></li>
+<li>각각의 줄을 (td를 갖는) tr로 바꿔서<br><img src="/images/2019/12/03.png" style="width:20rem;"></li>
+</ul>
+<hr>
+<h5 id="cf-5-배열의-고차함수"><a href="#cf-5-배열의-고차함수" class="headerlink" title="cf__5. 배열의 고차함수"></a>cf__5. 배열의 고차함수</h5><p>배열의 고차함수를 쓰는 원리는 간단하다.</p>
+<ul>
+<li>루프돌고 싶으면 <code>forEach</code></li>
+<li>배열의 원소를 바꾼 배열을 얻고 싶으면 <code>map</code></li>
+<li>하나의 값으로 뭉치고 싶으면 <code>reduce</code><blockquote>
+<p>여러개의 집합을 하나의 스칼라값으로 바꾸는 것</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p><a name="4-5"></a></p>
+<h3 id="5-table에-이벤트-걸기"><a href="#5-table에-이벤트-걸기" class="headerlink" title="5. table에 이벤트 걸기."></a>5. table에 이벤트 걸기.</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> Game = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> column = <span class="number">8</span>, row = <span class="number">8</span>, blockSize = <span class="number">80</span>;</span><br><span class="line">  <span class="keyword">const</span> data = [];</span><br><span class="line">  <span class="keyword">let</span> table;</span><br><span class="line">  <span class="keyword">const</span> init = <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">    table = <span class="built_in">document</span>.querySelector(tid);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">      <span class="keyword">const</span> r = [];</span><br><span class="line">      data.push(r);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = Block.GET();</span><br><span class="line">    &#125;</span><br><span class="line">    👇👇👇</span><br><span class="line">    table.addEventListener(<span class="string">'mousedown'</span>, down);</span><br><span class="line">    table.addEventListener(<span class="string">'mouseup'</span>, up);</span><br><span class="line">    table.addEventListener(<span class="string">'mouseleave'</span>, up);</span><br><span class="line">    table.addEventListener(<span class="string">'mousemove'</span>, move);</span><br><span class="line">    👆👆👆</span><br><span class="line">    render();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> el = <span class="function"><span class="params">tag</span> =&gt;</span> <span class="built_in">document</span>.createElement(tag);</span><br><span class="line">  <span class="keyword">const</span> render = <span class="function"><span class="params">_</span> =&gt;</span> &#123;...&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mousedown<ul>
+<li>마우스를 누르는 그 순간. (click과 다르게 press하는 순간)</li>
+</ul>
+</li>
+<li>mouseup<ul>
+<li>손가락을 떼는 그 순간.</li>
+</ul>
+</li>
+<li>mouseleave<ul>
+<li>바인딩된 요소에만 이벤트가 발생하며, 해당 엘리먼트의 영역에서 마우스가 벗어날 때 발생한다.</li>
+</ul>
+</li>
+<li>mousemove<ul>
+<li>마우스가 엘리먼트에서 움직일 때 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a name="4-5-1"></a></p>
+<h3 id="5-1-이벤트-gt-블럭을-누르는-순간-down"><a href="#5-1-이벤트-gt-블럭을-누르는-순간-down" class="headerlink" title="5.1 이벤트 &gt; 블럭을 누르는 순간: down"></a>5.1 이벤트 &gt; 블럭을 누르는 순간: down</h3><ol>
+<li><p>move는 mousedown인 상태여야 의미가 있다.<br><strong>down의 상태값</strong> 필요</p>
+</li>
+<li><p>현재 눌러진 블록의 위치값 알아야함.<br>event로부터 x,y값 전체좌표를 받아와서<br>x, y좌표를 이용해서 테이블 내에서 몇번째 블록인지, 데이터로 치환하게 된다.</p>
+<p>현재 눌러진 블록이 첫 시작? 아니면 중간?</p>
+<ol>
+<li>시작 블록<ul>
+<li>지금 선택이 시작되는 블록</li>
+<li>라이언타입이면 계속 라이언 타입</li>
+<li>시작값은 왜 알아야하지?<ul>
+<li>돌아가기도 해야함.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>현재 블록<ul>
+<li>move할때마다 변함 (cursor와 같은)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> down = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// down된 상태를 활성</span></span><br><span class="line">  <span class="comment">// x, y로부터 block 데이터를 얻음</span></span><br><span class="line">  <span class="comment">// 위에서 얻은 블록을 시작블록 및 현재 블록으로 설정하고 선택목록에 포함시킴.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>down의 상태값<ul>
+<li>down이 아닐때만 down.</li>
+</ul>
+</li>
+<li>어떤 블록이 선택되어있는지.</li>
+<li>x,y값을 넣으면 몇번째인지 알아낼 수 있는 함수</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> column = <span class="number">8</span>, row = <span class="number">8</span>, blockSize = <span class="number">80</span>;</span><br><span class="line"><span class="keyword">const</span> data = [];</span><br><span class="line"><span class="keyword">let</span> table;</span><br><span class="line">👇👇👇</span><br><span class="line"><span class="keyword">let</span> startBlock, currBlock, isDown;</span><br><span class="line"><span class="keyword">const</span> selected = [], getBlock = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> down = <span class="function">(<span class="params">&#123;pageX: x, pageY: y&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x,y);</span><br><span class="line">  <span class="keyword">if</span>(!curr) <span class="keyword">return</span>;</span><br><span class="line">  isDown = <span class="literal">true</span>;</span><br><span class="line">  selected.length = <span class="number">0</span>;</span><br><span class="line">  selected[<span class="number">0</span>] = startBlock = currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;</span><br><span class="line">👆👆👆</span><br></pre></td></tr></table></figure>
+<p>getBlock이외의 밑에나오는 로직은 전부 인메모리 로직.<br>네이티브 레이어를 다루는 방법은 즉시 인메모리 객체로 변환한다. </p>
+<hr>
+<h5 id="cf-6-네이티브-객체를-다룰때-가장-중요한-요령"><a href="#cf-6-네이티브-객체를-다룰때-가장-중요한-요령" class="headerlink" title="cf__6. 네이티브 객체를 다룰때 가장 중요한 요령"></a>cf__6. 네이티브 객체를 다룰때 가장 중요한 요령</h5><ul>
+<li><strong>네이티브 레이어를 최대한 줄이는 것.</strong></li>
+<li>네이티브의 정보 중에 필요한 핵심정보만 이용해서 즉시 인메모리 객체로 바꿈.</li>
+<li>네이티브의 코드가 많이 퍼져있으면 퍼져있을수록<br>더욱더 다루기 어렵고<br>더욱더 컨버팅하기 어렵게 된다.</li>
+<li>네이티브 코드중에 필요한 부분만 추출해서 =&gt; 즉시 인메모리 객체로 바꾸고</li>
+<li>나머지 로직은 인메모리에서 수용하도록 함.</li>
+</ul>
+<blockquote>
+<p>좋은 개발자<br>말하면 코드로 옮기는 것이 리얼타임이 될때까지.. 훈련하자.<br>좋은 개발자는 제어문을 잘쓰거나, 코드를 한국어로 번역하거나 한국어를 코드로 번역하는 능력에 달려있다.<br>숙련을 많이 해서 실시간으로.</p>
+</blockquote>
+<hr>
+<h4 id="5-cf-네이티브-코드-gt-인메모리-객체로-변환"><a href="#5-cf-네이티브-코드-gt-인메모리-객체로-변환" class="headerlink" title="5.cf 네이티브 코드 =&gt; 인메모리 객체로 변환"></a>5.cf 네이티브 코드 =&gt; 인메모리 객체로 변환</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 네이티브 객체의 값을 =&gt; 인메모리 객체로 변환해주는 변환기 !</span></span><br><span class="line"><span class="comment">// 많이 나옴.</span></span><br><span class="line"><span class="keyword">const</span> getBlock = (x: <span class="built_in">number</span>, y: <span class="built_in">number</span>): <span class="function"><span class="params">Block</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; top: T, left: L &#125; = table.getBoundingClientRect();</span><br><span class="line">  <span class="keyword">if</span> (x &lt; L || x &gt; L + blockSize * row || y &lt; T || y &gt; T + blockSize * column)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 바둑판 범위를 넘는 경우 제외(왼쪽넘어, 오른쪽넘어, 위쪽넘어, 아래쪽 넘어)</span></span><br><span class="line">  <span class="keyword">return</span> data[<span class="built_in">parseInt</span>(y - T) / blockSize][<span class="built_in">parseInt</span>(x - L) / blockSize];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>getBoundingClientRect</code><br>Element.getBoundingClientRect() 메서드는<br>요소의 크기와 요소의 viewport에서의 상대적인 위치를 반환합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DOMRect </span><br><span class="line">&#123; x: 0, </span><br><span class="line">  y: 0, </span><br><span class="line">  width: 0, </span><br><span class="line">  height: 0, </span><br><span class="line">  top: 0, </span><br><span class="line">  bottom: 0, </span><br><span class="line">  left: 0, </span><br><span class="line">  right: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<hr>
+<p><a name="4-5-2"></a></p>
+<h3 id="5-2-이벤트-gt-블럭을-떼는-순간-up"><a href="#5-2-이벤트-gt-블럭을-떼는-순간-up" class="headerlink" title="5.2 이벤트 &gt; 블럭을 떼는 순간: up"></a>5.2 이벤트 &gt; 블럭을 떼는 순간: up</h3><p>코어액션이 여기서 다 일어난다.</p>
+<ol>
+<li>down을 해제</li>
+<li>선택목록이 3이상이면 삭제 실시</li>
+<li>2이하면 리셋</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> up = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// down을 해제</span></span><br><span class="line">  <span class="comment">// 선택목록이 3이상이면 삭제 실시</span></span><br><span class="line">  <span class="comment">// 2이하면 리셋</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-0-reset"><a href="#5-2-0-reset" class="headerlink" title="5.2.0 reset"></a>5.2.0 reset</h4><p>선택항목이 2이하면 모두 초기화시킨다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> up = <span class="function"><span class="params">_</span> =&gt;</span> selected.length &gt; <span class="number">2</span> ? remove() : reset();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reset = <span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  startBlock = currBlock = <span class="literal">null</span>;</span><br><span class="line">  selected.length = <span class="number">0</span>;</span><br><span class="line">  isDown = <span class="literal">false</span>;</span><br><span class="line">  render();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h5 id="cf-7-쉬운것부터-짜자"><a href="#cf-7-쉬운것부터-짜자" class="headerlink" title="cf__7. 쉬운것부터 짜자!"></a>cf__7. 쉬운것부터 짜자!</h5><p>쉬운 것은 의존성이 없다. 고칠 일이 적다.<br>복잡한 것부터 짜면 의존성이 많은 것부터 짜게 되고,<br>나중에 깨달은게 많을수록 더 많이 고치게 된다.</p>
+<hr>
+<ol>
+<li>선택된 블록들을 지워주고 =&gt; remove</li>
+<li>떨어뜨린 다음에 =&gt; drop</li>
+<li>새로 생성하고 =&gt; readyToFill</li>
+<li>다시 내려와주면서, 합쳐줘야함. =&gt; fill </li>
+</ol>
+<p><a name="4-5-2-1"></a></p>
+<h4 id="5-2-1-remove-😫😫"><a href="#5-2-1-remove-😫😫" class="headerlink" title="5.2.1 remove 😫😫"></a>5.2.1 remove 😫😫</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> remove = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 데이터 내부의 row를 돌면서</span></span><br><span class="line"><span class="comment">    해당 row에 선택된 요소가 존재하면 null로 만드는 함수.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  data.forEach(<span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">    selected.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i;</span><br><span class="line">      <span class="keyword">if</span> ((i = r.indexOf(v)) !== <span class="number">-1</span>) r[i] = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  render();</span><br><span class="line">  setTimeout(drop, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>forEach는 for문보다 대화가됨.</p>
+</blockquote>
+<p>column을 돌면서 row를 계산해서 떨어뜨리는 일을 한다.<br>한턴에는 한칸씩 떨어진다.<br>중력에 의해 떨어지는 방향은<br>column기준이기때문에 column을 먼저 loop돌린다.<br>row는 맨 아랫줄부터 떨어지는 작업을 해야하므로.. (전체row -1) 부터 시작</p>
+<ul>
+<li>isNext: 윗줄에도 block이 있는 상황이라 다음 row도 검사해야하는지.</li>
+<li>isEmpty: 떨어질 블럭이 하나의 column row들에 있는지 없는지.</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> drop = <span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> isNext = <span class="literal">false</span>; <span class="comment">// drop을 더 해야하는지 말아야하는지.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = row - <span class="number">1</span>; i &gt; <span class="number">-1</span>; i--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!data[i][j] &amp;&amp; i) &#123; <span class="comment">// 해당 구멍에 블럭이 없고, row의 인덱스가 0이 아닌(꼭대기가 아닌)</span></span><br><span class="line">        <span class="keyword">let</span> k = i, <span class="comment">// 해당 줄의 index를 복사한다.</span></span><br><span class="line">          isEmpty = <span class="literal">true</span>; <span class="comment">// data[i][j] 위에 떨어질 블럭이 비었는지 아닌지.</span></span><br><span class="line">        <span class="keyword">while</span> (k--) <span class="comment">// index를 하나씩 확인하면서</span></span><br><span class="line">          <span class="keyword">if</span> (data[k][j]) &#123; <span class="comment">// 위에 블럭이 있으면</span></span><br><span class="line">            isEmpty = <span class="literal">false</span>; <span class="comment">// 위에 떨어질 블럭이 하나라도 있다는 뜻</span></span><br><span class="line">            <span class="keyword">break</span>; <span class="comment">// 반복분을 끝낸다.</span></span><br><span class="line">          &#125;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty) <span class="keyword">break</span>; <span class="comment">// 위에 떨어질 블럭이 하나도 없으면 row loop 종료 다음 column loop 시작</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 위에 블럭이 하나라도 있는 상황이고, </span></span><br><span class="line">        <span class="comment">// 다음 row도 검새햐아함을 flag</span></span><br><span class="line">        isNext = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 떨어뜨리기.</span></span><br><span class="line">        <span class="keyword">while</span> (i--) &#123; <span class="comment">// 해당 줄 위에</span></span><br><span class="line">          data[i + <span class="number">1</span>][j] = data[i][j]; <span class="comment">// 현재 검사한 블럭에 위의 블럭을 넣어주고,</span></span><br><span class="line">          data[i][j] = <span class="literal">null</span>; <span class="comment">// 위의 블럭은 null로 초기화</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>; <span class="comment">// row loop를 종료 다음 column loop 시작</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  render();</span><br><span class="line">  isNext ? setTmeout(drop, <span class="number">300</span>) : readyToFill();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ㅋㅋㅋ ㅠㅠ 대댜냐댜..<br>머리가 좋아지는수밖에 없다.<br>잘짜고, 쉽게 짤때까지 머리로 훈련하는 수밖에 없다.<br>알고리즘, 코딩인터뷰, 자료구조, 트리구조 보다 도메인 해석 능력을 키우자.<br>어떠한 도메인에 대해서 알고리즘을 짜는 능력은 훈련밖에 없다.<br>복잡한 일이 일어나는 것을 눈으로 관찰해서 어떤 일인지 파악한 다음에<br>코드로 차근차근 푸는건 훈련밖에 없다.<br>이거 안되면 아키텍처고 디자인패턴이고 필요없다..</p>
+</blockquote>
+<hr>
+<p>채울준비를 하는 것은 밖에부터 채워야하는 애들이 예쁘게 내려오게 하기 위해서.</p>
+<ol>
+<li>지워진 모양 그대로의 형태가 위에 형성되고 =&gt; readyToFill</li>
+<li>해당 형태가 떨어지는 상황 =&gt; fill</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fills = [];</span><br><span class="line"><span class="comment">// fill 배열 초기화</span></span><br><span class="line"><span class="comment">// column은 똑같고, row만 계산해서 생성하면 됨.</span></span><br><span class="line"><span class="comment">// 실제 fills의 길이와 채워진 카운팅이 같게되면 다 채워졌다고 볼 예정 </span></span><br><span class="line"><span class="keyword">let</span> fillCnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> readyToFill = <span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  fills.length = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">  <span class="comment">// data를 돌면서 구멍난 부분을 찾는다.</span></span><br><span class="line">  data.some(<span class="function"><span class="params">row</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (row.indexOf(<span class="literal">null</span>) === <span class="number">-1</span>) <span class="keyword">return</span> ture; <span class="comment">// 구멍없는 row면 끝냄.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> r = [...row].fill(<span class="literal">null</span>); <span class="comment">// 새로운 row를 만들어서 우선 null로 채움</span></span><br><span class="line">    fills.push(r);</span><br><span class="line">    row.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> !v &amp;&amp; (r[i] = Block.GET())); </span><br><span class="line">    <span class="comment">// v가 없으면 해당 구멍에 block으로 채움 </span></span><br><span class="line">  &#125;);</span><br><span class="line">  fillCnt = <span class="number">0</span>; <span class="comment">// ?</span></span><br><span class="line">  setTimeout(fill, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fill = <span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (fillCnt &gt; fills.length) &#123; </span><br><span class="line">    <span class="comment">// fillCnt가 증가하다가 fills의 length와 일치하면 그만둘 때 </span></span><br><span class="line">    isDown = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; fillCnt; i++) &#123;</span><br><span class="line">    <span class="comment">// 채워야하는 fill 배열의 row에서 해당 요소가 null이 아니라 채워져있으면(v), </span></span><br><span class="line">    <span class="comment">// data의 해당 요소에 v를 넣는다.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// fills에 있는 마지막줄부터 윗줄을 채워가면 된다..</span></span><br><span class="line">    fills[fills.length - i - <span class="number">1</span>].forEach(<span class="function">(<span class="params">v, j</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (v) data[fillCnt - i - <span class="number">1</span>][j] = v;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  fillCnt++;</span><br><span class="line">  render();</span><br><span class="line">  setTimeout(fill, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<p><a name="4-5-3"></a></p>
+<h3 id="5-3-이벤트-gt-블럭을-down하면서-움직이는-상태-move"><a href="#5-3-이벤트-gt-블럭을-down하면서-움직이는-상태-move" class="headerlink" title="5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move"></a>5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move</h3><p>누른상태에서 다음(혹은 이전) 블럭으로 움직이는 상태</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> move = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// down이 아니라면 이탈</span></span><br><span class="line">  <span class="comment">// x,y 위치의 블록을 얻음</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 이전 블록의 타입이 같고 인접되어있는지 검사</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 선택목록에 없으면 추가</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 선택목록에 있다면 전전 블록일 경우 하나 삭제</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> move = <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x, y);</span><br><span class="line">  <span class="keyword">if</span> (!crr || curr.type !== startBlock.type || !isNext(curr)) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> (selected.indexOf(curr) == <span class="number">-1</span>) selected.push(curr);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (selected[selected.length - <span class="number">1</span>] == curr) selected.pop();</span><br><span class="line">  currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 받아오는 curr 블럭과 cache해놓은 curr 블럭을 비교하여 인접해있는지 검사.</span></span><br><span class="line"><span class="comment">// 나와 위치가 한개 차이 난다는 것. x로 하나 차이 혹은 y로 하나 차이</span></span><br><span class="line"><span class="keyword">const</span> isNext = <span class="function"><span class="params">curr</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> r0,</span><br><span class="line">    c0,</span><br><span class="line">    r1,</span><br><span class="line">    c1,</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* data에서 들어온 </span></span><br><span class="line"><span class="comment">    curr의 x인덱스, y인덱스와 </span></span><br><span class="line"><span class="comment">    currBlock의 x인덱스와 y인덱스를 구하는 방법. </span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  data.some(<span class="function">(<span class="params">row, i</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> j;</span><br><span class="line">    <span class="keyword">if</span> ((j = row.indexOf(currBlock)) !== <span class="number">-1</span>) (r0 = i), (c0 = j), cnt++;</span><br><span class="line">    <span class="keyword">if</span> ((j = row.indexOf(curr)) !== <span class="number">-1</span>) (r1 = i), (c1 = j), cnt++;</span><br><span class="line">    <span class="keyword">return</span> cnt === <span class="number">2</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    curr !== currBlock &amp;&amp; (<span class="built_in">Math</span>.abs(r0 - r1) === <span class="number">1</span> || <span class="built_in">Math</span>.abs(c0 - c1) === <span class="number">1</span>)</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>자바스크립트에서 배열의 고차함수로 여러 제어문을 제거할 수 있다.</p>
+<h2 id="최종-코드-및-정리"><a href="#최종-코드-및-정리" class="headerlink" title="최종 코드 및 정리"></a>최종 코드 및 정리</h2><p>프로시저 함수: 반환값이 없는 함수<br>sideEffect가 엄청 많다.<br>현재 로직들은 모두 프로시저 함수.<br>앞으로 객체지향으로 리팩토링 예정.</p>
+<details><br><summary>최종코드 (TS ver.)</summary><br><br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Game에서 사용한 interface</span></span><br><span class="line"><span class="keyword">interface</span> IGame &#123;</span><br><span class="line">  <span class="comment">// 게임판 정보</span></span><br><span class="line">  column: <span class="built_in">number</span>;</span><br><span class="line">  row: <span class="built_in">number</span>;</span><br><span class="line">  blockSize: <span class="built_in">number</span>;</span><br><span class="line">  data: (Block | <span class="literal">null</span>)[][];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 네이티브 객체 정보</span></span><br><span class="line">  table: HTMLElement;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 상태 정보</span></span><br><span class="line">  startBlock: Block;</span><br><span class="line">  currBlock: Block;</span><br><span class="line">  isDown: <span class="built_in">boolean</span>;</span><br><span class="line">  selected: Block[];</span><br><span class="line">  isNext: <span class="function">(<span class="params">curr: Block</span>) =&gt;</span> <span class="built_in">boolean</span>;</span><br><span class="line">  getBlock: <span class="function">(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>) =&gt;</span> Block;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 이벤트 관련</span></span><br><span class="line">  down: <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;: &#123; pageX: <span class="built_in">number</span>; pageY: <span class="built_in">number</span> &#125;</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  move: <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;: &#123; pageX: <span class="built_in">number</span>; pageY: <span class="built_in">number</span> &#125;</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  up: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  reset: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  remove: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  drop: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  fills: (Block | <span class="literal">null</span>)[][];</span><br><span class="line">  fillCnt: <span class="built_in">number</span>;</span><br><span class="line">  readyToFill: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  fill: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// util</span></span><br><span class="line">  el: <span class="function">(<span class="params">tag: HTMLElementTagNameMap</span>) =&gt;</span> HTMLElement;</span><br><span class="line">  </span><br><span class="line">  render: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 도저히 머리가 따라가기 힘들어서 TS로 우선 변환..</span></span><br><span class="line"><span class="keyword">const</span> Game = <span class="function">(<span class="params">(<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">class</span> Block &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">static</span> GET(<span class="params"><span class="keyword">type</span> = <span class="built_in">Math</span>.random(<span class="params"></span>) * 5</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">return</span> <span class="keyword">new</span> Block(<span class="params"><span class="keyword">type</span></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    _type: <span class="built_in">number</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    constructor(<span class="params"><span class="keyword">type</span></span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">this</span>._type = <span class="keyword">type</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">get</span> image(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">return</span> `url(<span class="params">'img/block$&#123;<span class="keyword">this</span>._type&#125;.png'</span>)`;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">get</span> <span class="keyword">type</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">return</span> <span class="keyword">this</span>._type;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> column = 8,</span></span></span><br><span class="line"><span class="function"><span class="params">    row = 8,</span></span></span><br><span class="line"><span class="function"><span class="params">    blockSize = 80;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> data: (<span class="params">Block | <span class="literal">null</span></span>)[][] = [];</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">let</span> table: HTMLElement;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">let</span> startBlock: Block, currBlock: Block, isDown: <span class="built_in">boolean</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> selected: Block[] = [];</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> getBlock = (<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>): Block =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> &#123; top: T, left: L &#125; = table.getBoundingClientRect(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">x &lt; L || x &gt; L + blockSize * row || y &lt; T || y &gt; T + blockSize * column</span>)</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">return</span> <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">return</span> data[(<span class="params">y - T</span>) / blockSize][(<span class="params">x - L</span>) / blockSize];</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> isNext = (<span class="params">curr: Block</span>): <span class="built_in">boolean</span> =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">let</span> r0: <span class="built_in">number</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">      c0: <span class="built_in">number</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">      r1: <span class="built_in">number</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">      c1: <span class="built_in">number</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">      cnt = 0;</span></span></span><br><span class="line"><span class="function"><span class="params">    data.some(<span class="params">(<span class="params">row: (<span class="params">Block | <span class="literal">null</span></span>)[], i: <span class="built_in">number</span></span>) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">let</span> j: <span class="built_in">number</span>;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">if</span> (<span class="params">(<span class="params">j = row.indexOf(<span class="params">currBlock</span>)</span>) != -1</span>) (<span class="params">r0 = i</span>), (<span class="params">c0 = j</span>), cnt++;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">if</span> (<span class="params">(<span class="params">j = row.indexOf(<span class="params">curr</span>)</span>) != -1</span>) (<span class="params">r1 = i</span>), (<span class="params">c1 = j</span>), cnt++;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">return</span> cnt == 2;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    &#125;</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">return</span> (<span class="params"></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      (<span class="params">curr != currBlock &amp;&amp; <span class="built_in">Math</span>.abs(<span class="params">r0 - r1</span>) == 1</span>) || <span class="built_in">Math</span>.abs(<span class="params">c0 - c1</span>) == 1</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    </span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> reset = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    startBlock = currBlock = <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    selected.length = 0;</span></span></span><br><span class="line"><span class="function"><span class="params">    isDown = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> remove = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    data.forEach(<span class="params">(<span class="params">r: (<span class="params">Block | <span class="literal">null</span></span>)[]</span>) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="comment">//데이터삭제</span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      selected.forEach(<span class="params">(<span class="params">v: Block</span>) =&gt; &#123;</span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params">        <span class="keyword">let</span> i: <span class="built_in">number</span>;</span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params">        <span class="keyword">if</span> (<span class="params">(<span class="params">i = r.indexOf(<span class="params">v</span>)</span>) != -1</span>) r[i] = <span class="literal">null</span>;</span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params">      &#125;</span>);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    &#125;</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    setTimeout(<span class="params">drop, 300</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> drop = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">let</span> isNext = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">for</span> (<span class="params"><span class="keyword">let</span> j = 0; j &lt; column; j++</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">for</span> (<span class="params"><span class="keyword">let</span> i = row - 1; i &gt; -1; i--</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">if</span> (<span class="params">!data[i][j] &amp;&amp; i</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">let</span> k = i,</span></span></span><br><span class="line"><span class="function"><span class="params">            isEmpty = <span class="literal">true</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">while</span> (<span class="params">k--</span>)</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">if</span> (<span class="params">data[k][j]</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">              isEmpty = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">break</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">            &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">if</span> (<span class="params">isEmpty</span>) <span class="keyword">break</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">          isNext = <span class="literal">true</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">while</span> (<span class="params">i--</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">            data[i + 1][j] = data[i][j];</span></span></span><br><span class="line"><span class="function"><span class="params">            data[i][j] = <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">          &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">          <span class="keyword">break</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">        &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">      &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    isNext ? setTimeout(<span class="params">drop, 300</span>) : readyToFill(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> fills: (<span class="params">Block | <span class="literal">null</span></span>)[][] = [];</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">let</span> fillCnt = 0;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> readyToFill = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    fills.length = 0;</span></span></span><br><span class="line"><span class="function"><span class="params">    data.some(<span class="params">(<span class="params">row: (<span class="params">Block | <span class="literal">null</span></span>)[]</span>) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">if</span> (<span class="params">row.indexOf(<span class="params"><span class="literal">null</span></span>) == -1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      <span class="keyword">const</span> r: (<span class="params">Block | <span class="literal">null</span></span>)[] = [...row].fill(<span class="params"><span class="literal">null</span></span>);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      fills.push(<span class="params">r</span>);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      row.forEach(<span class="params">(<span class="params">v: Block | <span class="literal">null</span>, i</span>) =&gt; !v &amp;&amp; (<span class="params">r[i] = Block.GET(<span class="params"></span>)</span>)</span>);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    &#125;</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    fillCnt = 0;</span></span></span><br><span class="line"><span class="function"><span class="params">    setTimeout(<span class="params">fill, 300</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> fill = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">fillCnt &gt; fills.length</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      isDown = <span class="literal">false</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">for</span> (<span class="params"><span class="keyword">let</span> i = 0; i &lt; fillCnt; i++</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      fills[fills.length - i - 1].forEach(<span class="params">(<span class="params">v, j</span>) =&gt; &#123;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">        <span class="keyword">if</span> (<span class="params">v</span>) data[fillCnt - i - 1][j] = v;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      &#125;</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    fillCnt++;</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    setTimeout(<span class="params">fill, 300</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> down = (<span class="params">&#123; pageX: x, pageY: y &#125;: &#123; pageX: <span class="built_in">number</span>; pageY: <span class="built_in">number</span> &#125;</span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">isDown</span>) <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> curr = getBlock(<span class="params">x, y</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">!curr</span>) <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    isDown = <span class="literal">true</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    selected.length = 0;</span></span></span><br><span class="line"><span class="function"><span class="params">    selected[0] = startBlock = currBlock = curr;</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> move = (<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">!isDown</span>) <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">const</span> curr = getBlock(<span class="params">x, y</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">!curr || curr.<span class="keyword">type</span> != startBlock.<span class="keyword">type</span> || !isNext(<span class="params">curr</span>)</span>) <span class="keyword">return</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">if</span> (<span class="params">selected.indexOf(<span class="params">curr</span>) == -1</span>) selected.push(<span class="params">curr</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="params">selected[selected.length - 2] == curr</span>) selected.pop(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    currBlock = curr;</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> up = (<span class="params"></span>) =&gt; (<span class="params">selected.length &gt; 2 ? remove(<span class="params"></span>) : reset(<span class="params"></span>)</span>);</span></span></span><br><span class="line"><span class="function"><span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> el = (<span class="params">tag: keyof HTMLElementTagNameMap</span>) =&gt; <span class="built_in">document</span>.createElement(<span class="params">tag</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">const</span> render = (<span class="params"></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    table.innerHTML = "";</span></span></span><br><span class="line"><span class="function"><span class="params">    data.forEach(<span class="params">row =&gt;</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">      table.appendChild(<span class="params"></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params">        row.reduce(<span class="params">(<span class="params">tr, block</span>) =&gt; &#123;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">          tr.appendChild(<span class="params">el(<span class="params">"td"</span>)</span>).style.cssText = `</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">        $&#123;block ? `background:$&#123;block.image&#125;;` : ""&#125;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">        width:$&#123;blockSize&#125;px;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">        height:$&#123;blockSize&#125;px;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">        cursor:pointer`;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">          <span class="keyword">return</span> tr;</span></span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params"><span class="params">        &#125;, el(<span class="params">"tr"</span>)</span>)</span></span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params"><span class="params">      </span>)</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="params">    </span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">return</span> (<span class="params">tid: <span class="built_in">string</span></span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    table = <span class="built_in">document</span>.querySelector(<span class="params">tid</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">for</span> (<span class="params"><span class="keyword">let</span> i = 0; i &lt; row; i++</span>) &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">const</span> r = [];</span></span></span><br><span class="line"><span class="function"><span class="params">      data.push(<span class="params">r</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">for</span> (<span class="params"><span class="keyword">let</span> j = 0; j &lt; column; j++</span>) r[j] = Block.GET(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;</span></span></span><br><span class="line"><span class="function"><span class="params">    table.addEventListener(<span class="params">"mousedown", down</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    table.addEventListener(<span class="params">"mouseup", up</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    table.addEventListener(<span class="params">"mouseleave", up</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    table.addEventListener(<span class="params">"mousemove", move</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">    render(<span class="params"></span>);</span></span></span><br><span class="line"><span class="function"><span class="params">  &#125;;</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>)<span class="params">()</span>;</span></span><br><span class="line"><span class="function"><span class="params">Game</span>(<span class="params">"#stage"</span>);</span></span><br></pre></td></tr></table></figure><br><br></details>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/02/17/OOP_08_2/" data-id="cjsimkvn10000kwbm9a4jsunz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#2">2. 게임 개요 및 규칙</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 엔티티 파악</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#2-2">2.2 규칙</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#2-2-1">Entity</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#2-2-2">Core Action</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#3">3. 어디부터 시작할까?</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#3-1">3.1 [객체] Block</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#3-2">3.2 [객체] Game</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#4">4 Game 시나리오</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#4-1">1,2,3 테이블 데이터 정의</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#4-4">4. 테이블 데이터 정의</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#4-5">5. 테이블 이벤트 걸기</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#4-5-1">5.1 이벤트 &gt; 블럭을 누르는 순간: down</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#4-5-2">5.2 이벤트 &gt; 블럭을 떼는 순간: up</a>
+                          <ul>
+                            
+                              
+                                <li>
+                                  <a href="#4-5-2-1">5.2.1 remove 😫</a>
+                                </li>
+                              
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#4-5-3">5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/02/17/OOP_08_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠80_OOP design with game (1)-1</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/OOP_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/12/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/17/OOP_08_2/" class="title">코드스피츠80_OOP design with game (1)-2</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-1" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)-1</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/04/JS_24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/09/thumb_default.jpg)" alt="(ing..) ES6 Symbol 프로퍼티" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/04/JS_24/" class="title">(ing..) ES6 Symbol 프로퍼티</a></p>
+                            <p class="item-date"><time datetime="2019-02-04T01:20:19.000Z" itemprop="datePublished">2019-02-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/08/thumb_default.jpg)" alt="ES6 Symbol 오브젝트" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_23/" class="title">ES6 Symbol 오브젝트</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T14:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/03/JS_20/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/10/thumb_default.jpg)" alt="코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/03/JS_20/" class="title">코드스피츠77 ES6_4회차_Abstract loop &amp; lazy execution</a></p>
+                            <p class="item-date"><time datetime="2019-02-03T11:20:19.000Z" itemprop="datePublished">2019-02-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">59</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/02/17/OOP_08_2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
