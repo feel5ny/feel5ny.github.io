@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,OOP" />
+    
+    
+    <meta name="description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   1. 저번시간의 코드에서 잘못된 점을 찾아보자. 1.1 베이스 클래스에 네이티브 지식이 포함되어있다.12345678const Block = class &amp;#123;  stati">
+<meta name="keywords" content="javascript,OOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)">
+<meta property="og:url" content="http://feel5ny.github.io/2019/03/17/OOP_09_2/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   1. 저번시간의 코드에서 잘못된 점을 찾아보자. 1.1 베이스 클래스에 네이티브 지식이 포함되어있다.12345678const Block = class &amp;#123;  stati">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/15/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-03-17T09:16:40.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)">
+<meta name="twitter:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   1. 저번시간의 코드에서 잘못된 점을 찾아보자. 1.1 베이스 클래스에 네이티브 지식이 포함되어있다.12345678const Block = class &amp;#123;  stati">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/15/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/03/17/OOP_09_2/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/15/thumb_default.jpg" alt="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)" style="width:100%">
+    </div>
+
+<article id="post-OOP_09_2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/03/17/OOP_09_2/" class="article-date">
+            <time datetime="2019-03-17T04:32:40.000Z" itemprop="datePublished">2019-03-17</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OOP/">OOP</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 저번시간의 코드에서 잘못된 점을 찾아보자.</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 베이스 클래스에 네이티브 지식이 포함되어있다.</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 통제권을 갖고 있는 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">1.3 통제권을 갖고 있는 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 객체지향으로 바꿔보자.</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 모델 (feat. 유틸)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>코드스피츠 강의 정리록</p>
+</blockquote>
+<p>생소한 도메인으로 배우는게 좋다.<br>익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.<br>때문에 80기는 게임을 통해서 진행할 예정.</p>
+<hr>
+<p><a name="1"></a></p>
+<h1 id="1-저번시간의-코드에서-잘못된-점을-찾아보자"><a href="#1-저번시간의-코드에서-잘못된-점을-찾아보자" class="headerlink" title="1. 저번시간의 코드에서 잘못된 점을 찾아보자."></a>1. 저번시간의 코드에서 잘못된 점을 찾아보자.</h1><p><a name="1-1"></a></p>
+<h2 id="1-1-베이스-클래스에-네이티브-지식이-포함되어있다"><a href="#1-1-베이스-클래스에-네이티브-지식이-포함되어있다" class="headerlink" title="1.1 베이스 클래스에 네이티브 지식이 포함되어있다."></a>1.1 베이스 클래스에 네이티브 지식이 포함되어있다.</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> GET(type = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">5</span>))&#123; <span class="keyword">return</span> <span class="keyword">new</span> Block(type);&#125;</span><br><span class="line">  <span class="keyword">constructor</span>(type) &#123;</span><br><span class="line">    <span class="keyword">this</span>._type = type;</span><br><span class="line">  &#125;</span><br><span class="line">  get image()&#123; <span class="keyword">return</span> 👉 <span class="string">`url('img/block<span class="subst">$&#123;<span class="keyword">this</span>._type&#125;</span>.png'`</span>;&#125;</span><br><span class="line">  get type()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._type&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>블럭 모델에 네이티브 지식이 들어가있다. (css 지식)</li>
+<li>베이스 레이어에 들어오면 안되는 지식이다.</li>
+</ul>
+<blockquote>
+<p>아키텍처는 코드에 가질 수 있는 역할과 가질수 없는 역할,<br>  기질수 있는 책임과 가질수 없는 책임을 명시할 수 있고,<br>  그것으로 코드가 바른지 안바른지 판단하는 기준표가 된다.</p>
+<ul>
+<li>기존 모델에서 지금 아키텍처와 안맞는 부분을 지목할 수 있다.</li>
+</ul>
+</blockquote>
+<hr>
+<p><a name="1-2"></a></p>
+<h2 id="1-2-통제권을-갖고-있는-제왕이-존재한다-1-블럭-위치값의-지식"><a href="#1-2-통제권을-갖고-있는-제왕이-존재한다-1-블럭-위치값의-지식" class="headerlink" title="1.2 통제권을 갖고 있는 제왕이 존재한다. (1) - 블럭 위치값의 지식"></a>1.2 통제권을 갖고 있는 제왕이 존재한다. (1) - 블럭 위치값의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">👉 <span class="keyword">const</span> data = [];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">  table = <span class="built_in">document</span>.querySelector(tid);</span><br><span class="line">  👉 <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> r = [];</span><br><span class="line">    data.push(r);</span><br><span class="line">    👉 <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = Block.GET();</span><br><span class="line">  &#125;</span><br><span class="line">  table.addEventListener(<span class="string">'mousedown'</span>, down);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseup'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseleave'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mousemove'</span>, move);</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="cf-1-프로시저적인-생각을-한다-를-어디서-알-수-있냐면"><a href="#cf-1-프로시저적인-생각을-한다-를-어디서-알-수-있냐면" class="headerlink" title="cf__1. 프로시저적인 생각을 한다? 를 어디서 알 수 있냐면,"></a>cf__1. 프로시저적인 생각을 한다? 를 어디서 알 수 있냐면,</h4><p>= <strong>모든 연산을 data를 갖고 하려고 한다.</strong></p>
+<ul>
+<li>data가 왕이다. 통제의 왕</li>
+</ul>
+<p>일반적으로 프로시저로 짜면 메모리를 적게 사용하게 된다.</p>
+<ul>
+<li>메모리의 효율성이 높아지고, 연산의 횟수가 줄어든다.</li>
+<li>하지만 모든 복잡성을 본인이 감당해야한다. <ul>
+<li>예를들어 현재는 2차원배열로 작업했지만,<br>요건이 만약 3차원의 개념으로 바뀐다면?<br>3차원배열로 바꿔야하는데 그럼.. 로직을 아예 바꿔야함</li>
+</ul>
+</li>
+</ul>
+<h3 id="블럭의-위치값"><a href="#블럭의-위치값" class="headerlink" title="블럭의 위치값"></a>블럭의 위치값</h3><p>2차원 배열에 들어가는데, 블럭에 X값 Y값이 들어가있나? </p>
+<ul>
+<li>안들어가있음. 실제 객체는(Block) 모르고 있다. </li>
+<li>블럭은 x, y값을 모르는데 자기 스스로 move나 판정을 할 수 있을까?<br>row와 column값은(i와 j) Block의 지식일까? data의 지식일까?</li>
+<li>현재는 data가 통제의 왕이기 때문에 data가 블럭의 판정통제권을 들고 있다.(i, j)</li>
+</ul>
+<p>객체지향은 내 할일이 아니면 위임하는 것이다.</p>
+<ul>
+<li>자기일이 아닌거는 계속 미룬다. 미룰사람이 누군지만 알고 있으면 된다.</li>
+<li>말로만 객체지향이나 역할을 거의 수행할 수 없는 상태.<br>현재 블럭은 x,y에 대한 역할을 수행할 수 없다.</li>
+</ul>
+<hr>
+<p><a name="1-3"></a></p>
+<h2 id="1-3-통제권을-갖고-있는-제왕이-존재한다-2-선택된-블럭의-지식"><a href="#1-3-통제권을-갖고-있는-제왕이-존재한다-2-선택된-블럭의-지식" class="headerlink" title="1.3 통제권을 갖고 있는 제왕이 존재한다. (2) - 선택된 블럭의 지식"></a>1.3 통제권을 갖고 있는 제왕이 존재한다. (2) - 선택된 블럭의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> selected = [], getBlock = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> down = <span class="function">(<span class="params">&#123;pageX: x, pageY: y&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x,y);</span><br><span class="line">  <span class="keyword">if</span>(!curr) <span class="keyword">return</span>;</span><br><span class="line">  isDown = <span class="literal">true</span>;</span><br><span class="line">  👉 selected.length = <span class="number">0</span>; </span><br><span class="line">  👉 selected[<span class="number">0</span>] = startBlock = currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> move = <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x, y);</span><br><span class="line">  <span class="keyword">if</span> (!crr || curr.type !== startBlock.type || !isNext(curr)) <span class="keyword">return</span>;</span><br><span class="line">  👉 <span class="keyword">if</span> (selected.indexOf(curr) == <span class="number">-1</span>) selected.push(curr);</span><br><span class="line">  👉 <span class="keyword">else</span> <span class="keyword">if</span> (selected[selected.length - <span class="number">1</span>] == curr) selected.pop();</span><br><span class="line">  currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> up = <span class="function"><span class="params">()</span> =&gt;</span> (👉 selected.length &gt; <span class="number">2</span> ? remove() : reset());</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>selected를 사방에서 직접 컨트롤하고 있다. </p>
+<ul>
+<li>만약 선택의 조건이 현재 요건과 달라진다면?<br>down, move, up 모두 바꿔야한다. </li>
+</ul>
+</li>
+<li><p>selected도 블럭이 선택되어있는지 아닌지에 대한 지식이기 때문에<br>Block의 지식이다.</p>
+<ul>
+<li>선택된 그룹도 블럭이 알고 있는 것이고,</li>
+<li>블럭이 블럭 인스턴스끼리 협력하는 코드는 블럭내의 지식이다.</li>
+<li>블럭은 내 형제가 누군지에 대해서 블럭이라는 클래스 지식내에서 해결할 수 있다.</li>
+</ul>
+</li>
+<li><p>우리는 완전히 독립되어있는 어떤 데이터를 바라보고 있는<br>프로시저를 짜서 해결하려고 한다.</p>
+<ul>
+<li>때문에 데이터 구조가 달라지면 다 바꿔야한다.</li>
+</ul>
+</li>
+<li><p>끊임없는 상태에 대한 변화의 책임을<br>블럭이 갖고 있어야한다.</p>
+<ul>
+<li>가장 중요한 권한은 블럭의 type이 아니라<br><strong>끊임없는 상태에 대한 변화의 책임을 블럭이 갖고 있어야한다.</strong> </li>
+<li>상태를 갖고 있으면 관리가 어렵기 때문에 해당 책임을 갖고 있는 객체가 알아서 하게끔 권한을 주는 것.</li>
+<li>현재 코드에서 블럭의 상태는<br>거의 상태가 없는 객체나 마찬가지이다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><a name="2"></a></p>
+<h1 id="2-프로시저를-객체지향으로-바꿔보자"><a href="#2-프로시저를-객체지향으로-바꿔보자" class="headerlink" title="2. 프로시저를 객체지향으로 바꿔보자."></a>2. 프로시저를 객체지향으로 바꿔보자.</h1><p><a name="2-1"></a></p>
+<h2 id="2-1-모델-feat-유틸"><a href="#2-1-모델-feat-유틸" class="headerlink" title="2.1 모델 (feat. 유틸)"></a>2.1 모델 (feat. 유틸)</h2><p><a name="2-1-1"></a></p>
+<h3 id="2-1-1-심플한-책임"><a href="#2-1-1-심플한-책임" class="headerlink" title="2.1.1 심플한 책임"></a>2.1.1 심플한 책임</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Block = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> GET(type = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">5</span>))&#123; <span class="keyword">return</span> <span class="keyword">new</span> Block(type);&#125;</span><br><span class="line">  <span class="keyword">constructor</span>(type) &#123;</span><br><span class="line">    <span class="keyword">this</span>._type = type;</span><br><span class="line">  &#125;</span><br><span class="line">  get image()&#123; <span class="keyword">return</span> <span class="string">`url('img/block<span class="subst">$&#123;<span class="keyword">this</span>._type&#125;</span>.png'`</span>;&#125;</span><br><span class="line">  get type()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._type&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>👇👇👇<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> UTIL = &#123;</span><br><span class="line">  el: <span class="function">(<span class="params">v: <span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">document</span>.querySelector(v),</span><br><span class="line">  prop: <span class="function">(<span class="params">...arg</span>) =&gt;</span> <span class="built_in">Object</span>.assign(...arg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> IItem &#123;</span><br><span class="line">  pos: <span class="function">(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  select: <span class="function">(<span class="params">item: Item</span>) =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">  unselect: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Item = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> GET(<span class="keyword">type</span>: <span class="built_in">number</span>, x: <span class="built_in">number</span>, y: <span class="built_in">number</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Item(<span class="keyword">type</span>, x, y);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">_type: <span class="built_in">number</span>, _x: <span class="built_in">number</span>, _y: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    prop(<span class="keyword">this</span>, &#123;_type, _x, _y, _selected: <span class="literal">false</span>, _prev: <span class="literal">null</span>&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="keyword">type</span>()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._type; &#125;</span><br><span class="line">  <span class="keyword">get</span> x()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._x; &#125;</span><br><span class="line">  <span class="keyword">get</span> y()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._y; &#125;</span><br><span class="line">  <span class="keyword">get</span> selected()&#123; <span class="keyword">return</span> <span class="keyword">this</span>.selected; &#125;</span><br><span class="line">  <span class="keyword">get</span> prev()&#123; <span class="keyword">return</span> <span class="keyword">this</span>._prev; &#125;</span><br><span class="line"></span><br><span class="line">  pos(x: <span class="built_in">number</span>, y: <span class="built_in">number</span>)&#123; <span class="comment">// 어디로 움직일지</span></span><br><span class="line">    <span class="keyword">this</span>._x = x;</span><br><span class="line">    <span class="keyword">this</span>._y = y;</span><br><span class="line">  &#125;</span><br><span class="line">  select(item: Item)&#123; <span class="comment">// 어떤 아이템에 선택할지?</span></span><br><span class="line">    <span class="keyword">this</span>._selected = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">this</span>._prev = item;</span><br><span class="line">  &#125; </span><br><span class="line">  unselect()&#123;</span><br><span class="line">    <span class="keyword">this</span>._selected = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>._prev = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>싱글 노드 링크드 리스트가 완성되었다.</p>
+<ul>
+<li>이전에는 배열로(data) 관리했었는데, 이제는 링크드 리스트로 관리한다.<br>나의 지식은 나와 이전(prev) 정도까지밖에 모르기 때문에</li>
+</ul>
+</li>
+<li><p>item 객체가 이 이상을 알게 되면, 권한 위반이된다.</p>
+<ul>
+<li><strong>권한 책임을 축소시키면 연산이 많이 일어난다. </strong><br>(연산이 늘어난 부분은 걱정하지 말자.)</li>
+</ul>
+</li>
+<li><p>밖에는 캡슐화 된 메소드로 대화한다.</p>
+<ul>
+<li>블럭 상태는 밖에서 관리하지 않고,</li>
+<li>밖에서는 pos, select, unselect만 알게하자.</li>
+</ul>
+</li>
+</ol>
+<p><a name="2-1-2"></a></p>
+<h3 id="2-1-2-어려운-책임"><a href="#2-1-2-어려운-책임" class="headerlink" title="2.1.2 어려운 책임"></a>2.1.2 어려운 책임</h3><p>좀 더 어려운 책임을 바라보게 하자.<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Item = <span class="keyword">class</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  isSelectedList(item: Item)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>._prev) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>._prev === item) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">this</span>._prev.isSelectedList(item) </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  isBorder(item: Item) &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.x - item.x) &lt; <span class="number">2</span>) &amp;&amp;</span><br><span class="line">           (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.y - item.y) &lt; <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="1-isSelectedList"><a href="#1-isSelectedList" class="headerlink" title="1. isSelectedList"></a>1. isSelectedList</h4><p>selectedList에 포함되어있냐 아니냐를 판단하는 메소드</p>
+<ul>
+<li>모든 상황이 안되면, 바로 이전의 item에게 물어본다.</li>
+</ul>
+<ul>
+<li>책임 권한을 _prev로 제약하여 메모리와 연산을 교환하였다. (링크드 리스트)</li>
+<li>이 모든 건 자료구조의 일부이다.</li>
+</ul>
+<h5 id="cf-2-객체지향에서-책임의-범위와-자료구조"><a href="#cf-2-객체지향에서-책임의-범위와-자료구조" class="headerlink" title="cf__2. 객체지향에서 책임의 범위와 자료구조"></a>cf__2. 객체지향에서 책임의 범위와 자료구조</h5><ol>
+<li><p>책임 범위를 축소하면 연산을 많이하게 된다.</p>
+<ul>
+<li>타클래스의 메서드를 호출할 경우도 있고,<br>본인의 연결되어있는 클래스를 호출하는 경우가 더 많다.</li>
+</ul>
+</li>
+<li><p>객체지향에서는 기본적으로 배열같은 어그리게이션(집합)을 쓰는 경우가 거의 없다.</p>
+<ul>
+<li>어그리게이션을 쓰면 어그리게이터에 대한 로직을 따로 짜야한다.</li>
+<li>코디네이터를 더 만들기 싫으면 본인 안에 링크드 리스트로 연결하는 수밖에 없다.</li>
+<li>컬렉터를 만드냐 안만드냐는 아키텍처상 중요한 요소이다.</li>
+<li>컬렉터를 추상화하는 것은 굉장히 어려운 것이다.</li>
+<li>통합된 자료구조를 안쓰게 되니까 다 연산으로 되어있는 자료구조를 쓰게 된다.</li>
+</ul>
+</li>
+<li><p>배열을 링크드 리스트로 치환한 것이다.</p>
+</li>
+</ol>
+<ul>
+<li>같은 자료구조임에도 불구하고, 연산으로 메모리로 치환하거나 메모리를 연산으로 치환할 수 있다.<ul>
+<li>연산을 메모리로 치환하면 속도가 빨라진다.<ul>
+<li>메모리를 연산으로 치환하면 좋은 점이<br>하나는 메모리가 절감되는 경우가 생기고,<br>권한을 축소할 수 있는 권한이 생긴다. (프로시저)</li>
+</ul>
+</li>
+<li>자바스크립트의 프로토타입체인은 대표적으로 연산을 통해서 메모리를 줄이는 시스템이다.<br>연산을 통해서 프로토타입 체인에 가져오는 것이다.<br>예전 메모리가 없던(네스케이프)시절 개발된 자바스크립트.<ul>
+<li>하지만 현대의 크롬브라우저는 속도가 더 중요하기 때문에 모든 프로토타입 체이닝에 잇는 것을 다 copy해서 캐시테이블을 만들어서 거기서 읽는다.<ul>
+<li>더이상 프로토타입 체인 타고 가서 가져오지 않는다. 때문에 크롬에서 자바사크립트가 빠른 이유이다.</li>
+<li>체인을 매번 타고가는 연산은 귀찮기 때문에</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>알고리즘의 태반은 자료구조로 되어있고,<br>자료구조의 태반은 다시 또 알고리즘으로 돌아가게 되어있다.<br>항상 메모리와 연산은 교환할 수 있다.</p>
+</blockquote>
+<h4 id="2-isBorder"><a href="#2-isBorder" class="headerlink" title="2. isBorder"></a>2. isBorder</h4><p>나의 인접셀을 파악하는 것도 나의 권한이다.</p>
+<ul>
+<li>특정 아이템의 x,y가 나의 지식이기 때문에.</li>
+<li>나의 x,y와 아이템의 x,y의 차이를 이용해서 나의 인접셀인지 아닌지를 알 수 있다.</li>
+</ul>
+<h5 id="cf-3-권한-책임-역할"><a href="#cf-3-권한-책임-역할" class="headerlink" title="cf__3. 권한 + 책임 = 역할"></a>cf__3. <strong>권한 + 책임 = 역할</strong></h5><ol>
+<li><p>우리가 책임을 부여하고 싶으면, 권한을 부여해야한다.<br>두개가 어긋나면 둘중 하나가 깨진다.</p>
+<ul>
+<li>객체지향에서 권한은 은닉화 되어서 내부 상태로 숨고,<br>책임은 표면화되서 외부 메소드를 드러나게 되어있다.<br>메소드는 캡슐화해서 표현된다.<br>ex_ATM기기</li>
+<li>객체지향에서 메소드는 <code>this</code>라는 내부상태의 은닉되어있는 상태를 사용하고 있느냐,<br>추상화가 되어있는, 캡슐화 되어있는 메소드냐가 충족되어야<br>객체지향에서 메소드라고 부른다.</li>
+</ul>
+</li>
+<li><p>얼만큼 캡슐화되어야하는지는 대상에 따라 다르다.</p>
+<ul>
+<li>어느 정도로 캡슐화되어있느냐는 공개 범위에 달려있다.</li>
+<li>현재 Item의 기준은 게임이다. 게임이 이해할 수 있고, 몰라도 되는 기준으로 캡슐화</li>
+<li>그게 내부 인터널에서 사용하는것?</li>
+<li>자기들끼리 쓰는것?</li>
+<li>부모자식간에 쓰는 것?</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>내가 만약 프로그램을 짜서 공개되는 코드도 마지막에 은닉과 캡슐화를 처리하는 단계는 항상 머리속에 짱구를 그려야한다.</p>
+</blockquote>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/03/17/OOP_09_2/" data-id="cjtcpt36j005unnbmb783r3zy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#1">1. 저번시간의 코드에서 잘못된 점을 찾아보자.</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-1">1.1 베이스 클래스에 네이티브 지식이 포함되어있다.</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">1.2 통제권을 갖고 있는 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">1.3 통제권을 갖고 있는 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#2">2. 객체지향으로 바꿔보자.</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#2-1">2.1 모델 (feat. 유틸)</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/03/11/OOP_09_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠80_OOP design with game (2)-1. 개요</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/17/OOP_09_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/15/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/17/OOP_09_2/" class="title">코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)</a></p>
+                            <p class="item-date"><time datetime="2019-03-17T04:32:40.000Z" itemprop="datePublished">2019-03-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/11/OOP_09_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/14/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)-1. 개요" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/11/OOP_09_1/" class="title">코드스피츠80_OOP design with game (2)-1. 개요</a></p>
+                            <p class="item-date"><time datetime="2019-03-11T01:20:19.000Z" itemprop="datePublished">2019-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/10/debug_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/13/thumb_default.jpg)" alt="Mac 환경에서 IE디버깅하기. (virtualBox 사용)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></p>
+                            <p class="item-title"><a href="/2019/03/10/debug_01/" class="title">Mac 환경에서 IE디버깅하기. (virtualBox 사용)</a></p>
+                            <p class="item-date"><time datetime="2019-03-10T01:20:19.000Z" itemprop="datePublished">2019-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/23/OOP_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/12/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/23/OOP_08_2/" class="title">코드스피츠80_OOP design with game (1)-2</a></p>
+                            <p class="item-date"><time datetime="2019-02-23T01:20:19.000Z" itemprop="datePublished">2019-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">60</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/03/17/OOP_09_2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>코드스피츠80_OOP design with game (2)-1. 개요 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javascript,OOP" />
+    
+    
+    <meta name="description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   0. 프로시저 프로그래밍 저번시간의 프로시저 프로그래밍 복습   프로시저 프로그래밍의 특징 함수와 함수가 처리해야할 데이터가 분리되어있고,데이터와 함수가 같이 연동되어야하지만">
+<meta name="keywords" content="javascript,OOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠80_OOP design with game (2)-1. 개요">
+<meta property="og:url" content="http://feel5ny.github.io/2019/03/11/OOP_09_1/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   0. 프로시저 프로그래밍 저번시간의 프로시저 프로그래밍 복습   프로시저 프로그래밍의 특징 함수와 함수가 처리해야할 데이터가 분리되어있고,데이터와 함수가 같이 연동되어야하지만">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/14/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-03-17T08:45:54.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠80_OOP design with game (2)-1. 개요">
+<meta name="twitter:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   0. 프로시저 프로그래밍 저번시간의 프로시저 프로그래밍 복습   프로시저 프로그래밍의 특징 함수와 함수가 처리해야할 데이터가 분리되어있고,데이터와 함수가 같이 연동되어야하지만">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/14/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/03/11/OOP_09_1/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/14/thumb_default.jpg" alt="코드스피츠80_OOP design with game (2)-1. 개요" style="width:100%">
+    </div>
+
+<article id="post-OOP_09_1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠80_OOP design with game (2)-1. 개요
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/03/11/OOP_09_1/" class="article-date">
+            <time datetime="2019-03-11T01:20:19.000Z" itemprop="datePublished">2019-03-11</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OOP/">OOP</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#0">0. 프로시저 프로그래밍</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#0-1">프로시저 프로그래밍의 특징</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-2">프로시저 프로그래밍의 단점</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-3">엔트로피 증가법칙 😎😎</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-4">엔트로피 증가를 막자.</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#0-4-0">가장 중요한 변화율</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-1">1. Categrizing</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-2">2. Modeling</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-3">3. Grouping</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#1">1. 레이어 분리</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-0">0. 유틸리티</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-1">1. 베이스 클래스</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#1-1-1">1.1 기반이 되는 3가지 클래스</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#1-1-2">1.2 뷰와 컨트롤러 사이의 버퍼 = 메세지</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#1-1-3">1.3 서브 뷰</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">2. 구상 클래스</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">3. 호스트 코드</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>코드스피츠 강의 정리록</p>
+</blockquote>
+<p>생소한 도메인으로 배우는게 좋다.<br>익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.<br>때문에 80기는 게임을 통해서 진행할 예정.</p>
+<hr>
+<p><a name="0"></a></p>
+<h1 id="0-프로시저-프로그래밍"><a href="#0-프로시저-프로그래밍" class="headerlink" title="0. 프로시저 프로그래밍"></a>0. 프로시저 프로그래밍</h1><blockquote>
+<p>저번시간의 프로시저 프로그래밍 복습</p>
+</blockquote>
+<p><a name="0-1"></a></p>
+<h2 id="프로시저-프로그래밍의-특징"><a href="#프로시저-프로그래밍의-특징" class="headerlink" title="프로시저 프로그래밍의 특징"></a>프로시저 프로그래밍의 특징</h2><ol>
+<li><strong>함수</strong>와 <strong>함수가 처리해야할 데이터</strong>가 분리되어있고,<br><strong>데이터와 함수가 같이 연동되어야하지만 프로시저가 작동된다.</strong><br>.<br>프로시저 작동에서는 행위에만 집착하게 된다. (데이터 배열에 무엇을 채웠어 무엇을 비웠어)<br>데이터를 처리했다는 행위에 집중한다.<br>.</li>
+<li>함수형과는 다르게 프로시저들은 가리키고 있는 <strong>데이터</strong>가 있다.<br>프로시저는 <strong>상태</strong>를 지향하며,<br>(유틸리티처럼) 특정상태를 변화시키는 것에 관심을 둔다.<br>(함수형은 인자로 받거나 지역변수만 사용하는 식으로 데이터를 처리하고 있다.)</li>
+</ol>
+<hr>
+<p><a name="0-2"></a></p>
+<h2 id="프로시저-프로그래밍의-단점"><a href="#프로시저-프로그래밍의-단점" class="headerlink" title="프로시저 프로그래밍의 단점"></a>프로시저 프로그래밍의 단점</h2><ol>
+<li><strong>데이터의 변화</strong>와<br><strong>데이터를 처리하는 함수의 변화</strong>가 동시에 이루어지지 않는다.<br>.</li>
+<li>데이터를 조금만 바꾸던지, 처리를 바꾸면<br>데이터가 어긋나게 되고 프로그램 전체가 깨지게 된다.<ul>
+<li>데이터 항목 구성을 변화하거나<br>데이터 자체에 추가적인 내용이나 연결되어있는 데이터를 만드는 일은 흔하다.<br>=&gt; 이런상황이 생기면 기존의 프로시저가 깨진다.</li>
+<li>우리는 프로시저 프로그래밍에 익숙해져 있다.<br>ex_TDD<br>TDD를 사용하면 무조건 프로시저로 짜게 된다.<br>테스트 메소드 전체는 다 프로시져이다.<ul>
+<li>테스트 메소드가 알 수 없는 외부상태의 것을 테스트하는 함수 <ul>
+<li>: 프로시저</li>
+</ul>
+</li>
+<li>: 객체를 바꾸면 테스트함수가 다깨짐. 다 바꿔야함.</li>
+<li>테스트 주도 개발을 하려면, 설계를 잘하면 할 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>프로시저로 만들면 어떤 일이 생긴냐면..<br>ex_만약에 폭발형 아이템을 만든다면?<br>=&gt; 프로시저 전체를 다 수정하는 수밖에 없다.<br>=&gt; if를 넣어서 분기하면서 수정하는 수밖에 없다.(모든 함수에 다 들어간다.)<br>=&gt; <strong>if가 추가되는 것이 문제가 아니라 기존의 모든 레거시와의 관계를 재검토해서 들어가야하는데..복잡성을 감당할 수 없다.</strong></li>
+</ul>
+<p>복잡성이 폭발하면 ? =&gt; 버려야합니다.</p>
+<ul>
+<li>프로그래밍의 수명은 복잡성 컨트롤 제어에 실패하면<br>더이상 유지보수할 수 없기 때문에<br>나머지의 모든 프로그래밍 기법들은 복잡성이 더 복잡해지지 않게 하기 위해.</li>
+</ul>
+<p><a name="0-3"></a></p>
+<h2 id="엔트로피-증가법칙-😎😎"><a href="#엔트로피-증가법칙-😎😎" class="headerlink" title="엔트로피 증가법칙 😎😎"></a>엔트로피 증가법칙 😎😎</h2><p>많은 사람들의 요건추가와 변화로 엔트로피가 꾸준히 증가한다.<br>엔트로피를 증가시키는 것을 최대한 둔화시켜야한다.<br>프로그래밍 세계에서 엔트로피가 언제 증가하는지 알아가는 것이 우리 스터디에서 배워야할 것.<br>많은 장치로 엔트로피의 증가를 막을 수있다.<br>아무리 막아도 내년되면 다시 짜야한다.<br>잘못짠 프로그램은 엔트로피가 급격하게 증가해서 빨리 버리게 된다.<br>잘짠 프로그램도 버려야한다.</p>
+<p>엔트로피 증가방향을 컨트롤해서 완화시키고<br>복잡한 환경이나 여러가지 변화상황을 잘 받아들일 수 있는 구조를 짜는것을<br>디자인이라고 하고<br>아키텍처라고 한다.</p>
+<p>엔트로피 증가를 막으려고.</p>
+<hr>
+<p><a name="0-4"></a></p>
+<h2 id="엔트로피-증가를-막자"><a href="#엔트로피-증가를-막자" class="headerlink" title="엔트로피 증가를 막자."></a>엔트로피 증가를 막자.</h2><p>객체지향에서는 어떻게 앤트로피 증가를 막느냐.<br><strong>역할</strong>이라는 것으로 분리해서 막는다.</p>
+<p><a name="0-4-0"></a></p>
+<h3 id="가장-중요한-변화율"><a href="#가장-중요한-변화율" class="headerlink" title="가장 중요한 변화율"></a>가장 중요한 변화율</h3><p>변화율을 기준으로 역할을 분리해서 역할별로 객체들을 만들고 싶은데,<br>그렇게 하기에는 우리가 해결해야하는 문제가 너무 큰 덩어리로 되어있는 문제라는 것이다.</p>
+<p>사람은 한꺼번에 복잡성 제어를 못하기 때문에 복잡성 폭발한 프로그램은 버리게된다.<br>너무 복잡한 것은 분석할 수 없다.<br>복잡한 문제는 나눠서 분석해야지만 분석할 수 있다.</p>
+<p>복잡한 문제를 나눠서 분석하기 위한 도구를 <strong>추상화도구</strong>라고 한다.<br>(<a href="https://feel5ny.github.io/2018/10/01/OOP_06/#2">다른 글</a>)</p>
+<p><a name="0-4-1"></a></p>
+<h3 id="1-Categrizing"><a href="#1-Categrizing" class="headerlink" title="1. Categrizing"></a>1. Categrizing</h3><p>분류를 통해서 계속 나눠가면<br>상쇄적인 부분만 하나씩 정복해나가면 전체를 이해할 수 있다 라는 개념</p>
+<ul>
+<li>단점: 카테고리가 여러곳에 소속되어있을때 처리하기가 많다.</li>
+</ul>
+<p><a name="0-4-2"></a></p>
+<h3 id="2-Modeling"><a href="#2-Modeling" class="headerlink" title="2. Modeling"></a>2. Modeling</h3><p>기억해야만 할 것을 정리하면 모델링이 된다.</p>
+<ul>
+<li>없어야할 데이터는 없어야한다. 없어야할 데이터가 있는것도 오류다.<br>.<br>현재의 모델링이 미래에 유용한것도 아니고<br>미래를 위해서 현재의 모델링을 함부로 확장하는 것도 아니다.</li>
+<li>모델링의 단점: 유지보수가 힘들다. 현실세계에서는 모델이 자주 바뀐다<br>ex_학생. =&gt; 학번, 이름,</li>
+</ul>
+<p>데이터에 의존하고 있는 프로시저가 데이터의 변화를 따라갈 수 없기 때문에 프로시저 프로그램들이 에러가 나는 것이다.</p>
+<ul>
+<li>현실세계에서 모델링을 해야하고<br>모델링을 다루는 함수들을 강력하게 바인딩시키지 않으면<br>모델의 변화가 프로시저에 충분히 반영되지 않거나<br>프로시저의 변화가 모델에 반영되지 않아 둘이 어긋나서 프로그램이 깨지는 것.</li>
+</ul>
+<p><a name="0-4-3"></a></p>
+<h3 id="3-Grouping"><a href="#3-Grouping" class="headerlink" title="3. Grouping"></a>3. Grouping</h3><p>우리가 필요해서 묶어주는 것</p>
+<ul>
+<li>enum을 사용하면 단일집합을 사용할 수있다.</li>
+<li>class도 집합.<br>클리스의 인스턴스를 만드는 것도 어떤 그룹인지 마킹을 해주는 의미도 있다.<br>단지 그룹핑만을 위해서 마커를 사용할 경우에 클래스나 인터페이스를 마커 클래스나 마커 인터페이스라고 한다.<br>ex_ 페이스북에 해시태그에 ‘맛집’도 집합</li>
+</ul>
+<hr>
+<hr>
+<p><a name="1"></a></p>
+<h1 id="1-레이어-분리-Layering"><a href="#1-레이어-분리-Layering" class="headerlink" title="1. 레이어 분리 (Layering)"></a>1. 레이어 분리 (Layering)</h1><p>(feat. 마틴 파울러의 <strong>앤터 프라이즈 디자인 패턴 책</strong>)<br>레이어라는 방법을 사용한다.<br>레이어는 일종에 카테고라이즈에 가깝다. </p>
+<p>먼저 크게 분리한다.<br>client ←→ server<br>presentation ←→ doman ←→ data source</p>
+<ul>
+<li>domain: 도메인 로직</li>
+<li>data source: 저장하는 로직</li>
+<li>presentation: 도메인을 표현하는 로직 (앱, 웹,..)</li>
+</ul>
+<p><img src="/images/2019/14/01.png"></p>
+<ol>
+<li>레이어는 계층적이다. 레이어들간에는 호환되지 않는다! 층을 정확하게 나눠야한다.</li>
+<li>기저레이어는 추상레이어를 모른다.<br><strong>추상레이어</strong><ul>
+<li>기저레이어를 사용하는 레이어</li>
+<li>기저레이어에 대한 지식을 알고 있는 레이어</li>
+<li>OOP에 대입하면<br><strong>기저레이어: 부모클래스<br>추상레이어: 자식클래스</strong></li>
+<li>자식이 부모를 알고 있다. 부모는 자식을 모른다.</li>
+</ul>
+</li>
+<li>레이어안에 다수의 역할이 소속된다.<br>레이어안에는 다수의 역할이나 다수의 역할을 수행하는 인스턴스들이 소속된다.</li>
+</ol>
+<p>레이어안에는 레이어의 전체적인 레이어 가이드들을 지키고 있는 수많은 레이어들이 존제한다.</p>
+<hr>
+<p>인메모리에서 레이어를 나누어보자.<br>레이어를 나누는 눈이 필요하다.</p>
+<ol>
+<li>(함수형) 유틸리티<br>함수와 메소드의 차이는 this를 쓰냐안쓰냐.<br>OOP에는 기저 인터페이스나 기저 클래스도 유틸리티로 분류하기도 한다.</li>
+<li>베이스 클래스</li>
+<li>구상 클래스</li>
+<li>호스트코드</li>
+</ol>
+<p>게임의 실체는 어디일까?<br>실체는 호스트 코드.</p>
+<ul>
+<li>구상클래스, 베이스 클래스에 로직이 있고, 호스트코드는 사용하는 입장이다.</li>
+<li>진짜로 일하는 애는 호스트코드</li>
+<li>호스트코드부터 짜는것이 좋다. 반대로 짜게되면 사용하지 않을 것들도 만들게됨.</li>
+</ul>
+<p>수업시간에는 아키텍처를 공부하기위해 반대로 짜볼 것이다.</p>
+<hr>
+<p><img src="/images/2019/14/02.png"></p>
+<p><a name="1-0"></a></p>
+<h3 id="0-유틸리티"><a href="#0-유틸리티" class="headerlink" title="0. 유틸리티"></a>0. 유틸리티</h3><p>  함수 호출 하는 방식으로 다른 레이어와 소통한다. 모든 레이어와 소통.</p>
+<p><a name="1-1"></a></p>
+<h3 id="1-베이스-클래스"><a href="#1-베이스-클래스" class="headerlink" title="1. 베이스 클래스"></a>1. 베이스 클래스</h3><p>베이스클래스와 구상클래스의 관계는 상속되거나 소유된다.</p>
+<hr>
+<p><a name="1-1-1"></a></p>
+<h4 id="1-1-기반이-되는-3가지-클래스"><a href="#1-1-기반이-되는-3가지-클래스" class="headerlink" title="1.1 기반이 되는 3가지 클래스"></a>1.1 기반이 되는 3가지 클래스</h4><ol>
+<li>모델<br>모델링 한 것, 게임 자체를 모델링한 데이터가 존재함. (entity)</li>
+<li>뷰<br>모델을 그림그릴 수 있는 로직</li>
+<li>컨트롤러<br>뷰와 대화하거나 해당 모델을 처리할 수 있는 로직이 한꺼번에 들어있음<ul>
+<li>컨트롤러가 여러개의 모델을 소유하게 될 것이다.</li>
+</ul>
+</li>
+</ol>
+<p>뷰가 인터렉션을 할 때 컨트롤러에게 위임하는데<br>컨트롤러에게 뷰의 책임을 위임하지 않을 것이다.<br>뷰가 컨트롤러에가 그냥 위임하게되면 컨트롤러에 뷰의 사정이 들어가게된다.<br>(네이트브 분리가 안되다. ex_ dom을 컨트롤하는 로직 등등..)</p>
+<ul>
+<li><strong>mvc패턴을 날로쓰면 컨트롤러가 반드시 특정 뷰와 강력한 바인딩이 되어서 뷰를 교체할 수 없다.</strong></li>
+<li>강력한 바인딩을 해제하기 위해서는<br>컨트롤러에게는 <strong>순수한 데이터 관련된 요청만 시켜야하고</strong><br>나머지 인터렉션은 뷰가 가져갸아한다.<ul>
+<li>mvp나, mvvm을 쓰면된다.</li>
+</ul>
+</li>
+<li>view에서는 인터렉션 1차 처리를 한다. event listener같은 로직을 넣고,</li>
+<li>컨트롤러에는 순수한 데이터만 보낼 것</li>
+</ul>
+<hr>
+<p><a name="1-1-2"></a></p>
+<h4 id="1-2-뷰와-컨트롤러-사이의-버퍼-메세지"><a href="#1-2-뷰와-컨트롤러-사이의-버퍼-메세지" class="headerlink" title="1.2 뷰와 컨트롤러 사이의 버퍼 = 메세지"></a>1.2 뷰와 컨트롤러 사이의 버퍼 = 메세지</h4><ul>
+<li>뷰가 컨트롤러와 직접 대화하게 되면 뷰의 네이티브 지식을 알아야한다.<br>이것을 방지하기 위해 버퍼를 하나 둔다. (메세지)</li>
+<li>컨트롤러는 메세지만 바라보고 있고,<br>뷰도 메세지만 바라보면서<br>메세지로만 통신한다.</li>
+</ul>
+<p><strong>why?</strong></p>
+<ul>
+<li>네이티브 요소를 완전히 제거해서<br>컨트롤러도 인메모리 객체를,<br>뷰도 인메모리 객체를 바라보게 하기 위해서 중간에 메세지라는 매개체를 둔다.</li>
+</ul>
+<p><strong>메세지는 중립적인 역할</strong></p>
+<ul>
+<li>메세지는 중립적인 역할이자, 인메모리 객체이다.<br>네이티브 지식이 전혀 없다.</li>
+<li>컨트롤러는 이 메세지를 받아들여서 모델과 매핑을 시켜야하고,<br>뷰는 메세지를 받아들여서 네이트브 객체와 매핑을 시켜야한다.</li>
+</ul>
+<hr>
+<p><a name="1-1-3"></a></p>
+<h4 id="1-3-서브-뷰"><a href="#1-3-서브-뷰" class="headerlink" title="1.3 서브 뷰"></a>1.3 서브 뷰</h4><p>뷰도 혼자서 전부 처리하기에 힘들기때문에<br>서브뷰를 만들어서 그림그리는 체계를 나눠준다.  </p>
+<blockquote>
+<p>최종적으로 만들 것은 구상서브뷰와 구상모델을 만들게 된다.</p>
+</blockquote>
+<ul>
+<li>서브뷰의 구상서브뷰와 뷰의 구상뷰를 만들 것이다.<ul>
+<li>구상서브뷰는 <code>div</code>가 될 것이고</li>
+<li>구상뷰는 <code>section</code>뷰가 될 것이다.</li>
+</ul>
+</li>
+<li>모델은 아직 서브 모델이 필요없다.<br>( 블럭의 다른 종류를 만들지 않음._ 추후 폭탄만들때는 필요 )</li>
+</ul>
+<hr>
+<p>베이스 클래스 까지는 인메모리 객체이다.<br>네이티브 지식이 하나도 나오지 않는다. 구상클래스만 네이티브 지식을 갖게된다. </p>
+<ul>
+<li>네이티브 지식은 횡으로도 분리하지만 종으로도 분리하게 되는데 이를 레이어링이라고 했다. </li>
+<li>우리가 레이어링을 한 이유는 베이스 클래스에는 순수한 인메모리 객체만 두고, 구상클래스에 네이티브 지식을 두게 하기 위함이다.</li>
+</ul>
+<hr>
+<hr>
+<p><a name="1-2"></a></p>
+<h3 id="2-구상클래스"><a href="#2-구상클래스" class="headerlink" title="2. 구상클래스"></a>2. 구상클래스</h3><ul>
+<li>호스트 클래스는 구상클래스를 인스턴스화 하여 사용한다. </li>
+</ul>
+<ol>
+<li>구상모델</li>
+<li><del>구상컨트롤러</del><ul>
+<li>Game이 바로 컨트롤러 역할을 수행하고 있음</li>
+<li>게임에 있는 하나하나의 블럭이 모델.</li>
+<li>게임이라는 컨트롤러 하나만 있으면 되기 때문에 구지 없어도됨.</li>
+</ul>
+</li>
+<li>구상뷰</li>
+</ol>
+<hr>
+<hr>
+<p><a name="1-3"></a></p>
+<h3 id="3-호스트코드"><a href="#3-호스트코드" class="headerlink" title="3. 호스트코드"></a>3. 호스트코드</h3><ul>
+<li>구상컨트롤러 생성 및 초기화 </li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/03/11/OOP_09_1/" data-id="cjtcpt35x004unnbm4zpa1360" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        <li class="first_depth">
+          <a href="#0">0. 프로시저 프로그래밍</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#0-1">프로시저 프로그래밍의 특징</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-2">프로시저 프로그래밍의 단점</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-3">엔트로피 증가법칙 😎😎</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#0-4">엔트로피 증가를 막자.</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#0-4-0">가장 중요한 변화율</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-1">1. Categrizing</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-2">2. Modeling</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#0-4-3">3. Grouping</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+        <li class="first_depth">
+          <a href="#1">1. 레이어 분리</a>
+          <ul>
+            
+              
+                <li>
+                  <a href="#1-0">0. 유틸리티</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-1">1. 베이스 클래스</a>
+                  <ul>
+                    
+                      
+                        <li>
+                          <a href="#1-1-1">1.1 기반이 되는 3가지 클래스</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#1-1-2">1.2 뷰와 컨트롤러 사이의 버퍼 = 메세지</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                        <li>
+                          <a href="#1-1-3">1.3 서브 뷰</a>
+                          <ul>
+                            
+                          </ul>
+                        </li>
+                      
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-2">2. 구상 클래스</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+                <li>
+                  <a href="#1-3">3. 호스트 코드</a>
+                  <ul>
+                    
+                  </ul>
+                </li>
+              
+            
+          </ul>
+        </li>
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/03/17/OOP_09_2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/03/10/debug_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Mac 환경에서 IE디버깅하기. (virtualBox 사용)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/17/OOP_09_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/15/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/17/OOP_09_2/" class="title">코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)</a></p>
+                            <p class="item-date"><time datetime="2019-03-17T04:32:40.000Z" itemprop="datePublished">2019-03-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/11/OOP_09_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/14/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)-1. 개요" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/11/OOP_09_1/" class="title">코드스피츠80_OOP design with game (2)-1. 개요</a></p>
+                            <p class="item-date"><time datetime="2019-03-11T01:20:19.000Z" itemprop="datePublished">2019-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/10/debug_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/13/thumb_default.jpg)" alt="Mac 환경에서 IE디버깅하기. (virtualBox 사용)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></p>
+                            <p class="item-title"><a href="/2019/03/10/debug_01/" class="title">Mac 환경에서 IE디버깅하기. (virtualBox 사용)</a></p>
+                            <p class="item-date"><time datetime="2019-03-10T01:20:19.000Z" itemprop="datePublished">2019-03-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/23/OOP_08_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/12/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-2" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/23/OOP_08_2/" class="title">코드스피츠80_OOP design with game (1)-2</a></p>
+                            <p class="item-date"><time datetime="2019-02-23T01:20:19.000Z" itemprop="datePublished">2019-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향</a></p>
+                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">60</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level2/">Level2</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Level3/">Level3</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/03/11/OOP_09_1/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
