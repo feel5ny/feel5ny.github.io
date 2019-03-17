@@ -20,7 +20,7 @@
 <meta property="og:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   1. 저번시간의 코드에서 잘못된 점을 찾아보자. 1.1 베이스 클래스에 네이티브 지식이 포함되어있다.12345678const Block = class &amp;#123;  stati">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/15/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-03-17T09:16:40.116Z">
+<meta property="og:updated_time" content="2019-03-17T15:48:21.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)">
 <meta name="twitter:description" content="코드스피츠 강의 정리록  생소한 도메인으로 배우는게 좋다.익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을 배우기 어렵다.때문에 80기는 게임을 통해서 진행할 예정.   1. 저번시간의 코드에서 잘못된 점을 찾아보자. 1.1 베이스 클래스에 네이티브 지식이 포함되어있다.12345678const Block = class &amp;#123;  stati">
@@ -225,14 +225,14 @@ ga('send', 'pageview');
                 </li>
               
                 <li>
-                  <a href="#1-2">1.2 통제권을 갖고 있는 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
+                  <a href="#1-2">1.2 통제권을 가진 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
                   <ul>
                     
                   </ul>
                 </li>
               
                 <li>
-                  <a href="#1-3">1.3 통제권을 갖고 있는 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
+                  <a href="#1-3">1.3 통제권을 가진 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
                   <ul>
                     
                   </ul>
@@ -275,14 +275,14 @@ ga('send', 'pageview');
 <li>베이스 레이어에 들어오면 안되는 지식이다.</li>
 </ul>
 <blockquote>
-<p>아키텍처는 코드에 가질 수 있는 역할과 가질수 없는 역할,<br>  기질수 있는 책임과 가질수 없는 책임을 명시할 수 있고,<br>  그것으로 코드가 바른지 안바른지 판단하는 기준표가 된다.</p>
+<p>아키텍처는 코드에 가질 수 있는 역할과 가질 수 없는 역할,<br>  기질 수 있는 책임과 가질수 없는 책임을 명시할 수 있고,<br>  그것으로 코드가 바른지 안바른지 판단하는 기준표가 된다.</p>
 <ul>
-<li>기존 모델에서 지금 아키텍처와 안맞는 부분을 지목할 수 있다.</li>
+<li>기존 모델에서 지금 아키텍처와 안 맞는 부분을 지목할 수 있다.</li>
 </ul>
 </blockquote>
 <hr>
 <p><a name="1-2"></a></p>
-<h2 id="1-2-통제권을-갖고-있는-제왕이-존재한다-1-블럭-위치값의-지식"><a href="#1-2-통제권을-갖고-있는-제왕이-존재한다-1-블럭-위치값의-지식" class="headerlink" title="1.2 통제권을 갖고 있는 제왕이 존재한다. (1) - 블럭 위치값의 지식"></a>1.2 통제권을 갖고 있는 제왕이 존재한다. (1) - 블럭 위치값의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">👉 <span class="keyword">const</span> data = [];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">  table = <span class="built_in">document</span>.querySelector(tid);</span><br><span class="line">  👉 <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> r = [];</span><br><span class="line">    data.push(r);</span><br><span class="line">    👉 <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = Block.GET();</span><br><span class="line">  &#125;</span><br><span class="line">  table.addEventListener(<span class="string">'mousedown'</span>, down);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseup'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseleave'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mousemove'</span>, move);</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-통제권을-가진-제왕이-존재한다-1-블럭-위치값의-지식"><a href="#1-2-통제권을-가진-제왕이-존재한다-1-블럭-위치값의-지식" class="headerlink" title="1.2 통제권을 가진 제왕이 존재한다. (1) - 블럭 위치값의 지식"></a>1.2 통제권을 가진 제왕이 존재한다. (1) - 블럭 위치값의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">👉 <span class="keyword">const</span> data = [];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">return</span> <span class="function"><span class="params">tid</span> =&gt;</span> &#123;</span><br><span class="line">  table = <span class="built_in">document</span>.querySelector(tid);</span><br><span class="line">  👉 <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> r = [];</span><br><span class="line">    data.push(r);</span><br><span class="line">    👉 <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = Block.GET();</span><br><span class="line">  &#125;</span><br><span class="line">  table.addEventListener(<span class="string">'mousedown'</span>, down);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseup'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mouseleave'</span>, up);</span><br><span class="line">  table.addEventListener(<span class="string">'mousemove'</span>, move);</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h4 id="cf-1-프로시저적인-생각을-한다-를-어디서-알-수-있냐면"><a href="#cf-1-프로시저적인-생각을-한다-를-어디서-알-수-있냐면" class="headerlink" title="cf__1. 프로시저적인 생각을 한다? 를 어디서 알 수 있냐면,"></a>cf__1. 프로시저적인 생각을 한다? 를 어디서 알 수 있냐면,</h4><p>= <strong>모든 연산을 data를 갖고 하려고 한다.</strong></p>
 <ul>
 <li>data가 왕이다. 통제의 왕</li>
@@ -308,11 +308,11 @@ ga('send', 'pageview');
 </ul>
 <hr>
 <p><a name="1-3"></a></p>
-<h2 id="1-3-통제권을-갖고-있는-제왕이-존재한다-2-선택된-블럭의-지식"><a href="#1-3-통제권을-갖고-있는-제왕이-존재한다-2-선택된-블럭의-지식" class="headerlink" title="1.3 통제권을 갖고 있는 제왕이 존재한다. (2) - 선택된 블럭의 지식"></a>1.3 통제권을 갖고 있는 제왕이 존재한다. (2) - 선택된 블럭의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> selected = [], getBlock = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> down = <span class="function">(<span class="params">&#123;pageX: x, pageY: y&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x,y);</span><br><span class="line">  <span class="keyword">if</span>(!curr) <span class="keyword">return</span>;</span><br><span class="line">  isDown = <span class="literal">true</span>;</span><br><span class="line">  👉 selected.length = <span class="number">0</span>; </span><br><span class="line">  👉 selected[<span class="number">0</span>] = startBlock = currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> move = <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x, y);</span><br><span class="line">  <span class="keyword">if</span> (!crr || curr.type !== startBlock.type || !isNext(curr)) <span class="keyword">return</span>;</span><br><span class="line">  👉 <span class="keyword">if</span> (selected.indexOf(curr) == <span class="number">-1</span>) selected.push(curr);</span><br><span class="line">  👉 <span class="keyword">else</span> <span class="keyword">if</span> (selected[selected.length - <span class="number">1</span>] == curr) selected.pop();</span><br><span class="line">  currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> up = <span class="function"><span class="params">()</span> =&gt;</span> (👉 selected.length &gt; <span class="number">2</span> ? remove() : reset());</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-통제권을-가진-제왕이-존재한다-2-선택된-블럭의-지식"><a href="#1-3-통제권을-가진-제왕이-존재한다-2-선택된-블럭의-지식" class="headerlink" title="1.3 통제권을 가진 제왕이 존재한다. (2) - 선택된 블럭의 지식"></a>1.3 통제권을 가진 제왕이 존재한다. (2) - 선택된 블럭의 지식</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> selected = [], getBlock = <span class="function">(<span class="params">x, y</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> down = <span class="function">(<span class="params">&#123;pageX: x, pageY: y&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span>(isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x,y);</span><br><span class="line">  <span class="keyword">if</span>(!curr) <span class="keyword">return</span>;</span><br><span class="line">  isDown = <span class="literal">true</span>;</span><br><span class="line">  👉 selected.length = <span class="number">0</span>; </span><br><span class="line">  👉 selected[<span class="number">0</span>] = startBlock = currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> move = <span class="function">(<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = getBlock(x, y);</span><br><span class="line">  <span class="keyword">if</span> (!crr || curr.type !== startBlock.type || !isNext(curr)) <span class="keyword">return</span>;</span><br><span class="line">  👉 <span class="keyword">if</span> (selected.indexOf(curr) == <span class="number">-1</span>) selected.push(curr);</span><br><span class="line">  👉 <span class="keyword">else</span> <span class="keyword">if</span> (selected[selected.length - <span class="number">1</span>] == curr) selected.pop();</span><br><span class="line">  currBlock = curr;</span><br><span class="line">  render();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> up = <span class="function"><span class="params">()</span> =&gt;</span> (👉 selected.length &gt; <span class="number">2</span> ? remove() : reset());</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>selected를 사방에서 직접 컨트롤하고 있다. </p>
 <ul>
-<li>만약 선택의 조건이 현재 요건과 달라진다면?<br>down, move, up 모두 바꿔야한다. </li>
+<li>만약 선택의 조건이 현재 요건과 달라진다면?<br>down, move, up 모두 바꿔야 한다. </li>
 </ul>
 </li>
 <li><p>selected도 블럭이 선택되어있는지 아닌지에 대한 지식이기 때문에<br>Block의 지식이다.</p>
@@ -348,9 +348,9 @@ ga('send', 'pageview');
 <li>이전에는 배열로(data) 관리했었는데, 이제는 링크드 리스트로 관리한다.<br>나의 지식은 나와 이전(prev) 정도까지밖에 모르기 때문에</li>
 </ul>
 </li>
-<li><p>item 객체가 이 이상을 알게 되면, 권한 위반이된다.</p>
+<li><p>item 객체가 이 이상을 알게 되면, 권한 위반이 된다.</p>
 <ul>
-<li><strong>권한 책임을 축소시키면 연산이 많이 일어난다. </strong><br>(연산이 늘어난 부분은 걱정하지 말자.)</li>
+<li><strong>권한 책임을 축소하면 연산이 많이 일어난다. </strong><br>(연산이 늘어난 부분은 걱정하지 말자.)</li>
 </ul>
 </li>
 <li><p>밖에는 캡슐화 된 메소드로 대화한다.</p>
@@ -394,10 +394,10 @@ ga('send', 'pageview');
 <li>메모리를 연산으로 치환하면 좋은 점이<br>하나는 메모리가 절감되는 경우가 생기고,<br>권한을 축소할 수 있는 권한이 생긴다. (프로시저)</li>
 </ul>
 </li>
-<li>자바스크립트의 프로토타입체인은 대표적으로 연산을 통해서 메모리를 줄이는 시스템이다.<br>연산을 통해서 프로토타입 체인에 가져오는 것이다.<br>예전 메모리가 없던(네스케이프)시절 개발된 자바스크립트.<ul>
+<li>자바스크립트의 프로토타입체인은 대표적으로 연산을 통해서 메모리를 줄이는 시스템이다.<br>연산을 통해서 프로토타입 체인에 가져오는 것이다.<br>예전 메모리가 없던(넷스케이프)시절 개발된 자바스크립트.<ul>
 <li>하지만 현대의 크롬브라우저는 속도가 더 중요하기 때문에 모든 프로토타입 체이닝에 잇는 것을 다 copy해서 캐시테이블을 만들어서 거기서 읽는다.<ul>
 <li>더이상 프로토타입 체인 타고 가서 가져오지 않는다. 때문에 크롬에서 자바사크립트가 빠른 이유이다.</li>
-<li>체인을 매번 타고가는 연산은 귀찮기 때문에</li>
+<li>체인을 매번 타고 가는 연산은 귀찮기 때문에</li>
 </ul>
 </li>
 </ul>
@@ -408,10 +408,10 @@ ga('send', 'pageview');
 <blockquote>
 <p>알고리즘의 태반은 자료구조로 되어있고,<br>자료구조의 태반은 다시 또 알고리즘으로 돌아가게 되어있다.<br>항상 메모리와 연산은 교환할 수 있다.</p>
 </blockquote>
-<h4 id="2-isBorder"><a href="#2-isBorder" class="headerlink" title="2. isBorder"></a>2. isBorder</h4><p>나의 인접셀을 파악하는 것도 나의 권한이다.</p>
+<h4 id="2-isBorder"><a href="#2-isBorder" class="headerlink" title="2. isBorder"></a>2. isBorder</h4><p>나의 인접 셀을 파악하는 것도 나의 권한이다.</p>
 <ul>
 <li>특정 아이템의 x,y가 나의 지식이기 때문에.</li>
-<li>나의 x,y와 아이템의 x,y의 차이를 이용해서 나의 인접셀인지 아닌지를 알 수 있다.</li>
+<li>나의 x,y와 아이템의 x,y의 차이를 이용해서 나의 인접 셀인지 아닌지를 알 수 있다.</li>
 </ul>
 <h5 id="cf-3-권한-책임-역할"><a href="#cf-3-권한-책임-역할" class="headerlink" title="cf__3. 권한 + 책임 = 역할"></a>cf__3. <strong>권한 + 책임 = 역할</strong></h5><ol>
 <li><p>우리가 책임을 부여하고 싶으면, 권한을 부여해야한다.<br>두개가 어긋나면 둘중 하나가 깨진다.</p>
@@ -440,7 +440,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/03/17/OOP_09_2/" data-id="cjtcpt36j005unnbmb783r3zy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/03/17/OOP_09_2/" data-id="cjtd3jx9300504wbmslv0eujf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -521,14 +521,14 @@ ga('send', 'pageview');
                 </li>
               
                 <li>
-                  <a href="#1-2">1.2 통제권을 갖고 있는 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
+                  <a href="#1-2">1.2 통제권을 가진 제왕이 존재한다.(1) - 블럭 위치값의 지식</a>
                   <ul>
                     
                   </ul>
                 </li>
               
                 <li>
-                  <a href="#1-3">1.3 통제권을 갖고 있는 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
+                  <a href="#1-3">1.3 통제권을 가진 제왕이 존재한다.(2) - 선택된 블럭의 지식</a>
                   <ul>
                     
                   </ul>
@@ -622,7 +622,7 @@ ga('send', 'pageview');
     
         <a href="/2019/03/11/OOP_09_1/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">코드스피츠80_OOP design with game (2)-1. 개요</p>
+        <p class="article-nav-title">코드스피츠80_OOP design with game (2)- 1. 개요</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -664,7 +664,7 @@ ga('send', 'pageview');
                             <a href="/2019/03/11/OOP_09_1/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2019/14/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)-1. 개요" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2019/14/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)- 1. 개요" class="thumbnail-image"></span>
     
     
 </a>
@@ -673,7 +673,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
-                            <p class="item-title"><a href="/2019/03/11/OOP_09_1/" class="title">코드스피츠80_OOP design with game (2)-1. 개요</a></p>
+                            <p class="item-title"><a href="/2019/03/11/OOP_09_1/" class="title">코드스피츠80_OOP design with game (2)- 1. 개요</a></p>
                             <p class="item-date"><time datetime="2019-03-11T01:20:19.000Z" itemprop="datePublished">2019-03-11</time></p>
                         </div>
                     </li>
@@ -704,7 +704,7 @@ ga('send', 'pageview');
                             <a href="/2019/02/23/OOP_08_2/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2019/12/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-2" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2019/12/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)- 2. OOAD &amp; 프로시저 P" class="thumbnail-image"></span>
     
     
 </a>
@@ -713,7 +713,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
-                            <p class="item-title"><a href="/2019/02/23/OOP_08_2/" class="title">코드스피츠80_OOP design with game (1)-2</a></p>
+                            <p class="item-title"><a href="/2019/02/23/OOP_08_2/" class="title">코드스피츠80_OOP design with game (1)- 2. OOAD &amp; 프로시저 P</a></p>
                             <p class="item-date"><time datetime="2019-02-23T01:20:19.000Z" itemprop="datePublished">2019-02-23</time></p>
                         </div>
                     </li>
@@ -724,7 +724,7 @@ ga('send', 'pageview');
                             <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향" class="thumbnail-image"></span>
     
     
 </a>
@@ -733,7 +733,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
-                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)-1. 객체지향과 값지향</a></p>
+                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향</a></p>
                             <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
                         </div>
                     </li>
