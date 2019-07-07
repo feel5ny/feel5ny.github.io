@@ -220,40 +220,57 @@ ga('send', 'pageview');
 </ol>
 <hr>
 <h1 id="1-dns"><a href="#1-dns" class="headerlink" title=" 1. dns"></a><a name="dns"></a> 1. dns</h1><p>DNS(도메인 네임 시스템)는 <code>.com</code> 또는 <code>.net</code>과 같은 특정 최상위 도메인(TLD)의 모든 도메인 네임 및 해당하는 IP 주소를 저장하는 데이터베이스입니다. DNS는 인터넷에서 컴퓨터 시스템과 리소스를 식별하고 찾습니다. 예를 들어, 웹 주소 또는 URL을 입력하면 DNS가 입력된 이름과 해당 위치의 IP 주소를 일치시키고 사용자를 해당 사이트에 연결시켜 줍니다.</p>
-<p><img src="/images/2018/02/dns1.png"></p>
+<img src="/images/2018/02/dns1.png">
+
 <hr>
 <h1 id="2-subnet"><a href="#2-subnet" class="headerlink" title=" 2. subnet"></a><a name="subnet"></a> 2. subnet</h1><ul>
-<li>서브넷(subnet)은 “subnetwork”을 줄인 말로서 어떤 기관에 소속된 네트웍이지만 따로 분리되어 있는 한 부분으로 인식될 수 있는 네트웍을 말한다. </li>
-<li>일반적으로 하나의 서브넷은 하나의 지역, 한 빌딩 또는 같은 근거리통신망 내에 있는 모든 컴퓨터들을 나타낼 수 있다.</li>
+<li><p>서브넷(subnet)은 “subnetwork”을 줄인 말로서 어떤 기관에 소속된 네트웍이지만 따로 분리되어 있는 한 부분으로 인식될 수 있는 네트웍을 말한다. </p>
+</li>
+<li><p>일반적으로 하나의 서브넷은 하나의 지역, 한 빌딩 또는 같은 근거리통신망 내에 있는 모든 컴퓨터들을 나타낼 수 있다.</p>
+</li>
 <li><p>여러 개의 서브넷으로 나뉘어진 어떤 조직의 네트웍은 인터넷에 하나의 공유된 네트웍 주소로 접속될 수 있다. 만약 서브넷이 없다면, 그 조직은 물리적으로 분리된 서브 네트웍마다 하나씩, 여러 군데의 인터넷 접속을 가지게 될 것이며, 그렇게 함으로써 한정된 량의 인터넷 주소가 쓸모 없이 낭비될 수도 있게된다.</p>
 </li>
 <li><p>인터넷은 네트웍 사용자들 간에 서로 커뮤니케이션을 하기 위한 네트웍의 집합이다. </p>
 </li>
-<li>커뮤니케이션을 위해서는 양측의 사용자 또는 호스트가 관련되어 있는 발신지와 도착지 네트웍, 그리고 네트웍 내의 특정한 컴퓨터의 주소가 있어야 한다. 이 주소를 IP 주소라고 부른다. </li>
-<li>32 비트의 IP 주소는 크게 두 부분으로 나뉘는데, 하나는 네트웍을 식별하는 네트웍 번호이고, 다른 하나는 네트웍 내의 특정한 컴퓨터나 호스트를 식별하는 호스트 번호이다. </li>
-<li>한 기관에서 특정한 서브넷을 확인시키기 위해 컴퓨터나 호스트를 식별하는 주소 내의 비트들을 일부 사용할 수 있다. </li>
-<li><p>그러므로 실제로는 IP 주소에는 네트웍 번호, 서브넷 번호, 그리고 컴퓨터 번호 등 세 부분이 포함되어 있는 셈이다.<br><img src="/images/2018/02/ipaddress.jpg"></p>
+<li><p>커뮤니케이션을 위해서는 양측의 사용자 또는 호스트가 관련되어 있는 발신지와 도착지 네트웍, 그리고 네트웍 내의 특정한 컴퓨터의 주소가 있어야 한다. 이 주소를 IP 주소라고 부른다. </p>
+</li>
+<li><p>32 비트의 IP 주소는 크게 두 부분으로 나뉘는데, 하나는 네트웍을 식별하는 네트웍 번호이고, 다른 하나는 네트웍 내의 특정한 컴퓨터나 호스트를 식별하는 호스트 번호이다. </p>
+</li>
+<li><p>한 기관에서 특정한 서브넷을 확인시키기 위해 컴퓨터나 호스트를 식별하는 주소 내의 비트들을 일부 사용할 수 있다. </p>
+</li>
+<li><p>그러므로 실제로는 IP 주소에는 네트웍 번호, 서브넷 번호, 그리고 컴퓨터 번호 등 세 부분이 포함되어 있는 셈이다.</p>
+<img src="/images/2018/02/ipaddress.jpg">
 </li>
 <li><p><a href="https://www.icann.org/" target="_blank" rel="noopener">https://www.icann.org/</a></p>
 </li>
 </ul>
 <hr>
 <h1 id="3-NAT-Network-Address-Translation"><a href="#3-NAT-Network-Address-Translation" class="headerlink" title=" 3. NAT (= Network Address Translation)"></a><a name="NAT"></a> 3. NAT (= Network Address Translation)</h1><ul>
-<li>NAT는 외부 네트웍에 알려진 것과 다른 IP 주소를 사용하는 내부 네트웍에서, IP 주소를 변환하는 것이다. </li>
-<li>일반적으로, 한 회사는 자신의 내부 네트웍 주소를 하나 또는 그 이상의 공인 IP 주소로 사상한다. 그리고 들어오는 패킷들 상의 공인 IP 주소를 다시 사설 IP 주소로 변환한다. </li>
-<li>이렇게 함으로써 나가거나 들어오는 각 요구들은 주소 변환과정을 반드시 거쳐야 하기 때문에, </li>
-<li>보안문제를 확실하게 하는데 도움이 되며, 또한 </li>
-<li>요구를 제한하거나 인증하고, 또 </li>
-<li>이전의 요구와 일치시키는 기회를 제공한다. </li>
+<li><p>NAT는 외부 네트웍에 알려진 것과 다른 IP 주소를 사용하는 내부 네트웍에서, IP 주소를 변환하는 것이다. </p>
+</li>
+<li><p>일반적으로, 한 회사는 자신의 내부 네트웍 주소를 하나 또는 그 이상의 공인 IP 주소로 사상한다. 그리고 들어오는 패킷들 상의 공인 IP 주소를 다시 사설 IP 주소로 변환한다. </p>
+</li>
+<li><p>이렇게 함으로써 나가거나 들어오는 각 요구들은 주소 변환과정을 반드시 거쳐야 하기 때문에, </p>
+</li>
+<li><p>보안문제를 확실하게 하는데 도움이 되며, 또한 </p>
+</li>
+<li><p>요구를 제한하거나 인증하고, 또 </p>
+</li>
+<li><p>이전의 요구와 일치시키는 기회를 제공한다. </p>
+</li>
 <li><p>NAT은 또한 회사에서 필요한 공인 IP 주소의 수를 보존하며, 회사가 외부 네트웍과의 통신에서 단 하나의 공인 IP 주소를 사용할 수 있게 한다.</p>
 </li>
 <li><p>NAT은 라우터의 일부로서 포함되며, 종종 통합된 방화벽의 일부가 되기도 한다. </p>
 </li>
-<li>네트웍 관리자들은 공인 IP 주소에서 사설 IP 주소로, 사설 IP 주소에서 공인 IP 주소로 사상하기 위한 NAT 표를 만든다. </li>
-<li>NAT은 라우팅 정책과 함께 사용될 수도 있다. </li>
-<li>NAT은 IP 주소를 정적으로 정의하거나, 또는 동적으로 변환하도록 설정될 수 있다. 시스코에서 만든 NAT 버전은 관리자가 다음과 같은 것들의 사상을 위한 표를 만들도록 해 준다.</li>
+<li><p>네트웍 관리자들은 공인 IP 주소에서 사설 IP 주소로, 사설 IP 주소에서 공인 IP 주소로 사상하기 위한 NAT 표를 만든다. </p>
+</li>
+<li><p>NAT은 라우팅 정책과 함께 사용될 수도 있다. </p>
+</li>
+<li><p>NAT은 IP 주소를 정적으로 정의하거나, 또는 동적으로 변환하도록 설정될 수 있다. 시스코에서 만든 NAT 버전은 관리자가 다음과 같은 것들의 사상을 위한 표를 만들도록 해 준다.</p>
+</li>
 </ul>
-<p><img src="/images/2018/02/nat.gif"></p>
+<img src="/images/2018/02/nat.gif">
+
 <hr>
 <h1 id="4-port"><a href="#4-port" class="headerlink" title=" 4. port"></a><a name="port"></a> 4. port</h1><p>네트워크의 입출력단자들을 포트(PORT)라고 하며 번호로 지정되는데 포트의 번호는 0에서 65535까지 입니다.<br>TCP/IP 네트웍에서 포트 번호는, 들어오는 트래픽을 컴퓨터 내에서 실행되고 있는 적절한 프로그램에 분배시키기 위해 할당되는 숫자를 말한다. 이것은 물리적인 플러그나 소켓이 아니며, 다만 <strong>논리적인 할당</strong>일 뿐이다</p>
 <ul>
@@ -275,17 +292,24 @@ ga('send', 'pageview');
 </ol>
 <hr>
 <h1 id="5-socket"><a href="#5-socket" class="headerlink" title=" 5. socket"></a><a name="socket"></a> 5. socket</h1><ul>
-<li>두 프로그램이 네트워크를 통해 서로 통신을 수행할 수 있도록 양쪽에 생성되는 <strong>링크의 단자</strong>입니다.</li>
-<li>두 소켓이 연결되면 서로 다른 프로세스끼리 데이터를 전달할 수 있습니다.</li>
-<li>결국 소켓이 구현됨으로써 네트워크 및 전송 계층의 캡슐화가 가능해집니다. </li>
+<li><p>두 프로그램이 네트워크를 통해 서로 통신을 수행할 수 있도록 양쪽에 생성되는 <strong>링크의 단자</strong>입니다.</p>
+</li>
+<li><p>두 소켓이 연결되면 서로 다른 프로세스끼리 데이터를 전달할 수 있습니다.</p>
+</li>
+<li><p>결국 소켓이 구현됨으로써 네트워크 및 전송 계층의 캡슐화가 가능해집니다. </p>
+</li>
 <li><p>소켓은 원래 캘리포니아 버클리 대학 분교에서 UNIX용으로 개발되었으며,  UNIX에서의 입출력 메소드의 표준인 개방/읽기/쓰기/닫기 메커니즘을 따릅니다.</p>
 </li>
 <li><p>소켓 함수는 동기모드(블록킹) / 비동기 모드 (논블록킹)으로 동작합니다.</p>
 </li>
-<li>차이점은 만약 데이터가 도착하지 않는 상태에서 recv()로 데이터를 수신하고자 했을 때 데이터가 올 때까지 대기(block)하느냐 , 그냥 수신된 데이터가 없다는 정보만 리턴하고 넘어가느냐 입니다.</li>
-<li>실제로 대기한다는 의미는 시스템을 멈추고 기다린다는 것이 아니라 다른 쓰레드나 프로세스(process)로 실행 권을 넘기는 것이기 때문에 프로세서는 항상 적절한 동작을 하게 됩니다.</li>
-<li>비동기 모드로 데이터가 올 떄까지 풀링(polling)하면서 대기하는 것과는 기다린다는 의미에서는 동일하지만 프로세서를 활용한다는 면에서는 하늘과 땅 차이라고 할 수 있습니다. 이런 병렬적인 처리에 대한 고려가 필요하게 됩니다.</li>
-<li>그리고 직접적인 소켓 통신을 처리하는 함수는 아니지만 소켓 처리에 대해서 Multiplex처리(하나의 쓰레드, 혹은 적은 수의 쓰레드에서 여러 개의 소켓을 처리)를 해주는 select , epoll , IOCP 같은 기능적인 함수군도 염두해 두어야겠습니다.</li>
+<li><p>차이점은 만약 데이터가 도착하지 않는 상태에서 recv()로 데이터를 수신하고자 했을 때 데이터가 올 때까지 대기(block)하느냐 , 그냥 수신된 데이터가 없다는 정보만 리턴하고 넘어가느냐 입니다.</p>
+</li>
+<li><p>실제로 대기한다는 의미는 시스템을 멈추고 기다린다는 것이 아니라 다른 쓰레드나 프로세스(process)로 실행 권을 넘기는 것이기 때문에 프로세서는 항상 적절한 동작을 하게 됩니다.</p>
+</li>
+<li><p>비동기 모드로 데이터가 올 떄까지 풀링(polling)하면서 대기하는 것과는 기다린다는 의미에서는 동일하지만 프로세서를 활용한다는 면에서는 하늘과 땅 차이라고 할 수 있습니다. 이런 병렬적인 처리에 대한 고려가 필요하게 됩니다.</p>
+</li>
+<li><p>그리고 직접적인 소켓 통신을 처리하는 함수는 아니지만 소켓 처리에 대해서 Multiplex처리(하나의 쓰레드, 혹은 적은 수의 쓰레드에서 여러 개의 소켓을 처리)를 해주는 select , epoll , IOCP 같은 기능적인 함수군도 염두해 두어야겠습니다.</p>
+</li>
 </ul>
 <h2 id="6-MAC-address-Media-Access-Control-Address"><a href="#6-MAC-address-Media-Access-Control-Address" class="headerlink" title=" 6. MAC address (= Media Access Control Address)"></a><a name="mac-address"></a> 6. MAC address (= Media Access Control Address)</h2><p>MAC 주소는, 무선 LAN 카드 또는 무선 LAN 기능 내장 기기에 개별적으로 부여되는 16진수 12자리의 단말 식별 번호(예:12:34:56:78:90:AB)입니다. OS에 따라 “물리적 주소” 또는”Wi-Fi 주소”라고 표시됩니다.</p>
 <h2 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h2><ul>
@@ -317,7 +341,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="cjtd3jx7i00134wbm7kxifs9j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="cjxt28y2y0019rsbm6oxqfawt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -473,6 +497,26 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/07/07/Joylog_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/17/thumb_default.jpg)" alt="2019 상반기 회고 + 하반기 다짐 (feat. 글또)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/07/07/Joylog_003/" class="title">2019 상반기 회고 + 하반기 다짐 (feat. 글또)</a></p>
+                            <p class="item-date"><time datetime="2019-07-07T12:23:55.000Z" itemprop="datePublished">2019-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/03/17/OOP_09_2/" class="thumbnail">
     
     
@@ -550,26 +594,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
-                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향</a></p>
-                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -579,7 +603,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11.11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 11.11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
         </div>
     </div>
 
@@ -589,7 +613,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -599,7 +623,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -636,13 +660,6 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>

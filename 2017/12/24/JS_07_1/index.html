@@ -216,7 +216,10 @@ ga('send', 'pageview');
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li><a href="#window">window 객체</a><br>1.1 <a href="#global">전역 스코프</a> : window.전역변수명, window.전역함수명<br>1.2 <a href="#frame">창 사이의 관계와 프레임</a><br>1.3 <a href="#screen-position">창의 위치</a> : screenLeft, screenTop<br>1.4 <a href="#screen-size">창의 크기</a> : innerWidth, outerWidth<br>1.5 <a href="#navigation&amp;open">내비게이션과 열기</a> : window.open, window.close<br>1.6 <a href="#interval&amp;timeout">인터벌과 타임아웃</a> : setInterval, setTimeout<br>1.7 <a href="#system-popup">시스템 대화상자</a> : alert, prompt, confirm, print, find<br>—- 2편 &#128071;</li>
+<li><a href="#window">window 객체</a><br>1.1 <a href="#global">전역 스코프</a> : window.전역변수명, window.전역함수명<br>1.2 <a href="#frame">창 사이의 관계와 프레임</a><br>1.3 <a href="#screen-position">창의 위치</a> : screenLeft, screenTop<br>1.4 <a href="#screen-size">창의 크기</a> : innerWidth, outerWidth<br>1.5 <a href="#navigation&open">내비게이션과 열기</a> : window.open, window.close<br>1.6 <a href="#interval&timeout">인터벌과 타임아웃</a> : setInterval, setTimeout<br>1.7 <a href="#system-popup">시스템 대화상자</a> : alert, prompt, confirm, print, find</li>
+</ol>
+<p>—- 2편 &#128071;</p>
+<ol start="2">
 <li>location 객체</li>
 <li>navigator 객체</li>
 <li>screen 객체</li>
@@ -225,18 +228,23 @@ ga('send', 'pageview');
 <hr>
 <hr>
 <h2 id="1-window-객체"><a href="#1-window-객체" class="headerlink" title=" 1. window 객체"></a><a name="window"></a> 1. window 객체</h2><p>BOM은 웹 페이지 콘텐츠와 무관하게 <code>브라우저 기능을 노출하는 객체</code>이다.</p>
-<p><img src="/images/post_img/56/BOM-01.png"></p>
+<img src="/images/post_img/56/BOM-01.png">
+
 <p>브라우저의 인스턴스 =&gt; window 객체<br>웹페이지에서 정의한 모든 객체, 변수, 함수에서는<br><strong>window가 Global 객체(= 표준내장객체) 구실을 하고,</strong><br>window에 정의된 parseInt()등의 메서드를 이용한다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">+</a></p>
 <blockquote>
 <p>global objects와 global object는 다르다.<br>global objects는 표중내장객체, global object는 전역객체이다.(실행 컨택스트에서 GO)</p>
 </blockquote>
 <hr>
-<h3 id="1-1-전역-스코프"><a href="#1-1-전역-스코프" class="headerlink" title=" 1.1 전역 스코프"></a><a name="global"></a> 1.1 전역 스코프</h3><p>전역에서 선언한 <code>변수</code>와 <code>함수</code>는 모두<br><strong>window 객체의 프로퍼티 및 메서드</strong>가 된다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">const</span> sayAge = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age); <span class="comment">// 전역을 가리키는 this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.age);  <span class="comment">// 29</span></span><br><span class="line">sayAge();           <span class="comment">// 29</span></span><br><span class="line"><span class="built_in">window</span>.sayAge();    <span class="comment">// 29</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="1-1-전역-스코프"><a href="#1-1-전역-스코프" class="headerlink" title=" 1.1 전역 스코프"></a><a name="global"></a> 1.1 전역 스코프</h3><p>전역에서 선언한 <code>변수</code>와 <code>함수</code>는 모두<br><strong>window 객체의 프로퍼티 및 메서드</strong>가 된다. </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">const</span> sayAge = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age); <span class="comment">// 전역을 가리키는 this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.age);  <span class="comment">// 29</span></span><br><span class="line">sayAge();           <span class="comment">// 29</span></span><br><span class="line"><span class="built_in">window</span>.sayAge();    <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="전역변수와-window-프로퍼티로-직접-정의하는-것의-차이"><a href="#전역변수와-window-프로퍼티로-직접-정의하는-것의-차이" class="headerlink" title="전역변수와 window 프로퍼티로 직접 정의하는 것의 차이."></a>전역변수와 window 프로퍼티로 직접 정의하는 것의 차이.</h4><ul>
 <li>전역 변수는 <code>delete</code>연산자로 제거할 수 없고, window 프로퍼티는 가능하다.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.age;    <span class="comment">// 제거 안됨</span></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.color;  <span class="comment">// 제거 됨</span></span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.color)</span><br></pre></td></tr></table></figure>
-<h4 id="선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능"><a href="#선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능" class="headerlink" title="선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능"></a>선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능</h4><p><img src="/images/post_img/56/BOM-02.png"></p>
+
+<h4 id="선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능"><a href="#선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능" class="headerlink" title="선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능"></a>선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능</h4><img src="/images/post_img/56/BOM-02.png">
+
 <hr>
 <h3 id="1-2-창-사이의-관계와-프레임"><a href="#1-2-창-사이의-관계와-프레임" class="headerlink" title=" 1.2 창 사이의 관계와 프레임"></a><a name="frame"></a> 1.2 창 사이의 관계와 프레임</h3><p>페이지에 프레임이 들어 있으면 각 프레임은 독자적인 window객체를 가지며, frames 컬렉션에 저장된다.</p>
 <hr>
@@ -262,6 +270,7 @@ ga('send', 'pageview');
 <ul>
 <li>이동할 URL, 대상 창, 기능을 나타내는 <code>string</code></li>
 <li>마지막으로 새 페이지가 브라우저 히스토리에서 현재 페이지를 대체할지 나타내는 <code>boolean</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>)</span><br><span class="line"><span class="comment">// 두번째 인자는 a태그에서 target과 같다.</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>두번째 인자에는 <code>_self</code>,<code>_parent</code>,<code>_top</code>,<code>_blank</code>사용가능</p>
@@ -269,75 +278,77 @@ ga('send', 'pageview');
 <p>소셜 인증시 팝업창이 open되고, close될 때 사용된다.</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br></pre></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
-<th style="text-align:left">옵션</th>
-<th style="text-align:left">값</th>
-<th style="text-align:left">설명</th>
+<th align="left">옵션</th>
+<th align="left">값</th>
+<th align="left">설명</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>fullscreen</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">브라우저 창을 최대 크기로 생성할지 나타낸다.</td>
+<tbody><tr>
+<td align="left"><code>fullscreen</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">브라우저 창을 최대 크기로 생성할지 나타낸다.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>height</code></td>
-<td style="text-align:left">숫자</td>
-<td style="text-align:left">새 창의 높이이다. 최소값은 100</td>
+<td align="left"><code>height</code></td>
+<td align="left">숫자</td>
+<td align="left">새 창의 높이이다. 최소값은 100</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>left</code></td>
-<td style="text-align:left">숫자</td>
-<td style="text-align:left">새 창의 x좌표이다. 음수는 쓸 수 없다.</td>
+<td align="left"><code>left</code></td>
+<td align="left">숫자</td>
+<td align="left">새 창의 x좌표이다. 음수는 쓸 수 없다.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>location</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">주소 표시줄을 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다. “no”로 지정하면 브라우저에 따라 주소 표시줄을 숨기거나 비활성화한다.</td>
+<td align="left"><code>location</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">주소 표시줄을 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다. “no”로 지정하면 브라우저에 따라 주소 표시줄을 숨기거나 비활성화한다.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>menubar</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">메뉴 바를 표시할지 나타낸다. 기본값은 “no”</td>
+<td align="left"><code>menubar</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">메뉴 바를 표시할지 나타낸다. 기본값은 “no”</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>resizable</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">새 창의 테두리를 드래그해서 크기를 조절할 수 있는지 나타냅니다. 기본값은 “no”</td>
+<td align="left"><code>resizable</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">새 창의 테두리를 드래그해서 크기를 조절할 수 있는지 나타냅니다. 기본값은 “no”</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>scrollbars</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">새 창 콘텐츠가 뷰표트를 넘칠 때 스크롤을 허용할지 나타낸다. 기본값은 “no”</td>
+<td align="left"><code>scrollbars</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">새 창 콘텐츠가 뷰표트를 넘칠 때 스크롤을 허용할지 나타낸다. 기본값은 “no”</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>status</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">상태 바를 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다.</td>
+<td align="left"><code>status</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">상태 바를 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>toolbar</code></td>
-<td style="text-align:left">“yes” or “no”</td>
-<td style="text-align:left">툴바를 표시할지 나타낸다. 기본값은 “no”</td>
+<td align="left"><code>toolbar</code></td>
+<td align="left">“yes” or “no”</td>
+<td align="left">툴바를 표시할지 나타낸다. 기본값은 “no”</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>top</code></td>
-<td style="text-align:left">숫자</td>
-<td style="text-align:left">새 창의 y좌표. 음수는 쓸 수 없다.</td>
+<td align="left"><code>top</code></td>
+<td align="left">숫자</td>
+<td align="left">새 창의 y좌표. 음수는 쓸 수 없다.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>width</code></td>
-<td style="text-align:left">숫자</td>
-<td style="text-align:left">새 창의 너비. 최솟값은 100</td>
+<td align="left"><code>width</code></td>
+<td align="left">숫자</td>
+<td align="left">새 창의 너비. 최솟값은 100</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h5 id="window-open"><a href="#window-open" class="headerlink" title="window.open()"></a><code>window.open()</code></h5><p>메서드는 새로 생성한 창에 대한 참조를 반환한다.<br>기본적으로 주요 브라우저 창의 위치나 크기를 스크립트에서 바꿀 수 없게 금지되지만, .open으로 생성한 창은 가능하다. (크롬은 CORS에 걸림)<br><code>window.close()</code>는 <code>window.open()</code>으로 생성된 창에서만 적용가능하다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br><span class="line"></span><br><span class="line">wroxWin.resizeTo(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">wroxWin.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-<p><code>wroxWin</code>은 <code>opener</code>프로퍼티를 갖고 있는데, window.open()을 호출한 창이나 프레임을 가리키는 포인터이다.<br>그 역은 존재하지 않는다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br><span class="line"></span><br><span class="line">alert(wroxWin.opener === <span class="built_in">window</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+
+<p><code>wroxWin</code>은 <code>opener</code>프로퍼티를 갖고 있는데, window.open()을 호출한 창이나 프레임을 가리키는 포인터이다.<br>그 역은 존재하지 않는다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br><span class="line"></span><br><span class="line">alert(wroxWin.opener === <span class="built_in">window</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
 <hr>
 <h3 id="1-6-인터벌과-타임아웃"><a href="#1-6-인터벌과-타임아웃" class="headerlink" title=" 1.6 인터벌과 타임아웃"></a><a name="interval&timeout"></a> 1.6 인터벌과 타임아웃</h3><p>window에는 코드가 특정 시간에 실행되게끔 해주는 메서드가 있다.<br><code>setTimeout(실해코드, 시간(밀리초))</code> : 일정 시간 뒤에 코드를 실행<br><code>setInterval()</code> : 일정 시간마다 코드를 반복 실행</p>
 <h4 id="128336-setTimeout"><a href="#128336-setTimeout" class="headerlink" title="&#128336; setTimeout()"></a>&#128336; <code>setTimeout()</code></h4><p>자바스크립트는 큐를 이용해 각 코드의 실행을 관리한다.</p>
@@ -345,7 +356,9 @@ ga('send', 'pageview');
 <p>큐?  Task 큐와 이벤트 루프이다. Task 큐는 말 그대로 콜백 함수들이 대기하는 큐(FIFO) 형태의 배열이라 할 수 있고, 이벤트 루프는 호출 스택이 비워질 때마다 큐에서 콜백 함수를 꺼내와서 실행하는 역할을 해 준다.</p>
 </blockquote>
 <p><code>clearTimeout(setTimeout이 할당된 변수이름. 혹은 id값)</code> : 타임아웃을 취소할 때 사용한다.</p>
-<h4 id="128171-setInterval"><a href="#128171-setInterval" class="headerlink" title="&#128171; setInterval()"></a>&#128171; <code>setInterval()</code></h4><p>페이지가 종료되거나 인터벌을 취소하기 전에는 일정 시간마다 코드를 반복 실행한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'test'</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="128171-setInterval"><a href="#128171-setInterval" class="headerlink" title="&#128171; setInterval()"></a>&#128171; <code>setInterval()</code></h4><p>페이지가 종료되거나 인터벌을 취소하기 전에는 일정 시간마다 코드를 반복 실행한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'test'</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
 <p><code>clearInterval()</code> : 인터벌을 취소한다.<br>인터벌을 취소하지 않으면 페이지가 떠 있는 동안은 계속 실행되므로 <strong>인터벌 취소는 timeout 취소보다 중요</strong></p>
 <hr>
 <h3 id="1-7-시스템-대화상자"><a href="#1-7-시스템-대화상자" class="headerlink" title=" 1.7 시스템 대화상자"></a><a name="system-popup"></a> 1.7 시스템 대화상자</h3><p><code>alert()</code> : Ok<br><code>confirm()</code> : Ok / cancel<br><code>prompt()</code> : input / Ok / cancel</p>
@@ -366,7 +379,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cjtd3jx84002f4wbmbfxgkumj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cjxt28y3g002ersbmhof9897k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -522,6 +535,26 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/07/07/Joylog_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/17/thumb_default.jpg)" alt="2019 상반기 회고 + 하반기 다짐 (feat. 글또)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/07/07/Joylog_003/" class="title">2019 상반기 회고 + 하반기 다짐 (feat. 글또)</a></p>
+                            <p class="item-date"><time datetime="2019-07-07T12:23:55.000Z" itemprop="datePublished">2019-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/03/17/OOP_09_2/" class="thumbnail">
     
     
@@ -599,26 +632,6 @@ ga('send', 'pageview');
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/02/17/OOP_08_1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/2019/11/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
-                            <p class="item-title"><a href="/2019/02/17/OOP_08_1/" class="title">코드스피츠80_OOP design with game (1)- 1. 객체지향과 값지향</a></p>
-                            <p class="item-date"><time datetime="2019-02-17T01:20:19.000Z" itemprop="datePublished">2019-02-17</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -628,7 +641,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 10px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11.11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 11.11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
         </div>
     </div>
 
@@ -638,7 +651,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -648,7 +661,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -685,13 +698,6 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
