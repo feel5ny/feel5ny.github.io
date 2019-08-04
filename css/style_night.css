@@ -1453,10 +1453,36 @@ a.article-title:hover {
   list-style: none;
 }
 .article-index li.first_depth {
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
+}
+.article-index li.first_depth.has_sub {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+}
+.article-index .first_depth--index {
+  margin-right: 1rem;
+}
+.article-index div.first_depth--sub {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  line-height: 1.2;
 }
 .article-index li.first_depth:last-child {
   margin-bottom: 0;
+}
+.article-index hr.article__hr {
+  border: 0.5px solid rgba(255,255,255,0.5);
+  margin: 1.5rem 0;
+}
+.article-index .article__subTitle {
+  opacity: 0.6;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
 }
 .article-index a {
   text-decoration: none;
