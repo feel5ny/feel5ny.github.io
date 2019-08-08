@@ -714,6 +714,17 @@ code {
   float: right;
   position: relative;
   padding-top: 2px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 #sidebar .sidebar-top .social-links li {
   float: left;
