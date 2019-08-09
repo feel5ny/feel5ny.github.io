@@ -20,7 +20,7 @@
 <meta property="og:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 / 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리케이션에">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/18/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-08-04T07:51:03.040Z">
+<meta property="og:updated_time" content="2019-08-09T13:35:26.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 개관">
 <meta name="twitter:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 / 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리케이션에">
@@ -339,7 +339,7 @@ ga('send', 'pageview');
           <li class="first_depth has_sub">
             
             <div>
-              <a href="#http-app">HTTP 구성요소</a>
+              <a href="#http-app">HTTP 기반 시스템의 구성요소</a>
                
                 <div class="first_depth--sub">proxy, cache, gateway, tunnel, agent</div>  
               
@@ -371,14 +371,14 @@ ga('send', 'pageview');
 <img src="/images/2019/18/02">
 
 <blockquote>
-<p>Host, port</p>
+<p>Host</p>
 </blockquote>
 </li>
 <li><p>위치를 파악했다면 클라이언트와 서버의 연결이 필요하다.</p>
 <img src="/images/2019/18/03">
 
 <blockquote>
-<p>TCP/IP 커넥션</p>
+<p>TCP/IP 커넥션, port</p>
 </blockquote>
 </li>
 <li><p>연결이 이루어졌다면, 서버에게 <strong>원하는 바를 요청</strong>해야한다.</p>
@@ -389,7 +389,7 @@ ga('send', 'pageview');
 <img src="/images/2019/18/04">
 
 <blockquote>
-<p>HTTP: HTTP는 어플리케이션 요청/응답 메세지를 해석하는 역할을 한다.</p>
+<p>HTTP: HTTP 프로토콜을 통해 요청/응답메세지를 보낸다.</p>
 </blockquote>
 </li>
 <li><p>요청이나 응답에서 어떤 데이터를 보내고, 받았는지<br><strong>데이터의 위치, 종류를 알아야,</strong> 클라이언트에서 해석할 수 있다.</p>
@@ -410,7 +410,7 @@ ga('send', 'pageview');
 <img src="/images/2019/18/06">
 
 <blockquote>
-<p>HTTP의 구성요소</p>
+<p>HTTP의 기반 시스템의 구성요소</p>
 </blockquote>
 </li>
 </ol>
@@ -494,7 +494,7 @@ ga('send', 'pageview');
 <li>HTTP는 네트워크 통신의 핵심적인 세부사항에 대해서 신경쓰지 않는다.</li>
 </ul>
 <hr>
-<h3 id="TCP가-재공하는-것"><a href="#TCP가-재공하는-것" class="headerlink" title="TCP가 재공하는 것"></a>TCP가 재공하는 것</h3><ul>
+<h3 id="TCP가-제공하는-것"><a href="#TCP가-제공하는-것" class="headerlink" title="TCP가 제공하는 것"></a>TCP가 제공하는 것</h3><ul>
 <li>오류 없는 데이터 전송</li>
 <li>순서에 맞는 전달</li>
 <li>조각나지 않는 데이터 스트림</li>
@@ -579,7 +579,7 @@ ga('send', 'pageview');
 </ol>
 <a name="4">
 
-<h2 id="4-어디에있는-어떤-데이터인지를-알려줘야한다-리소스"><a href="#4-어디에있는-어떤-데이터인지를-알려줘야한다-리소스" class="headerlink" title="4. 어디에있는 어떤 데이터인지를 알려줘야한다. ( 리소스 )"></a>4. 어디에있는 어떤 데이터인지를 알려줘야한다. ( 리소스 )</h2><p>이제 서버와 어떻게 대화하는지를 알게 되었다.<br>특정 데이터를 특정 액션(메서드)을 해달라는 요청을 하는 방법을 알게되었는데,<br><strong>특정 데이터라</strong>는 건 어떻게 서버가 알게 해야할까.<br><img src="/images/2019/18/11.jpg"><br>우선 데이터가</p>
+<h2 id="4-어디에있는-어떤-데이터인지를-알려줘야한다-리소스"><a href="#4-어디에있는-어떤-데이터인지를-알려줘야한다-리소스" class="headerlink" title="4. 어디에있는 어떤 데이터인지를 알려줘야한다. ( 리소스 )"></a>4. 어디에있는 어떤 데이터인지를 알려줘야한다. ( 리소스 )</h2><p>이제 서버와 어떻게 대화하는지를 알게 되었다.<br>특정 데이터를 특정 액션(메서드)을 해달라는 요청을 하는 방법을 알게되었는데,<br><strong>특정 데이터</strong>라는 건 어떻게 서버가 알게 해야할까.<br><img src="/images/2019/18/11.jpg"><br>우선 데이터가</p>
 <ol>
 <li>어디에 있는 어떤 컨텐츠인지.</li>
 <li>해당 컨텐츠가 어떤 타입인지를 알야아한다.</li>
@@ -590,7 +590,7 @@ ga('send', 'pageview');
 <li>웹 서버 리소스는 각자 이름을 갖고 있다.</li>
 </ul>
 <p>아래 URI를 분석해보면,<br><code>https://feel5ny.github.io/2019/07/07/Joylog_003/</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. https:// http 프로토콜을 사용하라</span><br><span class="line">2. feel5ny.github.io] 으로 이동하라</span><br><span class="line">3. /2019/07/07/Joylog_003/ 라고 불리는 리소스를 가져와라.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. https:// http 프로토콜을 사용하라</span><br><span class="line">2. feel5ny.github.io 으로 이동하라</span><br><span class="line">3. /2019/07/07/Joylog_003 라고 불리는 리소스를 가져와라.</span><br></pre></td></tr></table></figure>
 
 <p>URI에는 2가지가 있다.</p>
 <ol>
@@ -640,8 +640,8 @@ ga('send', 'pageview');
 <h5 id="HTTP에서-MIME-타입은"><a href="#HTTP에서-MIME-타입은" class="headerlink" title="HTTP에서 MIME 타입은?"></a>HTTP에서 MIME 타입은?</h5><p>웹 서버는 모든 HTTP 객체 데이터에 MIME 타입을 붙인다.</p>
 <ul>
 <li>웹브라우저는 서버로부터 객체를 돌려받을 때,<br>다룰 수 있는 객체인지, MIME타입을 통해 확인한다.</li>
-<li>대부분의 웹프라우저는 잘 알려진 객체 타입 수백가지를 다룰 수 있다.</li>
-<li>이미지 파일을 보여주고<br>html 파일을 분석하거나 포매팅하고,<br>오디오 파일을 컴퓨터의 스피커를 통해 재생하고<br>특별한 포맷의 파일을 다루기 위해 외부 플러그인 소프트웨어를 실핸한다.</li>
+<li>대부분의 웹브라우저는 잘 알려진 객체 타입 수백가지를 다룰 수 있다.</li>
+<li>이미지 파일을 보여주고<br>html 파일을 분석하거나 포매팅하고,<br>오디오 파일을 컴퓨터의 스피커를 통해 재생하고<br>특별한 포맷의 파일을 다루기 위해 외부 플러그인 소프트웨어를 실행한다.</li>
 </ul>
 <h5 id="MIME은-어떻게-표시되나"><a href="#MIME은-어떻게-표시되나" class="headerlink" title="MIME은 어떻게 표시되나?"></a>MIME은 어떻게 표시되나?</h5><p>MIME 타입은 사선 /으로 구분된 주 타입과 부타입으로 이루어진 문자열 라벨이다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">주타입/부타입 (primary object type / specific subtype)</span><br></pre></td></tr></table></figure>
@@ -697,7 +697,7 @@ ga('send', 'pageview');
 </ul>
 <a name="http-app">
 
-<h1 id="HTTP-구성요소-인터넷-곳곳에-설치된"><a href="#HTTP-구성요소-인터넷-곳곳에-설치된" class="headerlink" title="HTTP 구성요소 ( 인터넷 곳곳에 설치된 )"></a>HTTP 구성요소 ( 인터넷 곳곳에 설치된 )</h1><p>특정상황에 효율적인 처리를 위해 만들어진 HTTP 구성 요소 개념</p>
+<h1 id="HTTP-기반-시스템의-구성요소-인터넷-곳곳에-설치된"><a href="#HTTP-기반-시스템의-구성요소-인터넷-곳곳에-설치된" class="headerlink" title="HTTP 기반 시스템의 구성요소 ( 인터넷 곳곳에 설치된 )"></a>HTTP 기반 시스템의 구성요소 ( 인터넷 곳곳에 설치된 )</h1><p>특정상황에 효율적인 처리를 위해 만들어진 HTTP 구성 요소 개념</p>
 <ul>
 <li>프락시</li>
 <li>캐시</li>
@@ -768,6 +768,11 @@ ga('send', 'pageview');
 <ul>
 <li>자동화된 에이전트: 스파이더, 웹로봇</li>
 </ul>
+<hr>
+<p>참고링크</p>
+<ol>
+<li><a href="https://bignet.tistory.com/73" target="_blank" rel="noopener">https://bignet.tistory.com/73</a></li>
+</ol>
 </a></a></a></a></a></a></a></a>
         </div>
         <footer class="article-footer">
@@ -775,7 +780,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/03/HTTP_001/" data-id="cjz2sndlo001yc1bmpycfbypb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/03/HTTP_001/" data-id="cjz45qyaq001xv8bmi6atv34w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -970,7 +975,7 @@ ga('send', 'pageview');
           <li class="first_depth has_sub">
             
             <div>
-              <a href="#http-app">HTTP 구성요소</a>
+              <a href="#http-app">HTTP 기반 시스템의 구성요소</a>
                
                 <div class="first_depth--sub">proxy, cache, gateway, tunnel, agent</div>  
               
