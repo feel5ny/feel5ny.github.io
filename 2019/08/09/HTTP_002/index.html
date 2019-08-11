@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>URL과 리소스 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,URL">
+    
+    
+    <meta name="description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     URL의 개념URL(Uniform Resource Locator)은 인터넷 리소스를 가리키는 표준이름이다. URL은 전자정보">
+<meta name="keywords" content="http,study,URL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URL과 리소스">
+<meta property="og:url" content="http://feel5ny.github.io/2019/08/09/HTTP_002/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     URL의 개념URL(Uniform Resource Locator)은 인터넷 리소스를 가리키는 표준이름이다. URL은 전자정보">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/19/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-08-11T12:26:58.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL과 리소스">
+<meta name="twitter:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     URL의 개념URL(Uniform Resource Locator)은 인터넷 리소스를 가리키는 표준이름이다. URL은 전자정보">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/19/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/08/09/HTTP_002/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/19/thumb_default.jpg" alt="URL과 리소스" style="width:100%">
+    </div>
+
+<article id="post-HTTP_002" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        URL과 리소스
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/08/09/HTTP_002/" class="article-date">
+            <time datetime="2019-08-09T12:23:55.000Z" itemprop="datePublished">2019-08-09</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/URL/">URL</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/study/">study</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#url">URL의 개념</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">안전한 통합 자원 위치값을 위해서</div>
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#1">1. URL의 구성</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#1-1">1.1 스킴</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-2">1.2 사용자 정보</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-3">1.3 호스트</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-4">1.4 경로</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-5">1.5 Matrix 파라미터</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-6">1.6 Quary 파라미터</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-7">1.7 Fragment</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#2">2. 안전한 URL을 위해 고민한 설계자들</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#2-1">2.1 URL 문자 집합</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-2">2.2 인코딩 체계</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-3">2.3 문자 제한</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#3">3. 편리한 URL 사용을 위한 상황별 단축 URL</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#3-1">3.1 상대 URL</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#3-2">3.2 URL 확장</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#4">4. 접근하는 방법의 종류 (스킴의 종류)</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <ul>
+<li><a href="https://github.com/bookcrush?type=source" target="_blank" rel="noopener">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+</ul>
+<hr>
+<a name="url">
+
+<h1 id="URL의-개념"><a href="#URL의-개념" class="headerlink" title="URL의 개념"></a>URL의 개념</h1><p>URL(Uniform Resource Locator)은 <strong>인터넷 리소스를 가리키는 표준이름</strong>이다.</p>
+<p>URL은 전자정보 일부를 가리키고, 그것이<br>어디에 있고<br>어떻게 접근할 수 있는지 알려준다.</p>
+<!-- - 기존 이름은 유지하면서 객체들을 다른 장소로 옮기는 것을 가능하게 해주는 URN을 포함한 URL의 미래. -->
+
+<ul>
+<li>URL은 브라우저가 정보를 찾는데 필요한 <strong>리소스의 위치</strong>를 가리키며, </li>
+<li>URL을 이용해 사람과 어플리케이션이 인터넷 상의 수십억 개의 리소스를 찾고 사용하며 공유할 수 있다.</li>
+<li>URL을 통해 사람이 HTTP 및 다른 프로토콜을 통해 접근할 수 있다. </li>
+</ul>
+<p>URL을 사용하면 리소스를 일관된 방식으로 지칭할 수 있다.<br>대부분의 URL은 동일하게 <code>스킴://서버위치/경로</code> 구조로 이루어져있다.</p>
+<ul>
+<li>인터넷상의 <strong>모든 리소스</strong>를 가리키고 가져오기 위해,<br>모든 사람이 <strong>같은 방식</strong>으로 이름을 써서 리소스를 찾을 수 있도록,<br>단일 방식의 작명 규칙을 가진 것이다.<br>=== 통합 자원 위치값</li>
+</ul>
+<h2 id="URL은-URI의-일부"><a href="#URL은-URI의-일부" class="headerlink" title="URL은 URI의 일부"></a>URL은 URI의 일부</h2><p>URL은 <strong>통합 자원식별자 혹은 URI</strong>라고 불리는 더 일반화된 부류의 부분집합이다.<br>URI는 URL과 URN으로 구성된 종합적인 개념이다.</p>
+<ul>
+<li>URL은 리소스가 <strong>어디 있는지</strong> 설명해서 리소스를 식별한다.</li>
+<li>URN은 현재 그 리소스가 어디에 존재하든 상관없이 그 <strong>이름</strong>만으로 리소스를 식별한다.</li>
+</ul>
+<hr>
+<h1 id="안전한-통합-자원-위치-URL-값을-위해서"><a href="#안전한-통합-자원-위치-URL-값을-위해서" class="headerlink" title="안전한 통합 자원 위치(URL)값을 위해서"></a>안전한 통합 자원 위치(URL)값을 위해서</h1><a name="1">
+
+<h2 id="1-URL의-구성"><a href="#1-URL의-구성" class="headerlink" title="1. URL의 구성"></a>1. URL의 구성</h2><ul>
+<li>모든 리소스들은 <strong>다른 스킴</strong>을 통해 접근할 수 있으며, URL 문법은 <strong>스킴</strong>에 따라서 달라진다.</li>
+<li>대부분의 URL은 일반 URL문법을 따른다.</li>
+<li>의미있는 URL이라는 개념도 있다. (<a href="https://en.wikipedia.org/wiki/Clean_URL" target="_blank" rel="noopener">Clean URLs</a>)<ul>
+<li>당신이 URL을 조작하기 쉽게 한다.</li>
+<li>어디에 있고, 무엇을 하고, 무엇을 읽거나 웹에서 상호작용하는 지에 대해 유저들에게 분명히 알려준다.</li>
+<li>몇몇의 검색엔진은 관련 페이지들을 잘 분류하기 위해 이런 의미론을 사용할 수 있다.</li>
+</ul>
+</li>
+<li>URL은 9개의 컴포넌트로 구성되어있다. </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;스킴&gt;://&lt;사용자이름&gt;:&lt;비밀번호&gt;@&lt;호스트&gt;:&lt;포트&gt;/&lt;경로&gt;;&lt;파라미터&gt;?&lt;질의&gt;#&lt;플래그먼트&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="/images/2019/19/03.jpg" style="width:100%">
+-
+<img src="/images/2019/19/01.jpg" style="width:100%">
+
+<a name="1-1">
+
+<h3 id="1-1-스킴"><a href="#1-1-스킴" class="headerlink" title="1.1 스킴"></a>1.1 스킴</h3><img src="/images/2019/19/01_scheme.jpg" style="width:100%">
+
+<ul>
+<li>스킴은 주어진 리소스에 <strong>어떻게 접근하는지</strong> 알려주는 중요한 정보다.</li>
+<li>URL을 해석하는 어플리케이션이<br><strong>어떤 프로토콜을 사용하여 리소스를 요청해야 하는지</strong> 알려준다.</li>
+<li>첫번째 구분자로 <code>:</code>를 사용한다.</li>
+<li>스킴명은 대소문자를 가리지 않는다.<a name="1-2">
+
+</a></li>
+</ul>
+<h3 id="1-2-사용자-정보"><a href="#1-2-사용자-정보" class="headerlink" title="1.2 사용자 정보"></a>1.2 사용자 정보</h3><p>기본값</p>
+<ul>
+<li>사용자 이름 : anonymous</li>
+<li>비밀번호 : <code>IEUser</code>(익스플로러), <code>chrome@example.com</code>(크롬)</li>
+</ul>
+<img src="/images/2019/19/01_userInfo.jpeg" style="width:100%">
+
+<ul>
+<li>많은 서버가 자신이 가지고 있는 <strong>데이터에 접근을 허용하기 전에</strong><br>사용자 이름과 비밀번호를 요구한다.</li>
+<li>FTP서버가 주로 그러하다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp://anonymous:my_passwd@ftp.prep.ai.mit.edu/pub/gnu</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<a name="1-3">
+
+<h3 id="1-3-호스트"><a href="#1-3-호스트" class="headerlink" title="1.3 호스트"></a>1.3 호스트</h3><img src="/images/2019/19/01_host.jpg" style="width:100%">
+
+<ul>
+<li>어플리케이션이 인터넷에 있는 리소스를 찾으려면<br>리소스를 호스팅하고 있는 장비와<br>장비 내에서 리소스에 접근할 수 있는 서버가 어디에 있는지 알아야 한다.</li>
+</ul>
+<p>Host</p>
+<ul>
+<li>접근하려고 하는 리소스를 가지고 있는 인터넷상의 호스트장비(?)를 가리킨다.</li>
+<li>호스트명이나 IP주소로 제공한다.</li>
+</ul>
+<p>Port</p>
+<ul>
+<li>서버가 열어놓은 네트워크 포트를 가리킨다.</li>
+<li>TCP 프로토콜을 사용하는 HTTP는 기본 포트가 80이다. (https는 443)<a name="1-4">
+
+</a></li>
+</ul>
+<h3 id="1-4-경로"><a href="#1-4-경로" class="headerlink" title="1.4 경로"></a>1.4 경로</h3><img src="/images/2019/19/01_path.jpg" style="width:100%">
+
+<ul>
+<li>리소스가 서버의 어디에 있는지 알려준다.</li>
+<li>계층적 파일 시스템 경로와 유사한 구조이다.<ul>
+<li>유닉스 파일 시스템의 파일 경로와 유사하다.</li>
+</ul>
+</li>
+<li><code>/</code>를 기준으로 경로조각으로 나누니다.</li>
+<li>각 경로조각은 자체만으로 파라미터 컴포넌트를 가질 수 있다.<a name="1-5">
+
+</a></li>
+</ul>
+<h3 id="1-5-파라미터-Matrix-parameter"><a href="#1-5-파라미터-Matrix-parameter" class="headerlink" title="1.5 파라미터 Matrix parameter"></a>1.5 파라미터 Matrix parameter</h3><img src="/images/2019/19/01_parameter.jpg" style="width:100%">
+
+<ul>
+<li>많은 스킴이 객체에 대한 호스트 및 경로 정보만으로는 리소스를 찾지 못한다.</li>
+<li>URL이 사용하는 어플리케이션이 리소스에 접근하려면 프로토콜 파라미터가 필요하다.</li>
+<li>URL의 파라미터 컴포넌트는<br>어플리케이션이 서버에 정확한 요청을 하기 위해 필요한 입력 파라미터를 받는데 사용한다.</li>
+<li>이 컴포넌트는 이름/값 쌍의 리스트로 URL 나머지 부분들로부터 <code>;</code> 문자로 구분하여 URL에 기술한다.</li>
+</ul>
+<h4 id="쿼리스트링과-차이점"><a href="#쿼리스트링과-차이점" class="headerlink" title="쿼리스트링과 차이점"></a>쿼리스트링과 차이점</h4><p>개인적으로 지금까지 이런 형식의 URL을 본적이 없어서, 검색해보니<br>이런 형식을 <strong>Matrix parameter</strong>라고 불리며, 쿼리스트링과의 차이점은 아래와 같다고 나왔다.<br>( 관련링크 <a 16 2009 href http: web.archive.org web 20130126100355 brettdargan.com blog 01 query-vs-matrix-params"">Query vs. Matrix Params</a> )</p>
+<ul>
+<li>urls with query params won’t have their response cached by intermediaries/proxies (at present)<br><strong>쿼리 파라미터가있는 URL은 현재 중개자/프록시에 의한 응답이 캐시되지 않습니다.</strong></li>
+<li>matrix parameters may appear anywhere in path<br><strong>매트릭스 파라미터는는 path의 어느 곳이든 표현될 수 있다.</strong></li>
+<li>calculating the relative uri is different<br><strong>상대 URI를 계산하는 것이 다르다.</strong></li>
+<li>query params are generally abused to add new verbs instead of using existing methods on resources<br><strong>쿼리 파라미터는 일반적으로 리소스에 기존 방법을 사용하는 대신 새 동사를 추가하는데에 남용된다.</strong></li>
+<li>matrix parameters are not resources, they are aspects that help reference a resource in an information space that is difficult to represent within a hierarchy<br><strong>매트릭스 파라미터는 자원이 아니며, 정보 공간에서 계층 구조 내에서 표현하기 어려운 자원을 참조하는 데 도움이되는 측면입니다.</strong></li>
+</ul>
+<p>아직 proposal state에 존재하며, 웹 표준이 아니라고 한다.<br> (관련 링크 <a href https: www.w3.org designissues matrixuris.html"">w3-MatrixURIs</a> )<br><a name="1-6"></a></p>
+<h3 id="1-6-쿼리파라미터-질의-문자열"><a href="#1-6-쿼리파라미터-질의-문자열" class="headerlink" title="1.6 쿼리파라미터 (질의 문자열).."></a>1.6 쿼리파라미터 (질의 문자열)..</h3><img src="/images/2019/19/01_quary_parameter.jpg" style="width:100%">
+
+<ul>
+<li>데이터베이스 같은 서비스들은 요청을 받을 리소스 형식의 <strong>범위를 좁히기 위해</strong><br>질문이나 질의를 받을 수 있다.</li>
+<li>URL의 쿼리스트링 컴포넌트는<br><strong>게이트웨이를 가리키는 정보</strong>를 URL의 경로 컴포넌트와 함께 전달하고 있다.<ul>
+<li>보통 게이트웨이는 다른 어플리케이션에 접근하려고 할 때 거치는 통로라고 할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>쿼리스트링은 포맷에 제약사항은 없다. (URL에 금지된 문자제외하고)</li>
+<li><strong>편의상 많은 게이트웨이가 <code>&amp;</code>로 나뉜 <code>이름=값</code> 쌍 형식의 쿼리스트링을 원한다</strong></li>
+</ul>
+<a name="1-7">
+
+<h3 id="1-7-플래그먼트-fragment"><a href="#1-7-플래그먼트-fragment" class="headerlink" title="1.7 플래그먼트 fragment"></a>1.7 플래그먼트 fragment</h3><img src="/images/2019/19/01_fragment.jpg" style="width:100%">
+
+<ul>
+<li>HTML과 같은 리소스 형식들은 본래의 수준보다 더 작게 나뉠 수 있다.</li>
+<li>문단으로 나뉠 수 있는 경우 리소스 안에 있는 특정 문단을 가리킬 수 있다.</li>
+<li>리소스의 특정 부분을 가리킬 수 있도록 리소스 내 조각을 가리킬 수 잇는 fragment 컴포넌트를 제공한다.</li>
+<li>보통은 서버에는 fragment를 전달하진 않고, 프론트에서 특정 문단을 보여주고 싶을 때 사용한다.</li>
+</ul>
+<a name="2">
+
+<h2 id="2-안전한-URL을-위해-고민한-설계자들"><a href="#2-안전한-URL을-위해-고민한-설계자들" class="headerlink" title="2. 안전한 URL을 위해 고민한 설계자들"></a>2. 안전한 URL을 위해 고민한 설계자들</h2><h3 id="URL-설계자들은-이런-고민을-했다"><a href="#URL-설계자들은-이런-고민을-했다" class="headerlink" title="URL 설계자들은 이런 고민을 했다."></a><strong>URL 설계자들</strong>은 이런 고민을 했다.</h3><ol>
+<li>모든 인터넷 프로토콜로 URL이 <strong>안전하게 전송</strong>될 수 있기를 바랬고<ul>
+<li><strong>안전한 전송</strong>이란,<br>정보가 유실될 위험 없이 URL을 전송할 수 있다는 것을 의미한다.<br>문자가 제거되는 일을 피하고자 URL은 상대적으로 작고 일반적으로 안전한 알파벳 문자만 포함하도록 허락한다.</li>
+</ul>
+</li>
+<li><strong>가독성</strong>도 있기를 바랬다.</li>
+</ol>
+<hr>
+<h3 id="URL-설계자들은-이런-결론을-내렸다"><a href="#URL-설계자들은-이런-결론을-내렸다" class="headerlink" title="URL 설계자들은 이런 결론을 내렸다."></a><strong>URL 설계자들</strong>은 이런 결론을 내렸다.</h3><ol>
+<li>특정 문자 사용 금지.<ul>
+<li>따라서 출력이 되지 않거나 보이지 않는 문자를<br>이메일 프로그램에서 사용할 수 있다고 해서,<br>그리고 그 문자들이 변환될 수 있다 하더라도,<br><strong>URL에서 그런 문자들을 사용하는 것은 금지</strong>되었다.</li>
+<li></li>
+</ul>
+</li>
+<li>알파벳 이외의 문자도 포함될 수 있도록 <strong>이스케이프 기능</strong> 추가<ul>
+<li>사람들이 알파벳 이외의 문자도 포함하려고 할 때가 있다는 것을 알게 되어<br><strong>이스케이프라는 기능</strong>을 추가하여<br>안전하지 않은 문자를 안전한 문자로 <strong>인코딩</strong>할 수 있게 하였다.<a name="2-1">
+
+</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-1-URL문자-집합"><a href="#2-1-URL문자-집합" class="headerlink" title="2.1 URL문자 집합"></a>2.1 URL문자 집합</h3><ol>
+<li>역사적으로 많은 컴포터 어플리케이션이 <code>US-ASCII</code> 문자 집합을 사용해 왔다.</li>
+<li>US-ASCII는 문자를 서식화하고 하드웨어상에서 신호를 주고받기 위해, 7비트를 사용하여 영문 자판에 있는 키 대부분과 몇몇 출력되지 않는 제어 문자를 표현한다.</li>
+<li>미국인들에게는 편리하지만, 유럽언어나 수백가지 비 라틴계 언어들에 존재한는 변형된 문자들까지 US-ASCII가 지원하지 않는다.</li>
+<li>URL이 특정 이진데이터를 포함해야하는 경우도 있다.</li>
+</ol>
+<p>이런 경우를 지원하기 위해서 <strong>이스케이프 문자열</strong>을 쓸 수 있게 설계하였다.</p>
+<ul>
+<li>이스케이프 문자열은 URL에서 사용이 금지된 문자들로, 특정 문자나 데이터를 인코딩할 수 있게 함으로써 이동성과 완성도를 높였다.<a name="2-2">
+
+</a></li>
+</ul>
+<h3 id="2-2-인코딩-체계"><a href="#2-2-인코딩-체계" class="headerlink" title="2.2 인코딩 체계"></a>2.2 인코딩 체계</h3><p>URL에 있는 안전하지 않은 문자들을 표현할 수 있는 인코딩 방식이 고안되었다.<br>인코딩은 이스케이프 문자로 바꿔준다.</p>
+<ul>
+<li>이스케이프 문자 (<a href https: ko.wikipedia.org wiki %ed%8d%bc%ec%84%bc%ed%8a%b8_%ec%9d%b8%ec%bd%94%eb%94%a9"">퍼센트 문자</a>): <code>%</code>로 시작해 ASCII 코드로 표현되는 두개의 16진수 숫자로 이루어져있다.</li>
+</ul>
+<p>예시</p>
+<ul>
+<li><code>~</code>   →   126 (0x7E)  →   %7E</li>
+<li><code></code>   →   32 (0x20)   →   %20</li>
+<li><code>%</code>   →   37 (0x25)   →   %25<a name="2-3">
+
+</a></li>
+</ul>
+<h3 id="2-3-문자-제한"><a href="#2-3-문자-제한" class="headerlink" title="2.3 문자 제한"></a>2.3 문자 제한</h3><ol>
+<li>몇몇 문자는 URL에서 특별한 의미로 예약되어있다.</li>
+<li>어떤 문자는 US-ASCII의 출력 가능한 문자 집합에 포함되어있지 않다.</li>
+<li>몇몇 인터넷 게이트웨이와 프로토콜에서 혼동되는 것으로 알려져 있어 사용을 지양하고 있다.</li>
+</ol>
+<h4 id="URL-예약어"><a href="#URL-예약어" class="headerlink" title="URL 예약어"></a>URL 예약어</h4><ul>
+<li><code>%</code> : 인코딩 이스케이프 토큰</li>
+<li><code>/</code> : 경로 컴포넌트 세그먼트를 나누는 용도</li>
+<li><code>.</code> : 경로 컴포넌트에서 사용</li>
+<li><code>..</code> : 경로 컴포넌트에서 사용</li>
+<li><code>#</code> : fragment 컴포넌트에서 사용</li>
+<li><code>?</code> : 쿼리파라미터 컴포넌트에서 사용</li>
+<li><code>;</code> : 매트릭스 파라미터 컴포넌트에서 사용</li>
+<li><code>:</code> : 스킴, 사용자 이름/비밀번호, 호스트/포트의 구획문자로 사용</li>
+<li><code>$</code>, <code>+</code></li>
+</ul>
+<h4 id="게이트웨이에서-불안하게-다루기-때문에-제한"><a href="#게이트웨이에서-불안하게-다루기-때문에-제한" class="headerlink" title="게이트웨이에서 불안하게 다루기 때문에 제한"></a>게이트웨이에서 불안하게 다루기 때문에 제한</h4><ul>
+<li><code>{</code> <code>}</code> <code>|</code> <code>\</code> <code>~</code> <code>[</code> <code>]</code> <code>・</code> <ul>
+<li>게이트웨이와 같은 여러 전송 에이전트에서 불안하게 다루기 때문에 제한됨</li>
+</ul>
+</li>
+<li><code>&lt;</code> <code>&gt;</code> <code>&quot;</code> <ul>
+<li>안전하지 않음. </li>
+<li>웹 문서에서 URL을 구분지어 표시하듯이 URL 범위 밖에서 역할이 있는 문자이기 때문에 반드시 인코딩해야한다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="US-ASCII-관련"><a href="#US-ASCII-관련" class="headerlink" title="US-ASCII 관련"></a>US-ASCII 관련</h4><ul>
+<li><code>0x00-0x1F</code> <code>0x7F</code><ul>
+<li>제한됨. </li>
+<li>이 16진수 범위에 속하는 문자들은 인쇄되지 않는 US-ASCII 문자다.</li>
+</ul>
+</li>
+<li><code>&gt; 0x7F</code><ul>
+<li>제한됨. </li>
+<li>이 16진수 범위에 속하는 문자들은 7비트 US-ASCII 문자가 아니다.</li>
+</ul>
+</li>
+</ul>
+<a name="3">
+
+<h2 id="3-편리한-URL-사용을-위한-상황별-단축-URL"><a href="#3-편리한-URL-사용을-위한-상황별-단축-URL" class="headerlink" title="3. 편리한 URL 사용을 위한 상황별 단축 URL"></a>3. 편리한 URL 사용을 위한 상황별 단축 URL</h2><p>웹 클라이언트는 몇몇 단축 URL을 인식하고 사용한다.</p>
+<ol>
+<li>상대URL은 리소스 안에 있는 리소스를 간결하게 기술하는데 사용</li>
+<li>URL확장은 사용자가 기억하고 있는 URL 일부를 입력하면 나머지 부분을 자동으로 입력해준다.<a name="3-1">
+
+</a></li>
+</ol>
+<h3 id="3-1-상대-URL"><a href="#3-1-상대-URL" class="headerlink" title="3.1 상대 URL"></a>3.1 상대 URL</h3><p>URL은 2가지로 나뉜다.</p>
+<ul>
+<li>상대 URL : 모든 정보를 담고 있지 않다. 기저(base)URL을 사용해야한다.</li>
+<li>절대 URL : 리소스에 접근하는데 필요한 모든 정보를 가지고 있다.</li>
+</ul>
+<ul>
+<li>문서의 URL을 기준으로 상대경로로 해석될 수 있다.</li>
+<li>상대URL은 <ul>
+<li>fragment이거나 </li>
+<li>URL 일부다.</li>
+</ul>
+</li>
+</ul>
+<p>브라우저 같은 어플리케이션은 <strong>상대URL과 절대URL 간에 상호 변환</strong>을 할 수 있어야 한다.</p>
+<h4 id="기저-URL"><a href="#기저-URL" class="headerlink" title="기저 URL"></a>기저 URL</h4><p>기저 URL 찾는 방법</p>
+<ol>
+<li>리소스에서 명시적으로 제공<br><code>&lt;base&gt;</code> HTML 태그를 기술할 수 있다. (<a href https: developer.mozilla.org ko docs web html element base"">base</a>)</li>
+<li>리소스를 포함하고 있는 기저 URL<br>해당 리소스의 URL을 기저 URL로 쓸 수 있다.</li>
+<li>기저URL이 없는 경우<br>불안전하거나 깨진 URL일 수도 있다.</li>
+</ol>
+<h4 id="상대-참조-해석하기"><a href="#상대-참조-해석하기" class="headerlink" title="상대 참조 해석하기"></a>상대 참조 해석하기</h4><p>상대 URL과 기저을 각각의 컴포넌트 조각으로 나누는 것이다.<br>URL분해하기 = URL 파싱하기<br>변환을 위해서 특정 알고리즘을 사용한다.<br>이 알고리즘은 상대URL을 절대URL 형태로 변환한다.</p>
+<img src="/images/2019/19/02.jpg" style="width:100%">
+<a name="3-2">
+
+<h3 id="3-2-URL-확장"><a href="#3-2-URL-확장" class="headerlink" title="3.2 URL 확장"></a>3.2 URL 확장</h3><ol>
+<li><p>호스트명 확장</p>
+<ul>
+<li><code>yahoo.com</code> ⇒ <code>www.yahoo.com</code> 을 만든다.</li>
+<li>사용자의 시간을 절약하고 혼란을 막아준다.</li>
+<li>호스트명에 대한 확장 기능은 프락시와 다른 HTTP 어플리케이션에 문제를 발생시킬 수도 있다.</li>
+</ul>
+</li>
+<li><p>히스토리 확장</p>
+<ul>
+<li>과거에 사용자가 방문했던 URL의 기록을 저장해놓는다.</li>
+</ul>
+</li>
+</ol>
+<a name="4">
+
+<h2 id="4-접근하는-방법의-종류-스킴의-종류"><a href="#4-접근하는-방법의-종류-스킴의-종류" class="headerlink" title="4. 접근하는 방법의 종류(스킴의 종류)"></a>4. 접근하는 방법의 종류(스킴의 종류)</h2><table>
+<thead>
+<tr>
+<th align="left">스킴</th>
+<th align="left">설명</th>
+<th align="right">예</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">http</td>
+<td align="left">HTTP스킴이다. 포트값이 생략되어 있으면 기본값은 80이다.</td>
+<td align="right"><code>http://feel5ny.github.io</code></td>
+</tr>
+<tr>
+<td align="left">https</td>
+<td align="left">암호화하기 위해 넷스케이프에서 개발한 보안 소켓 계층(SSL)을 사용한다. 기본포트는 443</td>
+<td align="right"><code>https://feel5ny.github.io</code></td>
+</tr>
+<tr>
+<td align="left">mailto</td>
+<td align="left">이메일 주소를 가리킨다. RFC 822</td>
+<td align="right"><code>mailto:joe@joes-hardware.com</code></td>
+</tr>
+<tr>
+<td align="left">ftp</td>
+<td align="left">파일 전송 프로토콜. FTP는 웹과 URL이 출현하기 전부터 있었다.</td>
+<td align="right"><code>ftp://anonymous:joe%40joes-hardware.com@prep.ai.mit.edu:21/pub/gnu/</code></td>
+</tr>
+<tr>
+<td align="left">rtsp, rtspu</td>
+<td align="left">실시간 스트리밍 프로토콜(Real Time Streaming Protocol), rtspu에서 u는 리소스를 읽기 위해서 UDP 프로토콜이 사용됨을 뜻한다.</td>
+<td align="right"><code>rtsp://www.joes-hardware.com:554/interview/cto_video</code></td>
+</tr>
+<tr>
+<td align="left">file</td>
+<td align="left">주어진 호스트 기기에서 바로 접근할 수 있는 파일들을 나타낸다.</td>
+<td align="right"><code>file//OFFICE-FS/policies/casual-fridays.doc</code></td>
+</tr>
+<tr>
+<td align="left">news</td>
+<td align="left">RFC 1036에 정의된 바와 같이 특정 문서나 뉴스 그룹에 접근하는데 사용한다.</td>
+<td align="right"><code>news:rec.arts.startrek</code></td>
+</tr>
+<tr>
+<td align="left">telnet</td>
+<td align="left">대화형 서비스에 접근하는데 사용한다.</td>
+<td align="right"><code>telnet://slurp:webhound@joes-hardware.com:23/</code></td>
+</tr>
+</tbody></table>
+<hr>
+<p>참고자료</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Learn/Common_questions/What_is_a_URL" target="_blank" rel="noopener">https://developer.mozilla.org/ko/docs/Learn/Common_questions/What_is_a_URL</a></li>
+</ul>
+</a></a></a></a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/08/09/HTTP_002/" data-id="cjz6y4h8g001wvabmm40gmldq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#url">URL의 개념</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">안전한 통합 자원 위치값을 위해서</div>
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#1">1. URL의 구성</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#1-1">1.1 스킴</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-2">1.2 사용자 정보</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-3">1.3 호스트</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-4">1.4 경로</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-5">1.5 Matrix 파라미터</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-6">1.6 Quary 파라미터</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-7">1.7 Fragment</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#2">2. 안전한 URL을 위해 고민한 설계자들</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#2-1">2.1 URL 문자 집합</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-2">2.2 인코딩 체계</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-3">2.3 문자 제한</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#3">3. 편리한 URL 사용을 위한 상황별 단축 URL</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#3-1">3.1 상대 URL</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#3-2">3.2 URL 확장</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#4">4. 접근하는 방법의 종류 (스킴의 종류)</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/08/03/HTTP_001/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">HTTP 개관</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/09/HTTP_002/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/19/thumb_default.jpg)" alt="URL과 리소스" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/09/HTTP_002/" class="title">URL과 리소스</a></p>
+                            <p class="item-date"><time datetime="2019-08-09T12:23:55.000Z" itemprop="datePublished">2019-08-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/03/HTTP_001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/18/thumb_default.jpg)" alt="HTTP 개관" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/03/HTTP_001/" class="title">HTTP 개관</a></p>
+                            <p class="item-date"><time datetime="2019-08-03T12:23:55.000Z" itemprop="datePublished">2019-08-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/07/07/Joylog_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/17/thumb_default.jpg)" alt="2019 상반기 회고 + 하반기 다짐 (feat. 글또)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/07/07/Joylog_003/" class="title">2019 상반기 회고 + 하반기 다짐 (feat. 글또)</a></p>
+                            <p class="item-date"><time datetime="2019-07-07T12:23:55.000Z" itemprop="datePublished">2019-07-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/17/OOP_09_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/15/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/17/OOP_09_2/" class="title">코드스피츠80_OOP design with game (2)- 2. 모델 (베이스 레이어)</a></p>
+                            <p class="item-date"><time datetime="2019-03-17T04:32:40.000Z" itemprop="datePublished">2019-03-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/11/OOP_09_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/14/thumb_default.jpg)" alt="코드스피츠80_OOP design with game (2)- 1. 개요" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/03/11/OOP_09_1/" class="title">코드스피츠80_OOP design with game (2)- 1. 개요</a></p>
+                            <p class="item-date"><time datetime="2019-03-11T01:20:19.000Z" itemprop="datePublished">2019-03-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11.11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 11.11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 11.11px;">http</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/study/" style="font-size: 11.11px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">60</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/08/09/HTTP_002/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
