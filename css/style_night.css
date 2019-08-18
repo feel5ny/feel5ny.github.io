@@ -20,13 +20,13 @@
 .article-entry h1,
 .article-index h1,
 .article-tldr h1 {
-  font-size: 2em;
+  font-size: 1.6em;
 }
 .widget h2,
 .article-entry h2,
 .article-index h2,
 .article-tldr h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 .widget h3,
 .article-entry h3,
@@ -38,7 +38,7 @@
 .article-entry h4,
 .article-index h4,
 .article-tldr h4 {
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 .widget h5,
 .article-entry h5,
@@ -1091,6 +1091,7 @@ span.pink:hover {
   padding: 30px 30px 20px;
 }
 .article-inner {
+  font-size: 14px;
   overflow: hidden;
 }
 .article-inner img {
