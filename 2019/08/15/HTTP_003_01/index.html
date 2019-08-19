@@ -20,7 +20,7 @@
 <meta property="og:description" content="HTTP 메서지에 대해서 알아본다. 메세지는 세 덩어리로 나눌 수 있다 시작줄, 헤더, 본문. 시작줄은 요청과 응답에 따라 다르다. 요청의 시작줄에는 서버에 요구할 동작을 명시하는 메서드, 리소스의 위치를 알려줄 URL, 프로토콜 버전을 명시한다. 응답의 시작줄에는 버전과 처리 결과에 대한 상태코드, 사유구절이 명시되어있다. 다음 줄에는 헤더가 존재한다.">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/20/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-08-18T12:25:41.083Z">
+<meta property="og:updated_time" content="2019-08-19T14:42:55.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 메세지 - 개요">
 <meta name="twitter:description" content="HTTP 메서지에 대해서 알아본다. 메세지는 세 덩어리로 나눌 수 있다 시작줄, 헤더, 본문. 시작줄은 요청과 응답에 따라 다르다. 요청의 시작줄에는 서버에 요구할 동작을 명시하는 메서드, 리소스의 위치를 알려줄 URL, 프로토콜 버전을 명시한다. 응답의 시작줄에는 버전과 처리 결과에 대한 상태코드, 사유구절이 명시되어있다. 다음 줄에는 헤더가 존재한다.">
@@ -349,7 +349,7 @@ ga('send', 'pageview');
   </div>
 
         <div class="article-entry" itemprop="articleBody">
-            <p><strong>HTTP 메서지</strong>에 대해서 알아본다. 메세지는 세 덩어리로 나눌 수 있다 <strong>시작줄, 헤더, 본문.</strong> 시작줄은 요청과 응답에 따라 다르다. 요청의 시작줄에는 서버에 요구할 동작을 명시하는 <strong>메서드</strong>, 리소스의 위치를 알려줄 <strong>URL</strong>, <strong>프로토콜 버전</strong>을 명시한다. 응답의 시작줄에는 버전과 처리 결과에 대한 <strong>상태코드</strong>, <strong>사유구절</strong>이 명시되어있다. 다음 줄에는 <strong>헤더</strong>가 존재한다. 헤더는 <strong>일반헤더, 요청헤더, 응답헤더, 확장헤더, entity헤더</strong>로 이루어져 있고, 요청할 때 보내는 헤더와 응답할 때 보내지는 헤더의 종류가 존재한다. 헤더와 본문 사이에는 꼭 <strong>한 줄</strong>을 비워두어야한다.(CRLF) <strong>본문은 옵셔널</strong>하다. 있을 때도 있고 없을 때도 있다. 메세지의 흐름을 설명하는 용어가 존재하는데, 상대적으로 표현된다. 서버를 기준으로 외부 클라에서 서버로(안으로) 흐르는 메세지를 <strong>인바운드</strong>, 밖으로 나가는 메세지를 <strong>아웃바운드</strong>라고 하며, 발신자를 기준으로 발신자에서 수신자의 방향을 <strong>다운스트림</strong>, 그 반대를 <strong>업스트림</strong>이라고 한다.</p>
+            <p><strong>HTTP 메서지</strong>에 대해서 알아본다. 메세지는 세 덩어리로 나눌 수 있다 <strong>시작줄, 헤더, 본문.</strong> 시작줄은 요청과 응답에 따라 다르다. 요청의 시작줄에는 서버에 요구할 동작을 명시하는 <strong>메서드</strong>, 리소스의 위치를 알려줄 <strong>URL</strong>, <strong>프로토콜 버전</strong>을 명시한다. 응답의 시작줄에는 버전과 처리 결과에 대한 <strong>상태코드</strong>, <strong>사유구절</strong>이 명시되어있다. 다음 줄에는 <strong>헤더</strong>가 존재한다. 헤더는 <strong>일반헤더, 요청헤더, 응답헤더, 확장헤더, entity헤더</strong>로 구분할 수 있다. RFC 7231에서는 요청 헤더와 응답 헤더로 나눠서 설명한다. 헤더와 본문 사이에는 꼭 <strong>한 줄</strong>을 비워두어야한다.(CRLF) <strong>본문은 옵셔널</strong>하다. 있을 때도 있고 없을 때도 있다. 메세지의 흐름을 설명하는 용어가 존재하는데, 상대적으로 표현된다. 서버를 기준으로 외부 클라에서 서버로(안으로) 흐르는 메세지를 <strong>인바운드</strong>, 서버에서 클라로(밖으로) 나가는 메세지를 <strong>아웃바운드</strong>라고 하며, 발신자를 기준으로 발신자에서 수신자의 방향을 <strong>다운스트림</strong>, 그 반대를 <strong>업스트림</strong>이라고 한다.</p>
 <hr>
 <a name="stream">
 
@@ -428,7 +428,7 @@ ga('send', 'pageview');
 <ul>
 <li><strong><code>메서드</code></strong> : 서버에서 어떤 동작이 일어나야 하는지 설명해주는</li>
 <li><strong><code>URL</code></strong> : 동작에 대한 대상을 지칭</li>
-<li><strong><code>HTT P버전</code></strong> : 클라가 어떤 HTTP버전으로 말하고 있는지<ul>
+<li><strong><code>HTTP 버전</code></strong> : 클라가 어떤 HTTP버전으로 말하고 있는지<ul>
 <li>HTTP/1.0 이전에는 요청줄에 HTTP버전이 미포함이었다.</li>
 </ul>
 </li>
@@ -470,7 +470,7 @@ ga('send', 'pageview');
 <li>상태 정보와</li>
 <li>결과 데이터를 클라이언트에게 돌려준다.</li>
 </ul>
-<p>응답 메세지는</p>
+<p>응답 메세지의 시작줄, 즉 응답줄은</p>
 <ul>
 <li><strong><code>HTTP버전</code></strong></li>
 <li>숫자로된 <strong><code>상태코드</code></strong></li>
@@ -509,6 +509,14 @@ ga('send', 'pageview');
 <h3 id="3-2-1-헤더-분류"><a href="#3-2-1-헤더-분류" class="headerlink" title="3.2.1 헤더 분류"></a>3.2.1 헤더 분류</h3><ul>
 <li>헤더필드를 정의하다.</li>
 <li>자유롭게 자신만의 헤더를 만들어낼 수 있다.</li>
+<li>아래 분류 기준은 헤더를 이해하기 쉽게 카테고리화 한 것이며,<br><a href="https://tools.ietf.org/html/rfc7231#section-5" target="_blank" rel="noopener">RFC7231 기준</a>으로는 <code>Controls</code>, <code>Conditionals</code>, <code>Content Negotiation</code>, <code>Authentication Credentials</code>, <code>Request Context</code> 로만 분류되어있다.<ul>
+<li><code>Controls</code>: 요청의 특정 처리를 지시하는 헤더들</li>
+<li><code>Conditionals</code>: 조건부 헤더</li>
+<li><code>Content Negotiation</code>: 협상 헤더</li>
+<li><code>Authentication Credentials</code>: 권한 헤더</li>
+<li><code>Request Context</code>: 요청 정보 헤더</li>
+</ul>
+</li>
 </ul>
 <h4 id="3-2-1-2-일반-헤더"><a href="#3-2-1-2-일반-헤더" class="headerlink" title="3.2.1.2 일반 헤더"></a>3.2.1.2 일반 헤더</h4><ul>
 <li>요청과 응답 양쪽에 모두 나타날 수 있음</li>
@@ -532,7 +540,7 @@ ga('send', 'pageview');
 <img src="/images/2019/20/11.png" style="width:100%">
 
 
-<h3 id="3-2-본문-엔터티-본문이나-메시지-본문"><a href="#3-2-본문-엔터티-본문이나-메시지-본문" class="headerlink" title="3.2 본문 (엔터티 본문이나 메시지 본문)"></a>3.2 본문 (엔터티 본문이나 메시지 본문)</h3><ul>
+<h3 id="3-2-본문"><a href="#3-2-본문" class="headerlink" title="3.2 본문"></a>3.2 본문</h3><ul>
 <li>단순히 선택적인 데이터 덩어리이다. 옵셔너얼 ~</li>
 <li>시작줄과 헤더와 달리 텍스트나 이진 데이터를 포함할 수도 있고 그냥 비어있을 수도 있다<ul>
 <li>이진데이터: binary 데이터</li>
@@ -564,7 +572,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/15/HTTP_003_01/" data-id="cjzgyiwrv0021p2bmt1cixfdv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/15/HTTP_003_01/" data-id="cjzijtszi0023hfbm6i097egi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -1030,6 +1038,13 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
