@@ -20,7 +20,7 @@
 <meta property="og:description" content="출처: http-decision-diagram  http 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.     상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.=&amp;gt; 상태코드, 사유구절 HTTP/1.1 기준이다.  상태코드 (HTTP/1.1 기준)  정보성 상태 코드">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/22/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-08-18T12:38:54.109Z">
+<meta property="og:updated_time" content="2019-08-20T15:19:28.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 메세지 - 상태코드">
 <meta name="twitter:description" content="출처: http-decision-diagram  http 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.     상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.=&amp;gt; 상태코드, 사유구절 HTTP/1.1 기준이다.  상태코드 (HTTP/1.1 기준)  정보성 상태 코드">
@@ -255,7 +255,7 @@ ga('send', 'pageview');
               <span class="first_depth--index">2</span>
             
             <div>
-              <a href="#2">성공 상태 코드 (200 - 299)</a>
+              <a href="#2">성 공 상태 코드 (200 - 299)</a>
                
                 <div class="first_depth--sub">200, 201, 202, 203, 204, 205, 206</div>  
               
@@ -589,7 +589,7 @@ ga('send', 'pageview');
 <li>서버가 처리할 수 있는 혹은 처리하고자 하는 한계를 넘은 크기의 요청을 클라가 보냈을 때 사용한다.</li>
 <li>서버가 연결을 닫거나 헤더 필드(<code>Retry-After</code>)를 반환할 수 있다.</li>
 </ul>
-<h3 id="414-URI-Too-Long-Request-URI-Too-Long"><a href="#414-URI-Too-Long-Request-URI-Too-Long" class="headerlink" title="414 - URI Too Long (Request URI Too Long)"></a>414 - URI Too Long (Request URI Too Long)</h3><ul>
+<h3 id="2-414-URI-Too-Long-Request-URI-Too-Long"><a href="#2-414-URI-Too-Long-Request-URI-Too-Long" class="headerlink" title="2. 414 - URI Too Long (Request URI Too Long)"></a>2. 414 - URI Too Long (Request URI Too Long)</h3><ul>
 <li>서버가 처리할 수 있는 혹은 처리하고자 하는 한계를 넘은 길이의 요청 URL이 포함된 요청을 클라가 보냈을 때 사용한다.</li>
 </ul>
 <h3 id="415-Unsupported-Media-Type"><a href="#415-Unsupported-Media-Type" class="headerlink" title="415 - Unsupported Media Type"></a>415 - Unsupported Media Type</h3><ul>
@@ -625,7 +625,7 @@ ga('send', 'pageview');
 <li>사용자가 지정된 시간 동안 너무 많은 요청을 보냈음을 나타낸다.</li>
 <li>재시도 후 헤더가 이 응답에 포함될 수 있으며, 이는 새 요청을 하기 전에 대기할 시간을 나타낼 수 있다.</li>
 </ul>
-<h3 id="431-Request-Header-Fields-Too-Large"><a href="#431-Request-Header-Fields-Too-Large" class="headerlink" title="431 - Request Header Fields Too Large"></a>431 - Request Header Fields Too Large</h3><ul>
+<h3 id="3-431-Request-Header-Fields-Too-Large"><a href="#3-431-Request-Header-Fields-Too-Large" class="headerlink" title="3. 431 - Request Header Fields Too Large"></a>3. 431 - Request Header Fields Too Large</h3><ul>
 <li>서버가 헤더 필드가 너무 커서 요청을 처리하지 않음을 나타낸다.<br>요청 헤더 필드의 크기를 줄인 후 요청을 다시 제출할 수 있다.</li>
 <li>총 요청 헤더 필드 수가 너무 많은 경우 또는 단일 헤더 필드가 너무 큰 경우 사용할 수 있다.</li>
 <li>이 오류는 잘 테스트된 프로덕션 시스템에서 발생해서는 안 되지만,<br>새로운 시스템을 테스트하는 동안 더 자주 발견될 수 있다.</li>
@@ -652,7 +652,7 @@ ga('send', 'pageview');
 <h3 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 - Bad Gateway"></a>502 - Bad Gateway</h3><ul>
 <li>프락시나 게이트웨이처럼 행동하는 서버가<br>그 요청 응답 연쇄에 있는 다음 링크로부터<br>가짜 응답에 맞닥뜨렸을 때 사용한다.</li>
 </ul>
-<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 - Service Unavailable"></a>503 - Service Unavailable</h3><ul>
+<h3 id="1-503-Service-Unavailable"><a href="#1-503-Service-Unavailable" class="headerlink" title="1. 503 - Service Unavailable"></a>1. 503 - Service Unavailable</h3><ul>
 <li>서버가 요청을 처리해 줄 수 없지만, 나중에 가능함을 의미하고자 할대 사용한다.</li>
 <li>서버가 언제 그 리소스를 사용할 수 있게 될지 알고 있다면, 서버는 Retry-After 헤더를 응답에 포함시킬 수 있다.</li>
 </ul>
@@ -686,7 +686,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="cjzijtszg0020hfbmz56qelg3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="ck0103egd002ythbm8cu07po2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -797,7 +797,7 @@ ga('send', 'pageview');
               <span class="first_depth--index">2</span>
             
             <div>
-              <a href="#2">성공 상태 코드 (200 - 299)</a>
+              <a href="#2">성 공 상태 코드 (200 - 299)</a>
                
                 <div class="first_depth--sub">200, 201, 202, 203, 204, 205, 206</div>  
               
@@ -1129,13 +1129,6 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>

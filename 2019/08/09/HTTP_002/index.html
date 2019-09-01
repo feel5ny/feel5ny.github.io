@@ -20,7 +20,7 @@
 <meta property="og:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     URL의 개념URL(Uniform Resource Locator)은 인터넷 리소스를 가리키는 표준이름이다. URL은 전자정보">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/19/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-08-11T12:26:58.785Z">
+<meta property="og:updated_time" content="2019-09-01T13:17:13.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL과 리소스">
 <meta name="twitter:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     URL의 개념URL(Uniform Resource Locator)은 인터넷 리소스를 가리키는 표준이름이다. URL은 전자정보">
@@ -522,7 +522,7 @@ ga('send', 'pageview');
 <ul>
 <li>HTML과 같은 리소스 형식들은 본래의 수준보다 더 작게 나뉠 수 있다.</li>
 <li>문단으로 나뉠 수 있는 경우 리소스 안에 있는 특정 문단을 가리킬 수 있다.</li>
-<li>리소스의 특정 부분을 가리킬 수 있도록 리소스 내 조각을 가리킬 수 잇는 fragment 컴포넌트를 제공한다.</li>
+<li>리소스의 특정 부분을 가리킬 수 있도록 리소스 내 조각을 가리킬 수 있는 fragment 컴포넌트를 제공한다.</li>
 <li>보통은 서버에는 fragment를 전달하진 않고, 프론트에서 특정 문단을 보여주고 싶을 때 사용한다.</li>
 </ul>
 <a name="2">
@@ -536,12 +536,13 @@ ga('send', 'pageview');
 </ol>
 <hr>
 <h3 id="URL-설계자들은-이런-결론을-내렸다"><a href="#URL-설계자들은-이런-결론을-내렸다" class="headerlink" title="URL 설계자들은 이런 결론을 내렸다."></a><strong>URL 설계자들</strong>은 이런 결론을 내렸다.</h3><ol>
-<li>특정 문자 사용 금지.<ul>
+<li><p>특정 문자 사용 금지.</p>
+<ul>
 <li>따라서 출력이 되지 않거나 보이지 않는 문자를<br>이메일 프로그램에서 사용할 수 있다고 해서,<br>그리고 그 문자들이 변환될 수 있다 하더라도,<br><strong>URL에서 그런 문자들을 사용하는 것은 금지</strong>되었다.</li>
-<li></li>
 </ul>
 </li>
-<li>알파벳 이외의 문자도 포함될 수 있도록 <strong>이스케이프 기능</strong> 추가<ul>
+<li><p>알파벳 이외의 문자도 포함될 수 있도록 <strong>이스케이프 기능</strong> 추가</p>
+<ul>
 <li>사람들이 알파벳 이외의 문자도 포함하려고 할 때가 있다는 것을 알게 되어<br><strong>이스케이프라는 기능</strong>을 추가하여<br>안전하지 않은 문자를 안전한 문자로 <strong>인코딩</strong>할 수 있게 하였다.<a name="2-1">
 
 </a></li>
@@ -586,7 +587,8 @@ ga('send', 'pageview');
 <li><code>?</code> : 쿼리파라미터 컴포넌트에서 사용</li>
 <li><code>;</code> : 매트릭스 파라미터 컴포넌트에서 사용</li>
 <li><code>:</code> : 스킴, 사용자 이름/비밀번호, 호스트/포트의 구획문자로 사용</li>
-<li><code>$</code>, <code>+</code></li>
+<li><code>$</code> : 미리 선점되었다.</li>
+<li><code>+</code> : 미리 선점되었다.</li>
 </ul>
 <h4 id="게이트웨이에서-불안하게-다루기-때문에-제한"><a href="#게이트웨이에서-불안하게-다루기-때문에-제한" class="headerlink" title="게이트웨이에서 불안하게 다루기 때문에 제한"></a>게이트웨이에서 불안하게 다루기 때문에 제한</h4><ul>
 <li><code>{</code> <code>}</code> <code>|</code> <code>\</code> <code>~</code> <code>[</code> <code>]</code> <code>・</code> <ul>
@@ -722,7 +724,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/09/HTTP_002/" data-id="cjzijtsze001uhfbmp7qcl0yv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/09/HTTP_002/" data-id="ck0103ej000aethbmenkm4i0g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -1222,13 +1224,6 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
