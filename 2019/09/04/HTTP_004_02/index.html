@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>TCP 커넥션의 종류 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,TCP/IP,connection">
+    
+    
+    <meta name="description" content="병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화 커넥션 관리를 위해 따라야 할 규칙들    1. 병렬 커넥션 parallel HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.    1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다. 하나의 커넥션으로 객체들">
+<meta name="keywords" content="http,study,TCP&#x2F;IP,connection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP 커넥션의 종류">
+<meta property="og:url" content="http://feel5ny.github.io/2019/09/04/HTTP_004_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화 커넥션 관리를 위해 따라야 할 규칙들    1. 병렬 커넥션 parallel HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.    1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다. 하나의 커넥션으로 객체들">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/25/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-09-05T14:03:09.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP 커넥션의 종류">
+<meta name="twitter:description" content="병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화 커넥션 관리를 위해 따라야 할 규칙들    1. 병렬 커넥션 parallel HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.    1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다. 하나의 커넥션으로 객체들">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/25/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/09/04/HTTP_004_02/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/25/thumb_default.jpg" alt="TCP 커넥션의 종류" style="width:100%">
+    </div>
+
+<article id="post-HTTP_004_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        TCP 커넥션의 종류
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/04/HTTP_004_02/" class="article-date">
+            <time datetime="2019-09-04T07:23:55.000Z" itemprop="datePublished">2019-09-04</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/TCP-IP/">TCP/IP</a>, <a class="tag-link" href="/tags/connection/">connection</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/study/">study</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">TCP 커넥션의 종류</div>
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#1">1. 병렬 커넥션 parallel</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#2">2. 지속 커넥션 persistent</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#2-2">2.2  HTTP/1.0+의 Keep-Alive 커넥션</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-3">2.3  HTTP/1.1의 지속 커넥션</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#3">3. 파이프라인 커넥션 pipelined</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#4">커넥션 끊기에 대한 미스터리</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <ol>
+<li>병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화</li>
+<li>커넥션 관리를 위해 따라야 할 규칙들</li>
+</ol>
+<a name="1">
+
+<h1 id="1-병렬-커넥션-parallel"><a href="#1-병렬-커넥션-parallel" class="headerlink" title="1. 병렬 커넥션 parallel"></a>1. 병렬 커넥션 parallel</h1><ul>
+<li>HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.</li>
+</ul>
+<img src="/images/2019/25/1.png" style="width:100%">
+
+<h2 id="1-1-병렬-커넥션은-페이지를-더-빠르게-내려받는다"><a href="#1-1-병렬-커넥션은-페이지를-더-빠르게-내려받는다" class="headerlink" title="1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다."></a>1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다.</h2><ul>
+<li>하나의 커넥션으로 객체들을 로드할 때의 대역폭 제한과<br>대기시간을 줄일 수 있다면<br>더 빠르게 로드할 수 있을 것이다.</li>
+</ul>
+<img src="/images/2019/25/2.png" style="width:100%">
+
+<ul>
+<li>위 그림은 병렬 커넥션 방식을 개략적으로 보여준다.</li>
+<li>html을 머저 내려받고, 남은 3개의 트랜잭션이<br>각각 별도의 커넥션에서 <strong>동시</strong>에 처리된다.</li>
+<li>이미지들을 병렬로 내려받아 커넥션 지연이 <strong>겹쳐짐으로써</strong> 총 지연시간이 줄어든다.</li>
+</ul>
+<h2 id="1-2-병렬-커넥션이-항상-더-빠르지는-않다"><a href="#1-2-병렬-커넥션이-항상-더-빠르지는-않다" class="headerlink" title="1.2 병렬 커넥션이 항상 더 빠르지는 않다."></a>1.2 병렬 커넥션이 항상 더 빠르지는 않다.</h2><ul>
+<li>클라의 네트워크 대역폭이 좁을 때는 대부분 시간을 데이터 전송하는 데만 쓸 것이다.</li>
+<li>다수의 커넥션은 메모리를 많이 소모하고, 자체적인 성능 문제를 발생시킨다.</li>
+<li>브라우저는 실제로 병렬 커넥션을 사용하긴 하지만, 적은 수(대부분 4개, 최신 브라우저는 6~8개)의 병렬 커넥션만을 허용한다.</li>
+<li>서버는 특정 클라로부터 과도한 수의 커넥션이 맺어졌을 경우, 그것을 임의로 끊어버릴 수 있다.</li>
+</ul>
+<h2 id="1-3-병렬-커넥션은-더-빠르게-느껴질-수-있다"><a href="#1-3-병렬-커넥션은-더-빠르게-느껴질-수-있다" class="headerlink" title="1.3 병렬 커넥션은 더 빠르게 느껴질 수 있다."></a>1.3 병렬 커넥션은 더 빠르게 느껴질 수 있다.</h2><ul>
+<li>병렬 커넥션이 실제로 페이지를 더 빠르게 내려받는 것은 아니지만, 화면에 여러 개의 객체가 동시에 보이면서 내려받고 있는 상황을 볼 수 있기 때문에 사용자는 더 빠르게 내려받고 있는 것처럼 느낄 수 있다.</li>
+<li>사실 사람들은 페이지의 총 다운로드 시간이 더 걸린다 하더라도, 화면 전체에서 여러 작업이 일어나는 것으 ㄹ눈으로 확인할 수 있으면 그것을 더 빠르다고 여긴다.</li>
+</ul>
+<hr>
+<a name="2">
+
+<h1 id="2-지속-커넥션-persistent"><a href="#2-지속-커넥션-persistent" class="headerlink" title="2. 지속 커넥션 persistent"></a>2. 지속 커넥션 persistent</h1><p>웹 클라는 보통 같은 사이트에 여러 개의 커넥션을 맺는다. 즉 같은 서버에 계속 요청</p>
+<ul>
+<li>사이트 지역성이라 부른다. <strong>site locality</strong></li>
+</ul>
+<p>처리가 완료된 후에도 계속 연결된 상태로 있는 TCP 커넥션을 <strong>지속 커넥션</strong>이라고 부른다.</p>
+<ul>
+<li>HTTP/1.1을 지원하는 기기는 처리가 완료된 후에도<br>TCP 커넥션을 유지하여 앞으로 있을 HTTP 요청에 <strong>재사용</strong> 할 수 있다.</li>
+<li>커넥션을 맺기 위한 준비 작업에 따르는 시간을 절약할 수 있다.</li>
+<li>TCP의 느린 시작으로 인한 지연을 피할 수 있다.</li>
+</ul>
+<h2 id="2-1-지속-커넥션-vs-병렬-커넥션"><a href="#2-1-지속-커넥션-vs-병렬-커넥션" class="headerlink" title="2.1 지속 커넥션 vs 병렬 커넥션"></a>2.1 지속 커넥션 vs 병렬 커넥션</h2><p><strong>병렬 커넥션의 단점</strong></p>
+<ol>
+<li>각 트랜잭션마다 새로운 커넥션을 맺고 끊기 때문에 시간과 대역폭이 소요된다.</li>
+<li>새로운 커넥션은 TCP의 느린 시작 때문에 성능이 떨어진다.</li>
+<li>실제로 연결할 수 있는 병렬 커넥션의 수에는 제한이 있다.</li>
+</ol>
+<p><strong>지속 커넥션의 장점</strong></p>
+<ol>
+<li>커넥션을 맺기 이한 사전 작업 지연을 줄여줌</li>
+<li>튜닝된 커넥션을 유지</li>
+<li>커넥션의 수를 줄여준다.</li>
+</ol>
+<p><strong>지속 커넥션의 단점</strong></p>
+<ol>
+<li>계속 연결된 상태로 있는 수많은 커넥션이 쌓이게 될 것이다.</li>
+</ol>
+<p><strong>지속 커넥션 + 병렬 커넥션은 가장 효과적</strong></p>
+<ol>
+<li>HTTP/1.0+ 에는 keep-alive 커넥션이 있고,<br>HTTP/1.1에는 지속 커넥션이 있다.</li>
+</ol>
+<hr>
+<a name="2-2">
+
+<h2 id="2-2-HTTP-1-0-의-Keep-Alive-커넥션"><a href="#2-2-HTTP-1-0-의-Keep-Alive-커넥션" class="headerlink" title="2.2 HTTP/1.0+의 Keep-Alive 커넥션"></a>2.2 HTTP/1.0+의 Keep-Alive 커넥션</h2><ul>
+<li>초기의 지속 커넥션은 상호 운용과 관련된 설계에 문제가 있었지만,<br>아직 많은 클라와 서버는 이 초기 keep-alive 커넥션을 사용하고 있다.<ul>
+<li>설계상의 문제는 HTTP/1.1에서 수정되었다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-1-Keep-Alive-동작"><a href="#2-2-1-Keep-Alive-동작" class="headerlink" title="2.2.1 Keep-Alive 동작"></a>2.2.1 Keep-Alive 동작</h3><ul>
+<li><p>HTTP/1.1에서는 keep-alive는 사용하지 않기로 결정</p>
+</li>
+<li><p>아직 keep-alive 핸드셰이크가 널리 사용되고 있음.</p>
+</li>
+<li><p>HTTP/1.0 keep-alive 커넥션을 구현한 클라는 커넥션을 유지하기 위해서 요청에<br><code>Connection: Keep-Alive</code> 헤더를 포함시킨다.</p>
+</li>
+<li><p>이 요청을 받은 서버는 그다음 요청도 이 커넥션을 통해 받고자 한다면, 응답 메세지에 같은 헤더를 포함시켜 응답한다.</p>
+</li>
+<li><p>응답에 <code>Connection: Keep-Alive</code>가 없으면, 클라는 서버가 keep-alive를 지원하지 않으며,<br>응답 메세지가 전송되고 나면 서버 커넥션을 끊을 것이라고 추정한다.</p>
+</li>
+</ul>
+<h3 id="2-2-2-Keep-Alive-옵션-헤더"><a href="#2-2-2-Keep-Alive-옵션-헤더" class="headerlink" title="2.2.2 Keep-Alive 옵션 (헤더)"></a>2.2.2 Keep-Alive 옵션 (헤더)</h3><ul>
+<li>keep-alive 헤더는 커넥션을 유지하기를 바라는 요청일 뿐이다.</li>
+<li>클라나 서버가 keep-alive 요청을 받았다고 해서 무조건 그것을 따를 필요는 없다.</li>
+<li><code>Connection: Keep-Alive</code>가 있을 때만 사용 가능하다.</li>
+<li>HTTP/2에서는 무시된다.</li>
+</ul>
+<p>keep-alive의 동작은 <code>Keep-Alive</code> 헤더의 옵션들로 제어 가능하다</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keep-Alive: timeout=5, max=1000</span><br><span class="line">5초 동안 1000개의 커넥션을 유지하라는 내용</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>timeout</strong><ul>
+<li>커넥션이 얼마간 유지될 것인지를 의미한다.</li>
+<li>이대로 동작한다는 보장은 없다.</li>
+</ul>
+</li>
+<li><strong>max</strong><ul>
+<li>커넥션이 몇 개의 HTTP 트렌젝션을 처리할 때까지 유지될 것인지를 의미한다.</li>
+<li>이대로 동작한다는 보장은 없다.</li>
+</ul>
+</li>
+</ol>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive" target="_blank" rel="noopener">mdn 참고</a></p>
+<h3 id="2-2-3-Keep-Alive-커넥션-제한과-규칙"><a href="#2-2-3-Keep-Alive-커넥션-제한과-규칙" class="headerlink" title="2.2.3 Keep-Alive 커넥션 제한과 규칙"></a>2.2.3 Keep-Alive 커넥션 제한과 규칙</h3><ul>
+<li>HTTP/1.0과 HTTP/2.0에서는 사용되지 않는다.</li>
+</ul>
+<p><strong><code>Connection: Keep-Alive</code></strong></p>
+<ul>
+<li><code>Connection: Keep-Alive</code>가 있을 때만 사용 가능하다.</li>
+<li><code>Connection: Keep-Alive</code>가 없을 경우 서버는 요청을 처리한 후 커넥션을 끊을 것이다.</li>
+<li>클라는 <code>Connection: Keep-Alive</code>가 없을 경우 서버가 응답 후에 커넥션을 끊을 것임을 알 수 있다.</li>
+</ul>
+<p><strong>Content-Length과 커넥션</strong></p>
+<ul>
+<li>커넥션이 끊어지기 전에 엔터티 본문의 길이를 알 수 있어야 커넥션을 유지할 수 있다.<ul>
+<li>엔터티 본문이 정확한 Content-Length 값과 함께 멀티파트 미디어 형식을 가지거나,</li>
+<li>청크 전송 인코딩 chunked transfer encoding으로 인코드 되어야 함을 뜻한다.</li>
+</ul>
+</li>
+<li>keep-alive 커넥션에서 잘못된 Content-Length 값을 보내는 것은 좋지 않다.<ul>
+<li>트랜잭션이 끝나는 시점에 기존 메세지의 끝과 새로운 메세지의 시작점을 정확히 알 수 없기 때문이다.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Connection 헤더</strong></p>
+<ul>
+<li>프락시와 게이트웨이는 Connection 헤더의 규칙을 철저히 지켜야 한다. (명시된 헤더는 다 제거되기 때문)</li>
+<li>keep-alive 커넥션은 connection 헤더를 인식하지 못하는 프락시 서버와 맺어지면 안 된다.</li>
+<li>HTTP/1.0 을 따르는 기기로부터 받는 모든 Connection 헤더 필드는 무시해야 한다.<br>오래된 프락시 서버로부터 실수로 전달될 수 있기 때문.</li>
+</ul>
+<h3 id="2-2-4-Keep-Alive와-dumb-멍충한-프락시"><a href="#2-2-4-Keep-Alive와-dumb-멍충한-프락시" class="headerlink" title="2.2.4 Keep-Alive와 dumb(멍충한) 프락시"></a>2.2.4 Keep-Alive와 dumb(멍충한) 프락시</h3><img src="/images/2019/25/3.png" style="width:100%">
+
+<p><strong>Connection 헤더의 무조건 전달</strong></p>
+<ol>
+<li>웹 클라는 프락시에 <code>Connection: Keep-Alive</code> 헤더와 함께 메세지를 보내고, 커넥션을 유지하기를 요청한다.<br>클라는 커넥션을 유지하자는 요청이 받아들여졌는지 확인하기 위해 응답을 기다린다.</li>
+<li>멍청한 프락시는 <code>Connection</code> 헤더를 이해하지 못해서 다음 서버에 메세지를 그대로 전달한다.<br><code>Connection</code>헤더는 홉별 헤더다.(hop-by-hop): 오직 한 개의 전송 링크에만 적용되며, 다음 서버로 전달되어서는 안 된다.</li>
+<li><code>Connection: Keep-Alive</code>를 받은 웹 서버는 커넥션을 유지하자고 요청하는 것으로 잘못 판단하게 된다.<br>클라가 아닌 프락시와 커넥션을 유지하는 것에 동의하고 <code>Connection: Keep-Alive</code> 헤더를 포함하여 응답한다.<br>하지만 프락시는 <code>Connection</code>를 모른다.</li>
+<li>프락시는 <code>Connection: Keep-Alive</code> 헤더를 포함하고 있는 응답메세지를 클라에게 전달한다.<br>클라는 이 헤더를 통해 프락시가 커넥션을 유지하는 것에 동의했다고 추정한다.<br>클라와 서버는 커넥션을 유지한다고 생각하지만, 정작 프락시는 모름.</li>
+<li><code>Connection</code>를 모르는 프락시는 모든 데이터를 클라에게 전달하고 서버가 커넥션을 끊기를 기다린다.<br>하지만 서버는 커넥션을 유지하고, 프락시는 끊어지기 전까지 기다린다.</li>
+<li>클라는 유지되고 있다고 생각되는 커넥션으로 다음 요청을 보내는데, 프락시는 예상치 못한 요청이 들어온 거라 프락시로부터 무시되고,<br>브라우저는 아무런 응답 없이 로드 중이라는 표시만 나온다.</li>
+<li>브라우저는 자신이나 서버가 타임아웃이 나서 커넥션이 끊길 때까지 기다린다.</li>
+</ol>
+<p><strong>프락시와 홉별 헤더</strong><br>위의 잘못된 통신을 피하려면</p>
+<ul>
+<li>프락시는 Connection 헤더와 Connection 헤더에 명시된 헤더들은 절대 전달하면 안 된다.</li>
+<li>프락시는 <strong>Connection 헤더</strong>, <strong>Keep-Alive 헤더</strong>도 전달하면 안 된다.</li>
+<li><strong>홉별 헤더</strong>들 역시 전달하거나 캐시하면 안 된다.<ul>
+<li>Proxy-Authenticate, Proxy-Connection, Transfer-Encoding, Upgrade</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-5-Proxy-Connection-살펴보기"><a href="#2-2-5-Proxy-Connection-살펴보기" class="headerlink" title="2.2.5 Proxy-Connection 살펴보기"></a><del>2.2.5 Proxy-Connection 살펴보기</del></h3><ul>
+<li>Proxy-Connection은 비표준 헤더이다.</li>
+<li>프록시가 종종 여러 계층으로 배치되어 있기 때문에 2.6와 같은 문제를 야기한다.<ul>
+<li>클라는 요청 시 Proxy-Connection 헤더 필드를 보내지 않도록 권장한다.</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Connection 헤더를 모르는 프락시에게 Connection 대신에 Proxy-Connection 확장 헤더를 프락시에게 전달한다.</li>
+<li>웹 서버는 Proxy-Connection를 무시한다.</li>
+<li>영리한 프락시라면, 의미 없는 Proxy-Connection헤더를 Connection 헤더로 바꿈으로써 원하던 효과를 얻게 된다.</li>
+</ol>
+<p><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2" target="_blank" rel="noopener">RFC 7230</a><br><a href="https://stackoverflow.com/questions/15460819/what-is-the-difference-between-connection-and-proxy-connection-in-http-header" target="_blank" rel="noopener">Proxy-Connection vs Connection header</a></p>
+<hr>
+<a name="2-3">
+
+<h2 id="2-3-HTTP-1-1의-지속-커넥션"><a href="#2-3-HTTP-1-1의-지속-커넥션" class="headerlink" title="2.3 HTTP/1.1의 지속 커넥션"></a>2.3 HTTP/1.1의 지속 커넥션</h2><ul>
+<li>설계가 더 개선된 지속 커넥션을 지원한다.</li>
+<li>default로 활성화되어있다.</li>
+<li>HTTP/1.1 어플리케이션은 트랜잭션이 끝난 다음 커넥션을 끊으려면 <code>Connection:close</code> 헤더를 명시해야 한다.</li>
+<li>HTTP/1.1 클라는 응답에 <code>Connection:close</code> 헤더가 없으면 응답 후에도 커넥션을 계속 유지하는 것으로 추정한다.<ul>
+<li>클라와 서버는 언제든지 커넥션을 끊을 수 있다.</li>
+<li><code>Connection:close</code>를 보내지 않는 것이 서버가 커넥션을 영원히 유지하겠다는 것은 아니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-1-지속-커넥션의-제한과-규칙"><a href="#2-3-1-지속-커넥션의-제한과-규칙" class="headerlink" title="2.3.1 지속 커넥션의 제한과 규칙"></a>2.3.1 지속 커넥션의 제한과 규칙</h3><ul>
+<li>클라가 요청에 <code>Connection:close</code>헤더를 포함해 보내면,<br>클라는 그 커넥션으로 추가적인 요청을 보낼 수 없다.</li>
+<li>클라가 해당 커넥션으로 추가적인 요청을 보내지 않을 것이라면, 마지막 요청에 <code>Connection:close</code> 헤더를 보내야 한다..</li>
+<li>커넥션이 끊어지기 전에 엔터티 본문의 길이를 알 수 있어야 커넥션을 유지할 수 있다.<ul>
+<li>엔터티 본문이 정확한 Content-Length 값을 가지거나,</li>
+<li>청크 전송 인코딩 chunked transfer encoding으로 인코드 되어야 함을 뜻한다.</li>
+</ul>
+</li>
+<li>Connection 헤더의 값과 상관없이 언제든지 커넥션을 끊을 수 있다.</li>
+</ul>
+<hr>
+<a name="3">
+
+<h1 id="3-파이프라인-커넥션-pipelined"><a href="#3-파이프라인-커넥션-pipelined" class="headerlink" title="3. 파이프라인 커넥션 pipelined"></a>3. 파이프라인 커넥션 pipelined</h1><ul>
+<li>HTTP/1.1은 지속 커넥션을 통해서 요청을 파이프라이팅할 수 있다.<ul>
+<li>keep-alive 커넥션의 성능을 더 높여준다.</li>
+</ul>
+</li>
+<li>여러 개의 요청은 응답이 도착하기 전까지 큐에 쌓인다.</li>
+<li>대기 시간이 긴 네트워크 상황에서 네트워크 상의 왕복으로 인한 시간을 줄여서 성능을 높여준다.</li>
+</ul>
+<img src="/images/2019/25/4.png" style="width:100%">
+
+<h2 id="3-1-파이프라인의-제약사항"><a href="#3-1-파이프라인의-제약사항" class="headerlink" title="3.1 파이프라인의 제약사항"></a>3.1 파이프라인의 제약사항</h2><ul>
+<li>HTTP 클라는 커넥션이 지속 커넥션인지 확인하기 전까지 파이프라인을 이어서는 안 된다.</li>
+<li>응답은 요청 순서와 같게 와야 한다. 순서 없이 오면 순서에 맞게 정렬시킬 방법이 없다.</li>
+<li>HTTP 클라는 POST 요청같이(비멱등) 반복해서 보낼 경우, 문제가 생기는 요청은 파이프라인을 통해 보내면 안 된다.<ul>
+<li>에러가 발생하면 파이프라인을 통한 요청 중에 어떤 것들이 서버에서 처리되었는지 클라는 알 방법이 없다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<a name="4">
+
+<h1 id="4-커넥션-끊기에-대한-미스터리"><a href="#4-커넥션-끊기에-대한-미스터리" class="headerlink" title="4. 커넥션 끊기에 대한 미스터리"></a>4. 커넥션 끊기에 대한 미스터리</h1><h2 id="4-1-마음대로-커넥션-끊기"><a href="#4-1-마음대로-커넥션-끊기" class="headerlink" title="4.1 마음대로 커넥션 끊기"></a>4.1 마음대로 커넥션 끊기</h2><ul>
+<li>보통 커넥션은 메세지를 다 보낸 다음 끊지만,<br>에러가 있는 상황에서는 헤더의 중간이나, 다른 엉뚱한 곳에서 끊길 수 있다.</li>
+</ul>
+<h2 id="4-2-Content-Length와-Truncation-끊기"><a href="#4-2-Content-Length와-Truncation-끊기" class="headerlink" title="4.2 Content-Length와 Truncation(끊기)"></a>4.2 Content-Length와 Truncation(끊기)</h2><ul>
+<li>각 HTTP 응답은 본문의 정확한 크기 값을 가지는 Content-Length 헤더를 가지고 있어야 한다.</li>
+<li>클라나 프락시가 커넥션이 끊어졌다는 HTTP 응답을 받은 후,<br>실제 전달된 엔터티의 길이와 Content-Length의 값이 일치하지 않거나<br>Content-Length 자체가 존재하지 않으면, 수신자는 데이터의 정확한 길이를 서버에게 물어봐야 한다.</li>
+</ul>
+<h2 id="4-3-커넥션-끊기의-허용-재시도"><a href="#4-3-커넥션-끊기의-허용-재시도" class="headerlink" title="4.3 커넥션 끊기의 허용, 재시도"></a>4.3 커넥션 끊기의 허용, 재시도</h2><ul>
+<li>커넥션은 에러가 없더라도 언제든 끊을 수 있다.</li>
+<li>클라가 트랜잭션을 수행 중에 전송 커넥션이 끊기게 되면, 클라는 그 트랜잭션을 재시도 하더라도, 문제가 없다면(멱등성) 커넥션을 다시 맺고 한 번 더 전송을 시도해야 한다. <ul>
+<li>이건 파이프라인 커넥션에서는 어렵다.</li>
+<li>클라는 여러 요청을 큐에 쌓아 놓을 수 있지만,<br>서버는 아직 처리되지 않고 스케줄이 조정되어야 하는 요청들을 남겨둔 채로 커넥션을 끊어버릴 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-4-우아한-커넥션-끊기"><a href="#4-4-우아한-커넥션-끊기" class="headerlink" title="4.4 우아한 커넥션 끊기"></a>4.4 우아한 커넥션 끊기</h2><ul>
+<li>TCP 커넥션은 그림처럼 양방향이다.</li>
+<li>TCP 커넥션의 양쪽에는 데이터를 읽거나 쓰기 위한 입력 큐와 출력 큐가 있다.</li>
+</ul>
+<h3 id="전체-끊기와-절반-끊기"><a href="#전체-끊기와-절반-끊기" class="headerlink" title="전체 끊기와 절반 끊기"></a>전체 끊기와 절반 끊기</h3><ul>
+<li>전체 끊기: <code>close()</code>를 호출하면 TCP 커넥션의 입력 채널과 출력 채널의 커넥션을 모두 끊는다.</li>
+<li>절반 끊기: <code>shutdonw()</code>을 호출하면 입력 채널이나 출력 채널 중에 하나만을 개별적으로 끊는다.</li>
+</ul>
+<img src="/images/2019/25/5.png">
+
+<h3 id="TCP-끊기와-리셋-에러"><a href="#TCP-끊기와-리셋-에러" class="headerlink" title="TCP 끊기와 리셋 에러"></a>TCP 끊기와 리셋 에러</h3><blockquote>
+<p>잘 모르겠다.</p>
+</blockquote>
+<ul>
+<li>보통은 커넥션의 출력 채널을 끊는 것이 안전하다.<ul>
+<li>커넥션의 반대편에 있는 기기는 모든 데이터를 버퍼로부터 읽고 나서, 데이터 전송이 끝남과 동시에 당신이 커넥션을 끊었다는 것을 알게 될 것이다.</li>
+</ul>
+</li>
+<li>클라에서 더는 데이터를 보내지 않을 것임을 확신할 수 없는 이상, 커넥션의 입력 채널을 끊는 것은 위험하다.</li>
+<li>서버의 운영체제는 TCP ‘connection reset by peer’ 메세지를 클라에게 보낼 것이다.<ul>
+<li>대부분의 운영체제는 이것을 심각한 에러로 취급하여 버퍼에 저장된, 아직 읽히지 않은 데이터를 모두 삭제한다.</li>
+<li>파이프라인 커넥션에서는 이러한 상황은 더 악화된다.</li>
+</ul>
+</li>
+</ul>
+<img src="/images/2019/25/6.png">
+
+
+<h3 id="우아하게-커넥션-끊기"><a href="#우아하게-커넥션-끊기" class="headerlink" title="우아하게 커넥션 끊기"></a>우아하게 커넥션 끊기</h3><ul>
+<li>우아하게 커넥션 끊기를 구현하는 것은 어플리케이션 자신의 출력 채널을 먼저 끊고, 다른 쪽에 있는 기기의 출력 채널이 끊기는 것을 기다리는 것이다.</li>
+<li>양쪽에서 더는 데이터를 전송하지 않을 것이라고 알려주면 커넥션은 리셋의 위험 없이 온전히 종료된다.</li>
+<li>상대방이 절반 끊기를 구현했다는 보장도 없어서, 출력 채널에 절반 끊기를 하고 난 후에도 데이터나 스트림의 끝을 식별하기 위해 입력 채널에 대해 상태 검사를 주기적으로 해야 한다.</li>
+</ul>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+</a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="ck06rq63600368ibmb59klv3o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">TCP 커넥션의 종류</div>
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#1">1. 병렬 커넥션 parallel</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#2">2. 지속 커넥션 persistent</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#2-2">2.2  HTTP/1.0+의 Keep-Alive 커넥션</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#2-3">2.3  HTTP/1.1의 지속 커넥션</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#3">3. 파이프라인 커넥션 pipelined</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#4">커넥션 끊기에 대한 미스터리</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/08/26/HTTP_004_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">TCP 커넥션과 성능</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/04/HTTP_004_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/25/thumb_default.jpg)" alt="TCP 커넥션의 종류" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/04/HTTP_004_02/" class="title">TCP 커넥션의 종류</a></p>
+                            <p class="item-date"><time datetime="2019-09-04T07:23:55.000Z" itemprop="datePublished">2019-09-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/26/HTTP_004_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/24/thumb_default.jpg)" alt="TCP 커넥션과 성능" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/26/HTTP_004_01/" class="title">TCP 커넥션과 성능</a></p>
+                            <p class="item-date"><time datetime="2019-08-25T16:23:55.000Z" itemprop="datePublished">2019-08-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/18/HTTP_003_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/23/thumb_default.jpg)" alt="HTTP 메세지 - 헤더" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/18/HTTP_003_04/" class="title">HTTP 메세지 - 헤더</a></p>
+                            <p class="item-date"><time datetime="2019-08-18T12:23:55.000Z" itemprop="datePublished">2019-08-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/17/HTTP_003_03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/22/thumb_default.jpg)" alt="HTTP 메세지 - 상태코드" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/17/HTTP_003_03/" class="title">HTTP 메세지 - 상태코드</a></p>
+                            <p class="item-date"><time datetime="2019-08-17T12:23:55.000Z" itemprop="datePublished">2019-08-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/16/HTTP_003_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/21/thumb_default.jpg)" alt="HTTP 메세지 - 메서드" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/16/HTTP_003_02/" class="title">HTTP 메세지 - 메서드</a></p>
+                            <p class="item-date"><time datetime="2019-08-16T12:23:55.000Z" itemprop="datePublished">2019-08-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 17px;">OOP</a> <a href="/tags/TCP-IP/" style="font-size: 11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12px;">Web</a> <a href="/tags/algorism/" style="font-size: 11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12px;">angular</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/blog/" style="font-size: 11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/connection/" style="font-size: 11px;">connection</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11px;">flow control</a> <a href="/tags/formatter/" style="font-size: 11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/iterator/" style="font-size: 11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11px;">principle</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 18px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 16px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 19px;">typescript</a> <a href="/tags/web/" style="font-size: 11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">66</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/09/04/HTTP_004_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

@@ -283,7 +283,7 @@ body,
 }
 body {
   background: #303337;
-  font: 14px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 code {
@@ -291,6 +291,7 @@ code {
   color: #2ebee2;
   padding: 3px 5px;
   font-size: 0.8em;
+  font-weight: normal;
   border-radius: 2px;
   font-family: "FiraCode", Consolas, Monaco, Menlo, Consolas, monospace;
   background-color: #242729;
@@ -646,7 +647,7 @@ code {
   -moz-transition: 0.2s ease-in;
   -ms-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
-  font: 16px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   color: rgba(255,255,255,0.7);
 }
 .search-form-input:focus,
@@ -1282,7 +1283,7 @@ a.article-title:hover {
 .article-entry {
   margin-top: 1em;
   color: #f5f5f5;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.6em;
 }
@@ -1336,12 +1337,15 @@ a.article-title:hover {
   margin-bottom: 1.6em;
   list-style-position: outside;
   padding-left: 1.4em;
-  line-height: 1.7em;
+  line-height: 1.4em;
 }
 .article-entry ul p,
 .article-entry ol p,
 .article-entry dl p {
   margin: 0;
+}
+.article-entry li {
+  margin-top: 0.5rem;
 }
 .article-entry img,
 .article-entry video {
@@ -1395,7 +1399,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1440,7 +1444,7 @@ a.article-title:hover {
 }
 .article-index {
   color: #f5f5f5;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.6em;
   background: #404347;
@@ -1512,7 +1516,7 @@ a.article-title:hover {
 }
 .article-tldr {
   color: #f5f5f5;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.6em;
   padding: 2rem 0;
@@ -1561,7 +1565,7 @@ a.article-title:hover {
 .article-tldr blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
 }
 .article-tldr blockquote footer cite:before {
   content: "—";
@@ -1675,7 +1679,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
   padding: 0 15px;
   color: #f5f5f5;
   outline: none;
