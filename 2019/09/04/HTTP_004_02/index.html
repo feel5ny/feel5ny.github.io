@@ -20,7 +20,7 @@
 <meta property="og:description" content="병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화 커넥션 관리를 위해 따라야 할 규칙들    1. 병렬 커넥션 parallel HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.    1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다. 하나의 커넥션으로 객체들">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/25/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-09-05T14:03:09.874Z">
+<meta property="og:updated_time" content="2019-09-05T14:55:05.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 커넥션의 종류">
 <meta name="twitter:description" content="병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화 커넥션 관리를 위해 따라야 할 규칙들    1. 병렬 커넥션 parallel HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게 한다.    1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다. 하나의 커넥션으로 객체들">
@@ -561,8 +561,17 @@ ga('send', 'pageview');
 <li>상대방이 절반 끊기를 구현했다는 보장도 없어서, 출력 채널에 절반 끊기를 하고 난 후에도 데이터나 스트림의 끝을 식별하기 위해 입력 채널에 대해 상태 검사를 주기적으로 해야 한다.</li>
 </ul>
 <hr>
+<hr>
+<hr>
 <ul>
 <li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ul>
+<li><a href="https://fetch.spec.whatwg.org/#connections" target="_blank" rel="noopener">fetch 공식문서</a></li>
+<li><a href="https://xhr.spec.whatwg.org/" target="_blank" rel="noopener">XMLhttprequest 공식문서</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2" target="_blank" rel="noopener">keep alive관련 RFC문서</a></li>
 </ul>
 </a></a></a></a></a></a>
         </div>
@@ -571,7 +580,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="ck06t22xm002y9gbmfegkopno" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="ck06tcd31001urbbm0lo38j2g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
