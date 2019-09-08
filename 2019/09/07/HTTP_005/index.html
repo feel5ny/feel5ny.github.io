@@ -11,19 +11,19 @@
         <meta name="keywords" content="http,study,웹서버">
     
     
-    <meta name="description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정,통제,확장하기 위한 관리 기능을 제공한다. 웹 서버는 T">
+    <meta name="description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정, 통제, 확장하기 위한 관리 기능을 제공한다. 웹 서버는">
 <meta name="keywords" content="http,study,웹서버">
 <meta property="og:type" content="article">
 <meta property="og:title" content="웹 서버">
 <meta property="og:url" content="http://feel5ny.github.io/2019/09/07/HTTP_005/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정,통제,확장하기 위한 관리 기능을 제공한다. 웹 서버는 T">
+<meta property="og:description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정, 통제, 확장하기 위한 관리 기능을 제공한다. 웹 서버는">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/26/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-09-08T06:34:28.360Z">
+<meta property="og:updated_time" content="2019-09-08T07:39:21.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="웹 서버">
-<meta name="twitter:description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정,통제,확장하기 위한 관리 기능을 제공한다. 웹 서버는 T">
+<meta name="twitter:description" content="HTTP 통신을 진단해주는 간단한 웹 서버를 node.js로 작성해본다. 어떻게 웹 서버가 HTTP 트랜젝션을 처리하는지 단계별로 설명해본다.      웹 서버가 하는 일 웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다. 웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정, 통제, 확장하기 위한 관리 기능을 제공한다. 웹 서버는">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/26/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -371,7 +371,7 @@ ga('send', 'pageview');
 
 <h1 id="웹-서버가-하는-일"><a href="#웹-서버가-하는-일" class="headerlink" title="웹 서버가 하는 일"></a>웹 서버가 하는 일</h1><ul>
 <li>웹 서버는 HTTP 및 그와 관련된 TCP 처리를 구현한 것이다.</li>
-<li>웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정,통제,확장하기 위한 관리 기능을 제공한다.</li>
+<li>웹 서버는 자신이 제공하는 리소스를 관리하고, 웹 서버를 설정, 통제, 확장하기 위한 관리 기능을 제공한다.</li>
 <li>웹 서버는 TCP 커넥션 관리에 대한 책임을 운영체제와 나눠 갖는다.</li>
 </ul>
 <ol>
@@ -417,7 +417,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>리소스에 접근한다.<ul>
-<li>메세지에서 지저앟ㄴ 리소스에 접근한다.</li>
+<li>메세지에서 지정한 리소스에 접근한다.</li>
 </ul>
 </li>
 <li>응답을 만든다.<ul>
@@ -440,13 +440,13 @@ ga('send', 'pageview');
 <li>그렇지 않다면, 새로운 커넥션을 열 필요가 있다.</li>
 </ul>
 <h2 id="1-1-새-커넥션-다루기"><a href="#1-1-새-커넥션-다루기" class="headerlink" title="1.1 새 커넥션 다루기"></a>1.1 새 커넥션 다루기</h2><ul>
-<li>클라가 웹 서버에 TCP 커넥션을 요청하면, 웹 서버는 그 커넥션을 맺고 TCP커넥션에서 IP주소를 추출하여 커넥션 맞은편에 어떤 클라가 있는지 확인한다.</li>
-<li>새 커넥션이 맺어지고 받아들여지면, 서버는 새 커넥션을 커넥션 목록에 추가하고, 커넥션에서 오가는 데이터를 지켜보가 위한 준비를 한다.</li>
+<li>클라가 웹 서버에 TCP 커넥션을 요청하면, 웹 서버는 그 커넥션을 맺고 TCP 커넥션에서 IP 주소를 추출하여 커넥션 맞은편에 어떤 클라가 있는지 확인한다.</li>
+<li>새 커넥션이 맺어지고 받아들여지면, 서버는 새 커넥션을 커넥션 목록에 추가하고, 커넥션에서 오가는 데이터를 지켜보기 위한 준비를 한다.</li>
 <li>웹 서버는 어떤 커넥션이든 마음대로 거절하거나 즉시 닫을 수 있다.</li>
-<li>어떤 웹서버들은 클라의 IP주소나 호스트명이 인가되지 않았거나, 악의적이라고 알려진 것인 경우 커넥션을 닫는다.</li>
+<li>어떤 웹서버들은 클라의 IP 주소나 호스트명이 인가되지 않았거나, 악의적이라고 알려진 것인 경우 커넥션을 닫는다.</li>
 </ul>
 <h2 id="1-2-클라이언트-호스트명-식별"><a href="#1-2-클라이언트-호스트명-식별" class="headerlink" title="1.2 클라이언트 호스트명 식별"></a>1.2 클라이언트 호스트명 식별</h2><ul>
-<li><strong>역방향 DNS(reverse DNS)</strong>를 사용해서 클라의 IP주소를 클라의 호스트 명으로 변환하도록 설정되어 있다.</li>
+<li><strong>역방향 DNS(reverse DNS)</strong>를 사용해서 클라의 IP 주소를 클라의 호스트 명으로 변환하도록 설정되어 있다.</li>
 <li>웹서버는 <strong>클라이언트 호스트 명</strong>을 구체적인 접근 제어와 로깅을 위해 사용할 수 있다.</li>
 <li>호스트명 룩업(hostname lookup)은 꽤 시간이 많이 걸릴 수 있어, 웹 트랜잭션을 느려지게 할 수 있다.</li>
 <li>많은 대용량 웹 서버는 호스트명 분석(hostname resolution)을 꺼두거나, 특정 콘텐츠에 대해서만 켜놓는다.</li>
@@ -458,7 +458,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li>ident 프로토콜은 서버에게 어떤 사용자 이름이 HTTP 커넥션을 초기화했는지 찾아낼 수 있게 해준다.</li>
-<li>이 정보는 특히 웹서버 로깅에서 유용하기 때문에, 널리 쓰이는 일반 로그포맷(Common Log Format)의 두번째 필드는 각 HTTP 요청의 ident 사용자 이름을 담고 있다.</li>
+<li>이 정보는 특히 웹서버 로깅에서 유용하기 때문에, 널리 쓰이는 일반 로그포맷(Common Log Format)의 두 번째 필드는 각 HTTP 요청의 ident 사용자 이름을 담고 있다.</li>
 </ul>
 <p><a href="https://en.wikipedia.org/wiki/Ident_protocol" target="_blank" rel="noopener">ident protocol - wiki</a></p>
 <p>아래는 어떻게 ident 프로토콜이 동작하는지 보여준다.</p>
@@ -467,50 +467,50 @@ ga('send', 'pageview');
 <ul>
 <li>만약 클라가 ident 프로토콜을 지원한다면, 클라는 ident 결과를 위해 TCP port 113번을 listen한다.</li>
 </ul>
-<p><strong>공공 인터넷</strong>에서는 다음과같은 이유료 잘 동작하지 않는다.</p>
+<p><strong>공공 인터넷</strong>에서는 다음과 같은 이유로 잘 동작하지 않는다.</p>
 <ul>
 <li>많은 클라 PC는 identd 신원확인 프로토콜 데몬 소프트웨어를 실행하지 않는다.</li>
 <li>ident 프로토콜은 HTTP 트랜잭션을 유의미하게 <strong>지연</strong>시킨다.</li>
 <li><strong>방화벽</strong>이 ident 트래픽이 들어오는 것을 막는 경우가 많다.</li>
 <li>ident 프로토콜은 <strong>안전하지 않고 조작하기 쉽다.</strong></li>
-<li>ident 프로토콜은 <strong>가상 IP주소를 잘 지원하지 않는다.</strong></li>
+<li>ident 프로토콜은 <strong>가상 IP 주소를 잘 지원하지 않는다.</strong></li>
 <li>클라 사용자 이름의 노출로 인한 프라이버시 침해의 우려가 있다.</li>
 </ul>
 <hr>
 <a name="2">
 
 <h1 id="2-요청-메세지-수신"><a href="#2-요청-메세지-수신" class="headerlink" title="2. 요청 메세지 수신"></a>2. 요청 메세지 수신</h1><ul>
-<li>커넥션 데이터가 도착하면,<br>웹서버는 네트워크 커넥션에서 그 데이터를 읽어 들이고,<br>파싱하여 요청메세지를 구성한다.</li>
+<li>커넥션 데이터가 도착하면,<br>웹서버는 네트워크 커넥션에서 그 데이터를 읽어 들이고,<br>파싱하여 요청 메세지를 구성한다.</li>
 </ul>
 <img src="/images/2019/26/03.png">
 
 
-<p>요청메세지를 파싱할 때, 웹서버는 다음과 같은 일을 한다.</p>
+<p>요청 메세지를 파싱할 때, 웹서버는 다음과 같은 일을 한다.</p>
 <ul>
-<li>요청줄을 파싱하여 요청 <strong>메서드</strong>, 지정된 리소스의 식별자(<strong>URI</strong>), <strong>버전번호</strong>를 찾는다.<br>각 값은 스페이스 한개로 분리되어 있으며, 요청줄은 캐리지 리턴 줄바꿈(<strong><code>CRLF</code></strong>) 문자열로 끝난다. (<a href="https://feel5ny.github.io/2019/08/15/HTTP_003_01/#1">참고</a>)</li>
+<li>요청줄을 파싱하여 요청 <strong>메서드</strong>, 지정된 리소스의 식별자(<strong>URI</strong>), <strong>버전 번호</strong>를 찾는다.<br>각 값은 스페이스 한 개로 분리되어 있으며, 요청줄은 캐리지 리턴 줄바꿈(<strong><code>CRLF</code></strong>) 문자열로 끝난다. (<a href="https://feel5ny.github.io/2019/08/15/HTTP_003_01/#1">참고</a>)</li>
 <li>메세지 헤더들을 읽는다. 각 메세지 헤더는 <code>CRLF</code>로 끝난다.</li>
 <li>헤더의 끝을 의미하는 <code>CRLF</code>로 끝나는 빈 줄을 찾아낸다.</li>
 <li>요청 <strong>본문</strong>이 있다면, 읽어 들인다. (길이는 <code>Content-Length</code> 헤더로 정의한다.)</li>
 </ul>
 <h2 id="2-1-메세지의-내부-표현"><a href="#2-1-메세지의-내부-표현" class="headerlink" title="2.1 메세지의 내부 표현"></a>2.1 메세지의 내부 표현</h2><ul>
-<li>몇몇 웹서버는 요청메세지를 쉽게 다룰 수 있도록 내부의 <strong>자료구조에 저장</strong>한다.</li>
+<li>몇몇 웹서버는 요청 메세지를 쉽게 다룰 수 있도록 내부의 <strong>자료구조에 저장</strong>한다.</li>
 <li>자료구조는 요청 메세지의 각 조각에 대한 포인터와 길이를 담을 수 있을 것이고,<br>헤더는 속도가 빠른 <strong>룩업 테이블</strong>에 저장되어 각 필드에 신속하게 접근할 수 있을 것이다.</li>
 </ul>
 <img src="/images/2019/26/04.png">
 
 <h2 id="2-2-커넥션-입력-출력-처리-아키텍처"><a href="#2-2-커넥션-입력-출력-처리-아키텍처" class="headerlink" title="2.2 커넥션 입력/출력 처리 아키텍처"></a>2.2 커넥션 입력/출력 처리 아키텍처</h2><ul>
-<li>고성능 웹서버는 수천개의 커넥션을 동시에 열 수 있도록 지원한다.</li>
+<li>고성능 웹서버는 수천 개의 커넥션을 동시에 열 수 있도록 지원한다.</li>
 <li>어떤 커넥션들로부터는 요청이 느리게, 혹은 드물게 흘러 들어오고,<br>또 어떤 것들은 나중에 일어날 활동을 위해 대기하고 있는데 비해,<br>일부 커넥션들은 웹 서버로 급속히 요청을 보내고 있을 것이다.</li>
 <li>웹 서버들은 항상 새 요청을 주시하고 있다. 요청은 언제라도 도착할 수 있기 때문이다.</li>
 </ul>
 <p>웹 서버는 아키텍처의 차이에 따라 요청을 처리하는 방식도 달라진다.</p>
 <img src="/images/2019/26/05.png">
 
-<h3 id="2-2-1-단일스레드-웹서버"><a href="#2-2-1-단일스레드-웹서버" class="headerlink" title="2.2.1 단일스레드 웹서버"></a>2.2.1 단일스레드 웹서버</h3><ul>
-<li>단일 스레드 웹서버는 한번에 하나씩 요청을 처리한다.</li>
+<h3 id="2-2-1-단일-스레드-웹서버"><a href="#2-2-1-단일-스레드-웹서버" class="headerlink" title="2.2.1 단일 스레드 웹서버"></a>2.2.1 단일 스레드 웹서버</h3><ul>
+<li>단일 스레드 웹서버는 한 번에 하나씩 요청을 처리한다.</li>
 <li>트랜젝션이 완료되면, 다음 커넥션이 처리된다.</li>
 <li>처리 도중에 모든 다른 커넥션은 무시된다.<ul>
-<li>성능 문제를 만들어내므로, 로드가 적은 서버나 진다도구에서만 적당하다.</li>
+<li>성능 문제를 만들어내므로, 로드가 적은 서버나 진단도구에서만 적당하다.</li>
 </ul>
 </li>
 </ul>
@@ -519,7 +519,7 @@ ga('send', 'pageview');
 <p>프로세스란 어떤 프로그램의 자신만의 변수 집합을 갖는 하나의 독립된 제어 흐름이다.<br>  스레드는 프로세스의 더 빠르고 더 효율적인 버전이다.<br>  스레드와 프로세스 모두 하나의 프로그램이 여러 작업을 동시에 할 수 있게 해준다.</p>
 </blockquote>
 </li>
-<li>몇몇 서버는 매 커넥션마다 스레드/프로세스 하나를 할당하지만,<br>서버가 수만개의 동시 커넥션을 처리할 때 그로 인해 만들어진 수많은 프로세스나 스레드는 <strong>너무 많은 메모리나 시스템 리소스를 소비</strong>한다.</li>
+<li>몇몇 서버는 매 커넥션마다 스레드/프로세스 하나를 할당하지만,<br>서버가 수만 개의 동시 커넥션을 처리할 때 그로 인해 만들어진 수많은 프로세스나 스레드는 <strong>너무 많은 메모리나 시스템 리소스를 소비</strong>한다.</li>
 <li>많은 멀티스레드 웹 서비스가 스레드/프로세스의 최대 개수를 <strong>제한</strong>을 건다.</li>
 </ul>
 <h3 id="2-2-3-다중-I-O"><a href="#2-2-3-다중-I-O" class="headerlink" title="2.2.3 다중 I/O"></a>2.2.3 다중 I/O</h3><ul>
@@ -544,29 +544,29 @@ ga('send', 'pageview');
 
 <h1 id="4-리소스의-매핑과-접근"><a href="#4-리소스의-매핑과-접근" class="headerlink" title="4. 리소스의 매핑과 접근"></a>4. 리소스의 매핑과 접근</h1><ul>
 <li>웹서버는 리소스 서버다.</li>
-<li>그들은 HTML페이지나 JPEG 이미지 같은 미리 만들어진 콘텐츠를 제공하며,<br>서버 위에서 동작하는 리소스 생성 어플리케이션을 통해, 만들어진 동적 콘텐츠도 제공한다.</li>
-<li>웹서버가 클라에 콘텐츠를 전달하려면, 그 전에 요청 메세지의 URI에 대응하는 알맞은 콘텐츠나 콘텐츠 생성기를 웹서버에서 찾아서 그 콘텐츠의 원천을 식별해야한다.</li>
+<li>그들은 HTML 페이지나 JPEG 이미지 같은 미리 만들어진 콘텐츠를 제공하며,<br>서버 위에서 동작하는 리소스 생성 어플리케이션을 통해, 만들어진 동적 콘텐츠도 제공한다.</li>
+<li>웹서버가 클라에 콘텐츠를 전달하려면, 그 전에 요청 메세지의 URI에 대응하는 알맞은 콘텐츠나 콘텐츠 생성기를 웹서버에서 찾아서 그 콘텐츠의 원천을 식별해야 한다.</li>
 </ul>
 <h2 id="4-1-Docroot"><a href="#4-1-Docroot" class="headerlink" title="4.1 Docroot"></a>4.1 Docroot</h2><ul>
 <li>가장 단순한 형태는 요청 URI를 웹서버의 파일 시스템 안에 있는 파일 이름으로 사용하는 것이다.</li>
-<li>일반적으로 웹서버 파일시스템의 <strong>특별한 폴더</strong>를 웹콘텐츠를 위해 예약해둔다.</li>
+<li>일반적으로 웹서버 파일시스템의 <strong>특별한 폴더</strong>를 웹 콘텐츠를 위해 예약해둔다.</li>
 <li>이 폴더는 문서 루트 혹은 <code>docroot</code>로 불린다.</li>
-<li>웹서버는 요청메세지에서 URI를 가져와서 <strong>문서루트 뒤에 붙인다.</strong></li>
+<li>웹서버는 요청 메세지에서 URI를 가져와서 <strong>문서 루트 뒤에 붙인다.</strong></li>
 </ul>
-<p>httpd.conf 설정파일에 docroot 경로를 설정해두면 요청 헤더의 URI를 문서루트 뒤에 붙인다.</p>
+<p>httpd.conf 설정 파일에 docroot 경로를 설정해두면 요청 헤더의 URI를 문서 루트 뒤에 붙인다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /specials/joy.gif HTTP/1.0</span><br><span class="line">HOST: feel5ny.github.io</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot /usr/local/httpd/files</span><br></pre></td></tr></table></figure>
 
 <p><code>/usr/local/httpd/files</code> + <code>/specials/joy.gif</code></p>
 <ul>
-<li>서버는 docroot 이외의 부분이 노출되는 일이 생기지 않도록 주의해야한다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io/.../</span><br></pre></td></tr></table></figure>
+<li>서버는 docroot 이외의 부분이 노출되는 일이 생기지 않도록 주의해야 한다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io/.../</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h3 id="4-1-1-가상-호스팅된-docroot"><a href="#4-1-1-가상-호스팅된-docroot" class="headerlink" title="4.1.1 가상 호스팅된 docroot"></a>4.1.1 가상 호스팅된 docroot</h3><ul>
-<li>가상호스팅 웹서버는 각 사이트에 그들만의 분리된 문서 루트를 주는 방법으로, 한 웹서버에서 여러개의 웹사이트를 호스팅한다.</li>
-<li>가상호스팅 웹서버는 <strong>URI나 Host 헤더에서 얻은 IP주소나 호스트 명</strong>을 이용해 올바른 문서 루트를 식별한다.</li>
+<h3 id="4-1-1-가상-호스팅-된-docroot"><a href="#4-1-1-가상-호스팅-된-docroot" class="headerlink" title="4.1.1 가상 호스팅 된 docroot"></a>4.1.1 가상 호스팅 된 docroot</h3><ul>
+<li>가상 호스팅 웹서버는 각 사이트에 그들만의 분리된 문서 루트를 주는 방법으로, 한 웹서버에서 여러 개의 웹사이트를 호스팅한다.</li>
+<li>가상 호스팅 웹서버는 <strong>URI나 Host 헤더에서 얻은 IP 주소나 호스트 명</strong>을 이용해 올바른 문서 루트를 식별한다.</li>
 </ul>
 <img src="/images/2019/26/06.png">
 
@@ -585,8 +585,8 @@ ga('send', 'pageview');
 <li>디렉터리를 탐색해서 그 내용을 담은 HTML 페이지를 반환한다.</li>
 </ul>
 </li>
-<li>대부분의 웹서버는 요청한 URL에 대응되는 디렉터리 안에서 <code>index.html</code> 혹은 <code>index.htm</code>으로 이름붙은 파일을 찾아 반환한다.</li>
-<li>사용자가 디렉터리 URI를 요청했을 때, 기본 색인 파일이 없고 디렉터리 색인 기능이 꺼져있지 않다면, 많은 웹서버는 자동으로 그 디렉터리의 파일들을 크기, 변경일 및 그 파일에 대한 링크와 함께 열거한 HTML파일을 반환한다.</li>
+<li>대부분의 웹서버는 요청한 URL에 대응되는 디렉터리 안에서 <code>index.html</code> 혹은 <code>index.htm</code>으로 이름 붙은 파일을 찾아 반환한다.</li>
+<li>사용자가 디렉터리 URI를 요청했을 때, 기본 색인 파일이 없고 디렉터리 색인 기능이 꺼져있지 않다면, 많은 웹서버는 자동으로 그 디렉터리의 파일들을 크기, 변경일 및 그 파일에 대한 링크와 함께 열거한 HTML 파일을 반환한다.</li>
 </ul>
 <h2 id="4-3-동적-콘텐츠-리소스-매핑"><a href="#4-3-동적-콘텐츠-리소스-매핑" class="headerlink" title="4.3 동적 콘텐츠 리소스 매핑"></a>4.3 동적 콘텐츠 리소스 매핑</h2><ul>
 <li>웹서버는 URI를 동적 리소스에 매핑할 수도 있다.</li>
@@ -594,22 +594,22 @@ ga('send', 'pageview');
 <li>웹서버들 중에서 <strong>어플리케이션 서버</strong>라고 불리는 것들은 웹서버를 복잡한 백엔드 어플리케이션과 연결하는 일을 한다.</li>
 </ul>
 </li>
-<li>어플리케이션 서버는 그에 대한 동적콘텐츠 생성 프로그램이 어디에 있는지, 그리고 어떻게 그 프로그램을 실행하는지 알려줄 수 있어야 한다.</li>
+<li>어플리케이션 서버는 그에 대한 동적 콘텐츠 생성 프로그램이 어디에 있는지, 그리고 어떻게 그 프로그램을 실행하는지 알려줄 수 있어야 한다.</li>
 <li>대부분의 웹서버는 동적 리소스를 식별하고 매핑할 수 있는 기본적인 매커니즘을 갖고 있다.</li>
 <li>URI의 경로명이 실행 가능한 프로그램이 위치한 디렉터리로 매핑되도록 설정하는 기능을 제공하는 웹서버도 있다.</li>
-<li>서버가 실행가능한 경로명을 포함한 URI로 요청을 받으면, 그 경로에 대응하는 디렉터리에서 프로그램을 찾아 실행하려 시도한다.</li>
+<li>서버가 실행 가능한 경로명을 포함한 URI로 요청을 받으면, 그 경로에 대응하는 디렉터리에서 프로그램을 찾아 실행하려 시도한다.</li>
 </ul>
 <img src="/images/2019/26/08.png">
 
 
 <h2 id="4-4-서버사이드-인클루드-Server-Side-Includes-SSI"><a href="#4-4-서버사이드-인클루드-Server-Side-Includes-SSI" class="headerlink" title="4.4 서버사이드 인클루드 Server-Side Includes, SSI"></a>4.4 서버사이드 인클루드 Server-Side Includes, SSI</h2><ul>
-<li>만약 어떤 리소스가 서버사이드 인틀루드를 포함하고 있는것으로 설정되어 있다면, 서버는 그 리소스의 콘텐츠를 클라에게 보내기 전에 처리한다.</li>
-<li>서버는 콘텐츠에 변수 이름이나 내장된 스클비트가 될 수 있는 어떤 특별한 패턴이 있는지(주로 특별한 HTML 주속안에 포함된다) 검사를 받는다.</li>
+<li>만약 어떤 리소스가 서버사이드 인클루드를 포함하고 있는 것으로 설정되어 있다면, 서버는 그 리소스의 콘텐츠를 클라에게 보내기 전에 처리한다.</li>
+<li>서버는 콘텐츠에 변수 이름이나 내장된 스크립트가 될 수 있는 어떤 특별한 패턴이 있는지 검사를 받는다.</li>
 <li>특별한 패턴은 변수 값이나 실행 가능한 스크립트의 출력 값으로 치환된다. 이것은 동적 콘텐츠를 만드는 쉬운 방법이다.</li>
 </ul>
 <h2 id="4-5-접근-제어"><a href="#4-5-접근-제어" class="headerlink" title="4.5 접근 제어"></a>4.5 접근 제어</h2><ul>
 <li>각각의 리소스에 접근제어를 할당할 수 있다.</li>
-<li>웹서버는 클라의 IP주소에 근거하여 접근을 제어할 수 있고, 접근하기 위한 비밀번호를 물어볼 수도있다.<ul>
+<li>웹서버는 클라의 IP 주소에 근거하여 접근을 제어할 수 있고, 접근하기 위한 비밀번호를 물어볼 수도 있다.<ul>
 <li>HTTP 인증에서 자세히 다룬다.</li>
 </ul>
 </li>
@@ -618,7 +618,7 @@ ga('send', 'pageview');
 <a name="5">
 
 <h1 id="5-응답-만들기"><a href="#5-응답-만들기" class="headerlink" title="5. 응답 만들기"></a>5. 응답 만들기</h1><ul>
-<li>응답메세지는 응답사태코드, 응답헤더, 응답봅눔을 포함한다.</li>
+<li>응답메세지는 응답상태코드, 응답헤더, 응답본문을 포함한다.</li>
 </ul>
 <h2 id="5-1-응답-엔터티"><a href="#5-1-응답-엔터티" class="headerlink" title="5.1 응답 엔터티"></a>5.1 응답 엔터티</h2><p>본문이 있다면, 응답 메세지는 주로 다음을 포함한다.</p>
 <ol>
@@ -626,10 +626,10 @@ ga('send', 'pageview');
 <li>응답 본문의 길이를 서술하는 Content-Length 헤더</li>
 <li>실제 응답 본문의 내용</li>
 </ol>
-<h2 id="5-2-MIME-타입-결정하기"><a href="#5-2-MIME-타입-결정하기" class="headerlink" title="5.2 MIME 타입 결정하기"></a>5.2 MIME 타입 결정하기</h2><p>웹 서버에게는 응답 본문의 MIME타입을 결정해야하느 ㄴ책임이 있다.<br>MIME타입과 리소스를 연결하는 여러가지 방법이다.</p>
+<h2 id="5-2-MIME-타입-결정하기"><a href="#5-2-MIME-타입-결정하기" class="headerlink" title="5.2 MIME 타입 결정하기"></a>5.2 MIME 타입 결정하기</h2><p>웹 서버에게는 응답 본문의 MIME타입을 결정해야하는 책임이 있다.<br>MIME타입과 리소스를 연결하는 여러 가지 방법이다.</p>
 <h3 id="5-2-1-mime-types"><a href="#5-2-1-mime-types" class="headerlink" title="5.2.1 mime.types"></a>5.2.1 mime.types</h3><ul>
-<li>파일이름의 확장자를 사용할 수 있다.</li>
-<li>웹서버는 각 리소스의 MIME타입을 계산하기 위해 <strong>확장자별 MIME타입</strong>이 담겨있는 파일을 탐색한다.<ul>
+<li>파일 이름의 확장자를 사용할 수 있다.</li>
+<li>웹서버는 각 리소스의 MIME 타입을 계산하기 위해 <strong>확장자별 MIME타입</strong>이 담겨있는 파일을 탐색한다.<ul>
 <li>확장자에 따라 mime타입을 결정한다.<br><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types" target="_blank" rel="noopener">확장자별 mime타입 - mdn</a></li>
 </ul>
 </li>
@@ -638,10 +638,10 @@ ga('send', 'pageview');
 
 <h3 id="5-2-2-매직-타이핑-Magic-typing"><a href="#5-2-2-매직-타이핑-Magic-typing" class="headerlink" title="5.2.2 매직 타이핑 Magic typing"></a>5.2.2 매직 타이핑 Magic typing</h3><ul>
 <li>아파치 웹 서버는 각 파일의 MIME타입을 알아내기 위해 파일의 내용을 검사해서 알려진 패턴에 대한 테이블 (<strong>매직 파일</strong>이라 불린다)에 해당하는 패턴이 있는지 찾아볼 수 있다.</li>
-<li>느리긴하지만, 파일이 표준 확장자 없이 이름 지어진 경우에는 편리하다.</li>
+<li>느리긴 하지만, 파일이 표준 확장자 없이 이름 지어진 경우에는 편리하다.</li>
 </ul>
 <blockquote>
-<p><strong>매직 넘버.</strong> 다른 종류의 파일의 문법은 구조 상 보여지는 타입을 결정하는데 도움을 줍니다. 예를 들어, 각 GIF 파일들은 47 49 46 38 16진수 값 [GIF89]로 시작되며 PNG 파일의 경우 89 50 4E 47 [.PNG]로 시작됩니다. 파일의 모든 타입들이 이런 매직 넘버를 가지고 있는 것은 아니므로 100% 신뢰할 만한 시스템은 아니기도 합니다.<br><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">출처</a></p>
+<p><strong>매직 넘버.</strong> 다른 종류의 파일의 문법은 구조 상 보여지는 타입을 결정하는 데 도움을 줍니다. 예를 들어, 각 GIF 파일들은 47 49 46 38 16진수 값 [GIF89]로 시작되며 PNG 파일의 경우 89 50 4E 47 [.PNG]로 시작됩니다. 파일의 모든 타입들이 이런 매직 넘버를 가지고 있는 것은 아니므로 100% 신뢰할 만한 시스템은 아니기도 합니다.<br><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">출처</a></p>
 </blockquote>
 <h3 id="5-2-3-유형-명시-Explicit-typing"><a href="#5-2-3-유형-명시-Explicit-typing" class="headerlink" title="5.2.3 유형 명시 Explicit typing"></a>5.2.3 유형 명시 Explicit typing</h3><ul>
 <li>특정 파일이나 디렉터리 안의 파일들이 파일 확장자나 내용에 상관없이<br><strong>어떤 MIME 타입을 갖도록 웹 서버를 설정</strong>할 수 있다.</li>
@@ -671,22 +671,22 @@ ga('send', 'pageview');
 <li>웹 서버는 클라에게 리소스의 이름이 바뀌었으므로, 클라는 북마크를 갱신하거나 할 수 있다고 말해줄 수 있다. </li>
 <li><code>301 Moved Permanetly</code> 상태코드는 이런 종류의 리다이렉트를 위해 사용된다.</li>
 </ul>
-<h3 id="5-3-2-임시로-리소스가-올겨진-경우"><a href="#5-3-2-임시로-리소스가-올겨진-경우" class="headerlink" title="5.3.2 임시로 리소스가 올겨진 경우"></a>5.3.2 임시로 리소스가 올겨진 경우</h3><ul>
-<li>리소스가 임시로 옮겨지거나, 이름이 변경된 경우, 서버는 클라를 새 위치로 리다이렉트하길 원할 것이다. </li>
+<h3 id="5-3-2-임시로-리소스가-옮겨진-경우"><a href="#5-3-2-임시로-리소스가-옮겨진-경우" class="headerlink" title="5.3.2 임시로 리소스가 옮겨진 경우"></a>5.3.2 임시로 리소스가 옮겨진 경우</h3><ul>
+<li>리소스가 임시로 옮겨지거나, 이름이 변경된 경우, 서버는 클라를 새 위치로 리다이렉트 하길 원할 것이다. </li>
 <li>이름 변경이 임시적이기 때문에, 서버는 클라가 나중에는 원래 URL로 찾아오고 북마크도 갱신하지 않기를 원한다.</li>
 <li><code>303 See Other</code>과 <code>307 Temporary Redirect</code> 상태코드는 이런 종류의 리다이렉트를 위해 사용된다.</li>
 </ul>
 <h3 id="5-3-3-URL-증강"><a href="#5-3-3-URL-증강" class="headerlink" title="5.3.3 URL 증강"></a>5.3.3 URL 증강</h3><ul>
 <li>서버는 종종 <strong>문맥 정보(Context)</strong>를 포함시키기 위해 재 작성된 URL로 리다이렉트한다.</li>
 <li>요청이 도착했을 때, 서버는 상태 정보를 내포한 새 URL을 생성하고 사용자를 이 새 URL로 리다이렉트한다.<blockquote>
-<p>상태정보가 추가된 URL은 흔히 <strong>뚱뚱한 URL</strong>이라고도 부른다.</p>
+<p>상태 정보가 추가된 URL은 흔히 <strong>뚱뚱한 URL</strong>이라고도 부른다.</p>
 </blockquote>
 </li>
-<li>클라는 리다이렉트를 따라가서, 상태정보가 추가된 완전한 URL을 포함한 요청을 다시 보낸다.</li>
+<li>클라는 리다이렉트를 따라가서, 상태 정보가 추가된 완전한 URL을 포함한 요청을 다시 보낸다.</li>
 <li><code>303 See Other</code>과 <code>307 Temporary Redirect</code> 상태코드를 사용한다.</li>
 </ul>
 <h3 id="5-3-4-부하-균형"><a href="#5-3-4-부하-균형" class="headerlink" title="5.3.4 부하 균형"></a>5.3.4 부하 균형</h3><ul>
-<li>과부화된 서버가 요청을 받으면,<br>서버는 클라를 <strong>좀 덜 부하가 걸린 서버로 리다이렉트할 수 있다.</strong></li>
+<li>과부하된 서버가 요청을 받으면,<br>서버는 클라를 <strong>좀 덜 부하가 걸린 서버로 리다이렉트할 수 있다.</strong></li>
 <li><code>303 See Other</code>과 <code>307 Temporary Redirect</code> 상태코드를 사용한다.</li>
 </ul>
 <h3 id="5-3-5-친밀한-다른-서버가-있을-때"><a href="#5-3-5-친밀한-다른-서버가-있을-때" class="headerlink" title="5.3.5 친밀한 다른 서버가 있을 때"></a>5.3.5 친밀한 다른 서버가 있을 때</h3><ul>
@@ -701,9 +701,9 @@ ga('send', 'pageview');
 <a name="6">
 
 <h1 id="6-응답-보내기"><a href="#6-응답-보내기" class="headerlink" title="6. 응답 보내기"></a>6. 응답 보내기</h1><ul>
-<li>서버는 여러 클라에 대한 많은 커넥션을 가질 수 있다. 그들 중 일부는 아무것도 안하고 있는 상태이고, 일부는 서버로 데이터를 보내고 있으며, 또다른 일부는 클라로 돌려줄 응답 데이터를 실어 나르고 있을 것이다.</li>
-<li>서버는 커넥션 상태를 추적해야하며,<br>지속적인 커넥션은 특별히 주의해서 다룰 필요가 있다.</li>
-<li>비지속 커넥션이라면, 서버는 모든 메세지를 전송했을 때 자신쪽 커넥션을 닫을 것이다.</li>
+<li>서버는 여러 클라에 대한 많은 커넥션을 가질 수 있다. 그들 중 일부는 아무것도 안 하고 있는 상태이고, 일부는 서버로 데이터를 보내고 있으며, 또 다른 일부는 클라로 돌려줄 응답 데이터를 실어 나르고 있을 것이다.</li>
+<li>서버는 커넥션 상태를 추적해야 하며,<br>지속적인 커넥션은 특별히 주의해서 다룰 필요가 있다.</li>
+<li>비지속 커넥션이라면, 서버는 모든 메세지를 전송했을 때 자신 쪽 커넥션을 닫을 것이다.</li>
 <li>지속적인 커넥션이라면,<br>서버가 <code>Content-Length</code> 헤더를 바르게 계산하기 위해 특별히 주의를 필요로 하는 경우,<br>클라가 응답이 언제 끝나는지 알 수 없는 경우, 커넥션은 열린 상태를 유지할 것이다.</li>
 </ul>
 <hr>
@@ -711,7 +711,7 @@ ga('send', 'pageview');
 
 <h1 id="7-로깅"><a href="#7-로깅" class="headerlink" title="7. 로깅"></a>7. 로깅</h1><ul>
 <li>트랜잭션이 완료되었을 때, 웹서버는 트랜잭션이 어떻게 수행되었는지에 대한 <strong>로그를 로그파일에 기록한다.</strong></li>
-<li>대부분의 웹서버는 로깅에 대한 여러가지 설정 양식을 제공한다.</li>
+<li>대부분의 웹서버는 로깅에 대한 여러 가지 설정 양식을 제공한다.</li>
 <li>자세한건 책의 21장..</li>
 </ul>
 <hr>
@@ -735,7 +735,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/07/HTTP_005/" data-id="ck0am28af001yyobm7kzsicxf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/07/HTTP_005/" data-id="ck0ao2s8e003hgnbmxrkssb7d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
