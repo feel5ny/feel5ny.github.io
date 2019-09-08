@@ -1374,15 +1374,16 @@ a.article-title:hover {
 .article-entry blockquote {
   color: rgba(245,245,245,0.5);
   quote: none;
-  margin: 0.6em 0 20px 0;
+  margin: 20px 0;
   position: relative;
-  font-style: italic;
   padding-left: 36px;
+  background: rgba(9,40,47,0.349);
+  padding: 1em;
 }
 .article-entry blockquote:before {
-  top: 0;
-  left: 0;
-  color: #ccc;
+  top: -11px;
+  left: -11px;
+  color: #808080;
   font-size: 20px;
   content: "\f0d0";
   position: absolute;
@@ -1390,11 +1391,17 @@ a.article-title:hover {
   font-style: normal;
   font-family: 'FontAwesome';
   opacity: 0.4;
+  background: #fff;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  padding: 3px;
+  line-height: 40px;
 }
 .article-entry blockquote p {
   display: inline-block;
-  border-bottom: 1px solid #ccc;
   margin: 0;
+  padding-left: 30px;
 }
 .article-entry blockquote footer {
   font-size: 14px;
@@ -1542,7 +1549,6 @@ a.article-title:hover {
   quote: none;
   margin: 0.6em 0 20px 0;
   position: relative;
-  font-style: italic;
   padding-left: 36px;
 }
 .article-tldr blockquote:before {
