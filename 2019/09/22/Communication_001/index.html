@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>웹에서 앱으로 이동하기 (feat.딥링크) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="maketing,app,link,url">
+    
+    
+    <meta name="description" content="하나의 서비스가 웹이나 앱, 두 가지 플랫폼에서 운영 중일 경우, 서로가 서로의 플랫폼으로 고객을 이동시킬 수 있습니다. 앱에서는 웹링크를 사용하여 웹으로 이동시키거나, 인앱브라우저로 웹화면을 띄우곤 하는데, 웹화면에서 앱으로의 이동은 어떨까요.웹에서 앱의 특정 화면으로 이동시키기 위해선, 앱이 현재 디바이스에 인스톨이 되어있는지, 어떤 페이지로 이동하고">
+<meta name="keywords" content="maketing,app,link,url">
+<meta property="og:type" content="article">
+<meta property="og:title" content="웹에서 앱으로 이동하기 (feat.딥링크)">
+<meta property="og:url" content="http://feel5ny.github.io/2019/09/22/Communication_001/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="하나의 서비스가 웹이나 앱, 두 가지 플랫폼에서 운영 중일 경우, 서로가 서로의 플랫폼으로 고객을 이동시킬 수 있습니다. 앱에서는 웹링크를 사용하여 웹으로 이동시키거나, 인앱브라우저로 웹화면을 띄우곤 하는데, 웹화면에서 앱으로의 이동은 어떨까요.웹에서 앱의 특정 화면으로 이동시키기 위해선, 앱이 현재 디바이스에 인스톨이 되어있는지, 어떤 페이지로 이동하고">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/29/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-09-22T13:56:34.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="웹에서 앱으로 이동하기 (feat.딥링크)">
+<meta name="twitter:description" content="하나의 서비스가 웹이나 앱, 두 가지 플랫폼에서 운영 중일 경우, 서로가 서로의 플랫폼으로 고객을 이동시킬 수 있습니다. 앱에서는 웹링크를 사용하여 웹으로 이동시키거나, 인앱브라우저로 웹화면을 띄우곤 하는데, 웹화면에서 앱으로의 이동은 어떨까요.웹에서 앱의 특정 화면으로 이동시키기 위해선, 앱이 현재 디바이스에 인스톨이 되어있는지, 어떤 페이지로 이동하고">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/29/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/09/22/Communication_001/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/03-Communication/Marketing/">Marketing</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/29/thumb_default.jpg" alt="웹에서 앱으로 이동하기 (feat.딥링크)" style="width:100%">
+    </div>
+
+<article id="post-Communication_001" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        웹에서 앱으로 이동하기 (feat.딥링크)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/22/Communication_001/" class="article-date">
+            <time datetime="2019-09-22T14:23:55.000Z" itemprop="datePublished">2019-09-22</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/app/">app</a>, <a class="tag-link" href="/tags/link/">link</a>, <a class="tag-link" href="/tags/maketing/">maketing</a>, <a class="tag-link" href="/tags/url/">url</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#deeplink">딥링크란?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#direct">1. 다이렉트 딥링크</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#1-1">1.1 딥링크의 종류</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-2">1.2 딥링크의 문제점</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#deferred">2. 디퍼드 딥링크</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#dynamic">3. 다이나믹 딥링크</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>하나의 서비스가 웹이나 앱, 두 가지 플랫폼에서 운영 중일 경우, 서로가 서로의 플랫폼으로 고객을 이동시킬 수 있습니다. 앱에서는 웹링크를 사용하여 웹으로 이동시키거나, 인앱브라우저로 웹화면을 띄우곤 하는데, <strong>웹화면에서 앱으로의 이동은 어떨까요.</strong><br>웹에서 앱의 특정 화면으로 이동시키기 위해선, 앱이 현재 디바이스에 인스톨이 되어있는지, 어떤 페이지로 이동하고 싶어하는지 등의 정보를 알아야합니다. 이를 도와주는 개념이 딥링크 입니다.<br>마케터는 웹에서 앱 유입의 여러 측면으로써의 효율 확인하길 원하며, 웹개발자는 이를 위해 딥링크를 사용하곤 합니다.</p>
+<img src="/images/2019/29/1.jpeg">
+
+<a name="deeplink">
+
+<h1 id="딥링크란"><a href="#딥링크란" class="headerlink" title="딥링크란?"></a>딥링크란?</h1><p>딥링크는 단순한 개념입니다.<br>특정 콘텐츠에 <strong>직접 도달하는</strong> 모든 링크를 뜻하는데, 형태는 스킴(scheme)과 호스트(host)로 구성된 URL(Uniform Resource Locator)이며, 웹환경에서도 쉽게 적용할 수 있습니다.</p>
+<blockquote>
+<p>url의 자세한 설명은 <a href="https://feel5ny.github.io/2019/08/09/HTTP_002/#1">여기</a></p>
+</blockquote>
+<p>현재 url 또한 url하나로 블로그 글에 직접 도달할 수 있기 때문에 딥링크라고 말할 수 있습니다. (<code>https://feel5ny.github.io/2019/09/22/Communication_001/</code>) 앱에서도 특정 콘텐츠를 직접 도달할 수 있도록, 여러가지 딥링크의 종류들을 활용합니다. (url 스킴, 유니버설 링크…, 디버드 딥링크)</p>
+<img src="/images/2019/29/2.png">
+
+<blockquote>
+<p>굿닥은 원링크 사용</p>
+</blockquote>
+<p>앱의 특정 콘텐츠를 <strong>공유</strong>하고 싶을 경우에도 딥링크를 사용할 수 있습니다. </p>
+<a name="direct">
+
+<h1 id="1-다이렉트-딥링크"><a href="#1-다이렉트-딥링크" class="headerlink" title="1. 다이렉트 딥링크"></a>1. 다이렉트 딥링크</h1><p>다이렉트 딥링크를 사용할 경우,</p>
+<ul>
+<li>앱이 설치된 유저는 앱 내 특정 페이지로 이동한다.</li>
+<li>앱 미설치 유저는<br>URL schemes방식의 딥링크 사용시에는 동작하지 않고<br>Universal Link나 App Link 사용시 ios, and에 맞는 앱스토어로 이동한다.</li>
+</ul>
+<a name="1-1">
+
+<h2 id="1-1-딥링크의-종류"><a href="#1-1-딥링크의-종류" class="headerlink" title="1-1 딥링크의 종류"></a>1-1 딥링크의 종류</h2><h3 id="URL-schemes"><a href="#URL-schemes" class="headerlink" title="URL schemes"></a>URL schemes</h3><ul>
+<li>딥링크의 가장 초기 형태이다. url 스킴을 앱에 정의하는 방식으로 사용한다. <code>goodoc://</code></li>
+</ul>
+<p><strong>단점</strong></p>
+<ul>
+<li>스킴을 제약없이 설정이 가능하기 때문에, 고유한 딥링크를 점유할 수 없다.<ul>
+<li>즉, <strong>여러 앱에서 같은 이름의 스킴을 사용할 경우, 하이재킹(hijacking)</strong>될 수도 있다.</li>
+<li>이러한 이유로 몇몇 브라우저에서는 URL schemes에 대해 경고메세지를 띄우거나 동작을 막곤한다.</li>
+</ul>
+</li>
+<li>URL schemes만으로 앱 설치 유무를 알 수 없다.<ul>
+<li>앱이 설치되어있지 않을 경우에 대해 공식적인 지원이 없기 때문에<br>앱 미설치 유저는 딥링크가 동작하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Universal-Link-App-Link"><a href="#Universal-Link-App-Link" class="headerlink" title="Universal Link (App Link)"></a>Universal Link (App Link)</h3><ul>
+<li><p>URL schemes가 가진 문제점을 해결하기 위해 2015년 하반기에 iOS와 Android 플랫폼은 각각 새로운 딥링크를 개발하여 발표했다. </p>
+</li>
+<li><p>iOS는 Universal Link, Android는 App Link</p>
+</li>
+<li><p>개념적으로는 비슷한 형태의 딥링크이다.</p>
+</li>
+<li><p>HTTPS가 적용된 도메인을 딥링크로 사용한다. 보안문제를 해결하였다.</p>
+</li>
+<li><p>특정 도메인이 딥링크로 사용되는 것이기 때문에, 고유성을 보장한다.</p>
+</li>
+<li><p>대체 url(fallback url)을 공식 지원하기 때문에, 앱 미설치자의 OS에서 해당 link를 대체url로 판단하여서 웹사이트로 떨어트린다.</p>
+</li>
+</ul>
+<p><strong>단점</strong></p>
+<ul>
+<li>사용자의 트리거에 의해서만 작동한다. 스크립트로 클릭을 유발할 경우에는 앱이 설치되어있음에도 대체URL로 작동한다.</li>
+<li>특정 앱에서 동작하지 않도록 막고 있기도 하다. (핀터레스트, 페이스북 메신저, 텔레그램 ..)</li>
+<li>단점들때문에 URL 스킴과 복합적으로 사용하기도 한다.</li>
+</ul>
+<a name="1-2">
+
+<h2 id="1-2-딥링크의-문제점"><a href="#1-2-딥링크의-문제점" class="headerlink" title="1-2 딥링크의 문제점"></a>1-2 딥링크의 문제점</h2><ul>
+<li>앱 미설치자의 경우, 앱스트어로 이동시 사용자를 추적할 수 없는 경우가 있다.</li>
+<li>마켓을 이동하는 과정에서 딥링크가 유실되어 설치 후에 어떤 딥링크를 통해 앱을 설치했는지 알 수 없다.</li>
+</ul>
+<p>이를 해결하기 위해 디퍼드 딥링크를 사용한다.</p>
+<a name="deferred">
+
+<h1 id="2-디퍼드-딥링크"><a href="#2-디퍼드-딥링크" class="headerlink" title="2. 디퍼드 딥링크"></a>2. 디퍼드 딥링크</h1><ul>
+<li>새로 앱을 설치한 사용자(NRU, Newly Registered User)를 집계할 수 있다. (마케터의 광고 효율성을 측정할 수 있다.)</li>
+<li>사용자가 원하는 콘텐츠를 설치와 동시에 보여줄 수 있다.<br>앱 내 콘텐츠를 목적으로 설치한 사용자의 동선을 줄일 수 있다.</li>
+</ul>
+<p>이런 장점을 지닌 디퍼드 딥링크는 각각의 OS 별로 구현하는 방식이 다르다.</p>
+<ul>
+<li><p>안드: 앱 마켓 URL에 QueryParam으로 <code>referrer={URL Encoded String}</code>를 추가한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://play.google.com/store/apps/details</span><br><span class="line">  ? id=com.ksncho.hospitalinfo</span><br><span class="line">  &amp; hl=ko</span><br><span class="line">  &amp; referrer=&#123;App Link&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>iOS <a href="https://engineering.linecorp.com/ko/blog/how-to-use-deeplink-in-trackit/" target="_blank" rel="noopener">참고</a></p>
+<ul>
+<li>iOS 버전 11 이전 버전에서는 Safari webview는 브라우저와 앱 내의 webview가 쿠키 저장 공간을 공유한다.</li>
+<li>이를 이용하여 랜딩 페이지에서 쿠키를 저장한 뒤 앱 설치 후 invisible webview를 생성하여 랜딩 페이지에 접근, 쿠키 정보를 확인하여 설치를 확인하는 방법이 있다.</li>
+<li>하지만 이 방법은 iOS 버전 11에서 앱 별로 개별적인 cookie storage를 사용하도록 바뀌면서 그 이후로는 더 이상 사용할 수 없게 되었다.</li>
+</ul>
+</li>
+</ul>
+<p><strong>단점</strong></p>
+<ul>
+<li>OS별로 링크가 구분되어있기 때문에 웹에서는 <code>user-agent</code>를 확인하여 분기를 해줘야한다는 번거로움이 있다.</li>
+<li>2번 작업해야하는 번거로움을 해결하기 위해 하나의 링크를 사용하는 방식인 다이나믹 딥링크 방식이 나왔다.</li>
+</ul>
+<a name="dynamic">
+
+<h1 id="3-다이나믹-딥링크"><a href="#3-다이나믹-딥링크" class="headerlink" title="3. 다이나믹 딥링크"></a>3. 다이나믹 딥링크</h1><ul>
+<li>파이어베이스에서는 dynamic Link<br><strong>Appsflyer</strong>에서는 one Link<br>라는 명칭으로 불린다.</li>
+<li>하나의 URL로 각각의 OS에 맞게 자동으로 앱 내 특정페이지로 이동할 수 있게 해준다.</li>
+</ul>
+<img src="/images/2019/29/3.jpeg">
+
+<hr>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://branch.io/ko/what-is-deep-linking/" target="_blank" rel="noopener">branch의 딥링크 설명글</a></li>
+<li><a href="https://engineering.linecorp.com/ko/blog/how-to-use-deeplink-in-trackit/" target="_blank" rel="noopener">LINE-TRACKIT에서 딥링크를 사용하는 방법</a></li>
+<li><a href="https://blog.naver.com/PostView.nhn?blogId=wcjpower&logNo=220899970761&parentCategoryNo=&categoryNo=23&viewDate=&isShowPopularPosts=true&from=search" target="_blank" rel="noopener">다이렉트/디퍼드/다이나믹 딥링크 설명글</a></li>
+<li><a href="http://blog.ab180.co/deeplinkga-mweojyo/" target="_blank" rel="noopener">ab180의 딥링크 설명글</a></li>
+</ol>
+</a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/09/22/Communication_001/" data-id="ck0v1r7bl0010mabmjvemsdjw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#deeplink">딥링크란?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#direct">1. 다이렉트 딥링크</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#1-1">1.1 딥링크의 종류</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+                  <li>
+                    <a href="#1-2">1.2 딥링크의 문제점</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#deferred">2. 디퍼드 딥링크</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#dynamic">3. 다이나믹 딥링크</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/09/22/HTTP_006/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">프록시</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/22/Communication_001/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/29/thumb_default.jpg)" alt="웹에서 앱으로 이동하기 (feat.딥링크)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-Communication/Marketing/">Marketing</a></p>
+                            <p class="item-title"><a href="/2019/09/22/Communication_001/" class="title">웹에서 앱으로 이동하기 (feat.딥링크)</a></p>
+                            <p class="item-date"><time datetime="2019-09-22T14:23:55.000Z" itemprop="datePublished">2019-09-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/22/HTTP_006/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/28/thumb_default.jpg)" alt="프록시" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/22/HTTP_006/" class="title">프록시</a></p>
+                            <p class="item-date"><time datetime="2019-09-22T07:23:55.000Z" itemprop="datePublished">2019-09-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/08/CSS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/27/thumb_default.jpg)" alt="한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...👀 (feat. unicode)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></p>
+                            <p class="item-title"><a href="/2019/09/08/CSS_02/" class="title">한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...👀 (feat. unicode)</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T13:23:55.000Z" itemprop="datePublished">2019-09-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/07/HTTP_005/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/26/thumb_default.jpg)" alt="웹 서버" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/07/HTTP_005/" class="title">웹 서버</a></p>
+                            <p class="item-date"><time datetime="2019-09-07T07:23:55.000Z" itemprop="datePublished">2019-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/04/HTTP_004_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/25/thumb_default.jpg)" alt="커넥션 관리 - TCP 커넥션의 종류" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/04/HTTP_004_02/" class="title">커넥션 관리 - TCP 커넥션의 종류</a></p>
+                            <p class="item-date"><time datetime="2019-09-04T07:23:55.000Z" itemprop="datePublished">2019-09-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11.11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TCP-IP/" style="font-size: 11.11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 11.11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/connection/" style="font-size: 11.11px;">connection</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13.33px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 16.67px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/09/22/Communication_001/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
