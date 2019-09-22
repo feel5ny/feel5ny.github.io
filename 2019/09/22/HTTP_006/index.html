@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>프록시 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,proxy">
+    
+    
+    <meta name="description" content="1. 프록시란? 웹 프록시 서버는 클라의 입장에서 트랜젝션을 수행하는 중개인이다. http 프록시 서버는 웹 서버이기도 하고, 웹 클라이기도 하다.  1.1 개인 프록시와 공유 프록시개인 프록시 하나의 클라만을 위한 프록시 어떤 브라우저 보조 제품들은 몇몇 ISP 서비스와 마찬가지로 브라우저의 기능을 확장하거나 성능을 개선하거나, 무료 ISP 서비스를">
+<meta name="keywords" content="http,study,proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="프록시">
+<meta property="og:url" content="http://feel5ny.github.io/2019/09/22/HTTP_006/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="1. 프록시란? 웹 프록시 서버는 클라의 입장에서 트랜젝션을 수행하는 중개인이다. http 프록시 서버는 웹 서버이기도 하고, 웹 클라이기도 하다.  1.1 개인 프록시와 공유 프록시개인 프록시 하나의 클라만을 위한 프록시 어떤 브라우저 보조 제품들은 몇몇 ISP 서비스와 마찬가지로 브라우저의 기능을 확장하거나 성능을 개선하거나, 무료 ISP 서비스를">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/28/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-09-22T08:17:48.133Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="프록시">
+<meta name="twitter:description" content="1. 프록시란? 웹 프록시 서버는 클라의 입장에서 트랜젝션을 수행하는 중개인이다. http 프록시 서버는 웹 서버이기도 하고, 웹 클라이기도 하다.  1.1 개인 프록시와 공유 프록시개인 프록시 하나의 클라만을 위한 프록시 어떤 브라우저 보조 제품들은 몇몇 ISP 서비스와 마찬가지로 브라우저의 기능을 확장하거나 성능을 개선하거나, 무료 ISP 서비스를">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/28/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/09/22/HTTP_006/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/28/thumb_default.jpg" alt="프록시" style="width:100%">
+    </div>
+
+<article id="post-HTTP_006" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        프록시
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/22/HTTP_006/" class="article-date">
+            <time datetime="2019-09-22T07:23:55.000Z" itemprop="datePublished">2019-09-22</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/proxy/">proxy</a>, <a class="tag-link" href="/tags/study/">study</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#proxy">1. 프록시란?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#why">2. 왜 사용할까?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#where">3. 어디에 둘까?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#how">4. 클라에서 프록시 설정방법</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#attributes">5. 프록시 요청의 특이사항 9가지</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<a name="proxy">
+
+<h1 id="1-프록시란"><a href="#1-프록시란" class="headerlink" title="1. 프록시란?"></a>1. 프록시란?</h1><ul>
+<li>웹 프록시 서버는 클라의 입장에서 트랜젝션을 수행하는 중개인이다.</li>
+<li>http 프록시 서버는 웹 서버이기도 하고, 웹 클라이기도 하다.</li>
+</ul>
+<h2 id="1-1-개인-프록시와-공유-프록시"><a href="#1-1-개인-프록시와-공유-프록시" class="headerlink" title="1.1 개인 프록시와 공유 프록시"></a>1.1 개인 프록시와 공유 프록시</h2><h3 id="개인-프록시"><a href="#개인-프록시" class="headerlink" title="개인 프록시"></a>개인 프록시</h3><ul>
+<li>하나의 클라만을 위한 프록시</li>
+<li>어떤 브라우저 보조 제품들은 몇몇 ISP 서비스와 마찬가지로 브라우저의 기능을 확장하거나 성능을 개선하거나, 무료 ISP 서비스를 위한 공고들을 운영하기 위해 작은 프록시를 사용자의 컴퓨터에서 직접 실행한다.<blockquote>
+<p>ISP: Internet Service Provider (KT, SKT, LG+)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="공유-프록시"><a href="#공유-프록시" class="headerlink" title="공유 프록시"></a>공유 프록시</h3><ul>
+<li>여러 클라가 함께 사용하는 프록시</li>
+<li>대부부의 프록시는 공유 프록시다.</li>
+</ul>
+<h2 id="1-2-Proxy-vs-Gateway"><a href="#1-2-Proxy-vs-Gateway" class="headerlink" title="1.2 Proxy vs Gateway"></a>1.2 Proxy vs Gateway</h2><ul>
+<li><strong>프록시</strong>: 같은 프로토콜을 사용하는 둘 이상의 앱을 연결</li>
+<li><strong>게이트웨이</strong>: 서로 다른 프로토콜을 사용하는 둘 이상을 연결<br>프로토콜 변환기처럼 동작한다.<ul>
+<li>ex) HTTP/POP 게이트웨이: 이메일 서버와의 통신</li>
+</ul>
+</li>
+</ul>
+<hr>
+<a name="why">
+
+<h1 id="2-왜-사용할까"><a href="#2-왜-사용할까" class="headerlink" title="2. 왜 사용할까?"></a>2. 왜 사용할까?</h1><ul>
+<li>보안을 개선하고</li>
+<li>성능을 높여주며</li>
+<li>비용을 절약한다.</li>
+<li>부가적인 가치를 주는 여러 유용한 웹서비스를 구현하기 위해 트래픽을 감시하고 수정한다.</li>
+</ul>
+<h2 id="2-1-주-사용-케이스"><a href="#2-1-주-사용-케이스" class="headerlink" title="2.1 주 사용 케이스"></a>2.1 주 사용 케이스</h2><ol>
+<li><strong>어린이 필터</strong>: 성인 콘텐츠 차단용 <strong>필터링 프락시</strong></li>
+<li><strong>문서 접근 제어자</strong>: 웹 리소스에 대한 단일한 접근 제어 전략을 구현하고 감사추적을 하기 위해.</li>
+<li><strong>보안 방화벽</strong>: 조직 안에 들어오거나 나가는 응용 레벨 프로토콜의 흐름을 네트워크의 한 지점에서 통제한다.</li>
+<li><strong>웹 캐시</strong>: 인기 있는 문서의 로컬 사본을 관리하고, 해당 문서에 대한 요청이 오면 빠르게 제공하여, 느리고 비싼 인터넷 커뮤니케이션을 줄인다.</li>
+<li><strong>대리 프락시</strong>(Surrogate)<ul>
+<li>웹 서버인 것처럼 위장한다.</li>
+<li>공용 콘텐츠에 대한 느린 웹 서버의 성능을 개선하기 위해 사용될 수 있다.<blockquote>
+<p>서버 가속기라고 불린다.</p>
+</blockquote>
+</li>
+<li>콘텐츠 라우팅 기능과 결합되어, 주문형 복제 콘텐츠의 분산 네트워크를 만들기 위해 사용될 수 있다.</li>
+</ul>
+</li>
+<li><strong>콘텐츠 라우터</strong><ul>
+<li>인터넷 트래픽 조건과 콘텐츠의 종류에 따라, 요청을 특정 웹 서버로 유도하는 콘텐츠 라우터로 동작할 수 있다.</li>
+<li>사용자들에게 제공할 여러 서비스를 구현하는데 사용할 수 있다.<blockquote>
+<p>사용자가 필터링 서비스에 가입했다면, HTTP 요청이 필터링 프락시를 통과하도록 할 수 있다.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><strong>트랜스 코드</strong><ul>
+<li>콘텐츠를 클라에게 보내기 전에, 본문 포맷을 수정할 수 있다.<blockquote>
+<p><strong>트랜스 코딩</strong>: 데이터의 표현방식을 변환하는 것 </p>
+</blockquote>
+</li>
+<li>사례: gif 이미지 =&gt; jpg / 이미지의 크기 줄이기 / 텍스트 파일 압축 / 외국어 문서로 변환하기 / …</li>
+</ul>
+</li>
+<li><strong>익명화 프락시</strong> Anonymizer<ul>
+<li>HTTP 메세지에서 신원을 식별할 수 있는 특성들을 제거 =&gt; 개인 정보보호와 익명성 보장에 기여한다.<ul>
+<li>User-Agent 헤더에서 OS종류 / From헤더 / Referer헤더(출처) / Cookie(프로필과 신원정보) 등을 <strong>제거</strong>한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<a name="where">
+
+<h1 id="3-어디에-둘까"><a href="#3-어디에-둘까" class="headerlink" title="3. 어디에 둘까?"></a>3. 어디에 둘까?</h1><ul>
+<li>어떻게 프락시가 네트워크에 배치되는가</li>
+<li>어떻게 프락시의 연쇄가 계층을 이루는가</li>
+</ul>
+<h2 id="3-1-프락시-서버-배치"><a href="#3-1-프락시-서버-배치" class="headerlink" title="3.1 프락시 서버 배치"></a>3.1 프락시 서버 배치</h2><ol>
+<li><strong>출구 프락시</strong> Egress<ul>
+<li>로컬 네트워크와 더 큰 인터넷 사이를 오가는 트래픽을 제어하기 위해 프락시를 로컬 네트워크의 출구에 박아 넣을 수 있다.</li>
+<li>해킹 방지 방화벽 제공을 위해 / 인터넷 트래픽 성능 개선 / 필터링 출구 프락시</li>
+</ul>
+</li>
+<li>접근(입구) 프락시<ul>
+<li>고객으로부터의 모든 요청을 종합적으로 처리하기 위해 ISP 접근 지점에 위치</li>
+</ul>
+</li>
+<li>대리 프락시 (=리버스 프락시)<ul>
+<li>네트워크의 가장 끝에 있는 웹서버들의 바로 앞에 위치, 웹 서버로 향하는 모든 요청을 처리하고, 필요할 때만 웹 서버에게 자원을 요청할 수 있다.</li>
+<li>보안 기능을 추가</li>
+<li>성능 개선용: 빠른 웹서버 캐시를 느린 웹 서버 앞에 놓는다.</li>
+</ul>
+</li>
+<li>네트워크 교환 프락시<ul>
+<li>캐시를 이용해 인터넷 교차로의 혼잡을 완화하고, 트래픽 흐름을 감시하기 위해,<br><strong>충분한 처리 능력을 갖춘 프락시가 네트워크 사이의 인터넷 피어링 교환 지점들에 놓일 수 있다.</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="3-2-프락시-계층"><a href="#3-2-프락시-계층" class="headerlink" title="3.2 프락시 계층"></a>3.2 프락시 계층</h2><ul>
+<li>부모관계: 인바운드 프락시 방향 쪽의 프락시를 부모, 아웃바운드 프록시 방향 쪽을 자식으로 본다.</li>
+</ul>
+<h3 id="3-2-1-프락시-계층-콘텐츠-라우팅"><a href="#3-2-1-프락시-계층-콘텐츠-라우팅" class="headerlink" title="3.2.1 프락시 계층 콘텐츠 라우팅"></a>3.2.1 프락시 계층 콘텐츠 라우팅</h3><ul>
+<li>프록시 서버는 여러 가지 판단 근거에 의해 메세지를 다양하고 유동적인 프록시 서버와 원 서버들의 집합에게 보낼 수 있다.</li>
+</ul>
+<p><strong>동적 부모 선택의 몇 가지 사례</strong></p>
+<ol>
+<li><strong>부하 균형</strong>: 자식 프록시는 부하를 분산하기 위해 현재 부모들의 작업량 수준에 근거하여 부모 프록시를 고른다.</li>
+<li><strong>지리적 인접성에 근거한 라우팅</strong>: 자식 프록시는 원 서버의 지역을 담당하는 부모를 선택할 수 있다.</li>
+<li><strong>프로토콜/타입 라우팅</strong>: URI에 근거하여 다른 부모나 원서버로 라우팅 할 수 있다.</li>
+<li><strong>유료 서비스 가입자를 위한 라우팅</strong>: 사용자가 빠른 서비스를 위해 추가금을 지불했다면, 성능 개선을 위한 압축 엔진으로 라우팅 될 수 있다.</li>
+</ol>
+<h3 id="3-2-2-어떻게-프록시가-트래픽을-처리하는가"><a href="#3-2-2-어떻게-프록시가-트래픽을-처리하는가" class="headerlink" title="3.2.2 어떻게 프록시가 트래픽을 처리하는가"></a>3.2.2 어떻게 프록시가 트래픽을 처리하는가</h3><ul>
+<li>어떻게 HTTP 트래픽이 프록시로 향하는 길을 찾아내는지 알아보자.</li>
+</ul>
+<p><strong>클라 트래픽이 프록시로 가도록 만드는 방법 4가지</strong></p>
+<ol>
+<li>클라이언트를 수정한다.</li>
+<li>네트워크를 수정한다.: 클라가 컨트롤할 수 없다면, 네트워크 인프라를 가로채서 웹 트래픽을 프록시로 가도록 조장하는 방법.<blockquote>
+<p><strong>인터셉트 프록시</strong> (= transparent proxy): HTTP 트래픽을 지켜보고 가로채어 클라 모르게 트래픽을 프록시로 보내는 <strong>스위칭 장치</strong>와, 라우팅 장치가 필요.</p>
+</blockquote>
+</li>
+<li>DNS namespace를 수정한다.<ul>
+<li>대리 프록시는 웹 서버의 이름과 IP주소를 자신이 직접 허용한다. </li>
+<li>DNS 이른 테이블을 수동으로 편집하거나,<br>사용할 적절한 프록시나 서버를 계산해주는 특별한 동적 DNS 서버를 이용해서 조정 가능하다.</li>
+</ul>
+</li>
+<li>웹 서버를 수정한다.<ul>
+<li>HTTP 리다이렉션 명령을 클라에게 돌려줌으로써, 클라의 요청을 프록시로 리다이렉트 하도록 설정할 수 있다.</li>
+<li>리다이렉트를 받는 즉시, 클라는 프록시와의 트랜잭션을 시작한다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<a name="how">
+
+<h1 id="4-클라에서-프록시-설정-방법"><a href="#4-클라에서-프록시-설정-방법" class="headerlink" title="4. 클라에서 프록시 설정 방법"></a>4. 클라에서 프록시 설정 방법</h1><h2 id="4-1-수동"><a href="#4-1-수동" class="headerlink" title="4.1 수동"></a>4.1 수동</h2><ul>
+<li>단 하나의 프록시 서버만 지정가능하다.</li>
+<li>장애시 대체 작동에 대한 지원이 없다.</li>
+<li>관리 문제를 야기한다.</li>
+</ul>
+<h2 id="4-2-클라-프록시-설정"><a href="#4-2-클라-프록시-설정" class="headerlink" title="4.2 클라 프록시 설정"></a>4.2 클라 프록시 설정</h2><h3 id="PAC-파일"><a href="#PAC-파일" class="headerlink" title="PAC 파일"></a>PAC 파일</h3><ul>
+<li>프록시 자동 설정 파일은 프록시 설정에 대한 보다 동적인 해결책이다.</li>
+<li>문서에 접근할 때마다, 자바스크립트 함수가 적절한 프록시 서버를 선택한다.</li>
+</ul>
+<p>자바스크립트 PAC 파일의 URI를 브라우저에 설정해야 한다.</p>
+<ul>
+<li>브라우저는 URI로부터 PAC파일을 가져와서 매 접근마다 적절한 프록시 서버를 계산하기 위해 실행한다.</li>
+<li>확장자: <code>.pac</code></li>
+<li>MIME타입: <code>application/x-ns-proxy-autoconfig</code></li>
+<li><code>FindProxyForURL(url, host)</code> 함수를 정의해야 한다.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FindProxyForURL(url, host): <span class="string">"DIRECT"</span> | <span class="string">`PROXY <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span> | <span class="string">`SOCKS <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindProxyForURL</span>(<span class="params">url, host</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(url.substring(<span class="number">0</span>,<span class="number">5</span>) == <span class="string">'http:'</span>) <span class="keyword">return</span> <span class="string">"PROXY http-proxy.mydomain.com:8080"</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(url.substring(<span class="number">0</span>,<span class="number">4</span>) == <span class="string">'ftp:'</span>) <span class="keyword">return</span> <span class="string">"PROXY ftp-proxy.mydomain.com:8080"</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"DIRECT"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file" target="_blank" rel="noopener">MDN <strong>PAC 파일</strong> 참고자료</a></p>
+<h3 id="WPAD-파일"><a href="#WPAD-파일" class="headerlink" title="WPAD 파일"></a>WPAD 파일</h3><p>웹 프록시 자동 발견 프로토콜 Web Proxy Auto-Discovery Protocol<br><img src="/images/2019/28/01.png" style="width:100%"></p>
+<ul>
+<li>브라우저에게 알맞은 PAC 파일을 자동으로 찾아주는 알고리즘이다.</li>
+<li>WPAD 프로토콜이 구현된 클라가 하게 될 일은<ol>
+<li>PAC URI를 찾기 위해 WPAD를 사용한다.</li>
+<li>주어진 URI에서 PAC파일을 가져온다.</li>
+<li>프록시 서버를 알아내기 위해 PAC파일을 실행한다.</li>
+<li>알아낸 프록시 서버를 이용해서 요청을 처리한다.</li>
+</ol>
+</li>
+<li>WPAD는 성공할 때까지 각 기법을 하나씩 시도해본다. (20장에서 자세히..)<ol>
+<li>동적 호스트 발견 규약 <a href="https://jwprogramming.tistory.com/35" target="_blank" rel="noopener">DHCP</a> (Dynamic Host Configuration Protocol)</li>
+<li>서비스 위치 규약 [SLP]</li>
+<li>DNS 잘 알려진 호스트 명</li>
+<li>DNS SRV 레코드</li>
+<li>DNS TXT 레코드 안의 서비스 URI</li>
+</ol>
+</li>
+</ul>
+<hr>
+<a name="attributes">
+
+<h1 id="5-프록시-요청의-특이사항-6가지"><a href="#5-프록시-요청의-특이사항-6가지" class="headerlink" title="5. 프록시 요청의 특이사항 6가지"></a>5. 프록시 요청의 특이사항 6가지</h1><ol>
+<li>프록시 URI는 서버 URI와 다르다.</li>
+<li>가상 호스팅에서 일어나는 같은 문제</li>
+<li>인터셉트 프록시는 부분 URI를 받는다</li>
+<li>프록시는 프록시 요청과 서버 요청을 모두 다룰 수 있다.</li>
+<li>전송 중 URI 변경</li>
+<li>인터셉트 프록시를 이용한 URI 분석</li>
+</ol>
+<h2 id="5-1-프록시-URI는-서버-URI와-다르다"><a href="#5-1-프록시-URI는-서버-URI와-다르다" class="headerlink" title="5.1 프록시 URI는 서버 URI와 다르다."></a>5.1 프록시 URI는 서버 URI와 다르다.</h2><ul>
+<li><p>웹 서버와 웹 프록시 메세지의 문법은 간다.</p>
+</li>
+<li><p>요청 URI가 달라진다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">클라 =&gt; 서버</span><br><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br><span class="line"></span><br><span class="line">클라 =&gt; 프록시</span><br><span class="line">GET http://www.mary.com/index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>애초에 단일 서버 기준으로 메세지 설계가 되었었다. </p>
+</li>
+<li><p>프록시가 부상하면서 부분 URI는 문제가 되었고, 프록시 기반 게이트웨이는 URI 스킴을 알 필요가 있었기 때문에 부분URI가 아닌 전체 URI를 보낸다. </p>
+</li>
+</ul>
+<h2 id="5-2-가상-호스팅에서-일어나는-같은-문제"><a href="#5-2-가상-호스팅에서-일어나는-같은-문제" class="headerlink" title="5.2 가상 호스팅에서 일어나는 같은 문제"></a>5.2 가상 호스팅에서 일어나는 같은 문제</h2><ul>
+<li>명시적인 프록시는 요청 메세지가 완전한 URI를 갖도록 함</li>
+<li>가상 호스팅 웹 서버는 Host 헤더를 요구한다.</li>
+</ul>
+<h2 id="5-3-인터셉트-프록시는-부분-URI를-받는다"><a href="#5-3-인터셉트-프록시는-부분-URI를-받는다" class="headerlink" title="5.3 인터셉트 프록시는 부분 URI를 받는다"></a>5.3 인터셉트 프록시는 부분 URI를 받는다</h2><ul>
+<li>클라는 자신이 프록시와 대화하고 있음을 항상 알고 있지 않다.</li>
+<li>몇몇 프록시는 클라에게는 보이지 않을 수 있다. (대리 프록시, 인터셉트 프록시)</li>
+<li>때문에 보통 완전 URI를 보내지만, 위의 프록시들에게는 부분URI를 보내게된다.</li>
+</ul>
+<h2 id="5-4-프록시는-프록시-요청과-서버-요청을-모두-다룰-수-있다"><a href="#5-4-프록시는-프록시-요청과-서버-요청을-모두-다룰-수-있다" class="headerlink" title="5.4 프록시는 프록시 요청과 서버 요청을 모두 다룰 수 있다."></a>5.4 프록시는 프록시 요청과 서버 요청을 모두 다룰 수 있다.</h2><ul>
+<li>다목적 프록시 서버는 요청 메세지에 완전URI와 부분URI를 모두 지원해야한다.</li>
+<li>프록시<br>=&gt; 프록시로 요청시, 완전 URI<br>=&gt; 웹서버로 요청시, Host 헤더</li>
+</ul>
+<h2 id="5-5-전송-중-URI-변경"><a href="#5-5-전송-중-URI-변경" class="headerlink" title="5.5 전송 중 URI 변경"></a>5.5 전송 중 URI 변경</h2><p>프록시 서버는 요청 URI의 변경에 엄격해서는 안된다.<br>사이드 이펙트를 일으킬 수 있다.</p>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file" target="_blank" rel="noopener">MDN <strong>PAC 파일</strong> 참고자료</a></li>
+<li><a href="https://jwprogramming.tistory.com/35" target="_blank" rel="noopener">DHCP (Dynamic Host Configuration Protocol)</a></li>
+</ol>
+</a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/09/22/HTTP_006/" data-id="ck0uposek0022krbmj1xex8me" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javascript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#proxy">1. 프록시란?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#why">2. 왜 사용할까?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#where">3. 어디에 둘까?</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#how">4. 클라에서 프록시 설정방법</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#attributes">5. 프록시 요청의 특이사항 9가지</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/09/08/CSS_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...👀 (feat. unicode)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/22/HTTP_006/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/28/thumb_default.jpg)" alt="프록시" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/22/HTTP_006/" class="title">프록시</a></p>
+                            <p class="item-date"><time datetime="2019-09-22T07:23:55.000Z" itemprop="datePublished">2019-09-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/08/CSS_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/27/thumb_default.jpg)" alt="한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...👀 (feat. unicode)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></p>
+                            <p class="item-title"><a href="/2019/09/08/CSS_02/" class="title">한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...👀 (feat. unicode)</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T13:23:55.000Z" itemprop="datePublished">2019-09-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/07/HTTP_005/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/26/thumb_default.jpg)" alt="웹 서버" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/07/HTTP_005/" class="title">웹 서버</a></p>
+                            <p class="item-date"><time datetime="2019-09-07T07:23:55.000Z" itemprop="datePublished">2019-09-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/04/HTTP_004_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/25/thumb_default.jpg)" alt="커넥션 관리 - TCP 커넥션의 종류" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/04/HTTP_004_02/" class="title">커넥션 관리 - TCP 커넥션의 종류</a></p>
+                            <p class="item-date"><time datetime="2019-09-04T07:23:55.000Z" itemprop="datePublished">2019-09-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/08/26/HTTP_004_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/24/thumb_default.jpg)" alt="커넥션 관리 - TCP 커넥션과 성능" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/08/26/HTTP_004_01/" class="title">커넥션 관리 - TCP 커넥션과 성능</a></p>
+                            <p class="item-date"><time datetime="2019-08-25T16:23:55.000Z" itemprop="datePublished">2019-08-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15.56px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11.11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11.11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.67px;">OOP</a> <a href="/tags/TCP-IP/" style="font-size: 11.11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11.11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12.22px;">Web</a> <a href="/tags/algorism/" style="font-size: 11.11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12.22px;">angular</a> <a href="/tags/async/" style="font-size: 15.56px;">async</a> <a href="/tags/blog/" style="font-size: 11.11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12.22px;">browser</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12.22px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/connection/" style="font-size: 11.11px;">connection</a> <a href="/tags/css/" style="font-size: 11.11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11.11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11.11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11.11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/iterator/" style="font-size: 11.11px;">iterator</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13.33px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13.33px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11.11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11.11px;">principle</a> <a href="/tags/programming/" style="font-size: 12.22px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.78px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/rxjs/" style="font-size: 14.44px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 16.67px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11.11px;">symbol</a> <a href="/tags/typescript/" style="font-size: 18.89px;">typescript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/web/" style="font-size: 11.11px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">69</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Javascript/">Javascript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Typescript/">Typescript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-Typescript-workshop/">2017 Typescript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/">03_Algorithm &#128583;</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Algorithm/">Algorithm</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Algorithm-128583/Data-Structure/">Data Structure</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/09/22/HTTP_006/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
