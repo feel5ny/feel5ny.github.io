@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>코드스피츠85 1회-(2) 기본적인 CS | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javaScript,codeSpitz">
+    
+    
+    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+<meta name="keywords" content="javaScript,codeSpitz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠85 1회-(2) 기본적인 CS">
+<meta property="og:url" content="http://feel5ny.github.io/2019/11/01/JS_25_2/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/35/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-11-04T14:44:09.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠85 1회-(2) 기본적인 CS">
+<meta name="twitter:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/35/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/01/JS_25_2/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/35/thumb_default.jpg" alt="코드스피츠85 1회-(2) 기본적인 CS" style="width:100%">
+    </div>
+
+<article id="post-JS_25_2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠85 1회-(2) 기본적인 CS
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/01/JS_25_2/" class="article-date">
+            <time datetime="2019-11-01T11:20:19.000Z" itemprop="datePublished">2019-11-01</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/codeSpitz/">codeSpitz</a>, <a class="tag-link" href="/tags/javaScript/">javaScript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#program">Program</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle"> Runtime 동안..</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#runtime">Runtime</a>
+               
+                <div class="first_depth--sub">런타임에 대해 (Von Neumann machine, JavaScript runtime)</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#stateControl">State Control</a>
+               
+                <div class="first_depth--sub">[상태관리] 직접참조와 간접참조</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#stateControl">Flow Control</a>
+               
+                <div class="first_depth--sub">[명령관리] Sync flow Control, blocking, none-blocking</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#async">Async</a>
+               
+                <div class="first_depth--sub">Continuation, CPS, Sync &amp; Async</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>코드스피츠 85에서는 <code>none blocking</code>에 대한 이야기와<br>자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.</p>
+<hr>
+<p>🌕🌑🌑</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><img src="/images/2019/35/02.jpg">
+
+
+<hr>
+<a name="program">
+
+<h1 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h1><h2 id="Program-amp-Timing"><a href="#Program-amp-Timing" class="headerlink" title="Program &amp; Timing"></a>Program &amp; Timing</h2><img src="/images/2019/35/01.png" style="width:100%">
+
+<ol>
+<li>Language code</li>
+<li>Machine language로 트랜스파일한다.<ul>
+<li>여기서 machine이란.. 자기 언어가 실행되는 환경</li>
+</ul>
+</li>
+<li>File로 내린다. (Load)</li>
+<li>메모리에 적재되어 있는 File을 실행한다. (Run)</li>
+<li>실행이 끝나고나면 종료된다. (Terminate)</li>
+</ol>
+<a name="runtime">
+
+<h1 id="1-Runtime"><a href="#1-Runtime" class="headerlink" title="1. Runtime"></a>1. Runtime</h1><h2 id="1-1-Runtime-Execution"><a href="#1-1-Runtime-Execution" class="headerlink" title="1.1 Runtime Execution"></a>1.1 Runtime Execution</h2><ol>
+<li><p><code>Loading</code>: 적재되는 중</p>
+<ul>
+<li>파일을 실행하면 메모리에 적재된다.</li>
+<li>파일은<br><strong>명령</strong>과 <strong>값</strong>으로 분리되어서 메모리에 적재된다.</li>
+</ul>
+</li>
+<li><p><code>instruction</code> - fetching &amp; decoding</p>
+<ul>
+<li>여기서부터는 OS가 하는 일</li>
+<li><code>instruction</code>: CPU에서 해석할 수 있는 명령체계로 우리의 코드를 바꿔놓는 것</li>
+</ul>
+<p>메모리의 첫번째 명령을 실행한다.</p>
+<ul>
+<li>instruction을 로딩할 때 fetching이라는 과정을 통해<br>실제로는 제어유닛의 디코더로 로드하고,<br>디코딩을 통해서 cpu가 원하는 명령어로 바꾼다.</li>
+<li>연산유닛에서 값이 필요한 연산일 경우 메모리에 있는 값을 로드해야하는데,<br>이때 데이터 유닛에 값을 로드해온다.</li>
+<li>데이터 유닛에서 받은 값을 연산유닛으로 다시 보내준다.</li>
+</ul>
+</li>
+<li><p><code>execution</code></p>
+<ul>
+<li>명령을 처리한다.</li>
+<li>결과를 정리하여 반환해야한다는 명령이 있을 경우<br>다시 메모리의 값에 결과값을 보내준다</li>
+</ul>
+</li>
+</ol>
+<h3 id="폰-노이만-머신"><a href="#폰-노이만-머신" class="headerlink" title="폰 노이만 머신"></a>폰 노이만 머신</h3><ul>
+<li>첫번째 명령이 끝나면 두번째 명령이 실행되고<br>이렇게 메모리에 적재된 명령이 순차적으로 처리되어 없어지게된다.<br>모든 명령이 끝나면 <code>terminate</code>가 일어난다.</li>
+<li>폰 노이만 머신은 내장 메모리 순차처리 방식으로서,<br>데이터 메모리와 프로그램 메모리가 구분되어 있지 않고<br>하나의 버스를 가지고 있는 구조를 말한다. </li>
+<li><a href="https://ko.wikipedia.org/wiki/%ED%8F%B0_%EB%85%B8%EC%9D%B4%EB%A7%8C_%EA%B5%AC%EC%A1%B0" target="_blank" rel="noopener">위키</a>, <a href="https://www.slideshare.net/sunnykwak90/ss-43131241" target="_blank" rel="noopener">참고</a></li>
+</ul>
+<h3 id="결국-런타임이란"><a href="#결국-런타임이란" class="headerlink" title="결국 런타임이란!"></a>결국 런타임이란!</h3><ul>
+<li>이 과정이 반복되고 모든 명령어를 소비하면 실행이 끝난다.</li>
+<li><strong>런타임</strong>이란<br>로딩 이후에 instruction fetching - instruction decoding - execution 계속반복되어서<br>terminate가 일어나는 그 사이</li>
+<li><strong>동기명령</strong> <code>sync flow</code><br>순차적으로 실행되는 동안 아무것도 못하고 구경하는 행위</li>
+<li>메모리에 sync flow를 태워서 flow대로 흐르는 것</li>
+</ul>
+<h2 id="1-2-Runtime-Details"><a href="#1-2-Runtime-Details" class="headerlink" title="1.2 Runtime Details"></a>1.2 Runtime Details</h2><ol>
+<li>essential definition loading<ul>
+<li>우리의 코드가 실행되기 위해서는<br>우리가 정의한 클래스, 함수 인터페이스가 다 떠있어야함</li>
+<li>실행코드에 앞서, 핵심적인 정의사항들이 올라감.</li>
+</ul>
+</li>
+<li>vtable mapping (<strong>v</strong>ariables table)<ul>
+<li>현대의 있는 컴파일러들은 우리가 정의한 메모리공간을 사용할때 가상 메모리 공간을 사용한다.</li>
+<li>컴파일러가 나의 변수를 가상으로 매핑해서 컴파일 했음<br>진짜 메모리와 컴파일러가 만든 가상의 변수와 매핑을 해줘야한다.</li>
+<li>내가 정의한 모든 변수를 실제 메모리에 매핑해주는 과정이 필요하다.</li>
+</ul>
+</li>
+<li>run</li>
+<li>runtime definition loading</li>
+<li>run</li>
+</ol>
+<p>4번과 5번은 반복</p>
+<hr>
+<h3 id="자바스크립트의-런타임"><a href="#자바스크립트의-런타임" class="headerlink" title="자바스크립트의 런타임"></a>자바스크립트의 런타임</h3><p>자바스크립트의 런타임은 브라우저 로드에서부터 런타임으로 친다.</p>
+<ol>
+<li>browser load</li>
+<li>browser parsing</li>
+<li>run</li>
+</ol>
+<ul>
+<li>기초적인 정의를 로딩한다.</li>
+<li>우리가 정의한 확장된 정의를 로딩한다. (상대적으로 여기까지를 declare time)</li>
+<li>실행한다. (상대적으로 여기서부터를 runtime으로 )</li>
+</ul>
+<hr>
+<hr>
+<h1 id="2-State-Control"><a href="#2-State-Control" class="headerlink" title="2. State Control"></a>2. State Control</h1><ul>
+<li>메모리 관리의 어려운 점을 이야기하는 것도 있다.</li>
+<li>값이라는 것은 계속 변하기 때문에 <strong>상태</strong>라고 부른다.</li>
+</ul>
+<h2 id="Directive-Reference-직접참조"><a href="#Directive-Reference-직접참조" class="headerlink" title="Directive Reference 직접참조"></a>Directive Reference 직접참조</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = &apos;TEST&apos;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &amp;a // b에 a의 주소값을 할당</span><br><span class="line">c = &amp;b // c에 b의 주소값(a의 주소값)을 할당.</span><br><span class="line">a = b &amp; b =c (a=c) // 결국 a와 c도 같은 상황</span><br><span class="line">d = &apos;ABC&apos;</span><br><span class="line">b = &amp;d // b에 d의 주소를 재할당</span><br><span class="line">b = d &amp; b != c (a=c)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>마지막은 b와 d는 같고<br>b는 d의 주소값을 갖고 있기때문에<br>b는 c와 같은 상태가 아니다.<br>하지만 a와 c는 아직 같은 상태</li>
+<li>b와 d는 같다는것이 바로 인지되지만,<br>b에 다른 값을 넣었을 때 변하는 b와 c가 같지 않다 라는 사실을 바로 이해하고 인지할 수 있을까? <ul>
+<li><strong>추적을 못한다. 🙅</strong></li>
+<li>c를 사용하는 동네는 다 망가짐</li>
+</ul>
+</li>
+<li>전파, 여파.. <ul>
+<li><strong>직접 참조를 쓸때는 내 참조변수가 외부에 공유됐으면 변수의 값을 바꾸면 안된다.</strong></li>
+<li>협소하게 움직일 수 밖에 없고, 개발에 제약이 생긴다.</li>
+<li>이를 해결하기 위해 간점참조를 사용한다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Indirective-Reference-간접참조"><a href="#Indirective-Reference-간접참조" class="headerlink" title="Indirective Reference 간접참조"></a>Indirective Reference 간접참조</h2><ul>
+<li><p><strong>중간에 쿠션</strong>을 두는 개념</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &quot;TEST&quot;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &#123; target: &amp;a &#125;</span><br><span class="line">c = &amp;b</span><br><span class="line">d = &apos;ABC&apos;</span><br><span class="line">b.target = &amp;d // b를 직접 바꾸지 않기 때문에 더이상 싱크가 깨지는 문제가 일어나지 않는다.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>.</code>: 쿠션을 친다.</p>
+<ul>
+<li>런타임에 계산된다.</li>
+<li>비용이 든다.<ul>
+<li><strong>연산</strong>비용과 <strong>안정성</strong>을 바꿨다고 보면 된다.</li>
+<li>사람이 인지하고 있는 멘탈모델과 컨텍스트가 깨지지 않는다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>이 원리를 사용하여 linked list, 디자인패턴, 객체지향의 추상클래스도 만든다.</p>
+</li>
+</ul>
+<h3 id="사실-자료구조는-아래-2가지-원리에서-시작된다"><a href="#사실-자료구조는-아래-2가지-원리에서-시작된다" class="headerlink" title="사실 자료구조는 아래 2가지 원리에서 시작된다"></a>사실 자료구조는 아래 2가지 원리에서 시작된다</h3><ol>
+<li>메모리를 통으로 쓰는 배열과</li>
+<li>linked list형식을 빌린.. <ul>
+<li>참조포인터를 이용하여 쿠션을 치는</li>
+</ul>
+</li>
+</ol>
+<hr>
+<hr>
+<h1 id="3-Flow-Control"><a href="#3-Flow-Control" class="headerlink" title="3. Flow Control"></a>3. Flow Control</h1><ul>
+<li>명령 관리의 어려운 점을 이야기하는 것도 있다.</li>
+<li>state 관리 + 명령진행에 대한 어려움<ul>
+<li>2가지 모두 챙겨야하기때문에 상태관리보다 더 어렵다. </li>
+</ul>
+</li>
+</ul>
+<h2 id="Sync-flow-Control"><a href="#Sync-flow-Control" class="headerlink" title="Sync flow Control"></a>Sync flow Control</h2><p><a href="https://feel5ny.github.io/2019/02/03/JS_18_1/">자세한건 여기!</a></p>
+<ul>
+<li><strong>sync flow</strong>: 메모리에 적재된 명령이 순차적으로 실행됨</li>
+<li><strong>sync flow control</strong>: goto를 통해 명령의 위치를 이동함<ul>
+<li><code>goto</code>라는 명령어를 통해서 sync flow의 작동을 제어할 수 있다.</li>
+<li>메모리의 state에 따라서 분기를 한다.<ul>
+<li>sync flow control 핵심은 해당 시점의 메모리의 값 (분기칠때의 상태에 의존된다)</li>
+<li>condition control =&gt; 여기서 condition은 메모리의 상태값<blockquote>
+<p>cf__1 <strong>의존성 역전 / 제어 역전</strong></p>
+<ul>
+<li>의존성 역전: 추상적인 것에 의존하겠어.</li>
+<li>제어 역전: 추상적인 행동을 할 것이라고 전제하여 제어문을 짜는 것.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>sub flow</strong> (== <strong>sub routine</strong>: 반복적으로 사용할 수 있는 sync flow)<br>: 함수 등을 통해 별도의 명령set을 여러번 실행함</li>
+</ul>
+<h2 id="Blocking"><a href="#Blocking" class="headerlink" title="Blocking"></a>Blocking</h2><ul>
+<li>Sync flow가 실행되는 동안 다른 일을 할 수 없는 현상</li>
+<li>우리가 짠 모든 코드가 blocking 코드.</li>
+<li>때문에 우리가 할 수 있는건 blocking 줄이기</li>
+</ul>
+<h4 id="Blocking-줄이기"><a href="#Blocking-줄이기" class="headerlink" title="Blocking 줄이기"></a>Blocking 줄이기</h4><ul>
+<li>sync flow를 짧게 하기</li>
+<li>다른 thread에 sync flow를 떠넘기기<ul>
+<li>현대브라우저는 병행적 프로그래밍을 요구한다.</li>
+</ul>
+</li>
+<li><strong>이벤트 루프</strong>: 동기화 명령 사이사이에 이벤트 루프가 작동해서, 다른 thread 작업을 기다리게된다. </li>
+</ul>
+<h4 id="그럼-Non-Blocking이란"><a href="#그럼-Non-Blocking이란" class="headerlink" title="그럼 Non Blocking이란?"></a>그럼 Non Blocking이란?</h4><p>Sync Flow가 납득할 만한 <strong>시간</strong> 내에 종료되는 것</p>
+<ul>
+<li>우리의 코드는 보다 더 none blocking으로 향하는 길</li>
+<li><strong>빠른 thread로 빼내어서 main thread를 얼만큰 줄이느냐가 none blocking의 주제</strong></li>
+</ul>
+<hr>
+<hr>
+<h1 id="4-Async"><a href="#4-Async" class="headerlink" title="4. Async"></a>4. Async</h1><h2 id="Sync-amp-Async"><a href="#Sync-amp-Async" class="headerlink" title="Sync &amp; Async"></a>Sync &amp; Async</h2><ul>
+<li>앞에서 말한 sync flow와는 다른 개념이다. </li>
+<li><strong>Sync</strong>: 서브루틴이 즉시 값을 반환하는 것</li>
+<li><strong>Async</strong>: <strong>서브루틴이 <code>다른 수단</code>으로 값을 반환하는 것</strong><ul>
+<li>우리가 원하는 값을 즉시 리턴하지 않는 모든 함수가 async 함수</li>
+<li>다른수단이란?<ul>
+<li><code>Promise</code></li>
+<li><code>callback function</code></li>
+<li><code>iterations</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Async-단점"><a href="#Async-단점" class="headerlink" title="Async 단점"></a>Async 단점</h2><ul>
+<li>호출결과가 즉시 반환되지 않으므로,<br>현재의 sync flow가 종료됨<br>그 결과 현재의 어휘공간(컨텍스트) 내의 상태를<br>결과시점에 사용할 수 없음</li>
+<li>요청 시의 상태를 별도로 결과시점에 전달할 <strong>부가장치</strong> 필요</li>
+</ul>
+<p>sync 라는 순차적으로만 짤 수 있다는 식으로 처음부터 배웠기 때문에<br>우리는 async가 어색한 것이다.</p>
+<h2 id="Sync의-장점-Async의-장점"><a href="#Sync의-장점-Async의-장점" class="headerlink" title="Sync의 장점 + Async의 장점"></a>Sync의 장점 + Async의 장점</h2><ul>
+<li>sync 로직으로 async를 사용할 수 있게 함</li>
+<li>하지만 sync flow가 어긋나므로,<br>이전 sync flow의 상태를 기억하여 이어줄 장치 필요<ul>
+<li>상태를 기억하고 이어주는 장치: <code>Continuation</code> (컨텍스트라고 생각해되 된다.)</li>
+<li>이를 활용하는 프로그래밍 스타일: <strong>C</strong>ontinuation <strong>P</strong>assing <strong>S</strong>tyle</li>
+<li>Generator, Async, Asynchrous Iterators</li>
+</ul>
+</li>
+</ul>
+</a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="ck2kjrz63004z2xbmyxrrqh3h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#program">Program</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle"> Runtime 동안..</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#runtime">Runtime</a>
+               
+                <div class="first_depth--sub">런타임에 대해 (Von Neumann machine, JavaScript runtime)</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#stateControl">State Control</a>
+               
+                <div class="first_depth--sub">[상태관리] 직접참조와 간접참조</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#stateControl">Flow Control</a>
+               
+                <div class="first_depth--sub">[명령관리] Sync flow Control, blocking, none-blocking</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#async">Async</a>
+               
+                <div class="first_depth--sub">Continuation, CPS, Sync &amp; Async</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/10/27/JS_25_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠85 1회-(1) JavaScript Now</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/01/JS_25_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/35/thumb_default.jpg)" alt="코드스피츠85 1회-(2) 기본적인 CS" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/01/JS_25_2/" class="title">코드스피츠85 1회-(2) 기본적인 CS</a></p>
+                            <p class="item-date"><time datetime="2019-11-01T11:20:19.000Z" itemprop="datePublished">2019-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/27/JS_25_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/34/thumb_default.jpg)" alt="코드스피츠85 1회-(1) JavaScript Now" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/10/27/JS_25_1/" class="title">코드스피츠85 1회-(1) JavaScript Now</a></p>
+                            <p class="item-date"><time datetime="2019-10-27T11:20:19.000Z" itemprop="datePublished">2019-10-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/21/HTTP_009/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/33/thumb_default.jpg)" alt="WIP_웹 로봇" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/10/21/HTTP_009/" class="title">WIP_웹 로봇</a></p>
+                            <p class="item-date"><time datetime="2019-10-21T14:23:55.000Z" itemprop="datePublished">2019-10-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/05/HTTP_007-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/31/thumb_default.jpg)" alt="캐시의 원리와 제어방법" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/10/05/HTTP_007-2/" class="title">캐시의 원리와 제어방법</a></p>
+                            <p class="item-date"><time datetime="2019-10-05T14:23:55.000Z" itemprop="datePublished">2019-10-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/30/HTTP_007-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/30/thumb_default.jpg)" alt="캐시의 개념과 장점" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/09/30/HTTP_007-1/" class="title">캐시의 개념과 장점</a></p>
+                            <p class="item-date"><time datetime="2019-09-30T14:23:55.000Z" itemprop="datePublished">2019-09-30</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16px;">OOP</a> <a href="/tags/TCP-IP/" style="font-size: 11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12px;">Web</a> <a href="/tags/algorism/" style="font-size: 11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/blog/" style="font-size: 11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/cache/" style="font-size: 11px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 11px;">codeSpitz</a> <a href="/tags/connection/" style="font-size: 11px;">connection</a> <a href="/tags/css/" style="font-size: 11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 18px;">http</a> <a href="/tags/iterator/" style="font-size: 11px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11px;">principle</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 14px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 19px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">76</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/11/01/JS_25_2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

@@ -85,7 +85,7 @@
             // If more link not exists
             if ($('.main-nav-more').length == 0) {
                 $(['<li class="main-nav-list-item top-level-menu main-nav-more">',
-                    '<a class="main-nav-list-link" href="javascript:;">More</a>',
+                    '<a class="main-nav-list-link" href="javaScript:;">More</a>',
                     '<ul class="main-nav-list-child">',
                     '</ul></li>'].join('')).appendTo($('#main-nav'));
                 // Bind hover event
