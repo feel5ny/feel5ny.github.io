@@ -11,19 +11,19 @@
         <meta name="keywords" content="javaScript,codeSpitz">
     
     
-    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   Fi">
 <meta name="keywords" content="javaScript,codeSpitz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="코드스피츠85 1회-(2) Runtime때 일어나는 일들">
 <meta property="og:url" content="http://feel5ny.github.io/2019/11/01/JS_25_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   Fi">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/35/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-11-04T15:07:06.422Z">
+<meta property="og:updated_time" content="2019-11-11T13:06:12.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="코드스피츠85 1회-(2) Runtime때 일어나는 일들">
-<meta name="twitter:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR      ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   File로 내린">
+<meta name="twitter:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp;amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   Fi">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/35/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -310,7 +310,9 @@ ga('send', 'pageview');
 <p>🌕🌑🌑</p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><img src="/images/2019/35/02.jpg">
 
-
+<ul>
+<li><a href="https://feel5ny.github.io/2019/01/22/JS_17/">작년 글</a></li>
+</ul>
 <hr>
 <a name="program">
 
@@ -525,7 +527,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="ck2t6zr070059i2bmd6rg8we2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="ck2ug2a0i005d64bmux55skmp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -946,13 +948,6 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
-                
-                    <h1 class="logo-wrap">
-                        <!-- <a href="/">
-                            <img src="/images/logo_head.png" alt="">
-                        </a> -->
-                        <a href="/" class="logo"></a>
-                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
