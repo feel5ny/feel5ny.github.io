@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기. | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="javaScript,codeSpitz">
+    
+    
+    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하여, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item 실행될 시간과실행할 시간을 갖고 있는">
+<meta name="keywords" content="javaScript,codeSpitz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.">
+<meta property="og:url" content="http://feel5ny.github.io/2019/11/11/JS_26_2/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하여, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item 실행될 시간과실행할 시간을 갖고 있는">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/37/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-11-11T15:29:58.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.">
+<meta name="twitter:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하여, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item 실행될 시간과실행할 시간을 갖고 있는">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/37/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/11/JS_26_2/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/37/thumb_default.jpg" alt="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기." style="width:100%">
+    </div>
+
+<article id="post-JS_26_2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/11/JS_26_2/" class="article-date">
+            <time datetime="2019-11-11T11:20:19.000Z" itemprop="datePublished">2019-11-11</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/codeSpitz/">codeSpitz</a>, <a class="tag-link" href="/tags/javaScript/">javaScript</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#setTimer">setTimer</a>
+               
+                <div class="first_depth--sub">setTimer를 구현하여 동시성모델 이해</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#nbFor">Non Blocking For</a>
+               
+                <div class="first_depth--sub">Non Blocking처럼 For 구현해보기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#generator">Generator</a>
+               
+                <div class="first_depth--sub">Non Blocking처럼 For 구현해보기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#promise">Promise</a>
+               
+                <div class="first_depth--sub">비동기 반제어</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>코드스피츠 85에서는 <code>none blocking</code>에 대한 이야기와<br>자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.</p>
+<hr>
+<p>🌕🌑🌑</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>setTimer에서부터 promise까지 동시성 모델을 기반으로 구현하여, 루프 제어권의 통제에 대하여 알아본다. </p>
+<hr>
+<a name="setTimer">
+
+<h2 id="1-setTimer를-구현해보기"><a href="#1-setTimer를-구현해보기" class="headerlink" title="1. setTimer를 구현해보기"></a>1. setTimer를 구현해보기</h2><h3 id="entity"><a href="#entity" class="headerlink" title="entity"></a>entity</h3><ol>
+<li>Item<ul>
+<li>실행될 시간과<br>실행할 시간을 갖고 있는 객체</li>
+</ul>
+</li>
+<li>queue<ul>
+<li>callback queue 역할을 하는 큐</li>
+<li>객체 리스트 형태인 Set으로 생성</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Item = <span class="keyword">class</span> &#123;</span><br><span class="line">  time: <span class="built_in">number</span>; <span class="comment">// 몇초 후에 실행할지</span></span><br><span class="line">  block: <span class="built_in">Function</span>; <span class="comment">// 몇초 후에 실행할 함수</span></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">block, time</span>)&#123;</span><br><span class="line">    <span class="keyword">this</span>.block = block;</span><br><span class="line">    <span class="keyword">this</span>.time = time + performance.now();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queue = <span class="keyword">new</span> Set;</span><br></pre></td></tr></table></figure>
+
+<details>
+  <summary>cf__1. performace, Set, value</summary>
+  <ul>
+    <li>
+      <code>performance.now()</code>
+      <ul>
+        <li>브라우저가 실행되 이후에 지난 시간</li>
+        <li>date.now()보다 좋은 점은 나노초까지 볼 수 있다.</li>
+      </ul>
+    </li>
+    <li>
+      <code>Set</code>
+      <ul>
+        <li>배열에 담을 수 있는건 값만 담을 수 있다.</li>
+        <li>같은 객체가 중복으로 들어가지 않는다.</li>
+        <li>객체를 담는 리스트</li>
+      </ul>
+    </li>
+    <li>
+      <code>value</code>
+      <ul>
+        <li>불변</li>
+        <li>자체의 값으로 판단한다.</li>
+        <li>값으로 식별된다.</li>
+      </ul>
+    </li>
+  </ul>
+</details>
+
+<hr>
+<h3 id="Core-Action"><a href="#Core-Action" class="headerlink" title="Core Action"></a>Core Action</h3><ol>
+<li>callback 큐를 지속적으로 체크한다.<ul>
+<li>큐에 호출시간보다 작으면 실행하지 않는다.</li>
+<li>큐에 호출시간보다 크면<ol>
+<li>실행하고</li>
+<li>삭제한다.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@params</span> time 현재시간</span><br><span class="line"><span class="keyword">const</span> checkQueue = <span class="function">(<span class="params">time: <span class="built_in">number</span></span>) =&gt;</span> &#123;</span><br><span class="line">  queue.forEach(<span class="function">(<span class="params">item: &#123;time: <span class="built_in">number</span>, block: <span class="built_in">Function</span>&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(item.time &gt; time) <span class="keyword">return</span>; <span class="comment">// 현재시간이 호출시간보다 작다면 실행하지 않음.</span></span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 현재시간이 호출시간보다 작다면 실행.</span></span><br><span class="line">      queue.delete(item); <span class="comment">// 실행할 예정이기때문에 삭제</span></span><br><span class="line">      item.block(); <span class="comment">// 실행</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  requestAnimationFrame(checkQueue);</span><br><span class="line">&#125;</span><br><span class="line">requestAnimationFrame(checkQueue);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>cf__2 <code>requestAnimationFrame</code></strong></p>
+<ul>
+<li>브라우저에게 수행하기를 원하는 애니메이션을 알리고, 다음 리페인트가 진행되기 전에 해당 애니메이션을 업데이트하는 함수를 호출하게 한다.</li>
+<li>리페인트 이전에 실행할 콜백을 인자로 받는다. </li>
+<li>엔진이 렌더링이 끝나면 직접 발생시키는 함수</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="트리거"><a href="#트리거" class="headerlink" title="트리거"></a>트리거</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeout = <span class="function">(<span class="params">block: Funtion, time:<span class="built_in">number</span></span>) =&gt;</span></span><br><span class="line">   queue.add(<span class="keyword">new</span> Item(block, time))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="확인해보자"><a href="#확인해보자" class="headerlink" title="확인해보자."></a>확인해보자.</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeout(_ =&gt; <span class="built_in">console</span>.log(<span class="string">"hello"</span>), <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h3><p><strong>방금 구현한 setTimer를 동시성 모델로 구현해보면?</strong><br><img src="/images/2019/37/01.jpg" style="width: 100%"></p>
+<p><strong>좀더 큰 그림에서 보면?</strong><br><img src="/images/2019/37/02.jpg" style="width: 100%"></p>
+<ul>
+<li>동시성을 만들어내는 이벤트 루프 안에<br>작은 이벤트 루프를 만들어낸 것.</li>
+</ul>
+<hr>
+<hr>
+<a name="nbFor">
+
+<h2 id="2-Non-Blocking-For-구현해보기"><a href="#2-Non-Blocking-For-구현해보기" class="headerlink" title="2. Non Blocking For 구현해보기"></a>2. Non Blocking For 구현해보기</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> working = _ =&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) working();</span><br><span class="line"></span><br><span class="line"><span class="meta">@params</span> max 최대 루프수</span><br><span class="line"><span class="meta">@params</span> load 한번에 로드할 카운트</span><br><span class="line"><span class="meta">@params</span> block 실행할 함수</span><br><span class="line"><span class="keyword">const</span> nbFor = <span class="function">(<span class="params">max:<span class="built_in">number</span>, load: <span class="built_in">number</span>, block: <span class="built_in">Function</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> f = <span class="function">(<span class="params">time:<span class="built_in">number</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = load;</span><br><span class="line">    <span class="comment">// 한번에 로드할 카운트를 상태로 받기 위해 변수에 할당</span></span><br><span class="line">    <span class="keyword">while</span>(curr-- &amp;&amp; i &lt; max) &#123;</span><br><span class="line">      <span class="comment">// 1. 1회돌때마다 현재 상태를 하나씩 뺀다.</span></span><br><span class="line">      block();</span><br><span class="line">      <span class="comment">// 2. 실행</span></span><br><span class="line">      i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">    <span class="keyword">if</span>(i &lt; max<span class="number">-1</span>) requestAnimationFrame(f)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  requestAnimationFrame(f); <span class="comment">// --- (1)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>requestAnimationFrame</code>으로 내부함수 <code>f</code>가 실행</li>
+<li>load기준으로 반복 카운트가 chunk된다.</li>
+<li>while문이 한 셋트가(load 카운트가 종료) 끝나면, <code>requestAnimationFrame</code>으로 <code>f</code>함수를 다시 실행시킨다.<ul>
+<li>하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.</li>
+</ul>
+</li>
+<li>다시</li>
+<li>max까지 루프가 끝나면 더이상 f를 실행하지 않음. </li>
+</ol>
+<ul>
+<li>하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.</li>
+<li>클로저 패턴이 존재, i가 상태를 물고 있음</li>
+</ul>
+<hr>
+<hr>
+<a name="generator">
+
+<h2 id="3-Generator-구현해보기"><a href="#3-Generator-구현해보기" class="headerlink" title="3. Generator 구현해보기"></a>3. Generator 구현해보기</h2><ul>
+<li><a href="https://feel5ny.github.io/2019/02/03/JS_19/">제너레이터 글참고</a><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> infinity: Iterator = (<span class="function"><span class="keyword">function</span>*(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) <span class="keyword">yield</span> i++;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(infinity.next())</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es2015.iterable.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> IteratorResult&lt;T&gt; &#123;</span><br><span class="line">    done: <span class="built_in">boolean</span>;</span><br><span class="line">    value: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Iterator&lt;T&gt; &#123;</span><br><span class="line">    next(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">    <span class="keyword">return</span>?(value?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">    <span class="keyword">throw</span>?(e?: <span class="built_in">any</span>): IteratorResult&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>제너레이터는 <strong>유사 iterable</strong>이다.<ul>
+<li>제너레이터 자체는 iterable이 아니다.</li>
+<li>iterable은 iterator라는 함수(<code>[Symbol.iterator]()</code>)를 호출하면 iterator 객체를 주는데,<br>generator를 호출하면 iterator가 반환된다.</li>
+<li>generator는 <code>for...of</code>를 사용하지 못한다.<br>for…of는 iterable이 와야하기 때문에  </li>
+</ul>
+</li>
+<li><code>yield</code>가 일어날 때마다 <code>next</code>로 다음 턴을 줄 수 있다.</li>
+</ul>
+<hr>
+<h3 id="function"><a href="#function" class="headerlink" title="function*"></a><code>function*</code></h3><ul>
+<li>내부적으로 <strong>suspend</strong> 구간을 생성한다.<ul>
+<li>동기명령은 절대로 멈출 수 없다.<ul>
+<li>generator는 멈출 수 있다.</li>
+<li>generator는 중간에 끊을 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>yield를 호출하면 suspend가 일어난다.</strong><ul>
+<li>멈춘다.</li>
+<li>다음번 next 호출시 내부적으로 다시 재개되어서 루프돈다.<ul>
+<li>next 호출할때마다 <code>suspend</code>가 일어난 곳에서 <code>resume</code>이 일어난다.</li>
+<li>멈추는 것: <code>suspend</code></li>
+<li>다시 재개: <code>resume</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gene = <span class="function"><span class="keyword">function</span>*(<span class="params">max:<span class="built_in">number</span>, load:<span class="built_in">number</span>, block:<span class="built_in">Function</span></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>, curr = load;</span><br><span class="line">  <span class="keyword">while</span>(i &lt; max) &#123;</span><br><span class="line">    <span class="keyword">if</span>(curr--)&#123;</span><br><span class="line">      block();</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      curr = load; <span class="comment">// curr을 초기화하고</span></span><br><span class="line">      <span class="built_in">console</span>.log(i);</span><br><span class="line">      <span class="keyword">yield</span>; <span class="comment">// 제어권을 밖에 둔다.</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>suspend로 멈춰서 제어권을 외부에 위임할 수 있다.</li>
+<li><code>gene.next()</code></li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nbFor = <span class="function">(<span class="params">max, load, block</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> iterator: Iterator = gene(max, load, block);</span><br><span class="line">  <span class="keyword">const</span> f = _ =&gt; iterator.next().done || timeout(f);</span><br><span class="line">  timeout(f); <span class="comment">// timeout을 쓰는 위치를 밖으로 옮겼다.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>제어 시스템의 반제어권을 외부에 줌으로써</strong><br>내부에서 제어와 관련된 로직을 분리시킬수 있게 된다는게<br>제너레이터의 장점</p>
+<hr>
+<hr>
+<a name="promise">
+
+<h2 id="4-Promise-구현해보기"><a href="#4-Promise-구현해보기" class="headerlink" title="4. Promise 구현해보기"></a>4. Promise 구현해보기</h2><ul>
+<li>비동기 반제어</li>
+</ul>
+<ol>
+<li>트리거를 걸었음</li>
+<li>서버가 3초만에 데이터를 줬음</li>
+<li>3초 안에는 제어할 권한이 없음</li>
+<li>3초 이후에는 제어할 권한이 있음<ul>
+<li>Promise에 바로 <code>then</code>을 사용하는 것은<br>반제어권이 이점을 활용하지 않고 <strong>콜백처럼 쓰는 형태</strong></li>
+<li>내가 원할때 then을 호출할 수 있다.</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gene2 = <span class="function"><span class="keyword">function</span>*(<span class="params">max, load, block</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(i &lt; max)&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> curr = load;</span><br><span class="line">      <span class="keyword">while</span>(curr-- &amp;&amp; i &lt; max) &#123;</span><br><span class="line">        block();</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(i);</span><br><span class="line">      timeout(res, <span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>yield를 보낼때 Promise로 감싸서 보내고 있다.</li>
+<li>제어권을 완전 양도했었지만<br>위 코드는 capsulizing해서 Promise안의 작업이 끝나면 then을 호출할 수 있게끔 반제어권을 주었음.</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nbFor = <span class="function">(<span class="params">max, load, block</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> iterator:Iterator&lt;<span class="built_in">Promise</span>&gt; = gene2(max, load, block);</span><br><span class="line">  <span class="keyword">const</span> next = <span class="function">(<span class="params">&#123;value, done&#125;</span>) =&gt;</span> </span><br><span class="line">    dome || value.then(<span class="function"><span class="params">v</span> =&gt;</span> next(iterator.next()));</span><br><span class="line">  next(iterator.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nbFor에서는 트리거 역할만하는 것이고, </li>
+<li>제어는 Promise가 한다.</li>
+<li>co함수, redux-saga, …</li>
+</ul>
+<hr>
+<h2 id="참고자료"><a href="#참고자료" class="headerlink" title="참고자료"></a>참고자료</h2><ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution?hl=ko" target="_blank" rel="noopener">requestAnimationFrame</a></li>
+</ul>
+</a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/11/11/JS_26_2/" data-id="ck2ul3c4j005cdobmoiqcd2c5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#setTimer">setTimer</a>
+               
+                <div class="first_depth--sub">setTimer를 구현하여 동시성모델 이해</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#nbFor">Non Blocking For</a>
+               
+                <div class="first_depth--sub">Non Blocking처럼 For 구현해보기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#generator">Generator</a>
+               
+                <div class="first_depth--sub">Non Blocking처럼 For 구현해보기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#promise">Promise</a>
+               
+                <div class="first_depth--sub">비동기 반제어</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/11/10/JS_26_1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠85 2회-(1) 자바스크립트의 동시성</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/11/JS_26_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/37/thumb_default.jpg)" alt="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기." class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/11/JS_26_2/" class="title">코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.</a></p>
+                            <p class="item-date"><time datetime="2019-11-11T11:20:19.000Z" itemprop="datePublished">2019-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/10/JS_26_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/36/thumb_default.jpg)" alt="코드스피츠85 2회-(1) 자바스크립트의 동시성" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/10/JS_26_1/" class="title">코드스피츠85 2회-(1) 자바스크립트의 동시성</a></p>
+                            <p class="item-date"><time datetime="2019-11-10T11:20:19.000Z" itemprop="datePublished">2019-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/01/JS_25_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/35/thumb_default.jpg)" alt="코드스피츠85 1회-(2) Runtime때 일어나는 일들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/01/JS_25_2/" class="title">코드스피츠85 1회-(2) Runtime때 일어나는 일들</a></p>
+                            <p class="item-date"><time datetime="2019-11-01T11:20:19.000Z" itemprop="datePublished">2019-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/27/JS_25_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/34/thumb_default.jpg)" alt="코드스피츠85 1회-(1) JavaScript Now" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/10/27/JS_25_1/" class="title">코드스피츠85 1회-(1) JavaScript Now</a></p>
+                            <p class="item-date"><time datetime="2019-10-27T11:20:19.000Z" itemprop="datePublished">2019-10-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/10/21/HTTP_009/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/33/thumb_default.jpg)" alt="WIP_웹 로봇" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/10/21/HTTP_009/" class="title">WIP_웹 로봇</a></p>
+                            <p class="item-date"><time datetime="2019-10-21T14:23:55.000Z" itemprop="datePublished">2019-10-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Joy/" style="font-size: 11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/TCP-IP/" style="font-size: 11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12px;">Web</a> <a href="/tags/algorism/" style="font-size: 11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/blog/" style="font-size: 11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/cache/" style="font-size: 11px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 13px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 11px;">connection</a> <a href="/tags/css/" style="font-size: 11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 18px;">http</a> <a href="/tags/iterator/" style="font-size: 11px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11px;">principle</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 14px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 19px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 12px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">76</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/11/11/JS_26_2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
