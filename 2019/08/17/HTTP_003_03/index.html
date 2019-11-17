@@ -20,7 +20,7 @@
 <meta property="og:description" content="출처: http-decision-diagram  http 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.     상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.=&amp;gt; 상태코드, 사유구절 HTTP/1.1 기준이다.  상태코드 (HTTP/1.1 기준)  정보성 상태 코드">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/22/thumb_default.jpg">
-<meta property="og:updated_time" content="2019-10-05T04:26:36.914Z">
+<meta property="og:updated_time" content="2019-11-17T15:07:15.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP 메세지 - 상태코드">
 <meta name="twitter:description" content="출처: http-decision-diagram  http 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.     상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.=&amp;gt; 상태코드, 사유구절 HTTP/1.1 기준이다.  상태코드 (HTTP/1.1 기준)  정보성 상태 코드">
@@ -492,6 +492,9 @@ ga('send', 'pageview');
 <li>따라서 302 코드는 <code>GET</code> 또는 <code>HEAD</code> 방법에 대한 응답으로만 설정하고,<br>메서드 변경이 명시적으로 금지되므로 대신 <strong>307 임시 리디렉션</strong>을 사용하는 것이 좋다.</li>
 <li>사용된 메서드를 <code>GET</code>로 변경하려는 경우 대신 <strong>303 “기타”</strong>를 사용해야 한다. </li>
 </ul>
+<img src="/images/2019/22/03.png" style="width:100%">
+
+
 <h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 - See Other"></a>303 - See Other</h3><ul>
 <li>클라에게 리소스를 다른 URL에서 가져와야 한다고 말해주고자 할 때 쓰인다.</li>
 <li>새 URL은 응답메세지의 Location 헤더에 들어있다.</li>
@@ -691,7 +694,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="ck331gvg1001ybobms349ndvk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="ck334wr6g001z87bm2vl6t0j1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -1134,6 +1137,13 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
                 
                 <p>&copy; 2019 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
