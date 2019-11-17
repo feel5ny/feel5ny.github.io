@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>클라이언트 식별 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,web,Identification">
+    
+    
+    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta name="keywords" content="http,study,web,Identification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="클라이언트 식별">
+<meta property="og:url" content="http://feel5ny.github.io/2019/11/15/HTTP_011_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/38/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-11-17T12:44:00.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="클라이언트 식별">
+<meta name="twitter:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/38/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/15/HTTP_011_01/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/38/thumb_default.jpg" alt="클라이언트 식별" style="width:100%">
+    </div>
+
+<article id="post-HTTP_011_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        클라이언트 식별
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/15/HTTP_011_01/" class="article-date">
+            <time datetime="2019-11-15T14:23:55.000Z" itemprop="datePublished">2019-11-15</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Identification/">Identification</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/study/">study</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">클라이언트를 식별하는 여러 방법</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#header">HTTP 헤더</a>
+               
+                <div class="first_depth--sub">From, User-Agent, Referer</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#ip">클라이언트 IP 주소</a>
+               
+                <div class="first_depth--sub">IP주소</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#auth">사용자 로그인 인증</a>
+               
+                <div class="first_depth--sub">WWW-Authenticate, Authorization</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#fat">뚱뚱한 URL</a>
+               
+                <div class="first_depth--sub">상태정보를 포함한 URL</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>현대의 웹 사이트들은 <strong>개인화</strong>된 서비스를 제공하고 싶어한다.<br>개인화를 하는 방법은 여러 가지가 있다.</p>
+<ul>
+<li>개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보</li>
+<li>세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.</li>
+</ul>
+<ol>
+<li>사용자 식별 관련 정보를 전달하는 <strong>HTTP 헤더</strong></li>
+<li><strong>IP 주소</strong>로 사용자를 식별</li>
+<li>사용자 <strong>로그인 인증</strong>을 통한 사용자 식별</li>
+<li>URL에 식별자를 포함하는 <strong>뚱뚱한 URL</strong></li>
+<li>식별 정보를 지속해서 유지하는 <strong>쿠키</strong></li>
+</ol>
+<a name="header">
+
+<h2 id="1-HTTP-헤더"><a href="#1-HTTP-헤더" class="headerlink" title="1. HTTP 헤더"></a>1. HTTP 헤더</h2><ul>
+<li><code>From</code> (요창): 사용자 이메일 주소</li>
+<li><code>User-Agent</code> (요청): 사용자의 브라우저</li>
+<li><code>Referer</code> (요청): 사용자가 현재 링크를 타고 온 근원 페이지</li>
+</ul>
+<h3 id="From"><a href="#From" class="headerlink" title="From"></a><code>From</code></h3><ul>
+<li>사용자의 이메일 주소를 포함한다.</li>
+<li>악의적인 서버가 이메일 주소를 모아서 스팸 메일을 발송하는 문제가 있어서 From 헤더를 보내는 브라우저는 많지 않다.</li>
+<li>로봇이나 스파이더는 데이터를 수집하는 과정에서<br>본의 아니게 웹 사이트에 문제를 일으켰을 때, 해당 사이트의 웹 마스터가 항의 메일을 보낼 수 있도록 From 헤더에 이메일 주소를 기술한다.</li>
+</ul>
+<h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a><code>User-Agent</code></h3><ul>
+<li>사용자가 쓰고 있는 브라우저의 이름과 버전 정보</li>
+<li>운영체제에 대한 정보까지 포함하여 서버에게 알려준다.</li>
+<li>특정 사용자를 식별하는 데는 큰 도움이 되지 않는다.</li>
+</ul>
+<img src="/images/2019/38/01.png">
+
+<h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a><code>Referer</code></h3><ul>
+<li>사용자가 현재 페이지로 유입하게 한 웹페이지의 URL을 가리킨다.</li>
+<li>사용자의 웹 사용 형태나 사용자이 취향을 더 잘 파악할 수 있다.(?)</li>
+</ul>
+<img src="/images/2019/38/02.png">
+
+
+<a name="ip">
+
+<h2 id="2-클라이언트-IP-주소"><a href="#2-클라이언트-IP-주소" class="headerlink" title="2. 클라이언트 IP 주소"></a>2. 클라이언트 IP 주소</h2><ul>
+<li>초기 웹 선구자들은 사용자 식별에 클라이언트 IP 주소를 사용하려 했다.</li>
+<li>주소가 좀처럼 바뀌지 않고, 웹 서버가 요청마다 클라의 IP를 알 수 있다면 문제없이 동작한다.</li>
+<li>웹 서버는 HTTP 요청을 보내는 반대쪽 TCP 커넥션의 IP 주소를 알아낼 수 있다.</li>
+<li>이 방식을 제대로 동작하지 않아서 사용하지 않는다.</li>
+</ul>
+<h3 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h3><ul>
+<li>IP 주소는 사용자가 아닌, 사용하는 컴퓨터를 가리킨다.<br>즉, <strong>여러 사용자가 같은 컴퓨터를 사용하면 식별할 수 없다.</strong></li>
+<li>ISP(인터넷 서비스 제공자)는 사용자가 로그인하면 동적으로 IP 주소를 할당한다.<br>로그인 시간에 따라 사용자는 <strong>매번 다른 주소</strong>를 받으므로, 웹 서버는 사용자를 IP 주소로 식별할 수 없다.</li>
+<li>보안을 강화하고, 부족한 주소를 관리하려고 많은 사용자가 <strong>네트워크 주소 변환 방화벽</strong>을 통해 인터넷을 사용한다. (Network Address Translation, NAT)<ul>
+<li>이 NAT 장비들은 클라의 실제 IP 주소를 방화벽 뒤로 숨기고,<br>클라의 실제 IP 주소를 내부에서 사용하는 하나의 방화벽 IP 주소로 변환한다.</li>
+</ul>
+</li>
+<li>HTTP 프락시와 게이트웨이는 원서버에 새로운 TCP 연결을 한다.<br>웹 서버는 클라 IP 주소 대신 <strong>프락시 서버 IP 주소</strong>를 본다.<ul>
+<li>일부 프락시는 원본 IP 주소를 보존하려고 <code>Client-ip</code>나 <code>X-Forwarded-For</code>같은 확장 헤더를 추가하여 이 문제를 해결하려 했다.<blockquote>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For" target="_blank" rel="noopener">X-Forwarded-For</a><br>HTTP 프록시나 로드 밸런서를 통해 웹 서버에 접속하는 클라이언트의 원 IP 주소를 식별하는 사실상의 표준 헤더다. </p>
+</blockquote>
+</li>
+<li>모든 프락시가 이런 식으로 동작하진 않는다.</li>
+</ul>
+</li>
+</ul>
+<a name="auth">
+
+<h2 id="3-사용자-로그인-인증"><a href="#3-사용자-로그인-인증" class="headerlink" title="3. 사용자 로그인 인증"></a>3. 사용자 로그인 인증</h2><ul>
+<li><p>웹 서버는 사용자 이름과 비밀번호로 인증할 것을 요구해서, 사용자에게 명시적으로 식별 요청을 할 수 있다.</p>
+</li>
+<li><p>웹 사이트 로그인이 더 쉽도록 <code>WWW-Authenticate</code>와 <code>Authorization</code>헤더를 사용해 웹 사이트에 사용자 이름이 전달하는 자체적인 체계를 가지고 있다.</p>
+<blockquote>
+<ol>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate" target="_blank" rel="noopener">WWW-Authenticate</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Authorization" target="_blank" rel="noopener">Authorization</a><br>HTTP Authorization 요청 헤더는 서버의 사용자 에이전트임을 증명하는 자격을 포함하여, 보통 서버에서 401 Unauthorized 상태를 WWW-Authenticate 헤더로 알려준 이후에 나옵니다.</li>
+</ol>
+</blockquote>
+</li>
+<li><p>한번 로그인하면, 브라우저는 사이트로 보내는 모든 요청에 이 로그인 정보를 함께 보내므로, 웹서버느 그 로그인 정보는 항상 확인할 수 있다.</p>
+</li>
+<li><p>서버에서, 사용자가 사이트에 접근하기 전에 로그인을 시키고자 한다면 HTTP 401 Unauthorized 응답코드를 브라우저에 보낼 수 있다.</p>
+<ol>
+<li><a href="http://www.joy.com" target="_blank" rel="noopener">www.joy.com</a> 사이트로 요청</li>
+<li>사용자의 식별 정보를 알지 못하므로 401 Unauthorized 코드를 내리고, <code>WWW-Authenticate</code>헤더를 반환하여 로그인하라고 요청한다.</li>
+<li>로그인 후 <code>Authorization</code>헤더에 토큰을 포함하여 전송하여, 사용자 식별을 시도한다.</li>
+<li>한번만 로그인하면, 브라우저는 요청마다 해당 사용자의 식별 토큰을 Authorization헤더에 담아서 서버로 전송해서, 한 세션이 진행되는 내내 그 사용자에 대한 식별을 유지한다.</li>
+</ol>
+</li>
+</ul>
+<a name="fat">
+
+<h2 id="4-뚱뚱한-URL"><a href="#4-뚱뚱한-URL" class="headerlink" title="4. 뚱뚱한 URL"></a>4. 뚱뚱한 URL</h2><ul>
+<li>사용자의 URL마다 <strong>버전</strong>을 기술하여 사용자를 식별하고, 추적하였다.</li>
+<li><strong>사용자의 상태 정보를 포함하고 있는 URL</strong>을 뚱뚱한 URL이라고 부른다.</li>
+<li>웹 서버와 통신하는 독립적인 HTTP 트랜잭션을<br>하나의 ‘세션’ 혹은 ‘방문’으로 묶는 용도로<br>뚱뚱한 URL을 사용할 수 있다.</li>
+<li>사용자가 웹사이트에 처음 방문하면 <ol>
+<li>유일한 ID가 생성되고, </li>
+<li>그 값은 서버가 인식할 수 있는 방식으로 URL에 추가되며, </li>
+<li>서버는 클라를 이 뚱뚱한 URL로 리다이렉트 시킨다.</li>
+</ol>
+</li>
+<li>서버가 뚱뚱한 URL을 포함한 요청을 받으면,<br>사용자 아이디와 관련된 추가적인 정보를 찾아서 밖으로 향하는 모든 하이퍼링크를 뚱뚱한 URL로 바꾼다.</li>
+</ul>
+<h3 id="단점-1"><a href="#단점-1" class="headerlink" title="단점"></a>단점</h3><p>사용자를 식별하는 데 사용할 수 있지만, 문제가 있다.</p>
+<ol>
+<li><strong>😵못생긴 URL</strong><br>뚱뚱한 URL은 새로운 사용자들에게 혼란을 준다.</li>
+<li>🙅‍개인 정보때문에 <strong>공유하지 못하는 URL</strong><br>뚱뚱한 URL은 특정 사용자와 세션에 대한 상태 정보를 포함하기 때문에<br>외부 공유 시 개인 정보를 공유하게 된다.</li>
+<li><strong>🔥부하</strong><ol>
+<li><strong>📦캐시를 사용할 수 없음</strong><br>URL로 만든 것은, URL이 달라지기 때문에 기존 캐시에 접근할 수 없다.</li>
+<li><strong>서버 부하 가중</strong><br>뚱뚱한 URL에 해당하는 HTML 페이지를 다시 그려야 한다.</li>
+</ol>
+</li>
+<li><strong>🏃‍♀️이탈</strong><ol>
+<li><strong>초기화</strong><br>사용자가 링크를 타고 다른 사이트로 이동하거나, 특정 URL을 요청해서<br>의도치 않게 뚱뚱한 URL 세션에서 이탈하기 쉽다.<br>이탈하게 되면 모든 진척사항들이 <strong>초기화</strong>되고 다시 처음부터 시작해야 될 것이다.</li>
+<li><strong>세션 간 지속성의 부재</strong><br>북마킹하지 않는 이상, 로그아웃하면 모든 정보를 잃는다.</li>
+</ol>
+</li>
+</ol>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate" target="_blank" rel="noopener">WWW-Authenticate (:mdn)</a></li>
+</ol>
+</a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/11/15/HTTP_011_01/" data-id="ck331gvgj002sbobmrxjsjv8y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">클라이언트를 식별하는 여러 방법</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#header">HTTP 헤더</a>
+               
+                <div class="first_depth--sub">From, User-Agent, Referer</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#ip">클라이언트 IP 주소</a>
+               
+                <div class="first_depth--sub">IP주소</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#auth">사용자 로그인 인증</a>
+               
+                <div class="first_depth--sub">WWW-Authenticate, Authorization</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#fat">뚱뚱한 URL</a>
+               
+                <div class="first_depth--sub">상태정보를 포함한 URL</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/11/16/HTTP_011_02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            쿠키 🍪
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/11/11/JS_26_2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/16/HTTP_011_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/39/thumb_default.jpg)" alt="쿠키 🍪" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/16/HTTP_011_02/" class="title">쿠키 🍪</a></p>
+                            <p class="item-date"><time datetime="2019-11-16T14:23:55.000Z" itemprop="datePublished">2019-11-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/15/HTTP_011_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/38/thumb_default.jpg)" alt="클라이언트 식별" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/15/HTTP_011_01/" class="title">클라이언트 식별</a></p>
+                            <p class="item-date"><time datetime="2019-11-15T14:23:55.000Z" itemprop="datePublished">2019-11-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/11/JS_26_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/37/thumb_default.jpg)" alt="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기." class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/11/JS_26_2/" class="title">코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.</a></p>
+                            <p class="item-date"><time datetime="2019-11-11T11:20:19.000Z" itemprop="datePublished">2019-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/10/JS_26_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/36/thumb_default.jpg)" alt="코드스피츠85 2회-(1) 자바스크립트의 동시성" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/10/JS_26_1/" class="title">코드스피츠85 2회-(1) 자바스크립트의 동시성</a></p>
+                            <p class="item-date"><time datetime="2019-11-10T11:20:19.000Z" itemprop="datePublished">2019-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/01/JS_25_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/35/thumb_default.jpg)" alt="코드스피츠85 1회-(2) Runtime때 일어나는 일들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/01/JS_25_2/" class="title">코드스피츠85 1회-(2) Runtime때 일어나는 일들</a></p>
+                            <p class="item-date"><time datetime="2019-11-01T11:20:19.000Z" itemprop="datePublished">2019-11-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/TCP-IP/" style="font-size: 11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12px;">Web</a> <a href="/tags/algorism/" style="font-size: 11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/blog/" style="font-size: 11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/cache/" style="font-size: 11px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 13px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 11px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/css/" style="font-size: 11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 18px;">http</a> <a href="/tags/iterator/" style="font-size: 11px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11px;">principle</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 14px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 19px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">78</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/11/15/HTTP_011_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>

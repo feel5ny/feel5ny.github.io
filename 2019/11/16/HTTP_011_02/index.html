@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>쿠키 🍪 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,web,cookie">
+    
+    
+    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta name="keywords" content="http,study,web,cookie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="쿠키 🍪">
+<meta property="og:url" content="http://feel5ny.github.io/2019/11/16/HTTP_011_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/39/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-11-17T13:26:56.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="쿠키 🍪">
+<meta name="twitter:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/39/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/16/HTTP_011_02/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/39/thumb_default.jpg" alt="쿠키 🍪" style="width:100%">
+    </div>
+
+<article id="post-HTTP_011_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        쿠키 🍪
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/16/HTTP_011_02/" class="article-date">
+            <time datetime="2019-11-16T14:23:55.000Z" itemprop="datePublished">2019-11-16</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cookie/">cookie</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/study/">study</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#cookie">쿠키 🍪</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">쿠키에 대하여</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#type">(종류) 쿠키의 타입 💁‍♀️</a>
+               
+                <div class="first_depth--sub">세션, 지속, Secure, Http-only, Same-site, Third-party, 좀비</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#how">(How) 쿠키는 어떻게 동작하는가 🧐</a>
+               
+                <div class="first_depth--sub">Cookie헤더, Set-Cookie헤더</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#state">(State) 쿠키 상태 관리 ⏳</a>
+               
+                <div class="first_depth--sub">HTTP 상태 관리체계, Domain, Path</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#detail">(Detail) 쿠키 구성요소 🧩</a>
+               
+                <div class="first_depth--sub">HTTP 상태 관리체계, Version0/Version1</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">쿠키 사용 </div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#when">(When) 쿠키 목적별 사용 👀</a>
+               
+                <div class="first_depth--sub">Session 추적</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#careful">(Be Careful) 쿠키 사용시 주의사항 👮‍</a>
+               
+                <div class="first_depth--sub">캐시, 보안 및 개인정보</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>현대의 웹 사이트들은 <strong>개인화</strong>된 서비스를 제공하고 싶어 한다.<br>개인화를 하는 방법은 여러 가지가 있다.</p>
+<ul>
+<li>개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보</li>
+<li>세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.</li>
+</ul>
+<ol>
+<li>사용자 식별 관련 정보를 전달하는 <strong>HTTP 헤더</strong></li>
+<li><strong>IP 주소</strong>로 사용자를 식별</li>
+<li>사용자 <strong>로그인 인증</strong>을 통한 사용자 식별</li>
+<li>URL에 식별자를 포함하는 <strong>뚱뚱한 URL</strong></li>
+<li><strong>식별 정보를 지속해서 유지하는 쿠키</strong></li>
+</ol>
+<a name="cookie">
+
+<h1 id="쿠키-🍪"><a href="#쿠키-🍪" class="headerlink" title="쿠키 🍪"></a>쿠키 🍪</h1><ul>
+<li>쿠기는 <strong>사용자를 식별하고 세션을 유지하는 방식</strong> 중 현재까지 가장 널리 사용하는 방식이다.</li>
+<li>쿠키는 넷스케이프가 최초로 개발했지만, 지금은 모든 브라우저에서 지원한다.</li>
+<li>쿠키는 캐시와 충돌할 수 있어서, 대부분의 캐시나 브라우저는 쿠키에 있는 내용물을 캐싱 하지 않는다.</li>
+</ul>
+<hr>
+<a name="type">
+
+<h1 id="1-💁‍♀️-쿠키의-타입-type"><a href="#1-💁‍♀️-쿠키의-타입-type" class="headerlink" title="1. 💁‍♀️ 쿠키의 타입 type"></a>1. 💁‍♀️ 쿠키의 타입 type</h1><img src="https://img2.looper.com/img/gallery/the-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel/intro-1529252113.jpg">
+
+<blockquote>
+<p><a href="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwifgo7p9vDlAhVQw4sBHZCNBDYQjhx6BAgBEAI&url=https%3A%2F%2Fwww.looper.com%2F126230%2Fthe-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel%2F&psig=AOvVaw33Pe3U4ZSGg6yF4jZ1HcvQ&ust=1574069087195058" target="_blank" rel="noopener">출처</a></p>
+</blockquote>
+<ul>
+<li>세션 쿠키와 지속 쿠키의 차이점은 파기되는 <strong>시점</strong>뿐이다.</li>
+<li>쿠키는 <code>Discard</code> 파라미터가 설정되어 있거나,<br><code>Expires</code>, <code>Max-Age</code>같은 파기되기까지의 남은 시간을 표현하는 파라미터가 없으면 세션 쿠키가 된다.</li>
+</ul>
+<h2 id="세션-쿠키-session-cookie"><a href="#세션-쿠키-session-cookie" class="headerlink" title="세션 쿠키 session cookie"></a>세션 쿠키 session cookie</h2><ul>
+<li>사용자가 사이트를 탐색할 때,<br>관련한 설정과 선호 사항들을 저장하는 임시 쿠키다.</li>
+<li>세션 쿠키는 사용자가 브라우저를 닫으면 삭제된다.</li>
+</ul>
+<h2 id="지속-쿠키-persistent-cookie"><a href="#지속-쿠키-persistent-cookie" class="headerlink" title="지속 쿠키 persistent cookie"></a>지속 쿠키 persistent cookie</h2><ul>
+<li>삭제되지 않고 더 길게 유지될 수 있다.</li>
+<li>지속 쿠키는 디스크에 저장되어, 브라우저를 닫거나 컴퓨터를 재시작하더라도 남아있다.</li>
+<li>지속 쿠키는 사용자가 주기적으로 방문하는 사이트에 대한<br>설정 정보나 로그인 이름을 유지하려고 사용한다.</li>
+</ul>
+<h2 id="Secure-cookie"><a href="#Secure-cookie" class="headerlink" title="Secure cookie"></a>Secure cookie</h2><ul>
+<li>암호화된 연결 HTTPS로만 전송할 수 있다.</li>
+<li>Secure 플래그를 추가해서 생성하며,<br>HTTPS로 전송하기 때문에 쿠키를 열어보는 걸 방지할 수 있다. </li>
+</ul>
+<h2 id="Http-only-cookie"><a href="#Http-only-cookie" class="headerlink" title="Http-only cookie"></a>Http-only cookie</h2><ul>
+<li>자바스크립트 같은 클라이언트 사이드 API를 통해 접속할 수 없는 쿠키이며, XSS 위협을 없애준다.</li>
+<li>cross-site tracing(XST)와<br>cross-site request forgery(XSRF) 공격에 공격받기 쉽다.</li>
+<li>HttpOnly 플래그를 쿠키에 추가하여 생성한다.</li>
+</ul>
+<h2 id="Same-site-cookie"><a href="#Same-site-cookie" class="headerlink" title="Same-site cookie"></a>Same-site cookie</h2><ul>
+<li>구글 크롬 버전 51에서 새로 소개된 쿠키이다.</li>
+<li>쿠키를 생성한 도메인과 같은 출처일 때만 쿠키를 전송한다.</li>
+</ul>
+<h2 id="third-party-cookie"><a href="#third-party-cookie" class="headerlink" title="third-party cookie"></a>third-party cookie</h2><ul>
+<li>현재 방문하고 있는 사이트가 아닌 다른 사이트의 쿠키</li>
+<li>광고와 같은 외부 웹사이트의 컨텐츠가 있을 때 생성되며<br>이 쿠키를 이용하여 사용자를 추적하고, 광고를 제공하는 데 사용한다.</li>
+</ul>
+<h2 id="좀비-cookie"><a href="#좀비-cookie" class="headerlink" title="좀비 cookie"></a>좀비 cookie</h2><ul>
+<li>쿠키에 대한 좀 더 급진적인 해결책은<br>삭제 이후에 다시 생성되는 좀비 쿠키 혹은 “Evercookies”</li>
+<li>의도적으로 영원히 제거하는 것이 어려운 쿠키이다.</li>
+<li>그들은 쿠키가 존재 여부와 관계없이 그들 자신을 다시 만들어내기 위해 웹 스토리지 API, Flash 로컬 공유 객체 그리고 다른 기술들을 사용하고 있다.</li>
+</ul>
+<hr>
+<a name="how">
+
+<h1 id="2-🧐-쿠키는-어떻게-동작하는가-HOW"><a href="#2-🧐-쿠키는-어떻게-동작하는가-HOW" class="headerlink" title="2. 🧐 쿠키는 어떻게 동작하는가 HOW"></a>2. 🧐 쿠키는 어떻게 동작하는가 HOW</h1><ul>
+<li>쿠키는 서버가 사용자에게 붙이는 스티커와 같다.</li>
+<li>사용자가 웹 사이트에 반문하면, 웹 사이트는 서버가 사용자에게 붙인 모든 스티커를 읽을 수 있다.</li>
+</ul>
+<ol>
+<li>처음에 사용자가 웹사이트에 방문하면, 웹 서버는 사용자에 대해서 아무것도 모른다.</li>
+<li>웹 서버는 사용자가 다시 돌아왔을 때, 해당 사용자를 식별하기 위한 유일한 값을 쿠키에 할당한다.<ul>
+<li>쿠키는 임의의 <code>이름=값</code> 형태의 리스트를 가지고,<br>그 리스트는 <code>Set-Cookie</code> 혹은 <code>Set-Cookie2</code> 같은 HTTP응답 헤더에 기술되어 사용자에게 전달한다. <a href="https://feel5ny.github.io/2019/08/18/HTTP_003_04/#3">참고</a><blockquote>
+<p><code>Set-Cookie2</code>은 더 이상 사용되지 않는다.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>쿠키는 어떤 정보든 포함할 수 있지만,<br><strong>서버가 사용자 추적 용도</strong>로 생성한<br>유일한 <strong>단순 식별 번호</strong>만 포함하기도 한다.<ul>
+<li>서버는 이 쿠키 값으로 DB에서 사용자의 정보를 찾는데 사용할 수 있다.</li>
+<li>브라우저는 서버로 온 Set-Cookie 헤더에 있는 쿠키 콘텐츠를 <strong>브라우저 쿠키 DB</strong>에 저장한다.</li>
+<li>사용자가 미래에 같은 사이트를 방문하면,<br>브라우저는 서버가 이 사용자에게 할당했던 쿠키를 Cookie요청 헤더에 기술해 전송한다.</li>
+</ul>
+</li>
+</ol>
+<img src="/images/2019/39/03.png" style="width:100%">
+
+<h3 id="그니까-쿠키는-어떻게-동작-정리"><a href="#그니까-쿠키는-어떻게-동작-정리" class="headerlink" title="그니까 쿠키는 어떻게 동작? 정리"></a>그니까 쿠키는 어떻게 동작? <strong>정리</strong></h3><ol>
+<li>유저가 서버에 페이지를 요청한다.</li>
+<li>서버에서 응답과 함께 Set-Cookie 헤더를 전송한다.</li>
+<li>브라우저(User Agent)가 Set-Cookie 헤더에서 전달된 값을 갖고<br>쿠키를 생성해서 (브라우저에) 저장한다.</li>
+<li>이렇게 생성된 쿠키는 클라가 서버에 요청할 때마다<br><strong>브라우저가 같이 전송해준다.</strong></li>
+</ol>
+<hr>
+<a name="state">
+
+<h1 id="3-⏳쿠키-상태-관리"><a href="#3-⏳쿠키-상태-관리" class="headerlink" title="3. ⏳쿠키 상태 관리"></a>3. ⏳쿠키 상태 관리</h1><h2 id="3-1-클라이언트-측-상태"><a href="#3-1-클라이언트-측-상태" class="headerlink" title="3.1 클라이언트 측 상태"></a>3.1 클라이언트 측 상태</h2><ul>
+<li>쿠키의 기본적인 발상은<br>브라우저가 서버 관련 정보를 저장하고,<br>사용자가 해당 서버에 접근할 때마다 그 정보를 함께 전송하게 하는 것이다.</li>
+<li><strong>브라우저는 쿠키 정보를 저장할 책임</strong>이 있다.<br>= 클라이언트 측 상태<br>= HTTP 상태 관리체계 (HTTP State Management Mechnism)</li>
+<li>각 브라우저는 각기 다른 방식으로 쿠키를 저장한다.</li>
+</ul>
+<h2 id="3-2-Domain-별-쿠키-상태-관리"><a href="#3-2-Domain-별-쿠키-상태-관리" class="headerlink" title="3.2 Domain 별 쿠키 상태 관리"></a>3.2 Domain 별 쿠키 상태 관리</h2><ul>
+<li>브라우저는 수백수천 개의 쿠키를 가지고 있을 수 있지만,<br>브라우저가 쿠키 전부를 모든 사이트에 보내지는 않는다.</li>
+<li>브라우저는 보통 각 사이트에 2개 혹은 3개의 쿠키만 보낸다.<ol>
+<li>🔥 쿠키를 모두 전달하면 <strong>성능이 크게 저하된다.</strong><ul>
+<li>쿠키를 모두 전달하면, 브라우저는 실제 콘텐츠의 바이트보다 더 많은 쿠키 바이트를 전달하게 될 것이다.</li>
+</ul>
+</li>
+<li>🤷‍♂️ <strong>해당 도메인과 상관없는 쿠키를 보내면 무의미하다.</strong><ul>
+<li>이 쿠키들은 대부분은 서버에 특화된 이름/값 쌍을 포함하고 있기 때문에,<br>대부분 사이트에서는 인식하지 않는 무의미한 값이다.</li>
+<li>모든 사이트에 쿠키 전체를 전달하는 것은,<br>특정 사이트에서 제공한 정보를 신뢰하지 않는 사이트에서 가져갈 수 있어서,<br>잠재적인 <strong>개인 정보 문제</strong>를 일으킬 것이다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>보통 브라우저는 쿠키를 생성한 서버에게만 쿠키에 담긴 정보를 전달한다.</li>
+<li>쿠키는 일종의 <strong>상태 정보</strong>라고 할 수 있으며<ol>
+<li>서버가 생성하여 클라에 전달하고</li>
+<li>클라는 그 쿠키를 유효한 사이트에만 다시 전달하고 관리한다.</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>많은 <strong>웹 사이트는 광고를 관리하는 협력업체</strong>와 계약을 한다. (third-party 쿠키)</p>
+<ul>
+<li>이 광고들은 웹사이트 자체의 일부인 것처럼 제작되고, <strong>지속 쿠키</strong>를 만들어낸다.</li>
+<li>같은 광고사에서 제공하는 서로 다른 웹사이트에 사용자가 방문하면,<br>브라우저는 앞서 만든 지속 쿠키를 다시 광고사 서버로 전송한다.</li>
+<li>광고사는 이 기술에 <code>Referer</code>헤더를 접목하여,<br>사용자의 프로필과 웹사이트를 사용하는 습관에 대한 방대한 데이터를 구축할 수 있다.</li>
+</ul>
+</blockquote>
+<h3 id="쿠키-Domain-속성"><a href="#쿠키-Domain-속성" class="headerlink" title="쿠키 Domain 속성"></a>쿠키 Domain 속성</h3><ul>
+<li>서버는 쿠키를 생성할 때 Set-Cookie 응답 헤더에<br>Domain 속성을 시술해서, 어떤 사이트가 그 쿠키를 읽을 수 있는지 제어할 수 있다.<ul>
+<li>도메인에 해당하는 사이트를 방문하면 Cookie 헤더가 항상 적용될 것이다.</li>
+</ul>
+</li>
+</ul>
+<img src="/images/2019/39/04.png" style="width:100%">
+
+<blockquote>
+<p>아래 브라우저에 저장되어 있던 쿠키 내용을 해당 도메인과 같을 경우<br>  요청 헤더의 Cookie에 포함시킨다.</p>
+</blockquote>
+<img src="/images/2019/39/05.png" style="width:100%">
+
+<h3 id="쿠키-Path-속성"><a href="#쿠키-Path-속성" class="headerlink" title="쿠키 Path 속성"></a>쿠키 Path 속성</h3><ul>
+<li>웹 사이트 일부에만 쿠키를 적용할 수 있다.</li>
+<li><a href="https://www.google.com/" target="_blank" rel="noopener">https://www.google.com/</a> + <code>/search</code><br><code>/search</code> 여기에만 해당하는 쿠키!<img src="/images/2019/39/06.png" style="width:100%">
+
+</li>
+</ul>
+<hr>
+<a name="detail">
+
+<h1 id="4-🧩-쿠키-구성요소"><a href="#4-🧩-쿠키-구성요소" class="headerlink" title="4. 🧩 쿠키 구성요소"></a>4. 🧩 쿠키 구성요소</h1><ul>
+<li>현재 사용되는 쿠키 명세에는<br><strong>Version0</strong> 쿠키 (= 넷스케이프 쿠키)<br><strong>Version1</strong> 쿠키 (RFC 2965 =&gt; RFC 2965 =&gt; RFC 6265)</li>
+<li>Version1 쿠키는 Version0 쿠키의 확장으로<br>널리 쓰이지는 않는다.</li>
+<li>Version0과 Version1 쿠키 명세 모두 HTTP/1.1 명세 일부로 기술되어 있지는 않는다.</li>
+</ul>
+<h2 id="Version-0"><a href="#Version-0" class="headerlink" title="Version 0"></a>Version 0</h2><h3 id="1-Set-Cookie-헤더"><a href="#1-Set-Cookie-헤더" class="headerlink" title="1. Set-Cookie 헤더"></a>1. Set-Cookie 헤더</h3><ul>
+<li>Set-Cookie 헤더는 쿠키의 이름과 값을 가져야 한다.</li>
+<li>이는 쿠키 옵션 속성들에 <code>;</code>으로 이어 기술한다.</li>
+</ul>
+<ol>
+<li><code>이름=값</code>: 필수 값</li>
+<li><code>Expires</code>: 선택적인 속성. 쿠키의 생명주기를 가리키는 날짜 문자열<ul>
+<li><strong>요일, DD-MM-YY HH:MM:SS GMT</strong></li>
+<li>사용할 수 있는 타임존은 GMT</li>
+<li>쿠키에 Expires를 명시하지 않으면 그 쿠키는 사용자의 세션이 끝날 때 파기될 것이다.</li>
+</ul>
+</li>
+<li><code>Domain</code>: 선택적인 속성. 브라우저는 이 속성에 기술된 도메인을 사용하는 서버 호스트명으로만 쿠키를 전송한다.<ul>
+<li>이는 서버가 해당 도메인에만 쿠키를 제한적으로 전달하게 한다.</li>
+<li>도메인이 명시되어 있지 않으면, Set-Cookie 응답을 생성한 서버의 호스트 명을 기본값으로 사용한다.</li>
+</ul>
+</li>
+<li><code>Path</code>: 선택적인 속성. 서버에 있는 특정 문서에만 쿠키를 할당할 수 있다.<ul>
+<li><code>/foo</code>경로는 <code>/foobar</code>와 <code>/foo/bar.html</code>에 들어맞는다.</li>
+<li><code>/</code>는 모든 것에 들어맞는다.</li>
+<li>경로를 명시하지 않으면, Set-Cookie 응답을 전달하는 URL의 경로가 사용된다.</li>
+</ul>
+</li>
+<li><code>Secure</code>: 선택적인 속성. 쿠키는 HTTP가 SSL 보안 연결을 사용할 때만 쿠키를 전송한다.</li>
+<li><code>HttpOnly</code>: HttpOnly는 쿠키의 범위를 HTTP 요청으로 제한한다.<br>HttpOnly가 설정된 경우 클라이언트 사이드 API로는 쿠키에 접근하지 못한다.</li>
+</ol>
+<img src="/images/2019/39/07.png" style="width:100%">
+
+<h3 id="2-Cookie-헤더"><a href="#2-Cookie-헤더" class="headerlink" title="2. Cookie 헤더"></a>2. Cookie 헤더</h3><ul>
+<li>클라가 서버에 요청을 보낼 때는, Domain, Path, Secure 필터들이 현재 요청하려고 하는 사이트에 들어맞으면서, 아직 파기되지 않은 쿠키들을 함께 보낸다.</li>
+<li>Cookie 헤더에 이어 붙여서 보낸다.</li>
+</ul>
+<h2 id="Version-1"><a href="#Version-1" class="headerlink" title="Version 1"></a>Version 1</h2><ul>
+<li><p>쿠키 버전 1은 <strong>RFC 2109</strong>를 뜻한다.</p>
+</li>
+<li><p>RFC 2109는 기존 넷스케이프 쿠키의 스펙을 체계적으로 정리하고 수정하려고 시도한 것</p>
+</li>
+<li><p>Version0 쿠키 속성은 Name, Value, Expires, Domain, Path, Securer가 있다.</p>
+</li>
+<li><p>Version1 쿠키 속성은 Name, Value, Comment, Domain, Max-Age, Path, Secure, Version이 있다.</p>
+<ul>
+<li>Comment: 서버가 쿠키의 용도를 기록해두기 위한 속성</li>
+<li>Version: 쿠키가 어떤 명세서를 따르는지 버전을 나타낸다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="RFC-6265와-RFC-2109-쿠키의-차이"><a href="#RFC-6265와-RFC-2109-쿠키의-차이" class="headerlink" title="RFC 6265와 RFC 2109 쿠키의 차이"></a>RFC 6265와 RFC 2109 쿠키의 차이</h3><ul>
+<li>RFC 6265가 나오면서 RFC 2109, RFC 2965는 폐기</li>
+<li>둘디 Set-Cookie 헤더를 사용합니다.</li>
+<li>RFC 2109는 Name, Value, Comment, Domain, Max-Age, Path, Secure, Version</li>
+<li>RFC 6265는 Name, Value, Expires, Domain, Max-Age, Path, Secure, HttpOnly<ul>
+<li>Max-Age를 설정하면 자동으로 Expires가 정해진다.</li>
+<li>HttpOnly: 비 HTTP 요청을 막는다.</li>
+</ul>
+</li>
+<li>구현 고려 사항<ul>
+<li>RFC 2109는 유저 에이전트가 최소 300개의 쿠키,<br>쿠키마다 적어도 4096바이트,<br>한 호스트나 도메인마다 최소  20개를 지원해야 한다.</li>
+<li>RFC 6265는 유저 에이전트가 최소 3000개의 쿠키<br>쿠키마다 적어도 4096바이트,<br>도메인 당 최소 50개의 쿠키를 저장 가능해야 한다고 명시.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Set-Cookie2-헤더"><a href="#Set-Cookie2-헤더" class="headerlink" title="Set-Cookie2 헤더"></a><del>Set-Cookie2 헤더</del></h3><h3 id="Cookie2-헤더"><a href="#Cookie2-헤더" class="headerlink" title="Cookie2 헤더"></a><del>Cookie2 헤더</del></h3><p>Set-Cookie2와 Cookie2 헤더는 더 이상 사용되지 않으므로 패스</p>
+<hr>
+<a name="when">
+
+<h1 id="5-👀-쿠키-목적별-사용"><a href="#5-👀-쿠키-목적별-사용" class="headerlink" title="5. 👀 쿠키 목적별 사용"></a>5. 👀 쿠키 목적별 사용</h1><ul>
+<li>쿠키는 웹사이트에 수차례 트랜잭션을 만들어내는 사용자를 추적하는 데 사용한다.</li>
+</ul>
+<h2 id="5-1-쿠키와-세션-추적"><a href="#5-1-쿠키와-세션-추적" class="headerlink" title="5.1 쿠키와 세션 추적"></a>5.1 쿠키와 세션 추적</h2><p>Amazon.com의 예를 통해 살펴보자.</p>
+<ol>
+<li><p>브라우저가 Amazon.com의 루트 페이지를 처음 요청한다</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.0</span><br><span class="line">Host: www.amazon.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>서버는 클라를 전자상거래 소프트웨어 URL로 리다이렉트 시킨다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Location: http://www.amazon.com:80/exec/abidos/subst/home/redirect.html</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>클라는 리다이렉트 URL로 요청 보낸다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html HTTP/1.0 302 Found</span><br><span class="line">Host: http://www.amazon.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>서버는 응답에<br>두 개의 세션 쿠키를 기술하고 (<code>Set-Cookie</code> = 요 쿠키 브라우저에 넣어두세요)<br>사용자를 다른 URL로 리다이렉트 시키며<br>클라는 다시 이 쿠키들을 첨부하여 요청을 보낸다.(<code>Cookie</code>)
+새로운 URL(<a href="http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은" target="_blank" rel="noopener">http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은</a> 자체에 상태 정보를 갖고 있으므로 = <strong>뚱뚱한 URL</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:20:47 GMT</span><br><span class="line">Set-Cookie: session-id=002-1135265-8016838; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: session-id-time=1007884800; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>클라는 새로운 URL을 요청을 요청받았던 두 개의 쿠키와 함께 보낸다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>서버는 home.html 페이지로 리다이렉트 시키고, 쿠키 두 개를 더 첨부한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:45:40 GMT</span><br><span class="line">Set-Cookie: ubid-main=430-8248051-6231206; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: x-main=hQ...Bf; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Location: http://www.amazon.com/exec/abidos/subst/home/home.html/002-1135265-8016838</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>클라는 home.html 페이지를 가져오고, 총 4개의 쿠키를 전달한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/home.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800; ubid-main=430-8248051-6231206; x-main=hQ...Bf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>서버는 콘텐츠를 보낸다.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>쿠팡</strong> 첫 화면 진입 시 진행되는<br>  광고 솔루션 <strong>크리테오</strong> 세션 추적 과정 중 일부<br>  <img src="/images/2019/39/08.png" style="width:100%"></p>
+</blockquote>
+<hr>
+<a name="careful">
+
+<h1 id="6-👮‍-쿠키-사용-시-주의사항"><a href="#6-👮‍-쿠키-사용-시-주의사항" class="headerlink" title="6. 👮‍ 쿠키 사용 시 주의사항"></a>6. 👮‍ 쿠키 사용 시 주의사항</h1><h2 id="6-1-쿠키와-캐싱"><a href="#6-1-쿠키와-캐싱" class="headerlink" title="6.1 쿠키와 캐싱"></a>6.1 쿠키와 캐싱</h2><ul>
+<li>이전 사용자의 쿠키가 다른 사용자에게 할당돼버리거나,<br>누군가의 개인 정보가 다른 이에게 노출되는 최악의 상황이 일어날 수도 있다.</li>
+</ul>
+<ol>
+<li><p>캐시 되지 말아야 할 문서가 있다면 표시하라<br><code>Control: no-cache=&quot;Set-Cookie&quot;</code></p>
+</li>
+<li><p>Set-Cookie 해더를 캐시 하는 것에 유의하라</p>
+<ul>
+<li>같은 Set-Cookie 헤더를 여러 사용자에게 보내게 되면 사용자 추적에 실패할 것이기 때문</li>
+<li>어떤 캐시는 응답을 저장하기 전에 Set-Cookie 헤더를 제거하기 때문에, 그 캐시 데이터를 받은 클라는 Set-Cookie 헤더 정보가 없는 데이터를 받게 되어 문제가 발생할 수 있다. <ul>
+<li>캐시가 모든 요청마다 원 서버와 재검사시켜 클라로 가는 응답에 Set-Cookie 헤더 값을 기술하여 이 문제를 개선할 수 있다. (<a href="https://feel5ny.github.io/2019/10/05/HTTP_007-2/#control">참고</a>)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: must-revalidate, max-age=0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cookie 헤더를 가지고 있는 요청을 주의하라</p>
+<ul>
+<li>클라 요청에 Cookie 헤더가 함께 오면,<br>결과 콘텐츠가 개인 정보를 담고 있을 수도 있다는 힌트다.</li>
+<li>개인 정보는 캐시 되지 않도록 표시되어 있어야 하지만, 그 표시를 하지 않는 서버도 있다.</li>
+<li>보수적인 캐시는 Cookie 헤더가 포함된 요청에 응답으로 가는 문서는 캐시 하지 않을 것이다.</li>
+</ul>
+</li>
+</ol>
+<h2 id="6-2-쿠키-보안-그리고-개인-정보"><a href="#6-2-쿠키-보안-그리고-개인-정보" class="headerlink" title="6.2 쿠키, 보안 그리고 개인 정보"></a>6.2 쿠키, 보안 그리고 개인 정보</h2><ul>
+<li>쿠키를 사용하지 않도록 비활성화 시킬 수 있고, 로그 분석 같은 다른 방법으로 대체하는 것도 가능하므로, 그 자체가 보안상으로 엄청나게 위험한 것은 아니다.</li>
+<li>원격 DB에 개인 정보를 저장하고,<br>해당 데이터의 키값을 쿠키에 저장하는 방식을 표준으로 사용하면,<br>클라와 서버 사이에 예민한 데이터가 오가는 것을 줄일 수 있다.</li>
+<li>쿠키에 대한 부정적인 여론이 많기는 하지만,<br>제공하는 개인 정보를 누가 받는지 명확히 알고, 사이트의 개인 정보 정책에만 유의한다면, 쿠키에 관련한 위험성보다<br>세션 조작이나 트랜잭션 상의 편리함이 더 크다.</li>
+</ul>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Cookies" target="_blank" rel="noopener">mdn 쿠키글</a></li>
+<li><a href="https://meetup.toast.com/posts/172" target="_blank" rel="noopener">HTTP 쿠키와 톰캣 버전별 이슈</a></li>
+<li><a href="https://tools.ietf.org/html/rfc6265" target="_blank" rel="noopener">RFC 6265</a></li>
+</ol>
+</a></a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/11/16/HTTP_011_02/" data-id="ck331gvgl002zbobma5o1wubi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#cookie">쿠키 🍪</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">쿠키에 대하여</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#type">(종류) 쿠키의 타입 💁‍♀️</a>
+               
+                <div class="first_depth--sub">세션, 지속, Secure, Http-only, Same-site, Third-party, 좀비</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#how">(How) 쿠키는 어떻게 동작하는가 🧐</a>
+               
+                <div class="first_depth--sub">Cookie헤더, Set-Cookie헤더</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#state">(State) 쿠키 상태 관리 ⏳</a>
+               
+                <div class="first_depth--sub">HTTP 상태 관리체계, Domain, Path</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#detail">(Detail) 쿠키 구성요소 🧩</a>
+               
+                <div class="first_depth--sub">HTTP 상태 관리체계, Version0/Version1</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">쿠키 사용 </div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#when">(When) 쿠키 목적별 사용 👀</a>
+               
+                <div class="first_depth--sub">Session 추적</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#careful">(Be Careful) 쿠키 사용시 주의사항 👮‍</a>
+               
+                <div class="first_depth--sub">캐시, 보안 및 개인정보</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/11/15/HTTP_011_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">클라이언트 식별</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/16/HTTP_011_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/39/thumb_default.jpg)" alt="쿠키 🍪" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/16/HTTP_011_02/" class="title">쿠키 🍪</a></p>
+                            <p class="item-date"><time datetime="2019-11-16T14:23:55.000Z" itemprop="datePublished">2019-11-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/15/HTTP_011_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/38/thumb_default.jpg)" alt="클라이언트 식별" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/15/HTTP_011_01/" class="title">클라이언트 식별</a></p>
+                            <p class="item-date"><time datetime="2019-11-15T14:23:55.000Z" itemprop="datePublished">2019-11-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/11/JS_26_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/37/thumb_default.jpg)" alt="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기." class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/11/JS_26_2/" class="title">코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.</a></p>
+                            <p class="item-date"><time datetime="2019-11-11T11:20:19.000Z" itemprop="datePublished">2019-11-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/10/JS_26_1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/36/thumb_default.jpg)" alt="코드스피츠85 2회-(1) 자바스크립트의 동시성" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/10/JS_26_1/" class="title">코드스피츠85 2회-(1) 자바스크립트의 동시성</a></p>
+                            <p class="item-date"><time datetime="2019-11-10T11:20:19.000Z" itemprop="datePublished">2019-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/01/JS_25_2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/35/thumb_default.jpg)" alt="코드스피츠85 1회-(2) Runtime때 일어나는 일들" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/02-WorkShop/">02_WorkShop</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></p>
+                            <p class="item-title"><a href="/2019/11/01/JS_25_2/" class="title">코드스피츠85 1회-(2) Runtime때 일어나는 일들</a></p>
+                            <p class="item-date"><time datetime="2019-11-01T11:20:19.000Z" itemprop="datePublished">2019-11-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 15px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 11px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 11px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/TCP-IP/" style="font-size: 11px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 11px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 12px;">Web</a> <a href="/tags/algorism/" style="font-size: 11px;">algorism</a> <a href="/tags/angular/" style="font-size: 12px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 15px;">async</a> <a href="/tags/blog/" style="font-size: 11px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 12px;">browser</a> <a href="/tags/cache/" style="font-size: 11px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 12px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 13px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 11px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/css/" style="font-size: 11px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 11px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 11px;">formatter</a> <a href="/tags/generator/" style="font-size: 11px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 18px;">http</a> <a href="/tags/iterator/" style="font-size: 11px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 13px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 13px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 11px;">prettier</a> <a href="/tags/principle/" style="font-size: 11px;">principle</a> <a href="/tags/programming/" style="font-size: 12px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 14px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 11px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 19px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 14px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">78</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/11/16/HTTP_011_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
