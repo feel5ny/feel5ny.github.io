@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>다이제스트 인증(2) - 실제 다이제스트 인증과 보안 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,web,digest,authorization">
+    
+    
+    <meta name="description" content="점점 번역이 이해하기 더 어려워질 정도로 직역형태다..     1. 실제 상황에 대한 고려TL;DR 다이제스트 인증 요구 qop: 가장 강력한 인증 매커니즘 선택하기 오류 처리: 400 Bad Request 보호 공간 realm: 일반적으로 원 서버에 의해 할당되는 문자열 URI 다시 쓰기: 프락시는 구문만 고쳐서 URI를 다시 쓰기도 한다 캐시: mu">
+<meta name="keywords" content="http,study,web,digest,authorization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="다이제스트 인증(2) - 실제 다이제스트 인증과 보안">
+<meta property="og:url" content="http://feel5ny.github.io/2019/12/01/HTTP_013_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="점점 번역이 이해하기 더 어려워질 정도로 직역형태다..     1. 실제 상황에 대한 고려TL;DR 다이제스트 인증 요구 qop: 가장 강력한 인증 매커니즘 선택하기 오류 처리: 400 Bad Request 보호 공간 realm: 일반적으로 원 서버에 의해 할당되는 문자열 URI 다시 쓰기: 프락시는 구문만 고쳐서 URI를 다시 쓰기도 한다 캐시: mu">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/43/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-12-01T10:39:31.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="다이제스트 인증(2) - 실제 다이제스트 인증과 보안">
+<meta name="twitter:description" content="점점 번역이 이해하기 더 어려워질 정도로 직역형태다..     1. 실제 상황에 대한 고려TL;DR 다이제스트 인증 요구 qop: 가장 강력한 인증 매커니즘 선택하기 오류 처리: 400 Bad Request 보호 공간 realm: 일반적으로 원 서버에 의해 할당되는 문자열 URI 다시 쓰기: 프락시는 구문만 고쳐서 URI를 다시 쓰기도 한다 캐시: mu">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/43/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/12/01/HTTP_013_02/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/43/thumb_default.jpg" alt="다이제스트 인증(2) - 실제 다이제스트 인증과 보안" style="width:100%">
+    </div>
+
+<article id="post-HTTP_013_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        다이제스트 인증(2) - 실제 다이제스트 인증과 보안
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/12/01/HTTP_013_02/" class="article-date">
+            <time datetime="2019-12-01T01:43:10.000Z" itemprop="datePublished">2019-12-01</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/authorization/">authorization</a>, <a class="tag-link" href="/tags/digest/">digest</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/study/">study</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#real">실제 상황에 대한 고려</a>
+               
+                <div class="first_depth--sub">다중인증요구 / 오류 / realm(보호공간) / URI 다시쓰는.. / 캐시</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#guard">보안에 대한 고려사항</a>
+               
+                <div class="first_depth--sub">헤더 부당변경 / 재전송 공격 / 다중인증 매커니즘 / 사전공격 / 악의적인 프락시와 중간자 공격 / 선택 평문 공격 / 비밀번호 저장</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<blockquote>
+<p>점점 번역이 이해하기 더 어려워질 정도로 직역형태다..</p>
+</blockquote>
+<hr>
+<a name="real">
+
+<h1 id="1-실제-상황에-대한-고려"><a href="#1-실제-상황에-대한-고려" class="headerlink" title="1. 실제 상황에 대한 고려"></a>1. 실제 상황에 대한 고려</h1><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ol>
+<li>다이제스트 인증 요구 <code>qop</code>: 가장 강력한 인증 매커니즘 선택하기</li>
+<li>오류 처리: <code>400 Bad Request</code></li>
+<li>보호 공간 realm: 일반적으로 원 서버에 의해 할당되는 문자열</li>
+<li>URI 다시 쓰기: 프락시는 구문만 고쳐서 URI를 다시 쓰기도 한다</li>
+<li>캐시: <code>must-revalidate</code>나 <code>public</code></li>
+</ol>
+<h2 id="1-1-다중-인증-요구-qop"><a href="#1-1-다중-인증-요구-qop" class="headerlink" title="1.1 다중 인증 요구 qop"></a>1.1 다중 인증 요구 <code>qop</code></h2><img src="/images/2019/43/01.png" style="width:100%">
+
+<ul>
+<li>서버는 한 리소스에 대해 여러 인증을 요구할 수 있다.</li>
+<li>보통은 WWW-Authenticate에 qop필드에 쉼표로 구분하여 인증방법을 보내준다.</li>
+<li><strong>클라는 자신이 지원할 수 있는 가장 강력한 인증 메커니즘을 선택</strong>해야 한다.</li>
+<li>다양한 인증 옵션을 제공할 때,<br>클라가 강력한 인증 메커니즘을 지원하지 못한다면, 사용자에게 보안에 대해 경고를 해야 한다.</li>
+</ul>
+<h2 id="1-2-오류-처리"><a href="#1-2-오류-처리" class="headerlink" title="1.2 오류 처리"></a>1.2 오류 처리</h2><ul>
+<li>다이제스트 인증에서,<br>지시자나 그 값이 적절하지 않거나,<br>요구된 지시자가 빠져있는 경우<br><code>400 Bad Request</code></li>
+<li><strong>로그를 남기자</strong><br>비밀번호가 반복적으로 실패할 경우,<br>공격자의 비밀번호 추측의 시도가 있을 수 있으므로 로그를 남기는게 좋다.</li>
+<li>URI 지시자가 가리키는 리소스가 요청줄에 명시된 리소스와 같음을 확인해야한다.    (중간 프락시가 변조할 수도 있음)<ul>
+<li>요청줄에 명시된 리소스는 domain필드에 같이 명시해준다.<img src="/images/2019/43/02.png" style="width:100%">
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-보호-공간-realm"><a href="#1-3-보호-공간-realm" class="headerlink" title="1.3 보호 공간 realm"></a>1.3 보호 공간 realm</h2><img src="/images/2019/43/03.png" style="width:100%">
+
+<ul>
+<li><p>영역 값은, 접근한 서버의 루트 URL과 결합하여, 보호 공간을 정의한다.</p>
+</li>
+<li><p>영역은 보호 영역의 집합으로 분할할 수 있도록 해준다. (보호 영역으로 따로 구분해둔다..)</p>
+<blockquote>
+<p>번역이해가 어려워서 나름 위 문장대로 이해함..<br>원문: 영역은 서버의 보호된 리소스들을 자신만의 인증제도와 인가 데이터베이스 어느 한쪽 혹은 양쪽 모두를 가진 보호 영역의 집합으로 분할 할 수 있도록 해준다.</p>
+</blockquote>
+</li>
+<li><p>영역의 값은 일반적으로 원 서버에 의해 할당되는 문자열이다.<br>(인증 제도에 추가적인 의미를 더한다.)</p>
+</li>
+<li><p>보호공간은 어떤 자격이 자동으로 적용되는 영역을 결정한다.</p>
+<ul>
+<li>이전 요청이 인가되면,<br>같은 자격은 인증제도, 매개변수, 사용자 설정 중 한가지 이상에 의해 정해진 시간 동안 재사용 될 것이다.</li>
+</ul>
+</li>
+<li><p>보호공간의 구체적인 계산은 인증 메커니즘에 달려있다.</p>
+<ol>
+<li><strong>기본 인증</strong><ul>
+<li>클라는 요청 URI와 그 하위의 모든 경로는<br>같은 보호 공간에 있는 것으로 가정한다.</li>
+<li>클라는 이 공간에서 서버로부터의 또 다른 인증 요구를 기다리지 않고, 미리 리소스에 대한 인가를 받을 수 있다.</li>
+</ul>
+</li>
+<li><strong>다이제스트 인증</strong><ul>
+<li><code>WWW-Authenticate: domain</code> 필드는<br>보호 공간을 보다 엄밀하게 정의한다.</li>
+<li>domain 필드는 작은 따옴표로 묶인 URI의 공백으로 분리된 목록이다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domain = &quot;&apos;/cart&apos; &apos;/main&apos;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>이 domain 목록의 모든 URI와<br>논리적으로 그 하위에 위치한 모든 URI는<br>같은 보호 공간에 있는 것으로 가정한다.</p>
+</li>
+<li><p>만약 domain 필드가 없거나 빈 값이라면,<br>인증을 요구하는 서버의 모든 URI는 그 보호 공간에 있는 것이다.</p>
+</li>
+</ul>
+<h2 id="1-4-URI-다시-쓰기-feat-프락시"><a href="#1-4-URI-다시-쓰기-feat-프락시" class="headerlink" title="1.4 URI 다시 쓰기 (feat. 프락시)"></a>1.4 URI 다시 쓰기 (feat. 프락시)</h2><ul>
+<li>프락시는<br>가리키는 리소스의 변경 없이<br><strong>구문만 고쳐서 URI를 다시 쓰기도 한다.</strong></li>
+<li>예<ul>
+<li>호스트 명은 정규화괴거나 IP주소로 대체될 수 있다.</li>
+<li>문자들은 <code>%</code> escape 형식으로 대체될 수 있다.</li>
+<li>특정 원서버로부터 가져오는 리소스에 영향을 주지 않는,<br>타입에 대한 추가 속성이<br>URI의 끝에 붙거나 중간에 삽입될 수 있다.</li>
+</ul>
+</li>
+<li>프락시가<br>URI를 변경할 수 있는 동시에<br>다이제스트 인증은 URI 값의 무결성을 검사하므로<br>다이제스트 인증은 이러한 변경에 의해 실패할 수 있다.</li>
+</ul>
+<h2 id="1-5-캐시"><a href="#1-5-캐시" class="headerlink" title="1.5 캐시"></a>1.5 캐시</h2><ul>
+<li>어떤 공유가 Authorization 헤더를 포함한 요청과 그에 대한 응답을 받은 경우,<br>두 <strong>Cache-Control 지시자</strong> <code>must-revalidate</code>나 <code>public</code> 중 하나가 응답에 존재하지 않는 한<br><strong>다른 요청에 대해 그 응답을 반환해서는 안된다.</strong></li>
+<li>만약 원서버의 응답이 <code>must-revalidate</code> Cache-Control 지시자를 포함한 경우, <ul>
+<li>캐시는 그 응답의 엔터티를 다음 요청에 대한 응답을 위해 활용할 것이다.</li>
+<li>그러나 원 서버가 새 요청을 인증할 수 있도록,<br>우선 그 요청의 헤더를 이용해서 <strong>재검사를 수행해야한다.</strong></li>
+</ul>
+</li>
+<li>만약 원서버의 응답이 <code>public</code> Cache-Control 지시자를 포함한 경우,<br>응답 엔터티는 그 다음에 오는 임의의 요청에 대한 응답으로 반환될 수 있다.</li>
+</ul>
+<hr>
+<hr>
+<a name="guard">
+
+<h1 id="2-보안에-대한-고려사항"><a href="#2-보안에-대한-고려사항" class="headerlink" title="2. 보안에 대한 고려사항"></a>2. 보안에 대한 고려사항</h1><h2 id="TL-DR-1"><a href="#TL-DR-1" class="headerlink" title="TL;DR"></a>TL;DR</h2><ol>
+<li>헤더 부당 변경: <strong>양종단 암호화 / 디지털 서명</strong></li>
+<li>재전송 공격: <strong>매 트랜잭션마다 유일한 난스값</strong></li>
+<li>다중 인증 매커니즘: <strong>가장 강력한 인증 제도만을 유지하는 프락시 서버 사용</strong></li>
+<li>사전 공격: <strong>복잡한 비밀번호사용 및 비밀번호 만료 정책</strong></li>
+<li>악의적인 프락시와 중간 공격: <strong>SSL을 사용하는 것</strong></li>
+<li>선택 평문 공격: <strong>선택적 c난스 사용 / 만료매커니즘 / 강력 비밀번호</strong></li>
+<li>비밀번호 저장: -</li>
+</ol>
+<hr>
+<ol>
+<li><p><strong>헤더 부당 변경</strong></p>
+<ul>
+<li>헤더 부당 변경에 대해 항상 안전한 시스템을 제공하기 위해서<br><strong>양 종단 암호화</strong>나
+헤더에 대한 <strong>디지털 서명</strong>이 필요할 것이다.</li>
+</ul>
+</li>
+<li><p><strong>재전송 공격</strong></p>
+<ul>
+<li>재전송 공격이란, 누군가 어떤 트랜잭션에서 엿들은 인증자격을<br>다른 트랜잭션을 위해 사용하는 것을 말한다.</li>
+<li>GET 요청에 대한 이슈이긴 하지만<br>POST나 PUT 요청에 대한 재전송 공격에 대해서도 항상 잘 동작하는 예방책은 필수적으로 가지고 있어야 한다.</li>
+<li>재전송 공격을 완전히 피할 수 있는 한 방법은<br><strong>매 트랜잭션마다 유일한 난스 값을 사용하는 것</strong>이다.<ul>
+<li>이 구현에서는 매 트랜잭션마다 서버는 유일한 난스를 타임아웃 값과 함께 발급한다.</li>
+<li>발급된 난스 값은 그때의 트랜잭션과 주어진 타임아웃 값의 기간 동안만 유효하다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>다중 인증 메커니즘</strong></p>
+<ul>
+<li>서버가 다중 인증 제도를 지원할때, 선택지를 제공할 것이다.<br>클라에게 가장 강력한 인증 메커니즘을 선택해야 할 의무가 있는 것은 아니기 때문에,<br>결국 인증의 강도는 선택지 중 <strong>가장 약한 것과 같다고 보아야 한다.</strong></li>
+<li>클라가 언제나 가능한 한 가장 강력한 인증제도를 선택하면 문제가 해결하면 되지만,<br>현실적으로 불가능하다면,<br><strong>가장 강력한 인증 제도만을 유지하는 프락시 서버를 사용하여</strong> 해결하는 것이다.<ul>
+<li>그러나 이런 접근은 오직 모든 클라가 우리가 선택한 강력한 인증 제도를 지원할 수 있다고 알려진 경우에만 실현 가능하다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>사전 공격 dictionary</strong></p>
+<ul>
+<li>사전공격은 <strong>전형적인 비밀번호 추측 공격</strong>이다.</li>
+<li>악의적인 사용자는 트랜잭션을 엿들을 수 있고,<br>난스/응답 쌍에 대해 (흔히 구할 수 있는) 비밀번호 추측 프로그램을 사용할 수 있다.</li>
+<li>크래킹하기 어렵도록 <strong>상대적으로 복잡한 비밀번호를 사용하는 것</strong>과 
+<strong>괜찮은 비밀번호 만료 정책</strong> 외에는 실질적으로 없다.</li>
+</ul>
+</li>
+<li><p><strong>악의적인 프락시와 중간 공격</strong> Man in the Middle Attack</p>
+<ul>
+<li><p>리다이렉션 기술과 차단 프락시의 도입으로 사용자는 그의 요청이 프락시를 통과한다는 것조차 눈치 채지 못하고 한다.</p>
+</li>
+<li><p>만약 이들 프락시 중 하나가 악의적이거나 보안이 허술하다면,<br>클라는 중간자 공격에 취약한 상태가 될 가능성이 있다.</p>
+</li>
+<li><p>해결할 좋은 방법은 없지만, 가능한 해결책은,</p>
+<ol>
+<li>클라가 사용자에게 인증의 강도를 시각적으로 보여주는 것</li>
+<li>클라가 언제나 가능한 한 <strong>가장 강력한 인증을 선택하도록</strong> 설정하는 것 </li>
+</ol>
+<p>등이 있다.</p>
+</li>
+<li><p>공격을 방어하는 제일 좋은 방법은 <strong>SSL을 사용하는 것</strong>이다.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>선택 평문 공격</strong></p>
+<ul>
+<li>다이제스트 인증을 사용하는 클라는 응답을 생성하기 위해 서버가 제공한 난스를 사용한다.</li>
+<li>그러나 악의적인 서버나 프락시가 있을 중간에 있을 경우<br>클라 응답 게산을 하기 위한 난스를 제공할 수 있다.<br><strong>= 선택적 평문 공격</strong></li>
+</ul>
+<ol>
+<li><strong>미리 계산된 사전 공격</strong><ul>
+<li>사전공격과 선택 평문 공격의 조합</li>
+</ul>
+<ol>
+<li>공격서버는 미리 결정된 난스와 자주 쓰이는 비밀번호들로 응답의 집합을 생성하고, 사전을 만든다.</li>
+<li>공격 서버/프락시는 트래픽을 차단하고<br>미리 결정된 난스를 클라로 전송하기 시작한다.</li>
+<li>클라로부터 응답을 받을 때, 공격자는 대응되는 항목을 사전에서 찾는다.</li>
+<li>대응되는 것이 있으면, 공격자는 특정 사용자의 비밀번호를 손에 넣은 것</li>
+</ol>
+</li>
+<li><strong>자동화된 무차별 대입 공격</strong><ul>
+<li>많은 컴퓨터를 동원하여 주어진 범위에서 가능한 모든 비밀번호를 열거한다.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>이런 공격으로 인한 위협을 방어하는 방법<ul>
+<li>서버에서 제공된 난스 대신<br><strong>선택적 c난스 지시자를 사용</strong>하여 응답할 수 있도록 한다. </li>
+<li><strong>만료</strong> 메커니즘이나<br><strong>강력한 비밀번호</strong>를 강제하는 정책이 있으면 더 높은 방어가 가능</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>비밀번호 저장</strong></p>
+<ul>
+<li>다이제스트 인증 메커니즘은 사용자 응답을<br>서버 내부에 저장된 것과 비교한다.</li>
+<li>비밀번호가 유출되는 문제를 완화하는 몇가지 방법<ol>
+<li>비밀번호 파일이<br>평문으로 된 비밀번호를 포함하고 있다고 생각하고 안전하게 보호한다. (?)</li>
+<li>영역 이름이 유일함을 보장하며, 비밀번호 파일이 유출되더라도,<br><strong>피해를 특정 영역으로 국소화</strong>한다.<ul>
+<li>호스트와 도메인을 포함한 완전한 영역 이름을 이 요구를 만족한다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc7235#section-2.2" target="_blank" rel="noopener">RFC7235-realm</a></li>
+</ul>
+</a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_013_02/" data-id="ck3n86ina0030wobm1dse9cjp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#real">실제 상황에 대한 고려</a>
+               
+                <div class="first_depth--sub">다중인증요구 / 오류 / realm(보호공간) / URI 다시쓰는.. / 캐시</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#guard">보안에 대한 고려사항</a>
+               
+                <div class="first_depth--sub">헤더 부당변경 / 재전송 공격 / 다중인증 매커니즘 / 사전공격 / 악의적인 프락시와 중간자 공격 / 선택 평문 공격 / 비밀번호 저장</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/12/01/HTTP_014_01/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            HTTPS 이해를 위한 디지털 암호학
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/11/24/HTTP_013_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">다이제스트 인증 (1) - 다이제스트 인증과 특징</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/01/HTTP_014_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/44/thumb_default.jpg)" alt="HTTPS 이해를 위한 디지털 암호학" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/01/HTTP_014_01/" class="title">HTTPS 이해를 위한 디지털 암호학</a></p>
+                            <p class="item-date"><time datetime="2019-12-01T11:43:10.000Z" itemprop="datePublished">2019-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/01/HTTP_013_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/43/thumb_default.jpg)" alt="다이제스트 인증(2) - 실제 다이제스트 인증과 보안" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/01/HTTP_013_02/" class="title">다이제스트 인증(2) - 실제 다이제스트 인증과 보안</a></p>
+                            <p class="item-date"><time datetime="2019-12-01T01:43:10.000Z" itemprop="datePublished">2019-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/24/HTTP_013_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/42/thumb_default.jpg)" alt="다이제스트 인증 (1) - 다이제스트 인증과 특징" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/24/HTTP_013_01/" class="title">다이제스트 인증 (1) - 다이제스트 인증과 특징</a></p>
+                            <p class="item-date"><time datetime="2019-11-24T14:43:10.000Z" itemprop="datePublished">2019-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/23/HTTP_012_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/41/thumb_default.jpg)" alt="기본 인증" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/23/HTTP_012_01/" class="title">기본 인증</a></p>
+                            <p class="item-date"><time datetime="2019-11-23T11:23:55.000Z" itemprop="datePublished">2019-11-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/16/HTTP_011_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/39/thumb_default.jpg)" alt="쿠키 🍪" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/16/HTTP_011_02/" class="title">쿠키 🍪</a></p>
+                            <p class="item-date"><time datetime="2019-11-16T14:23:55.000Z" itemprop="datePublished">2019-11-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 14.55px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.91px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 10.91px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.36px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/TCP-IP/" style="font-size: 10.91px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.91px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 11.82px;">Web</a> <a href="/tags/algorism/" style="font-size: 10.91px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.82px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.55px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 11.82px;">authorization</a> <a href="/tags/blog/" style="font-size: 10.91px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.82px;">browser</a> <a href="/tags/cache/" style="font-size: 10.91px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.82px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 13.64px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.91px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/css/" style="font-size: 10.91px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 11.82px;">digest</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.91px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.91px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.91px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 19.09px;">http</a> <a href="/tags/iterator/" style="font-size: 10.91px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.73px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.91px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.91px;">principle</a> <a href="/tags/programming/" style="font-size: 11.82px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.27px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 12.73px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.64px;">rxjs</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 19.09px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.91px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 18.18px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 15.45px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">82</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/12/01/HTTP_013_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
