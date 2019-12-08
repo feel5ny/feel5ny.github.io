@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>HTTPS의 세부사항 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,study,https,openSSL,sslHandShake,ca">
+    
+    
+    <meta name="description" content="최근 인증서 관련 이슈를 만난적이 있었는데,이번 장을 통해서 조금이나마 이해가 될 수 있게 되었다 :)     HTTPS는 HTTP의 가장 유명한 보안 버전이다. HTTPS는 HTTP 프로토콜에 대칭, 비대칭 인증서 기반 암호 기법의 강력한 집합을 결합한 것이다. HTTPS는 웹 기반 전자상거래의 고속 성장을 이끄는 주력이다.  HTTPS 세부사항 HT">
+<meta name="keywords" content="http,study,https,openSSL,sslHandShake,ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS의 세부사항">
+<meta property="og:url" content="http://feel5ny.github.io/2019/12/08/HTTP_014_02/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="최근 인증서 관련 이슈를 만난적이 있었는데,이번 장을 통해서 조금이나마 이해가 될 수 있게 되었다 :)     HTTPS는 HTTP의 가장 유명한 보안 버전이다. HTTPS는 HTTP 프로토콜에 대칭, 비대칭 인증서 기반 암호 기법의 강력한 집합을 결합한 것이다. HTTPS는 웹 기반 전자상거래의 고속 성장을 이끄는 주력이다.  HTTPS 세부사항 HT">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2019/45/thumb_default.jpg">
+<meta property="og:updated_time" content="2019-12-08T13:10:15.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTPS의 세부사항">
+<meta name="twitter:description" content="최근 인증서 관련 이슈를 만난적이 있었는데,이번 장을 통해서 조금이나마 이해가 될 수 있게 되었다 :)     HTTPS는 HTTP의 가장 유명한 보안 버전이다. HTTPS는 HTTP 프로토콜에 대칭, 비대칭 인증서 기반 암호 기법의 강력한 집합을 결합한 것이다. HTTPS는 웹 기반 전자상거래의 고속 성장을 이끄는 주력이다.  HTTPS 세부사항 HT">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2019/45/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2019/12/08/HTTP_014_02/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <!-- <a href="/" class="logo">
+                                <img src="/images/3.gif" alt="">
+                            </a> -->
+                            <a href="/" class="logo"></a>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2019/45/thumb_default.jpg" alt="HTTPS의 세부사항" style="width:100%">
+    </div>
+
+<article id="post-HTTP_014_02" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        HTTPS의 세부사항
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/12/08/HTTP_014_02/" class="article-date">
+            <time datetime="2019-12-08T11:43:10.000Z" itemprop="datePublished">2019-12-08</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ca/">ca</a>, <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/https/">https</a>, <a class="tag-link" href="/tags/openSSL/">openSSL</a>, <a class="tag-link" href="/tags/sslHandShake/">sslHandShake</a>, <a class="tag-link" href="/tags/study/">study</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">HTTPS의 세부사항</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#scheme">HTTPS 스킴</a>
+               
+                <div class="first_depth--sub">https://</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#setup">보안 전송 셋업</a>
+               
+                <div class="first_depth--sub">http, https</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#handshake">SSL 핸드셰이크</a>
+               
+                <div class="first_depth--sub">handshake, ssl</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#ca">서버 인증서</a>
+               
+                <div class="first_depth--sub">X.509 v3</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">5</span>
+            
+            <div>
+              <a href="#ocsp">사이트 인증서 검사</a>
+               
+                <div class="first_depth--sub">OCSP</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">6</span>
+            
+            <div>
+              <a href="#-">가상 호스팅과 인증서</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#openssl">HTTPS 예시 (feat. OpenSSL)</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#httpsSSLtunnelingProtocol">프락시를 통한 보안 트래픽 터널링</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<blockquote>
+<p>최근 인증서 관련 이슈를 만난적이 있었는데,<br>이번 장을 통해서 조금이나마 이해가 될 수 있게 되었다 :) </p>
+</blockquote>
+<hr>
+<ul>
+<li>HTTPS는 HTTP의 가장 유명한 보안 버전이다.</li>
+<li>HTTPS는 HTTP 프로토콜에 대칭, 비대칭 인증서 기반 암호 기법의 강력한 집합을 결합한 것이다.</li>
+<li>HTTPS는 웹 기반 전자상거래의 고속 성장을 이끄는 주력이다.</li>
+</ul>
+<h1 id="HTTPS-세부사항"><a href="#HTTPS-세부사항" class="headerlink" title="HTTPS 세부사항"></a>HTTPS 세부사항</h1><ul>
+<li>HTTPS는 그냥 보안 전송 계층을 통해 전송되는 HTTP이다.</li>
+<li>HTTPS는 HTTP 메세지를 TCP로 보내기 전에<br>먼저 그것들을 <strong>암호화하는 보안계층</strong>으로 보낸다.</li>
+<li>오늘날 HTTPS의 보안계층은 <strong>SSL과 TLS</strong>로 구현되었다.</li>
+</ul>
+<a name="scheme">
+
+<h2 id="1-HTTPS-스킴"><a href="#1-HTTPS-스킴" class="headerlink" title="1. HTTPS 스킴"></a>1. HTTPS 스킴</h2><ul>
+<li><p>보안 HTTP는 선택적이다.</p>
+</li>
+<li><p>웹 서버로의 요청을 만들때, 웹서버에게 HTTP의 보안 프로토콜 버전을 수행한다고 말해줄 방법이 필요하다.</p>
+</li>
+<li><p>이것은 URL의 스킴을 통해 이루어진다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>만약 URL이 http 스킴을 갖고 있다면<br>클라는 서버에 <strong>80</strong>번 포트로 연결하고<br>평범한 HTTP 명령을 전송한다. </p>
+</li>
+<li><p>만약 URL이 http<code>s</code> 스킴을 갖고 있다면<br>클라는 서버에 <strong>443</strong>번 포트로 연결하고<br>서버와 바이너리 포맷으로 된 몇몇 SSL 보안 매개변수를 교환하면서<br>핸드셰이크를 하고,<br>암호화된 HTTP 명령이 뒤를 잇는다.</p>
+</li>
+<li><p>SSL 트래픽은 <strong>바이너리 프로토콜</strong>이기 때문에 HTTP와는 완전히 다르다. </p>
+<ul>
+<li>그 트래픽은 다른 포트로 전달된다.(SSL은 보통 443포트)</li>
+</ul>
+</li>
+</ul>
+<a name="setup">
+
+<h2 id="2-보안-전송-셋업"><a href="#2-보안-전송-셋업" class="headerlink" title="2. 보안 전송 셋업"></a>2. 보안 전송 셋업</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>HTTP에서는 클라는 </p>
+<ol>
+<li>웹서버의 80번 포트로 TCP 커넥션을 열고, </li>
+<li>요청메세지를 보내고, </li>
+<li>응답메세지를 받고, </li>
+<li>커넥션을 닫는다.</li>
+</ol>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>HTTPS에서는 클라는</p>
+<ol>
+<li>웹서버의 443번 포트로 연결한다. TCP 연결이 되고나면, </li>
+<li>클라와 서버는 암호법 매개변수와 교환 키를 협상하면서 SSL 계층을 초기화한다.</li>
+<li>핸드셰이크가 완료되면 SSL 초기화는 완료되며 클라는 요청 메세지를 보안계층에 보낼 수 있다.<br>이 메세지는 TCP로 보내지기 전에 <strong>암호화</strong>된다. 암호화된 요청을 보낸다.</li>
+<li>SSL을 통해 보내진 HTTP 요청 / TCP를 통해 보내진 암호화된 요청</li>
+<li>SSL 닫힘을 통지한다.</li>
+<li>TCP 커넥션이 닫힌다. </li>
+</ol>
+<img src="/images/2019/45/01.png" style="width:100%">
+
+<a name="handshake">
+
+<h2 id="3-SSL-핸드셰이크"><a href="#3-SSL-핸드셰이크" class="headerlink" title="3. SSL 핸드셰이크"></a>3. SSL 핸드셰이크</h2><ul>
+<li>암호화된 HTTP 메세지를 보낼 수 있게 되기 전에<br>클라와 서버는 SSL 핸드셰이크를 할 필요가 있다.</li>
+<li><strong>핸드셰이크에서 일어나는 일</strong><ol>
+<li>프로토콜 버전 번호 교환</li>
+<li>양쪽이 알고 있는 암호 선택</li>
+<li>양쪽의 신원을 인증</li>
+<li>채널을 암호화하기 위한 임시 세션 키 생성</li>
+</ol>
+</li>
+<li>SSL 핸드셰이크를 단순화한 버전이다.</li>
+<li>SSL이 어떻게 사용되는가에 따라 핸드셰이크는 보다 복잡해질 수 있다.</li>
+</ul>
+<img src="/images/2019/45/02.png">
+
+<p>실제로 좀더 자세히 보면..<br><img src="/images/2019/45/03.png"></p>
+<blockquote>
+<p><a href="https://run-it.tistory.com/29" target="_blank" rel="noopener">출처</a></p>
+</blockquote>
+<h3 id="3-1-예시로-알아보기"><a href="#3-1-예시로-알아보기" class="headerlink" title="3.1 예시로 알아보기"></a>3.1 예시로 알아보기</h3><p><a href="http://www.bing.com에" target="_blank" rel="noopener">www.bing.com에</a> 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 보면서 알아보자.</p>
+<ol>
+<li>(클 =&gt; 서버) Client Hello</li>
+<li>(서버 =&gt; 클) Server Hello</li>
+<li>(서버 =&gt; 클) Certificate</li>
+<li>(서버 =&gt; 클) Certificate Status</li>
+<li>(서버 =&gt; 클) Server Key Exchange</li>
+<li>(서버 =&gt; 클) Server Hello Done</li>
+<li>(클 =&gt; 서버) Client Key Exchange</li>
+<li>(클 =&gt; 서버) Change Cipher Spec</li>
+<li>(클 =&gt; 서버) Encrypted Handshake Message</li>
+<li>(서버 =&gt; 클) Change Cipher Spec</li>
+<li>(서버 =&gt; 클) Encrypted Handshake Message</li>
+</ol>
+<img src="/images/2019/45/04.png" style="width:100%">
+
+<hr>
+<img src="/images/2019/45/05.png" style="width:100%">
+
+<hr>
+<h4 id="1-클-gt-서버-Client-Hello"><a href="#1-클-gt-서버-Client-Hello" class="headerlink" title="1. (클 =&gt; 서버) Client Hello"></a>1. (클 =&gt; 서버) Client Hello</h4><img src="/images/2019/45/06.png">
+
+<ul>
+<li>사용자가 bing에 접속하기 위해 bing 서버쪽에 통신을 요청</li>
+<li>TLS 버전, </li>
+<li>자신이 지원하는 cipher리스트, </li>
+<li>클라이언트가 생성한 난수 정보를 보낸다.</li>
+</ul>
+<img src="/images/2019/45/07.png" style="width:100%">
+
+<h4 id="2-서버-gt-클-Server-Hello"><a href="#2-서버-gt-클-Server-Hello" class="headerlink" title="2. (서버 =&gt; 클) Server Hello"></a>2. (서버 =&gt; 클) Server Hello</h4><ul>
+<li>서버는 자신의 SSL버전</li>
+<li>자신이 만든 임의의 난수와</li>
+<li>클라이언트의 cipher 리스트 중 하나의 선택하여 그 정보를 클라이언트에게 보낸다. </li>
+</ul>
+<img src="/images/2019/45/08.png" style="width:100%">
+
+<h4 id="3-서버-gt-클-Certificate"><a href="#3-서버-gt-클-Certificate" class="headerlink" title="3. (서버 =&gt; 클) Certificate"></a>3. (서버 =&gt; 클) Certificate</h4><ul>
+<li>서버는 자신이 갖고있는 인증서정보를 전송한다.</li>
+<li>첫번째는 서버의 인증서 이고<br>두번째는 CA 인증서이다.</li>
+</ul>
+<img src="/images/2019/45/11.png">
+
+<hr>
+<img src="/images/2019/45/09.png" style="width:100%">
+
+<h4 id="4-서버-gt-클-Certificate-Status"><a href="#4-서버-gt-클-Certificate-Status" class="headerlink" title="4. (서버 =&gt; 클) Certificate Status"></a>4. (서버 =&gt; 클) Certificate Status</h4><ul>
+<li>갖고있는 인증서의 유효성 정보를를 전송한다.</li>
+<li>OCSP는 <code>온라인 인증서 상태 프로토콜</code>의 약자로, 인증서 유효성 확인을 제공하는 방법이다.</li>
+</ul>
+<img src="/images/2019/45/10.png" style="width:100%">
+
+<h4 id="5-서버-gt-클-Server-Key-Exchange"><a href="#5-서버-gt-클-Server-Key-Exchange" class="headerlink" title="5. (서버 =&gt; 클) Server Key Exchange"></a>5. (서버 =&gt; 클) Server Key Exchange</h4><ul>
+<li>서버는 ECDHE 키 쌍을 만들어서 클라에게 public 키를 전송한다.</li>
+<li>이 키는 클라의 public키를 이용해서 ECDHE shared secret을 만들기 위해 사용된다.<blockquote>
+<p><strong>ECDHE</strong> : Elliptic Curve 및 Ephermeral 을 지원하는 디피 헬만 (Diffie Hellman) 방식 (PFS, Perfect Foward Secrecy  지원) <a href="https://rsec.kr/?p=455" target="_blank" rel="noopener">출처</a></p>
+</blockquote>
+</li>
+</ul>
+<img src="/images/2019/45/12.png" style="width:100%">
+
+<h4 id="6-서버-gt-클-Server-Hello-Done"><a href="#6-서버-gt-클-Server-Hello-Done" class="headerlink" title="6. (서버 =&gt; 클) Server Hello Done"></a>6. (서버 =&gt; 클) Server Hello Done</h4><ul>
+<li>서버의 말이 끝남</li>
+</ul>
+<h4 id="7-클-gt-서버-Client-Key-Exchange"><a href="#7-클-gt-서버-Client-Key-Exchange" class="headerlink" title="7. (클 =&gt; 서버) Client Key Exchange"></a>7. (클 =&gt; 서버) Client Key Exchange</h4><ul>
+<li>클라는<br>자신이 마든 난수와 + 서버가 만든 난수를 통해<br>= pre-master-secret을 생성한다.</li>
+<li>서버의 공개키를 통해 암호화하여 서버로 전송한다. (아까 5번에서 받은 public key)</li>
+<li>즉, 해당과정을 통해 실질적으로 암호화에 사용하는 <strong>대칭키</strong>가 생성된다.</li>
+</ul>
+<img src="/images/2019/45/13.png" style="width:100%">
+
+<h4 id="8-클-gt-서버-Change-Cipher-Spec"><a href="#8-클-gt-서버-Change-Cipher-Spec" class="headerlink" title="8. (클 =&gt; 서버) Change Cipher Spec"></a>8. (클 =&gt; 서버) Change Cipher Spec</h4><ul>
+<li>클라이언트가 성공적으로 공유키를 생성했으며,<br><strong>이후 메시지는 암호화 하여 전송할 것을 알리는 메시지</strong>를 전송한다. </li>
+</ul>
+<img src="/images/2019/45/14.png">
+
+
+<h4 id="9-클-gt-서버-Encrypted-Handshake-Message-Finished"><a href="#9-클-gt-서버-Encrypted-Handshake-Message-Finished" class="headerlink" title="9. (클 =&gt; 서버) Encrypted Handshake Message(Finished)"></a>9. (클 =&gt; 서버) Encrypted Handshake Message(Finished)</h4><ul>
+<li>클라이언트는 서버에게 핸드셰이크가 성공적으로 완료되었음을 알린다.</li>
+</ul>
+<img src="/images/2019/45/15.png">
+
+<h4 id="10-서버-gt-클-Change-Cipher-Spec"><a href="#10-서버-gt-클-Change-Cipher-Spec" class="headerlink" title="10. (서버 =&gt; 클) Change Cipher Spec"></a>10. (서버 =&gt; 클) Change Cipher Spec</h4><ul>
+<li>서버도 성공적으로 공유키를 생성했음을 알린다.</li>
+</ul>
+<h4 id="11-서버-gt-클-Encrypted-Handshake-Message-Finished"><a href="#11-서버-gt-클-Encrypted-Handshake-Message-Finished" class="headerlink" title="11. (서버 =&gt; 클) Encrypted Handshake Message(Finished)"></a>11. (서버 =&gt; 클) Encrypted Handshake Message(Finished)</h4><ul>
+<li>서버도 클라에언트에게 핸드셰이크가 성공적으로 완료되었음을 알린다.</li>
+</ul>
+<h4 id="12-어플리케이션-데이터"><a href="#12-어플리케이션-데이터" class="headerlink" title="12. 어플리케이션 데이터"></a>12. 어플리케이션 데이터</h4><ul>
+<li>서로 상대방에게 전송할 데이터를 암호화하여 전송한다.</li>
+</ul>
+<a name="ca">
+
+<h2 id="4-서버-인증서"><a href="#4-서버-인증서" class="headerlink" title="4. 서버 인증서"></a>4. 서버 인증서</h2><ul>
+<li>SSL 인증서는 클라이언트와 서버간의 통신을 제3자가 보증해주는 전자화된 문서다.</li>
+<li>SSL은 서버 인증서를 클라로 나르고<br>다시 클라 인증서를 서버로 날라주는 상호 인증을 지원한다.<ul>
+<li>오늘날 클라 인증서는 흔히 쓰이지 않는다.</li>
+</ul>
+</li>
+<li>보안 HTTPS 트랜잭션은 항상 서버 인증서를 요구한다.</li>
+<li>서버 인증서는 <code>X.509 v3</code>에서 파생되 인증서이다. <a href="https://feel5ny.github.io/2019/12/01/HTTP_014_01/#certs">디지털 인증서</a></li>
+</ul>
+<img src="/images/2019/45/16.png">
+
+<a name="ocsp">
+
+<h2 id="5-사이트-인증서-검사"><a href="#5-사이트-인증서-검사" class="headerlink" title="5. 사이트 인증서 검사"></a>5. 사이트 인증서 검사</h2><ul>
+<li>SSL 자체는 사용자에게 웹 서버 인증서를 검증할 것을 요구하지 않지만,<br>최신 웹브라우저들 대부분은 인증서에 대해 간단하게 기본적인 검사를 하고<br>그 결과를 더 철저한 검사를 할 수 있는 방법과 함께 사용자에게 알려준다.</li>
+<li>넷스케이프가 제안한 웹 서버 인증서 검사를 위한 한 알고리즘 수행 단계는 다음과 같다.<ol>
+<li>날짜 검사</li>
+<li>서명자 신뢰도 검사</li>
+<li>서명 검사</li>
+<li>사이트 신원 검사</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-날짜-검사"><a href="#1-날짜-검사" class="headerlink" title="1. 날짜 검사"></a>1. 날짜 검사</h3><ul>
+<li>브라우저는.<br>인증서가 여전히 유효함을 확인하기 위해<br>인증서의 시작 및 종료일을 검사한다.</li>
+<li>만료되었거나 활성화되지 않았다면<br>인증서 검사는 실패. 브라우저는 에러를 보여준다.</li>
+</ul>
+<h3 id="2-서명자-신뢰도-검사"><a href="#2-서명자-신뢰도-검사" class="headerlink" title="2. 서명자 신뢰도 검사"></a>2. 서명자 신뢰도 검사</h3><ul>
+<li>모든 인증서는 서버를 보증하는 어떤 인증기관에 의해 서명되어 있다.<br><code>CA</code> = Certificate Authority</li>
+<li>여러가지 수준의 인증서가 있는데, 각각은 다른 수준의 배경 검증을 요구한다.<ul>
+<li>전자상거래 서버 인증서를 발급받고자 한다면,<br>사업체로서의 법인에 대한 법적 증명을 제시해야 한다.</li>
+</ul>
+</li>
+<li>누구나 인증서를 생성할 수 있지만 몇몇 CA는<br>인증서 지원자의 신원 및 사업의 선량함을 입증하는<br>알기쉬운 절차를 갖춘 잘 알려진 기관이다.</li>
+<li>이러한 이유료, <strong>브라우저는 신뢰할 만한 서명 기관의 목록을 포함한 채로 배포</strong>된다.<blockquote>
+<p>브라우저마다 다르게 셋팅되어있다. <a href="https://security.stackexchange.com/questions/49006/list-of-certificate-authorities-in-browsers-and-mobile-platforms" target="_blank" rel="noopener">출처</a></p>
+<ul>
+<li><a href="https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/included/" target="_blank" rel="noopener">Firefox</a></li>
+<li>Chrome: it uses the certificates included with the OS.</li>
+<li><a href="https://certs.opera.com/" target="_blank" rel="noopener">Opera</a>: it install the most uses CA within installing the application, you can find the rest in the online root repository</li>
+<li><a href="https://support.apple.com/kb/ht5012" target="_blank" rel="noopener">iOs</a></li>
+</ul>
+</blockquote>
+</li>
+<li>만약 브라우저가 알려져 있지 않은 인증기관으로부터 서명된 인증서를 받았다면<br>브라우저는 보통 경고를 보여준다.</li>
+<li>브라우저는 신뢰할만한 CA가 간접적으로 서명한 인증서를 받아들이는 것을 선택할 수 있다<ul>
+<li>신뢰할만한 CA가 ‘필오의 개발일지’를 위한 인증서에 서명을 하고<br>필요의 개발일지는 어떤 사이트 인증서에 서명을 한다면,<br>브라우저는 그 인증서를 올바른 CA 경로에서 파생된 것으로 보고 받아들일 수 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-서명-검사"><a href="#3-서명-검사" class="headerlink" title="3. 서명 검사"></a>3. 서명 검사</h3><ul>
+<li>한번 서명 기관이 믿을 만하다고 판단되면,<br>브라우저는 서명기관의 공개키를 서명에 적용하여,<br>그의 체크섬과 비교해봄으로써 인증서의 무결성을 검사한다.</li>
+</ul>
+<h3 id="4-사이트-신원-검사"><a href="#4-사이트-신원-검사" class="headerlink" title="4. 사이트 신원 검사"></a>4. 사이트 신원 검사</h3><ul>
+<li><p>서버가 누군가 다른 이의 인증서를 복사하거나,<br>그들의 트래픽을 가로채는 것을 방지하기 위해, </p>
+</li>
+<li><p>대부분의 브라우저는<br><strong>인증서의 도메인 이름이</strong><br><strong>대화 중인 서버의 도메인 이름과 비교하여 맞는지</strong> 검사한다.</p>
+</li>
+<li><p>서버 인증서에는 보통 단일 도메인 이름이 들어있지만<br>몇몇 CA는 서버 클러스터나 서버 팜을 위해<br>서버 이름의 목록이나 서버 이름들에 대한 와일드카드 표현이 들어있는 인증서를 만든다.</p>
+<blockquote>
+<p><strong>서버 클러스터란?</strong> (<a href="https://allpartner.tistory.com/11" target="_blank" rel="noopener">IT솔루션 by 올파</a>)</p>
+<ul>
+<li>서버 클러스터란 <strong>각기 다른 서버(Server Enterprise or server Datacenter)들을 하나로 묶어서 하나의 시스템같이 동작하게 함으로써, 클라이언트들에게 고가용성의 서비스를 제공하는것을 말한다.</strong> </li>
+<li>클러스터로 묶인 한시스템에 장애가 발생하면, 정보의 제공 포인트는 클러스터로 묶인 다른 정상적인 서버로 이동한다. </li>
+<li>서버클러스터는 <strong>사용자로 하여금 서버 기반 정보를 지속적이고, 끊기지않게 제공받을수 있게 한다</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>서버 팜이란?</strong></p>
+<ul>
+<li>서버 클러스터라고 불리기도 하는 서버팜은 <strong>컴퓨터 서버와 운영 시설을 한곳에 모아 놓은 곳</strong></li>
+<li>허가받지 않은 외부에선 접근이 불가능</li>
+<li>임의의 서버가 중단되더라도 다른 서버로 대체되어 원할한 서비스를 제공한다.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>와일드 카드</strong>란?</p>
+<ul>
+<li>파일을 지정할 때, 구체적인 이름 대신에 여러 파일을 동시에 지정할 목적으로 사용하는 <strong>특수 기호</strong>. <code>＊&#39;,？&#39;</code> 따위.</li>
+</ul>
+</blockquote>
+</li>
+<li><p>만약 호스트명이 인증서의 신원과 맞지 않는다면,<br>사용자를 우선으로 생각하는 클라이언트는 반드시 이 사실을 사용자에게 알리거나 잘못된 인증서 에러와 함께 커넥션을 끊어야 한다.</p>
+</li>
+</ul>
+<a name="-">
+
+<h2 id="6-가상-호스팅과-인증서"><a href="#6-가상-호스팅과-인증서" class="headerlink" title="6. 가상 호스팅과 인증서"></a>6. 가상 호스팅과 인증서</h2><blockquote>
+<p>잘 모르겠다.</p>
+</blockquote>
+<ul>
+<li>가상 호스트(하나의 서버에 여러 호스트명)로 운영되는 사이트의 보안 트래픽을 다루는 것은 까다로운 경우도 많다.</li>
+<li>만약 사용자가 인증서의 이름과 정확히 맞지 않는 가상 호스트 명에 도착했다면 경고 상자가 나타날 것이다.</li>
+</ul>
+<hr>
+<hr>
+<a name="openssl">
+
+<h1 id="HTTPS-예시-feat-OpenSSL"><a href="#HTTPS-예시-feat-OpenSSL" class="headerlink" title="HTTPS 예시 (feat. OpenSSL)"></a>HTTPS 예시 (feat. <code>OpenSSL</code>)</h1><ul>
+<li>SSL은 복잡한 바이너리 프로토콜이다.</li>
+<li>가공되지 않은 SSL 트래픽을 직접보는 것은 어렵다.</li>
+<li>몇가지 SSL 클라이언트와 서버 프로그래밍을 쉽게 만들어주는 상용 혹은 오픈 소스 라이브러리들이 존재한다.</li>
+</ul>
+<h2 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h2><ul>
+<li>OpenSSL은 SSL과 TLS의 가장 인기 있는 오픈 소스 구현이다.</li>
+<li><a href="http://www.openssl.org" target="_blank" rel="noopener">http://www.openssl.org</a> </li>
+<li>SSLeay도 있다.</li>
+</ul>
+<h3 id="온라인-중개소의-홈페이지에-접속했을-때"><a href="#온라인-중개소의-홈페이지에-접속했을-때" class="headerlink" title="온라인 중개소의 홈페이지에 접속했을 때"></a>온라인 중개소의 홈페이지에 접속했을 때</h3><p>clients1.online.msdw.com 의 사이트라고 가정</p>
+<ol>
+<li><p>SSL 컨텍스트가 초기화 되었다.</p>
+</li>
+<li><p>clients1.online.msdw.com의 IP주소: 63.151.15.11</p>
+</li>
+<li><p>호스트 clients1.online.msdw.com, 포트 443으로 TCP 커넥션을 열었다.</p>
+</li>
+<li><p>SSL endpoint가 생성되었으며 핸드셰이크 완료</p>
+</li>
+<li><p>다음의 암호로 SSL 연결이 됨: DES-CBC3-MD5</p>
+</li>
+<li><p>서버 인증서를 받았다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">대상: /C=US/ST=Utah/L=Salt Lake City/O=Morgan Stanley/OU=Online/CN=clients1.online.msdw.com</span><br><span class="line">발급자: /C=US/O=RSA Data Security, Inc./OU=Secure Server Certification Authority</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>암호화된 채널을 통해 HTTP 요청을 보냈다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.0</span><br><span class="line">Host: Clients1.online.msdw.com:443</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTP응답에서 615바이트를 가져왔다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sat, 09 Mar 2002 09:43:42 GMT</span><br><span class="line">Server: ...</span><br><span class="line">Location: ...</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; ...</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>모두 끝났으므로 커넥션을 닫고 정리한다.</p>
+</li>
+</ol>
+<hr>
+<hr>
+<a name="httpsSSLtunnelingProtocol">
+
+<h1 id="프락시를-통한-보안-트래픽-터널링-HTTPS-SSL-터널링-프로토콜"><a href="#프락시를-통한-보안-트래픽-터널링-HTTPS-SSL-터널링-프로토콜" class="headerlink" title="프락시를 통한 보안 트래픽 터널링 (HTTPS SSL 터널링 프로토콜)"></a>프락시를 통한 보안 트래픽 터널링 (HTTPS SSL 터널링 프로토콜)</h1><ul>
+<li><p>클라는 종종 웹 프락시 서버를 이용한다. </p>
+</li>
+<li><p>그러나 클라가 서버로 보낼 데이터를 서버의 공개키로 암호화하기 시작했다면, 프락시는 더 이상 HTTP 헤더를 읽을 수 없다.</p>
+</li>
+<li><p>만약 프락시가 HTTP 헤더를 읽을 수 없다면, 요청을 어디로 보내야 하는지 알 수 없게 된다.</p>
+</li>
+<li><p>해결 방법 중에 인기있는 방법은 <strong>HTTPS SSL 터널링 프로토콜</strong>이다.</p>
+</li>
+<li><p>클라는 먼저 프락시에게 자신이 연결하고자 하는 안전한 호스트와 포트를 말해준다.</p>
+</li>
+<li><p>클라는 이 내용을 프락시가 읽을 수 있도록 암호화가 시작되기 전의 평문으로 말해준다.</p>
+</li>
+<li><p>HTTP는 <a href="http://localhost:4000/2019/08/16/HTTP_003_02/#9" target="_blank" rel="noopener">CONNECT</a>라 불리는 새로운 확장 메서드를 이용해서 평문으로 된 endpoint 정보를 전송하기 위해 사용된다.</p>
+<ul>
+<li>CONNECT 메서드는 프락시에게 희망하는 호스트와 포트번호로 연결을 해달라고 말해주며<br>그것이 완료되면 클라와 서버 사이에서<br>데이터가 직접적으로 오갈 수 있게 해주는 터널을 만든다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CONNECT home.netscape.com:443 HTTP/1.0</span><br><span class="line">User-agent: Mozilla/1.1N</span><br><span class="line"></span><br><span class="line">&lt;SSL로 암호화된 데이터가 이 다음에 온다..&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>클라는 프락시로부터의 응답을 기다릴 것이다.</p>
+<ul>
+<li>프락시는 요청을 평가하여 그것이 유효하고,<br>사용자가 그러한 커넥션을 요청할 수 있도록 허가를 받앗는지 확인한다.</li>
+<li>모든 것이 적법하다면 프락시는 목적지 서버로 연결하고<br>성공하면 <code>200 Connection Established</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ul>
+<li><a href="https://run-it.tistory.com/29" target="_blank" rel="noopener">SSL 핸드셰이크1</a></li>
+<li><a href="http://blog.daum.net/tlos6733/58" target="_blank" rel="noopener">인증서</a></li>
+<li><a href="https://www.securesign.kr/guides/kb/24" target="_blank" rel="noopener">ocsp</a></li>
+<li><a href="https://kthan.tistory.com/entry/TLS-%ED%95%B8%EB%93%9C%EC%89%90%EC%9D%B4%ED%81%AC-Handshake-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-%EB%B6%84%EC%84%9D" target="_blank" rel="noopener">SSL 핸드셰이크2</a></li>
+<li><a href="https://rsec.kr/?p=455" target="_blank" rel="noopener">ECDHE</a></li>
+<li><a href="https://opentutorials.org/course/228/4894" target="_blank" rel="noopener">생활코딩 - HTTPS와 SSL 인증서</a></li>
+</ul>
+</a></a></a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2019/12/08/HTTP_014_02/" data-id="ck3x0yutu005jydbmh1fuidnb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">HTTPS의 세부사항</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#scheme">HTTPS 스킴</a>
+               
+                <div class="first_depth--sub">https://</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#setup">보안 전송 셋업</a>
+               
+                <div class="first_depth--sub">http, https</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#handshake">SSL 핸드셰이크</a>
+               
+                <div class="first_depth--sub">handshake, ssl</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#ca">서버 인증서</a>
+               
+                <div class="first_depth--sub">X.509 v3</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">5</span>
+            
+            <div>
+              <a href="#ocsp">사이트 인증서 검사</a>
+               
+                <div class="first_depth--sub">OCSP</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">6</span>
+            
+            <div>
+              <a href="#-">가상 호스팅과 인증서</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#openssl">HTTPS 예시 (feat. OpenSSL)</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#httpsSSLtunnelingProtocol">프락시를 통한 보안 트래픽 터널링</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/12/01/HTTP_014_01/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">HTTPS 이해를 위한 디지털 암호학</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/08/HTTP_014_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/45/thumb_default.jpg)" alt="HTTPS의 세부사항" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/08/HTTP_014_02/" class="title">HTTPS의 세부사항</a></p>
+                            <p class="item-date"><time datetime="2019-12-08T11:43:10.000Z" itemprop="datePublished">2019-12-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/01/HTTP_014_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/44/thumb_default.jpg)" alt="HTTPS 이해를 위한 디지털 암호학" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/01/HTTP_014_01/" class="title">HTTPS 이해를 위한 디지털 암호학</a></p>
+                            <p class="item-date"><time datetime="2019-12-01T11:43:10.000Z" itemprop="datePublished">2019-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/01/HTTP_013_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/43/thumb_default.jpg)" alt="다이제스트 인증(2) - 실제 다이제스트 인증과 보안" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/01/HTTP_013_02/" class="title">다이제스트 인증(2) - 실제 다이제스트 인증과 보안</a></p>
+                            <p class="item-date"><time datetime="2019-12-01T01:43:10.000Z" itemprop="datePublished">2019-12-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/24/HTTP_013_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/42/thumb_default.jpg)" alt="다이제스트 인증 (1) - 다이제스트 인증과 특징" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/24/HTTP_013_01/" class="title">다이제스트 인증 (1) - 다이제스트 인증과 특징</a></p>
+                            <p class="item-date"><time datetime="2019-11-24T14:43:10.000Z" itemprop="datePublished">2019-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/11/23/HTTP_012_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/41/thumb_default.jpg)" alt="기본 인증" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/11/23/HTTP_012_01/" class="title">기본 인증</a></p>
+                            <p class="item-date"><time datetime="2019-11-23T11:23:55.000Z" itemprop="datePublished">2019-11-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 14.55px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.91px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 10.91px;">Joy</a> <a href="/tags/OOP/" style="font-size: 16.36px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/TCP-IP/" style="font-size: 10.91px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.91px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 11.82px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.91px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.82px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.55px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.91px;">authorization</a> <a href="/tags/blog/" style="font-size: 10.91px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.82px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.91px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.82px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 13.64px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.91px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.91px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.91px;">digest</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.91px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.91px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.91px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 19.09px;">http</a> <a href="/tags/https/" style="font-size: 10.91px;">https</a> <a href="/tags/iterator/" style="font-size: 10.91px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.73px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.91px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.91px;">principle</a> <a href="/tags/programming/" style="font-size: 11.82px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 17.27px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 12.73px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.64px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 19.09px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.91px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 18.18px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 15.45px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2019 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2019/12/08/HTTP_014_02/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
