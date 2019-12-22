@@ -337,6 +337,22 @@ code {
   -moz-background-size: 240px 240px;
   background-size: 240px 240px;
 }
+.sub-logo {
+  display: block;
+  margin-top: 30px;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  position: absolute;
+  width: 520px;
+  height: 245px;
+  background-image: url("/images/top_2020.png");
+  background-position: 0px 10px;
+  background-repeat: no-repeat;
+  -webkit-background-size: 520px 245px;
+  -moz-background-size: 520px 245px;
+  background-size: 520px 245px;
+}
 #bm {
   width: 200px;
   margin: 0 auto;
@@ -449,7 +465,6 @@ code {
 }
 #header-title .logo-wrap__box,
 #header-title .subtitle-wrap__box {
-  position: relative;
   text-align: center;
 }
 #header-title .logo-wrap img,
