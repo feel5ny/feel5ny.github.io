@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>엔터티와 인코딩 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,encoding,endity">
+    
+    
+    <meta name="description" content="HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.HTTP는 콘텐츠를 잘 나르기 위한잘 라벨링된 엔터티를 사용한다.  엔터티와 엔터티 헤더들 웹상의 화물을 수송하기 위해 어떤일을 하는지 HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지 복잡하지만 강력한 기능을 알아본다.HTTP 엔터티, 범위요청(range request">
+<meta name="keywords" content="http,encoding,endity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="엔터티와 인코딩">
+<meta property="og:url" content="http://feel5ny.github.io/2020/01/05/HTTP_015_01/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.HTTP는 콘텐츠를 잘 나르기 위한잘 라벨링된 엔터티를 사용한다.  엔터티와 엔터티 헤더들 웹상의 화물을 수송하기 위해 어떤일을 하는지 HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지 복잡하지만 강력한 기능을 알아본다.HTTP 엔터티, 범위요청(range request">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2020/01/thumb_default.jpg">
+<meta property="og:updated_time" content="2020-01-05T15:00:24.672Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="엔터티와 인코딩">
+<meta name="twitter:description" content="HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.HTTP는 콘텐츠를 잘 나르기 위한잘 라벨링된 엔터티를 사용한다.  엔터티와 엔터티 헤더들 웹상의 화물을 수송하기 위해 어떤일을 하는지 HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지 복잡하지만 강력한 기능을 알아본다.HTTP 엔터티, 범위요청(range request">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2020/01/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2020/01/05/HTTP_015_01/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2020/01/thumb_default.jpg" alt="엔터티와 인코딩" style="width:100%">
+    </div>
+
+<article id="post-HTTP_015_01" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        엔터티와 인코딩
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/01/05/HTTP_015_01/" class="article-date">
+            <time datetime="2020-01-05T11:43:10.000Z" itemprop="datePublished">2020-01-05</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/encoding/">encoding</a>, <a class="tag-link" href="/tags/endity/">endity</a>, <a class="tag-link" href="/tags/http/">http</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">엔터티에 대하여</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#entity">메세지는 컨테이너, 엔터티는 화물</a>
+               
+                <div class="first_depth--sub">entity = entity headers + entity body</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#length">content-length: 엔터티의 길이</a>
+               
+                <div class="first_depth--sub">잘림 검출, 콘텐츠 인코딩, 지속커넥션</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#type">미디어 타입과 charset</a>
+               
+                <div class="first_depth--sub">Content-Type, MIME, 인코딩, multipart</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">전송 전 ~ 전송 후</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#checksum">엔터티 요약 (무결성 검사용)</a>
+               
+                <div class="first_depth--sub">Content-MD5</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#encoding">콘텐츠 인코딩 (압축, 암호화)</a>
+               
+                <div class="first_depth--sub">Content-Encoding</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#transfer">전송 인코딩과 청크 인코딩</a>
+               
+                <div class="first_depth--sub">Transfer-encoding</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<p>HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.<br>HTTP는 콘텐츠를 잘 나르기 위한<br><strong>잘 라벨링된 엔터티</strong>를 사용한다.</p>
+<ul>
+<li>엔터티와 엔터티 헤더들</li>
+<li>웹상의 화물을 수송하기 위해 어떤일을 하는지</li>
+<li>HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지</li>
+<li>복잡하지만 강력한 기능을 알아본다.<br>HTTP 엔터티, 범위요청(range request), 델타 인코딩(delta encoding), 요약(digest), 청크 인코딩(chunked encoding)</li>
+</ul>
+<h1 id="엔터티에-대하여"><a href="#엔터티에-대하여" class="headerlink" title="엔터티에 대하여"></a>엔터티에 대하여</h1><a name="entity">
+
+<h2 id="1-메세지는-컨테이너-엔터티는-화물"><a href="#1-메세지는-컨테이너-엔터티는-화물" class="headerlink" title="1. 메세지는 컨테이너, 엔터티는 화물"></a>1. 메세지는 컨테이너, 엔터티는 화물</h2><img src="/images/2020/01/01.png" style="width:200px">
+
+<ul>
+<li>엔터티는 엔터티헤더 + 엔터티 본문의 조합</li>
+</ul>
+<h3 id="1-1-엔터티-헤더-참고"><a href="#1-1-엔터티-헤더-참고" class="headerlink" title="1.1 엔터티 헤더 (참고)"></a>1.1 엔터티 헤더 (<a href="https://feel5ny.github.io/2019/08/18/HTTP_003_04/#4">참고</a>)</h3><ul>
+<li>3가지 종류의 헤더가 있다 <ol>
+<li>엔터티 정보헤더, </li>
+<li>콘텐츠 헤더, </li>
+<li>엔터티 캐싱 헤더</li>
+</ol>
+</li>
+</ul>
+<h4 id="1-엔터티-정보헤더"><a href="#1-엔터티-정보헤더" class="headerlink" title="1. 엔터티 정보헤더"></a>1. 엔터티 정보헤더</h4><ol>
+<li><code>Allow</code> : 이 리소스에 대해 <strong>어떤 요청 메서드가 허용</strong>되는지</li>
+</ol>
+<h4 id="2-콘텐츠-헤더"><a href="#2-콘텐츠-헤더" class="headerlink" title="2. 콘텐츠 헤더"></a>2. 콘텐츠 헤더</h4><ol>
+<li><code>Content-Type</code> : 엔터티에 의해 전달된 객체의 <strong>종류</strong></li>
+<li><code>Content-Length</code> : 전달되는 메세지의 <strong>길이나 크기</strong></li>
+<li><code>Content-Language</code> : 전달되는 객체와 가장 잘 대응되는 <strong>자연어</strong></li>
+<li><code>Content-Encoding</code> : 객체 데이터에 대해 행해진 <strong>변형</strong> (압축 등)</li>
+<li><code>Content-Location</code> : 요청 시점 기준으로, 객체의 또 다르 <strong>위치</strong></li>
+<li><code>Content-Range</code> : 이 엔터티가 부분 엔터티라면, 이 헤더는 이 엔터티가 전체에서 <strong>어느 부분에 해당</strong>하는지 정의한다.</li>
+<li><code>Content-MD5</code> : 엔터티 본문의 콘텐츠에 대한 <strong>체크섬</strong>(중복검사의 한 형태)</li>
+</ol>
+<h4 id="3-엔터티-캐싱-헤더"><a href="#3-엔터티-캐싱-헤더" class="headerlink" title="3. 엔터티 캐싱 헤더"></a>3. 엔터티 캐싱 헤더</h4><ol>
+<li><code>Last-Modified</code> : 서버에서 이 콘텐츠가 <strong>생성 혹은 수정된 날</strong></li>
+<li><code>Expires</code> : 이 엔터티 데이터가 <strong>더 이상 신선하지 않은 것으로 간주</strong>되기 시작하는 날짜와 시각</li>
+<li><code>ETag</code> : 이 인스턴스에 대한 <strong>고유한</strong> 검사기</li>
+</ol>
+<h3 id="1-2-엔터티-본문"><a href="#1-2-엔터티-본문" class="headerlink" title="1.2 엔터티 본문"></a>1.2 엔터티 본문</h3><ul>
+<li>엔터티 본문은 가공되지 않은 데이터만을 담고 있다. raw data</li>
+<li>다른 정보들은 모두 헤더에 담겨 있다.</li>
+<li>엔터티본문은 CRLF (캐리지 리턴 + 개행) 줄 바로 다음부터 시작한다.</li>
+</ul>
+<a name="length">
+
+<h2 id="2-Content-Length-엔터티의-길이"><a href="#2-Content-Length-엔터티의-길이" class="headerlink" title="2. Content-Length 엔터티의 길이"></a>2. <code>Content-Length</code> 엔터티의 길이</h2><ul>
+<li>메세지의 엔터티 본문의 크기를 <strong>바이트 단위</strong>로 나타낸다.</li>
+<li>어떻게 인코딩 되었든 상관없이 크기를 표현할 수 있다.<ul>
+<li><strong>gzip</strong>으로 압축된 텍스트 파일이라면 =&gt; 원래 크기가 아니라 <strong>압축된 후의 크기</strong></li>
+</ul>
+</li>
+<li>엔터티 본문을 포함한 메세지에서는 필수적으로 있어야 한다.<ul>
+<li>서버 충돌로 인해 메세지가 잘렸는지 감지하고자 할때</li>
+<li>지속 커넥션을 공유하는 메세지를 올바르게 분할하고자 할때 필요</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-잘림-검출"><a href="#2-1-잘림-검출" class="headerlink" title="2.1 잘림 검출"></a>2.1 잘림 검출</h3><ul>
+<li>옛날 버전의 HTTP: 커넥션이 닫힌 것을 보고 메세지가 끝났음을 인지<ul>
+<li>Content-length가 없다면 클라는 <ol>
+<li>커넥션이 정상적으로 닫힌 것인지,</li>
+<li>메세지 전송 중에 서버에 충돌이 발생한 것인지 구분하지 못함</li>
+</ol>
+</li>
+<li>잘림을 검출하기 위해 Content-length가 필요로 했다.</li>
+</ul>
+</li>
+<li>메세지 잘림은 <strong>캐싱 프락시 서버</strong>에서 특히 취약하다.<ol>
+<li>캐시가 잘린 메세지를 수신했으나 잘렸다는 것을 ㅇ니식하지 못했다면</li>
+<li>캐시는 결함이 있는 콘텐츠를 저장하고</li>
+<li>계속 제공하게 돌 것이다.</li>
+</ol>
+</li>
+<li>캐싱 프락시 서버는 명시적으로 Content-length 헤더를 갖고 있지 않은 HTTP본문은 <strong>보통 캐시하지 않는다.</strong></li>
+</ul>
+<h3 id="2-2-잘못된-Content-length"><a href="#2-2-잘못된-Content-length" class="headerlink" title="2.2 잘못된 Content-length"></a>2.2 잘못된 Content-length</h3><ul>
+<li>공식적으로 HTTP/1.1 사용자 에이전트는 잘못된 길이를 받고 그 사실을 인지했을 때 사용자에게 알려주게 되어 있다.</li>
+</ul>
+<h3 id="2-3-Content-length와-지속커넥션"><a href="#2-3-Content-length와-지속커넥션" class="headerlink" title="2.3 Content-length와 지속커넥션"></a>2.3 Content-length와 지속커넥션</h3><ul>
+<li>Content-length는 지속커넥션을 위해 필수다.</li>
+<li>만약 응답이 지속커넥션을 통해서 온 것이라면, 또 다른 HTTP 응답이 즉시 그 뒤를 이을 것이다.</li>
+<li>Content-length 헤더는 클라에게 메세지 하나가 어디서 끝나고 다음 시작은 어디인지 알려주는데, </li>
+<li>커넥션이 지속적일경우 클라가 커넥션이 닫힌 위치를 근거로 메세지의 끝을 인식하는 것은 불가능하므로,<br>Content-length로 시작과 끝을 가늠한다. </li>
+<li>때문에 지속커넥션에서는 Content-length는 필수이다.<ul>
+<li>다만, 청크인코딩은 지속커넥션으로 이루어지는데, 이때 Content-length헤더는 없다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-콘텐츠-인코딩"><a href="#2-4-콘텐츠-인코딩" class="headerlink" title="2.4 콘텐츠 인코딩"></a>2.4 콘텐츠 인코딩</h3><ul>
+<li>HTTP는<br>보안을 강화하거나<br>압축을 통해 공간을 절약할 수 있도록,<br>엔터티 본문을 인코딩할 수 있게 해준다.</li>
+<li>인코딩 될 경우 Content-length 헤더는 인코딩된 본문의 길이를 바이트 단위로 정의한다.</li>
+</ul>
+<h3 id="2-5-엔터티-본문-길이-판별을-위한-규칙"><a href="#2-5-엔터티-본문-길이-판별을-위한-규칙" class="headerlink" title="2.5 엔터티 본문 길이 판별을 위한 규칙"></a>2.5 엔터티 본문 길이 판별을 위한 규칙</h3><p>switch (true)</p>
+<ol>
+<li>본문을 갖는 것이 허용되지 않은 특정타입의 HTTP 메세지<ul>
+<li>Content-length는 무시된다.</li>
+<li>ex_ <code>HEAD</code> 메서드</li>
+</ul>
+</li>
+<li>메세지가 Transfer-Encoding 헤더를 포함하고 있다면<ul>
+<li>엔터티는 ‘0 바이트 청크’라 불리는 특별한 패턴으로 끝나야 한다.</li>
+</ul>
+</li>
+<li>메세지가 Content-length 헤더를 갖는다면<ul>
+<li>본문의 길이를 담게 된다.</li>
+<li>Transfer-Encoding가 identity가 아닌값을 포함한 메세지를 받았을 경우 Content-length는 무시된다.</li>
+</ul>
+</li>
+<li>(Content-type: multipart/byteranges) &amp;&amp; (Content-length가 정의되어있지 않다면)<ul>
+<li>멀티파트 메세지의 각 부분은<br>각자 스스로의 크기를 정의할 것이다.</li>
+<li>멀티파트 유형은 자신의 크기를 스스로 결정할 수 있는 유일한 엔터티 본문 유형이다.</li>
+<li>수신자가 이것을 해석할 수 있다는 사실을 송신자가 알기 전까지 보내지 말아야 한다…</li>
+<li><em>RFC7230</em> 때 삭제됨.</li>
+</ul>
+</li>
+<li>(default)<ul>
+<li>엔터티는 커넥션이 닫힐 때 끝난다.</li>
+<li>Content-length를 요구하고 싶을 경우 411 Length Required 응답을 보냄</li>
+</ul>
+</li>
+</ol>
+<a name="type">
+
+<h2 id="3-미디어-타입과-Charset"><a href="#3-미디어-타입과-Charset" class="headerlink" title="3. 미디어 타입과 Charset"></a>3. 미디어 타입과 Charset</h2><ul>
+<li>Content-Type은 엔터티 본문의 MIME 타입을 기술한다. <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" rel="noopener">IANA에 정리되어있는 MIME타입</a><blockquote>
+<p>IANA: 인터넷 할당 번호 관리기관 <strong>I</strong>nternet <strong>A</strong>ssigned <strong>N</strong>umbers <strong>A</strong>uthority</p>
+</blockquote>
+</li>
+<li>주타입: application, audio, font, example, image, message, model, multipart, text, video</li>
+</ul>
+<h3 id="3-1-텍스트-매체를-위한-문자-인코딩"><a href="#3-1-텍스트-매체를-위한-문자-인코딩" class="headerlink" title="3.1 텍스트 매체를 위한 문자 인코딩"></a>3.1 텍스트 매체를 위한 문자 인코딩</h3><p><code>Content-Type: text/html; charset=iso-8859-7</code></p>
+<ul>
+<li>엔터티의 비트 집합을 텍스트 파일의 글자들로 변환하기 위한 charset 매개변수가 있다.</li>
+</ul>
+<h3 id="3-2-멀티파트-미디어-타입"><a href="#3-2-멀티파트-미디어-타입" class="headerlink" title="3.2 멀티파트 미디어 타입"></a>3.2 멀티파트 미디어 타입</h3><ul>
+<li>서로 붙어있는 여러 개의 메세지를 포함하며, 하나의 복합 메세지로 보내진다.</li>
+<li>각 구성요소는 자족적으로 자신에 대해 서술하는 헤더를 포함한다.</li>
+<li>HTTP는 일부의 경우에 지원한다<ol>
+<li>폼을 채워서 제출할때</li>
+<li>문서의 일부분을 실어 나르는 범위 응답을 할 때</li>
+</ol>
+</li>
+</ul>
+<h4 id="1-멀티파트-폼-제출-multipart-form-data"><a href="#1-멀티파트-폼-제출-multipart-form-data" class="headerlink" title="1. 멀티파트 폼 제출 multipart/form-data"></a>1. 멀티파트 폼 제출 <code>multipart/form-data</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=[abcdefghijklmnopqrstuvwzyz]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>boundary는 본문의 서로 다른 부분을 구분하기 위한 구분자로 쓰인다.</li>
+</ul>
+<img src="/images/2020/01/02.png">
+
+<hr>
+<img src="/images/2020/01/03.png">
+
+<h4 id="2-멀티파트-범위-응답-multipart-byteranges"><a href="#2-멀티파트-범위-응답-multipart-byteranges" class="headerlink" title="2. 멀티파트 범위 응답 multipart/byteranges"></a>2. 멀티파트 범위 응답 <code>multipart/byteranges</code></h4><ul>
+<li><strong>범위 요청</strong>에 대한 HTTP 응답 또한 멀티파트가 될 수도 있다.</li>
+<li>각각 다른 범위를 담고 있는 멀티파트 본문이 함께 온다.</li>
+<li>multipart/byteranges는 브라우저로 회신하는 부분적인 응답 전송의 컨텍스트 내에서 사용된다. </li>
+<li><strong>206 Partial Content</strong> 상태 코드가 전송된 경우,<br>MIME 타입은 문서가 각각의 요청된 범위들 중 하나인 몇 가지 파트들로 구성되어 있음을 알려주기 위해 사용된다.</li>
+<li>다른 멀티파트 타입처럼, Content-Type은 경계선 문자열을 정의하기 위해 boundary 디렉티브를 사용한다.<br>각각의 다른 파트들은 문서의 실제 타입을 가진 Content-Type 헤더와 그들이 나타내는 범위를 가진 Content-Range를 지니고 있다.</li>
+</ul>
+<img src="/images/2020/01/04.png">
+
+<h1 id="전송-전-전송-후"><a href="#전송-전-전송-후" class="headerlink" title="전송 전 ~ 전송 후"></a>전송 전 ~ 전송 후</h1><a name="checksum">
+
+<h2 id="1-엔터티-요약-Content-MD5"><a href="#1-엔터티-요약-Content-MD5" class="headerlink" title="1. 엔터티 요약 Content-MD5"></a>1. 엔터티 요약 <code>Content-MD5</code></h2><ul>
+<li>여러가지 이유로 메세지의 일부분이 전송 중에 변형되는 일이 일어난다.</li>
+<li>송신자는 최초 엔터티가 생성될 때 <strong>데이터에 대한 체크섬</strong>을 생성할 수 있다.</li>
+<li>수신자는 모든 의도하지 않은 엔터티의 변경을 잡아내기 위해, 그 체크섬으로 기본적인 검사를 할 수 있다.</li>
+<li>Content-MD5 헤더는 서버가 엔터티 본문에 MD5 알고리즘을 적용한 결과를 보내기 위해 사용된다.<ul>
+<li>응답을 처음 만든 서버만이 Content-MD5헤더를 계산해서 보낼 것이다. </li>
+<li>중간에 있는 프락시와 캐시는 그 헤더를 변경하거나 추가하지 않을 것이다. (건드릴 경우 무결성 검증 목적을 손상시킴)</li>
+</ul>
+</li>
+<li>Content-MD5 헤더는<br>콘텐츠 인코딩은 끝났지만,<br>전송 인코딩은 아직 적용하지 않은 엔터티 본문에 대한 MD5를 담고 있다.<ul>
+<li>메세지의 무결성을 검증하려는 클라는 먼저 전송 인코딩을 디코딩하고</li>
+<li>그 디코딩 된 엔터티 본문에 MD5를 계산해야 한다.</li>
+<li>문서를 gzip 알고리즘으로 압축하여 청크 인코딩으로 보냈다면, MD5 알고리즘은 압축된 본문 전체에 대해 수행된다.</li>
+</ul>
+</li>
+<li>MD5는 문서의 위치를 빠르게 알아내고, 콘텐츠의 중복저장을 방지하기 위한 해시테이블의 키로 이용디ㅗㄹ 수 있다.<blockquote>
+<p>Content-MD5 헤더는 그다지 <strong>자주 전송되지 않는다.</strong></p>
+</blockquote>
+</li>
+</ul>
+<a name="encoding">
+
+<h2 id="2-콘텐츠-인코딩-Content-Encoding"><a href="#2-콘텐츠-인코딩-Content-Encoding" class="headerlink" title="2. 콘텐츠 인코딩 Content-Encoding"></a>2. 콘텐츠 인코딩 <code>Content-Encoding</code></h2><ul>
+<li>전송시간을 줄이기 위해 <strong>압축</strong>하거나</li>
+<li>보안을 위해 콘텐츠를 <strong>암호화</strong>하거나<br>할때 사용한다.</li>
+<li>콘텐츠 인코딩은 콘텐츠 포맷과 연관되어있다.</li>
+</ul>
+<ol>
+<li>과정</li>
+<li>유형</li>
+<li>관련 헤더</li>
+</ol>
+<h3 id="1-과정"><a href="#1-과정" class="headerlink" title="1. 과정"></a>1. 과정</h3><ol>
+<li>웹서버가 원본 Content-Type과 Content-Length 헤더를 수반한 원본 응답 메세지를 생성</li>
+<li>콘텐츠 인코딩 서버가 인코딩도니 메세지 생성 (원서버 or 프록시)<ul>
+<li>Content-Length는 변경된다.</li>
+<li>콘텐츠 인코딩 서버는 <strong>어떤 방식으로 인코딩했는지 정보가 담겨있는 Content-Encoding 헤더를</strong> 인코딩된 메세지에 추가<br>수신자가 디코딩할 수 있도록 한다.</li>
+</ul>
+</li>
+<li>수신자는 인코딩된 메세지를 디코딩하고 원본을 얻는다.</li>
+</ol>
+<blockquote>
+<p>모던 <strong>브라우저</strong>에는 <strong>gzip 압축해제</strong>를 자동으로 해준다. <a href="https://stackoverflow.com/questions/32172704/is-gzip-automatically-decompressed-by-browser/32172835#32172835" target="_blank" rel="noopener">참고</a></p>
+</blockquote>
+<h3 id="2-유형"><a href="#2-유형" class="headerlink" title="2. 유형"></a>2. 유형</h3><ul>
+<li>표준 콘텐츠 인코딩 유형이 정의되어있음. (IANA를 통해 표준화됨)</li>
+<li>커스텀으로 확장 인코딩을 추가하는걸 허용해놓음</li>
+<li>gzip, compress, deflate 인코딩은 전송되는 메세지의 크기를 정보으 손실 없이 줄이기 위한 <strong>무손실 압축 알고리즘</strong>이다.</li>
+</ul>
+<p><code>Content-Encoding: {유형}</code></p>
+<ol>
+<li>gzip : GNU zip 인코딩이 적용되었음을 의미</li>
+<li>compress: 유닉스 파일 압축 프로그램인 compress가 실행되었음을 의미</li>
+<li>deflate : zlib 포맷으로 압축되었다는 의미</li>
+<li>identity : 어떤 인코딩도 수행되지 않았음을 의미. (Content-Encoding 헤더가 존재하지 않는다면, 이 값인 것으로 간주)</li>
+</ol>
+<h3 id="3-Accept-Encoding-헤더"><a href="#3-Accept-Encoding-헤더" class="headerlink" title="3. Accept-Encoding 헤더"></a>3. Accept-Encoding 헤더</h3><ul>
+<li>서버에서 클라가 지원하지 않는 인코딩을 사용하는 것을 막기 위해,<br>클라가 자신이 지원하는 인코딩의 목록을 Accept-Encoding 헤더에 포함한다.</li>
+<li>인코딩에 Q(quality)값을 매개변수로 더해<br><strong>선호도</strong>를 나타낼 수 있다.<ul>
+<li>Q의 범위는 원치않음 0.0 ~ 가장선호 1.0 사이이다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip</span><br><span class="line">Accept-Encoding:</span><br><span class="line">Accept-Encoding: *</span><br><span class="line">Accept-Encoding: compress; q=0.5, gzip; q=1.0</span><br><span class="line">Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<a name="transfer">
+
+<h2 id="3-전송-인코딩과-청크-인코딩-Transfer-encoding"><a href="#3-전송-인코딩과-청크-인코딩-Transfer-encoding" class="headerlink" title="3. 전송 인코딩과 청크 인코딩 Transfer-encoding"></a>3. 전송 인코딩과 청크 인코딩 <code>Transfer-encoding</code></h2><ul>
+<li>메세지 데이터가 네트워크를 통해 <strong>전송되는 방법을 바꾸기 위해</strong></li>
+</ul>
+<h3 id="3-1-안전한-전송"><a href="#3-1-안전한-전송" class="headerlink" title="3.1 안전한 전송"></a>3.1 안전한 전송</h3><ul>
+<li>역사적으로, 전송 인코딩은 안전한 전송을 위해 존재했다.</li>
+<li>HTTP에서 전송된 메세지의 본문이 문제를 일으킬 수 있는 이유<ol>
+<li><strong>알수 없는 크기</strong>: 몇몇 게이트 웨이 어플리케이션 or 콘텐츠 인코더는 메세지 본문의 최종 크기를 판단할 수 없다.</li>
+<li><strong>보안</strong> : 메세지 콘텐츠를 보내기 전에, 전송 인코딩을 사용해 알아보기 어렵게 뒤섞어버리는 방법도 있다. SSL이 있어서 전송 인코딩 보안은 흔하지 않다.</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-2-Transfer-encoding-헤더"><a href="#3-2-Transfer-encoding-헤더" class="headerlink" title="3.2 Transfer-encoding 헤더"></a>3.2 <strong><code>Transfer-encoding</code></strong> 헤더</h3><ul>
+<li>전송 인코딩을 제어하고, 서술하기 위해 정의된 헤더는 2개</li>
+<li>최신 HTTP 명세는 오직 하나의 전송 인코딩, 청크 인코딩만을 정의했다.</li>
+<li><strong>어떤 형태의 전송 인코딩을 선호하는지</strong> 표현하는 <code>Q</code>값을 가질 수 있다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /new_products.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">User-Agent: Mozilla/4.61 [en] (WinNT; I)</span><br><span class="line">TE: trailers, chunked</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Server: Apache/3.0</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong><code>Transfer-encoding</code></strong><br>: 안전한 전송을 위해, 어떤 인코딩이 메세지에 적용되었는지 수신자에게 알려준다.<img src="https://media.geeksforgeeks.org/wp-content/uploads/20191029112629/1091.png"></li>
+<li><strong><code>TE</code></strong><br>: 어떤 확장된 전송 인코딩을 사용할 수 있는지 서버에게 알려주기 위해, 요청 헤더에 사용한다.</li>
+</ol>
+<h3 id="3-3-청크-인코딩"><a href="#3-3-청크-인코딩" class="headerlink" title="3.3 청크 인코딩"></a>3.3 <strong>청크 인코딩</strong></h3><ul>
+<li>메세지를 일정 크기의 청크 여럿으로 쪼갠다. </li>
+<li>서버는 각 청크를 순차적으로 보낸다.</li>
+<li>청크 인코딩을 이용하면, 메세지를 보내기 전에 전체 크기를 알 필요가 없어진다.</li>
+<li>청크 인코딩은 본문이 아닌, <strong>메세지의 속성</strong>이다.<ul>
+<li>멀티파트 인코딩은 본문의 속성, 청크 인코딩과는 완전 분리되어있다.</li>
+</ul>
+</li>
+</ul>
+<h4 id="청크-인코딩과-지속-커넥션"><a href="#청크-인코딩과-지속-커넥션" class="headerlink" title="청크 인코딩과 지속 커넥션"></a>청크 인코딩과 지속 커넥션</h4><ul>
+<li><p>지속커넥션에서는, 본문을 쓰기 전에 만드시 Content-Length 헤더에 본문의 길이를 담아서 보내줘야 한다.</p>
+</li>
+<li><p>청크 인코딩은 서버가 본문을 여러 청크로 쪼개 보낼 수 있게 해줌으로써</p>
+<ol>
+<li>동적으로 본문이 생성되면서, </li>
+<li>서버는 그 중 일부를 버퍼에 담은 뒤, </li>
+<li>그 한 덩어리를 그의 크기와 함께 보낼 수 있다. </li>
+<li>서버는 크기가 0인 청크로 본문이 끝났음을 알리고</li>
+<li>다음 응답을 위해 커넥션을 열린 채로 유지할 수 있다.</li>
+</ol>
+</li>
+<li><p>청크 인코딩은</p>
+<ul>
+<li>응답 헤더 블록으로 시작하고</li>
+<li>이어서 청크의 스트림이 온다.<ul>
+<li>각 청크는 길이값과 각 청크에 대한 데이터를 담고 있다.</li>
+<li>길이값과 청크 데이터는 <code>&lt;CR&gt;&lt;LF&gt;</code>로 분리된다.</li>
+<li>마지막 청크는 본문의 끝을 의미하기 위해 길이가 0 이다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">27&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">블라블라블라 ~</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0&lt;CR&gt;&lt;LF&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>클라 또한</strong> 청크 인코딩된 데이터를 서버로 전송한다.</p>
+</li>
+</ul>
+<h4 id="청크-인코딩된-메세지의-트레일러"><a href="#청크-인코딩된-메세지의-트레일러" class="headerlink" title="청크 인코딩된 메세지의 트레일러"></a>청크 인코딩된 메세지의 트레일러</h4><ul>
+<li>다음 중 하나 이상 조건을 만족하면 청크 메세지에 트레일러를 추가할 수 있다.<ol>
+<li>클라의 <code>TE</code> 헤더가 트레일러를 받아들일 수 있음을 나타내고 있는 경우</li>
+<li>트레일러가 응답을 만든 서버에 의해 추가되었으며,<br>트레일러의 콘테츠는 클라가 이해하고 사용할 필요가 없어서 <em>무시하고 버려도 되는 경우</em></li>
+</ol>
+</li>
+<li>트레일러에는 본문의 콘텐츠가 먼저 생성되어야 한다거나 하는 등의 이유로</li>
+</ul>
+<p><strong>메세지 시작 시점에서 그 값을 알 수 없는 추가적인 헤더 필드를 담을 수 있다.</strong></p>
+<ul>
+<li>트레일러로 보낼 수 있는 헤더의 예로 <code>Content-MD5</code> 헤더가 있다.</li>
+<li><code>Transfer-Encoding</code>, <code>Trailer</code>, <code>Content=Length</code>를 제외한 어떤 HTTP 헤더도 트레일러로 보낼 수 있다.</li>
+</ul>
+<h4 id="콘텐츠와-전송-인코딩의-조합"><a href="#콘텐츠와-전송-인코딩의-조합" class="headerlink" title="콘텐츠와 전송 인코딩의 조합"></a>콘텐츠와 전송 인코딩의 조합</h4><ul>
+<li>콘텐츠 인코딩과 전송인코딩은 동시에 사용될 수 있다.</li>
+</ul>
+<h4 id="전송-인코딩-규칙"><a href="#전송-인코딩-규칙" class="headerlink" title="전송 인코딩 규칙"></a>전송 인코딩 규칙</h4><ul>
+<li>전송 인코딩 집합은 반드시 chunked를 포함해야 한다.</li>
+<li>청크 전송 인코딩이 사용되었다면, 메세지 본문에 적용된 마지막 전송 인코딩이 존재해야 한다.</li>
+<li>청크 전송 인코딩은 반드시 메세지 본문에 한 번 이상 적용되어야 한다.</li>
+</ul>
+<p><a href="https://www.httpwatch.com/httpgallery/chunked/" target="_blank" rel="noopener">이미지 청크 인코딩 예시</a></p>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+</a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="ck515ckpb003ilzbmnwokaq06" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">엔터티에 대하여</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#entity">메세지는 컨테이너, 엔터티는 화물</a>
+               
+                <div class="first_depth--sub">entity = entity headers + entity body</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#length">content-length: 엔터티의 길이</a>
+               
+                <div class="first_depth--sub">잘림 검출, 콘텐츠 인코딩, 지속커넥션</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#type">미디어 타입과 charset</a>
+               
+                <div class="first_depth--sub">Content-Type, MIME, 인코딩, multipart</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">전송 전 ~ 전송 후</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#checksum">엔터티 요약 (무결성 검사용)</a>
+               
+                <div class="first_depth--sub">Content-MD5</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#encoding">콘텐츠 인코딩 (압축, 암호화)</a>
+               
+                <div class="first_depth--sub">Content-Encoding</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#transfer">전송 인코딩과 청크 인코딩</a>
+               
+                <div class="first_depth--sub">Transfer-encoding</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/01/06/HTTP_015_02/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            인스턴스 조작과 인코딩
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/12/22/Joylog_004/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">2019 회고 + 2020 다짐 (feat. 글또)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/06/HTTP_015_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/02/thumb_default.jpg)" alt="인스턴스 조작과 인코딩" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/06/HTTP_015_02/" class="title">인스턴스 조작과 인코딩</a></p>
+                            <p class="item-date"><time datetime="2020-01-05T15:10:10.000Z" itemprop="datePublished">2020-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/05/HTTP_015_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/01/thumb_default.jpg)" alt="엔터티와 인코딩" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/05/HTTP_015_01/" class="title">엔터티와 인코딩</a></p>
+                            <p class="item-date"><time datetime="2020-01-05T11:43:10.000Z" itemprop="datePublished">2020-01-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/22/Joylog_004/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/46/thumb_default.jpg)" alt="2019 회고 + 2020 다짐 (feat. 글또)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/12/22/Joylog_004/" class="title">2019 회고 + 2020 다짐 (feat. 글또)</a></p>
+                            <p class="item-date"><time datetime="2019-12-22T12:23:55.000Z" itemprop="datePublished">2019-12-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/08/HTTP_014_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/45/thumb_default.jpg)" alt="HTTPS의 세부사항" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/08/HTTP_014_02/" class="title">HTTPS의 세부사항</a></p>
+                            <p class="item-date"><time datetime="2019-12-08T11:43:10.000Z" itemprop="datePublished">2019-12-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/01/HTTP_014_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/44/thumb_default.jpg)" alt="HTTPS 이해를 위한 디지털 암호학" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/01/HTTP_014_01/" class="title">HTTPS 이해를 위한 디지털 암호학</a></p>
+                            <p class="item-date"><time datetime="2019-12-01T11:43:10.000Z" itemprop="datePublished">2019-12-01</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 14.17px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.83px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 11.67px;">Joy</a> <a href="/tags/OOP/" style="font-size: 15.83px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/TCP-IP/" style="font-size: 10.83px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.83px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 11.67px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.83px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.17px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.83px;">authorization</a> <a href="/tags/blog/" style="font-size: 11.67px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.67px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.83px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.67px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.5px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.83px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.83px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.83px;">digest</a> <a href="/tags/encoding/" style="font-size: 10.83px;">encoding</a> <a href="/tags/endity/" style="font-size: 10px;">endity</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.83px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.83px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.83px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 19.17px;">http</a> <a href="/tags/https/" style="font-size: 10.83px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/iterator/" style="font-size: 10.83px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.5px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.5px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.83px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.83px;">principle</a> <a href="/tags/programming/" style="font-size: 11.67px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 12.5px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.33px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.33px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.83px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 17.5px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">85</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2020 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2020/01/05/HTTP_015_01/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
