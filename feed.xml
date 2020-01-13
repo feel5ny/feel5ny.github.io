@@ -79,11 +79,11 @@
     
       <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
     
+      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
+    
       <category term="instance" scheme="http://feel5ny.github.io/tags/instance/"/>
     
       <category term="Range" scheme="http://feel5ny.github.io/tags/Range/"/>
-    
-      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
     
   </entry>
   
@@ -116,9 +116,9 @@
     
       <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
     
-      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
-    
       <category term="endity" scheme="http://feel5ny.github.io/tags/endity/"/>
+    
+      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
     
   </entry>
   
@@ -420,9 +420,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="Identification" scheme="http://feel5ny.github.io/tags/Identification/"/>
-    
       <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
+    
+      <category term="Identification" scheme="http://feel5ny.github.io/tags/Identification/"/>
     
   </entry>
   
@@ -587,9 +587,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
-    
       <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
+    
+      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
     
   </entry>
   
@@ -3477,34 +3477,6 @@
   </entry>
   
   <entry>
-    <title>1/ 변수, 원시 값과 참조 값</title>
-    <link href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
-    <id>http://feel5ny.github.io/2017/11/29/JS_01/</id>
-    <published>2017-11-29T09:23:55.000Z</published>
-    <updated>2019-10-31T13:06:01.737Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966260768&orderClick=LAG&Kc=" target="_blank" rel="noopener">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p></blockquote><p>까묵지말자<br>Call-by-value, Call-by-reference</p><hr><h2 id="1-변수란"><a href="#1-변수란" class="headerlink" title=" 1. 변수란?"></a><a name="1"></a> 1. 변수란?</h2><p>변수는 위치(주소)를 기억하는 저장소이다. (포인터의 개념)<br>위치란 메모리 상의 주소(address)를 의미한다. 즉, 메모리 주소에 접근하기 위해 사람이 이해할 수 있는 언어로 지정한 식별자이다.</p><p>변수를 통해 메모리에 값을 저장하기 위해서는 우선 필요한 저장 단위(byte)를 알아야한다. <strong>이는 값의 종류에 따라 값을 저장하기 위해 확보해야할 메모리의 크기가 다르기 때문이다.</strong> 이때 값의 종류 즉, 데이터의 종류를 자료형이라고 한다. C-family언어는 정적타이핑 언어로 변수 선언 시 변수에 저장할 값의 종류에 따라 사전에 자료형을 지정하여야 한다.</p><blockquote><p>변수를 선언하는 것부터가 메모리를 사용하는 것이기 때문에 변수사용을 최소한으로 하여, 페이지의 성능을 유지해야한다.</p></blockquote><h3 id="동적-타입-Dynamic-typed"><a href="#동적-타입-Dynamic-typed" class="headerlink" title="동적 타입 Dynamic typed"></a>동적 타입 Dynamic typed</h3><p>jacascript는 동적 타이핑 언어로(느슨한 타입: loosely typed) 변수의 Type annotation이 필요없이 값이 할당되는 과정에서 자동으로 자료형이 결정(Type Inference: 타입 추론)된다. 따라서 같은 변수에 여러 자료형의 값을 대입할 수 있다. </p><blockquote><p>타입스크립트는 이런 동적 타이핑 언어의 단점을 보안하기 위해서 타입을 명시해주는 특징을 갖고 있다. </p></blockquote><p>변수는 값을 저장(할당), 참조하기 위해 사용된다. 한번 쓰고 버리는 값이 아닌 유지할 필요가 있는 경우, 변수를 사용한다.</p><hr><h2 id="2-원시-값과-참조-값"><a href="#2-원시-값과-참조-값" class="headerlink" title=" 2. 원시 값과 참조 값"></a><a name="2"></a> 2. 원시 값과 참조 값</h2><p>원시 값과 참조값 두가지 타입의 데이터를 저장할 수 있는데,<br>원시 값은 단순한 데이터이며<br>참조 값은 여러 값으로 구성되는 객체를 가리킨다.<br>변수에 값이 할당되면 <code>자바스크립트 엔진</code>이 해당 값이 원시 데이터인지 참조인지 판단한다.</p><p>참조 값은 메모리에 저장된 객체이다. <code>다른 언어와 달리 자바스크립트는 메모리 위치에 직접 접근하는 것을 허용하지 않고, 객체의 메모리 공간을 직접 조작하는 일은 불가능하다.</code></p><h3 id="참조로-접근한다"><a href="#참조로-접근한다" class="headerlink" title="참조로 접근한다"></a><code>참조로 접근한다</code></h3><p>객체를 조작할 때는 객체 자체가 아니라 해당 객체에 대한 <strong>참조를 조작</strong>하는 것이다. 이런 이유로 객체를 가리키는 값은 ‘참조로 접근한다’고 한다.</p><hr><h2 id="3-동적-프로퍼티"><a href="#3-동적-프로퍼티" class="headerlink" title=" 3. 동적 프로퍼티"></a><a name="3"></a> 3. 동적 프로퍼티</h2><p>참조 값을 다룰 때는 언제든 프로퍼티와 메서드를 추가하거나 바꾸고 삭제 할 수 있다.<br>원시 값에는 프로퍼티가 없지만 추가하려 해도 에러가 생기진 않는다.<br>동적으로 프로퍼티를 추가할 수 있는 값은 참조 값 뿐이다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person.name = <span class="string">'Clara'</span></span><br><span class="line">alert(person.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'Clara'</span></span><br><span class="line">name.age = <span class="number">27</span></span><br><span class="line">alert(name.age) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure><hr><h2 id="4-값-복사"><a href="#4-값-복사" class="headerlink" title=" 4. 값 복사"></a><a name="4"></a> 4. 값 복사</h2><h3 id="원시-값"><a href="#원시-값" class="headerlink" title="원시 값"></a>원시 값</h3><p>원시 값은 다른 변수로 복사할 때는 현재 저장된 값을 새로 생성한 다음 새로운 변수에 복사한다. 복사된 값과 원래 값은 완전히 분리되어 있다.</p><h3 id="참조-값"><a href="#참조-값" class="headerlink" title="참조 값"></a>참조 값</h3><p>참조 값을 변수에서 다른 변수로 복사가되면 그 값이 객체 자체가 아니라 <code>힙</code>에 저장된 객체를 가리키는 <code>포인터</code>라는 점이다. 복사 후에는 두 변수는 정확히 같은 객체를 가리킨다. 따라서 한쪽을 조작하면 다른 쪽에도 반영된다.<br>스택메모리 공간은 함수호출 시마다 생성되고,<br>힙메모리 공간은 객체 생성 시 생성됨.</p><img src="/images/post_img/33/reference_copy.jpg" width="80%"><hr><h2 id="5-매개변수-전달"><a href="#5-매개변수-전달" class="headerlink" title=" 5. 매개변수 전달"></a><a name="5"></a> 5. 매개변수 전달</h2><p>함수 매개변수는 모두 <code>값</code>으로 전달된다. 함수 외부에 있는 값은 함수 내부의 매개변수에 복사된다. 변수는 값으로도, 참조로도 접근할 수 있지만 <strong>매개변수는 오직 <code>값</code>으로만 전달된다.</strong> 메모리 공간을 확보하며 매개변수에 할당된다.</p><h3 id="Call-by-value-값에-의한-호출"><a href="#Call-by-value-값에-의한-호출" class="headerlink" title="Call-by-value (값에 의한 호출)"></a>Call-by-value (값에 의한 호출)</h3><img src="/images/post_img/33/primitive.jpg" width="80%"><p>매개변수를 값 형태로 넘기면 해당 값은 지역 변수에 <code>복사</code>된다.  arguments 객체에 들어가게 된다.</p><h3 id="Call-by-reference-참조에-의한-호출"><a href="#Call-by-reference-참조에-의한-호출" class="headerlink" title="Call-by-reference (참조에 의한 호출)"></a>Call-by-reference (참조에 의한 호출)</h3><img src="/images/post_img/33/reference_parameter_1.jpg" width="80%">함수에 `값`을 전달했기 때문에 함수 내부에서 매개변수의 값이 바뀌었음에도 불구하고 원래 객체에 대한 참조를 그대로 유지한 것이다. = 즉 객체가 넘어갈때는 참조 형태로 전달되는 것이 아니라 **값으로 넘어간다.** (== 포인터가 넘어간다)<img src="/images/post_img/33/reference_parameter_2.jpg" width="80%">함수 내부에서 obj를 덮어쓰면 obj는 지역객체를 가리키는 포인터가 되고, 이 지역 객체(obj.name)는 함수 실행이 끝나면 파괴된다.<hr><h2 id="6-타입판별"><a href="#6-타입판별" class="headerlink" title=" 6. 타입판별"></a><a name="6"></a> 6. 타입판별</h2><p><code>typeof</code> </p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> 변수명</span><br></pre></td></tr></table></figure><p><code>instanceof</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">변수명 <span class="keyword">instanceof</span> <span class="built_in">Object</span> </span><br><span class="line"><span class="comment">// 이 변수는 Object의 인스턴스인가? </span></span><br><span class="line"><span class="comment">// 결과값은 boolean</span></span><br></pre></td></tr></table></figure><hr><h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol><li><a href="http://poiemaweb.com/js-data-type-variable" target="_blank" rel="noopener">http://poiemaweb.com/js-data-type-variable</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=&quot;
-      
-    
-    </summary>
-    
-      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
-    
-      <category term="JavaScript" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/JavaScript/"/>
-    
-    
-      <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>persistor.purge()</title>
     <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
     <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
@@ -3529,6 +3501,34 @@
     
     
       <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1/ 변수, 원시 값과 참조 값</title>
+    <link href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
+    <id>http://feel5ny.github.io/2017/11/29/JS_01/</id>
+    <published>2017-11-29T09:23:55.000Z</published>
+    <updated>2019-10-31T13:06:01.737Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966260768&orderClick=LAG&Kc=" target="_blank" rel="noopener">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p></blockquote><p>까묵지말자<br>Call-by-value, Call-by-reference</p><hr><h2 id="1-변수란"><a href="#1-변수란" class="headerlink" title=" 1. 변수란?"></a><a name="1"></a> 1. 변수란?</h2><p>변수는 위치(주소)를 기억하는 저장소이다. (포인터의 개념)<br>위치란 메모리 상의 주소(address)를 의미한다. 즉, 메모리 주소에 접근하기 위해 사람이 이해할 수 있는 언어로 지정한 식별자이다.</p><p>변수를 통해 메모리에 값을 저장하기 위해서는 우선 필요한 저장 단위(byte)를 알아야한다. <strong>이는 값의 종류에 따라 값을 저장하기 위해 확보해야할 메모리의 크기가 다르기 때문이다.</strong> 이때 값의 종류 즉, 데이터의 종류를 자료형이라고 한다. C-family언어는 정적타이핑 언어로 변수 선언 시 변수에 저장할 값의 종류에 따라 사전에 자료형을 지정하여야 한다.</p><blockquote><p>변수를 선언하는 것부터가 메모리를 사용하는 것이기 때문에 변수사용을 최소한으로 하여, 페이지의 성능을 유지해야한다.</p></blockquote><h3 id="동적-타입-Dynamic-typed"><a href="#동적-타입-Dynamic-typed" class="headerlink" title="동적 타입 Dynamic typed"></a>동적 타입 Dynamic typed</h3><p>jacascript는 동적 타이핑 언어로(느슨한 타입: loosely typed) 변수의 Type annotation이 필요없이 값이 할당되는 과정에서 자동으로 자료형이 결정(Type Inference: 타입 추론)된다. 따라서 같은 변수에 여러 자료형의 값을 대입할 수 있다. </p><blockquote><p>타입스크립트는 이런 동적 타이핑 언어의 단점을 보안하기 위해서 타입을 명시해주는 특징을 갖고 있다. </p></blockquote><p>변수는 값을 저장(할당), 참조하기 위해 사용된다. 한번 쓰고 버리는 값이 아닌 유지할 필요가 있는 경우, 변수를 사용한다.</p><hr><h2 id="2-원시-값과-참조-값"><a href="#2-원시-값과-참조-값" class="headerlink" title=" 2. 원시 값과 참조 값"></a><a name="2"></a> 2. 원시 값과 참조 값</h2><p>원시 값과 참조값 두가지 타입의 데이터를 저장할 수 있는데,<br>원시 값은 단순한 데이터이며<br>참조 값은 여러 값으로 구성되는 객체를 가리킨다.<br>변수에 값이 할당되면 <code>자바스크립트 엔진</code>이 해당 값이 원시 데이터인지 참조인지 판단한다.</p><p>참조 값은 메모리에 저장된 객체이다. <code>다른 언어와 달리 자바스크립트는 메모리 위치에 직접 접근하는 것을 허용하지 않고, 객체의 메모리 공간을 직접 조작하는 일은 불가능하다.</code></p><h3 id="참조로-접근한다"><a href="#참조로-접근한다" class="headerlink" title="참조로 접근한다"></a><code>참조로 접근한다</code></h3><p>객체를 조작할 때는 객체 자체가 아니라 해당 객체에 대한 <strong>참조를 조작</strong>하는 것이다. 이런 이유로 객체를 가리키는 값은 ‘참조로 접근한다’고 한다.</p><hr><h2 id="3-동적-프로퍼티"><a href="#3-동적-프로퍼티" class="headerlink" title=" 3. 동적 프로퍼티"></a><a name="3"></a> 3. 동적 프로퍼티</h2><p>참조 값을 다룰 때는 언제든 프로퍼티와 메서드를 추가하거나 바꾸고 삭제 할 수 있다.<br>원시 값에는 프로퍼티가 없지만 추가하려 해도 에러가 생기진 않는다.<br>동적으로 프로퍼티를 추가할 수 있는 값은 참조 값 뿐이다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person.name = <span class="string">'Clara'</span></span><br><span class="line">alert(person.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'Clara'</span></span><br><span class="line">name.age = <span class="number">27</span></span><br><span class="line">alert(name.age) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure><hr><h2 id="4-값-복사"><a href="#4-값-복사" class="headerlink" title=" 4. 값 복사"></a><a name="4"></a> 4. 값 복사</h2><h3 id="원시-값"><a href="#원시-값" class="headerlink" title="원시 값"></a>원시 값</h3><p>원시 값은 다른 변수로 복사할 때는 현재 저장된 값을 새로 생성한 다음 새로운 변수에 복사한다. 복사된 값과 원래 값은 완전히 분리되어 있다.</p><h3 id="참조-값"><a href="#참조-값" class="headerlink" title="참조 값"></a>참조 값</h3><p>참조 값을 변수에서 다른 변수로 복사가되면 그 값이 객체 자체가 아니라 <code>힙</code>에 저장된 객체를 가리키는 <code>포인터</code>라는 점이다. 복사 후에는 두 변수는 정확히 같은 객체를 가리킨다. 따라서 한쪽을 조작하면 다른 쪽에도 반영된다.<br>스택메모리 공간은 함수호출 시마다 생성되고,<br>힙메모리 공간은 객체 생성 시 생성됨.</p><img src="/images/post_img/33/reference_copy.jpg" width="80%"><hr><h2 id="5-매개변수-전달"><a href="#5-매개변수-전달" class="headerlink" title=" 5. 매개변수 전달"></a><a name="5"></a> 5. 매개변수 전달</h2><p>함수 매개변수는 모두 <code>값</code>으로 전달된다. 함수 외부에 있는 값은 함수 내부의 매개변수에 복사된다. 변수는 값으로도, 참조로도 접근할 수 있지만 <strong>매개변수는 오직 <code>값</code>으로만 전달된다.</strong> 메모리 공간을 확보하며 매개변수에 할당된다.</p><h3 id="Call-by-value-값에-의한-호출"><a href="#Call-by-value-값에-의한-호출" class="headerlink" title="Call-by-value (값에 의한 호출)"></a>Call-by-value (값에 의한 호출)</h3><img src="/images/post_img/33/primitive.jpg" width="80%"><p>매개변수를 값 형태로 넘기면 해당 값은 지역 변수에 <code>복사</code>된다.  arguments 객체에 들어가게 된다.</p><h3 id="Call-by-reference-참조에-의한-호출"><a href="#Call-by-reference-참조에-의한-호출" class="headerlink" title="Call-by-reference (참조에 의한 호출)"></a>Call-by-reference (참조에 의한 호출)</h3><img src="/images/post_img/33/reference_parameter_1.jpg" width="80%">함수에 `값`을 전달했기 때문에 함수 내부에서 매개변수의 값이 바뀌었음에도 불구하고 원래 객체에 대한 참조를 그대로 유지한 것이다. = 즉 객체가 넘어갈때는 참조 형태로 전달되는 것이 아니라 **값으로 넘어간다.** (== 포인터가 넘어간다)<img src="/images/post_img/33/reference_parameter_2.jpg" width="80%">함수 내부에서 obj를 덮어쓰면 obj는 지역객체를 가리키는 포인터가 되고, 이 지역 객체(obj.name)는 함수 실행이 끝나면 파괴된다.<hr><h2 id="6-타입판별"><a href="#6-타입판별" class="headerlink" title=" 6. 타입판별"></a><a name="6"></a> 6. 타입판별</h2><p><code>typeof</code> </p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> 변수명</span><br></pre></td></tr></table></figure><p><code>instanceof</code></p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">변수명 <span class="keyword">instanceof</span> <span class="built_in">Object</span> </span><br><span class="line"><span class="comment">// 이 변수는 Object의 인스턴스인가? </span></span><br><span class="line"><span class="comment">// 결과값은 boolean</span></span><br></pre></td></tr></table></figure><hr><h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol><li><a href="http://poiemaweb.com/js-data-type-variable" target="_blank" rel="noopener">http://poiemaweb.com/js-data-type-variable</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&amp;mallGb=KOR&amp;barcode=9788966260768&amp;orderClick=LAG&amp;Kc=&quot;
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="JavaScript" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/JavaScript/"/>
+    
+    
+      <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
     
   </entry>
   
