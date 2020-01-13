@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>국제화 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="http,internationalization">
+    
+    
+    <meta name="description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원 HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.  서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우저">
+<meta name="keywords" content="http,internationalization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="국제화">
+<meta property="og:url" content="http://feel5ny.github.io/2020/01/13/HTTP_016/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원 HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.  서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우저">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2020/03/thumb_default.jpg">
+<meta property="og:updated_time" content="2020-01-13T14:50:49.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="국제화">
+<meta name="twitter:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원 HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.  서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우저">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2020/03/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2020/01/13/HTTP_016/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2020/03/thumb_default.jpg" alt="국제화" style="width:100%">
+    </div>
+
+<article id="post-HTTP_016" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        국제화
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/01/13/HTTP_016/" class="article-date">
+            <time datetime="2020-01-13T00:10:10.000Z" itemprop="datePublished">2020-01-13</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/http/">http</a>, <a class="tag-link" href="/tags/internationalization/">internationalization</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#http">국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">언어와 문자</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#charset">문자집합과 HTTP</a>
+               
+                <div class="first_depth--sub">charset, accept-charset</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#glyph">다중언어 문자 인코딩에 대한 지침</a>
+               
+                <div class="first_depth--sub">coded character, glyph, coding space, character repertoire, ... </div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#tag">언어 태그와 HTTP</a>
+               
+                <div class="first_depth--sub">Content-Language, Accept-Language, 서브태그</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#uri">국제화 URI</a>
+               
+                <div class="first_depth--sub">예약어, 이스케이핑, 아스키</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#etc">기타 고려사항</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <hr>
+<hr>
+<a name="http">
+
+<h1 id="국제적인-콘텐츠를-다루기-위해-필요한-HTTP-지원"><a href="#국제적인-콘텐츠를-다루기-위해-필요한-HTTP-지원" class="headerlink" title="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원"></a>국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원</h1><ul>
+<li><p>HTTP에서 엔터티 본문이란 그저 <strong>비트들로 가득 찬</strong> 상자에 불과하다.</p>
+</li>
+<li><p>서버는 클라에게 문서의 문자와 언어를<br><strong><code>Content-Type charset</code></strong> 매개변수와<br><strong><code>Content-Language</code></strong> 헤더를 통해 알려준다.</p>
+</li>
+<li><p>클라는 서버에게<br>사용자가 어떤 언어를 이해할 수 있고,<br>어떤 알파벳의 코딩 알고리즘이 브라우저에 설치되어 있는지 말해줄 필요가 있다.<br><strong><code>Accept-Charset</code></strong>과
+<strong><code>Accept-Language</code></strong> 헤더를 보낸다</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: fr, en;q=0.8</span><br><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>모국어를 선호하지만, 피치 못할 경우 영어도 사용하는 프랑스어 사용자가 보낸 케이스</p>
+</li>
+<li><p><strong>iso-8859-1</strong> =&gt; 서유럽 차셋 인코딩과<br><strong>utf-8</strong> 유니코드 차셋 인코딩을<br>지원할 것이다.</p>
+</li>
+<li><p>q는 품질 인자로 프랑스어보다 영어에 낮은순위를 주었다. (기본은 1.0)</p>
+</li>
+</ul>
+<hr>
+<a name="charset">
+
+<h1 id="1-문자-집합과-HTTP"><a href="#1-문자-집합과-HTTP" class="headerlink" title="1. 문자 집합과 HTTP"></a>1. 문자 집합과 HTTP</h1><h2 id="1-1-Charset은-글자를-비트로-변환하는-인코딩이다"><a href="#1-1-Charset은-글자를-비트로-변환하는-인코딩이다" class="headerlink" title="1.1 Charset은 글자를 비트로 변환하는 인코딩이다."></a>1.1 Charset은 글자를 비트로 변환하는 인코딩이다.</h2><ul>
+<li>HTTP Charset 태그는<br>비트들을 글자로 변환하거나 (디코딩)<br>글자를 비트들로 변환하는 (인코딩)<br>알고리즘을 명명한다.<blockquote>
+<p><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_blank" rel="noopener">IANA 문자집합</a></p>
+</blockquote>
+</li>
+<li>몇몇 문자 인코딩 (utf-8이나 iso-2022-jp)은 글자당 비트 수가 일정하지 않아, 더 복잡한 가변길이 코드다.</li>
+<li>이런 종류의 코딩은 중국어나 일본어와 같이,<br>많은 글자로 이루어진 문자체계를 지원하기 위해 <strong>추가적인 비트</strong>를 사용할 수 있게 해준다.</li>
+<li>아랍어는 28개의 문자만을 갖는다.<br>8비트 256개의 유일한 값을 제공하므로, 라틴어, 아랍어, 그 밖의 유용한 기호들을 위한 충분한 공간이 된다.</li>
+</ul>
+<h2 id="1-2-문자집합과-인코딩은-어떻게-동작하는가"><a href="#1-2-문자집합과-인코딩은-어떻게-동작하는가" class="headerlink" title="1.2 문자집합과 인코딩은 어떻게 동작하는가"></a>1.2 문자집합과 인코딩은 어떻게 동작하는가</h2><ul>
+<li>비트들을 문자로 변환하는 디코딩 알고리즘을 짗이하고 적용하는<br>표준화된 방법이 필요하다.</li>
+</ul>
+<ol>
+<li>비트 =&gt; 문자로 변환 (의미 해석) - HTTP</li>
+<li>문자 =&gt; 모양으로 표현 (시각적 표현) - 브라우저, 운영체제, 글꼴이 결정</li>
+</ol>
+<h2 id="1-3-잘못된-Charset은-잘못된-글자들을-낳는다"><a href="#1-3-잘못된-Charset은-잘못된-글자들을-낳는다" class="headerlink" title="1.3 잘못된 Charset은 잘못된 글자들을 낳는다."></a>1.3 잘못된 Charset은 잘못된 글자들을 낳는다.</h2><p>브라우저가 본문으로부터 225 (11100001)을 가져온 경우</p>
+<ul>
+<li>iso-8859-1 (서유럽 문자 코드) 인코딩 양음 악센트가 붙은 소문자 a = <code>á</code></li>
+<li>iso-8859-6 (아랍 코드) : <code>FEH</code> = <code>ف</code></li>
+<li>iso-8859-7 (그리스어) : 알파 = <code>α</code></li>
+<li>iso-8859-8 (히브리어) : <code>BET</code> = <code>ב</code></li>
+</ul>
+<h2 id="1-4-표준화된-MIME-Charset-값"><a href="#1-4-표준화된-MIME-Charset-값" class="headerlink" title="1.4 표준화된 MIME Charset 값"></a>1.4 표준화된 MIME Charset 값</h2><ul>
+<li>특정 문자 인코딩과<br>특정 코딩된 문자집합의 결합을 MIME 차셋이라고 부른다.</li>
+<li>HTTP는 표준화된 MIME 차셋 태그를<br><strong>Content-Type</strong>과 <strong>Accept-Charset</strong> 헤더에 사용한다.</li>
+</ul>
+<h3 id="MIME-차셋-인코딩-태그"><a href="#MIME-차셋-인코딩-태그" class="headerlink" title="MIME 차셋 인코딩 태그"></a>MIME 차셋 인코딩 태그</h3><ul>
+<li><strong>us-ascii</strong> : ascii로도 불리지만, 여러가지 국제 변형때문에 us라는 접두어를 붙이는 것을 선호한다.</li>
+<li><strong>iso-8856-1</strong>(Latin1) : <strong>서유럽</strong> 언어를 지원하기 위한 ascii를 확장</li>
+<li><strong>iso-8856-2</strong> : (체코어, 폴란드어, 루마니아어와 같은) <strong>중부유럽 혹은 동부유럽</strong> 언어에서 사용되는 문자들을 포함시키기 위해 ascii를 확장</li>
+<li><strong>iso-8856-5</strong> : (러시아어, 세르비아어, 불가리아어 등에 사용되는) <strong>키릴</strong> 문자를 포함하기 위해 ascii를 확장</li>
+<li><strong>iso-8856-6</strong> : <strong>아랍</strong> 문자들을 포함하기 위해 ascii를 확장</li>
+<li><strong>iso-8856-7</strong> : 현대 <strong>그리스</strong> 문자를 포함하기 위해 ascii를 확장</li>
+<li><strong>iso-8856-8</strong> : <strong>히브리어와 이디시어</strong> 문자를 위해 ascii를 확장</li>
+<li><strong>iso-8856-15</strong>(Latin0) : 몇몇 <strong>구두점, 분수 기호</strong>들을 <strong>고대 프랑스어와 핀란드어</strong> 글자들로 대체하고, 국제 통화 기호를 <strong>새로운 유로 통화 기호</strong>로 대체하기 위해 iso-8859-1을 갱신한 것이다.</li>
+<li><strong>iso-2202-jp</strong> : 일본어 전자우편과 웹 콘텐츠를 위해 널리 사용되는 인코딩</li>
+<li><strong>euc-jp</strong> : 여러 종류의 모드나 이스케이프 문자열 없이 각 글자를 식별하기 위해 명시적 비트 패턴을 사용하는 iso 2022 호환 가변길이 인코딩이다.</li>
+<li><strong>Shift-JIS</strong> : 마소에 의해 개발. 역사적인 호환성문제때문에 복잡, 모든 문자에 대응하지도 못하지만 여전히 흔하게 쓰이고 있다.</li>
+<li><strong>koi8-r</strong> : 러시아어를 위한 인기있는 8비트 인터넷 문자집합 인코딩 이다.</li>
+<li><strong>utf-8</strong> : 전 세계의 문자들에 대한 보편적인 문자집합인 UCS를 표현하기 위한 흔히 쓰이는 가변길이 문자 인코딩 구조다.</li>
+<li><strong>windows-1252</strong> : 마소는 자신의 코딩됭 문자집합을 코드 페이지라고 부른다. 윈도우 코드페이지 1252는 iso-8859-1의 확장이다</li>
+</ul>
+<blockquote>
+<p><strong>euc-kr과 utf-8</strong> <a href="https://ofcourse.kr/html-course/%EC%9D%B8%EC%BD%94%EB%94%A9" target="_blank" rel="noopener">참고</a><br>euc-kr 방식은 원래 영어만을 고려한 1byte 길이의 ASCII 라는 인코딩 방식을 확장하여 한글을 사용할 수 있도록 만든 2byte 길이의 국가 언어 코드입니다.<br>국가 언어코드. <strong>즉 우리나라에서만 쓸 수 있도록 만든 코드</strong>이며 세계 어디에서나 공통으로 사용되는 인코딩 방식이 아니기 때문에, 다른 언어를 사용하는 환경(외국 등)에서는 <strong>한글 페이지를 제대로 볼 수 없는 문제가 발생합니다.</strong><br>이를 해결하기 위해 새로운 인코딩 방식이 개발되었는데, 그중 가장 보편화된 인코딩이 <strong>UTF-8</strong>입니다. (3byte)<br>예전에는 용량이 작은 euc-kr 방식을 선호하는 곳들도 많았으나, 현재는 용량 문제보다 표준화 및 글로벌 환경을 고려해야 하므로 UTF-8 인코딩 방식을 강력하게 권고하는 바입니다.</p>
+</blockquote>
+<h2 id="1-5-Content-Type-charset-헤더와-메타태그"><a href="#1-5-Content-Type-charset-헤더와-메타태그" class="headerlink" title="1.5 Content-Type charset 헤더와 메타태그"></a>1.5 Content-Type charset 헤더와 메타태그</h2><ol>
+<li><p>웹 서버는 클라에게 MIME charset 태그를 charset 매개변수와 함께 Content-Type 헤더에 담아 보낸다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>만약 나열되지 않았다면, 수신자는 문서의 콘텐츠로부터 문자집합을 추측하려고 시도한다.</p>
+<ol>
+<li><p>받은 HTML 파일에서 <code>meto</code>태그중 <code>HTTP-EQUIV</code>라는 속성을 갖고 있는 태그를 찾는다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>만약 문서가 html이 아니라면, 혹은<br>meta Content-Type 태그가 없다면,<br>소프트웨어는 언어와 인코딩에 대한 일반적인 패턴을 찾기 위해 <strong>실제 텍스트를 스케닝하여 문자 인코딩을 추측한다.</strong></p>
+</li>
+<li><p>클라가 문자 인코딩을 추측하지 못했다면 <code>iso-8859-1</code>인것으로 가정한다.</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="1-6-Accept-Charset-헤더"><a href="#1-6-Accept-Charset-헤더" class="headerlink" title="1.6 Accept-Charset 헤더"></a>1.6 Accept-Charset 헤더</h2><ul>
+<li>대부분의 클라는 모든 종류의 문자 코딩과 매핑 시스템을 지원하지는 않는다.</li>
+<li>HTTP 클라는 서버에게 정확히 어떤 문자 체계를 그들이 지원하는지 Accep-Charset 요청 헤더를 통해 알려준다.</li>
+<li>Accept-Charset 헤더의 값은 클라가 지원하는 문자 인코딩 목록을 제공해준다.</li>
+<li>이 문자 인코딩 구조 중 어떤 것으로 콘텐츠를 반환할지는 서버의 자유다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure>
+
+<hr>
+<a name="glyph">
+
+<h1 id="2-다중언어-문자-인코딩에-대한-지침"><a href="#2-다중언어-문자-인코딩에-대한-지침" class="headerlink" title="2. 다중언어 문자 인코딩에 대한 지침"></a>2. 다중언어 문자 인코딩에 대한 지침</h1><h2 id="문자집합-용어"><a href="#문자집합-용어" class="headerlink" title="문자집합 용어"></a>문자집합 용어</h2><ol>
+<li>문자 : 글쓰기의 최소단위. </li>
+<li><strong>글리프</strong> glyph<ul>
+<li>하나의 글자를 표현하기 위한, 획의 패턴이나 다른 것과 구분되는 유일한 시각적 형태</li>
+<li>글자를 여러 방식으로 쓰는 것이 가능하다면, 글리프를 여러 개 가질 수도 있다.</li>
+</ul>
+</li>
+<li><strong>코딩된 문자</strong> coded character<ul>
+<li>각 글자에 할당된 유일한 숫자</li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B5%AD%EC%A0%9C_%EB%AC%B8%EC%9E%90_%EC%84%B8%ED%8A%B8" target="_blank" rel="noopener">국제 문자 셋트</a></li>
+</ul>
+</li>
+<li><strong>코드 공간</strong> coding space<ul>
+<li>각 문자 코드의 비트 개수</li>
+<li>ex) UTF-8 인코딩은 유니코드 한 문자를 나타내기 위해 1바이트에서 4바이트까지를 사용한다.</li>
+</ul>
+</li>
+<li><strong>사용 가능 문자집합</strong> character repertoire<ul>
+<li>글자들에 대한 특정한 작업 집합</li>
+</ul>
+</li>
+<li><strong>코딩된 문자집합</strong> coded character set<ul>
+<li>사용 가능 문자집합을 받아서, 각 글자에 코드 공간의 코드를 할당해주는 코딩된 문자들의 집합.</li>
+<li>실제 글자들에 숫자로 된 문자코드를 대응시킨 것</li>
+</ul>
+</li>
+<li><strong>문자 인코딩 구조</strong><ul>
+<li>숫자로 된 문자 코드들을 콘텐츠 비트의 연속으로 인코딩하는 알고리즘.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="자세히-알아보기"><a href="#자세히-알아보기" class="headerlink" title="자세히 알아보기"></a>자세히 알아보기</h3><ol>
+<li><strong>문자</strong><ul>
+<li>하나의 문자는 하나의 알파벳 글자, 숫자, 구두점, 표의문자(중국어에서와 같은), 수학기호, 그 외에 다른 쓰기의 기본 단위</li>
+<li>문자는 글꼴이나 스타일에 독립적이다.</li>
+<li>같은 글자라도 그 글자가 단어에서 어디에 위치하느냐에 따라 각각 다른 모양을 갖는 표기 체계도 많다.<img src="/images/2020/03/01.png"></li>
+</ul>
+</li>
+<li><strong>글리프(glyphs), 연자(ligatures), 표현형태</strong><ul>
+<li><strong>글리프</strong>는 각 글자를 그리는 특정한 방법니다.<ul>
+<li>글꼴이나 사소한 미적 양식에 의존하지 않는, 글자에 내재된 모양새이다.</li>
+</ul>
+</li>
+<li>연자 ligatures<ul>
+<li>FI 연자 / LA연자<img src="/images/2020/03/02.jpg"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>코딩된 문자집합</strong> Coded Character Set<ul>
+<li>코딩된 문자집합은 정수를 글자로 대응시킨다.</li>
+<li>코딩된 문자집합은 보통 코드번호로 인덱싱된 배열로 구현된다.</li>
+<li>그 배열의 원소들은 문자들이다.</li>
+</ul>
+<hr>
+<ol>
+<li><strong>US-ASCII</strong> (모든 문자집합의 어머니)<ul>
+<li>1968sus ANSI 표준 X3.4 ‘정보교환을 위한 미국 표준 코드’로 표준화된 가장 유명한 코딩된 문자집합이다.</li>
+<li>아스키는 오직 코드 값 0~127만 사용한다.</li>
+<li>코드 공간을 전체 표현하는데 7비트만 필요하다.</li>
+<li>다른 국제 변종과 구분하기 위해 ‘<strong>US-ASCII</strong>‘를 더 선호한다.</li>
+</ul>
+</li>
+<li><strong>iso-8859</strong><ul>
+<li>US-ASCII 의 8비트 확대 집합들이다.</li>
+<li>국제적인 글쓰기를 위해 필요한 글자들을 하이비트를 이용하여 추가</li>
+<li>추가비트에 의해 제공되는 추가공간은 모든 유럽 글자를 담기에는 충분히 크지 않으므로,<br>iso-8859는 지역에 따라 커스터마이징된 문자집합을 제공한다.</li>
+</ul>
+<ol>
+<li>iso-8859-1 : 서유럽어 (영어, 프랑스어) (= Latin1) - HTML을 위한 기본 문자집합</li>
+<li>iso-8859-2 : 중앙 및 동유럽어 (체코어, 폴란드어)</li>
+<li>iso-8859-3 : 남유럽어</li>
+<li>iso-8859-4 : 북유럽어</li>
+<li>iso-8859-5 : 키릴 (불가리아어, 러시아어, 세르비아어)</li>
+<li>iso-8859-6 : 아랍어</li>
+<li>iso-8859-7 : 그리스어</li>
+<li>iso-8859-8 : 히브리어</li>
+<li>iso-8859-9 : 터키어</li>
+<li>iso-8859-10 : 노르딕어 (아이슬랜드어, 이뉴잇어)</li>
+<li>iso-8859-15 : 새로운 유로 통화 문자를 포함하기 위한 iso-8859-1의 변형</li>
+</ol>
+</li>
+<li><strong>JIS X 0201</strong><ul>
+<li>일본어 가타카나 반각문자를 더해, 확장한 극단적으로 작은 문자집합</li>
+<li>= <strong>JIS ROMAN</strong> 으로 불린다. (JIS = Japanese Industrial Standard = 일본 산업 표준)</li>
+</ul>
+</li>
+<li><strong>JIS X 0208과 JIS X 0212</strong><ul>
+<li>일본어는 여러 문자 체계로부터 온 수천개의 글자를 담고 있다.</li>
+<li>JIS X 0201의 63개 표음 가타카나 문자보다 완전한 문자집합이 필요하다.</li>
+<li>JIS X 02<strong>08</strong>은 최초의 멀티바이트 일본어 문자집합이다. = 일본식 한자인 <strong>6879</strong>개의 코딩문자를 정의했다.</li>
+<li>JIS X 02<strong>12</strong> 문자집합은 6607개의 문자를 <strong>추가</strong>했다.</li>
+</ul>
+</li>
+<li><strong>UCS</strong><ul>
+<li>국제 문자 셋트 Univeral Character Set 은 전 세계의 모든 글자를 하나의 코딩된 문자집합으로 통합하려 노력하는 세계적인 표준이다.</li>
+<li>UCS는 ISO 10646으로 정의된다.</li>
+<li>유니코드는 UCS 표준을 따르는 상업적인 컨소시업이다.</li>
+<li>UCS는 기본 집합은 단 50,000 글자만으로 이루어져 있음에도 불구하고,<br>수백만개의 글자를 위한 코드공간을 갖고 있다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>문자 인코딩 구조</strong><ul>
+<li>숫자로 된 문자 코드를 콘텐츠 비트들로 변환</li>
+<li>다른 쪽에서는 그들을 다시 문자코드로 환원한다. </li>
+<li>문자 인코딩 구조는 3종류로 분류할 수 있다. (고정폭/가변폭(비모달)/가변폭(모달))</li>
+</ul>
+<hr>
+<ol>
+<li><strong>고정폭</strong><ul>
+<li>각 코딩된 문자를 고정된 길이의 비트로 표현한다.</li>
+<li>빠르게 처리될 수 있지만 공간을 낭비할 우려가 있다.</li>
+</ul>
+</li>
+<li><strong>가변폭 (비모달)</strong><ul>
+<li>다른 문자 코드 번호에 다른 길이의 비트르 ㄹ사용한다.</li>
+<li>자주 사용하는 글자의 비트 길이를 줄일 수 있고,<br>국제 문자에 대해서는 여러 바이트를 사용하도록 함으로써<br>이전의 8비트 문자집합과의 호환성도 유지할 수 있다. </li>
+</ul>
+</li>
+<li><strong>가변폭 (모달)</strong><ul>
+<li>다른 모드로의 전환을 위해 특별한 escapte 패턴을 사용한다.</li>
+<li>예를 들어<br>어떤 모달 인코딩은 텍스트에서 중첩된 여러가지 문자집합 간의 전환을 위해 사용될 수 있다.</li>
+<li>모달 인코딩은 처리하기 복잡하지만, 복잡한 표기 체계를 효과적으로 지원해 줄 수 있다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>[고정폭] <strong>8비트</strong><ul>
+<li>간단히 각 문자 코드를 그에 대응하는 8비트 값으로 인코딩한다.</li>
+<li>256개 문자의 코드 범위에 대한 문자집합만을 지원한다.</li>
+<li>iso-8859 문자집합군은 8비트 아이덴티티 인코딩을 사용한다.</li>
+</ul>
+</li>
+<li>[가변폭(비모달)] <strong>UTF-8</strong><ul>
+<li>인기있는 UCS를 위해 설계된 문자 인코딩 구조다. (UTF = UCS Transformation Format)</li>
+<li>첫 바이트의 서두 비트들은 인코딩된 문자의 길이를 바이트 단위로 나타내고,<br>그 이후의 바이트들은 각 6비트 코드값을 담는다.<br>(0ccccccc, 110ccccc,…)</li>
+<li>문자 코드 90(아스키 ‘Z’)는 1바이트로 인코딩 되었을 것이며(01011010), 코드 5073(13비트 이진값 100111101001)은 3바이트로 인코딩되었을 것이다.</li>
+</ul>
+</li>
+<li>[가변폭(모달)]<strong>iso-2022-jp</strong><ul>
+<li>일본어 인터넷 문서를 위해 널리 사용되는 인코딩이다.</li>
+<li>128보다 작은 값으로만 이루어진 가변길이 모달 인코딩이다.</li>
+<li>인코딩 콘텍스트는 4가지 미리 정의된 문자집합 중 하나로 설정된다.</li>
+<li>특별한 이스케이프 문자열(<code>ESC ( B</code>, <code>ESC ( J</code>, <code>ESC $ @</code>, <code>ESC $ B</code>)은 한 집합에서 다른 집합으로 전환시켜준다. (모달)</li>
+</ul>
+</li>
+<li>[가변폭(비모달)]<strong>euc-jp</strong><ul>
+<li>일본어 인코딩</li>
+<li>EUC는 Extended Unix Code의 약자 </li>
+<li>유닉스 운영체제에서 아시아 문자들을 지원하기 위해 처음 개발되었다.</li>
+<li>모드간의 전환을 위한 이스케이프 문자열이 없다.</li>
+<li>euc-jp는 4가지 코딩된 문자집합을 지원한다.<br>(JIS X 0201, JIS X 0208, 반각 가타카나, JIS X 0212)</li>
+</ul>
+</li>
+<li>[가변폭(비모달)]<strong>euc-kr</strong><ul>
+<li>한글 인터넷 문서를 위해 널리 사용되는 가변길이 인코딩</li>
+<li>2가지 문자집합을 지원한다. (KS X 1003, KS X 1001)</li>
+<li>KS X 1001은 총 2350자만 담고 있었고 표현하기에는 부족</li>
+<li>이를 보완하기 위해 <strong>한글 채움문자</strong>를 이용해 한글을 표현하는 방식을 규정하고 있다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Charset은-문자집합이-아닌-매핑-알고리즘의-이름이다"><a href="#Charset은-문자집합이-아닌-매핑-알고리즘의-이름이다" class="headerlink" title="Charset은 문자집합이 아닌 매핑 알고리즘의 이름이다."></a>Charset은 문자집합이 아닌 매핑 알고리즘의 이름이다.</h2><ul>
+<li>MIME charset 태그는 문자집합을 의미하는 것이 아니다.</li>
+<li>MIME charset 값은 데이터 비트를 고유한 문자의 코드로 매핑하는 알고리즘의 이름이다.<br>= 문자 인코딩 구조 + 코딩된 문자집합</li>
+</ul>
+<hr>
+<a name="tag">
+
+<h1 id="언어태그와-HTTP"><a href="#언어태그와-HTTP" class="headerlink" title="언어태그와 HTTP"></a>언어태그와 HTTP</h1><ul>
+<li>영어 en / 독일어 de / 한국어 ko<br>많은 다른 언어에 대한 언어 태그가 존재한다.</li>
+<li>브라질 포르투갈어 pt-BR / 미국 영어 en-US / 허난 중국어 zh-ziang<br>지역에 따라 변형된 언어나 방언을 표현할 수 있다.</li>
+</ul>
+<ol>
+<li><p><strong>Content-Language 헤더</strong></p>
+<ul>
+<li>Content-Language 엔터티 헤더 필드는 엔터티가 어떤 언어 사용자를 대상으로 하고 있는지 서술한다.</li>
+</ul>
+</li>
+<li><p><strong>Accept-Lanugage 헤더</strong></p>
+<ul>
+<li>HTTP는 우리에게 우리의 언어 제약과 선호도를 웹 서버에 전달할 수 있게 해준다.</li>
+<li>Accept-Lanugage와 Accept-Charset을 사용할 수 있다.</li>
+</ul>
+</li>
+<li><p><strong>언어 태그의 종류</strong> ([RFC 3066] 기준)</p>
+<ul>
+<li>언어태그는 다음을 표현하기 위해 사용될 수 있다.<ul>
+<li>일반적인 언어의 종류 ex_<code>es</code> (스페인어)</li>
+<li>특정 국가의 언어 ex_<code>en-GB</code> (영국 영어)</li>
+<li>방언 ex_<code>no-bok</code> (노르웨이어의 Book Language를 의미)</li>
+<li>지방어 ex_<code>sgn-US-MA</code> (마서스 비니어드 섬의 수화)</li>
+<li>그외의 다른 언어의 변형이 아닌 표준언어 (ex_<code>i-navajo</code>)</li>
+<li>비표준 언어 ex_<code>x-snowboarder-slang</code> (스노우보드 타는 사람..)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>서브태그</strong></p>
+<ul>
+<li>언어 태그는 하이픈으로 분리된 하나 이상의 서브태그로 이루어져 있다.</li>
+<li>ex_<code>sgn-US-MA</code></li>
+</ul>
+<ol>
+<li>주 서브태그 : 표준화되어 있다. - 알파벳만</li>
+<li>두번째 서브태그: 자신만의 이름 표준을 따름 (선택적) - 알파벳 + 숫자가능 (최대 8글자)</li>
+<li>서브태그는 등록되어 있지 않다.</li>
+</ol>
+<hr>
+<ol>
+<li><p><strong>첫번째 서브태그 : 이름공간</strong></p>
+<ul>
+<li>ISO 639 표준 언어 집합에서 선택된 표준화된 언어 토큰</li>
+<li>첫번째 서브태그가</li>
+<li>두 글자라면, ISO 639와 639-1 표준의 언어코드다.</li>
+<li>세 글자라면, ISO 639-2표준과 확장에 열거된 언어코드다.</li>
+<li>글자가 <code>i</code>라면, IANA에 등록된 것</li>
+<li>글자가 <code>x</code>라면, 특정 개인이나 집단 전용의 비표준 확장 서브태그다.</li>
+<li>한국어 : ko(ISO 639) / kor(ISO 639-2)</li>
+<li>영어 : en(ISO 639) / eng(ISO 639-2)</li>
+</ul>
+</li>
+<li><p><strong>두번째 서비태그: 이름공간</strong></p>
+<ul>
+<li>ISO 3166 국가 코드와 지역 표준 집합에서 선택된 표준화된 국가토큰이다.</li>
+<li>IANA에 등록된 다른 문자열일 수도 있다.</li>
+<li>두번째 서브태그는</li>
+<li>두글자라면 ISO 3166에 정의된 국가/지역이다.</li>
+<li>3~8 글자라면, IANA에 등록된 것이다.</li>
+<li>한글자라면, 문가 잘못된 것..</li>
+<li>일본: JP</li>
+<li>인도: IN</li>
+</ul>
+</li>
+<li><p><strong>나머지 서브태그: 이름공간</strong></p>
+<ul>
+<li>8자 이하의 알파벳과 숫자로 이루어져야 한다는 것을 제외하면 다른 규칙은 없다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<a name="uri">
+
+<h1 id="국제화된-URI"><a href="#국제화된-URI" class="headerlink" title="국제화된 URI"></a>국제화된 URI</h1><ul>
+<li>오늘날 URI는 US-ASCII의 부분집합으로 구성되어 있다.</li>
+</ul>
+<ol>
+<li><strong>국제적 가독성 vs 의미있는 문자들</strong> <ul>
+<li>URI에 들어가고 조작하고, 공유하기 쉽게 하기 위하여<br>설계자들은 매우 제한된 공통 문자집합을 선택했다.<ul>
+<li>기본적인 라틴 알파벳 문자, 숫자, 특수문자</li>
+</ul>
+</li>
+<li><strong>단점</strong><ul>
+<li>URI는 비영어권 사람들도 쉽게 사용하고, 기억할 수 있도록 설계되지는 못했다.</li>
+<li>전 세계 사람들이 라틴 알파벳을 인식조차 하지 못하기 때문에 URI를 추상화 패턴으로 기억하는 것은 거의 불가능</li>
+<li>URI 저자들은 리소스 식별자의 가독성과<br>공유 가능성의 보장이<br>대부분의 의미 있는 문자들로 구성될 수 있도록 하는 것이 더 중요하다고 여겼다.</li>
+</ul>
+</li>
+<li>그래서 <strong>아스키 문자들의 제한된 집합으로 이루어진 URI</strong>를 갖게 되었다.</li>
+</ul>
+</li>
+<li><strong>URI에서 사용될 수 있는 문자들</strong><ul>
+<li>URI에서 사용할 수 있는 US-ASCII 문자들의 부분집합은 <ul>
+<li>예약된 문자들, </li>
+<li>예약되지 않은 문자들, </li>
+<li>이스케이프 문자들로 나뉜다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>예약되지 않은 문자들은 일반적으로 사용될 수 있다.</li>
+<li>예약된 문자들은 URI에서 특별한 의미를 가지며, 일반적으로는 사용될 수 없다.</li>
+</ul>
+<hr>
+<ul>
+<li>예약되지 않은 문자: [A-Za-z0-9] <code>-</code> <code>_</code> <code>.</code> <code>!</code> <code>~</code> <code>*</code> <code>&#39;</code>  <code>(</code> <code>)</code></li>
+<li>예약된 문자: <code>;</code> <code>/</code> <code>?</code> <code>:</code> <code>@</code> <code>&amp;</code> <code>=</code> <code>+</code> <code>$</code> <code>,</code></li>
+<li>이스케이프: <code>%</code> <code>&lt;HEX&gt;</code> <code>&lt;HEX&gt;</code></li>
+</ul>
+</li>
+<li><strong>이스케이핑과 역이스케이핑</strong><ul>
+<li>URI 이스케이프는 예약된 문자나 다른 지원하지 않은 글자들(space)을 안전하게 URI에 삽일할 수 있는 방법을 제공한다.</li>
+<li><strong>이스케이프</strong> : 퍼센트 글자 하나와, 뒤이은 16진수 글자 둘로 이루어진 3글자 문자열이다.<ul>
+<li><code></code>스페이스 (아스키 32): %20 (20은 32의 16진법 표현이다.)</li>
+<li><code>%</code>(아스키 25): %25</li>
+</ul>
+</li>
+<li>URI를 해석할 때,<ol>
+<li>이스케이핑된 코드 바이트들을 (<code>encodeURIComponent</code> 메서드를 사용하면 URI 인코딩을 진행할 수 있다.)</li>
+<li>원래 ASCII 코드 바이트로 변한하여 해석한다.</li>
+</ol>
+</li>
+<li>두번 인코딩 되지 않도록 주의한다.</li>
+</ul>
+</li>
+<li><strong>국제 문자들을 이스케이핑하기</strong><ul>
+<li>이스케이프 값들은 US-ASCII 코드의 범위(0~127)에 있어야한다.</li>
+<li>어떤 어플리케이션은 iso-8859-1 확장 문자들(128~255)을 표현하기 위해 이스케이프 값을 사용하려 한다.</li>
+<li>그러나 오늘날에는 아스키 범위 밖의 문자를 인코딩하는 일은 상당히 흔하다.</li>
+</ul>
+</li>
+<li><strong>URI에서의 모달 전환</strong><ul>
+<li>몇몇 URI는 다른 문자집합의 글자를 표현하기 위해 아스키 문자열을 사용한다.<ul>
+<li>예를 들어 iso-2022-jp 인코딩은 JIS-Roman으로 변경하기 위해 <code>ESC ( J</code>를 삽입할 수 있으며 <code>ESC ( B</code>로 다시 아스키로 돌아올 수 있다.</li>
+</ul>
+</li>
+<li>현재 URI는 그다지 국제화에 친화적이지 않다.</li>
+<li>당분간 HTTP 어플리케이션은 아스키와 함께 써야한다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<a name="etc">
+
+<h1 id="기타-고려사항"><a href="#기타-고려사항" class="headerlink" title="기타 고려사항"></a>기타 고려사항</h1><ol>
+<li><strong>헤더와 명세에 맞지 않는 데이터</strong><ul>
+<li>HTTP 헤더는 반드시 US-ASCII 문자집합의 글자들로만 이루어져야 한다.</li>
+<li>많은 HTTP 어플리케이션은 글자들을 처리하기 위해<br>운영체제와 라이브러리 루틴을 사용한다. </li>
+<li>이 모든 라이브러리가 아스키 범위(0~127)를 벗어난 글자를 지원하지 않는다.</li>
+</ul>
+</li>
+<li><strong>날짜</strong><ul>
+<li>HTTP명세는 올바른 GMT 날짜 형식을 명확히 정의하고 있지만, 모든 웹 서버와 클라가 규칙을 따르고 있지 않음을 주의하라.</li>
+</ul>
+</li>
+<li><strong>도메인 이름</strong><ul>
+<li>국제화 문자를 포함하는 도메인 이름을 = 국제화 도메인 이름 Internationalizing Domain Name</li>
+<li>오늘날 대부분의 웹브라우저가 <strong>퓨니코드</strong>를 이용해 이를 지원한다. punycode<ul>
+<li>퓨지코드란 유니코드 문자열을 호스트 명에서 사용 가능한 문자만으로 이루어진 문자열로 변환하는 방법 (RFC 3492)</li>
+<li>웹브라우저들은 이 기법을 이용해, 사용자가 입력한 다국어로 된 도메인 이름을<br>알파벳과 숫자 등으로 된 도메인 이름으로 변환한다.<br>( <code>한글.com</code> =&gt; <code>xn--bj0bj06e.com</code> )</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ul>
+<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+</ul>
+<hr>
+<p><strong>참고자료</strong></p>
+<ul>
+<li><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_blank" rel="noopener">IANA 문자집합</a></li>
+</ul>
+</a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="ck5ckf3if003lxmbm4di52okt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#http">국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">언어와 문자</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#charset">문자집합과 HTTP</a>
+               
+                <div class="first_depth--sub">charset, accept-charset</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#glyph">다중언어 문자 인코딩에 대한 지침</a>
+               
+                <div class="first_depth--sub">coded character, glyph, coding space, character repertoire, ... </div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#tag">언어 태그와 HTTP</a>
+               
+                <div class="first_depth--sub">Content-Language, Accept-Language, 서브태그</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#uri">국제화 URI</a>
+               
+                <div class="first_depth--sub">예약어, 이스케이핑, 아스키</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#etc">기타 고려사항</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/01/06/HTTP_015_02/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">인스턴스 조작과 인코딩</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/13/HTTP_016/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/03/thumb_default.jpg)" alt="국제화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/13/HTTP_016/" class="title">국제화</a></p>
+                            <p class="item-date"><time datetime="2020-01-13T00:10:10.000Z" itemprop="datePublished">2020-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/06/HTTP_015_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/02/thumb_default.jpg)" alt="인스턴스 조작과 인코딩" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/06/HTTP_015_02/" class="title">인스턴스 조작과 인코딩</a></p>
+                            <p class="item-date"><time datetime="2020-01-05T15:10:10.000Z" itemprop="datePublished">2020-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/05/HTTP_015_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/01/thumb_default.jpg)" alt="엔터티와 인코딩" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/05/HTTP_015_01/" class="title">엔터티와 인코딩</a></p>
+                            <p class="item-date"><time datetime="2020-01-05T11:43:10.000Z" itemprop="datePublished">2020-01-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/22/Joylog_004/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/46/thumb_default.jpg)" alt="2019 회고 + 2020 다짐 (feat. 글또)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2019/12/22/Joylog_004/" class="title">2019 회고 + 2020 다짐 (feat. 글또)</a></p>
+                            <p class="item-date"><time datetime="2019-12-22T12:23:55.000Z" itemprop="datePublished">2019-12-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/12/08/HTTP_014_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2019/45/thumb_default.jpg)" alt="HTTPS의 세부사항" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2019/12/08/HTTP_014_02/" class="title">HTTPS의 세부사항</a></p>
+                            <p class="item-date"><time datetime="2019-12-08T11:43:10.000Z" itemprop="datePublished">2019-12-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CS/" style="font-size: 14.17px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.83px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 11.67px;">Joy</a> <a href="/tags/OOP/" style="font-size: 15.83px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/TCP-IP/" style="font-size: 10.83px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.83px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 11.67px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.83px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.17px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.83px;">authorization</a> <a href="/tags/blog/" style="font-size: 11.67px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.67px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.83px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.67px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.5px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.83px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.83px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.83px;">digest</a> <a href="/tags/encoding/" style="font-size: 10.83px;">encoding</a> <a href="/tags/endity/" style="font-size: 10px;">endity</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.83px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.83px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.83px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/http/" style="font-size: 19.17px;">http</a> <a href="/tags/https/" style="font-size: 10.83px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10.83px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.5px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.5px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.83px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.83px;">principle</a> <a href="/tags/programming/" style="font-size: 11.67px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 12.5px;">refactoring</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.33px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.33px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.83px;">symbol</a> <a href="/tags/typeScript/" style="font-size: 17.5px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">86</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2020 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2020/01/13/HTTP_016/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
