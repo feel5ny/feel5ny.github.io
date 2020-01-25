@@ -20,7 +20,7 @@
 <meta property="og:description" content="HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.HTTP는 콘텐츠를 잘 나르기 위한잘 라벨링된 엔터티를 사용한다.  엔터티와 엔터티 헤더들 웹상의 화물을 수송하기 위해 어떤일을 하는지 HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지 복잡하지만 강력한 기능을 알아본다.HTTP 엔터티, 범위요청(range request">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2020/01/thumb_default.jpg">
-<meta property="og:updated_time" content="2020-01-05T15:00:24.672Z">
+<meta property="og:updated_time" content="2020-01-25T14:56:14.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="엔터티와 인코딩">
 <meta name="twitter:description" content="HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다.HTTP는 콘텐츠를 잘 나르기 위한잘 라벨링된 엔터티를 사용한다.  엔터티와 엔터티 헤더들 웹상의 화물을 수송하기 위해 어떤일을 하는지 HTTP가 어떻게 콘텐츠 크기, 타입, 인코딩에 대한 필수적인 값들을 제공하는지 복잡하지만 강력한 기능을 알아본다.HTTP 엔터티, 범위요청(range request">
@@ -397,43 +397,43 @@ ga('send', 'pageview');
 </ul>
 <h3 id="2-1-잘림-검출"><a href="#2-1-잘림-검출" class="headerlink" title="2.1 잘림 검출"></a>2.1 잘림 검출</h3><ul>
 <li>옛날 버전의 HTTP: 커넥션이 닫힌 것을 보고 메세지가 끝났음을 인지<ul>
-<li>Content-length가 없다면 클라는 <ol>
+<li>Content-Length가 없다면 클라는 <ol>
 <li>커넥션이 정상적으로 닫힌 것인지,</li>
 <li>메세지 전송 중에 서버에 충돌이 발생한 것인지 구분하지 못함</li>
 </ol>
 </li>
-<li>잘림을 검출하기 위해 Content-length가 필요로 했다.</li>
+<li>잘림을 검출하기 위해 Content-Length가 필요로 했다.</li>
 </ul>
 </li>
 <li>메세지 잘림은 <strong>캐싱 프락시 서버</strong>에서 특히 취약하다.<ol>
-<li>캐시가 잘린 메세지를 수신했으나 잘렸다는 것을 ㅇ니식하지 못했다면</li>
+<li>캐시가 잘린 메세지를 수신했으나 잘렸다는 것을 인식하지 못했다면</li>
 <li>캐시는 결함이 있는 콘텐츠를 저장하고</li>
-<li>계속 제공하게 돌 것이다.</li>
+<li>계속 제공하게 될 것이다.</li>
 </ol>
 </li>
-<li>캐싱 프락시 서버는 명시적으로 Content-length 헤더를 갖고 있지 않은 HTTP본문은 <strong>보통 캐시하지 않는다.</strong></li>
+<li>캐싱 프락시 서버는 명시적으로 Content-Length 헤더를 갖고 있지 않은 HTTP본문은 <strong>보통 캐시하지 않는다.</strong></li>
 </ul>
-<h3 id="2-2-잘못된-Content-length"><a href="#2-2-잘못된-Content-length" class="headerlink" title="2.2 잘못된 Content-length"></a>2.2 잘못된 Content-length</h3><ul>
+<h3 id="2-2-잘못된-Content-Length"><a href="#2-2-잘못된-Content-Length" class="headerlink" title="2.2 잘못된 Content-Length"></a>2.2 잘못된 Content-Length</h3><ul>
 <li>공식적으로 HTTP/1.1 사용자 에이전트는 잘못된 길이를 받고 그 사실을 인지했을 때 사용자에게 알려주게 되어 있다.</li>
 </ul>
-<h3 id="2-3-Content-length와-지속커넥션"><a href="#2-3-Content-length와-지속커넥션" class="headerlink" title="2.3 Content-length와 지속커넥션"></a>2.3 Content-length와 지속커넥션</h3><ul>
-<li>Content-length는 지속커넥션을 위해 필수다.</li>
+<h3 id="2-3-Content-Length와-지속커넥션"><a href="#2-3-Content-Length와-지속커넥션" class="headerlink" title="2.3 Content-Length와 지속커넥션"></a>2.3 Content-Length와 지속커넥션</h3><ul>
+<li>Content-Length는 지속커넥션을 위해 필수다.</li>
 <li>만약 응답이 지속커넥션을 통해서 온 것이라면, 또 다른 HTTP 응답이 즉시 그 뒤를 이을 것이다.</li>
-<li>Content-length 헤더는 클라에게 메세지 하나가 어디서 끝나고 다음 시작은 어디인지 알려주는데, </li>
-<li>커넥션이 지속적일경우 클라가 커넥션이 닫힌 위치를 근거로 메세지의 끝을 인식하는 것은 불가능하므로,<br>Content-length로 시작과 끝을 가늠한다. </li>
-<li>때문에 지속커넥션에서는 Content-length는 필수이다.<ul>
-<li>다만, 청크인코딩은 지속커넥션으로 이루어지는데, 이때 Content-length헤더는 없다.</li>
+<li>Content-Length 헤더는 클라에게 메세지 하나가 어디서 끝나고 다음 시작은 어디인지 알려주는데, </li>
+<li>커넥션이 지속적일경우 클라가 커넥션이 닫힌 위치를 근거로 메세지의 끝을 인식하는 것은 불가능하므로,<br>Content-Length로 시작과 끝을 가늠한다. </li>
+<li>때문에 지속커넥션에서는 Content-Length는 필수이다.<ul>
+<li>다만, 청크인코딩은 지속커넥션으로 이루어지는데, 이때 Content-Length헤더는 없다.</li>
 </ul>
 </li>
 </ul>
 <h3 id="2-4-콘텐츠-인코딩"><a href="#2-4-콘텐츠-인코딩" class="headerlink" title="2.4 콘텐츠 인코딩"></a>2.4 콘텐츠 인코딩</h3><ul>
 <li>HTTP는<br>보안을 강화하거나<br>압축을 통해 공간을 절약할 수 있도록,<br>엔터티 본문을 인코딩할 수 있게 해준다.</li>
-<li>인코딩 될 경우 Content-length 헤더는 인코딩된 본문의 길이를 바이트 단위로 정의한다.</li>
+<li>인코딩 될 경우 Content-Length 헤더는 인코딩된 본문의 길이를 바이트 단위로 정의한다.</li>
 </ul>
 <h3 id="2-5-엔터티-본문-길이-판별을-위한-규칙"><a href="#2-5-엔터티-본문-길이-판별을-위한-규칙" class="headerlink" title="2.5 엔터티 본문 길이 판별을 위한 규칙"></a>2.5 엔터티 본문 길이 판별을 위한 규칙</h3><p>switch (true)</p>
 <ol>
 <li>본문을 갖는 것이 허용되지 않은 특정타입의 HTTP 메세지<ul>
-<li>Content-length는 무시된다.</li>
+<li>Content-Length는 무시된다.</li>
 <li>ex_ <code>HEAD</code> 메서드</li>
 </ul>
 </li>
@@ -441,12 +441,12 @@ ga('send', 'pageview');
 <li>엔터티는 ‘0 바이트 청크’라 불리는 특별한 패턴으로 끝나야 한다.</li>
 </ul>
 </li>
-<li>메세지가 Content-length 헤더를 갖는다면<ul>
+<li>메세지가 Content-Length 헤더를 갖는다면<ul>
 <li>본문의 길이를 담게 된다.</li>
-<li>Transfer-Encoding가 identity가 아닌값을 포함한 메세지를 받았을 경우 Content-length는 무시된다.</li>
+<li>Transfer-Encoding가 identity가 아닌값을 포함한 메세지를 받았을 경우 Content-Length는 무시된다.</li>
 </ul>
 </li>
-<li>(Content-type: multipart/byteranges) &amp;&amp; (Content-length가 정의되어있지 않다면)<ul>
+<li>(Content-type: multipart/byteranges) &amp;&amp; (Content-Length가 정의되어있지 않다면)<ul>
 <li>멀티파트 메세지의 각 부분은<br>각자 스스로의 크기를 정의할 것이다.</li>
 <li>멀티파트 유형은 자신의 크기를 스스로 결정할 수 있는 유일한 엔터티 본문 유형이다.</li>
 <li>수신자가 이것을 해석할 수 있다는 사실을 송신자가 알기 전까지 보내지 말아야 한다…</li>
@@ -455,7 +455,7 @@ ga('send', 'pageview');
 </li>
 <li>(default)<ul>
 <li>엔터티는 커넥션이 닫힐 때 끝난다.</li>
-<li>Content-length를 요구하고 싶을 경우 411 Length Required 응답을 보냄</li>
+<li>Content-Length를 요구하고 싶을 경우 411 Length Required 응답을 보냄</li>
 </ul>
 </li>
 </ol>
@@ -517,7 +517,7 @@ ga('send', 'pageview');
 <li>문서를 gzip 알고리즘으로 압축하여 청크 인코딩으로 보냈다면, MD5 알고리즘은 압축된 본문 전체에 대해 수행된다.</li>
 </ul>
 </li>
-<li>MD5는 문서의 위치를 빠르게 알아내고, 콘텐츠의 중복저장을 방지하기 위한 해시테이블의 키로 이용디ㅗㄹ 수 있다.<blockquote>
+<li>MD5는 문서의 위치를 빠르게 알아내고, 콘텐츠의 중복저장을 방지하기 위한 해시테이블의 키로 이용될 수 있다.<blockquote>
 <p>Content-MD5 헤더는 그다지 <strong>자주 전송되지 않는다.</strong></p>
 </blockquote>
 </li>
@@ -536,7 +536,7 @@ ga('send', 'pageview');
 </ol>
 <h3 id="1-과정"><a href="#1-과정" class="headerlink" title="1. 과정"></a>1. 과정</h3><ol>
 <li>웹서버가 원본 Content-Type과 Content-Length 헤더를 수반한 원본 응답 메세지를 생성</li>
-<li>콘텐츠 인코딩 서버가 인코딩도니 메세지 생성 (원서버 or 프록시)<ul>
+<li>콘텐츠 인코딩 서버가 인코딩된 메세지 생성 (원서버 or 프록시)<ul>
 <li>Content-Length는 변경된다.</li>
 <li>콘텐츠 인코딩 서버는 <strong>어떤 방식으로 인코딩했는지 정보가 담겨있는 Content-Encoding 헤더를</strong> 인코딩된 메세지에 추가<br>수신자가 디코딩할 수 있도록 한다.</li>
 </ul>
@@ -634,7 +634,7 @@ ga('send', 'pageview');
 <h4 id="청크-인코딩된-메세지의-트레일러"><a href="#청크-인코딩된-메세지의-트레일러" class="headerlink" title="청크 인코딩된 메세지의 트레일러"></a>청크 인코딩된 메세지의 트레일러</h4><ul>
 <li>다음 중 하나 이상 조건을 만족하면 청크 메세지에 트레일러를 추가할 수 있다.<ol>
 <li>클라의 <code>TE</code> 헤더가 트레일러를 받아들일 수 있음을 나타내고 있는 경우</li>
-<li>트레일러가 응답을 만든 서버에 의해 추가되었으며,<br>트레일러의 콘테츠는 클라가 이해하고 사용할 필요가 없어서 <em>무시하고 버려도 되는 경우</em></li>
+<li>트레일러가 응답을 만든 서버에 의해 추가되었으며,<br>트레일러의 콘텐츠는 클라가 이해하고 사용할 필요가 없어서 <em>무시하고 버려도 되는 경우</em></li>
 </ol>
 </li>
 <li>트레일러에는 본문의 콘텐츠가 먼저 생성되어야 한다거나 하는 등의 이유로</li>
@@ -642,7 +642,7 @@ ga('send', 'pageview');
 <p><strong>메세지 시작 시점에서 그 값을 알 수 없는 추가적인 헤더 필드를 담을 수 있다.</strong></p>
 <ul>
 <li>트레일러로 보낼 수 있는 헤더의 예로 <code>Content-MD5</code> 헤더가 있다.</li>
-<li><code>Transfer-Encoding</code>, <code>Trailer</code>, <code>Content=Length</code>를 제외한 어떤 HTTP 헤더도 트레일러로 보낼 수 있다.</li>
+<li><code>Transfer-Encoding</code>, <code>Trailer</code>, <code>Content-Length</code>를 제외한 어떤 HTTP 헤더도 트레일러로 보낼 수 있다.</li>
 </ul>
 <h4 id="콘텐츠와-전송-인코딩의-조합"><a href="#콘텐츠와-전송-인코딩의-조합" class="headerlink" title="콘텐츠와 전송 인코딩의 조합"></a>콘텐츠와 전송 인코딩의 조합</h4><ul>
 <li>콘텐츠 인코딩과 전송인코딩은 동시에 사용될 수 있다.</li>
@@ -666,7 +666,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="ck5l2g8wm003o6pbm8c3eovuk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="ck5tq0v0u003a8qbm7usipuo5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -1120,6 +1120,13 @@ ga('send', 'pageview');
         <div class="container-inner">
             <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
             <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
                 
                 <p>&copy; 2020 Joy Kim</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
