@@ -20,7 +20,7 @@
 <meta property="og:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원 HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.  서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우저">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2020/03/thumb_default.jpg">
-<meta property="og:updated_time" content="2020-01-13T14:50:49.116Z">
+<meta property="og:updated_time" content="2020-01-27T16:47:32.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="국제화">
 <meta name="twitter:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원 HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.  서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우저">
@@ -358,7 +358,7 @@ ga('send', 'pageview');
 <li>아랍어는 28개의 문자만을 갖는다.<br>8비트 256개의 유일한 값을 제공하므로, 라틴어, 아랍어, 그 밖의 유용한 기호들을 위한 충분한 공간이 된다.</li>
 </ul>
 <h2 id="1-2-문자집합과-인코딩은-어떻게-동작하는가"><a href="#1-2-문자집합과-인코딩은-어떻게-동작하는가" class="headerlink" title="1.2 문자집합과 인코딩은 어떻게 동작하는가"></a>1.2 문자집합과 인코딩은 어떻게 동작하는가</h2><ul>
-<li>비트들을 문자로 변환하는 디코딩 알고리즘을 짗이하고 적용하는<br>표준화된 방법이 필요하다.</li>
+<li>비트들을 문자로 변환하는 디코딩 알고리즘을 지칭하고 적용하는<br>표준화된 방법이 필요하다.</li>
 </ul>
 <ol>
 <li>비트 =&gt; 문자로 변환 (의미 해석) - HTTP</li>
@@ -479,7 +479,7 @@ ga('send', 'pageview');
 <hr>
 <ol>
 <li><strong>US-ASCII</strong> (모든 문자집합의 어머니)<ul>
-<li>1968sus ANSI 표준 X3.4 ‘정보교환을 위한 미국 표준 코드’로 표준화된 가장 유명한 코딩된 문자집합이다.</li>
+<li>1968년 ANSI 표준 X3.4 ‘정보교환을 위한 미국 표준 코드’로 표준화된 가장 유명한 코딩된 문자집합이다.</li>
 <li>아스키는 오직 코드 값 0~127만 사용한다.</li>
 <li>코드 공간을 전체 표현하는데 7비트만 필요하다.</li>
 <li>다른 국제 변종과 구분하기 위해 ‘<strong>US-ASCII</strong>‘를 더 선호한다.</li>
@@ -538,12 +538,12 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li><strong>가변폭 (비모달)</strong><ul>
-<li>다른 문자 코드 번호에 다른 길이의 비트르 ㄹ사용한다.</li>
+<li>다른 문자 코드 번호에 다른 길이의 비트를 사용한다.</li>
 <li>자주 사용하는 글자의 비트 길이를 줄일 수 있고,<br>국제 문자에 대해서는 여러 바이트를 사용하도록 함으로써<br>이전의 8비트 문자집합과의 호환성도 유지할 수 있다. </li>
 </ul>
 </li>
 <li><strong>가변폭 (모달)</strong><ul>
-<li>다른 모드로의 전환을 위해 특별한 escapte 패턴을 사용한다.</li>
+<li>다른 모드로의 전환을 위해 특별한 escape 패턴을 사용한다.</li>
 <li>예를 들어<br>어떤 모달 인코딩은 텍스트에서 중첩된 여러가지 문자집합 간의 전환을 위해 사용될 수 있다.</li>
 <li>모달 인코딩은 처리하기 복잡하지만, 복잡한 표기 체계를 효과적으로 지원해 줄 수 있다.</li>
 </ul>
@@ -639,11 +639,13 @@ ga('send', 'pageview');
 <li><p><strong>첫번째 서브태그 : 이름공간</strong></p>
 <ul>
 <li>ISO 639 표준 언어 집합에서 선택된 표준화된 언어 토큰</li>
-<li>첫번째 서브태그가</li>
+<li>첫번째 서브태그가<ul>
 <li>두 글자라면, ISO 639와 639-1 표준의 언어코드다.</li>
 <li>세 글자라면, ISO 639-2표준과 확장에 열거된 언어코드다.</li>
 <li>글자가 <code>i</code>라면, IANA에 등록된 것</li>
 <li>글자가 <code>x</code>라면, 특정 개인이나 집단 전용의 비표준 확장 서브태그다.</li>
+</ul>
+</li>
 <li>한국어 : ko(ISO 639) / kor(ISO 639-2)</li>
 <li>영어 : en(ISO 639) / eng(ISO 639-2)</li>
 </ul>
@@ -652,10 +654,12 @@ ga('send', 'pageview');
 <ul>
 <li>ISO 3166 국가 코드와 지역 표준 집합에서 선택된 표준화된 국가토큰이다.</li>
 <li>IANA에 등록된 다른 문자열일 수도 있다.</li>
-<li>두번째 서브태그는</li>
+<li>두번째 서브태그는<ul>
 <li>두글자라면 ISO 3166에 정의된 국가/지역이다.</li>
 <li>3~8 글자라면, IANA에 등록된 것이다.</li>
 <li>한글자라면, 문가 잘못된 것..</li>
+</ul>
+</li>
 <li>일본: JP</li>
 <li>인도: IN</li>
 </ul>
@@ -780,7 +784,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="ck5triwhr0059uzbmxmvs5mpq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="ck5wor4g9003herbmlpcggluj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
