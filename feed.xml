@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://feel5ny.github.io/"/>
-  <updated>2020-01-19T13:38:11.147Z</updated>
+  <updated>2020-02-02T15:09:25.179Z</updated>
   <id>http://feel5ny.github.io/</id>
   
   <author>
@@ -17,11 +17,80 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>WebDAV와 공동작업</title>
+    <link href="http://feel5ny.github.io/2020/02/03/HTTP_019/"/>
+    <id>http://feel5ny.github.io/2020/02/03/HTTP_019/</id>
+    <published>2020-02-02T15:10:10.000Z</published>
+    <updated>2020-02-02T15:09:25.179Z</updated>
+    
+    <content type="html"><![CDATA[<hr><!-- 1. WebDAV와 XML1. WebDAV 헤더1. WebDAV 메서드  1. WebDAV 잠금과 덮어쓰기 방지    1. LOCK 메서드    2. UNLOCK 메서드  2. 속성과 meta 데이터    1. propfind 메서드    2. proppatch 메서드  3. 콜랙션과 이름공간 관리    1. MKCOL 메서드    2. DELETE 메서드    3. COPY와 MOVE 메서드  4. 향상된 HTTP/1.1 메서드1. WebDAV의 버전관리1. WebDAV의 미래 --><hr><ul><li>웹 분산 저작과 버저닝 Web Distributed Authoring and Versioning, WebDAV</li><li>WebDAV는 웹 배포 공동 작업에 대한 또 다른 영역을 개척했다.<ul><li>현재 공동작업으로 <strong>svn, git</strong>이 널리 쓰이고 있다</li></ul></li><li>WebDAV은 공동 저작에 적합한 플랫폼을 제공하려고 HTTP를 확장하는 데 집중하였다.</li></ul><a name="xml"><h1 id="1-WebDAV와-XML"><a href="#1-WebDAV와-XML" class="headerlink" title="1. WebDAV와 XML"></a>1. WebDAV와 XML</h1><ul><li>WebDAV의 메서드는 요청과 응답 관련 정보를 모두 잘 다루어야 한다.</li><li>HTTP는 보통 이 정보를 메세지 헤더에 담아 전달한다.<ul><li>헤더에만 정보를 담아 전송하는 것은 한계가 있다.</li><li>WebDAV는 이를 해결하기 위해 XML을 지원한다.</li></ul></li><li>XML은 구조화된 데이터를 표현할 때 사용하는 포맷. <strong>메타 마크업 언어</strong>다.</li><li>다음과 같은 용도로 사용한다.<ol><li>데이터를 어떻게 처리할 것인지 설명하는 <strong>명령 포맷</strong></li><li>서버의 <strong>복잡한 응답을 표현</strong>하는 데 사용하는 포맷</li><li>콜렉션과 리소스를 처리하는 데 사용하는 <strong>커스텀 정보 포맷</strong></li><li><strong>데이터 자체를 표현</strong>할 수 있는 유연한 포맷</li><li>대부분의 <strong>국제화</strong> 관련 문제에 대한 훌륭한 해결책</li></ol></li><li>WebDAV는 <code>DAV.</code>라는 별도의 XML namespace를 정의한다.<ul><li>요소나 속성 이름의 집합</li><li>이미 정의된 스키마는,<br>구문 분석 소프트웨어가 DTD 파일을 읽고 그것들을 정확히 해석할 필요 없이,<br>XML 스키마에서 데이터를 추정할 수 있게 한다. </li></ul></li></ul><a name="header"><h1 id="2-WebDAV-헤더"><a href="#2-WebDAV-헤더" class="headerlink" title="2. WebDAV 헤더"></a>2. WebDAV 헤더</h1><ul><li><strong>DAV</strong><ul><li>WebDAV를 제공하는 서버와 통신할 때 사용. </li><li>WebDAV에서 지원하는 모든 리소스는 OPTIONS 요청에 대한 응답에 이 헤더를 포함해야 한다.</li></ul></li><li><strong>Depth</strong></li><li><strong>Destination</strong> : COPY나 MOVE 메서드가 목적지 URI를 식별하는데 쓰인다.</li><li><strong>If</strong>: 조건집합을 정의한다. 조건들에 모두 많지 않으면 요청은 실패. </li><li><strong>Lock-Token</strong>: UNLOCK 메서드에서 사용한다.</li><li><strong>Overwrite</strong>: 대상을 덮어쓸 것인지 아닌지 기술한다.</li><li><strong>Timeout</strong></li></ul><a name="method"><h1 id="3-WebDAV-메서드"><a href="#3-WebDAV-메서드" class="headerlink" title="3. WebDAV 메서드"></a>3. WebDAV 메서드</h1><h2 id="3-1-WebDAV-잠금과-덮어쓰기-방지"><a href="#3-1-WebDAV-잠금과-덮어쓰기-방지" class="headerlink" title="3.1 WebDAV 잠금과 덮어쓰기 방지"></a>3.1 WebDAV 잠금과 덮어쓰기 방지</h2><ul><li><p>공동 작업과 관련한 문제들</p></li><li><p>WebDAV는 이 문제를 개선하기 위해 <strong>잠금</strong>이라는 개념을 지원한다.</p></li><li><p>잠금이 완벽한 해결책은 아니다.</p><ul><li>완벽한 해결을 위해서는<br>버저닝와 메세징을 지원해야 한다.</li></ul></li><li><p>WebDAV는 2가지 형식의 잠금을 지원한다.</p><ol><li>리소스나 콜렉션에 대한 배타적 쓰기 잠금</li><li>리소스나 콜렉션에 대한 공유된 쓰기 잠금</li></ol></li></ul><h3 id="1-리소스나-콜렉션에-대한-배타적-쓰기-잠금"><a href="#1-리소스나-콜렉션에-대한-배타적-쓰기-잠금" class="headerlink" title="1. 리소스나 콜렉션에 대한 배타적 쓰기 잠금"></a>1. 리소스나 콜렉션에 대한 배타적 쓰기 잠금</h3><ul><li>잠금 소유자만 쓸 수 있게 보장한다.<ul><li>이 잠금 형식은 잠재적인 충돌을 완벽히 제거한다.</li><li>공유된 쓰기 잠금은<br>여러 사람으로 이루어져 있는 그룹이<br>하나의 문서에 작업할 수 있게 한다. </li><li>이 잠금 형식은 모든 저자가 각각 서로의 활동을 인식하고 있는 상황에서는 잘 동작한다.</li></ul></li><li>WebDAV는 잠금과 관련한 메서드로 <code>LOCK</code>, <code>UNLOCK</code>을 제공한다.<ol><li>잠금을 수행하려면, <em>저자를 식별하는 메커니즘</em>이 필요한다.<br>=&gt; WebDAV는 <strong>다이제스트 인증</strong>을 요구한다.</li><li>잠금이 승인되면, 서버는 도메인 전체에서 유일한 토큰을 클라에 반환한다.<br>: <strong>opaquelocktoken</strong> 잠금 토큰 URI 스킴</li><li>그 이후에 클라가 서버에 쓰기를 보내고자 할때, 서버에 연결하고 다이제스트 인증을 수행한다.<ul><li>인증이 완료되면 WebDAV 클라는 PUT 요청을 통해 잠금 토큰을 보낸다.</li></ul></li></ol></li></ul><hr><ul><li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li></ul><hr><p><strong>참고자료</strong><br><a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC 4918</a></p></a></a></a>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;!-- 1. WebDAV와 XML
+1. WebDAV 헤더
+1. WebDAV 메서드
+  1. WebDAV 잠금과 덮어쓰기 방지
+    1. LOCK 메서드
+    2. UNLOCK 메서드
+  2. 속성과 meta 데이터
+    1. propf
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="HTTP" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/HTTP/"/>
+    
+    
+      <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
+    
+      <category term="release" scheme="http://feel5ny.github.io/tags/release/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>웹 호스팅</title>
+    <link href="http://feel5ny.github.io/2020/02/02/HTTP_018/"/>
+    <id>http://feel5ny.github.io/2020/02/02/HTTP_018/</id>
+    <published>2020-02-01T15:10:10.000Z</published>
+    <updated>2020-02-02T15:09:11.350Z</updated>
+    
+    <content type="html"><![CDATA[<hr><ul><li>콘텐츠 리소스를 저장, 중개, 관리하는 일을 통틀어 <strong>웹 호스팅</strong>이라 한다.</li><li>필요한 하드웨어나 소프트웨어를 직접 관리하기 어렵다면,<br>호스팅 서비스나 호스팅 업체가 필요할 것이다.</li><li>호스팅 업체는 서버와 웹 사이트 관리 프로그램을 대여해주고<br>다양한 등급의 보안, 리포트, 사용 편의를 제공한다.</li></ul><a name="service"><h1 id="1-호스팅-서비스"><a href="#1-호스팅-서비스" class="headerlink" title="1. 호스팅 서비스"></a>1. 호스팅 서비스</h1><ul><li>웹이 빠르게 대세가 되면서,<br>모든 사람이 웹 사이트를 원했지만,<br>냉난방 장치가 있는 서버실을 짓고, 도메인 이름을 등록하고, 네트워크 대역폭을 구매할 기술과 시간을 가진 사람은 드물었다.</li><li>그 시간을 절약하기 위해, 전문적으로 관리하는 웹 호스팅 서비스를 제공하는 여러 신사업이 만들어졌다.<ul><li>물리적인 장비관리 ~ 고객이 직접 콘텐츠를 제공할 수 있는 총괄적인 웹 호스팅까지<br>다양한 종류의 서비스들이 있다.</li></ul></li></ul><h2 id="1-1-예-전용-호스팅"><a href="#1-1-예-전용-호스팅" class="headerlink" title="1.1 예: 전용 호스팅"></a>1.1 예: 전용 호스팅</h2><ul><li><a href="https://ko.wikipedia.org/wiki/%EC%A0%84%EC%9A%A9_%ED%98%B8%EC%8A%A4%ED%8C%85_%EC%84%9C%EB%B9%84%EC%8A%A4" target="_blank" rel="noopener">참고 wiki</a></li><li><a href="https://kr.godaddy.com/hosting/dedicated-server" target="_blank" rel="noopener">GoDaddy의 전용호스팅</a></li></ul><hr><hr><a name="virtual"><h1 id="2-가상-호스팅"><a href="#2-가상-호스팅" class="headerlink" title="2. 가상 호스팅"></a>2. 가상 호스팅</h1><ul><li>많은 웹 호스팅 업자는 <strong>컴퓨터 한 대</strong>를 <strong>여러 고객이 공유</strong>하게 해서<br><strong>저렴한</strong> 웹 호스팅 서비스를 제공한다.<ul><li>이를 <strong>공유호스팅</strong> 혹은 <strong>가상호스팅</strong> 이라고 부른다.</li><li>각 웹사이트는 다른 서버에서 호스팅하는 것처럼 보이겠지만,<br>사실은 물리적으로 <strong>같은 서버</strong>에서 호스팅되는 것이다.<ul><li>최종 사용자의 관점에서 가상 호스팅에 있는 웹사이트는,<br>물리적으로 분리된 전용 서버에서 호스팅 하는 사이트와 구분할 수 없어야 한다.</li></ul></li></ul></li><li>가상 호스팅은 비용, 공간, 관리에 이점이 있으므로,<br>가상 호스팅을 제공하는 업체는 한 서버에 여러 개의 웹 사이트를 호스팅하려고 한다.<ul><li>하지만 그것이 PC한대에 웹 사이트 여러 개를 구축한다는 뜻은 아니다.</li><li>호스팅 업자는 복제 서버 더미(<strong><a href="https://ko.wikipedia.org/wiki/%EC%84%9C%EB%B2%84_%ED%8C%9C" target="_blank" rel="noopener">서버 팜</a></strong>)를 만들고<br>서버팜에 부하를 분산할 수 있다.</li><li>팜에 있는 각 서버는 다른 서버를 복제한 것이며,<br>수많은 가상 웹사이트를 호스팅하고 있기 때문에 관리자는 훨씬 편해진다.</li></ul></li></ul><h2 id="2-1-호스트-정보가-없는-가상-서버-요청"><a href="#2-1-호스트-정보가-없는-가상-서버-요청" class="headerlink" title="2.1 호스트 정보가 없는 가상 서버 요청"></a>2.1 호스트 정보가 없는 가상 서버 요청</h2><ul><li>HTTP/1.0 명세는 공용 웹 서버가 호스팅하고 있는 가상 웹사이트에<br><strong>누가 접근하고 있는지</strong> 식별하는 기능을 제공하지 않는다.</li><li><a href="https://feel5ny.github.io/index.html을">https://feel5ny.github.io/index.html을</a> 요청한다면, HTTP/1.0 요청은 호스트명에 대한 별다른 언급 없이 “GET /index.html”이라는 요청을 한다.<ul><li>서버가 여러개의 사이트를 가상 호스팅하고 있으면, 사용자가 어떤 가상 웹 사이트로 접근하려고 하는것인지 아는 데 필요한 정보가 충분하지 않다.</li></ul></li><li>HTTP 대리 서버와 인터셉트 프락시 또한<br>어떤 사이트를 요청하는지에 관한 정보가 필요하다.</li></ul><h2 id="2-2-가상-호스팅-동작하게-하기-VirtualHost"><a href="#2-2-가상-호스팅-동작하게-하기-VirtualHost" class="headerlink" title="2.2 가상 호스팅 동작하게 하기 VirtualHost"></a>2.2 가상 호스팅 동작하게 하기 VirtualHost</h2><ul><li>HTTP 설계자들이 공유 서버인 가상 호스팅을 고려하지 않았다.</li><li>이를 해결하기 위해서, HTTP 요청 메세지에<br><strong>완전한 URL도 포함</strong>해서 보내게 해서 간단히 해결하였다.</li></ul><ol><li><p>URL경로를 통한 가상 호스팅</p><ul><li>서버가 어떤 사이트를 요청하는 것인지 알 수 있게<br>URL에 특별한 경로 컴포넌트를 추가한다.</li><li>“GET /joy/index.html” 조이 사이트에 대한 요청이다.<br>“GET /grey/index.html” 그레이 사이트에 대한 요청이다.</li><li>거의 사용하지 않는다.</li></ul></li><li><p>포트번호를 통한 가상 호스팅</p><ul><li>각 사이트에 다른 포트번호를 할당,<br>분리된 웹 서버의 인스턴스가 요청을 처리한다.</li></ul></li><li><p>IP 주소를 통한 가상 호스팅</p><ul><li>각 가상 사이트에 별도의 IP 주소를 할당하고, 모든 IP 주소를 장비 하나에 연결한다.</li><li>웹 서버는 IP 주소로 사이트 이름을 식별한다.</li><li>각 가상 웹 사이트에 유일한 IP 주소를 한 개 이상 부여한다. 모든 가상 서버의 IP주소는 같은 공용 서버에 연결되어 있다.</li><li>예<ul><li><a href="http://feel5ny.github.io은" target="_blank" rel="noopener">http://feel5ny.github.io은</a> 210.89.164.90<br><a href="http://feel5ny.me는" target="_blank" rel="noopener">http://feel5ny.me는</a> 210.89.164.91 이라고 가정해보자</li></ul><ol><li>클라A는 <a href="http://feel5ny.github.io/index.html을">http://feel5ny.github.io/index.html을</a> 요청한다.</li><li>클라A는 IP 주소를 요청해 210.89.164.90를 얻는다.</li><li>클라A는 210.89.164.90에 공용 웹서버에 TCP 커넥션을 맺는다.</li><li>클라A는 “GET /index.html HTTP/1.0” 요청을 보낸다.</li><li>실제 목적지 IP 주소를(210.89.164.90) 기록하고,<br>이것이 조이의 웹사이트에 대한 가상IP 주소라는 것을 판단하고 요청을 처리한다.</li></ol><ul><li>클라B도 유사하게 처리된다.</li></ul></li><li>규모가 큰 호스팅 업자에게는 약간 어려운 <strong>문제점</strong>이 있다.<ul><li>컴퓨터 시스템이 연결할 수 있는 장비의 <strong>IP 갯수는 제한</strong>되어있다.</li><li>IP주소는 <strong>희소 상품</strong>이다. </li><li>IP주소가 부족한 문제는 호스팅 업자가 용량을 늘리려고 서버를 복제하면서 더 심각해진다.</li></ul></li><li>위의 문제점이 있지만 많이 사용되는 방식이다.</li><li>참고<ul><li><a href="http://furuyakoumuten.com/manual/ko/vhosts/ip-based.html" target="_blank" rel="noopener">IP 기반 가상호스팅 관련: 아파치</a></li></ul></li></ul></li><li><p>Host 헤더를 통한 가상 호스팅</p><ul><li>HTTP/1.1에 Host 요청 헤더를 정의했다.</li><li>웹 서버는 Host 헤더로 가상 사이트를 식별할 수 있다.</li><li>브라우저와 서버 개발자들은 서버가 원 호스트 명을 받아 볼 수 있게 HTTP를 확장했다.</li><li>모든 요청에 호스트 명(그리고 포트)를 Host 확장 헤더에 기술해서 전달한다.</li></ul></li></ol><img src="/images/2020/05/01.png"><h2 id="2-3-HTTP-1-1-Host-헤더"><a href="#2-3-HTTP-1-1-Host-헤더" class="headerlink" title="2.3 HTTP/1.1 Host 헤더"></a>2.3 HTTP/1.1 Host 헤더</h2><ul><li><a href="https://tools.ietf.org/html/rfc7230#section-5.4" target="_blank" rel="noopener">RFC 7230</a></li></ul><h3 id="문법과-사용방법"><a href="#문법과-사용방법" class="headerlink" title="문법과 사용방법"></a>문법과 사용방법</h3><ul><li>Host 헤더에 포트가 기술되어 있지 않으면, 해당 스킴의 기본 포트를 사용한다.</li><li>URL에 IP주소가 있으면, Host 헤더는 같은 주소를 포함해야 한다.</li><li>URL에 호스트 명이 기술되어 있으면,<ul><li>Host 헤더는 같은 호스트 명을 포함해야 한다.</li><li>Host 헤더는 URL의 호스트명이 가리키는 IP 주소를 포함해서는 안된다.<ul><li>여러개의 가상 사이트를 한개의 IP주소에 연결한 가상 호스트 서버에서 문제가 될 수 있기 때문</li></ul></li></ul></li><li>클라가 특정 프락시 서버를 사용한다면<ul><li>Host헤더에는 origin 서버의 호스트명과 포트를 기술해야 한다.</li></ul></li><li>웹 클라는 모든 요청 메세지에 Host헤더를 기술해야 한다.</li><li>웹 프락시는 요청을 전달하기 전에 요청 메세지에 Host 헤더를 추가해야 한다</li><li>HTTP/1.1 웹 서버는<br><strong>Host 헤더 필드가 없는</strong> HTTP/1.1 요청 메세지를 받으면<br>400 상태 코드로 응답해야 한다. </li></ul><h3 id="Host-헤더-해석하기"><a href="#Host-헤더-해석하기" class="headerlink" title="Host 헤더 해석하기"></a>Host 헤더 해석하기</h3><ul><li><p>호스트를 기준으로 리소스를 구분하는 모든 웹 서버는 HTTP/1.1을 통해 오는 리소스를 결정하려면 다음과 같은 규칙을 사용해야 한다.</p></li><li><p>HTTP 요청 메세지에 </p><ul><li>전체 URL이 기술되어 있으면<br>Host 헤더에 있는 값은 무시하고<br>URL을 사용한다.</li><li>전체 URL이 기술되어 있지 않고<br>요청에 Host 헤더가 있으면, 호스트 명과 포트를 Host 헤더에서 가져온다.</li></ul></li><li><p>전체 URL이나 Host 둘다 없을 경우<br>클라에게 400 Bad Request 응답을 반환한다.</p></li></ul><h3 id="Host헤더는-누가-자동-셋팅을"><a href="#Host헤더는-누가-자동-셋팅을" class="headerlink" title="Host헤더는 누가 자동 셋팅을?"></a>Host헤더는 누가 자동 셋팅을?</h3><ul><li>Host나 Connection같이, 셋팅하는 코드를 넣지 않았는데<br>네트워크 탭에서 보면 종종 request 헤더에 포함되어있는 것을 보았다.</li><li>이는 브라우저 엔진 내부에서 자동으로 셋팅해준다.<ul><li>예) <a href="https://github.com/chromium/chromium/blob/bb384192e4fb83e9779c08ef2243b72e11f24166/net/http/http_network_transaction.cc#L929" target="_blank" rel="noopener">chromium</a></li></ul></li><li>자동 셋팅해주는 헤더는 <strong>어디서 확인 가능할까?</strong><ul><li>크롬 확장 api중 webRequest API에는 라이프사이클이 존재하는데 <code>onBeforeSendHeaders</code>라는 콜백으로 확인 가능하다.</li><li><a href="https://developer.chrome.com/extensions/webRequest#life_cycle_footnote" target="_blank" rel="noopener">참고</a></li></ul></li></ul><hr><hr><a name="stable"><h1 id="3-안정적인-웹사이트-만들기"><a href="#3-안정적인-웹사이트-만들기" class="headerlink" title="3. 안정적인 웹사이트 만들기"></a>3. 안정적인 웹사이트 만들기</h1><p>웹 사이트에 장애가 생기는 몇가지 상황</p><ol><li>서버다운</li><li>트래픽 폭증</li><li>네트워크 장애나 손실</li></ol><h2 id="3-1-미러링-된-서버-팜"><a href="#3-1-미러링-된-서버-팜" class="headerlink" title="3.1 미러링 된 서버 팜"></a>3.1 미러링 된 서버 팜</h2><ul><li>서버팜은 서로 대신할 수 있고 식별할 수 있게 설정된 웹 서버들의 집합이다.</li><li>서버팜의 서버에 있는 콘텐츠들은 한 곳에 문제가 생기면,<br>다른 한 곳에서 대신 전달할 수 있게 미러링 할 수 있다.</li><li>미러링된 서버는 계층적인 관계에 있다.<ul><li>한 서버는 (원본 콘텐츠를 가지고 있는) ‘콘텐츠의 원본 제작자’ 같이 행동한다.<ul><li>=&gt; <strong>마스터 원 서버</strong>라 부른다. Master Origin Server</li></ul></li><li>마스터 원 서버로부터 콘텐츠를 받은 미러링된 서버는<ul><li>=&gt; <strong>복제 원 서버</strong>라 부른다. Replica Origin Server</li></ul></li></ul></li></ul><img src="/images/2020/05/03.png"><ul><li>서버 팜에 배포하는 간단한 방법 하나는<br><strong><a href="https://ko.wikipedia.org/wiki/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EC%8A%A4%EC%9C%84%EC%B9%98" target="_blank" rel="noopener">네트워크 스위치</a></strong>를 사용해서 서버에 분산 요청을 보내는 것이다.<ul><li>서버에 호스팅 되고 있는<br>각 웹사이트의 IP주소는<br>스위치의 IP주소가 된다.</li></ul></li><li>마스터 원 서버는 복제 원 서버에 콘텐츠를 보낼 책임이 있다.<ul><li>외부에서 볼 때, 이 콘텐츠를 가리키는 IP주소는 스위치의 IP주소다.<br>스위치는 서버에게 요청을 전송해야 하는 책임이 있다.</li><li>미러링된 웹 서버에는 다른 위치에 있는 콘텐츠와 정확히 같은 복제본이 있다.</li></ul></li></ul><img src="/images/2020/05/02.png"><ul><li>위 그림의 시나리오에서는, 클라의 요청이 특정 서버로 가는 2가지 방법이 있다.<ol><li><strong>HTTP 리다이렉션</strong><br>: 콘텐츠에 대한 URL은 <strong>마스터 서버의 IP</strong>를 가리키고,<br> 마스터 서버는 요청을 받는 즉시 복제 서버로 리다이렉트 시킨다.</li><li><strong>DNS 리다이렉션</strong><br>: 콘텐츠의 URL은 4개의 IP주소를 가리킬 수 있고,<br> DNS 서버는 클라에게 전송할 IP주소를 선택할 수 있다.</li></ol></li></ul><h2 id="3-2-콘텐츠-분산-네트워크-CDN"><a href="#3-2-콘텐츠-분산-네트워크-CDN" class="headerlink" title="3.2 콘텐츠 분산 네트워크 CDN"></a>3.2 콘텐츠 분산 네트워크 <code>CDN</code></h2><ul><li>Contents Delivery Network</li><li>콘텐츠 분산 네트워크 CDN 은 특정 콘텐츠의 분산을 목적으로 하는 단순한 네트워크이다.</li><li>네트워크의 노드는 <ol><li>서버 </li><li>대리 서버 </li><li>프락시 서버</li></ol></li></ul><p>가 될 수 있다.</p><blockquote><p>기본적으로 사용자가 원격지에 있는 서버(Origin Server)로 부터 Content(예. Web Object, Video, Music, Image, Document 등)를 다운로드 받을 때 가까이 있는 서버에서 받는 것보다 시간이 오래 걸리므로, <strong>사용자와 가까운 곳에 위치한 Cache Server에 해당 Content를 저장(캐싱)하고</strong> Content 요청시에 Cache Server가 응답을 주는 기술입니다.<br><a href="https://cdn.hosting.kr/cdn%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94/" target="_blank" rel="noopener">참고</a></p></blockquote><h2 id="3-3-CDN의-대리-캐시-리버스-프락시"><a href="#3-3-CDN의-대리-캐시-리버스-프락시" class="headerlink" title="3.3 CDN의 대리 캐시 ( == 리버스 프락시 )"></a>3.3 <code>CDN</code>의 대리 캐시 ( == 리버스 프락시 )</h2><ul><li><strong>Gateway 캐시</strong>: 실제 요청을 담당하는 서버에서 관리되는 캐시</li><li>== Reverse 프락시 : forward 프락시의 반대 방향</li><li>대리 서버는 <strong>복제 원 서버를 대신해 사용될 수 있다.</strong></li><li>대리 서버는 미러링 된 웹 서버처럼, 콘텐츠에 대한 요청을 받는다.</li><li>그들은 특정 원 서버 집합을 대신해 요청을 받는다.<ul><li>이는 콘텐츠에 대한 IP주소가 알려졌기 때문에 가능하다.<br>보통 원 서버와 대리 서버가 연결되며, 대리 서버는 특정 원 서버를 가리키는 요청을 받는다.<blockquote><p>??</p></blockquote></li></ul></li><li>대리 서버와 미러링 된 서버의 차이점<ul><li>대리 서버는 <strong>수요에 따라서 동작한다.</strong></li><li>대리 서버는 원서버의 전체 콘텐츠를 복사하지 않는다.</li><li><strong>클라이언트가 요청하는 콘텐츠만 저장할 뿐이다.</strong></li><li>대리 서버의 캐시에 콘텐츠가 분산되는 방식은<br>그들이 받는 요청에 따라 달라진다.</li></ul></li><li>원 서버는 그들의 콘텐츠를 업데이트 해 줄 의무는 없다. </li><li>많은 요청이 있는 콘텐츠를 빠르게 제공하려고,<br>사용자가 요청하기도 전에 콘텐츠를 가져오는 “<strong>미리 가져오기 기능</strong>“을 가진 대리 서버도 있다.</li></ul><h2 id="3-4-CDN의-프락시-캐시"><a href="#3-4-CDN의-프락시-캐시" class="headerlink" title="3.4 CDN의 프락시 캐시"></a>3.4 <code>CDN</code>의 프락시 캐시</h2><ul><li><strong>네트워크 레이어 캐시</strong>: ISP, 방화벽에 설치됨. shared cache</li><li>전통적인 프락시 캐시는 어떤 웹 서버 요청이든지 다 받을 수 있다.</li><li>대리 서버를 사용하면,<br>프락시 캐시의 콘텐츠는 요청이 있을 때만 저장될 것이고,<br>원본 서버 콘텐츠를 정확히 복제한다는 보장이 없다.</li><li>어떤 프락시는 요청이 많이 받는 콘텐츠를 미리 로딩하기도 한다.</li></ul><img src="/images/2020/05/04.png"><ul><li>요청이 있을 때만 저장하는 프락시 캐시<ul><li>레이어2 혹은 레이어3 장비(스위치 혹은 라우터)가 중간에 웹 트래픽을 가로채 처리하기도 한다.</li><li>가로채기 설정은, 클라와 서버 사이의 모든 HTTP 요청이 물리적으로 캐시를 거치게 네트워크 설정을 할 수 있는지에 따라 달라진다.</li><li>콘텐츠는 받는 요청에 따라서 캐시에 분산된다.</li></ul></li></ul><hr><hr><a name="faster"><h1 id="4-웹-사이트-빠르게-만들기"><a href="#4-웹-사이트-빠르게-만들기" class="headerlink" title="4. 웹 사이트 빠르게 만들기"></a>4. 웹 사이트 빠르게 만들기</h1><ul><li><p>서버 팜이나 분산 크락시 캐시, 대리 서버는 혼잡을 조절하고 네트워크 트래픽을 분산시킨다.</p></li><li><p>콘텐츠를 분산시키면,<br>그 콘텐츠를 사용자에게 더 가깝게 만들어 주므로,<br>콘텐츠를 서버에서 클라로의 전송하는 시간이 단축된다.</p></li><li><p>리소스의 로딩속도를 좌우하는 요소</p><ol><li><strong>리다이렉션</strong><br>어떻게 요청과 응답이 클라와 서버 사이에서 연결을 맺고 인터넷을 가로질러 데이터를 전송하는 지.</li><li><strong>인코딩</strong> 콘텐츠를 인코딩 하는 것.</li></ol></li></ul><hr><ul><li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li></ul><hr><p><strong>참고자료</strong></p><ul><li><a href="https://jcdgods.tistory.com/322" target="_blank" rel="noopener">Reverse 프록시 관련</a></li><li><a href="https://blog.ordinarysimple.com/posts/programming/2018-02-25-http-cache/" target="_blank" rel="noopener">캐시 관련</a></li></ul></a></a></a></a>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;콘텐츠 리소스를 저장, 중개, 관리하는 일을 통틀어 &lt;strong&gt;웹 호스팅&lt;/strong&gt;이라 한다.&lt;/li&gt;
+&lt;li&gt;필요한 하드웨어나 소프트웨어를 직접 관리하기 어렵다면,&lt;br&gt;호스팅 서비스나 호스팅 업체가 필요할 것이다.
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="HTTP" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/HTTP/"/>
+    
+    
+      <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
+    
+      <category term="hosting" scheme="http://feel5ny.github.io/tags/hosting/"/>
+    
+  </entry>
+  
+  <entry>
     <title>내용협상과 트랜스코딩</title>
     <link href="http://feel5ny.github.io/2020/01/20/HTTP_017/"/>
     <id>http://feel5ny.github.io/2020/01/20/HTTP_017/</id>
     <published>2020-01-20T00:10:10.000Z</published>
-    <updated>2020-01-19T13:38:11.147Z</updated>
+    <updated>2020-02-02T15:01:02.261Z</updated>
     
     <content type="html"><![CDATA[<hr><ul><li>http는 클라와 서버가 서로 내용을 협상할 수 있도록 방법을 제공한다. content-negotiation</li><li><strong>하나의 url이 여러가지 리소스 중 적합한 것에 대응되도록 할 수 있다.</strong><ul><li>여기서는 서로 다른 버전을 <code>varient</code>라고 부른다.</li></ul></li><li>서버는 특정 url에 대해 어떤 콘텐츠가 클라에게 보내주기 가장 적절한지에 대한 판단도 할 수 있어야 한다.</li><li>트랜스코딩은 http 클라와 서버 사이의 내용 협상에 대한 응답에서 수행된다.</li></ul><a name="negotiation"><h1 id="내용-협상-기법"><a href="#내용-협상-기법" class="headerlink" title="내용 협상 기법"></a>내용 협상 기법</h1><ul><li>서버에 있는 페이지들 중<br>어떤 것이 클라에게 맞는지 판단하는<br>3가지 방법</li></ul><ol><li>클라에게 선택지를 주거나 = <strong>클라이언트 주도 협상</strong><ul><li><strong>HOW</strong>: 클라가 요청을 보내면, 서버는 클라에게 선택지를 보내주고, <strong>클라가 선택한다.</strong></li><li><strong>장점</strong>: 서버 입장에서 가장 구현하기 쉽다. 클라는 최선의 선택을 할 수 있다.</li><li><strong>단점</strong>: 대기시간이 증가한다. 즉, 올바른 콘텐츠를 얻으려면 <strong>최소 두번의 요청</strong>이 필요하다.</li></ul></li><li>서버가 자동으로 판단하는 방법 = <strong>서버 주도 협상</strong><ul><li><strong>HOW</strong>: 서버가 클라의 요청 헤더를 검증해서 <strong>어떤 버전을 제공</strong>할지 결정한다.</li><li><strong>장점</strong>: 클라 주도 협상보다 빠르다. <ul><li>HTTP는 서버가 가장 적절한 것을 선택할 수 있도록 q값 메커니즘을 제공하고,<br>서버가 다운스트림 장치에게 요청이 어떻게 평가되는지 말해줄 수 있도록 하기 위해 <code>Vary</code> 헤더를 제공한다.</li></ul></li><li><strong>단점</strong>: 만약 결정이 뻔하지 않으면 (헤더에 맞는 것이 없으면), 서버는 추측을 해야만 한다.</li></ul></li><li>중개자에게 선택하도록 부탁하는 방법 = <strong>투명한 협상</strong><ul><li><strong>HOW</strong>: 투명한 중간장치(주로 프락시 캐시)가 서버를 대신하여 협상을 한다.</li><li><strong>장점</strong>: 웹서버가 협상을 할 필요가 없다. 클라 주도 협상보다 빠르다.</li><li><strong>단점</strong>: 투명 협상을 어떻게 하는지에 대한 정형화된 명세가 없다.</li></ul></li></ol><a name="client"><h1 id="1-클라-주도-협상"><a href="#1-클라-주도-협상" class="headerlink" title="1. 클라 주도 협상"></a>1. 클라 주도 협상</h1><ul><li>서버에게 있어 가장 쉬운 방법은<ul><li>서버가 클라의 요청을 받았을 때,<br>가능한 페이지의 목록을 응답으로 돌려주어<br>클라가 보고 싶은 것을 선택하게 하는 것이다.</li><li>서버 입장에서 구현하기 쉽고,<br>최선의 사본이 선택될 것이다.</li></ul></li></ul><h3 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h3><ol><li>(<strong>기술</strong>측면) 각 페이지에 <strong>두 번의 요청</strong>이 필요하다는 것.<ul><li>한번은 <strong>목록</strong>을 얻고</li><li>두번째는 <strong>선택한</strong> 사본을 얻는다.</li><li>선택지를 표현하는 2가지 방법<ol><li>여러가지 버전에 대한 링크와 설명이 담긴 html</li><li><strong><code>300 Multiple Choices</code></strong> 응답코드로 응답을 돌려주는 것. (<a href="https://feel5ny.github.io/2019/08/17/HTTP_003_03/#3">상태코드 글 참고</a>)</li></ol></li></ul></li><li>(<strong>ux</strong>측면) 여러개의 url을 요구한다는 점<ul><li>예)<br>아래처럼 여러 url을 요구할 것이다.<br><a href="https://feel5ny.github.io">https://feel5ny.github.io</a> <code>/korean</code><br><a href="https://feel5ny.github.io">https://feel5ny.github.io</a> <code>/english</code></li><li>어떤 링크를 메인 링크라고 생각할 것인가? (공유할때나, 북마킹할때 등등)</li></ul></li></ol><a name="server"><h1 id="2-서버-주도-협상"><a href="#2-서버-주도-협상" class="headerlink" title="2. 서버 주도 협상"></a>2. 서버 주도 협상</h1><ul><li>불필요한 커뮤니케이션 비용을 줄이는 방향으로<br>서버가 어떤 페이지를 돌려줄 것인지 결정하게 하는 것.<ul><li>클라는 반드시 자신이 무엇을 선호하는지에 대한 충분한 정보를 서버에게 주어서,<br>서버가 현명한 결정을 할 수 있게 해 주어야 한다.</li></ul></li><li>http 서버가 클라에게 보내줄 적절한 응답을 계산하기 위해 사용하는 메커니즘은 2가지<ol><li>내용 협상 헤더들을 살펴본다.<ul><li>서버는 클라의 <code>Accept</code> 관련 헤더들을 들여다보고, 그에 알맞은 응답 헤더를 준비한다.</li></ul></li><li>내용 협상 헤더 외의 다른 헤더들을 살펴본다.<ul><li>예_서버는 클라의 <code>User-Agent</code> 헤더에 기반하여 응답을 보내줄 수도 있다.</li></ul></li></ol></li></ul><h2 id="2-1-내용협상-헤더"><a href="#2-1-내용협상-헤더" class="headerlink" title="2.1 내용협상 헤더"></a>2.1 내용협상 헤더</h2><ul><li><code>Accept</code> : 서버가 어떤 <strong>미디어 타입</strong>으로 보내도 되는지 알려준다.</li><li><code>Accept-Language</code> : 서버가 어떤 <strong>언어</strong>로 보내도 되는지 알려준다.</li><li><code>Accept-Charset</code> : 서버가 어떤 <strong>차셋</strong>으로 보내도 되는지 알려준다.</li><li><code>Accept-Encoding</code> : 서버가 어떤 <strong>인코딩</strong>으로 보내도 되는지 알려준다.</li></ul><p>내용 협상 헤더들은</p><ol><li>클라와 서버가 선호 정보를 서로 교환하고, </li><li>문서들의 여러 버전 중 하나를 선택하는 것을 도와, </li><li>클라의 선호에 가장 잘 맞는 문서를 제공해 주기 위한 목적으로 사용된다.</li></ol><ul><li>만약에 클라중 하나가 일본어를 선호한다면<br>한국어을 돌려줘야할까<br>영어를 돌려줘야할까.<ul><li>한국어를 좀 더 선호한다면,<br>선호한다는 의사 정보를 추가하여 전달할 수 있으면 좋겠다고 생각할 것이다.</li></ul></li><li>HTTP는 풍부한 설명을 품질값을 이용해 전달할 수 있는 메커니즘을 제공한다.<ul><li><strong>quality value</strong>, 줄여서 <code>q</code>값</li></ul></li></ul><h2 id="2-2-내용-협상-헤더의-품질값"><a href="#2-2-내용-협상-헤더의-품질값" class="headerlink" title="2.2 내용 협상 헤더의 품질값"></a>2.2 내용 협상 헤더의 품질값</h2><ul><li><p>HTTP 프로토콜은 클라가 각 선호의 카테고리마다, 여러 선택 가능한 항목을<br>선호도와 함께 나열할 수 있도록 품질값을 정의하였다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: en;q=0.5, fr;q=0.0, nl;q=1.0, tr;q=0.0</span><br></pre></td></tr></table></figure></li><li><p>q는 0.0부터 1.0까지의 값을 가질 수 있다.</p></li><li><p>위 상황은 네덜란드어(nl)로 된 문서를 받기 원하고 잇으나<br>영어(en)로 된 문서라도 받아들일 것임을 의미한다.</p></li></ul><p>때때로 서버는 클라의 선호에 대응하는 문서를 하나도 갖고있지 않을 수 도 있다.<br>이 경우, 서버는 클라의 선호에 맞추기 위해<br><strong>문서를 고치거나 트랜스코딩</strong> 할 수 있다.</p><h2 id="2-3-그-외의-헤더들에-의해-결정"><a href="#2-3-그-외의-헤더들에-의해-결정" class="headerlink" title="2.3 그 외의 헤더들에 의해 결정"></a>2.3 그 외의 헤더들에 의해 결정</h2><ul><li>서버는 또한 User-Agent와 같은 클라의 다른 요청 헤더들을 이용해 알맞은 요청을 만들어내려고 시도할 수 있다.</li><li>최선에 가장 가까운 대응을 찾아낼 수 있는 q값 매커니즘은 없다.</li><li>서버는 정확한 대응을 찾아내거나,<br>그냥 갖고 있는 것을 제공해주어야 한다.</li><li>캐시는 반드시 캐시된 문서의 올바른 ‘최선의’ 버전을 제공해주려 해야 하기 때문에,<br>HTTP 프르토콜은 서버가 응답에 넣어 보낼 수 있는 <code>Vary</code> 헤더를 정의한다.<ul><li><code>Vary</code> 헤더는 캐시에게 서버가 내줄 응답의 최선의 버전을 결정하기 위해<br>어떤 요청 헤더를 참고하고 있는지 말해준다. </li></ul></li></ul><a name="cache"><h1 id="3-투명-협상"><a href="#3-투명-협상" class="headerlink" title="3. 투명 협상"></a>3. 투명 협상</h1><ul><li>클라 입장에서 협상하는 중개자 프락시를 둠으로써,<br>클라와의 메세지 교환을 최소화하는 동시에<br>서버 주도 협상으로 인한 부하를 서버에서 제거한다.</li><li>투명한 내용 협상을 지원하기 위해, http에서 정의한 <code>Vary</code> 헤더를 사용한다.<ul><li>서버는 어떤 요청 헤더를 검사해야 하는지 프락시에게 Vary 헤더를 통해 말해준다.</li></ul></li></ul><h2 id="3-1-캐시와-얼터네이트-alternate"><a href="#3-1-캐시와-얼터네이트-alternate" class="headerlink" title="3.1 캐시와 얼터네이트 alternate"></a>3.1 캐시와 얼터네이트 alternate</h2><ul><li>캐시는 클라의 요청을 서버로 그대로 전달하고, 응답을 저장한다.</li><li>두번째 요청시 응답은 캐시가 URL에 대응하는 문서를 찾아서 돌려줄 것인데,<br>이때 다른 언어의 문서를 원한다면,<br>캐시는 이번응답과 새로운 응답문서 2가지를 저장해야한다.</li><li>이 다른 버전은 <strong>베리언트</strong>나 <strong>얼터네이트</strong>라고 불리다.<br>variant (:변형)<br>alternate (:교대로)</li></ul><h2 id="3-2-Vary-헤더"><a href="#3-2-Vary-헤더" class="headerlink" title="3.2 Vary 헤더"></a>3.2 Vary 헤더</h2><ul><li>http Vary 응답 헤더는<br>서버가 문서를 선택하거나, 커스텀 콘텐츠를 생성할 때 고려한<br><strong>클라 요청 헤더 모두를 나열한다.</strong></li><li>새 요청이 도착했을 때, 캐시는 내용 협상 헤더들을 이용해 가장 잘 맞는 것을 찾는다.<ul><li>캐시는 반드시 캐시된 응답 안에 서버가 보낸 <strong>Vary</strong> 헤더가 들어있는지 확인하고,<br>Vary 헤더가 명시하고 있는 헤더들은<br>새 요청과 오래된 캐시된 요청에서 그 값이 서로 맞아야만 한다.<ul><li>서버는 클라의 요청 헤더에 따라 그들의 응답이 달라질 수 있기 때문에<br>투명 협상을 구현하기 위해 캐시는 반드시<br><strong>캐시된 variant</strong>와 함께<br>클라 요청 헤더와<br>그에 알맞은 서버 응답헤더 양쪽 모두를 저장해야한다.</li></ul></li></ul></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vary: User-Agent, Cookie</span><br></pre></td></tr></table></figure><ul><li>서버의 Vary 헤더가 이렇다면, 거대한 수의 다른 User-Agent와 Cookie이 많은 배리언트 variant를 만들어낼 것이다.</li><li>캐시는 각 배리언트마다 알맞은 문서 버전을 저장해야 한다.</li><li>캐시가 검색을 할 때,<ol><li>먼저 내용 협상 헤더로 적합한 콘텐츠를 맞춰보고</li><li>다음에 요청의 배리언트를 캐시된 배리언트와 맞춰본다.</li><li>만약 맞는 것이 없으면, 캐시는 문서를 서버에서 가져온다.<br>맞는 것이 있다면, 해당 콘텐츠를 보내준다.</li></ol></li></ul><img src="/images/2020/04/03.png"><hr><hr><a name="transcoding"><h1 id="트랜스-코딩"><a href="#트랜스-코딩" class="headerlink" title="트랜스 코딩"></a>트랜스 코딩</h1><ul><li>서버가 클라의 요구에 맞는 문서를 아예 갖고 있지 않다면?<br>이론적으로는 서버는 기존의 문서를 클라가 사용할 수 있는 무언가로 변환할 수도 있다.<br>-&gt; 이 옵션을 <strong>트랜스코딩</strong>이라고 부른다.</li></ul><ol><li>HTML 문서 👉 WML 문서</li><li>고해상도 이미지 👉 저해상도 이미지</li><li>64K색 이미지 👉 흑백 이미지</li><li>프레임을 포함한 복잡한 페이지 👉 프레임이나 이미지가 없는 단순한 텍스트 페이지</li><li>자바 애플릿이 있는 HTML 페이지 👉 자바 애플릿이 없는 페이지</li><li>광고가 있는 페이지 👉 광고가 없는 페이지</li></ol><hr><ol><li><strong>포맷 변환</strong><ul><li>포맷변환은 데이터를 클라가 볼 수 있도록 한 포맷에서 다른 포맷으로 변환하는 것이다.</li></ul></li><li><strong>정보 합성</strong><ul><li>문서에서 정보의 요점을 추출하는 것을 정보 합성이라고 한다. <strong>information synthesis</strong></li><li>각 절의 제목에 기반한 <strong>문서의 개요 생성</strong>이나,<br>페이지에서 광고 및 로고 제거를 들 수 있다.<ul><li>본문의 키워드에 기반하여 페이지를 분류하는<br>더 복잡한 기술은 문서의 핵심을 요약할 때도 역시 유용하다.</li></ul></li><li>이 기술을 포털사이트의 웹페이지 디렉터리와 같은<br>자동화된 웹페이지 분류 시스템에 의해 종종 사용된다.</li></ul></li><li><strong>콘텐츠 주입</strong><ul><li>포맷 변환과 정보 합성은 문서의 양을 줄이지만<br>주입 트랜스코딩은 오히려 양을 늘린다.</li><li>내용 주입 트랜스 코딩의 예로 자동 광고 생성과 사용자 추적 시스템이 있다.</li><li>동적으로 문서에 추가된다.</li></ul></li><li><strong>트랜스 코딩 vs 정적으로 미리 생성해놓기</strong><ul><li>트랜스 코딩의 대안은 웹서버에서 웹페이지의 여러가지 사본을 만드는 것이다.<ul><li>예_고해상도는 저해상도 이미지를 만든다.</li></ul></li><li>여러가지 이유로 그다지 현식적인 기법이 못된다.<ul><li>페이지에 대한 어떠한 작은 변화도 여러 페이지의 수정을 요구하게 되고</li><li>각 페이지의 모든 버전을 저장하기 위해 더 많은 공간이 필요하게 되며</li><li>페이지들을 관리하고, 그것들 중 올바른 것을 골라서 제공해주는 웹서버를 프로그래밍하기 어려워진다.</li></ul></li><li>변환은 더 싼 프락시나 캐시에 있는 외부 에이전트에 의해 수행될 수 있다.</li></ul></li></ol><hr><ul><li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li></ul><hr><p><strong>참고자료</strong></p><ul><li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Content_negotiation" target="_blank" rel="noopener">http 콘텐츠 협상</a></li></ul></a></a></a></a></a>]]></content>
     
@@ -117,11 +186,11 @@
     
       <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
     
-      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
-    
       <category term="instance" scheme="http://feel5ny.github.io/tags/instance/"/>
     
       <category term="Range" scheme="http://feel5ny.github.io/tags/Range/"/>
+    
+      <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
     
   </entry>
   
@@ -154,9 +223,9 @@
     
       <category term="http" scheme="http://feel5ny.github.io/tags/http/"/>
     
-      <category term="entity" scheme="http://feel5ny.github.io/tags/entity/"/>
-    
       <category term="encoding" scheme="http://feel5ny.github.io/tags/encoding/"/>
+    
+      <category term="entity" scheme="http://feel5ny.github.io/tags/entity/"/>
     
   </entry>
   
@@ -458,9 +527,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
-    
       <category term="Identification" scheme="http://feel5ny.github.io/tags/Identification/"/>
+    
+      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
     
   </entry>
   
@@ -625,9 +694,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
-    
       <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
+    
+      <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
     
   </entry>
   
@@ -1328,9 +1397,9 @@
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
     
-      <category term="symbol" scheme="http://feel5ny.github.io/tags/symbol/"/>
-    
       <category term="iterator" scheme="http://feel5ny.github.io/tags/iterator/"/>
+    
+      <category term="symbol" scheme="http://feel5ny.github.io/tags/symbol/"/>
     
   </entry>
   
@@ -1391,9 +1460,9 @@
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
     
-      <category term="yield" scheme="http://feel5ny.github.io/tags/yield/"/>
-    
       <category term="generator" scheme="http://feel5ny.github.io/tags/generator/"/>
+    
+      <category term="yield" scheme="http://feel5ny.github.io/tags/yield/"/>
     
       <category term="loop" scheme="http://feel5ny.github.io/tags/loop/"/>
     
@@ -1424,9 +1493,9 @@
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
     
-      <category term="generator" scheme="http://feel5ny.github.io/tags/generator/"/>
-    
       <category term="iterator" scheme="http://feel5ny.github.io/tags/iterator/"/>
+    
+      <category term="generator" scheme="http://feel5ny.github.io/tags/generator/"/>
     
   </entry>
   
@@ -3515,34 +3584,6 @@
   </entry>
   
   <entry>
-    <title>persistor.purge()</title>
-    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
-    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
-    <published>2017-11-29T09:23:55.000Z</published>
-    <updated>2019-02-03T15:17:37.679Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
-      
-    
-    </summary>
-    
-      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
-    
-      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
-    
-    
-      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
     <title>1/ 변수, 원시 값과 참조 값</title>
     <link href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
     <id>http://feel5ny.github.io/2017/11/29/JS_01/</id>
@@ -3567,6 +3608,34 @@
     
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>persistor.purge()</title>
+    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
+    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
+    <published>2017-11-29T09:23:55.000Z</published>
+    <updated>2019-02-03T15:17:37.679Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
     
   </entry>
   
