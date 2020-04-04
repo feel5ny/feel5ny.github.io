@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>리팩토링2판) 1. 예시로 알아보기 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="refactoring">
+    
+    
+    <meta name="description" content="TL;DR⭐️⭐️⭐️  리팩토링하기 전에 제대로 된 테스트부터 마련한다. 테스트는 반드시 자가진단하도록 만든다. 프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서 원하는 기능을 추가한다. 리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다.">
+<meta name="keywords" content="refactoring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="리팩토링2판) 1. 예시로 알아보기">
+<meta property="og:url" content="http://feel5ny.github.io/2020/04/04/Refactoring_002/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="TL;DR⭐️⭐️⭐️  리팩토링하기 전에 제대로 된 테스트부터 마련한다. 테스트는 반드시 자가진단하도록 만든다. 프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서 원하는 기능을 추가한다. 리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다.">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2020/07/thumb_default.jpg">
+<meta property="og:updated_time" content="2020-04-04T14:23:02.941Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="리팩토링2판) 1. 예시로 알아보기">
+<meta name="twitter:description" content="TL;DR⭐️⭐️⭐️  리팩토링하기 전에 제대로 된 테스트부터 마련한다. 테스트는 반드시 자가진단하도록 만든다. 프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서 원하는 기능을 추가한다. 리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다.">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2020/07/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2020/04/04/Refactoring_002/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-Design-💅/Motion/">Motion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2020/07/thumb_default.jpg" alt="리팩토링2판) 1. 예시로 알아보기" style="width:100%">
+    </div>
+
+<article id="post-Refactoring_002" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        리팩토링2판) 1. 예시로 알아보기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/04/04/Refactoring_002/" class="article-date">
+            <time datetime="2020-04-04T11:12:34.000Z" itemprop="datePublished">2020-04-04</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/refactoring/">refactoring</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#test">테스트환경 준비</a>
+               
+                <div class="first_depth--sub">test code</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#architect">골격 다시 잡기</a>
+               
+                <div class="first_depth--sub">함수 추출하기, 변수명 변경, 변수 인라인으로 변경, 반복문 쪼개기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#short">작은 단계로 리팩토링하기</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#easy">사람이 이해하도록 작성하기</a>
+               
+                <div class="first_depth--sub">임시변수를 질의함수로 바꾸기, 변수 인라인하기, 함수명 바꾸기, 반복문 쪼개기, 문장 슬라이드하기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">5</span>
+            
+            <div>
+              <a href="#healthy">작업 시작 전보다 건강한 코드로 유지하기</a>
+               
+                <div class="first_depth--sub">단계 쪼개기, 함수 옮기기, 반복문을 파이프라인으로 바꾸기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">6</span>
+            
+            <div>
+              <a href="#Polymorphism">수정하기 쉽도록 작성하기</a>
+               
+                <div class="first_depth--sub">조건부 로직을 다형성으로 바꾸기, 타입코드를 서브클래스로 바꾸기, 생성자 팩터리 함수로 바꾸기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">7</span>
+            
+            <div>
+              <a href="#ideal">지속적으로 리팩토링하기</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>⭐️⭐️⭐️</p>
+<ol>
+<li>리팩토링하기 전에 제대로 된 <strong>테스트</strong>부터 마련한다. 테스트는 반드시 <strong>자가진단</strong>하도록 만든다.</li>
+<li>프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 <strong>기능을 추가하기 쉬운 형태로 리팩터링</strong>하고 나서 원하는 기능을 추가한다.</li>
+<li>리팩터링은 프로그램 수정을 <strong>작은 단계</strong>로 나눠 진행한다. 그래서 <strong>중간에 실수하더라도 버그를 쉽게 찾을 수 있다.</strong></li>
+<li>컴퓨터가 이해하는 코드는 바보도 작성할 수 있다. <strong>사람이 이해하도록 작성하는 프로그래머</strong>가 진정한 실력자다.</li>
+<li>캠핑자들에게는 도착했을 때보다 깔끔하게 정돈하고 떠난다는 규칙이 있다. 프로그래밍도 마찬가지다. 항시 코드베이스를 <strong>작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.</strong></li>
+<li>좋은코드를 가늠하는 확실한 방법은 <strong>얼마나 수정하기 쉬운가다</strong>. (다형성을 활용해 계산 코드 재구성하기)</li>
+<li>코드를 건강하게 관리하려면 프로그래밍 팀의 <strong>현재와 이상의 차이에 항상 신경 쓰면서</strong>, 이상에 가까워지도록 리팩토링해야한다.</li>
+</ol>
+<hr>
+<hr>
+<h3 id="예시로-접근해보기"><a href="#예시로-접근해보기" class="headerlink" title="예시로 접근해보기"></a>예시로 접근해보기</h3><ul>
+<li>다양한 연극을 외주로 받아서 공연하는 극단에서<br>공연 요청이 들어오면,<br>연극의 장르와 관객 규모를 기초로 비용을 책정하는데,<br>이때 발생했던 공연료와 포인트를 확인하는 프로그램이다.</li>
+</ul>
+<h1 id="최초-코드"><a href="#최초-코드" class="headerlink" title="최초 코드"></a>최초 코드</h1><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Finit%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<p>발견부분</p>
+<ol>
+<li>청구내역을 HTML로 출력하는 기능이 필요.</li>
+<li>예측 가능한 기획 변경 대응</li>
+</ol>
+<ul>
+<li>비슷한 함수를 복사할 경우 중복되는 부분의 수정이 <strong>일관되게 반영되도록 보장해야한다.</strong></li>
+<li>리팩터링이 필요한 이유는 <strong>변경</strong>때문이다.</li>
+</ul>
+<h2 id="리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다"><a href="#리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다" class="headerlink" title="리팩토링하기 전에 제대로 된 테스트부터 마련한다.테스트는 반드시 자가진단하도록 만든다."></a>리팩토링하기 전에 제대로 된 <code>테스트부터 마련</code>한다.<br>테스트는 반드시 <code>자가진단</code>하도록 만든다.</h2><ul>
+<li>테스트코드들부터 마련해야한다.</li>
+<li>리팩터링에서 테스트의 역할은 굉장히 중요하다.</li>
+<li>리팩터링 기법들이 버그 발생 여지를 최소화하도록 구성됐다고는 하나,<br>실제 작업은 사람이 수행하기 때문에 언제든지 실수할 수 있다.</li>
+</ul>
+<hr>
+<ul>
+<li>리팩터링 시 테스트에 상당히 의지할 필요가 있다.</li>
+<li>테스트를 작성하는 데 시간이 좀 걸리지만,<br>신경 써서 만들어두면 디버깅시간이 줄어서 전체 작업시간은 오히려 단축된다.</li>
+<li>리펙터링 후에는 반드시 테스트하는 습관을 가져야한다.</li>
+</ul>
+<h2 id="프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다"><a href="#프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다" class="headerlink" title="프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면,먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서원하는 기능을 추가한다."></a>프로그램이 새로운 기능을 추가하기에 <code>편한 구조가 아니라면</code>,<br>먼저 <code>기능을 추가하기 쉬운 형태로 리팩터링</code>하고 나서<br>원하는 기능을 추가한다.</h2><ul>
+<li><p>프로그램이 잘 작동하는 상황에서 그저 코드가 ‘<strong>지저분하다</strong>‘는 이유료 불평하는 것은<br>프로그램의 구조를 너무 미적인 기준으로만 판단하는 건 아닐까</p>
+<ul>
+<li>코드를 수정하려면 <strong>사람이 개입되고</strong>, 
+사람은 미적 상태에 민감하다.</li>
+<li>설계가 나쁜 시스템은 수정하기 어렵다.</li>
+<li>무엇을 수정할지 찾기 어렵다면 실수를 저질러서 버그가 생길 가능성도 높아진다.</li>
+</ul>
+</li>
+<li><p>수백줄짜리 코드를 수정할 때면,<br>먼저 프로그램의 작동방식을 더 쉽게 파악할 수 있도록<br>코드를 여러 함수와 프로그램 요소로 재구성한다.</p>
+</li>
+</ul>
+<h2 id="리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다"><a href="#리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다" class="headerlink" title="리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다."></a>리팩터링은 프로그램 수정을 <code>작은 단계</code>로 나눠 진행한다. <br>그래서 중간에 실수하더라도 <code>버그</code>를 쉽게 찾을 수 있다.</h2><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F02%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<ul>
+<li>함수 추출하기</li>
+<li>변수명 변경</li>
+<li>변수 인라인으로 변경</li>
+<li>반복문 쪼개기</li>
+</ul>
+<hr>
+<p>함수 추출 이후에는 <strong>명확하게</strong> 표현할 수 있는 간단한 방법을 찾아보자.</p>
+<ul>
+<li>변수명<ul>
+<li>접두어로 타입을 표현한다.</li>
+<li>매개변수의 타입이 뚜렷하지 않으면 부정관사를 붙인다. (a/an)</li>
+<li>캔트백 [Smalltalk Best Practice Patterns]를 참고했다고함</li>
+</ul>
+</li>
+<li>좋은 코드라면 하는 일이 명확히 드러나야하며, 변수 이름은 커다란 역할을 한다.</li>
+<li>추출한 함수에는 그 코드가 하는 일을 설명하는 이름을 지어준다.<ul>
+<li>다음번에 코드를 볼때 다시 분석하지 않아도<br>코드 스스로가 자신이 하는 일이 무엇인지 이야기해줄 것이다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다"><a href="#컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다" class="headerlink" title="컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.사람이 이해하도록 작성하는 프로그래머가 진정한 실력자다."></a>컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.<br><code>사람이 이해하도록 작성하는 프로그래머</code>가 진정한 실력자다.</h2><ul>
+<li><strong>임시변수를 질의함수로 바꾸기</strong>(7장): 긴 함수를 쪼갤때마다 변수를 최대한 제거한다.<ul>
+<li>지역변수를 제거해서 얻는 가장 큰 장점은 추출 작업이 훨씬 쉬워진다는 것이다.</li>
+<li>유효범위를 신경써야 할 대상이 줄어들기 때문이다.</li>
+</ul>
+</li>
+<li><strong>변수 인라인하기</strong>(6장): 변수를 제거하고 바로 함수를 적용한다.<blockquote>
+<p>개인적으로 이건 잘 모르겠다.<br>함수 안에서 해당변수가 여러번 필요한 경우가 있는데 그때마다 호출하는거가 더 나은건지,<br>변수로 해서 레퍼런스만 호출하는게 좋은건지.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>라고 했지만, 책 마지막에는<br>“특별한 경우가 아니라면 <strong>성능이슈는 일단 무시</strong>하라는 것,<br>리팩토링때문에 성능이 떨어진다면,<br>리팩터링을 마무리하고 나서 성능을 개선하자”</p>
+</blockquote>
+</li>
+<li><strong>함수명 바꾸기</strong>(6장)<ul>
+<li>이름짓기는 중요하면서도 쉽지 않은 작업이다.</li>
+<li>이름이 좋으면 함수 본문을 읽지 않고도 무슨일을 하는지 알 수 있다.</li>
+</ul>
+</li>
+<li><strong>반복문 쪼개기</strong>(8장): 반복문안에서 여러 역할을 하는 것들을 반복분을 따로 만들어서 각각 수행하도록..<ul>
+<li>논리적인 요소를 파악하기 쉽도록 코드의 구조를 보강하는데 주안점을 두고 리팩터링.<br>== 복잡하기 얽힌 덩어리를 잘게 쪼개는 작업</li>
+</ul>
+</li>
+<li><strong>문장 슬라이드하기</strong>(8장): 문장 위치를 바꾸는것..?</li>
+</ul>
+<hr>
+<h2 id="캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다"><a href="#캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다" class="headerlink" title="캠핑자들에게는 도착했을 때보다 깔끔하게 정돈하고 떠난다는 규칙이 있다.프로그래밍도 마찬가지다.항시 코드베이스를 작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다."></a>캠핑자들에게는 <code>도착했을 때보다 깔끔하게 정돈하고 떠난다</code>는 규칙이 있다.<br>프로그래밍도 마찬가지다.<br>항시 코드베이스를 <code>작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.</code></h2><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F03%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<ul>
+<li><strong>단계 쪼개기</strong>(6장): 1. 필요한 데이터를 처리하고 =&gt; 2. 그 다음 단계 =&gt; …</li>
+<li><strong>함수 옮기기</strong>(8장)</li>
+<li><strong>반복문을 파이프라인으로 바꾸기</strong>(8장)</li>
+<li>간결함이 지혜의 정수일지 몰라도, 프로그래밍에서만큼은 명료함이 진화할 수 있는 소프트웨어의 정수다.</li>
+</ul>
+<hr>
+<h2 id="좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기"><a href="#좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기" class="headerlink" title="좋은코드를 가늠하는 확실한 방법은 얼마나 수정하기 쉬운가다.다형성을 활용해 계산 코드 재구성하기"></a>좋은코드를 가늠하는 확실한 방법은 <code>얼마나 수정하기 쉬운가</code>다.<br><code>다형성</code>을 활용해 계산 코드 재구성하기</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">amountFor</span>(<span class="params">aPerformance</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (aPerformance.play.type) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"tragedy"</span>: <span class="comment">//비극</span></span><br><span class="line">        result = <span class="number">40000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.audience &gt; <span class="number">30</span>)</span><br><span class="line">          result += <span class="number">1000</span> * (aPerformance.audience - <span class="number">30</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"comedy"</span>: <span class="comment">//희극</span></span><br><span class="line">        result = <span class="number">30000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.audience &gt; <span class="number">20</span>)</span><br><span class="line">          result += <span class="number">1000</span> + <span class="number">500</span> * (aPerformance.audience - <span class="number">20</span>);</span><br><span class="line">        result += <span class="number">300</span> * aPerformance.audience;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`알 수 없는 장르: <span class="subst">$&#123;aPerformance.play.type&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>위 코드는 타입이 추가될수록 <strong>복잡도가 올라간다.</strong><ul>
+<li>다형성을 활용하는 것이 자연스럽다.</li>
+</ul>
+</li>
+<li><strong>조건부 로직을 다형성으로 바꾸기</strong>(10장)<ul>
+<li>class로 함수옮기기를 하는 것은 다른 컨텍스트로 옮기는 큰 작업</li>
+</ul>
+</li>
+<li><strong>타입코드를 서브클래스로 바꾸기</strong>(12장)</li>
+<li><strong>생성자 팩터리 함수로 바꾸기</strong>(11장)</li>
+</ul>
+<iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F04%2FcreateStatementData.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
+<ol>
+<li>원본함수를 중첩 함수 여러개로 나눴다.</li>
+<li>계산코드와 출력코드를 분리했다. (단계 쪼개기)</li>
+<li>계산로직을 다형성으로 표현했다.</li>
+</ol>
+<ul>
+<li>코드는 명확해야한다.</li>
+<li>코드를 수정해야 할 상황이 되면 고쳐야 할 곳을 쉽게 찾을 수 있고,<br>오류 없이 빠르게 수정할 수 있어야 한다.</li>
+<li>건강한 코드베이스는 <strong>생산성을 극대화</strong>하고,<br>고객에게 필요한 기능을<br><strong>더 빠르고 저렴한 비용으로 제공</strong>하도록 해준다.</li>
+</ul>
+<hr>
+<h2 id="코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다"><a href="#코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다" class="headerlink" title="코드를 건강하게 관리하려면프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,이상에 가까워지도록 리팩토링해야한다."></a>코드를 건강하게 관리하려면<br>프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,<br><code>이상에 가까워지도록 리팩토링</code>해야한다.</h2><p>리팩토링을 효과적으로 하는 핵심은</p>
+<ul>
+<li>단계를 잘게 나눠야 더 빠르게 처리할 수 있고</li>
+<li>코드는 절대 깨지지 않으며</li>
+<li>작은 단계들이 모여서 상당히 큰 변화를 이룰 수 있다는 사실을 깨닫는 것이다.</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2020/04/04/Refactoring_002/" data-id="ck8lpiv23008amtbmoqi6ubfv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#test">테스트환경 준비</a>
+               
+                <div class="first_depth--sub">test code</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#architect">골격 다시 잡기</a>
+               
+                <div class="first_depth--sub">함수 추출하기, 변수명 변경, 변수 인라인으로 변경, 반복문 쪼개기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">3</span>
+            
+            <div>
+              <a href="#short">작은 단계로 리팩토링하기</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">4</span>
+            
+            <div>
+              <a href="#easy">사람이 이해하도록 작성하기</a>
+               
+                <div class="first_depth--sub">임시변수를 질의함수로 바꾸기, 변수 인라인하기, 함수명 바꾸기, 반복문 쪼개기, 문장 슬라이드하기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">5</span>
+            
+            <div>
+              <a href="#healthy">작업 시작 전보다 건강한 코드로 유지하기</a>
+               
+                <div class="first_depth--sub">단계 쪼개기, 함수 옮기기, 반복문을 파이프라인으로 바꾸기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">6</span>
+            
+            <div>
+              <a href="#Polymorphism">수정하기 쉽도록 작성하기</a>
+               
+                <div class="first_depth--sub">조건부 로직을 다형성으로 바꾸기, 타입코드를 서브클래스로 바꾸기, 생성자 팩터리 함수로 바꾸기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">7</span>
+            
+            <div>
+              <a href="#ideal">지속적으로 리팩토링하기</a>
+               
+                <div class="first_depth--sub">-</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2020/02/03/HTTP_019/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">WebDAV와 공동작업</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/04/Refactoring_002/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/07/thumb_default.jpg)" alt="리팩토링2판) 1. 예시로 알아보기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></p>
+                            <p class="item-title"><a href="/2020/04/04/Refactoring_002/" class="title">리팩토링2판) 1. 예시로 알아보기</a></p>
+                            <p class="item-date"><time datetime="2020-04-04T11:12:34.000Z" itemprop="datePublished">2020-04-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/03/HTTP_019/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/06/thumb_default.jpg)" alt="WebDAV와 공동작업" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/02/03/HTTP_019/" class="title">WebDAV와 공동작업</a></p>
+                            <p class="item-date"><time datetime="2020-02-02T15:10:10.000Z" itemprop="datePublished">2020-02-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/02/02/HTTP_018/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/05/thumb_default.jpg)" alt="웹 호스팅" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/02/02/HTTP_018/" class="title">웹 호스팅</a></p>
+                            <p class="item-date"><time datetime="2020-02-01T15:10:10.000Z" itemprop="datePublished">2020-02-02</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/20/HTTP_017/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/04/thumb_default.jpg)" alt="내용협상과 트랜스코딩" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/20/HTTP_017/" class="title">내용협상과 트랜스코딩</a></p>
+                            <p class="item-date"><time datetime="2020-01-20T00:10:10.000Z" itemprop="datePublished">2020-01-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/01/13/HTTP_016/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/03/thumb_default.jpg)" alt="국제화" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></p>
+                            <p class="item-title"><a href="/2020/01/13/HTTP_016/" class="title">국제화</a></p>
+                            <p class="item-date"><time datetime="2020-01-13T00:10:10.000Z" itemprop="datePublished">2020-01-13</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Accept-header/" style="font-size: 10px;">Accept header</a> <a href="/tags/CS/" style="font-size: 14.17px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.83px;">File API</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 11.67px;">Joy</a> <a href="/tags/OOP/" style="font-size: 15.83px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/TCP-IP/" style="font-size: 10.83px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.83px;">TDD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web/" style="font-size: 11.67px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.83px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.17px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.83px;">authorization</a> <a href="/tags/blog/" style="font-size: 11.67px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.67px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.83px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.67px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.5px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.83px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.83px;">css</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.83px;">digest</a> <a href="/tags/encoding/" style="font-size: 10.83px;">encoding</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.83px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.83px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.83px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hosting/" style="font-size: 10px;">hosting</a> <a href="/tags/http/" style="font-size: 19.17px;">http</a> <a href="/tags/https/" style="font-size: 10.83px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10.83px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 10px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.5px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.5px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.83px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.83px;">principle</a> <a href="/tags/programming/" style="font-size: 11.67px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/release/" style="font-size: 10px;">release</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.33px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.33px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.83px;">symbol</a> <a href="/tags/transcoding/" style="font-size: 10px;">transcoding</a> <a href="/tags/typeScript/" style="font-size: 17.5px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/variant/" style="font-size: 10px;">variant</a> <a href="/tags/vary/" style="font-size: 10px;">vary</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/">04_Design 💅</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-Design-💅/Motion/">Motion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2020 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2020/04/04/Refactoring_002/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
