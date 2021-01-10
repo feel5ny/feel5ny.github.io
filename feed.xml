@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://feel5ny.github.io/"/>
-  <updated>2020-11-15T12:42:48.675Z</updated>
+  <updated>2021-01-10T14:50:17.369Z</updated>
   <id>http://feel5ny.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립</title>
+    <link href="http://feel5ny.github.io/2021/01/10/UX%EC%8B%AC%EB%A6%AC%ED%95%99_Jakob/"/>
+    <id>http://feel5ny.github.io/2021/01/10/UX심리학_Jakob/</id>
+    <published>2021-01-10T11:00:00.000Z</published>
+    <updated>2021-01-10T14:50:17.369Z</updated>
+    
+    <content type="html"><![CDATA[<p>피플웨어 책 초반에 이런내용이 나온다.</p><blockquote><p>.. 우리가 아는 프로젝트 대다수에서 그 어떤 기술적인 난관보다 사회적인 복잡도가 훨씬 더 컸다는 사실이 분명해 졌다. 그러면서, 불가피하게, 우리는 아주 속상한 겨론에 도달했다. 다분히 사회학이 기술보다 더 중요하다는 사실을 오랫동안 느낌으로 알아왔으면서도 정작 우리 중 누구도 그렇게 관리하려 시도하지 않는다는 사실이었다. 물론, 때때로 팀의 ㅎ벼력을 돕거나, 팀 내 긴장을 풀어주기 위해 사회학적인 방법을 사용하기도 했지만, 한번도 우리 업무의 본질이라 여기지 않았다. … - ‘피플웨어’ 중</p></blockquote><p>UX에 대해서 중요하다고 생각은 했는데, 항상 생각만하고 막상 공부나 여러가지 시도를 하지 못하고 있었다. 직감적으로는 알겠는데, 조금 더 스스로 정리하기 위해 해당 글을 작성하였다. 개인적인 견해이니 자유롭게 읽으면 좋을 듯 하다. </p><a name="growth"><h2 id="1-UX이전에-좀-먼-얘기부터-해보자-성장"><a href="#1-UX이전에-좀-먼-얘기부터-해보자-성장" class="headerlink" title="1. UX이전에 좀 먼 얘기부터 해보자.. 성장"></a>1. UX이전에 좀 먼 얘기부터 해보자.. 성장</h2><p>최근에 웹개발자로 일하면서 이런 생각이 든다.</p><ul><li>개인적으로 뭔가를 만들고, 피드백 받고 개선하며, 고도화하며 프러덕트를 더 잘 만들고 싶다.</li><li>즐겁고 재밌게 일하고, 시야를 넓혀서 융합적으로 접근하고 싶다.</li><li>공부를 꾸준히 해야한다. 재밌게! 그리고 오랫동안 일하고 싶다.</li></ul><p>제품을 잘 만들어서, 내 업의 성취감을 얻으려면 재밌고 오랫동안 일하고 공부해야한다.</p><h3 id="재밌게-일하려면-나의-성향은-어떠한지"><a href="#재밌게-일하려면-나의-성향은-어떠한지" class="headerlink" title="재밌게 일하려면, 나의 성향은 어떠한지"></a>재밌게 일하려면, 나의 성향은 어떠한지</h3><p>프론트개발자로 일을 하면, 여러 유관부서와 협업하며 업무를 진행하게 된다. 디자이너뿐만아니라, 마케터, 기획자, 타 부서 엔지니어등. 그들은 내가 어떤 개발을 해야할지 알려주고, 개발을 요청해 오거나, 혹은 나 스스로가 일을 만들때도 있었다. 몇 년을 이렇게 프로젝트들을 진행하면서, 주변 피드백을 통해 나의 특이점을 찾게 되었는데, <strong>흥미가 있는 프로젝트이거나, 이유가 명확한 프로젝트일수록 업무의 생산성과 속도가 올라가곤 했다.</strong> 그리고 그 마음가짐이 오래간다. (근데 모.. 이는 모두가 같을 것이다.) (흥미의 포인트는 개인의 관점일수도, 서비스의 관점일 수도있다.) 여기에 같이 일하는 사람과의 합이 잘 맞을 경우 몇 배나 더 즐겁게 일했던 기억이 난다.</p><h4 id="목표지향적-진행에는-목적과-이유가-명확해야한다"><a href="#목표지향적-진행에는-목적과-이유가-명확해야한다" class="headerlink" title="목표지향적 진행에는 목적과 이유가 명확해야한다."></a>목표지향적 진행에는 목적과 이유가 명확해야한다.</h4><p>이렇듯, 사람은 자신이 하는 일에 이유가 있다면, 업무 자체가 <strong>목표지향적</strong>이게 되어서 빠르게 치고 나갈 수 있는데, 최근 들어서 내가 공부하려는 프론트 skill들은 어떤 이유에서 비롯해서 공부해야하는지? 알긴알고 있지만, 그 이유, 동기들을 정리할 필요가 있다고 생각이 들었다. 굳이 모든 일에 이유를 찾을 필요는 없지만, 조금 더 재밌게 하기위해서는? 시간을 효율적으로 나눠서 공부하기 위해서는? 조금더 근본적인 이유를 찾을 필요는 있는 듯 하다. 그리고 공부가 재밌는 순간은 공부한 내용을 <strong>바로 활용할때..!</strong></p><h3 id="공부할-주제의-성격"><a href="#공부할-주제의-성격" class="headerlink" title="공부할 주제의 성격"></a>공부할 주제의 성격</h3><p>인터넷에 돌아다니는 XXX 로드맵들을 보고 있으면, 참 공부해야할게 많다. 브라우저 엔진에 대하여, 사용하는 언어의 최신문법, 특정상황에 필요한 기술들, 성능향상을 위한 알고리즘, 네트워크, DB, 아키텍처, 패러다임, 디자인 패턴 …<br>모두가 중요하지만 오랫동안 재밌게 공부하기 위해서는, 공부할 내용의 성격, 분량, 목적 등을 정리해서, 꾸준히 공부할 수 있도록 해야한다고 생각했다.</p><h4 id="프론트엔드-개발자의-역할을-다시-정리해보자"><a href="#프론트엔드-개발자의-역할을-다시-정리해보자" class="headerlink" title="프론트엔드 개발자의 역할을 다시 정리해보자"></a>프론트엔드 개발자의 역할을 다시 정리해보자</h4><p>웹 개발자는 웹 어플리케이션을 만들고, 사용자는 우리의 웹 서비스를 필요한 상황에 고용하여 사용한다. 사용자는 서비스를 사용하면서, pain point를 개선하게 되고, 이런 혜택을 제일 잘 얻을 수 있는 어플리케이션을 maker들은 ‘잘’ 만들어야한다. 나의 position은 maker에 속하며, 유저가 잘 인지하게 하고, 잘 input하고, 잘 피드백받을 수 있는 <strong>인터페이스</strong>를 ‘구현’하는 역할이다. </p><h4 id="커뮤니케이션-타겟은-주로-백엔드-엔지니어-그리고-디자이너"><a href="#커뮤니케이션-타겟은-주로-백엔드-엔지니어-그리고-디자이너" class="headerlink" title="커뮤니케이션 타겟은 주로 백엔드 엔지니어, 그리고 디자이너"></a>커뮤니케이션 타겟은 주로 백엔드 엔지니어, 그리고 디자이너</h4><p>인터페이스를 만드는 maker에는 여러 유관부서가 기여하게 된다. PO, 디자이너, 클라이언트 개발자 등. 여기서 기여의 비중이 높은 순으로는 디자이너, 클라이언트 개발자라고 생각하는데 이 두 부서간의 교집합은 크다. 클라이언트 개발자가 백엔드 개발자와 커뮤니케이션을 많이 하는 만큼, 디자이너와의 커뮤니케이션 비중도 높다. </p><ul><li>백엔드 개발자와는 <strong>프러덕트 구현의 퀄리티</strong>를 높이기 위해서 커뮤니케이션을, </li><li>디자이너와는 <strong>프러덕트 사용성의 퀄리티</strong>를 높이기 위해서 커뮤니케이션을 한다. </li></ul><p>즉, 구현을 위해서는 시스템의 이해도, 기술력의 이해도를 높여하고, <strong>사용성의 퀄리티를 올리기 위해서는 사용자 맥락의 이해도를 올려야한다.</strong> </p><h4 id="‘잘’-만들고-커뮤니케이션을-‘잘’-하기위해-공부해야-한다"><a href="#‘잘’-만들고-커뮤니케이션을-‘잘’-하기위해-공부해야-한다" class="headerlink" title="‘잘’ 만들고, 커뮤니케이션을 ‘잘’ 하기위해 공부해야 한다."></a>‘잘’ 만들고, 커뮤니케이션을 ‘잘’ 하기위해 공부해야 한다.</h4><p>구현관점에서 이해도를 높이기 위해 기본적인 공부는 꾸준히 진행하며, 어느 정도 실무를 통해서도 자연스럽게 진행하고 있다. 그리고 이쪽은 나름? 우선순위 정리가 되었다. (도움을 준 책은 의외로 : 객체지향의 사실과 오해)<br>하지만 사용자 맥락의 이해를 올리는 부분은, 중요하다는 인지는 하지만, 막상 업무의 본질로써는 수면위로 올리지 못했다. 아마 구현을 위한 공부에 여유가 없어서일 가능성이 있다. 혹은 디자이너라는 포지션이 있기때문에 나의 영역은 아니라고도 생각하기도 했다.</p><h4 id="UX는-‘몰입해야-나오는-배우들의-애드립’이라고-생각해보자"><a href="#UX는-‘몰입해야-나오는-배우들의-애드립’이라고-생각해보자" class="headerlink" title="UX는 ‘몰입해야 나오는 배우들의 애드립’이라고 생각해보자."></a>UX는 ‘몰입해야 나오는 배우들의 애드립’이라고 생각해보자.</h4><p>여러가지 프로젝트를 하면서, 프론트개발자는 시각적인 부분을 구현하는 역할이지만, 제일 큰 <strong>킬링 포인트</strong>라고 생각되는 점은<br>구현 관점에서도 사용성을 올릴 수 있는 <strong>디테일한 포인트를 캐치할 수 있는 역할</strong>이 프론트개발자라고도 생각이 들었다.</p><ol><li>프론트 개발자만이 할 수 있는 UX개선 (구현 기술력이 요구되는)</li><li>프론트 개발자와 디자인의 교집합에 있는 UX 개선 (구현과 시각화 사이)</li><li>디자이너가 더 잘 고민할 수 있는 UX개선이 있다고 본다. (시각화)</li></ol><p>의외로 구현하면서 “생각해보니 이렇게 하는게 좋지 않을까요?”라는 말을 많이 했던 기억이 난다.<br>즉, 1번은 필수적으로 고민하고 진행해야하는 부분, 2번은 협업관점에서 잘 커뮤니케이션하고 전달하기 위해서는, 감각에 의지하지말고, 개념적인 부분을 공부를 하며 끌어올려야하는 영역이라고 생각한다. 그리고 2번의 개념이 올라가고 익숙해지만, 마치 배우들이 연기를 하다가 연기 몰입해서 애드립을 내듯이 프론트개발자도 디자이너와의 합이 잘 맞으면서 적합한 애드립이 튀어나오지 않을까 싶다. 이는 반대로 디자이너가 개발을 배워도 같은 효과. (= 융합의 꽃)<br>3번은 디자이너분들의 역할. 3번 영역은 디자이너분의 의견을 존중한다!!</p><p>이 외에도 단순하게 생각하면, 서비스의 수명이 오래가기위해서는 결국에는 두가지 포인트는(퀄리티 관점, UX관점) 병렬로 꾸준히 유지되어야 한다고 생각한다.<br>프론트 개발자도 이 2가지를 같은 레벨로 계속 습득하고, 유지해야한다.</p><h4 id="앞뒤-연관분야의-본질을-공부하자"><a href="#앞뒤-연관분야의-본질을-공부하자" class="headerlink" title="앞뒤 연관분야의 본질을 공부하자."></a>앞뒤 연관분야의 본질을 공부하자.</h4><p>요즘에는 가이드 툴, 프로토타이핑 툴, 인터렉션을 가이드할 수 있는 여러가지 도구가 나오면서, 디자이너가 사용성을 고민하고 시각화를 하거나 가이드안을 산출하는 상황이 많지만, 도움을 줄 수 있는 도구가 나왔다고 해서, 본질적인 부분, 즉 이 교집합인 부분의 지식을 습득하는 것은 여전히 중요하다고 생각한다. </p><p>프러덕트 개발은 항상 리소스는 한정되어있는 상황에 마주한다. 이런 상황에서도 좋은 퀄리티의 제품을 만들기 위해서는, 정확한 방향을 잡고, 병렬적으로 여러 사람이 제한된 시간에 많은 아이디어를 내고, 디테일한 부분까지 챙기면서 구현하는 것이 이상적이지만 중요한 부분이라고 생각한다.</p><h4 id="그래도-우선순위는-완성도"><a href="#그래도-우선순위는-완성도" class="headerlink" title="그래도 우선순위는 완성도"></a>그래도 우선순위는 완성도</h4><p>프론트 개발자의 성장관점에서는 구현의 퀄리티와 사용성의 퀄리티의 우선순위로 보면, 당연히 구현완성도를 높이는 기술력 습득이 1순위이다.</p><a name="How"><h2 id="2-어떻게-접근해볼까-정리해볼까"><a href="#2-어떻게-접근해볼까-정리해볼까" class="headerlink" title="2. 어떻게 접근해볼까? 정리해볼까?"></a>2. 어떻게 접근해볼까? 정리해볼까?</h2><blockquote><p>사용자 경험 패턴을 지식으로 습득하지 않고, 기저에 있는 심리학 법칙을 이해하고 사용한다면, 훨씬 더 설득력 있는 인터페이스로 이어질 것이다. - UX/UI의 10가지 심리학 법칙</p></blockquote><p>내가 왜 이 기능을 구현해야하는지. 이 부분은 왜 기본적으로 지켜야하는지를 알기 위해 사용자의 근본적인 심리학과 관련된 책을 읽어보고자 한다. 책은 [UX/UI의 10가지 심리학 법칙]이며, 아마.. 이 책을 다 읽으면 다른 책을 선택해보지 않을까 싶다.<br>해당 책은 10가지 심리학 법칙이 나오는데, 법칙들을 읽으면서, 이런 기본적으로 갖고 있는 심리를 유지하기 위해서는 어떤 기술력이 필요로할지 정리하고, 앞으로의 공부방향과 공부분야의 중요성을 이 법칙을 기준으로 정리해보고자한다. 또한 이런 심리를 고려해서 어떤식으로 구현했는지를 정리해보고자한다.  </p><p><strong>두 분야 다 알야아하는 부분</strong></p><ul><li>제이콥의 법칙 : 관습은 유지한다. 멘탈모델은 유지하면서 개선</li><li>힉의 법칙 : 인지 부하를 줄여햐한다.</li><li>테슬러의 법칙 : 복잡성을 낮춘다. (추상화의 개념과 굉장히 유사)</li></ul><p><strong>구현관점</strong></p><ul><li>피츠의 법칙 : 입력 사용성 올리기</li><li>포스텔의 법칙 : 어떤 상황에서도 일관되게 -&gt; 디자인시스템, 접근성, 반응형</li><li>피크엔드 법칙 : 최고의 순간을 극대화 -&gt; 시각적 요소 이용, 모션 이용</li><li>도허티 임계 : 체감 성능을 높인다. -&gt; 성능 최적화, 속도개선, …</li></ul><p><strong>시각디자인 관점</strong></p><ul><li>심미적 사용성 효과 : 레이아웃, 위치 포지션</li><li>폰 레스토프 효과 : 특정 맥락에서의 강조 효과</li></ul></a></a>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;피플웨어 책 초반에 이런내용이 나온다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.. 우리가 아는 프로젝트 대다수에서 그 어떤 기술적인 난관보다 사회적인 복잡도가 훨씬 더 컸다는 사실이 분명해 졌다. 그러면서, 불가피하게, 우리는 아주 속상한 겨론에 
+      
+    
+    </summary>
+    
+      <category term="04_UX 💅" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/"/>
+    
+      <category term="Notion" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/Notion/"/>
+    
+    
+      <category term="UX" scheme="http://feel5ny.github.io/tags/UX/"/>
+    
+      <category term="Frontend" scheme="http://feel5ny.github.io/tags/Frontend/"/>
+    
+  </entry>
   
   <entry>
     <title>2020 상반기 회고, 남은 2020년은?</title>
@@ -638,9 +669,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="cookie" scheme="http://feel5ny.github.io/tags/cookie/"/>
-    
       <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
+    
+      <category term="cookie" scheme="http://feel5ny.github.io/tags/cookie/"/>
     
   </entry>
   
@@ -841,9 +872,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
-    
       <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
+    
+      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
     
   </entry>
   
@@ -2834,7 +2865,7 @@
     <link href="http://feel5ny.github.io/2018/02/25/interaction_01/"/>
     <id>http://feel5ny.github.io/2018/02/25/interaction_01/</id>
     <published>2018-02-25T12:20:19.000Z</published>
-    <updated>2019-01-06T16:12:50.363Z</updated>
+    <updated>2021-01-10T14:09:03.886Z</updated>
     
     <content type="html"><![CDATA[<p>airbnb 앱을 쓰다보면 곳곳에서 다양한 애니메이션을 볼 수 있다. 한 서비스에 애니메이션이 있으면 있을수록 자연스러운 사용성 유도, 사용자의 감성에도 메세지를 전할 수 있고, 서비스의 브랜드가 더 기억에 오래남고 강해진다고 생각한다. </p><p>모션을 좋아하는 성향과 모션이 줄 수 있는 위의 특징때문에 곳곳에 모션을 넣는 것을 좋아하는데, 그러던 중 airbnb의 <code>lottie</code> 서비스가 눈에 들어왔다. 예전부터 테스트만해보고 넣어보는 것을 시도했었는데, react-native로 앱을 만드는 부분에 로딩애니메이션으로도 넣어보았지만 아직 웹에서는 넣어보지 않아서 이번 기회에 해당 블로그 header의 아바타에 움직임을 넣어보았다.<br>(최근 <a href="https://ant.design/" target="_blank" rel="noopener">antd</a>의 메인에서도 쓴걸 확인!)</p><img src="/images/2018/07/logo-ny_1.gif" width="300px"><p><strong>장단점</strong></p><ul><li>작업을 다하고 든 생각은.. gif보다 경량화시킬 수 있을거라는 생각을 했지만, gif보다 3배나 파일이 컸다.</li><li>대신 svg로 이미지가 들어가기 때문에 벡터상태로 선명하게 들어간다. gif는 움직이는대신 화질이 떨어지는 단점이 있는데 이를 보안한다는 점에서 굉장한 장점.</li><li>after effect를 좀 다뤄야한다는 .. 진입장벽이 있다. </li></ul><p><strong>간단 작업 순서</strong></p><ol><li><a href="https://www.adobe.com/kr/products/aftereffects.html" target="_blank" rel="noopener">after effect</a>로 작업하기</li><li>after effect에 bodymovin 플러그인 설치</li><li>작업 후 최종 렌더링할 컴포넌트 =&gt; bodymovin 플러그인을 사용하여 렌더링<ul><li>렌더링 옵션이 여러개가 있다. 본인의 프로젝트에 맞춰서 렌더링하면 됨.</li></ul></li><li>렌더링 이후 export된 json파일, js파일을 html에 잘 임포트를 시키면 끝!</li></ol><hr><h1 id="1-after-effect로-작업하기"><a href="#1-after-effect로-작업하기" class="headerlink" title="1. after effect로 작업하기"></a>1. after effect로 작업하기</h1><p>shape animation이나 여러가지 모션그래픽은 에프터이펙트로 작업합니다. bodymovin 플러그인을 사용하기 위해서는 after effect로 작업된 파일이 필요합니다.</p><img src="/images/2018/07/01.png"><p><strong>작업할 때 알아야할 점 (버그)</strong></p><ul><li>레이어 그룹해제 : 일러스트레이터를 임포트할 때 해당 레이어 내부에 group되어있는 부분을 전부 단일 레이어로 만들어야합니다. (그룹이 모두 해제되어있는 상태여야함)</li><li>마스크는 레이어당 하나만 : 하나의 shape 레이어에서 마스크를 동시에 2개를 사용시 둘중 하나만 인식이 됩니다. (아직 로티의 버그인 듯) 로티에서 해결해줄때까지 ㅠ 우선은 마스크를 한 레이어당 하나만 사용하면서 모션을 잡으셔야합니다.</li><li>너무 많은 레이어와 긴 시간의 모션은 스크립트도 용량이 크게 나옵니다. 웬만하면 loop되는 애니메이션으로 작업하셔야 합니다.</li></ul><h1 id="2-after-effect에-bodymovin-플러그인-설치"><a href="#2-after-effect에-bodymovin-플러그인-설치" class="headerlink" title="2. after effect에 bodymovin 플러그인 설치"></a>2. after effect에 bodymovin 플러그인 설치</h1><p>bodymovin이라는 플러그인을 설치하고 해당 플러그인을 사용하여 렌더링 해야합니다.</p><p><strong>설치방법</strong></p><ol><li>에펙이 실행되고 있다면 닫으십시오.</li><li>ZXP installer를 설치해야합니다. <a href="http://aescripts.com/learn/zxp-installer/" target="_blank" rel="noopener">설치경로</a></li><li>bodymovin 확장프로그램을 설치합니다. 다운로드를 클릭하여 다운받으세요. <a href="https://github.com/airbnb/lottie-web/tree/master/build/extension" target="_blank" rel="noopener">설치경로</a></li><li>ZXP installer를 실행시킨후 3번에서 다운받은 bodymovin.zxp을 드래그하여 ZXP installer에 넣습니다. (에펙에 플러그인 설치완료)</li><li>에펙을 오픈한 후 “Window &gt; Extensions”를 보시면 “Bodymovin”가 있는걸 확인할 수 있습니다.</li></ol><p>참고 &gt; <a href="http://airbnb.io/lottie/after-effects/bodymovin-installation.html" target="_blank" rel="noopener">http://airbnb.io/lottie/after-effects/bodymovin-installation.html</a></p><h1 id="3-bodymovin으로-렌더링하기"><a href="#3-bodymovin으로-렌더링하기" class="headerlink" title="3. bodymovin으로 렌더링하기"></a>3. bodymovin으로 렌더링하기</h1><div class="video-container"><iframe src="//www.youtube.com/embed/5XMUJdjI0L8" frameborder="0" allowfullscreen></iframe></div><blockquote><p>위의 방법대로 진행하면 오케이!</p></blockquote><img src="/images/2018/07/03.png">에펙에서 "Window > Extensions"의 "Bodymovin"를 오픈하면 위의 그림처럼 창이 하나 오픈됩니다. 우리가 필요한 파일은 `json`파일과 `js`파일입니다.<h2 id="3-1-json파일로-렌더링하기"><a href="#3-1-json파일로-렌더링하기" class="headerlink" title="3-1. json파일로 렌더링하기"></a>3-1. json파일로 렌더링하기</h2><ol><li><p>렌더링할 컴포넌트를 선택합니다.</p><img src="/images/2018/07/04-1.png"></li><li><p>어떤 포맷으로 렌더링할지 settings에서 선택해야합니다.</p><img src="/images/2018/07/04.png"></li><li><p>옵션은 여러가지가 있는데, 다중선택이 가능합니다.</p><img src="/images/2018/07/05.png"></li><li><p>셋팅이 완료되면 경로를 지정합니다. =&gt; 어떤 포맷으로 렌덜이되는지 확인할 수 있습니다.</p><img src="/images/2018/07/04-3.png"></li><li><p>위의 렌더링버튼을 누르시면 렌더링 시작.</p><img src="/images/2018/07/04-4.png"></li></ol><h2 id="3-2-js파일로-렌더링하기"><a href="#3-2-js파일로-렌더링하기" class="headerlink" title="3-2. js파일로 렌더링하기"></a>3-2. js파일로 렌더링하기</h2><ol><li><p>오른쪽 상단의 get the player를 선택합니다.</p><img src="/images/2018/07/04-2.png"></li><li><p>왼쪽의 get the player를 누르면 js파일을 받을 수 있습니다.</p><img src="/images/2018/07/06.png"></li></ol><h1 id="4-렌더링-이후-export된-파일-프로젝트에-import시키기"><a href="#4-렌더링-이후-export된-파일-프로젝트에-import시키기" class="headerlink" title="4. 렌더링 이후 export된 파일 프로젝트에 import시키기"></a>4. 렌더링 이후 export된 파일 프로젝트에 import시키기</h1><p>hexo블로그에 셋팅할 경우 파일은 아래 경로로 옮깁니다.<br><code>themes &gt; hueman &gt; source &gt; js</code></p><img src="/images/2018/07/02.png" width="200px" style="margin: 0;"><p><strong>필요한 파일</strong></p><ol><li>bodymoivn.js</li><li>data.json</li></ol><p>셋팅방법은 <a href="https://codepen.io/airnan/project/editor/ZeNONO/의" target="_blank" rel="noopener">https://codepen.io/airnan/project/editor/ZeNONO/의</a> 구조를 참고하였습니다.</p><ul><li>js파일 로드하는 스크립트 코드 html에 추가.</li><li>index.js파일에서 아래처럼 json파일을 불러오면 home이외의 메뉴에서는 로드되지 않습니다. (hexo의 generate방식때문)<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> animation = bodymovin.loadAnimation(&#123;</span></span><br><span class="line"><span class="javascript">        container: <span class="built_in">document</span>.getElementById(<span class="string">"bm"</span>),</span></span><br><span class="line"><span class="javascript">        renderer: <span class="string">"svg"</span>,</span></span><br><span class="line"><span class="javascript">        loop: <span class="literal">true</span>,</span></span><br><span class="line"><span class="javascript">        autoplay: <span class="literal">true</span>,</span></span><br><span class="line"><span class="javascript">        path: <span class="string">"logo_ny.json"</span></span></span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li></ul><p><strong>해결방법</strong><br>좋은 방법이라고는 생각되지 않으므로 피드백환영합니다.</p><ul><li><code>index.js</code>의 경로를 아래처럼 수정 후,</li><li>js폴더에 json파일을 넣습니다.</li><li><del>json파일도 따로 로드합니다.</del></li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lottie_index.js</span></span><br><span class="line"><span class="keyword">var</span> animation = bodymovin.loadAnimation(&#123;</span><br><span class="line">    container: <span class="built_in">document</span>.getElementById(<span class="string">"bm"</span>),</span><br><span class="line">    renderer: <span class="string">"svg"</span>,</span><br><span class="line">    loop: <span class="literal">true</span>,</span><br><span class="line">    autoplay: <span class="literal">true</span>,</span><br><span class="line">    path: <span class="string">"../../../../logo_ny.json"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scripts.ejs</span></span><br><span class="line">&lt;%- js(<span class="string">'js/lottie'</span>) %&gt;</span><br><span class="line">&lt;%- js(<span class="string">'js/lottie_index'</span>) %&gt;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -2847,9 +2878,9 @@
     
     </summary>
     
-      <category term="04_Design 💅" scheme="http://feel5ny.github.io/categories/04-Design-%F0%9F%92%85/"/>
+      <category term="04_UX 💅" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/"/>
     
-      <category term="Motion" scheme="http://feel5ny.github.io/categories/04-Design-%F0%9F%92%85/Motion/"/>
+      <category term="Motion" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/Motion/"/>
     
     
       <category term="lottie" scheme="http://feel5ny.github.io/tags/lottie/"/>
@@ -3522,34 +3553,6 @@
   </entry>
   
   <entry>
-    <title>0/ React</title>
-    <link href="http://feel5ny.github.io/2017/12/07/React_01/"/>
-    <id>http://feel5ny.github.io/2017/12/07/React_01/</id>
-    <published>2017-12-07T12:20:19.000Z</published>
-    <updated>2019-01-03T15:33:29.066Z</updated>
-    
-    <content type="html"><![CDATA[<p>어썸 리액트! &#128153;</p><p>리액트 공식 사이트로 들어가면 부제목으로 이런 글이 있다.<br><code>A JavaScript library for building user interfaces</code><br>UI 작업을 위한 자바스크립트 라이브러리! </p><p>사용자가 서비스를 접하면서 만나게되는 여러 상황에 빠르게 대응할 수 있고, 다양한 UI 트리거를 빠르게 만들 수 있도록 나온 라이브러리가 아닌가 한다. 그만큼 개발에도 사용자 경험을 많이 신경쓰고 있다는 점에서, UI와 인터렉션은 정말 화두 오브 화두. 상태관리를 손쉽게 할 수 있다는 점때문에 개발자가 UX를 고민할 시간이 더 생긴다는 점에서 리액트를 선호한다. 최근에는 앵귤러를 입문하고 있는데, 비슷한 패턴으로 상태관리를 한다고 느껴지긴했지만, 아직 어려운 개념들이 많고.. 그래서 아직 리액트와의 차이점은 잘 모르겠다. </p><hr><p>목차 </p><ol><li>리액트 탄생배경</li><li>리액트의 특징</li></ol><hr><h2 id="1-리액트-탄생배경"><a href="#1-리액트-탄생배경" class="headerlink" title="1. 리액트 탄생배경"></a>1. 리액트 탄생배경</h2><p>front 영역을 제어하기 위해서는 자바스크립트로 DOM을 컨트롤 하면 된다. 이는 다양한 인터렉션 기능들을 구현할 수 있게 해주지만 이 DOM이라는 것을 조작하기에는 여간 까다로운게 아니다.(바닐라로 간단 기능을 짜본사람은 무슨 느낌인지..) 이런 까다로운 DOM을 쉽고 효율적으로 다루기 위해 Jquery 라이브러리가 나왔다. But, 제이커리는 여러가지 <a href="https://www.tokyobranch.net/archives/7463" target="_blank" rel="noopener">이슈</a>를 갖고 있었다.</p><p>SPA 개발을 위한 구글의 오픈소스 자바스크립트 프레임워크인 Angular가 등장하면서 구조화된 프론트엔드 환경을 제시했다. 이런 상황에서 Facebook에서 React가 등장하게 된다. React는 에어비엔비, 넷플릭스, 드랍박스, 트위터 등에서 사용하고 있다. 리엑트는 자바스크립트 라이브러리이며, 라우터와 같이 웹을 만들 때 필요한 도구들을 포함되어 있지 <strong>않다.</strong> (앵귤러는 포함되어있음) 필요한 도구들이 없는 대신? 가볍다. 그리고 빠르게 배울수 있다는 점!</p><h2 id="2-리액트의-특징"><a href="#2-리액트의-특징" class="headerlink" title="2. 리액트의 특징"></a>2. 리액트의 특징</h2><p>React 공식 사이트에서 말하는 특징</p><h3 id="1-Declarative"><a href="#1-Declarative" class="headerlink" title="1. Declarative"></a>1. Declarative</h3><p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.<br>Declarative views make your code more predictable and easier to debug.</p><blockquote><p>직관적<br>리액트는 인터렉티브 UI를 어려움없이 만들 수 있습니다. 당신의 어플리케이션의 각각의 상태를 위해 간단한 view들을 디자인을 해보십시요. 리액트는 데이터가 변할때 해당 컴포넌트를 효과적으로 업데이트하고 렌더링 할 수 있습니다. 직관적인 view들은 디버깅하기 더 쉽게, 더 잘 예측할 수 있도록 해줍니다!</p></blockquote><h3 id="2-Component-Based"><a href="#2-Component-Based" class="headerlink" title="2. Component-Based"></a>2. Component-Based</h3><p>Build encapsulated components that manage their own state, then compose them to make complex UIs.<br>Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p><blockquote><p>컴포넌트 단위.<br>자체 상태를 관리하는 캡슐화된 컴포넌트를 만들어서 복잡한 UI를 만들 수 있도록 구성해보세요. 템플릿 대신 자바스크립트로 작성된 컴포넌트 로직을 통해 여러분은 풍부한 데이터를 쉽게 전달하고, DOM에서 상태를 유지할 수 있습니다.</p></blockquote><h3 id="3-Learn-Once-Write-Anywhere"><a href="#3-Learn-Once-Write-Anywhere" class="headerlink" title="3. Learn Once, Write Anywhere"></a>3. Learn Once, Write Anywhere</h3><p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.<br>React can also render on the server using Node and power mobile apps using React Native.</p><blockquote><p>한번배우고, 어디서나 쓰십쇼!우리는 여러분의 기술 스택의 나머지 부분에 대해서 가정하지 않았으므로 여러분은 기존 코드를 다시 작성하지 않고, React에서 새로운 기능을 개발할 수 있습니다. React는 React Native를 사용하여 Node나 모바일 앱을 사용하여 서버에서 렌더링할 수 있습니다.</p></blockquote><hr><h3 id="2-1-Component"><a href="#2-1-Component" class="headerlink" title="2-1. Component"></a>2-1. Component</h3><p>component는 UI를 구성하는 개별적은 View 단위이다. 이 단위들이 레고 블럭처럼 조합되어서 최종 결과물을 만들어낸다. 이는 앵귤러도 같은 개념이다. Component의 강력한 특징은 <strong>재사용</strong>이 가능하다. 틀을 만들어 놓고 여러 컴포넌트로 갖고가서 사용이 가능하다는 것.<br>리덕스 창시자 Dan Abramov는 React의 목표가 성능보다는 유지가능한 앱을 만드는 것!이라고 설명했다고 한다.</p><h3 id="2-2-JSX"><a href="#2-2-JSX" class="headerlink" title="2-2. JSX"></a>2-2. JSX</h3><p>JSX는 React에서 사용하기 위해서 새로 만들어진 자바스크립트 문법이다.<br>React는 작성한 코드를 컴파일하는 과정을 꼭 거쳐야한다. 때문에 리액트에서는 Babel을 사용하고 있다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">"John"</span> /&gt;</span>, mountNode)</span></span><br></pre></td></tr></table></figure><p>return 내부의 형태와 ReactDom.render의 첫번째 인자는 JSX문법이다. 이를 자바스크립트로 컴파일을 하기위해 Babel을 사용하는 것이다. 자바스크립트로 컴파일 후의 모습은 아래와 같다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> React.createElement(</span><br><span class="line">      <span class="string">"div"</span>,</span><br><span class="line">      <span class="literal">null</span>,</span><br><span class="line">      <span class="string">"Hello "</span>,</span><br><span class="line">      <span class="keyword">this</span>.props.name</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(React.createElement(HelloMessage, &#123; <span class="attr">name</span>: <span class="string">"John"</span> &#125;), mountNode);</span><br></pre></td></tr></table></figure><p>React는 Babel과 같은 트랜스파일러를 꼭 사용해야하기 때문에 Webpack등을 사용해야하는데, 왜 구지 이런 셋팅을 하면서까지 JSX를 사용하는 걸까. 위처럼 작성해도 되지만, 공식사이트에서 말한 첫번째 특징인 직관적인(Declarative) 개발을 할 수 있도록 하기 위해 JSX를 사용한다. JSX를 보면 html마크업과 거의 같다고 볼 수 있다. 어떤 결과물이 나올지 이해가 된 상태에서 개발하기 때문에 예측가능 개발을 할 수 있도록 해주며, 개발의 피로도를 상당히 줄여준다.</p><h3 id="2-3-Vitual-DOM"><a href="#2-3-Vitual-DOM" class="headerlink" title="2-3. Vitual DOM"></a>2-3. Vitual DOM</h3><div class="video-container"><iframe src="//www.youtube.com/embed/BYbgopx44vo" frameborder="0" allowfullscreen></iframe></div><p>DOM은 웹의 핵심으로, 말 그대로 브라우저가 화면을 그리기 위한 정보가 담겨있는 문서이다. 이 DOM을 다루는 것이 힘들다는 것은.. 바닐라로 짜보면 알 수 있다. 정확히는 DOM 조작이 전체 동작을 비효율적으로 만드는게 아니라, 그 이후에 일어나는 일 때문에 작업이 더뎌지는 거라고 한다. DOM에 변화가 생기면, 렌더트리를 재생성하고(모든 요소의 스타일이 다시 계산된다.) 레이아웃을 만들고, 페인팅을 하는 과정을 반복한다. 그만큼 DOM을 쉽게 다룰 수 있는 부분은 개발자들의 숙제였고, 그러던 중에 Jquery가 탄생하게 된것이다. </p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">     <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;div&gt;Hello &#123;<span class="keyword">this</span>.props.name&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;div&gt;I am &#123;this.state.chatName&#125;&lt;/</span>div&gt;</span><br><span class="line">       &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>React 컴포넌트는 render를 다시 호출하여 새로운 결과 값을 return한다. 그런데 이 리턴값은 바로 DOM에 반영되지 않는다! 즉 렌더링이 되지 않는다는 말인데, react는 return값을 갖고 새로운 Virtual DOM을 만든다.. 그리고, 현재 브라우저에 보여지고 있는 진짜 DOM과 비교하여 어떤 부분이 달라졌는지 찾아낸다. 달리진 부분을 발견하면 그 부분만! 바뀐 그 부분만 진짜 DOM에 반영한다. 그리고 브라우저는 이 DOM을 해석하고 유저에게 새로운 화면을 그려준다. 즉, 브라우저 내에서 발생하는 연산의 양을 줄이면서 실제 DOM을 조작하는 것보다 성능이 개선이 된다. </p><p>가상돔을 만든 이유는, 직접 DOM을 조작하는 리소스가 많으 드는 행위를 하지않고, DOM을 조작하는 과정을 최적화시켜주고, 컴포넌트 단위로 묶어서 관리할 수 있도록 해준다. 컴포넌트 단위의 개발을 구현하기 위해 보다 효율적인 DOM 조작 방식을 도입한 것이다. </p><hr><h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol><li><a href="https://reactjs.org/" target="_blank" rel="noopener">https://reactjs.org/</a></li><li><a href="https://medium.com/@RianCommunity/react%EC%9D%98-%ED%83%84%EC%83%9D%EB%B0%B0%EA%B2%BD%EA%B3%BC-%ED%8A%B9%EC%A7%95-4190d47a28f" target="_blank" rel="noopener">https://medium.com/@RianCommunity/react%EC%9D%98-%ED%83%84%EC%83%9D%EB%B0%B0%EA%B2%BD%EA%B3%BC-%ED%8A%B9%EC%A7%95-4190d47a28f</a></li><li><a href="https://velopert.com/3236" target="_blank" rel="noopener">https://velopert.com/3236</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;어썸 리액트! &amp;#128153;&lt;/p&gt;
-&lt;p&gt;리액트 공식 사이트로 들어가면 부제목으로 이런 글이 있다.&lt;br&gt;&lt;code&gt;A JavaScript library for building user interfaces&lt;/code&gt;&lt;br&gt;UI 작업을 위한 
-      
-    
-    </summary>
-    
-      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
-    
-      <category term="React" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/React/"/>
-    
-    
-      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
     <title>6/ 함수표현식의 다른 용도</title>
     <link href="http://feel5ny.github.io/2017/12/07/JS_06/"/>
     <id>http://feel5ny.github.io/2017/12/07/JS_06/</id>
@@ -3578,6 +3581,34 @@
     
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>0/ React</title>
+    <link href="http://feel5ny.github.io/2017/12/07/React_01/"/>
+    <id>http://feel5ny.github.io/2017/12/07/React_01/</id>
+    <published>2017-12-07T12:20:19.000Z</published>
+    <updated>2019-01-03T15:33:29.066Z</updated>
+    
+    <content type="html"><![CDATA[<p>어썸 리액트! &#128153;</p><p>리액트 공식 사이트로 들어가면 부제목으로 이런 글이 있다.<br><code>A JavaScript library for building user interfaces</code><br>UI 작업을 위한 자바스크립트 라이브러리! </p><p>사용자가 서비스를 접하면서 만나게되는 여러 상황에 빠르게 대응할 수 있고, 다양한 UI 트리거를 빠르게 만들 수 있도록 나온 라이브러리가 아닌가 한다. 그만큼 개발에도 사용자 경험을 많이 신경쓰고 있다는 점에서, UI와 인터렉션은 정말 화두 오브 화두. 상태관리를 손쉽게 할 수 있다는 점때문에 개발자가 UX를 고민할 시간이 더 생긴다는 점에서 리액트를 선호한다. 최근에는 앵귤러를 입문하고 있는데, 비슷한 패턴으로 상태관리를 한다고 느껴지긴했지만, 아직 어려운 개념들이 많고.. 그래서 아직 리액트와의 차이점은 잘 모르겠다. </p><hr><p>목차 </p><ol><li>리액트 탄생배경</li><li>리액트의 특징</li></ol><hr><h2 id="1-리액트-탄생배경"><a href="#1-리액트-탄생배경" class="headerlink" title="1. 리액트 탄생배경"></a>1. 리액트 탄생배경</h2><p>front 영역을 제어하기 위해서는 자바스크립트로 DOM을 컨트롤 하면 된다. 이는 다양한 인터렉션 기능들을 구현할 수 있게 해주지만 이 DOM이라는 것을 조작하기에는 여간 까다로운게 아니다.(바닐라로 간단 기능을 짜본사람은 무슨 느낌인지..) 이런 까다로운 DOM을 쉽고 효율적으로 다루기 위해 Jquery 라이브러리가 나왔다. But, 제이커리는 여러가지 <a href="https://www.tokyobranch.net/archives/7463" target="_blank" rel="noopener">이슈</a>를 갖고 있었다.</p><p>SPA 개발을 위한 구글의 오픈소스 자바스크립트 프레임워크인 Angular가 등장하면서 구조화된 프론트엔드 환경을 제시했다. 이런 상황에서 Facebook에서 React가 등장하게 된다. React는 에어비엔비, 넷플릭스, 드랍박스, 트위터 등에서 사용하고 있다. 리엑트는 자바스크립트 라이브러리이며, 라우터와 같이 웹을 만들 때 필요한 도구들을 포함되어 있지 <strong>않다.</strong> (앵귤러는 포함되어있음) 필요한 도구들이 없는 대신? 가볍다. 그리고 빠르게 배울수 있다는 점!</p><h2 id="2-리액트의-특징"><a href="#2-리액트의-특징" class="headerlink" title="2. 리액트의 특징"></a>2. 리액트의 특징</h2><p>React 공식 사이트에서 말하는 특징</p><h3 id="1-Declarative"><a href="#1-Declarative" class="headerlink" title="1. Declarative"></a>1. Declarative</h3><p>React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.<br>Declarative views make your code more predictable and easier to debug.</p><blockquote><p>직관적<br>리액트는 인터렉티브 UI를 어려움없이 만들 수 있습니다. 당신의 어플리케이션의 각각의 상태를 위해 간단한 view들을 디자인을 해보십시요. 리액트는 데이터가 변할때 해당 컴포넌트를 효과적으로 업데이트하고 렌더링 할 수 있습니다. 직관적인 view들은 디버깅하기 더 쉽게, 더 잘 예측할 수 있도록 해줍니다!</p></blockquote><h3 id="2-Component-Based"><a href="#2-Component-Based" class="headerlink" title="2. Component-Based"></a>2. Component-Based</h3><p>Build encapsulated components that manage their own state, then compose them to make complex UIs.<br>Since component logic is written in JavaScript instead of templates, you can easily pass rich data through your app and keep state out of the DOM.</p><blockquote><p>컴포넌트 단위.<br>자체 상태를 관리하는 캡슐화된 컴포넌트를 만들어서 복잡한 UI를 만들 수 있도록 구성해보세요. 템플릿 대신 자바스크립트로 작성된 컴포넌트 로직을 통해 여러분은 풍부한 데이터를 쉽게 전달하고, DOM에서 상태를 유지할 수 있습니다.</p></blockquote><h3 id="3-Learn-Once-Write-Anywhere"><a href="#3-Learn-Once-Write-Anywhere" class="headerlink" title="3. Learn Once, Write Anywhere"></a>3. Learn Once, Write Anywhere</h3><p>We don’t make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.<br>React can also render on the server using Node and power mobile apps using React Native.</p><blockquote><p>한번배우고, 어디서나 쓰십쇼!우리는 여러분의 기술 스택의 나머지 부분에 대해서 가정하지 않았으므로 여러분은 기존 코드를 다시 작성하지 않고, React에서 새로운 기능을 개발할 수 있습니다. React는 React Native를 사용하여 Node나 모바일 앱을 사용하여 서버에서 렌더링할 수 있습니다.</p></blockquote><hr><h3 id="2-1-Component"><a href="#2-1-Component" class="headerlink" title="2-1. Component"></a>2-1. Component</h3><p>component는 UI를 구성하는 개별적은 View 단위이다. 이 단위들이 레고 블럭처럼 조합되어서 최종 결과물을 만들어낸다. 이는 앵귤러도 같은 개념이다. Component의 강력한 특징은 <strong>재사용</strong>이 가능하다. 틀을 만들어 놓고 여러 컴포넌트로 갖고가서 사용이 가능하다는 것.<br>리덕스 창시자 Dan Abramov는 React의 목표가 성능보다는 유지가능한 앱을 만드는 것!이라고 설명했다고 한다.</p><h3 id="2-2-JSX"><a href="#2-2-JSX" class="headerlink" title="2-2. JSX"></a>2-2. JSX</h3><p>JSX는 React에서 사용하기 위해서 새로 만들어진 자바스크립트 문법이다.<br>React는 작성한 코드를 컴파일하는 과정을 꼭 거쳐야한다. 때문에 리액트에서는 Babel을 사용하고 있다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">"John"</span> /&gt;</span>, mountNode)</span></span><br></pre></td></tr></table></figure><p>return 내부의 형태와 ReactDom.render의 첫번째 인자는 JSX문법이다. 이를 자바스크립트로 컴파일을 하기위해 Babel을 사용하는 것이다. 자바스크립트로 컴파일 후의 모습은 아래와 같다.</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> React.createElement(</span><br><span class="line">      <span class="string">"div"</span>,</span><br><span class="line">      <span class="literal">null</span>,</span><br><span class="line">      <span class="string">"Hello "</span>,</span><br><span class="line">      <span class="keyword">this</span>.props.name</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(React.createElement(HelloMessage, &#123; <span class="attr">name</span>: <span class="string">"John"</span> &#125;), mountNode);</span><br></pre></td></tr></table></figure><p>React는 Babel과 같은 트랜스파일러를 꼭 사용해야하기 때문에 Webpack등을 사용해야하는데, 왜 구지 이런 셋팅을 하면서까지 JSX를 사용하는 걸까. 위처럼 작성해도 되지만, 공식사이트에서 말한 첫번째 특징인 직관적인(Declarative) 개발을 할 수 있도록 하기 위해 JSX를 사용한다. JSX를 보면 html마크업과 거의 같다고 볼 수 있다. 어떤 결과물이 나올지 이해가 된 상태에서 개발하기 때문에 예측가능 개발을 할 수 있도록 해주며, 개발의 피로도를 상당히 줄여준다.</p><h3 id="2-3-Vitual-DOM"><a href="#2-3-Vitual-DOM" class="headerlink" title="2-3. Vitual DOM"></a>2-3. Vitual DOM</h3><div class="video-container"><iframe src="//www.youtube.com/embed/BYbgopx44vo" frameborder="0" allowfullscreen></iframe></div><p>DOM은 웹의 핵심으로, 말 그대로 브라우저가 화면을 그리기 위한 정보가 담겨있는 문서이다. 이 DOM을 다루는 것이 힘들다는 것은.. 바닐라로 짜보면 알 수 있다. 정확히는 DOM 조작이 전체 동작을 비효율적으로 만드는게 아니라, 그 이후에 일어나는 일 때문에 작업이 더뎌지는 거라고 한다. DOM에 변화가 생기면, 렌더트리를 재생성하고(모든 요소의 스타일이 다시 계산된다.) 레이아웃을 만들고, 페인팅을 하는 과정을 반복한다. 그만큼 DOM을 쉽게 다룰 수 있는 부분은 개발자들의 숙제였고, 그러던 중에 Jquery가 탄생하게 된것이다. </p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">     <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;div&gt;Hello &#123;<span class="keyword">this</span>.props.name&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">          &lt;div&gt;I am &#123;this.state.chatName&#125;&lt;/</span>div&gt;</span><br><span class="line">       &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure><p>React 컴포넌트는 render를 다시 호출하여 새로운 결과 값을 return한다. 그런데 이 리턴값은 바로 DOM에 반영되지 않는다! 즉 렌더링이 되지 않는다는 말인데, react는 return값을 갖고 새로운 Virtual DOM을 만든다.. 그리고, 현재 브라우저에 보여지고 있는 진짜 DOM과 비교하여 어떤 부분이 달라졌는지 찾아낸다. 달리진 부분을 발견하면 그 부분만! 바뀐 그 부분만 진짜 DOM에 반영한다. 그리고 브라우저는 이 DOM을 해석하고 유저에게 새로운 화면을 그려준다. 즉, 브라우저 내에서 발생하는 연산의 양을 줄이면서 실제 DOM을 조작하는 것보다 성능이 개선이 된다. </p><p>가상돔을 만든 이유는, 직접 DOM을 조작하는 리소스가 많으 드는 행위를 하지않고, DOM을 조작하는 과정을 최적화시켜주고, 컴포넌트 단위로 묶어서 관리할 수 있도록 해준다. 컴포넌트 단위의 개발을 구현하기 위해 보다 효율적인 DOM 조작 방식을 도입한 것이다. </p><hr><h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol><li><a href="https://reactjs.org/" target="_blank" rel="noopener">https://reactjs.org/</a></li><li><a href="https://medium.com/@RianCommunity/react%EC%9D%98-%ED%83%84%EC%83%9D%EB%B0%B0%EA%B2%BD%EA%B3%BC-%ED%8A%B9%EC%A7%95-4190d47a28f" target="_blank" rel="noopener">https://medium.com/@RianCommunity/react%EC%9D%98-%ED%83%84%EC%83%9D%EB%B0%B0%EA%B2%BD%EA%B3%BC-%ED%8A%B9%EC%A7%95-4190d47a28f</a></li><li><a href="https://velopert.com/3236" target="_blank" rel="noopener">https://velopert.com/3236</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;어썸 리액트! &amp;#128153;&lt;/p&gt;
+&lt;p&gt;리액트 공식 사이트로 들어가면 부제목으로 이런 글이 있다.&lt;br&gt;&lt;code&gt;A JavaScript library for building user interfaces&lt;/code&gt;&lt;br&gt;UI 작업을 위한 
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="React" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/React/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
     
   </entry>
   
@@ -3730,34 +3761,6 @@
   </entry>
   
   <entry>
-    <title>persistor.purge()</title>
-    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
-    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
-    <published>2017-11-29T09:23:55.000Z</published>
-    <updated>2019-02-03T15:17:37.679Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
-      
-    
-    </summary>
-    
-      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
-    
-      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
-    
-    
-      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
     <title>1/ 변수, 원시 값과 참조 값</title>
     <link href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
     <id>http://feel5ny.github.io/2017/11/29/JS_01/</id>
@@ -3782,6 +3785,34 @@
     
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>persistor.purge()</title>
+    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
+    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
+    <published>2017-11-29T09:23:55.000Z</published>
+    <updated>2019-02-03T15:17:37.679Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
     
   </entry>
   
