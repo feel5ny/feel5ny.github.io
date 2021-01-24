@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>피츠의 법칙과 Touch Target | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="UX,Frontend,UX Law,Fitts Law,Touch Target,Accessibility">
+    
+    
+    <meta name="description" content="[UX/UI의 10가지 심리학 법칙] 책을 읽으며 법칙별로내용 요약 + 개인적으로 찾았던 레퍼런스 + 그밖에 자료들을 모아서 작성한 글입니다.    사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성 인터렉션은 최소한의 노력만으로 불편없이 간단하게 이뤄져야 한다. 사용자가 인터랙티브 요소를 사용하려고 움직이는 데 드는 시간은, 인터렉션의 중요한">
+<meta name="keywords" content="UX,Frontend,UX Law,Fitts Law,Touch Target,Accessibility">
+<meta property="og:type" content="article">
+<meta property="og:title" content="피츠의 법칙과 Touch Target">
+<meta property="og:url" content="http://feel5ny.github.io/2021/01/24/피츠의-법칙/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="[UX/UI의 10가지 심리학 법칙] 책을 읽으며 법칙별로내용 요약 + 개인적으로 찾았던 레퍼런스 + 그밖에 자료들을 모아서 작성한 글입니다.    사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성 인터렉션은 최소한의 노력만으로 불편없이 간단하게 이뤄져야 한다. 사용자가 인터랙티브 요소를 사용하려고 움직이는 데 드는 시간은, 인터렉션의 중요한">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2021/02/thumb_default.jpg">
+<meta property="og:updated_time" content="2021-01-24T13:40:49.361Z">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="피츠의 법칙과 Touch Target">
+<meta name="twitter:description" content="[UX/UI의 10가지 심리학 법칙] 책을 읽으며 법칙별로내용 요약 + 개인적으로 찾았던 레퍼런스 + 그밖에 자료들을 모아서 작성한 글입니다.    사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성 인터렉션은 최소한의 노력만으로 불편없이 간단하게 이뤄져야 한다. 사용자가 인터랙티브 요소를 사용하려고 움직이는 데 드는 시간은, 인터렉션의 중요한">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2021/02/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2021/01/24/피츠의-법칙/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javaScript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65963601-5', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/">04_UX 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Motion/">Motion</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Notion/">Notion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/04-UX-💅/">04_UX 💅</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2021/02/thumb_default.jpg" alt="피츠의 법칙과 Touch Target" style="width:100%">
+    </div>
+
+<article id="post-피츠의-법칙" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        피츠의 법칙과 Touch Target
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2021/01/24/피츠의-법칙/" class="article-date">
+            <time datetime="2021-01-24T11:00:00.000Z" itemprop="datePublished">2021-01-24</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Accessibility/">Accessibility</a>, <a class="tag-link" href="/tags/Fitts-Law/">Fitts Law</a>, <a class="tag-link" href="/tags/Frontend/">Frontend</a>, <a class="tag-link" href="/tags/Touch-Target/">Touch Target</a>, <a class="tag-link" href="/tags/UX/">UX</a>, <a class="tag-link" href="/tags/UX-Law/">UX Law</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">피츠의 법칙</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#ux">사용하기 위해 움직이는(소비하는) 시간을 줄인다.</a>
+               
+                <div class="first_depth--sub">인터렉션의 중요한 지표</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#Fitts">1. 피츠의 법칙</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#history">1.1 기원</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#Accessibility">2. 피츠의 법칙과 Accessibility</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">Touch Target</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#guideline">1. 터치 대상의 최소 권장 규격</a>
+               
+                <div class="first_depth--sub">44px, 48px...</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#design-system">2. 디자인 시스템에 적용하기</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#media-query">2.1 대상이 다를 경우</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#touch-target">3. Material design - Touch Target</a>
+               
+                <div class="first_depth--sub">48px</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#space-methods">4. Material design - Space methods</a>
+               
+                <div class="first_depth--sub">8px</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#layout">5. Layout</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">적용한 컴포넌트 사례</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#touch-target-example">1. Touch Target</a>
+               
+                <div class="first_depth--sub">Material design, Airbnb, Facebook, Toss</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#space-example">2. Space</a>
+               
+                <div class="first_depth--sub">Material design</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p><strong>[UX/UI의 10가지 심리학 법칙]</strong> 책을 읽으며 법칙별로<br>내용 요약 + 개인적으로 찾았던 레퍼런스 + 그밖에 자료들을 모아서 작성한 글입니다.</p>
+</blockquote>
+<a name="ux">
+
+<h2 id="사용하기-위해-움직이는-소비하는-시간을-줄인다-→-접근성"><a href="#사용하기-위해-움직이는-소비하는-시간을-줄인다-→-접근성" class="headerlink" title="사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성"></a>사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성</h2><ul>
+<li>인터렉션은 최소한의 노력만으로 불편없이 간단하게 이뤄져야 한다.</li>
+<li><strong>사용자가 인터랙티브 요소를 사용하려고 움직이는 데 드는 시간</strong>은, <strong>인터렉션의 중요한 지표</strong>다.</li>
+<li>디자이너는 인터랙티브 요소의 크기와 위치를 적절하게 지정함으로써, <ul>
+<li>사용자가 해당 요소를 손쉽게 선택하게 하고, </li>
+<li>선택 가능 영역에 관한 사용자의 기대에 부응시켜야 한다.</li>
+</ul>
+</li>
+<li>마우스나 손처럼 정밀도가 제각기 다른 다양한 입력 방식이 존재하는 오늘날의 사용환경을 고려하면, 꽤 어려운 과제다.</li>
+</ul>
+<a name="Fitts">
+
+<h3 id="피츠의-법칙"><a href="#피츠의-법칙" class="headerlink" title="피츠의 법칙"></a>피츠의 법칙</h3><ul>
+<li>대상이 커지면, → 대상 선택에 드는 시간이 줄어든다. (W)</li>
+<li>대상 선택을 위해 움직이는 거리가 줄면, → 대상을 선택하는 데 드는 시간도 줄어든다. (D)</li>
+</ul>
+<a name="history">
+
+<h4 id="기원"><a href="#기원" class="headerlink" title="기원"></a>기원</h4><ul>
+<li><p>1954년 미국의 심리학자 : 폴 피츠</p>
+</li>
+<li><p>터치 대상까지 움직이는 데 드는 시간을 대상까지 거리와 대상 너비 간의 비율에 관한 함수를 통해 예측하면서 탄생</p>
+</li>
+<li><p>피츠의 법칙은 오늘날 인체 움직임에 관한 가장 영향력 있는 수학적 모델로 여겨지며,</p>
+<ul>
+<li>인체 공학, <a href="(https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B0%84-%EC%BB%B4%ED%93%A8%ED%84%B0_%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9)">인간-컴퓨터 상호작용</a> 분야에서</li>
+<li>실제로든 가상으로든,</li>
+<li>대상을 가리키는 행동에 관한 모델을 만드는 데 널리 쓰이다.</li>
+</ul>
+</li>
+<li><p>피츠는 대상 선택 작업의 난이도 ID를 정량화하는 측정 기준도 제시했다.</p>
+  <img src="/images/2021/02/01.png" style="width: 200px;margin-top:10px">
+
+<ul>
+<li>D : 대상 중심까지의 거리 → 신호 signal</li>
+<li>W : 대상의 허용 오차 혹은 너비 → 잡음 noise</li>
+</ul>
+</li>
+</ul>
+<img src="https://lh3.googleusercontent.com/proxy/0l8bfR_yWjAdK3N6qwgFmvOWZp8UozJnOgQoseqqGiSDlratm7QQjLzGltIgguGdxD85Sz6z1CwfzWMv40kHAdSeyiZGxLItvcNdO_momx6TRDUj-wOorUMQg67eqFnmI_8V_rZbThFrhy1bm3d28eVoYSgo7OCzNJSCPQHPa3ibbN42FOluN7tQPfbjzJe8va012pU" alt="출처: 불꽃사슴다이어리">
+
+<a name="Accessibility">
+
+<h3 id="피츠의-법칙과-Accessibility"><a href="#피츠의-법칙과-Accessibility" class="headerlink" title="피츠의 법칙과 Accessibility"></a>피츠의 법칙과 Accessibility</h3><ul>
+<li>피츠의 법칙에서는 2가지 개념이 나온다.<br>대상 선택을 위해 움직인 <strong>거리</strong>와 대상 선택이 용이하게끔 <strong>키우는 것</strong>.</li>
+<li>인터렉션의 향상을 위해 → 잡읍을 없애고 거리를 줄이는 것이 핵심이다.</li>
+<li>3가지 개념이 나오는데, <strong>대상</strong>과 <strong>타겟</strong>, <strong>거리</strong>이다.<ul>
+<li>대상은<ol>
+<li>모바일 : 내 손가락</li>
+<li>웹 : 마우스 포인터, 및 기타 기기</li>
+</ol>
+</li>
+<li>타겟은 <strong>UI 엘리먼트</strong></li>
+<li>대상과 타겟과의 거리에 영향을 주는 것은 여러가지가 있겠지만<br>여기서는 2가지를 얘기한다.<ol>
+<li>대상이 어떤 목적을 위해 움직일때의 맥락(상황)</li>
+<li>기기</li>
+</ol>
+</li>
+<li>결국에는 상황에 맞춘 레이아웃을 잡는 것인데, 이는 디자이너의 영역으로 생각하자.</li>
+</ul>
+</li>
+<li>여기서 프론트 개발자가 제어할 수 있는 부분은 <strong>UI 엘리먼트</strong>이다.</li>
+<li><a href="http://www.kwacc.or.kr/WAI/wcag21/#target-size" target="_blank" rel="noopener">웹 콘텐츠 접근성 가이드(WCAG 2.0)</a>에서도 타겟 사이즈에 대한 내용이 나온다.</li>
+<li>이처럼 피츠의 법칙은 접근성과 관련이 있으며, 이중에서도 터치 타겟과 관련이 있다.</li>
+</ul>
+<hr>
+<ol>
+<li>영향력있는 단체에서 잡은 터치 사이즈 권장 규격을 확인하고,(머테리얼 디자인 기준)<ul>
+<li>터치 대상의 크기</li>
+<li>요소 사이의 간격</li>
+</ul>
+</li>
+<li>적용한 사례를 살펴보자.</li>
+</ol>
+<h2 id="Touch-Target"><a href="#Touch-Target" class="headerlink" title="Touch Target"></a>Touch Target</h2><p><strong>터치 타겟의 개념</strong>에 3가지가 나오는데, 크기, 다른 요소간의 간격, 유사한 흐름에 배치</p>
+<ol>
+<li>터치 대상의 크기는 사용자가 정확하게 선택할 수 있을 정도로 <strong>충분히 커야 한다.</strong></li>
+<li>터치 대상 사이에 <strong>충분한 거리</strong>를 확보해야 한다.</li>
+<li>터치 대상은 인터페이스상에서 <strong>쉽게 도달할 수 있는 영역에 배치</strong>해야 한다.</li>
+</ol>
+<a name="guideline">
+
+<h3 id="터치-대상의-최소-권장-규격"><a href="#터치-대상의-최소-권장-규격" class="headerlink" title="터치 대상의 최소 권장 규격"></a>터치 대상의 최소 권장 규격</h3><ul>
+<li>Human interface guideLine : <strong>44 * 44 pt</strong></li>
+<li>Material design guideLine : <strong>48 * 48 dp</strong></li>
+<li>Web contents Access GuideLine(WCAG) : <strong>44 * 44 CSS px</strong></li>
+<li>닐슨 노먼 그룹 : <strong>1 * 1cm</strong></li>
+</ul>
+<a name="design-system">
+
+<h3 id="디자인-시스템에-적용하긔"><a href="#디자인-시스템에-적용하긔" class="headerlink" title="디자인 시스템에 적용하긔"></a>디자인 시스템에 적용하긔</h3><ul>
+<li>프론트에서는 프로젝트에 디자인 가이드라인이나 basic philosophy부분에 디자이너와 협의하여 최소 권장규격을 지정하고, (혹은 위에서 제안하는 권장규격을 따르거나) 개발자는 input 성격을 갖고 있는 컴포넌트 소스에 기본 값으로 해당 값을 지정하는 코드를 넣어두면 될 듯 하다.</li>
+<li>아래에 머테리얼 디자인에서 구현한 방식을 따르는 것도 좋은 방법인듯하다.</li>
+<li>최근에는 구글 머테리얼 디자인의 desgin foundation을 따르는 곳이 많아진 듯 하다. (글쓴이 피셜)</li>
+</ul>
+<a name="media-query">
+
+<h4 id="대상이-다를-경우"><a href="#대상이-다를-경우" class="headerlink" title="대상이 다를 경우"></a>대상이 다를 경우</h4><ul>
+<li>웹의 경우 데스크탑웹과 모바일 웹이 존재하는데, 각각 사용대상이 다르다.</li>
+<li>데스크탑의 경우 마우스 포인터를 사용, 모바일 웹에서는 손가락 터치를 사용한다.</li>
+<li>만약 이를 구분하여 적용해야할 여백등이 고려되어야할 경우 미디어 쿼리의 pointer를 활용하면 된다.</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">media</span> (pointer: coarse) &#123;</span><br><span class="line">  <span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: .<span class="number">8em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a name="touch-target">
+
+<h3 id="Material-design-Touch-Target"><a href="#Material-design-Touch-Target" class="headerlink" title="Material design - Touch Target"></a>Material design - Touch Target</h3><ul>
+<li>구글 머테리얼 디자인에서는 최소 규격을 48dp로 지정하였다. 웹에서도 터치 최소 규격이 48px로 계산된다.</li>
+<li>구글 머테리얼 디자인에서 <code>@material/touch-target</code>라는 패키지를 제공하는데, 추가적인 sass파일을 적용시켜준다.</li>
+</ul>
+<p><strong>기본 버튼</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"mdc-button"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__ripple"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"mdc-button__label"</span>&gt;</span>My Inaccessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>touch-target로 감싸기</strong></p>
+<ul>
+<li><p>mdc-touch-target-wrapper로 감싸고 </p>
+</li>
+<li><p>mdc-button__touch를 추가해두었다. → 여기에 absolute로 height값이 지정된다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-touch-target-wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"mdc-button mdc-button--touch"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__ripple"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"mdc-button__label"</span>&gt;</span>My Accessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__touch"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>touch-target의 scss 파일을 보면, height값과 width값에 default값으로 48px을 적용한 부분이 보인다.</p>
+</li>
+<li><p>마지막 margin부분은, 강제로 적용한 touch target 영역을 채우기 위해 margin을 추가적으로 적용하는 부분이 보인다.</p>
+<blockquote>
+<p>아름답다.. 지금까지 scss를 잘 활용하지 못했다고 생각했다..</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/@material/touch-target/_touch-target.scss</span></span><br><span class="line"></span><br><span class="line">@use <span class="string">'@material/base/mixins'</span> as base-mixins;</span><br><span class="line">@use <span class="string">'@material/feature-targeting/feature-targeting'</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$height</span>: <span class="number">48px</span> !default; 👈👈👈</span><br><span class="line"><span class="variable">$width</span>: <span class="variable">$height</span> !default;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Styles applied to the component's touch target wrapper element.</span></span><br><span class="line">@<span class="keyword">mixin</span> wrapper(<span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.mdc-touch-target-wrapper</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      @<span class="keyword">include</span> base-mixins.emit-once(<span class="string">'mdc-touch-target/wrapper'</span>) &#123;</span><br><span class="line">        <span class="attribute">display</span>: inline;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> touch-target(<span class="variable">$set-width</span>: false, <span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$height</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">if</span> <span class="variable">$set-width</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="comment">/* @noflip */</span></span><br><span class="line">      <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="variable">$width</span>;</span><br><span class="line">      <span class="attribute">transform</span>: translate(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; @<span class="keyword">else</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">transform</span>: translateY(-<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> margin(</span><br><span class="line">  <span class="variable">$component-height</span>,</span><br><span class="line">  <span class="variable">$component-width</span>: null,</span><br><span class="line">  <span class="variable">$touch-target-height</span>: <span class="variable">$height</span>,</span><br><span class="line">  <span class="variable">$touch-target-width</span>: <span class="variable">$width</span>,</span><br><span class="line">  <span class="variable">$query</span>: feature-targeting.all()</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$vertical-margin-value</span>: (<span class="variable">$touch-target-height</span> - <span class="variable">$component-height</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">if</span> <span class="variable">$component-width</span> &#123;</span><br><span class="line">    <span class="variable">$horizontal-margin-value</span>: (<span class="variable">$touch-target-width</span> - <span class="variable">$component-width</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">      <span class="attribute">margin-left</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a name="space-methods">
+
+<h3 id="Material-design-Space-methods"><a href="#Material-design-Space-methods" class="headerlink" title="Material design - Space methods"></a>Material design - Space methods</h3><ul>
+<li>구글 머테리얼 디자인에서는 UI 요소사이의 공간을 8dp 혹은 4dp 단위로 측정한다.</li>
+<li>웹에서도 8px, 4px 단위로 여백을 조정한다.<ul>
+<li>보통은 8px로 진행하는 듯 하다. <a href="https://brunch.co.kr/@blackindigo-red/8" target="_blank" rel="noopener">이 글</a>과 연관이 있지 않을까 싶다.</li>
+</ul>
+</li>
+</ul>
+<a name="layout">
+
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><ul>
+<li>사용자의 <strong>맥락</strong>을 고려한 레이아웃은 <strong>디자이너의 영역</strong>에 가깝지만,<br>사용자의 <strong>기기</strong>와 관련된 나용은 한번은 읽어볼만한 내용이였다.</li>
+</ul>
+<hr>
+<p>스마트폰 <strong>form factor</strong>가 다양하다.</p>
+<ul>
+<li>어떤 작업을 할지, 양손을 다 쓸수 있는지에 따라 → 스마트폰을 손에 쥐는 방식도 달라진다.</li>
+<li>한손밖에 쓰지 못할 때 : 기기를 쥔 손의 엄지손가락으로 터치하는 경우, 잘 닿지 않는 영역이 생긴다.<ul>
+<li>한 손을 쓸 때의 정확도는 오른쪽 하단에서 왼쪽 상단까지 선형으로 증가하지 않는다.</li>
+<li>스티븐 후버가 진행한 연구<ul>
+<li>사람들이 시선을 두거나, 터치하기 선호하는 영역은 → 스마트폰 화면의 중앙부. 정확도도 중앙부가 높다.</li>
+<li>집중하고 싶어하는 영역 : 중앙부</li>
+<li>PC와는 다르다. PC는 왼쪽 상단에서 오른쪽 하단으로 훑어봄</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>양손을 쓸 수 있어서 한손으로 기기를 쥐고 다른 손으로 터치하는 경우 동일한 영역도 쉽게 선택할 수 있다.</li>
+</ul>
+<hr>
+<p>위 내용은 uxmatters의 글을 읽어보는 것이 더 재밌다. 해당 포스팅에서는 자세히 다루진 않겠다.<br><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 1</a><br><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 2</a><br><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 3</a></p>
+<h2 id="적용한-컴포넌트-사례"><a href="#적용한-컴포넌트-사례" class="headerlink" title="적용한 컴포넌트 사례"></a>적용한 컴포넌트 사례</h2><ul>
+<li>요즘은 개발자도구에도 접근성이 아주 잘나온다..!</li>
+<li>토스는 전체적으로 시원시원한 UI를 갖고있다는 느낌이 들곤했는데, 아무래도 이런 Touch Target의 최소규격을 사용성이 좋게 적당히 잡아둔 듯 하다.</li>
+</ul>
+<a name="touch-target-example">
+
+<h3 id="Touch-Target-1"><a href="#Touch-Target-1" class="headerlink" title="Touch Target"></a>Touch Target</h3><ol>
+<li>(Material design) Radio <img src="/images/2021/02/10.png" style="margin-top:10px" alt="Material design의 Radio - 라디오 버튼은 48px보다 작지만, touch영역은 48px을 유지"></li>
+<li>(Material design) Slider <img src="/images/2021/02/11.png" style="margin-top:10px" alt="Material design의 Slider - 슬라이더의 pointer부분의 높이값을 48px을 유지"></li>
+<li>(Material design) Switch <img src="/images/2021/02/12.png" style="margin-top:10px" alt="Material design의 Switch"></li>
+<li>(Facebook) Button <img src="/images/2021/02/02.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 높이 영역을 50px로 유지"></li>
+<li>(Facebook) Button - icon <img src="/images/2021/02/04.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 터치영역을 44px로 유지"></li>
+<li>(Airbnb) Input <img src="/images/2021/02/07.png" style="margin-top:10px" alt="Airbnb의 Button - input의 터치영역을 44px로 유지"></li>
+<li>(토스) Button - fullfilled <img src="/images/2021/02/05.png" style="margin-top:10px" alt="Toss의 Button - 버튼의 터치영역을 58px로 유지 (wow)">
+
+</li>
+</ol>
+<a name="space-example">
+
+<h3 id="Space"><a href="#Space" class="headerlink" title="Space"></a>Space</h3><ol>
+<li>(Material design) Dialog  <img src="/images/2021/02/09.png" style="margin-top:10px" alt="Material design의 Button 컴포넌트들 여백"></li>
+<li>(Material design) Chips  <img src="/images/2021/02/14.png" style="margin-top:10px" alt="Material design의 Chips 컴포넌트들 여백">
+
+
+
+</li>
+</ol>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://web.dev/accessible-tap-targets/" target="_blank" rel="noopener">Accessible tap targets</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/%EB%AF%B8%EB%94%94%EC%96%B4_%EC%BF%BC%EB%A6%AC_%EC%B4%88%EB%B3%B4%EC%9E%90_%EC%95%88%EB%82%B4%EC%84%9C" target="_blank" rel="noopener">미디어 쿼리 초보자 안내서</a></li>
+<li><a href="https://material.io/design/usability/accessibility.html#layout-and-typography" target="_blank" rel="noopener">Material - Layout and typography</a></li>
+<li><a href="https://material.io/develop/web/components/touchtarget" target="_blank" rel="noopener">Material - web - touch target</a></li>
+<li><a href="https://material.io/design/layout/spacing-methods.html" target="_blank" rel="noopener">Material - Spaceing methods</a></li>
+<li><a href="https://material-components.github.io/material-components-web-components/demos/index.html" target="_blank" rel="noopener">Material Web Components Catalog</a></li>
+<li><a href="https://www.google.com/accessibility/for-developers/" target="_blank" rel="noopener">Google - 접근성을 고려한 개발</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/accessibility" target="_blank" rel="noopener">Google Web Fundamentals - Accessibility</a></li>
+<li><a href="https://toss.im/" target="_blank" rel="noopener">toss</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 1</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 2</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 3</a></li>
+<li><a href="https://m.blog.naver.com/viviang777/50171045913" target="_blank" rel="noopener">[피츠의 법칙] Fitts’ Law &amp; Paul M. Fitts</a></li>
+</ol>
+</a></a></a></a></a></a></a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2021/01/24/피츠의-법칙/" data-id="ckkb6xwre00u47nbm6w3se4iq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">피츠의 법칙</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#ux">사용하기 위해 움직이는(소비하는) 시간을 줄인다.</a>
+               
+                <div class="first_depth--sub">인터렉션의 중요한 지표</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#Fitts">1. 피츠의 법칙</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#history">1.1 기원</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#Accessibility">2. 피츠의 법칙과 Accessibility</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">Touch Target</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#guideline">1. 터치 대상의 최소 권장 규격</a>
+               
+                <div class="first_depth--sub">44px, 48px...</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#design-system">2. 디자인 시스템에 적용하기</a>
+              
+            </div>
+              <ul>
+              
+                
+                  <li>
+                    <a href="#media-query">2.1 대상이 다를 경우</a>
+                    <ul>
+                      
+                    </ul>
+                  </li>
+                
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#touch-target">3. Material design - Touch Target</a>
+               
+                <div class="first_depth--sub">48px</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#space-methods">4. Material design - Space methods</a>
+               
+                <div class="first_depth--sub">8px</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#layout">5. Layout</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">적용한 컴포넌트 사례</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#touch-target-example">1. Touch Target</a>
+               
+                <div class="first_depth--sub">Material design, Airbnb, Facebook, Toss</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#space-example">2. Space</a>
+               
+                <div class="first_depth--sub">Material design</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/01/10/UX와 프론트엔드개발자/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/01/24/피츠의-법칙/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/02/thumb_default.jpg)" alt="피츠의 법칙과 Touch Target" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/04-UX-💅/">04_UX 💅</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a></p>
+                            <p class="item-title"><a href="/2021/01/24/피츠의-법칙/" class="title">피츠의 법칙과 Touch Target</a></p>
+                            <p class="item-date"><time datetime="2021-01-24T11:00:00.000Z" itemprop="datePublished">2021-01-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/01/10/UX와 프론트엔드개발자/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/01/thumb_default.jpg)" alt="프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/04-UX-💅/">04_UX 💅</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/04-UX-💅/Notion/">Notion</a></p>
+                            <p class="item-title"><a href="/2021/01/10/UX와 프론트엔드개발자/" class="title">프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립</a></p>
+                            <p class="item-date"><time datetime="2021-01-10T11:00:00.000Z" itemprop="datePublished">2021-01-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/11/15/2020-상반기-회고/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/11/thumb_default.jpg)" alt="2020 상반기 회고, 남은 2020년은?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2020/11/15/2020-상반기-회고/" class="title">2020 상반기 회고, 남은 2020년은?</a></p>
+                            <p class="item-date"><time datetime="2020-11-15T11:00:00.000Z" itemprop="datePublished">2020-11-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/03/Communication_004/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/10/thumb_default.jpg)" alt="고객 Profiling (3장)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-Communication/Marketing/">Marketing</a></p>
+                            <p class="item-title"><a href="/2020/07/03/Communication_004/" class="title">고객 Profiling (3장)</a></p>
+                            <p class="item-date"><time datetime="2020-07-03T14:23:55.000Z" itemprop="datePublished">2020-07-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/02/Communication_003/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/09/thumb_default.jpg)" alt="예측 분석이란? (2장)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-Communication/Marketing/">Marketing</a></p>
+                            <p class="item-title"><a href="/2020/07/02/Communication_003/" class="title">예측 분석이란? (2장)</a></p>
+                            <p class="item-date"><time datetime="2020-07-02T14:23:55.000Z" itemprop="datePublished">2020-07-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Accept-header/" style="font-size: 10px;">Accept header</a> <a href="/tags/Accessibility/" style="font-size: 10px;">Accessibility</a> <a href="/tags/CS/" style="font-size: 14.17px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.83px;">File API</a> <a href="/tags/Fitts-Law/" style="font-size: 10px;">Fitts Law</a> <a href="/tags/Frontend/" style="font-size: 10.83px;">Frontend</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 12.5px;">Joy</a> <a href="/tags/LTV/" style="font-size: 10.83px;">LTV</a> <a href="/tags/OOP/" style="font-size: 15.83px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/TCP-IP/" style="font-size: 10.83px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.83px;">TDD</a> <a href="/tags/Touch-Target/" style="font-size: 10px;">Touch Target</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/UX/" style="font-size: 10.83px;">UX</a> <a href="/tags/UX-Law/" style="font-size: 10px;">UX Law</a> <a href="/tags/Web/" style="font-size: 11.67px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.83px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.17px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.83px;">authorization</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.67px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.83px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.67px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.5px;">codeSpitz</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.83px;">connection</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.83px;">css</a> <a href="/tags/customer/" style="font-size: 10px;">customer</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.83px;">digest</a> <a href="/tags/encoding/" style="font-size: 10.83px;">encoding</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.83px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.83px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.83px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hosting/" style="font-size: 10px;">hosting</a> <a href="/tags/http/" style="font-size: 19.17px;">http</a> <a href="/tags/https/" style="font-size: 10.83px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10.83px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 12.5px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.5px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.5px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.83px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.83px;">principle</a> <a href="/tags/programming/" style="font-size: 11.67px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/release/" style="font-size: 10px;">release</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.33px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.33px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.83px;">symbol</a> <a href="/tags/transcoding/" style="font-size: 10px;">transcoding</a> <a href="/tags/typeScript/" style="font-size: 17.5px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/variant/" style="font-size: 10px;">variant</a> <a href="/tags/vary/" style="font-size: 10px;">vary</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/">04_UX 💅</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Motion/">Motion</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Notion/">Notion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2021 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2021/01/24/피츠의-법칙/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
