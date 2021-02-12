@@ -3801,34 +3801,6 @@
   </entry>
   
   <entry>
-    <title>persistor.purge()</title>
-    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
-    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
-    <published>2017-11-29T09:23:55.000Z</published>
-    <updated>2019-02-03T15:17:37.679Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
-      
-    
-    </summary>
-    
-      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
-    
-      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
-    
-    
-      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
-    
-  </entry>
-  
-  <entry>
     <title>1/ 변수, 원시 값과 참조 값</title>
     <link href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
     <id>http://feel5ny.github.io/2017/11/29/JS_01/</id>
@@ -3853,6 +3825,34 @@
     
     
       <category term="javaScript" scheme="http://feel5ny.github.io/tags/javaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>persistor.purge()</title>
+    <link href="http://feel5ny.github.io/2017/11/29/log_001/"/>
+    <id>http://feel5ny.github.io/2017/11/29/log_001/</id>
+    <published>2017-11-29T09:23:55.000Z</published>
+    <updated>2019-02-03T15:17:37.679Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/rt2zz/redux-persist" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist</a><br>redux-persist 정리할 때 purge에 대해서 구체적으로 작성해보겠습니다.</p></blockquote><h2 id="상황"><a href="#상황" class="headerlink" title="상황"></a>상황</h2><ul><li>작업하면서 계속 리로딩을 하고 있었는데 reducer에서 값을 넣는 모양을 계속 바꿔주면서 작업하고 있었는데, 갑자기 로딩화면만 계속 나오기 시작</li></ul><p>에러 메세지</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: In this environment the sources <span class="keyword">for</span> assign MUST be an object. This error is a performance optimization and not spec compliant</span><br></pre></td></tr></table></figure><h2 id="원인"><a href="#원인" class="headerlink" title="원인"></a>원인</h2><p>오류가 있는 persist 저장소를 갖고있어서 그럼.</p><h2 id="솔루션"><a href="#솔루션" class="headerlink" title="솔루션"></a>솔루션</h2><p><a href="https://github.com/rt2zz/redux-persist/issues/536" target="_blank" rel="noopener">https://github.com/rt2zz/redux-persist/issues/536</a></p><ol><li>루트 폴더에 persist를 작성한 부분 중 <code>const persistor = persistStore(store);</code>를 찾아냅니다.</li><li>해당 코드 밑에 <code>persistor.purge();</code>를 넣고 다시 실행 (purge는 persistStore의 데이터를 전부 날리는 역할을 한다.)</li><li>잘 싱행된다면 해당 코드는 삭제하세요.</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/rt2zz/redux-persist&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/rt2zz/redux-persist&lt;/a&gt;&lt;b
+      
+    
+    </summary>
+    
+      <category term="01_DevTIL ✍" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/"/>
+    
+      <category term="0_DevLog 👻" scheme="http://feel5ny.github.io/categories/01-DevTIL-%E2%9C%8D/0-DevLog-%F0%9F%91%BB/"/>
+    
+    
+      <category term="react" scheme="http://feel5ny.github.io/tags/react/"/>
     
   </entry>
   
