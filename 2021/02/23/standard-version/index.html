@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>웹 버저닝과 배포내역관리 (feat. standard-version) | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="version,standard-version,CHANGLOG,SemVr,commitlint,conventional-commit">
+    
+    
+    <meta name="description" content="셋팅은 여기 레포에서 확인 가능하다.  최근 버그와 관련된 CS가 인입이 되어, 픽스 후 배포했음에도 불구하고 유사한 CS가 인입이 되었을때 또 다시 버그 개선 티켓이 생성되곤 했다. 버그 픽스가 제대로 되지 못했을 수도있지만, 상황을 확인해보면 이슈를 CS단계에서 확인하지 못하고 바로 넘어오는 상황이 많았다. (커뮤니케이션으로 해결가능한 것들도) 이런">
+<meta name="keywords" content="version,standard-version,CHANGLOG,SemVr,commitlint,conventional-commit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="웹 버저닝과 배포내역관리 (feat. standard-version)">
+<meta property="og:url" content="http://feel5ny.github.io/2021/02/23/standard-version/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="셋팅은 여기 레포에서 확인 가능하다.  최근 버그와 관련된 CS가 인입이 되어, 픽스 후 배포했음에도 불구하고 유사한 CS가 인입이 되었을때 또 다시 버그 개선 티켓이 생성되곤 했다. 버그 픽스가 제대로 되지 못했을 수도있지만, 상황을 확인해보면 이슈를 CS단계에서 확인하지 못하고 바로 넘어오는 상황이 많았다. (커뮤니케이션으로 해결가능한 것들도) 이런">
+<meta property="og:locale" content="korea">
+<meta property="og:image" content="http://feel5ny.github.io/images/2021/03/thumb_default.jpg">
+<meta property="og:updated_time" content="2021-02-23T09:38:12.273Z">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="웹 버저닝과 배포내역관리 (feat. standard-version)">
+<meta name="twitter:description" content="셋팅은 여기 레포에서 확인 가능하다.  최근 버그와 관련된 CS가 인입이 되어, 픽스 후 배포했음에도 불구하고 유사한 CS가 인입이 되었을때 또 다시 버그 개선 티켓이 생성되곤 했다. 버그 픽스가 제대로 되지 못했을 수도있지만, 상황을 확인해보면 이슈를 CS단계에서 확인하지 못하고 바로 넘어오는 상황이 많았다. (커뮤니케이션으로 해결가능한 것들도) 이런">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2021/03/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2021/02/23/standard-version/">
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/images/favicon.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+    
+    <link rel="stylesheet" href="/css/style_night.css">
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- <script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65963601-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-65963601-5');
+  gtag('config', 'G-LBPKPXPZJ6');
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <meta name="google-signin-client_id" content="657683199292-cume7g4tomld10jkgpv1p7cm5buttboa.apps.googleusercontent.com">
+        <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/React/">React</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/">03_Communication</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Application/">Application</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-Communication/Marketing/">Marketing</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/">04_UX 💅</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Motion/">Motion</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-UX-💅/Notion/">Notion</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/">blog 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/blog-🙆/project/">project</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/03-Communication/Application/">Application</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2021/03/thumb_default.jpg" alt="웹 버저닝과 배포내역관리 (feat. standard-version)" style="width:100%">
+    </div>
+
+<article id="post-standard-version" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        웹 버저닝과 배포내역관리 (feat. standard-version)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2021/02/23/standard-version/" class="article-date">
+            <time datetime="2021-02-23T10:00:00.000Z" itemprop="datePublished">2021-02-23</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CHANGLOG/">CHANGLOG</a>, <a class="tag-link" href="/tags/SemVr/">SemVr</a>, <a class="tag-link" href="/tags/commitlint/">commitlint</a>, <a class="tag-link" href="/tags/conventional-commit/">conventional-commit</a>, <a class="tag-link" href="/tags/standard-version/">standard-version</a>, <a class="tag-link" href="/tags/version/">version</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#problem">문제사항</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#solution">해결방향</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#develop">구현방향</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">구현방향</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#library">1. 라이브러리 서칭</a>
+               
+                <div class="first_depth--sub">SemVr, CHANGELOG, standard-version, conventional-commit, commitlint</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#cicd">2. 배포 파이프라인 추가</a>
+               
+                <div class="first_depth--sub">Github Action</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#comment">마치며</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>셋팅은 여기 <a href="https://github.com/feel5ny/test-spa-version" target="_blank" rel="noopener">레포</a>에서 확인 가능하다.</p>
+</blockquote>
+<p>최근 버그와 관련된 CS가 인입이 되어, 픽스 후 배포했음에도 불구하고 유사한 CS가 인입이 되었을때 또 다시 버그 개선 티켓이 생성되곤 했다. 버그 픽스가 제대로 되지 못했을 수도있지만, 상황을 확인해보면 이슈를 CS단계에서 확인하지 못하고 바로 넘어오는 상황이 많았다. (커뮤니케이션으로 해결가능한 것들도) 이런 상황이 반복되고 누적되다보니 개발 집중력이 떨어지고, 불필요한 커뮤니케이션에 시간을 쏟고 있다는 생각이 들어, 개선해야겠다는 생각이 들었다.<br><img src="/images/2021/03/02.png" alt="유저, CS담당자, 개발자"></p>
+<a name="problem">
+
+<h2 id="문제-사항"><a href="#문제-사항" class="headerlink" title="문제 사항"></a>문제 사항</h2><p>CS단계에서 진행되지 못하고 넘어올수밖에 없었던 이유</p>
+<ol>
+<li>CS 대응 메뉴얼에 새로고침과 관련된 항목이 없었음.<blockquote>
+<p>CSR의 경우 새로운 배포가 이루어졌을때, 새로고침을 하지 않을 경우 새로 배포한 JS파일을 바라보지 못하고, 이전 JS파일을 바라보고 있게 된다.</p>
+</blockquote>
+</li>
+<li>새로고침 이전에 사용자가 바라보는 버전이 신규 배포 버전의 JS파일인지 확인을 해야하지만 서비스에 버전을 명시하지 않아, CS 담당자가 확인할 수 없었다는 점. </li>
+<li>버전명을 확인해도 해당 버전에 어떤 배포가 이루어졌었는지. 이전에 등록됐던 버그 픽스건이 배포가 되었었는지 확인할 수 있는 내역을 슬랙에서 검색해서 찾는 등 히스토리를 찾아야하는 상황.<blockquote>
+<p>배포 notice를 확인할 수 있는 채널이 있지만, CS담당자가 이를 확인하지 못했거나, 잊을수도 있다.</p>
+</blockquote>
+</li>
+</ol>
+<p>사실 1번과 2번의 경우 SSR형태의 프로젝트나, 브라우저를 오래 유지하지 않고 사용하는 프로젝트라면 화면을 이동할때나 새로 들어갈때 최근에 배포한 파일을 load하기때문에 문제가 거의 발생하지 않는다. 하지만 어드민과 같은 프로젝트의 경우 브라우저를 끄지 않거나 컴퓨터를 아예 끄지 않는 경우 등, 오랫동안 새로고침하지 않고 유지되는 상황이 존재하기에 위 상황이 발생할 가능성이 있다.</p>
+<a name="solution">
+
+<h2 id="해결-방향"><a href="#해결-방향" class="headerlink" title="해결 방향"></a>해결 방향</h2><p>생각나는 해결 방법은 아래와 같았다.</p>
+<ul>
+<li>CS담당자가 사용자가 바라보고 있는 버전을 확인할 수 있게 한다.</li>
+<li>CS담당자가 배포된 내역을 확인할 수 있게 한다.</li>
+<li>사용자는 새로 배포된 버전이 있을 경우 새로고침을 유도하는 팝업을 받는다.</li>
+<li>…</li>
+</ul>
+<p>문제사항의 해결방향으로 다시 바라보면</p>
+<ul>
+<li>문제사항 1번의 경우 메뉴얼에 해당항목 추가</li>
+<li>문제사항 2번의 경우 해결방향 3번으로 해결 가능</li>
+<li>문제사항 3번의 경우 해결방향 1번, 2번으로 해결 가능하다.</li>
+</ul>
+<p>해결방법 3번이 가장 효과적인 방법이긴하나, 이번 포스팅에서는..<br>해결방법 1,2번의 경우에 해당되는 <strong>버전관리, 배포내역관리</strong>에대해 작성하고자 했다.ㅎㅎ</p>
+<a name="develop">
+
+<h2 id="구현-방향"><a href="#구현-방향" class="headerlink" title="구현 방향"></a>구현 방향</h2><p>버전관리와 배포내역 관리는 배포시점에 진행해야하는데, 생각나는 순서는 아래와 같았다.</p>
+<ol>
+<li>프러덕션 배포 전 버전을 업데이트<ol>
+<li>버전의 경우 배포하는 기능의 범위와 유형에 따라 major, minor, patch를 올릴지 결정</li>
+<li>package.json의 버전을 결정한 버전으로 변경</li>
+</ol>
+</li>
+<li>빌드 및 배포</li>
+<li>배포가 성공하면 배포사항을 내역에 추가</li>
+</ol>
+<p>버전을 업데이트하고, 배포사항을 내역에 추가하는 일련의 과정을 배포때마다 한다는 것은 여간 번거로운 일이 아니다. 직접 구현전에 자동화로 만들어 놓은 오픈소스를 찾아보고, 배포시점때마다 진행되어야해서 CI툴에 JOB으로 단계별로 생성하여 진행하기로 했다.</p>
+<ol>
+<li>관련 라이브러리 찾아보기</li>
+<li>배포 파이프라인에 추가하기</li>
+</ol>
+<a name="library">
+
+<h2 id="1-라이브러리-서칭"><a href="#1-라이브러리-서칭" class="headerlink" title="1. 라이브러리 서칭"></a>1. 라이브러리 서칭</h2><p>찾기전에 버전과 배포내역이라는 개념을 정리해볼 필요가 있었다.<br>두 가지는 <strong>오픈소스 프로젝트</strong>에서 자주 볼 수 있었다.<br>이를 참고하여 리서칭해보니 2가지 개념이 나온다.</p>
+<ol>
+<li>시맨틱 버저닝</li>
+<li>CHANGLOG</li>
+</ol>
+<h3 id="개념-시멘틱-버저닝이란"><a href="#개념-시멘틱-버저닝이란" class="headerlink" title="개념) 시멘틱 버저닝이란?"></a>개념) 시멘틱 버저닝이란?</h3><p>시맨틱 버저닝의 경우 <a href="https://semver.org/lang/ko/" target="_blank" rel="noopener">이 링크</a>에서 자세히 확인 가능하다. 소프트웨어의 버전 변경 규칙에 대한 제안이다. 간단히 말하자면 의존성 지옥을 해결하고자 배포시 버전번호를 명시하여 정의를 내림으로써 의존성관리를 용이하게 한다. SemVer의 형태는 아래와 같다. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MAJOR.MINOR.PATCH</span><br></pre></td></tr></table></figure>
+
+<img src="https://bytearcher.com/goodies/semantic-versioning-cheatsheet/wheelbarrel-no-tilde-caret-white-bg-w1000.jpg" alt="출처: bytearcher">
+
+<p>npm에서는 버전을 관리할 수 있는 cli를 제공한다.<br>이 명령어를 통해서 package.json의 버전명을 올릴 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">npm version </span><br><span class="line">    [</span><br><span class="line">        &lt;newversion&gt; </span><br><span class="line">        | major </span><br><span class="line">        | minor </span><br><span class="line">        | patch </span><br><span class="line">        | premajor </span><br><span class="line">        | preminor </span><br><span class="line">        | prepatch </span><br><span class="line">        | prerelease [--preid=&lt;prerelease-id&gt;] </span><br><span class="line">        | from-git</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="개념-CHANGELOG란"><a href="#개념-CHANGELOG란" class="headerlink" title="개념) CHANGELOG란?"></a>개념) CHANGELOG란?</h3><ul>
+<li>체인지로그(CHANGLOG, 변경 기록)는 웹 사이트나 프로그램을 제작하는 것 같은 어떤 프로젝트를 진행할 때에 변경 사항에 대한 기록이다. </li>
+<li>많은 오픈소스 프로젝트에서는 체인지로그 파일을 가장 상위에 포함해서 배포한다.<br>(<a href="https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%9D%B8%EC%A7%80%EB%A1%9C%EA%B7%B8" target="_blank" rel="noopener">위키</a>)</li>
+</ul>
+<img src="https://d33wubrfki0l68.cloudfront.net/abc69d24631dca030e29dd6c2be5898d8a5ae881/1af65/static/43682732cd75b06795c875eccd0aae1a/b1001/changelog.png" alt="CHANGELOG">
+
+<h4 id="릴리즈-노트와-CHANGLOG"><a href="#릴리즈-노트와-CHANGLOG" class="headerlink" title="릴리즈 노트와 CHANGLOG"></a>릴리즈 노트와 CHANGLOG</h4><p><strong>CHANGLOG</strong></p>
+<ul>
+<li>CHANGLOG의 경우 조금 더 개발레벨의 변경사항을 작성한거에 가깝다고 생각한다. </li>
+<li>만약 지금과같은 문제사항이서 CS담당자에게는 CHANGLOG파일보다는 기능요약, 버그수정을 비개발자가 알 수 있는 언어로 정리된 릴리즈노트를 제공하는게 맞다고 생각한다.</li>
+<li>만약 릴리즈 노트를 작성하지 않는 팀이라면, 비개발용어로 commit 타입을 생성하여 개발자가 일반용어로 작성하여 CHANGLOG에 포함하는 것도 나쁘지 않다고 본다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .versionrc</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"types"</span>: [</span><br><span class="line">    ...</span><br><span class="line">    &#123;<span class="string">"type"</span>:<span class="string">"release"</span>&#125;, <span class="comment">// release용으로 생성</span></span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<img src="/images/2021/03/04.png" alt="Gatsby.js내의 릴리즈노트 페이지">
+
+
+<p><strong>release note</strong></p>
+<ul>
+<li>릴리스 정보 는 제품 또는 서비스의 새 버전 릴리스에 대한 자세한 설명을 제공하기 위해 고객에게 제공되는 문서이다. </li>
+<li>이 문서는 일반적으로 PM 또는 PO가 생성하고 기능 요약, 버그 수정, 사용 사례 및 기타 자료를 포함한다. </li>
+<li>릴리스 정보는 사용자 문서 외부에서 변경된 사항에 대한 빠른 가이드로 사용된다.</li>
+</ul>
+<h3 id="library-standard-version"><a href="#library-standard-version" class="headerlink" title="library) standard-version"></a>library) <a href="https://github.com/conventional-CHANGLOG/standard-version" target="_blank" rel="noopener">standard-version</a></h3><p><strong>이 2가지를 관리할 수 있는 standard-version이라는 라이브러리가 존재한다.</strong><br><code>standard-version</code> 스크립트 하나로 여러가지 일을 실행해주는데 아래와 같다.</p>
+<ol>
+<li>깃의 commit로그를 확인하여<ol>
+<li>새로운 버전을 생성하고 package.json의 <strong>버전 업데이트</strong> (npm version 명령어 대체가능)</li>
+<li><u>커밋을 기준</u>으로 <strong>CHANGLOG파일 생성 및 갱신</strong></li>
+</ol>
+</li>
+<li>해당 과정이 마무리되면 CHANGLOG파일과 package.json의 변경내역 <strong>커밋을 진행한다.</strong><ul>
+<li>자동 커밋메세지 : <code>chore(release): 버전명</code></li>
+</ul>
+</li>
+<li>버전명을 Tag로 만들어서 추가한다.</li>
+</ol>
+<h4 id="생각-및-고민"><a href="#생각-및-고민" class="headerlink" title="생각 및 고민"></a>생각 및 고민</h4><ol>
+<li>장점) 버전 업데이트, 릴리즈 tag명시, CHANGLOG 갱신을 한번에 해결해준다.</li>
+<li>고민) 기여자 모두가 커밋을 conventional commit 스펙에 맞추어 엄격하게 작성해야한다.</li>
+<li>장점) 커밋 규칙을 지키며 개발하는 덕분에 커밋정리 및 규칙도 정리된다.</li>
+<li>확장) 배포때마다 tag관리가 되어 롤백등의 상황에서도 태그기준으로 롤백이 편리하게 가능하다.</li>
+</ol>
+<h4 id="커밋에-의존적인-상황"><a href="#커밋에-의존적인-상황" class="headerlink" title="커밋에 의존적인 상황"></a>커밋에 의존적인 상황</h4><p>하나 걱정되는 것은 기여자 모두가 conventional commit 스펙을 정확히 맞춰서 작성해야하는 부분이였는데<br>아래 라이브러리들로 해결이 가능했다.</p>
+<ul>
+<li>휴먼에러나 규칙을 자동으로 체킹하기 위해 lint와 같은 기능이 필요<ul>
+<li><a href="https://github.com/conventional-CHANGLOG/commitlint" target="_blank" rel="noopener">commitlint</a>라는 라이브러리</li>
+</ul>
+</li>
+<li>내가 개발한 코드가 어떤 목적인지 카테고라이징을 하는 기준이 각자 정의하기 애매하다면?<ul>
+<li><a href="https://github.com/commitizen/cz-cli" target="_blank" rel="noopener">commitizen/cz-cli</a>라는 라이브러리</li>
+</ul>
+</li>
+</ul>
+<img src="https://github.com/commitizen/cz-cli/raw/master/meta/screenshots/add-commit.png" alt="'commitizen/cz-cli' 셋팅 후 commit 진행시">
+
+<h3 id="규격-conventional-commit"><a href="#규격-conventional-commit" class="headerlink" title="규격) conventional commit"></a>규격) <a href="https://www.conventionalcommits.org/ko/v1.0.0/" target="_blank" rel="noopener">conventional commit</a></h3><p>컨벤셔널 커밋은 페이지에서 이렇게 설명한다.</p>
+<ul>
+<li>Conventional Commits 스펙은 <strong>커밋 메시지에 곁들여진 가벼운 컨벤션</strong>으로<br>  <strong>명확한 커밋 히스토리</strong>를 생성하기 위한 간단한 규칙을 제공합니다. </li>
+<li>이렇게 만들어진 커밋 히스토리를 이용하여 더 쉽게 자동화된 도구를 만들 수 있습니다.<br>  (commitlint, standard-version)</li>
+<li>이 컨벤션은 커밋 메세지에 신규 기능 추가, 문제 수정, 커다란 변화가 있음을 기술함으로써<br>  유의적 버전(Sementic Versioning)과 일맥상통한 면이 있습니다.</li>
+</ul>
+<blockquote>
+<p>프로젝트에 셋팅하지 않아도 커밋 습관을 들이기 좋은 컨벤션이라고 생각이 들었다.</p>
+</blockquote>
+<p>형태는 아래와 같다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;타입&gt;[적용 범위(선택 사항)]: &lt;설명&gt;</span><br><span class="line"></span><br><span class="line">[본문(선택 사항)]</span><br><span class="line"></span><br><span class="line">[꼬리말(선택 사항)]</span><br></pre></td></tr></table></figure>
+
+<p>즉, 위의 규격을 지키며 커밋을 진행해야한다.</p>
+<p>(예시)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fix: correct minor typos in code</span><br><span class="line"></span><br><span class="line">see the issue for details</span><br><span class="line"></span><br><span class="line">on typos fixed.</span><br><span class="line"></span><br><span class="line">Reviewed-by: Z</span><br><span class="line">Refs #133</span><br></pre></td></tr></table></figure>
+
+<h3 id="library-commitlint"><a href="#library-commitlint" class="headerlink" title="library) commitlint"></a>library) commitlint</h3><p>commitlint를 사용해 commit시에 컨벤션을 잘 지켰는지 체크한다. 컨벤션은 어느정도 <a href="https://github.com/conventional-CHANGLOG/commitlint/blob/master/docs/reference-rules.md" target="_blank" rel="noopener">규격화</a>되어있다. </p>
+<ol>
+<li>컨벤션 셋팅</li>
+<li>commit hook에 셋팅</li>
+</ol>
+<h4 id="컨벤션-셋팅"><a href="#컨벤션-셋팅" class="headerlink" title="컨벤션 셋팅"></a>컨벤션 셋팅</h4><ul>
+<li>standard-version에서 따르는 <code>conventional-commit</code>을 따르려면 <code>@commitlint/config-conventional</code>를 상속받아서 사용하면된다.</li>
+</ul>
+<img src="/images/2021/03/03.png" alt=".commitlintrc.js파일. 기본 아이콘 이뿜">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  extends: [<span class="string">"@commitlint/config-conventional"</span>],</span><br><span class="line">  rules: &#123;</span><br><span class="line">    <span class="string">"type-enum"</span>: [</span><br><span class="line">      <span class="number">2</span>,</span><br><span class="line">      <span class="string">"always"</span>,</span><br><span class="line">      [</span><br><span class="line">        <span class="string">"build"</span>,</span><br><span class="line">        <span class="string">"ci"</span>,</span><br><span class="line">        <span class="string">"chore"</span>,</span><br><span class="line">        <span class="string">"docs"</span>,</span><br><span class="line">        <span class="string">"feat"</span>,</span><br><span class="line">        <span class="string">"fix"</span>,</span><br><span class="line">        <span class="string">"perf"</span>,</span><br><span class="line">        <span class="string">"refactor"</span>,</span><br><span class="line">        <span class="string">"revert"</span>,</span><br><span class="line">        <span class="string">"style"</span>,</span><br><span class="line">        <span class="string">"test"</span>,</span><br><span class="line">        <span class="string">"release"</span>,</span><br><span class="line">      ],</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="commit-hook에-셋팅"><a href="#commit-hook에-셋팅" class="headerlink" title="commit hook에 셋팅"></a>commit hook에 셋팅</h4><p>husky를 사용하여 셋팅하였다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// package.json</span></span><br><span class="line"><span class="string">"husky"</span>: &#123;</span><br><span class="line">  <span class="string">"hooks"</span>: &#123;</span><br><span class="line">    <span class="string">"commit-msg"</span>: <span class="string">"commitlint -E HUSKY_GIT_PARAMS"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h3><img src="/images/2021/03/06.png" alt="정리 이미지">
+
+<ul>
+<li>버전관리, 배포내역관리를 자동화하기 위해 standard-version를 사용한다.<ul>
+<li>conventional-commit 규격에 엄격하므로,<br>해당 컨벤션을 적용하기 힘든 상황이라면 <ul>
+<li><code>npm version</code> 명령어를 통해 버전을 관리하고, </li>
+<li>배포때마다 직접 <strong>CHANGLOG</strong>를 작성한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>standard-version 이외에 필요한 라이브러리는<ul>
+<li>(필수) @commitlint/cli : 커밋 작성시 컨벤션용 린트</li>
+<li>(옵션) commitizen/cz-cli : conventional commit의 규격을 하나씩 문항에 답하면서 커밋을 완성한다.</li>
+</ul>
+</li>
+</ul>
+<a name="cicd">
+
+<h2 id="2-배포-파이프라인에-추가하기"><a href="#2-배포-파이프라인에-추가하기" class="headerlink" title="2. 배포 파이프라인에 추가하기"></a>2. 배포 파이프라인에 추가하기</h2><ul>
+<li>문제사항 2번을 해결하기 위해 footer같은 곳에 버전명을 명시할 수 있다. </li>
+<li>이처럼 버전명이 서비스에 명시되기 때문에 프러덕션 배포시 빌드전 새로운 버전명 업데이트되어야하며 이에 맞춰 버전업과 CHANGLOG셋팅은 빌드 전에 진행한다. </li>
+<li>jenkins를 쓴다면 파이프라인 프로젝트로 만들어서 사용하고, github action을 사용한다면 worflow에 셋팅하면된다. </li>
+<li>이번 포스팅에서는 github action으로 설명</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">build:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line"><span class="attr">  steps:</span></span><br><span class="line"><span class="attr">    - uses:</span> <span class="string">actions/checkout@v2</span> <span class="comment"># 레포 바라보게 하기용</span></span><br><span class="line"><span class="attr">    - uses:</span> <span class="string">fregante/setup-git-user@v1</span> <span class="comment"># 유저 셋팅용</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">패키지</span> <span class="string">설치</span></span><br><span class="line"><span class="attr">      run:</span> <span class="string">yarn</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># 커밋타입에 release 타입을 추가하여</span></span><br><span class="line">      <span class="comment"># 릴리즈 노트를 마지막 커밋에 대신 작성하게 하였다.</span></span><br><span class="line">      <span class="comment"># 해당 스크립트는 lastCommit.sh 파일을 실행한다.</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">릴리즈</span> <span class="string">내역</span> <span class="string">커밋</span> <span class="string">확인</span> </span><br><span class="line"><span class="attr">      run:</span> <span class="string">yarn</span> <span class="attr">check:lastCommit</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># standard-version 진행</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">version</span> <span class="string">업데이트</span> <span class="string">및</span> <span class="string">changelog</span> <span class="string">생성</span></span><br><span class="line"><span class="attr">      run:</span> <span class="string">yarn</span> <span class="string">release</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># 빌드 및 배포 start</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">빌드</span> <span class="string">시작</span></span><br><span class="line"><span class="attr">      run:</span> <span class="string">yarn</span> <span class="string">build</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">    - name:</span> <span class="string">배포</span></span><br><span class="line"><span class="attr">      run:</span> <span class="string">echo</span> <span class="string">"배포2"</span></span><br><span class="line">      <span class="comment"># 빌드 및 배포 end</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">변경내역</span> <span class="string">푸시</span></span><br><span class="line"><span class="attr">      uses:</span> <span class="string">ad-m/github-push-action@master</span></span><br><span class="line"><span class="attr">      with:</span></span><br><span class="line"><span class="attr">        github_token:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITHUB_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line"><span class="attr">        branch:</span> <span class="string">$&#123;&#123;</span> <span class="string">github.ref</span> <span class="string">&#125;&#125;</span></span><br><span class="line"><span class="attr">        tags:</span> <span class="literal">true</span> <span class="comment"># 태그까지 생성되기때문에 같이 추가한다.</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">배포완료</span> <span class="string">사항</span> <span class="string">노티</span></span><br><span class="line">      <span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">Job</span> <span class="string">상태</span> <span class="string">노티</span></span><br><span class="line">      <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+<img src="/images/2021/03/05.png" alt="github action 캡쳐">
+
+<a name="comment">
+
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>운영이슈에서 오는 피로감을 개선하고자 여러가지 방향을 고민해보았는데, 문제해결로 가다가 살짝 옆으로 샌감이 없지않아 있다.ㅎㅎ 무튼 덕분에 버전관리와 배포내역관리에 대한 라이브러리들 을 알 수 있었고 github액션도 사용해보아서 개인적으로 재밌었던 포스팅이었다.</p>
+<hr>
+<p><strong>참고자료</strong></p>
+<ol>
+<li><a href="https://semver.org/lang/ko/" target="_blank" rel="noopener">SemVr</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%9D%B8%EC%A7%80%EB%A1%9C%EA%B7%B8" target="_blank" rel="noopener">wiki-CHANGELOG</a></li>
+<li><a href="https://github.com/conventional-CHANGLOG/standard-version" target="_blank" rel="noopener">standard-version</a></li>
+<li><a href="https://github.com/conventional-CHANGLOG/commitlint" target="_blank" rel="noopener">commitlint</a></li>
+<li><a href="https://github.com/commitizen/cz-cli" target="_blank" rel="noopener">commitizen/cz-cli</a></li>
+<li><a href="https://github.com/conventional-CHANGLOG/commitlint/blob/master/docs/reference-rules.md" target="_blank" rel="noopener">규격화</a></li>
+</ol>
+</a></a></a></a></a></a>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://feel5ny.github.io/2021/02/23/standard-version/" data-id="cklhtfkcg00cszvbm4z1hhof1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#problem">문제사항</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#solution">해결방향</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#develop">구현방향</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+            <div class="article__subTitle">구현방향</div>
+          
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#library">1. 라이브러리 서칭</a>
+               
+                <div class="first_depth--sub">SemVr, CHANGELOG, standard-version, conventional-commit, commitlint</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+            <div>
+              <a href="#cicd">2. 배포 파이프라인 추가</a>
+               
+                <div class="first_depth--sub">Github Action</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <hr class="article__hr"> 
+          
+        
+      
+        
+          <li class="first_depth">
+            
+            <div>
+              <a href="#comment">마치며</a>
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2021/01/24/피츠의-법칙/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">피츠의 법칙과 Touch Target</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/02/23/standard-version/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/03/thumb_default.jpg)" alt="웹 버저닝과 배포내역관리 (feat. standard-version)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-Communication/Application/">Application</a></p>
+                            <p class="item-title"><a href="/2021/02/23/standard-version/" class="title">웹 버저닝과 배포내역관리 (feat. standard-version)</a></p>
+                            <p class="item-date"><time datetime="2021-02-23T10:00:00.000Z" itemprop="datePublished">2021-02-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/01/24/피츠의-법칙/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/02/thumb_default.jpg)" alt="피츠의 법칙과 Touch Target" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/04-UX-💅/">04_UX 💅</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a></p>
+                            <p class="item-title"><a href="/2021/01/24/피츠의-법칙/" class="title">피츠의 법칙과 Touch Target</a></p>
+                            <p class="item-date"><time datetime="2021-01-24T11:00:00.000Z" itemprop="datePublished">2021-01-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/01/10/UX와 프론트엔드개발자/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/01/thumb_default.jpg)" alt="프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/04-UX-💅/">04_UX 💅</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/04-UX-💅/Notion/">Notion</a></p>
+                            <p class="item-title"><a href="/2021/01/10/UX와 프론트엔드개발자/" class="title">프론트엔드 개발자에게 UX는? 연기에 몰입해서 나오는 배우들의 애드립</a></p>
+                            <p class="item-date"><time datetime="2021-01-10T11:00:00.000Z" itemprop="datePublished">2021-01-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/11/15/2020-상반기-회고/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/11/thumb_default.jpg)" alt="2020 상반기 회고, 남은 2020년은?" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/blog-🙆/">blog 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a></p>
+                            <p class="item-title"><a href="/2020/11/15/2020-상반기-회고/" class="title">2020 상반기 회고, 남은 2020년은?</a></p>
+                            <p class="item-date"><time datetime="2020-11-15T11:00:00.000Z" itemprop="datePublished">2020-11-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/03/Communication_004/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2020/10/thumb_default.jpg)" alt="고객 Profiling (3장)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-Communication/">03_Communication</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-Communication/Marketing/">Marketing</a></p>
+                            <p class="item-title"><a href="/2020/07/03/Communication_004/" class="title">고객 Profiling (3장)</a></p>
+                            <p class="item-date"><time datetime="2020-07-03T14:23:55.000Z" itemprop="datePublished">2020-07-03</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Accept-header/" style="font-size: 10px;">Accept header</a> <a href="/tags/Accessibility/" style="font-size: 10px;">Accessibility</a> <a href="/tags/CHANGLOG/" style="font-size: 10px;">CHANGLOG</a> <a href="/tags/CS/" style="font-size: 14.17px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.83px;">File API</a> <a href="/tags/Fitts-Law/" style="font-size: 10px;">Fitts Law</a> <a href="/tags/Frontend/" style="font-size: 10.83px;">Frontend</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 12.5px;">Joy</a> <a href="/tags/LTV/" style="font-size: 10.83px;">LTV</a> <a href="/tags/OOP/" style="font-size: 15.83px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/SemVr/" style="font-size: 10px;">SemVr</a> <a href="/tags/TCP-IP/" style="font-size: 10.83px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.83px;">TDD</a> <a href="/tags/Touch-Target/" style="font-size: 10px;">Touch Target</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/UX/" style="font-size: 10.83px;">UX</a> <a href="/tags/UX-Law/" style="font-size: 10px;">UX Law</a> <a href="/tags/Web/" style="font-size: 11.67px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.83px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.67px;">angular</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.17px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.83px;">authorization</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.67px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.83px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.67px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.5px;">codeSpitz</a> <a href="/tags/commitlint/" style="font-size: 10px;">commitlint</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.83px;">connection</a> <a href="/tags/conventional-commit/" style="font-size: 10px;">conventional-commit</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.83px;">css</a> <a href="/tags/customer/" style="font-size: 10px;">customer</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/db/" style="font-size: 10px;">db</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.83px;">digest</a> <a href="/tags/encoding/" style="font-size: 10.83px;">encoding</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/firebase/" style="font-size: 10px;">firebase</a> <a href="/tags/flow-control/" style="font-size: 10.83px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.83px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.83px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hosting/" style="font-size: 10px;">hosting</a> <a href="/tags/http/" style="font-size: 19.17px;">http</a> <a href="/tags/https/" style="font-size: 10.83px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10.83px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 12.5px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.5px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.5px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.83px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.83px;">principle</a> <a href="/tags/programming/" style="font-size: 11.67px;">programming</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 16.67px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.33px;">refactoring</a> <a href="/tags/release/" style="font-size: 10px;">release</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rxjs/" style="font-size: 13.33px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/standard-version/" style="font-size: 10px;">standard-version</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.33px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/symbol/" style="font-size: 10.83px;">symbol</a> <a href="/tags/transcoding/" style="font-size: 10px;">transcoding</a> <a href="/tags/typeScript/" style="font-size: 17.5px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/variant/" style="font-size: 10px;">variant</a> <a href="/tags/vary/" style="font-size: 10px;">vary</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/글쓰기/" style="font-size: 10px;">글쓰기</a> <a href="/tags/웹서버/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/">01_DevTIL ✍</a><span class="category-list-count">90</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/0-DevLog-👻/">0_DevLog 👻</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Algorithm/">Algorithm</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Angular/">Angular</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CS/">CS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/CleanCode/">CleanCode</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Database/">Database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/FP/">FP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/HTTP/">HTTP</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/JavaScript/">JavaScript</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Jquery/">Jquery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/OOP/">OOP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Programing/">Programing</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/React/">React</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TDD/">TDD</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/TypeScript/">TypeScript</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/01-DevTIL-✍/Web/">Web</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/">02_WorkShop</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2017-TypeScript-workshop/">2017 TypeScript workshop</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2018-CodeSpitz/">2018 CodeSpitz</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/02-WorkShop/2019-CodeSpitz/">2019 CodeSpitz</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/">03_Communication</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Application/">Application</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/03-Communication/Marketing/">Marketing</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/">04_UX 💅</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Accessibility/">Accessibility</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Motion/">Motion</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/04-UX-💅/Notion/">Notion</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/">blog 🙆</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/JoyStory/">JoyStory</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/blog-🙆/project/">project</a><span class="category-list-count">4</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://brunch.co.kr/@feel5ny">Brunch</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://feel5ny.me">Naver blog</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                    <h1 class="logo-wrap">
+                        <!-- <a href="/">
+                            <img src="/images/logo_head.png" alt="">
+                        </a> -->
+                        <a href="/" class="logo"></a>
+                    </h1>
+                
+                <p>&copy; 2021 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    var disqus_url = 'http://feel5ny.github.io/2021/02/23/standard-version/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+<!-- <script src="/js/lottie.js"></script>
+<script src="/js/lottie_index.js"></script> -->
+
+    </div>
+</body>
+</html>
