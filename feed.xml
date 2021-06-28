@@ -6,7 +6,7 @@
   <link href="/feed.xml" rel="self"/>
   
   <link href="http://feel5ny.github.io/"/>
-  <updated>2021-02-23T09:45:41.168Z</updated>
+  <updated>2021-06-28T16:07:10.434Z</updated>
   <id>http://feel5ny.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Svg로 Rounded rect형태의 progress bar 만들기 (feat. animation, path)</title>
+    <link href="http://feel5ny.github.io/2021/06/28/svg-line/"/>
+    <id>http://feel5ny.github.io/2021/06/28/svg-line/</id>
+    <published>2021-06-28T14:00:00.000Z</published>
+    <updated>2021-06-28T16:07:10.434Z</updated>
+    
+    <content type="html"><![CDATA[<p>Progress bar를 구현해야한다.<br>웹에서 찾을 수 있는 여러 예제들을 참고하여 사용해도 되지만, 커스텀하기 어려운 경우 직접 구현을 해야한다.<br>바로 생각나는 엣지 케이스는 무엇일까 ?</p><img src="/images/2021/04/04.jpg" alt="Progress bar"><h2 id="Rounded-progress-bar의-코너-부분"><a href="#Rounded-progress-bar의-코너-부분" class="headerlink" title="Rounded progress bar의 코너 부분"></a>Rounded progress bar의 코너 부분</h2><p>채워지는 bar의 Corner 부분!</p><ul><li>base bar의 코너가 rouneded가 아니거나 + 채워지는 bar도 rounded일경우 디테일한 부분까지 챙기지 않아도 되지만, </li><li>base bar의 코너가 rounded이면서 + 채워지는 bar가 rouned가 아닐경우, 마지막 채워지는 부분에 rounded를 대응해야한다.</li></ul><img src="/images/2021/04/01.png" alt="채워질 때 마지막 코너 부분"><p>생각나는 방법은 3가지가 있다.</p><ol><li>css가 가장자리에 닿을 경우의 퍼센트를 계산하여 radius값을 올리기</li><li>css의 masking 사용</li><li>svg의 gradient를 활용하여 fill animation으로 구현</li></ol><p>1번과 2번의 경우 base bar와 채워지는 bar 2가지 모양을 만들어서, 채워지는 bar의 corner를 대응해야한다.<br>1번의 경우 부자연스러움이 걱정되었고, 2번의 경우 구현하는 방법이 상상이 되지 않았다.<br>3번의 경우 2가지 bar를 만드는 것이 아닌, 하나의 bar에서 채워지는 속성을 컨트롤하여 구현하기 때문에 1번 2번보다 자연스럽게 구현할 수 있다고 생각하였다.<br>또한 svg로 선택할 경우 그래프 이외에 커스텀한 디자인이 추가될 경우 대응이 가능하기때문에 3번 방법으로 선택하여 구현해보았다.</p><p>해당 포스팅은 3번 구현에 대한 내용을 작성하려고한다.</p><h2 id="고려할-부분"><a href="#고려할-부분" class="headerlink" title="고려할 부분"></a>고려할 부분</h2><p>3번으로 진행할 경우 2가지 케이스를 확인해야한다.</p><ol><li>색상이 채워지는 형태로 구현가능한지</li><li>반응형 대응은 어떻게 해야할지</li></ol><p>기타) 애니메이션도 챙겨보자.</p><h2 id="1-채워지듯이-Svg와-그라데이션"><a href="#1-채워지듯이-Svg와-그라데이션" class="headerlink" title="1. 채워지듯이 - Svg와 그라데이션"></a>1. 채워지듯이 - <code>Svg</code>와 그라데이션</h2><blockquote><p>⚠️ 이 방법을 사용하기 전에 전제조건은,<br><strong>디자인이 모두 flat한 형태의 디자인일 경우에만 가능하다.</strong> 만약 채워지는 bar의 fill이 단색이 아니라 디자인이 추가되어있을 경우 사용할 수 없다.</p></blockquote><p>svg는 형태를 만들고, 그 안을 fill로 채울 수 있다. prgress bar에서의 100%를 향해 채워지는 형태로 생각해보았다.</p><p>현재 svg에는 색상을 나눌 수 있는 속성은 따로 없다. 대신 <strong>그라데이션 효과</strong>를 사용하면(linear gradient) fill에 2가지 이상의 색상을 줄 수 있다. 그라데이션은 2가지 이상의 색상을 정의하고, 색상의 position을 정의하면, 각각의 위치에서 서로의 위치 사이의 색상이 점진적으로 정의된다. </p><img src="/images/2021/04/02.png" alt="다른 위치의 그라데이션"><p>여기서 각각의 poisition을 동일하게 둘 경우, 둘 사이의 정의할 색상이 존재하지 않기 때문에 색상이 2가지 단색으로 존재할 수 있다.</p><img src="/images/2021/04/03.png" alt="같은 위치의 그라데이션"><p>위 그림의 중앙 point를 오른쪽으로 움직이면 왼쪽에서 오른쪽으로 채워지는 형태가 될거라고 기대할 수 있다.</p><h2 id="2-반응형-대응"><a href="#2-반응형-대응" class="headerlink" title="2. 반응형 대응"></a>2. 반응형 대응</h2><p>그래프가 고정형이 아닌 모바일 대응을 해야할 경우, 폭을 대응해야한다.<br>높이는 유지하고 폭을 대응해야하기 때문에 scale로 늘릴 수는 없다. (정비율로 커지기 때문에)<br>방법은 shape의 point를 옮기는 방법이 있다. 아래와 그림과 같이 가장 오른쪽의 point들을 늘리면 된다.</p><img src="/images/2021/04/05.gif" alt="폭 늘리기"><h2 id="구현"><a href="#구현" class="headerlink" title="구현"></a>구현</h2><h3 id="0-기본"><a href="#0-기본" class="headerlink" title="0. 기본"></a>0. 기본</h3><p>bar는 rect 태그를 활용하여 구현한다. rx에는 radius의 값을 추가한다.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rect</span> <span class="attr">x</span>=<span class="string">"0"</span> <span class="attr">y</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"200"</span> <span class="attr">height</span>=<span class="string">"50"</span> <span class="attr">rx</span>=<span class="string">"8"</span> <span class="attr">fill</span>=<span class="string">"none"</span>/&gt;</span></span><br></pre></td></tr></table></figure><h3 id="1-채워지듯이"><a href="#1-채워지듯이" class="headerlink" title="1. 채워지듯이"></a>1. 채워지듯이</h3><ul><li>svg의 linerGradient의 stop 태그로 각 position을 정의하면된다.</li><li>defs에 linerGradient를 추가하고, 하위의 stop 태그 &gt; offset에 정의하면된다.</li><li>애니메이션까지 추가하고 싶다면 svg의 animate 태그를 사용하면된다.<ul><li>원하는 지점은 animation의 <code>to</code> 속성에 비율을 정의하면 된다. (0 ~ 1사이)</li><li>애니메이션을 사용하지 않는다면 stop의 <code>offset</code>속성에 비율을 정의하면 된다.</li></ul></li><li>linerGradient에 정의한 id를 참조할 모양의 형태에 url로 id를 참고하면 된다.</li></ul><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">defs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linearGradient</span> <span class="attr">id</span>=<span class="string">"left-to-right"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0"</span> <span class="attr">stop-color</span>=<span class="string">"#007AFF"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">animate</span> <span class="attr">dur</span>=<span class="string">"2s"</span> <span class="attr">attributeName</span>=<span class="string">"offset"</span> <span class="attr">fill</span>=<span class="string">"freeze"</span> <span class="attr">from</span>=<span class="string">"0"</span> <span class="attr">to</span>=<span class="string">"1"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">stop</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0"</span> <span class="attr">stop-color</span>=<span class="string">"#D8D8D8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">animate</span> <span class="attr">dur</span>=<span class="string">"2s"</span> <span class="attr">attributeName</span>=<span class="string">"offset"</span> <span class="attr">fill</span>=<span class="string">"freeze"</span> <span class="attr">from</span>=<span class="string">"0"</span> <span class="attr">to</span>=<span class="string">"1"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">stop</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">linearGradient</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">id</span>=<span class="string">"Rectangle"</span> <span class="attr">x</span>=<span class="string">"0"</span> <span class="attr">y</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"200"</span> <span class="attr">height</span>=<span class="string">"50"</span> <span class="attr">rx</span>=<span class="string">"8"</span> <span class="attr">fill</span>=<span class="string">"url(#left-to-right)"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="2-반응형-대응-1"><a href="#2-반응형-대응-1" class="headerlink" title="2. 반응형 대응"></a>2. 반응형 대응</h3><ul><li>bar를 구현하는 rect태그의 width 값을 다이나믹으로 대응하면 가능하다.</li><li>이때에 fill은 비율로 계산되므로 width가 계산되면 자동 계산될 것이다.</li></ul><h2 id="최종"><a href="#최종" class="headerlink" title="최종"></a>최종</h2><iframe src="https://codesandbox.io/embed/dawn-sky-sze8i?fontsize=14&hidenavigation=1&theme=dark" style="width:100%; height:300px; border:0; border-radius: 8px; overflow:hidden;" title="dawn-sky-sze8i" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Progress bar를 구현해야한다.&lt;br&gt;웹에서 찾을 수 있는 여러 예제들을 참고하여 사용해도 되지만, 커스텀하기 어려운 경우 직접 구현을 해야한다.&lt;br&gt;바로 생각나는 엣지 케이스는 무엇일까 ?&lt;/p&gt;
+&lt;img src=&quot;/images/202
+      
+    
+    </summary>
+    
+      <category term="04_UX 💅" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/"/>
+    
+      <category term="Motion" scheme="http://feel5ny.github.io/categories/04-UX-%F0%9F%92%85/Motion/"/>
+    
+    
+      <category term="svg" scheme="http://feel5ny.github.io/tags/svg/"/>
+    
+      <category term="rounded rect" scheme="http://feel5ny.github.io/tags/rounded-rect/"/>
+    
+      <category term="progress bar" scheme="http://feel5ny.github.io/tags/progress-bar/"/>
+    
+      <category term="animation" scheme="http://feel5ny.github.io/tags/animation/"/>
+    
+  </entry>
   
   <entry>
     <title>웹 버저닝과 배포내역관리 (feat. standard-version)</title>
@@ -785,9 +819,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
-    
       <category term="Identification" scheme="http://feel5ny.github.io/tags/Identification/"/>
+    
+      <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
     
   </entry>
   
@@ -952,9 +986,9 @@
     
       <category term="study" scheme="http://feel5ny.github.io/tags/study/"/>
     
-      <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
-    
       <category term="web" scheme="http://feel5ny.github.io/tags/web/"/>
+    
+      <category term="robot" scheme="http://feel5ny.github.io/tags/robot/"/>
     
   </entry>
   
