@@ -11,19 +11,19 @@
         <meta name="keywords" content="Docker">
     
     
-    <meta name="description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요? 도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이너로">
+    <meta name="description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요?   도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="도커 개념과 컨테이너">
 <meta property="og:url" content="http://feel5ny.github.io/2022/02/13/docker_01_개념/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요? 도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이너로">
+<meta property="og:description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요?   도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이">
 <meta property="og:locale" content="korea">
 <meta property="og:image" content="http://feel5ny.github.io/images/2022/01/thumb_default.jpg">
-<meta property="og:updated_time" content="2022-02-13T10:30:22.973Z">
+<meta property="og:updated_time" content="2022-02-13T10:34:12.660Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="도커 개념과 컨테이너">
-<meta name="twitter:description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요? 도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이너로">
+<meta name="twitter:description" content="도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.  왜 우린 도커를 써야하나요?   도커? 🐋리눅스 컨테이너에 여러 기능을 추가하여→ 어플리케이션을 컨테이">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2022/01/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
@@ -247,6 +247,8 @@
 <p>도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.</p>
 </blockquote>
 <p><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container" target="_blank" rel="noopener">왜 우린 도커를 써야하나요?</a></p>
+<a name="basic">
+
 <h2 id="도커-🐋"><a href="#도커-🐋" class="headerlink" title="도커? 🐋"></a>도커? 🐋</h2><p><strong>리눅스 컨테이너</strong>에 여러 기능을 추가하여<br>→ <strong>어플리케이션을 컨테이너</strong>로서 좀더 쉽게 사용할 수 있게 만들어진 오픈소스 프로젝트</p>
 <ul>
 <li>리눅스 : <strong>리눅스</strong>(<strong>Linux</strong>)는 1991년 9월 17일 리누스 토르발스가 처음 출시한 운영 체제 커널인 <strong>리눅스</strong> 커널에 기반을 둔 오픈 소스 유닉스 계열 운영 체제 계열</li>
@@ -398,6 +400,8 @@
 </ul>
 </li>
 </ul>
+<a name="container">
+
 <h2 id="도커-컨테이너-다루기"><a href="#도커-컨테이너-다루기" class="headerlink" title="도커 컨테이너 다루기"></a>도커 컨테이너 다루기</h2><blockquote>
 <p><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">도커 GUI 클라이언트</a> 사용하며 익히면 굳</p>
 </blockquote>
@@ -445,7 +449,7 @@
 <li><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container" target="_blank" rel="noopener">왜 우린 도커를 써야하나요?</a></li>
 <li><a href="https://medium.com/naver-cloud-platform/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EA%B8%B0%EC%88%A0-%EA%B2%BD%ED%97%98-%EA%B0%80%EC%83%81%ED%99%94-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-qemu-vs-kvm-962113641799" target="_blank" rel="noopener">[네이버클라우드 기술&amp;경험] 가상화 개념 이해하기#1, QEMU vs KVM</a></li>
 </ul>
-
+</a></a>
         </div>
         <footer class="article-footer">
             
@@ -464,7 +468,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2022/02/13/docker_01_개념/" data-id="ckzl4mrsw00bvzybmz015162b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2022/02/13/docker_01_개념/" data-id="ckzl4rvdg00bms7bm0vmx3z1l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
