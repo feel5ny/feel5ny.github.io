@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelectorAll() 메서드 matchesSelector() 메서드   요소 간 이동 HTML5 클래스 관련 추가사항 getElementsByClassName()">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelectorAll() 메서드 matchesSelector() 메서드 요소 간 이동 HTML5 클래스 관련 추가사항- getElementsByClassName()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8&#x2F; DOM 확장">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/28/JS_08_4/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelectorAll() 메서드 matchesSelector() 메서드   요소 간 이동 HTML5 클래스 관련 추가사항 getElementsByClassName()">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  선택자 API querySelector() 메서드 querySelectorAll() 메서드 matchesSelector() 메서드 요소 간 이동 HTML5 클래스 관련 추가사항- getElementsByClassName()">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/61/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-28T12:20:19.000Z">
@@ -235,49 +235,25 @@
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li>선택자 API<ol>
+<li>선택자 API</li>
 <li>querySelector() 메서드</li>
 <li>querySelectorAll() 메서드</li>
 <li>matchesSelector() 메서드</li>
-</ol>
-</li>
 <li>요소 간 이동</li>
-<li>HTML5<ol>
-<li>클래스 관련 추가사항<ul>
-<li>getElementsByClassName() 메서드</li>
-<li>classList 프로퍼티</li>
-</ul>
-</li>
+<li>HTML5</li>
+<li>클래스 관련 추가사항<br>- getElementsByClassName() 메서드<br>- classList 프로퍼티</li>
 <li>포커스 관리</li>
-<li>HTMLDocument의 변화<ul>
-<li>readyState 프로퍼티</li>
-<li>호환성 모드</li>
-</ul>
-</li>
+<li>HTMLDocument의 변화<br>- readyState 프로퍼티<br>- 호환성 모드</li>
 <li>문자셋 프로퍼티</li>
 <li>커스텀 데이터 속성</li>
-<li>마크업 삽입<ul>
-<li>innerHTML</li>
-<li>outerHTML</li>
-<li>insertAdjacentHTML() 메서드</li>
-<li>메모리와 성능 문제</li>
-</ul>
-</li>
+<li>마크업 삽입<br>- innerHTML<br>- outerHTML<br>- insertAdjacentHTML() 메서드<br>- 메모리와 성능 문제</li>
 <li>scrollIntoView() 메서드</li>
-</ol>
-</li>
-<li>전용 확장<ol>
+<li>전용 확장</li>
 <li>문서모드</li>
 <li>children 프로퍼티</li>
 <li>contains() 메서드</li>
-<li>마크업 삽입<ul>
-<li>innerText 프로퍼티</li>
-<li>outerText 프로퍼티</li>
-</ul>
-</li>
+<li>마크업 삽입<br>- innerText 프로퍼티<br>- outerText 프로퍼티</li>
 <li>스크롤</li>
-</ol>
-</li>
 </ol>
 <hr>
 <hr>
@@ -318,7 +294,7 @@
 <li><code>firstElementChild</code> : 첫번째 자식 요소를 가리킨다. </li>
 <li><code>lastElementChild</code> : 마지막 자식 요소를 가리킨다.</li>
 <li><code>previousElementSibling</code> : 이전 형제 요소를 가리킨다. </li>
-<li><code>nextElementSibling</code> : 다음 형제 요소를 가리킨다. </li>
+<li><code>nextElementSibling</code> : 다음 형제 요소를 가리킨다.</li>
 </ul>
 <hr>
 <hr>
@@ -380,7 +356,7 @@
 <li>문서를 불러왔는지 확인하는 것</li>
 <li>보통은 onload 이벤트 핸들러를 사용했다.</li>
 </ul>
-<h4 id="lt-head-gt-프로퍼티"><a href="#lt-head-gt-프로퍼티" class="headerlink" title="&lt;head&gt; 프로퍼티"></a><code>&lt;head&gt;</code> 프로퍼티</h4><ul>
+<h4 id="프로퍼티"><a href="#프로퍼티" class="headerlink" title="&lt;head&gt; 프로퍼티"></a><code>&lt;head&gt;</code> 프로퍼티</h4><ul>
 <li><code>document.head</code>로도 <code>&lt;head&gt;</code>요소 참조가 가능하다.</li>
 <li>크롬과 사파리 5 가능</li>
 </ul>
@@ -398,7 +374,7 @@
 </ul>
 <hr>
 <h3 id="3-5-커스텀-데이터-속성-data"><a href="#3-5-커스텀-데이터-속성-data" class="headerlink" title="3-5. 커스텀 데이터 속성 data-"></a>3-5. 커스텀 데이터 속성 <code>data-</code></h3><ul>
-<li>HTML5 요소에서는 요소의 렌더링에 필요한 정보나 시맨틱 값이 아닌 데이터를 접두사 <strong>data-</strong>가 붙은 비표준 속성에 제공하도록 한다.</li>
+<li>HTML5 요소에서는 요소의 렌더링에 필요한 정보나 시맨틱 값이 아닌 데이터를 접두사 **data-**가 붙은 비표준 속성에 제공하도록 한다.</li>
 <li>data- 뒤에는 자유롭게 네이밍</li>
 <li>요소의 <strong>dataset</strong>프로퍼티를 통해 접근할 수 있다.</li>
 <li>이름-값 쌍으로 이루어진 <code>DOMStringMap</code> 인스턴스이다.</li>
@@ -413,17 +389,19 @@
 <h3 id="3-6-마크업-삽입"><a href="#3-6-마크업-삽입" class="headerlink" title="3-6. 마크업 삽입"></a>3-6. 마크업 삽입</h3><p>마크업이 포함된 콘텐츠를 추가하는 것은 <a href="https://namu.wiki/w/XSS">크로스 스크립팅 공격</a>(XSS: Cross-Site Scripting Attacks)에 취약하다.</p>
 <hr>
 <h4 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h4><ol>
-<li>읽기모드 : 요소와 주석, 텍스트 노드 등의 자식 노드를 모두 나타내는 HTML 표현을 반환한다.<ul>
-<li>innerHTML이 어떤 텍스트를 반활할지는 브라우저마다 다르다.</li>
-</ul>
-</li>
-<li>쓰기모드 : 주어진 값을 바탕으로 새 DOM 서브트리를 만들어서 요소의 잣기 노드를 완전히 교체한다.<ul>
-<li>주어진 문자열을 DOM 서브트리로 파싱해 이미 존재하는 자식 노드를 모두 교체한다.</li>
-</ul>
-</li>
+<li>읽기모드 : 요소와 주석, 텍스트 노드 등의 자식 노드를 모두 나타내는 HTML 표현을 반환한다.</li>
 </ol>
 <ul>
-<li>모든 요소가 innerHTML을 지원하지 않는다. <ul>
+<li>innerHTML이 어떤 텍스트를 반활할지는 브라우저마다 다르다.</li>
+</ul>
+<ol start="2">
+<li>쓰기모드 : 주어진 값을 바탕으로 새 DOM 서브트리를 만들어서 요소의 잣기 노드를 완전히 교체한다.</li>
+</ol>
+<ul>
+<li><p>주어진 문자열을 DOM 서브트리로 파싱해 이미 존재하는 자식 노드를 모두 교체한다.</p>
+</li>
+<li><p>모든 요소가 innerHTML을 지원하지 않는다. </p>
+<ul>
 <li>col, colgroup, framset, head, html, style, table, tbody, thead, tfoot, tr, title도 지원하지 않는다.</li>
 </ul>
 </li>
@@ -470,11 +448,7 @@
 <li>문서모드</li>
 <li>children 프로퍼티</li>
 <li>contains() 메서드</li>
-<li>마크업 삽입<ul>
-<li>innerText 프로퍼티</li>
-<li>outerText 프로퍼티</li>
-</ul>
-</li>
+<li>마크업 삽입<br>- innerText 프로퍼티<br>- outerText 프로퍼티</li>
 <li>스크롤</li>
 </ol>
 <hr>
@@ -500,7 +474,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/28/JS_08_4/" data-id="ckzv7cqhr005lqobmt4hn4hqb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/28/JS_08_4/" data-id="cm3u7mj1q0054hwb21dx06cmw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

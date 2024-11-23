@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study,message,header" />
     
     
-    <meta name="description" content="해당 링크를 기준으로 standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선 처리하였다.    메세지 헤더헤더에는👆 특정 종류의 메세지에만 사용할 수 있는 헤더와,🤚 더 일반 목적으로 사용할 수 있는 헤더,👐 그리고 응답과 요청 메세지 양쪽 모두에서 정보를 제공하는 헤더가 있다.  일반 헤더 일반 정보 헤더 일반 캐시 헤더">
+    <meta name="description" content="해당 링크를 기준으로 standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선 처리하였다.    메세지 헤더헤더에는👆 특정 종류의 메세지에만 사용할 수 있는 헤더와,🤚 더 일반 목적으로 사용할 수 있는 헤더,👐 그리고 응답과 요청 메세지 양쪽 모두에서 정보를 제공하는 헤더가 있다.  일반 헤더   일반 정보 헤더 일반 캐시 헤더">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 메세지 - 헤더">
 <meta property="og:url" content="http://feel5ny.github.io/2019/08/18/HTTP_003_04/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="해당 링크를 기준으로 standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선 처리하였다.    메세지 헤더헤더에는👆 특정 종류의 메세지에만 사용할 수 있는 헤더와,🤚 더 일반 목적으로 사용할 수 있는 헤더,👐 그리고 응답과 요청 메세지 양쪽 모두에서 정보를 제공하는 헤더가 있다.  일반 헤더 일반 정보 헤더 일반 캐시 헤더">
+<meta property="og:description" content="해당 링크를 기준으로 standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선 처리하였다.    메세지 헤더헤더에는👆 특정 종류의 메세지에만 사용할 수 있는 헤더와,🤚 더 일반 목적으로 사용할 수 있는 헤더,👐 그리고 응답과 요청 메세지 양쪽 모두에서 정보를 제공하는 헤더가 있다.  일반 헤더   일반 정보 헤더 일반 캐시 헤더">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/23/thumb_default.jpg">
 <meta property="article:published_time" content="2019-08-18T12:23:55.000Z">
@@ -337,34 +337,40 @@
 
 <h1 id="메세지-헤더"><a href="#메세지-헤더" class="headerlink" title="메세지 헤더"></a>메세지 헤더</h1><p>헤더에는<br>👆 <strong>특정 종류의 메세지</strong>에만 사용할 수 있는 헤더와,<br>🤚 <strong>더 일반 목적</strong>으로 사용할 수 있는 헤더,<br>👐 그리고 응답과 요청 메세지 <strong>양쪽 모두에서 정보를 제공하는</strong> 헤더가 있다.</p>
 <ol>
-<li>일반 헤더<ul>
+<li>일반 헤더</li>
+</ol>
+<ul>
 <li>일반 <strong>정보</strong> 헤더</li>
 <li>일반 <strong>캐시</strong> 헤더</li>
 </ul>
-</li>
-<li>요청 헤더<ul>
+<ol start="2">
+<li>요청 헤더</li>
+</ol>
+<ul>
 <li>요청 <strong>정보</strong> 헤더</li>
 <li><strong>Accept</strong> 관련 헤더</li>
 <li><strong>조건부</strong> 요청 헤더</li>
 <li>요청 <strong>보안</strong> 헤더</li>
 <li><strong>프락시</strong> 요청 헤더</li>
 </ul>
-</li>
-<li>응답 헤더<ul>
+<ol start="3">
+<li>응답 헤더</li>
+</ol>
+<ul>
 <li><strong>협상</strong> 헤더</li>
 <li>응답 <strong>보안</strong> 헤더</li>
 </ul>
-</li>
-<li>엔터티 헤더<ul>
+<ol start="4">
+<li>엔터티 헤더</li>
+</ol>
+<ul>
 <li>엔터티 <strong>정보</strong> 헤더</li>
 <li><strong>콘텐츠</strong> 헤더</li>
 <li>엔터티 <strong>캐싱</strong> 헤더</li>
 </ul>
-</li>
-</ol>
 <hr>
 <hr>
-<h1 id="Header-HTTP-1-1-기준"><a href="#Header-HTTP-1-1-기준" class="headerlink" title="Header (HTTP/1.1 기준)"></a>Header (HTTP/1.1 기준)</h1><a name="1"/>
+<h1 id="Header-HTTP-1-1-기준"><a href="#Header-HTTP-1-1-기준" class="headerlink" title="Header (HTTP&#x2F;1.1 기준)"></a>Header (HTTP&#x2F;1.1 기준)</h1><a name="1"/>
 
 <h2 id="1-일반-헤더-General-headers"><a href="#1-일반-헤더-General-headers" class="headerlink" title="1. 일반 헤더 General headers"></a>1. 일반 헤더 General headers</h2><ul>
 <li>클라와 서버 양쪽 모두가 사용한다.</li>
@@ -372,7 +378,7 @@
 </ul>
 <h3 id="일반-정보헤더"><a href="#일반-정보헤더" class="headerlink" title="일반 정보헤더"></a>일반 정보헤더</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection: keep-alive</span><br><span class="line">Date: Wed, 21 Oct 2015 07:28:00 GMT</span><br><span class="line">Transfer-Encoding: gzip, chunked</span><br><span class="line">Via: HTTP/1.1 GWA</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>Connection</code>: 클라와 서버가 요청/응답 연결에 대한 옵션을 정할 수 있게 해준다.<ul>
+<li><code>Connection</code>: 클라와 서버가 요청&#x2F;응답 연결에 대한 옵션을 정할 수 있게 해준다.<ul>
 <li>전송된 값이 keep-alive일 경우, 연결은 지속적이며 닫히지 않으므로 동일한 서버에 대한 후속 요청이 수행될 수 있다.</li>
 <li><strong>close</strong>, <strong>keep-alive</strong></li>
 </ul>
@@ -394,13 +400,11 @@
 <p>최신 버전의 HTTP는 매우 풍부한 캐시 매개변수의 집합을 가지고 있다.</p>
 <ul>
 <li><code>Cache-Control</code>: 메세지와 함께 캐시 지시자를 전달하기 위해 사용한다.<ul>
-<li><strong>max-age={seconds}</strong>, <strong>max-stale[={seconds}]</strong>, <strong>min-fresh={seconds}</strong>, <strong>no-cache</strong>, <strong>no-store</strong>, <strong>no-transform</strong>, <strong>only-if-cached</strong>, <strong>must-revalidate</strong>, <strong>no-cache</strong>, <strong>no-store</strong>, <strong>no-transform</strong>, <strong>public</strong>, <strong>private</strong>, <strong>proxy-revalidate</strong>, <strong>s-maxage={seconds}</strong>, <strong>immutable</strong>, <strong>stale-while-revalidate={seconds}</strong>, <strong>stale-if-error={seconds}</strong>, </li>
+<li><strong>max-age&#x3D;{seconds}</strong>, <strong>max-stale[&#x3D;{seconds}]</strong>, <strong>min-fresh&#x3D;{seconds}</strong>, <strong>no-cache</strong>, <strong>no-store</strong>, <strong>no-transform</strong>, <strong>only-if-cached</strong>, <strong>must-revalidate</strong>, <strong>no-cache</strong>, <strong>no-store</strong>, <strong>no-transform</strong>, <strong>public</strong>, <strong>private</strong>, <strong>proxy-revalidate</strong>, <strong>s-maxage&#x3D;{seconds}</strong>, <strong>immutable</strong>, <strong>stale-while-revalidate&#x3D;{seconds}</strong>, <strong>stale-if-error&#x3D;{seconds}</strong>,</li>
 </ul>
 </li>
-<li><code>Pragma</code>: 메세지와 함께 지시자를 전달하는 또 다른 방법. 캐시에 국한되지 않는다. (HTTP/1.0)<ul>
-<li><strong>no-cache</strong><a name="2"/>
-
-</li>
+<li><code>Pragma</code>: 메세지와 함께 지시자를 전달하는 또 다른 방법. 캐시에 국한되지 않는다. (HTTP&#x2F;1.0)<ul>
+<li><strong>no-cache</strong><a name="2"/></li>
 </ul>
 </li>
 </ul>
@@ -421,7 +425,7 @@
 </ul>
 </li>
 <li><code>User-Agent</code>: 요청을 보낸 어플리케이션의 이름을 서버에게 말해준다.<ul>
-<li><strong>{product} / {product-version} {comment}</strong></li>
+<li><strong>{product} &#x2F; {product-version} {comment}</strong></li>
 </ul>
 </li>
 <li><del><code>UA-Color</code>: 클라 기기 디스플레이의 색상 능력에 대한 정보를 제공한다.</del></li>
@@ -461,13 +465,13 @@
 </li>
 <li><code>If-Unmodified-Since</code>: <strong>주어진 날짜 이후에 리소스가 변경되었다면</strong> 요청을 제한한다.</li>
 <li><code>Range</code>: 서버가 범위 요청을 지원한다면, 리소스에 대한 특정 범위를 요청한다.<ul>
-<li><strong>{unit}={range-start}-{range-end}, {range-start}-{range-end}</strong></li>
+<li><strong>{unit}&#x3D;{range-start}-{range-end}, {range-start}-{range-end}</strong></li>
 <li>ex. <code>bytes=200-1000</code></li>
 </ul>
 </li>
 </ul>
 <h3 id="요청-보안-헤더"><a href="#요청-보안-헤더" class="headerlink" title="요청 보안 헤더"></a>요청 보안 헤더</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l</span><br><span class="line">Cookie: PHPSESSID=298zf09hf012fh2; csrftoken=u32t4o3tb3gg43; _gat=1;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>HTTP는 자체적으로 요청을 위한 간단한 인증요구/응답 체계를 갖고 있다.<br>요청하는 클라가 어느 정도의 리소스에 접근하기 전에 자신을 인증하게 함으로써, 트랜잭션을 약간 더 안전하게 만들고자 한다.</p>
+<p>HTTP는 자체적으로 요청을 위한 간단한 인증요구&#x2F;응답 체계를 갖고 있다.<br>요청하는 클라가 어느 정도의 리소스에 접근하기 전에 자신을 인증하게 함으로써, 트랜잭션을 약간 더 안전하게 만들고자 한다.</p>
 <ul>
 <li><code>Authorization</code>: 클라가 서버에게 제공하는 인증 그 자체에 대한 정보를 담고 있다.<ul>
 <li><strong>{type} {credentials}</strong></li>
@@ -475,7 +479,7 @@
 </ul>
 </li>
 <li><code>Cookie</code>: 클라가 서버에게 토큰을 전달할 때 사용한다. 진짜 보안헤더는 아니지만, 보안에 영향을 줄 수 있다는 것은 확실하다.<ul>
-<li><strong>{name}={value}; {name2}={value2};</strong></li>
+<li><strong>{name}&#x3D;{value}; {name2}&#x3D;{value2};</strong></li>
 </ul>
 </li>
 <li><del><code>Cookie2</code>: 요청자가 지원하는 쿠키의 버전을 알려줄 때 사용한다.</del></li>
@@ -514,12 +518,12 @@
 <li><del><code>Title</code>: HTML 문서에서 주어진 것과 같은 제목</del></li>
 <li><code>Warning</code>: 사유 구절에 있는 것보다 더 자세한 경고 메세지<ul>
 <li><strong>{<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning#Warning_codes">warn-code</a>} {warn-agent} {warn-text} [{warn-date}]</strong></li>
-<li>예시) Warning: 110 anderson/1.3.37 “Response is stale”</li>
+<li>예시) Warning: 110 anderson&#x2F;1.3.37 “Response is stale”</li>
 </ul>
 </li>
 </ul>
 <h3 id="협상-헤더"><a href="#협상-헤더" class="headerlink" title="협상 헤더"></a>협상 헤더</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: bytes</span><br><span class="line">Vary: User-Agent</span><br></pre></td></tr></table></figure>
-<p>서버에 프랑스어나 독일어로 번역된 HTML 문서가 있는 경우와 같이 여러 가지 표현이 가능한 상황이라면,<br>HTTP/1.1은 서버와 클라가 어떤 표현을 택할 것인가에 대한 협상을 할 수 있도록 지원한다.</p>
+<p>서버에 프랑스어나 독일어로 번역된 HTML 문서가 있는 경우와 같이 여러 가지 표현이 가능한 상황이라면,<br>HTTP&#x2F;1.1은 서버와 클라가 어떤 표현을 택할 것인가에 대한 협상을 할 수 있도록 지원한다.</p>
 <ul>
 <li><code>Accept-Ranges</code>: 서버에게 서버가 보내도 되는 <strong>언어</strong>를 말해준다.</li>
 <li><code>Vary</code>: 서버가 확인해 보아야 하고, 그렇기 때문에 응답에 영향을 줄 수 있는 헤더들의 목록</li>
@@ -529,22 +533,22 @@
 <ul>
 <li><code>Proxy-Authenticate</code>: 프락시에서 클라로 보낸 인증요구의 목록</li>
 <li><code>Set-Cookie</code>: 진짜 보안 헤더는 아니지만, 보안에 영향은 줄 수 있다. 서버가 클라를 인증할 수 있도록 클라 측에 토큰을 설정하기 위해 사용한다.<ul>
-<li><strong>{cookie-name}={cookie-value}</strong></li>
-<li><strong>{cookie-name}={cookie-value}; Expires={date}</strong></li>
-<li><strong>{cookie-name}={cookie-value}; Max-Age={non-zero-digit}</strong></li>
-<li><strong>{cookie-name}={cookie-value}; Domain={domain-value}</strong></li>
-<li><strong>{cookie-name}={cookie-value}; Path={path-value}</strong></li>
-<li><strong>{cookie-name}={cookie-value}; Secure</strong></li>
-<li><strong>{cookie-name}={cookie-value}; HttpOnly</strong></li>
-<li><strong>{cookie-name}={cookie-value}; SameSite=Strict</strong></li>
-<li><strong>{cookie-name}={cookie-value}; SameSite=Lax</strong></li>
-<li><strong>{cookie-name}={cookie-value}; SameSite=None</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; Expires&#x3D;{date}</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; Max-Age&#x3D;{non-zero-digit}</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; Domain&#x3D;{domain-value}</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; Path&#x3D;{path-value}</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; Secure</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; HttpOnly</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; SameSite&#x3D;Strict</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; SameSite&#x3D;Lax</strong></li>
+<li><strong>{cookie-name}&#x3D;{cookie-value}; SameSite&#x3D;None</strong></li>
 </ul>
 </li>
 <li><del><code>Set-Cookie2</code>: Set-Cookie와 비슷하게 RFC 2965로 정의된 쿠키.</del></li>
 <li><code>WWW-Authenticate</code>: 서버에서 클라로 보낸 인증요구의 목록<ul>
-<li><strong>{type} realm={realm}</strong></li>
-<li>예시) Basic realm=”Access to the staging site”</li>
+<li><strong>{type} realm&#x3D;{realm}</strong></li>
+<li>예시) Basic realm&#x3D;”Access to the staging site”</li>
 </ul>
 </li>
 </ul>
@@ -581,21 +585,21 @@
 <li><code>Content-Location</code>: 리소스가 실제로 어디에 위치하는지</li>
 <li><del><code>Content-MD5</code>: 본문의 MD5 체크섬</del></li>
 <li><code>Content-Range</code>: 전체 리소스에서 이 엔터티가 해당하는 범위를 바이트 단위로 표현<ul>
-<li><strong>{unit} {range-start}-{range-end}/{size}</strong></li>
-<li>예시) bytes 200-1000/67589</li>
+<li><strong>{unit} {range-start}-{range-end}&#x2F;{size}</strong></li>
+<li>예시) bytes 200-1000&#x2F;67589</li>
 </ul>
 </li>
 <li><code>Content-Type</code>: 이 본문이 어떤 종류의 객체인지<ul>
-<li><strong>{media-type};charset={value}; boundary={something}</strong></li>
-<li>예시) text/html; charset=utf-8</li>
-<li>예시) multipart/form-data; boundary=something</li>
+<li><strong>{media-type};charset&#x3D;{value}; boundary&#x3D;{something}</strong></li>
+<li>예시) text&#x2F;html; charset&#x3D;utf-8</li>
+<li>예시) multipart&#x2F;form-data; boundary&#x3D;something</li>
 </ul>
 </li>
 <li><code>Content-Disposition</code>: 콘텐츠가 브라우저에 인라인으로 표시될 것으로 예상되는지, 즉 웹 페이지 또는 웹 페이지의 일부로서 또는 첨부 파일로 로컬로 다운로드 및 저장될 것으로 예상되는지를 나타내는 헤더다.<ul>
 <li><strong>Content-Disposition: inline</strong></li>
 <li><strong>Content-Disposition: attachment</strong></li>
 <li><strong>Content-Disposition: form-data</strong></li>
-<li><strong>; name=”fieldName”</strong>이 덧붙여서 올 수 있다.</li>
+<li>**; name&#x3D;”fieldName”**이 덧붙여서 올 수 있다.</li>
 </ul>
 </li>
 </ul>
@@ -610,7 +614,7 @@
 <hr>
 <ul>
 <li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p>참고자료</p>
@@ -637,7 +641,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/18/HTTP_003_04/" data-id="ckzv7cqfi002qqobm5aqmpy2s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/18/HTTP_003_04/" data-id="cm3u7mj1g002hhwb265geabtr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

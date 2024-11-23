@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="javaScript,iterator,generator" />
+        <meta name="keywords" content="javaScript,generator,iterator" />
     
     
     <meta name="description" content="🌕🌑🌑자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에 중요하며, loop를">
@@ -23,8 +23,8 @@
 <meta property="article:modified_time" content="2024-11-23T12:10:16.973Z">
 <meta property="article:author" content="Joy Kim">
 <meta property="article:tag" content="javaScript">
-<meta property="article:tag" content="iterator">
 <meta property="article:tag" content="generator">
+<meta property="article:tag" content="iterator">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/07/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
@@ -334,11 +334,11 @@
 <ol>
 <li>인터페이스란 사양에 맞는 값과 연결된 속성키의 셋트 </li>
 <li>어떤 Object라도 인터페이스의 정의를 충족시킬 수 있다.</li>
-<li>하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.<ul>
+<li>하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.</li>
+</ol>
+<ul>
 <li>반환값의 타입까지 정할 수 있다.</li>
 </ul>
-</li>
-</ol>
 <h4 id="interface-예제"><a href="#interface-예제" class="headerlink" title="interface 예제"></a>interface 예제</h4><ol>
 <li>test라는 키를 갖고 </li>
 <li>값으로 문자열인지를 1개 받아 boolean 결과를 반환하는 함수가 온다.</li>
@@ -347,9 +347,7 @@
 <p>cf__1. es6 객체리터럴<br>test옆에 바로 괄호?</p>
 <ul>
 <li>es6에서 객체 리터럴에 새로 도입된 문법. </li>
-<li>key에 function을 집어넣는 경우가 생기면, function과 <code>:</code>을 생략하고 바로 괄호를 쓸 수 있는 문법이 추가되었다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="attr">test</span>: <span class="keyword">function</span> (<span class="params">str</span>)&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>key에 function을 집어넣는 경우가 생기면, function과 <code>:</code>을 생략하고 바로 괄호를 쓸 수 있는 문법이 추가되었다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  <span class="attr">test</span>: <span class="keyword">function</span> (<span class="params">str</span>)&#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <blockquote>
 <p>자바스크립트 엔진 레벨에서 여러가지 interface를 정의하고 있다.</p>
@@ -357,26 +355,23 @@
 <hr>
 <h3 id="1-2-Iterator-interface"><a href="#1-2-Iterator-interface" class="headerlink" title="1.2 Iterator interface"></a>1.2 Iterator interface</h3><ol>
 <li>next라는 키를 갖고 </li>
-<li>값으로 인자를 받지 않고<br><code>IteratorResultObject</code>를 반환하는 함수가 온다.<ul>
+<li>값으로 인자를 받지 않고<br>  <code>IteratorResultObject</code>를 반환하는 함수가 온다.<ul>
 <li>IteratorResultObject는 interface이다.<br>(아래의 IteratorResult interface를 확인)</li>
 </ul>
 </li>
 <li>IteratorResultObject는 <code>value</code>와 <code>done</code>이라는 키를 갖고 있다.</li>
-<li>이 중 <code>done</code>은 계속 반복할 수 있을지 없을지에 따라 불린값을 반환한다.<ul>
+<li>이 중 <code>done</code>은 계속 반복할 수 있을지 없을지에 따라 불린값을 반환한다.</li>
+</ol>
+<ul>
 <li>done이 <code>true</code>일때는 value는 <code>undefined</code> 라는것도 정의되어있음</li>
 </ul>
-</li>
-</ol>
 <p>위 조건만 만족하면 Iterator 객체로 본다.<br>아래는 타입스크립트에서 자바스크립트 내장 객체들을 정의해놓은 type definition 파일의 일부를 가져왔다.</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es2015.iterable.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IteratorResult</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="attr">done</span>: <span class="built_in">boolean</span>;</span><br><span class="line">    <span class="attr">value</span>: T;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Iterator</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="title function_">next</span>(value?: <span class="built_in">any</span>): <span class="title class_">IteratorResult</span>&lt;T&gt;;</span><br><span class="line">    <span class="keyword">return</span>?(value?: <span class="built_in">any</span>): <span class="title class_">IteratorResult</span>&lt;T&gt;;</span><br><span class="line">    <span class="keyword">throw</span>?(e?: <span class="built_in">any</span>): <span class="title class_">IteratorResult</span>&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">value</span>: <span class="number">1</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="그니까-iterator란"><a href="#그니까-iterator란" class="headerlink" title="그니까 iterator란"></a>그니까 iterator란</h4><p>이터레이터 프로토콜(: 데이터 컬렉션을 순회하기 위한 프로토콜(미리약속된 규칙))은 next메소드를 호출하면 iterable을 순회하며 value, done 프로퍼티를 갖는 iteratorResultObject를 반환한다. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">pop</span>(),</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span> == <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="1-3-Iterable-interface"><a href="#1-3-Iterable-interface" class="headerlink" title="1.3 Iterable interface"></a>1.3 Iterable interface</h3><ol>
+<h4 id="그니까-iterator란"><a href="#그니까-iterator란" class="headerlink" title="그니까 iterator란"></a>그니까 iterator란</h4><h2 id="이터레이터-프로토콜-데이터-컬렉션을-순회하기-위한-프로토콜-미리약속된-규칙-은-next메소드를-호출하면-iterable을-순회하며-value-done-프로퍼티를-갖는-iteratorResultObject를-반환한다"><a href="#이터레이터-프로토콜-데이터-컬렉션을-순회하기-위한-프로토콜-미리약속된-규칙-은-next메소드를-호출하면-iterable을-순회하며-value-done-프로퍼티를-갖는-iteratorResultObject를-반환한다" class="headerlink" title="이터레이터 프로토콜(: 데이터 컬렉션을 순회하기 위한 프로토콜(미리약속된 규칙))은 next메소드를 호출하면 iterable을 순회하며 value, done 프로퍼티를 갖는 iteratorResultObject를 반환한다."></a>이터레이터 프로토콜(: 데이터 컬렉션을 순회하기 위한 프로토콜(미리약속된 규칙))은 next메소드를 호출하면 iterable을 순회하며 value, done 프로퍼티를 갖는 iteratorResultObject를 반환한다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">data</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">pop</span>(),</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span> == <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="1-3-Iterable-interface"><a href="#1-3-Iterable-interface" class="headerlink" title="1.3 Iterable interface"></a>1.3 Iterable interface</h3><ol>
 <li>Symbol.iterator라는 키를 갖고 </li>
-<li>값으로 인자를 받지 않고 <strong><code>Iterator Object</code>를 반환하는 함수가 온다.</strong><br>Iterator Object 인터페이스는 위 1.2의 interface</li>
+<li>값으로 인자를 받지 않고 <strong><code>Iterator Object</code>를 반환하는 함수가 온다.</strong><br>  Iterator Object 인터페이스는 위 1.2의 interface</li>
 </ol>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lib.es2015.iterable.d.ts</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Iterable</span>&lt;T&gt; &#123;</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>](): <span class="title class_">Iterator</span>&lt;T&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">IterableIterator</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">Iterator</span>&lt;T&gt; &#123;</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>](): <span class="title class_">IterableIterator</span>&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -384,6 +379,7 @@
 <h4 id="그니까-iterable란"><a href="#그니까-iterable란" class="headerlink" title="그니까 iterable란?"></a>그니까 iterable란?</h4><p>iterable은 Symbol.iterator 메소드를 구현하거나, 프로토타입 체인에 의해 상속한 객체를 말한다.<br>Symbol.iterator 메소드는 이터레이터를 반환한다. </p>
 <blockquote>
 <p><a href="https://poiemaweb.com/es6-symbol">Symbol</a>?</p>
+</blockquote>
 <ul>
 <li>ES6 추가된 새로운 primitive type</li>
 <li>객체가 아닌 값으로 인식된다는 말.</li>
@@ -391,22 +387,11 @@
 <li>primitive이지만 <strong>객체의 키로 사용할 수 있는 특징</strong>이 있다.</li>
 <li>Symbol.iterator는 이터레이터 오브젝트를 생성하면서 반환한다.</li>
 <li>오브젝트의 <code>[Symbol.iterator]</code>를 호출하면 이터레이터 오브젝트를 생성하여 반환한다. <ul>
-<li>심볼은 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키(property key)를 만들기 위해 사용한다. </li>
+<li>심볼은 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키(property key)를 만들기 위해 사용한다.</li>
 </ul>
 </li>
 </ul>
-</blockquote>
-<p>iterator만 있으면 되지 않을까? 왜 iterable이 필요하지?</p>
-<ul>
-<li>loop를 돌 수 있는 reset 타이밍을 위해서</li>
-<li>즉, loop를 돌리는 객체의 사본을 만들기 위해서 iterable형태가 필요한 것이다.<ul>
-<li>위에서 iterable 형태를 보면, Symbole.iterator를 키로 갖는걸 볼 수 있는데,<br>루프 돌 때마다 <strong>루프를 위한 변수</strong>와 <strong>원본데이터 변수</strong>를 구분하면서 iterator를 잘 구축하라고 iterable이 한번 개입하는 것이다.</li>
-<li><a href="https://jusungpark.tistory.com/25">iterator 패턴</a>에서 온 개념<br></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><a name="2"></a></p>
+<h2 id="iterator만-있으면-되지-않을까-왜-iterable이-필요하지-loop를-돌-수-있는-reset-타이밍을-위해서-즉-loop를-돌리는-객체의-사본을-만들기-위해서-iterable형태가-필요한-것이다-위에서-iterable-형태를-보면-Symbole-iterator를-키로-갖는걸-볼-수-있는데-루프-돌-때마다-루프를-위한-변수와-원본데이터-변수를-구분하면서-iterator를-잘-구축하라고-iterable이-한번-개입하는-것이다-iterator-패턴에서-온-개념"><a href="#iterator만-있으면-되지-않을까-왜-iterable이-필요하지-loop를-돌-수-있는-reset-타이밍을-위해서-즉-loop를-돌리는-객체의-사본을-만들기-위해서-iterable형태가-필요한-것이다-위에서-iterable-형태를-보면-Symbole-iterator를-키로-갖는걸-볼-수-있는데-루프-돌-때마다-루프를-위한-변수와-원본데이터-변수를-구분하면서-iterator를-잘-구축하라고-iterable이-한번-개입하는-것이다-iterator-패턴에서-온-개념" class="headerlink" title="iterator만 있으면 되지 않을까? 왜 iterable이 필요하지?- loop를 돌 수 있는 reset 타이밍을 위해서- 즉, loop를 돌리는 객체의 사본을 만들기 위해서 iterable형태가 필요한 것이다.  - 위에서 iterable 형태를 보면, Symbole.iterator를 키로 갖는걸 볼 수 있는데,    루프 돌 때마다 루프를 위한 변수와 원본데이터 변수를 구분하면서 iterator를 잘 구축하라고 iterable이 한번 개입하는 것이다.  - iterator 패턴에서 온 개념"></a>iterator만 있으면 되지 않을까? 왜 iterable이 필요하지?<br>- loop를 돌 수 있는 reset 타이밍을 위해서<br>- 즉, loop를 돌리는 객체의 사본을 만들기 위해서 iterable형태가 필요한 것이다.<br>  - 위에서 iterable 형태를 보면, Symbole.iterator를 키로 갖는걸 볼 수 있는데,<br>    루프 돌 때마다 <strong>루프를 위한 변수</strong>와 <strong>원본데이터 변수</strong>를 구분하면서 iterator를 잘 구축하라고 iterable이 한번 개입하는 것이다.<br>  - <a href="https://jusungpark.tistory.com/25">iterator 패턴</a>에서 온 개념<br></h2><p><a name="2"></a></p>
 <h2 id="2-Loop-to-Iterator"><a href="#2-Loop-to-Iterator" class="headerlink" title="2. Loop to Iterator"></a>2. Loop to Iterator</h2><p>왜 for, while, do..while을 쓰지 않게 하고 이런걸 제공할까</p>
 <ul>
 <li>문이기 때문에 한번 실행하고 나면 사라진다.(노이만 머신의 구조)<ul>
@@ -426,24 +411,22 @@
 <ul>
 <li>여러번 문을 반복해서 실행할 수 있다.</li>
 <li>문을 메모리에(함수) 담아두면 flow를 타지 않고 원하는 시점에 마음대로 실행할 수 있다.</li>
-<li><strong>commend 패턴</strong><br>: 우리가 원하는 문들을 죄다 값으로 바꿔서 invoke에 저장하고, invoke를 호출할때마다 마음대로 문을 실행했다, 멈췄다, 되돌렸다 를 할 수 있게 만들어주는 패턴 </li>
+<li><strong>commend 패턴</strong><br>: 우리가 원하는 문들을 죄다 값으로 바꿔서 invoke에 저장하고, invoke를 호출할때마다 마음대로 문을 실행했다, 멈췄다, 되돌렸다 를 할 수 있게 만들어주는 패턴</li>
 </ul>
 <p>for문이나 while문을 <strong>값</strong>으로 바꾸고 싶다.<br>반복 전용에 해당되는 객체로 바꿔주면 된다.</p>
 <h4 id="while-vs-iterator"><a href="#while-vs-iterator" class="headerlink" title="while vs iterator"></a>while vs iterator</h4><ol>
-<li><p>while</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">while</span>(arr.<span class="property">length</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">pop</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>while<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line"><span class="keyword">while</span>(arr.<span class="property">length</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="title function_">pop</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>조건문: 계속 반복할지 판단.</li>
 <li>body: 반복시마다 처리할 것.</li>
 </ul>
-</li>
-<li><p>iterator</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> == <span class="number">0</span>, </span><br><span class="line">      <span class="comment">// while의 조건문에 해당 (계속 반복할지 판단.)</span></span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">arr</span>.<span class="title function_">pop</span>())</span><br><span class="line">      <span class="comment">// while의 body에 해당 (반복시 처리할 것.)</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>더 반복할지 말지에 대한 조건문을 while에서는 while문 자체가 들고 있었지만,<br>iterator에서는 iterator의 next 반환값 자체가 갖고 있다.<br>즉, next에 의존적이 된다. </li>
-</ul>
-</li>
+<ol start="2">
+<li>iterator<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> == <span class="number">0</span>, </span><br><span class="line">      <span class="comment">// while의 조건문에 해당 (계속 반복할지 판단.)</span></span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">arr</span>.<span class="title function_">pop</span>())</span><br><span class="line">      <span class="comment">// while의 body에 해당 (반복시 처리할 것.)</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
+<ul>
+<li>더 반복할지 말지에 대한 조건문을 while에서는 while문 자체가 들고 있었지만,<br>iterator에서는 iterator의 next 반환값 자체가 갖고 있다.<br>  즉, next에 의존적이 된다.</li>
+</ul>
 <h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><div style="padding:20px; background-color:rgba(0,0,0,0.2)">1. 반복자체를 하지는 않지만 (: iterator 객체와 next객체가 반복하진 않지만.)
   2. 외부에서 반복을 하려고 할 때
     3. 반복에 필요한 조건과 실행을 
@@ -453,13 +436,10 @@
 <p>  즉, 반복행위와 반복을 위한 준비를 분리 </p>
 <ol>
 <li>미리 반복에 대한 준비를 해두고 </li>
-<li>필요할 때 필요한 만큼 반복 </li>
+<li>필요할 때 필요한 만큼 반복<br>  <strong>3. 반복을 재현할 수 있음</strong></div></li>
 </ol>
-<p>  <strong>3. 반복을 재현할 수 있음</strong></p>
-</div>
-
 <p>반복 자체를 하지 않지만,<br>외부에서 iterator를 이용해서 반복하려고 하는 상황을 위해서,<br>반복에 필요한 조건과 실행을 미리 준비해둔 객체를 갖고 있는 것이다. (iteratorResult객체)</p>
-<p>next만 부르면, 몇번이고 반복할 수 있다.<br>이제는 더이상 복잡한 loop의 상태조건이나 문의 실행을 다 빼버리고,<br>외부에서는 반복이라는 행위만 하면된다.<br>=&gt; 반복기와 반복조건을 분리</p>
+<p>next만 부르면, 몇번이고 반복할 수 있다.<br>이제는 더이상 복잡한 loop의 상태조건이나 문의 실행을 다 빼버리고,<br>외부에서는 반복이라는 행위만 하면된다.<br>&#x3D;&gt; 반복기와 반복조건을 분리</p>
 <hr>
 <p><a name="3"></a></p>
 <h2 id="3-ES6-Loop"><a href="#3-ES6-Loop" class="headerlink" title="3. ES6+ Loop"></a>3. ES6+ Loop</h2><h3 id="3-1-사용자-반복-처리기"><a href="#3-1-사용자-반복-처리기" class="headerlink" title="3.1 사용자 반복 처리기"></a>3.1 사용자 반복 처리기</h3><p>직접 Iterator 반복처리기를 구현해보자. 커스텀</p>
@@ -481,14 +461,14 @@
 <li>기타 iterable을 인수로 받는 함수</li>
 </ul>
 <ol>
-<li><p>Array destructuring 배열해체 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iter는 iterable 객체.</span></span><br><span class="line"><span class="keyword">const</span> iter = &#123; </span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>&#125;,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> == <span class="number">0</span>,</span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="title function_">pop</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [a, ...b] = iter;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b); <span class="comment">// 4, [3,2,1]</span></span><br></pre></td></tr></table></figure>
+<li>Array destructuring 배열해체 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iter는 iterable 객체.</span></span><br><span class="line"><span class="keyword">const</span> iter = &#123; </span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>&#125;,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> == <span class="number">0</span>,</span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="title function_">pop</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> [a, ...b] = iter;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a,b); <span class="comment">// 4, [3,2,1]</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>해체구분은 보통 변수를 선언하는 쪽에 쓰인다.</li>
 <li>배열은 <code>=</code>의 왼쪽에 오면 변수이름이 된다.</li>
 <li>해당 index에 있는 값을 변수에 담음.</li>
 </ul>
-</li>
+<ol start="2">
 <li><p>Spread 펼치기 </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>&#125;,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">done</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="property">length</span> == <span class="number">0</span>,</span><br><span class="line">      <span class="attr">value</span>: <span class="variable language_">this</span>.<span class="property">arr</span>.<span class="title function_">pop</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = [...iter];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// [4,3,2,1]</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -516,11 +496,11 @@
 <li>symbol iterator를 호출할 때 마다 제각각 다른 지역변수가 만들어질테고,<br>그때마다 태어난 함수도 제각각 다른 지역변수를 자유변수로 캡쳐해둘 것이다.<ul>
 <li>함수호출할때마다 instance가 자기만의 field를 갖고 태어난것과 비슷하네?<blockquote>
 <p>함수형 패러다임에서는 instance를 new 연산자로 생성하는 대신에,<br>함수를 생성함으로써 그때에 있는 자유변수를 instance의 field처럼 쓰게 된다.<br>자바스크립트에서는 instance를 만들면서 field지정할것인지.<br>함수를 생성하면서 자유변수를 지정할 것인지 선택할 수 있다.<br>혹은 섞어 쓰거나.</p>
+</blockquote>
 <ul>
 <li>이게 자바스크립트가 혼란스러운 이유…  </li>
 <li>비단 자바스크립트만 그렇진 않다..</li>
 </ul>
-</blockquote>
 </li>
 </ul>
 </li>
@@ -528,11 +508,11 @@
 <hr>
 <h4 id="cf-2-함수-함수-스코프-클로저"><a href="#cf-2-함수-함수-스코프-클로저" class="headerlink" title="cf__2. 함수, 함수 스코프, 클로저"></a>cf__2. 함수, 함수 스코프, 클로저</h4><p>함수는 함수가 만들어지는 시점에 바깥쪽에 있는 변수들을 캡쳐해서 마치 지역변수로 쓸 수 있는 권한이 있다.</p>
 <ul>
-<li>함수 입장에서는 지역변수, 인자도 아닌데 참조할 수 있는 변수 =&gt; 자유변수 </li>
+<li>함수 입장에서는 지역변수, 인자도 아닌데 참조할 수 있는 변수 &#x3D;&gt; 자유변수 </li>
 <li>자유변수가 생성되는 원리는 언어마다 다르다.</li>
 <li>자유변수를 함수는 사용할 수 있다.</li>
 <li>자바스크립트 매커니즘에서는 next라는 함수가 탄생할 때, 바깥쪽 함수 둘레에 있는 변수들을 사용할 수 있다.<blockquote>
-<p>자유변수가 잡혀서 사용되는 닫혀진 공간을 클로저라고 한다.<br>함수는 곧 클로저라고 할 수 있다. 자유변수를 가둬둘 수 있기 때문에 </p>
+<p>자유변수가 잡혀서 사용되는 닫혀진 공간을 클로저라고 한다.<br>함수는 곧 클로저라고 할 수 있다. 자유변수를 가둬둘 수 있기 때문에</p>
 </blockquote>
 </li>
 </ul>
@@ -595,7 +575,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_19/" data-id="ckzv7cqi8006eqobmipn9bcy7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_19/" data-id="cm3u7mj1t0065hwb23ojr4gn2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -418,8 +418,7 @@
 <li>공간의 블록이 생성되어 채워짐</li>
 </ol>
 <blockquote>
-<p>cf__1 <strong>게임이야기</strong> ~
-모바일시대에서는 복잡한 core action이 많이 들어간 게임은 상품성이 없다. (안좋은 예: 와우)<br>core action이 단순한 게임이 상품성이 좋다. 최근 rpg게임들은 단순하게 변했다. 한붓그리기도 이미 오래전에 누가 찾아낸 코어액션중에 하나이다. 재밌는 반복거리를 찾아내면 벗어나려고 하지 않는다.</p>
+<p>cf__1 <strong>게임이야기</strong> ~<br>모바일시대에서는 복잡한 core action이 많이 들어간 게임은 상품성이 없다. (안좋은 예: 와우)<br>core action이 단순한 게임이 상품성이 좋다. 최근 rpg게임들은 단순하게 변했다. 한붓그리기도 이미 오래전에 누가 찾아낸 코어액션중에 하나이다. 재밌는 반복거리를 찾아내면 벗어나려고 하지 않는다.</p>
 </blockquote>
 <hr>
 <hr>
@@ -432,23 +431,29 @@
 <p>프로그램의 핵심은 데이터이다.</p>
 <ul>
 <li>거의 대부분의 프로그램들은 다 예쁜 데이터 view.</li>
-<li>개발자의 눈으로 보면 프로그램의 핵심은 데이터이다. </li>
+<li>개발자의 눈으로 보면 프로그램의 핵심은 데이터이다.</li>
 </ul>
 <h2 id="entity의-종류를-미리-파악하자-👀"><a href="#entity의-종류를-미리-파악하자-👀" class="headerlink" title="entity의 종류를 미리 파악하자. 👀"></a>entity의 종류를 미리 파악하자. 👀</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">column = <span class="number">8</span>;</span><br><span class="line">row = <span class="number">8</span>;</span><br><span class="line">blockTypes = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="title class_">Block</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line">  <span class="title function_">isNext</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line">  <span class="title function_">isValid</span>(<span class="params"></span>)&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="현실세계-entity에는-이-3가지-이외에는-발견하기-힘들다"><a href="#현실세계-entity에는-이-3가지-이외에는-발견하기-힘들다" class="headerlink" title="현실세계 entity에는 이 3가지 이외에는 발견하기 힘들다."></a>현실세계 entity에는 이 3가지 이외에는 발견하기 힘들다.</h3><ol>
-<li>스칼라 값<ul>
+<li>스칼라 값</li>
+</ol>
+<ul>
 <li>설정에 따라 자유롭게 크기를 변경할 수 있음.</li>
 <li>단일 값 </li>
 <li>가변적</li>
 <li>(한번에 하나의 값만 보유할 수 있는 원자량 <a href="https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC">from wiki</a>)</li>
 </ul>
-</li>
-<li>정의값<ul>
+<ol start="2">
+<li>정의값</li>
+</ol>
+<ul>
 <li>미리 정해진 타입이 존재한다.</li>
 <li>bolckTypes는 콜렉션 개념이 아니다.<br>집합을 정의한 개념이다. 하나의 값인것처럼.</li>
 </ul>
-</li>
-<li>객체값<ul>
+<ol start="3">
+<li>객체값</li>
+</ol>
+<ul>
 <li>생성되거나 삭제되고, 연결되거나 조건을 파악한다.</li>
 <li>블록을 객체로 보는 이유는 <strong>블록이 자신만의 책임을 위임할 수 있기 때문</strong>이다.<ul>
 <li>다음번에 올 수 있는 블록이니?</li>
@@ -458,8 +463,6 @@
 </li>
 <li>블록에는 자신만의 책임을 가질 수 있기 때문에 객체로 평가하게 된다.</li>
 </ul>
-</li>
-</ol>
 <blockquote>
 <p>UML을 깊이 공부하면 5가지 종류의 여러가지 entity과 관계가 나온다.</p>
 </blockquote>
@@ -479,26 +482,30 @@
 <hr>
 <p><a name="3-1"></a></p>
 <h2 id="3-1-객체-Block"><a href="#3-1-객체-Block" class="headerlink" title="3.1 [객체] Block"></a>3.1 [객체] Block</h2><ol>
-<li>클래스? 혹은 싱글톤 객체?<ul>
+<li>클래스? 혹은 싱글톤 객체?</li>
+</ol>
+<ul>
 <li>블록은 여러개 생성되므로 <strong>클래스</strong></li>
 </ul>
-</li>
+<ol start="2">
 <li>책임</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Block</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">type</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_type</span> = type;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">image</span>()&#123;<span class="keyword">return</span> <span class="string">`url(&#x27;img/<span class="subst">$&#123;<span class="variable language_">this</span>._type&#125;</span>.png&#x27;)`</span>;&#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">type</span>()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_type</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Block</span>.<span class="property">GET</span> = <span class="function">(<span class="params">type = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random()*<span class="number">5</span>)</span>) =&gt;</span> <span class="keyword">new</span> <span class="title class_">Block</span>(type);</span><br></pre></td></tr></table></figure>
 <ol>
-<li>자신만의 <strong>타입</strong>을 갖는다.<ul>
+<li>자신만의 <strong>타입</strong>을 갖는다.</li>
+</ol>
+<ul>
 <li><code>parseInt(Math.random()*5)</code>: 0 ~ 4 사이의 타입을 얻게됨</li>
 <li><strong>인자에 초기화 코드를 명시해주면<br>선언과 코드의 내용을 분리할 수 있어서 가독성이 좋아진다.</strong></li>
 </ul>
-</li>
-<li>타입에 따른 <strong>이미지 경로</strong>를 반환한다.<br>(타입에 따른 블록 이미지가 다르니까.. )</li>
+<ol start="2">
+<li>타입에 따른 <strong>이미지 경로</strong>를 반환한다.<br>  (타입에 따른 블록 이미지가 다르니까.. )</li>
 </ol>
 <h3 id="왜-factory-함수로-Block-GET"><a href="#왜-factory-함수로-Block-GET" class="headerlink" title="왜 factory 함수로? (Block.GET)"></a>왜 factory 함수로? (<code>Block.GET</code>)</h3><ul>
 <li>Block 클래스는 <strong>받아온 type을 자기 타입으로 기억하는데</strong>만 관심 있다. </li>
 <li>타입을 전달하지 않았을 때 어떻게 만드는지는<br><strong>엄밀하게 따지면 블럭의 지식은 아니다.</strong><ul>
 <li>블럭을 만드는 쪽이 관심 있다.<ul>
-<li>만드는 쪽이 관심있는 것과<br>만들어 지는 쪽이 관심있는 것이 다르다. </li>
+<li>만드는 쪽이 관심있는 것과<br>만들어 지는 쪽이 관심있는 것이 다르다.</li>
 </ul>
 </li>
 <li>랜덤함수는 팩토리 함수가 가져야할 지식이다.</li>
@@ -528,21 +535,22 @@
 <p><a name="3-2"></a></p>
 <h2 id="3-2-객체-Game"><a href="#3-2-객체-Game" class="headerlink" title="3.2 [객체] Game"></a>3.2 [객체] Game</h2><p>게임이라는 객체는 블록들을 소유하는 마스터 객체</p>
 <ol>
-<li><p>클래스이냐? 싱글톤 객체이냐?<br>게임은 하나의 객체만 있으면 된다. (바둑판 하나.)<br>구지 클래스로 선언하지 않고, 싱글톤 객체로 만든다.<br>=&gt; 싱글톤 객체</p>
+<li><p>클래스이냐? 싱글톤 객체이냐?<br>  게임은 하나의 객체만 있으면 된다. (바둑판 하나.)<br>  구지 클래스로 선언하지 않고, 싱글톤 객체로 만든다.<br>  &#x3D;&gt; 싱글톤 객체</p>
 </li>
-<li><p>책임<br>2번과 3번은 내부에서만 알면된다.</p>
-<ol>
-<li>초기화<br>필요한 정보를 바탕으로 게임 본체를 생성</li>
-<li>렌더링<br>그림 갱신</li>
-<li>이벤트 걸기<br>각 블록에서 이벤트를 처리</li>
-</ol>
+<li><p>책임<br>  2번과 3번은 내부에서만 알면된다.</p>
+</li>
+<li><p>초기화<br>필요한 정보를 바탕으로 게임 본체를 생성</p>
+</li>
+<li><p>렌더링<br>그림 갱신</p>
+</li>
+<li><p>이벤트 걸기<br>각 블록에서 이벤트를 처리</p>
 </li>
 <li><p>외부에서 게임의 어떤 상태만 알면 될까?</p>
+</li>
+</ol>
 <ul>
 <li>게임 초기화<br>함수만 하나 노출하면 됨</li>
 </ul>
-</li>
-</ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 게임은 초기화된 게임이 바로 생성되어야 하므로, 즉시실행함수로.</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Game</span> = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> init = ...</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> init;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
 
 <hr>
@@ -551,11 +559,13 @@
 <li>테이블 형태 정의</li>
 <li>테이블 생성</li>
 <li>테이블 내에 블록 데이터 채우기 (data)<br>2차원배열을 만들어야하기때문에<br>row와 column을 돌면서 생성한다.</li>
-<li>렌더링<ul>
+<li>렌더링</li>
+</ol>
+<ul>
 <li>data는 inMemory 객체</li>
 <li>render를 따로 호출하는 것은 네이티브 객체이기때문에(dom의 세상..)</li>
 </ul>
-</li>
+<ol start="5">
 <li>렌더링 전 table에 이벤트 걸기.</li>
 </ol>
 <hr>
@@ -574,21 +584,10 @@
 <p>배열을 루프돌아서<br>각각의 줄을 td를 갖는 tr로 바꿔서<br>table에 넣고 싶음.</p>
 <ul>
 <li>td를 갖는 tr로 <img src="/images/2019/12/04.png" style="width:20rem;"></li>
-<li>각각의 줄을 (td를 갖는) tr로 바꿔서 <img src="/images/2019/12/03.png" style="width:20rem;">
-</li>
+<li>각각의 줄을 (td를 갖는) tr로 바꿔서 <img src="/images/2019/12/03.png" style="width:20rem;"></li>
 </ul>
 <hr>
-<h5 id="cf-5-배열의-고차함수"><a href="#cf-5-배열의-고차함수" class="headerlink" title="cf__5. 배열의 고차함수"></a>cf__5. 배열의 고차함수</h5><p>배열의 고차함수를 쓰는 원리는 간단하다.</p>
-<ul>
-<li>루프돌고 싶으면 <code>forEach</code></li>
-<li>배열의 원소를 바꾼 배열을 얻고 싶으면 <code>map</code></li>
-<li>하나의 값으로 뭉치고 싶으면 <code>reduce</code><blockquote>
-<p>여러개의 집합을 하나의 스칼라값으로 바꾸는 것</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<p><a name="4-5"></a></p>
+<h5 id="cf-5-배열의-고차함수"><a href="#cf-5-배열의-고차함수" class="headerlink" title="cf__5. 배열의 고차함수"></a>cf__5. 배열의 고차함수</h5><h2 id="배열의-고차함수를-쓰는-원리는-간단하다-루프돌고-싶으면-forEach-배열의-원소를-바꾼-배열을-얻고-싶으면-map-하나의-값으로-뭉치고-싶으면-reduce-여러개의-집합을-하나의-스칼라값으로-바꾸는-것"><a href="#배열의-고차함수를-쓰는-원리는-간단하다-루프돌고-싶으면-forEach-배열의-원소를-바꾼-배열을-얻고-싶으면-map-하나의-값으로-뭉치고-싶으면-reduce-여러개의-집합을-하나의-스칼라값으로-바꾸는-것" class="headerlink" title="배열의 고차함수를 쓰는 원리는 간단하다.- 루프돌고 싶으면 forEach- 배열의 원소를 바꾼 배열을 얻고 싶으면 map- 하나의 값으로 뭉치고 싶으면 reduce  &gt; 여러개의 집합을 하나의 스칼라값으로 바꾸는 것"></a>배열의 고차함수를 쓰는 원리는 간단하다.<br>- 루프돌고 싶으면 <code>forEach</code><br>- 배열의 원소를 바꾼 배열을 얻고 싶으면 <code>map</code><br>- 하나의 값으로 뭉치고 싶으면 <code>reduce</code><br>  &gt; 여러개의 집합을 하나의 스칼라값으로 바꾸는 것</h2><p><a name="4-5"></a></p>
 <h3 id="5-table에-이벤트-걸기"><a href="#5-table에-이벤트-걸기" class="headerlink" title="5. table에 이벤트 걸기."></a>5. table에 이벤트 걸기.</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Game</span> = (<span class="function"><span class="params">_</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> column = <span class="number">8</span>, row = <span class="number">8</span>, blockSize = <span class="number">80</span>;</span><br><span class="line">  <span class="keyword">const</span> data = [];</span><br><span class="line">  <span class="keyword">let</span> table;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">init</span> = tid =&gt; &#123;</span><br><span class="line">    table = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(tid);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; row; i++)&#123;</span><br><span class="line">      <span class="keyword">const</span> r = [];</span><br><span class="line">      data.<span class="title function_">push</span>(r);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; column; j++) r[j] = <span class="title class_">Block</span>.<span class="title function_">GET</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    👇👇👇</span><br><span class="line">    table.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousedown&#x27;</span>, down);</span><br><span class="line">    table.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mouseup&#x27;</span>, up);</span><br><span class="line">    table.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mouseleave&#x27;</span>, up);</span><br><span class="line">    table.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mousemove&#x27;</span>, move);</span><br><span class="line">    👆👆👆</span><br><span class="line">    <span class="title function_">render</span>();</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">el</span> = tag =&gt; <span class="variable language_">document</span>.<span class="title function_">createElement</span>(tag);</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">render</span> = _ =&gt; &#123;...&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>mousedown<ul>
@@ -604,41 +603,28 @@
 </ul>
 </li>
 <li>mousemove<ul>
-<li>마우스가 엘리먼트에서 움직일 때 </li>
+<li>마우스가 엘리먼트에서 움직일 때</li>
 </ul>
 </li>
 </ul>
 <hr>
 <p><a name="4-5-1"></a></p>
-<h3 id="5-1-이벤트-gt-블럭을-누르는-순간-down"><a href="#5-1-이벤트-gt-블럭을-누르는-순간-down" class="headerlink" title="5.1 이벤트 &gt; 블럭을 누르는 순간: down"></a>5.1 이벤트 &gt; 블럭을 누르는 순간: down</h3><ol>
-<li><p>move는 mousedown인 상태여야 의미가 있다.<br><strong>down의 상태값</strong> 필요</p>
+<h3 id="5-1-이벤트-블럭을-누르는-순간-down"><a href="#5-1-이벤트-블럭을-누르는-순간-down" class="headerlink" title="5.1 이벤트 &gt; 블럭을 누르는 순간: down"></a>5.1 이벤트 &gt; 블럭을 누르는 순간: down</h3><ol>
+<li><p>move는 mousedown인 상태여야 의미가 있다.<br>  <strong>down의 상태값</strong> 필요</p>
 </li>
-<li><p>현재 눌러진 블록의 위치값 알아야함.<br>event로부터 x,y값 전체좌표를 받아와서<br>x, y좌표를 이용해서 테이블 내에서 몇번째 블록인지, 데이터로 치환하게 된다.</p>
-<p>현재 눌러진 블록이 첫 시작? 아니면 중간?</p>
-<ol>
-<li>시작 블록<ul>
-<li>지금 선택이 시작되는 블록</li>
-<li>라이언타입이면 계속 라이언 타입</li>
-<li>시작값은 왜 알아야하지?<ul>
-<li>돌아가기도 해야함.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>현재 블록<ul>
-<li>move할때마다 변함 (cursor와 같은)</li>
-</ul>
+<li><p>현재 눌러진 블록의 위치값 알아야함.<br>  event로부터 x,y값 전체좌표를 받아와서<br>  x, y좌표를 이용해서 테이블 내에서 몇번째 블록인지, 데이터로 치환하게 된다.</p>
 </li>
 </ol>
-</li>
-</ol>
+<p>  현재 눌러진 블록이 첫 시작? 아니면 중간?<br>    1. 시작 블록<br>      - 지금 선택이 시작되는 블록<br>      - 라이언타입이면 계속 라이언 타입<br>      - 시작값은 왜 알아야하지?<br>        - 돌아가기도 해야함.<br>    2. 현재 블록<br>      - move할때마다 변함 (cursor와 같은)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">down</span> = e =&gt; &#123;</span><br><span class="line">  <span class="comment">// down된 상태를 활성</span></span><br><span class="line">  <span class="comment">// x, y로부터 block 데이터를 얻음</span></span><br><span class="line">  <span class="comment">// 위에서 얻은 블록을 시작블록 및 현재 블록으로 설정하고 선택목록에 포함시킴.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li>down의 상태값<ul>
+<li>down의 상태값</li>
+</ol>
+<ul>
 <li>down이 아닐때만 down.</li>
 </ul>
-</li>
+<ol start="2">
 <li>어떤 블록이 선택되어있는지.</li>
 <li>x,y값을 넣으면 몇번째인지 알아낼 수 있는 함수</li>
 </ol>
@@ -649,39 +635,34 @@
 <li><strong>네이티브 레이어를 최대한 줄이는 것.</strong></li>
 <li>네이티브의 정보 중에 필요한 핵심정보만 이용해서 즉시 인메모리 객체로 바꿈.</li>
 <li>네이티브의 코드가 많이 퍼져있으면 퍼져있을수록<br>더욱더 다루기 어렵고<br>더욱더 컨버팅하기 어렵게 된다.</li>
-<li>네이티브 코드중에 필요한 부분만 추출해서 =&gt; 즉시 인메모리 객체로 바꾸고</li>
+<li>네이티브 코드중에 필요한 부분만 추출해서 &#x3D;&gt; 즉시 인메모리 객체로 바꾸고</li>
 <li>나머지 로직은 인메모리에서 수용하도록 함.</li>
 </ul>
 <blockquote>
 <p>좋은 개발자<br>말하면 코드로 옮기는 것이 리얼타임이 될때까지.. 훈련하자.<br>좋은 개발자는 제어문을 잘쓰거나, 코드를 한국어로 번역하거나 한국어를 코드로 번역하는 능력에 달려있다.<br>숙련을 많이 해서 실시간으로.</p>
 </blockquote>
 <hr>
-<h4 id="5-cf-네이티브-코드-gt-인메모리-객체로-변환"><a href="#5-cf-네이티브-코드-gt-인메모리-객체로-변환" class="headerlink" title="5.cf 네이티브 코드 =&gt; 인메모리 객체로 변환"></a>5.cf 네이티브 코드 =&gt; 인메모리 객체로 변환</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 네이티브 객체의 값을 =&gt; 인메모리 객체로 변환해주는 변환기 !</span></span><br><span class="line"><span class="comment">// 많이 나옴.</span></span><br><span class="line"><span class="keyword">const</span> getBlock = (<span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span>): <span class="function"><span class="params">Block</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">top</span>: T, <span class="attr">left</span>: L &#125; = table.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">  <span class="keyword">if</span> (x &lt; L || x &gt; L + blockSize * row || y &lt; T || y &gt; T + blockSize * column)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 바둑판 범위를 넘는 경우 제외(왼쪽넘어, 오른쪽넘어, 위쪽넘어, 아래쪽 넘어)</span></span><br><span class="line">  <span class="keyword">return</span> data[<span class="built_in">parseInt</span>(y - T) / blockSize][<span class="built_in">parseInt</span>(x - L) / blockSize];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="5-cf-네이티브-코드-인메모리-객체로-변환"><a href="#5-cf-네이티브-코드-인메모리-객체로-변환" class="headerlink" title="5.cf 네이티브 코드 &#x3D;&gt; 인메모리 객체로 변환"></a>5.cf 네이티브 코드 &#x3D;&gt; 인메모리 객체로 변환</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 네이티브 객체의 값을 =&gt; 인메모리 객체로 변환해주는 변환기 !</span></span><br><span class="line"><span class="comment">// 많이 나옴.</span></span><br><span class="line"><span class="keyword">const</span> getBlock = (<span class="attr">x</span>: <span class="built_in">number</span>, <span class="attr">y</span>: <span class="built_in">number</span>): <span class="function"><span class="params">Block</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">top</span>: T, <span class="attr">left</span>: L &#125; = table.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">  <span class="keyword">if</span> (x &lt; L || x &gt; L + blockSize * row || y &lt; T || y &gt; T + blockSize * column)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 바둑판 범위를 넘는 경우 제외(왼쪽넘어, 오른쪽넘어, 위쪽넘어, 아래쪽 넘어)</span></span><br><span class="line">  <span class="keyword">return</span> data[<span class="built_in">parseInt</span>(y - T) / blockSize][<span class="built_in">parseInt</span>(x - L) / blockSize];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>getBoundingClientRect</code><br>Element.getBoundingClientRect() 메서드는<br>요소의 크기와 요소의 viewport에서의 상대적인 위치를 반환합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DOMRect </span><br><span class="line">&#123; x: 0, </span><br><span class="line">  y: 0, </span><br><span class="line">  width: 0, </span><br><span class="line">  height: 0, </span><br><span class="line">  top: 0, </span><br><span class="line">  bottom: 0, </span><br><span class="line">  left: 0, </span><br><span class="line">  right: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li><code>getBoundingClientRect</code><br>Element.getBoundingClientRect() 메서드는<br>요소의 크기와 요소의 viewport에서의 상대적인 위치를 반환합니다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DOMRect </span><br><span class="line">&#123; x: 0, </span><br><span class="line">  y: 0, </span><br><span class="line">  width: 0, </span><br><span class="line">  height: 0, </span><br><span class="line">  top: 0, </span><br><span class="line">  bottom: 0, </span><br><span class="line">  left: 0, </span><br><span class="line">  right: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <hr>
 <p><a name="4-5-2"></a></p>
-<h3 id="5-2-이벤트-gt-블럭을-떼는-순간-up"><a href="#5-2-이벤트-gt-블럭을-떼는-순간-up" class="headerlink" title="5.2 이벤트 &gt; 블럭을 떼는 순간: up"></a>5.2 이벤트 &gt; 블럭을 떼는 순간: up</h3><p>코어액션이 여기서 다 일어난다.</p>
+<h3 id="5-2-이벤트-블럭을-떼는-순간-up"><a href="#5-2-이벤트-블럭을-떼는-순간-up" class="headerlink" title="5.2 이벤트 &gt; 블럭을 떼는 순간: up"></a>5.2 이벤트 &gt; 블럭을 떼는 순간: up</h3><p>코어액션이 여기서 다 일어난다.</p>
 <ol>
 <li>down을 해제</li>
 <li>선택목록이 3이상이면 삭제 실시</li>
 <li>2이하면 리셋</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">up</span> = e =&gt; &#123;</span><br><span class="line">  <span class="comment">// down을 해제</span></span><br><span class="line">  <span class="comment">// 선택목록이 3이상이면 삭제 실시</span></span><br><span class="line">  <span class="comment">// 2이하면 리셋</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="5-2-0-reset"><a href="#5-2-0-reset" class="headerlink" title="5.2.0 reset"></a>5.2.0 reset</h4><p>선택항목이 2이하면 모두 초기화시킨다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">up</span> = _ =&gt; selected.<span class="property">length</span> &gt; <span class="number">2</span> ? <span class="title function_">remove</span>() : <span class="title function_">reset</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reset</span> = _ =&gt; &#123;</span><br><span class="line">  startBlock = currBlock = <span class="literal">null</span>;</span><br><span class="line">  selected.<span class="property">length</span> = <span class="number">0</span>;</span><br><span class="line">  isDown = <span class="literal">false</span>;</span><br><span class="line">  <span class="title function_">render</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h5 id="cf-7-쉬운것부터-짜자"><a href="#cf-7-쉬운것부터-짜자" class="headerlink" title="cf__7. 쉬운것부터 짜자!"></a>cf__7. 쉬운것부터 짜자!</h5><p>쉬운 것은 의존성이 없다. 고칠 일이 적다.<br>복잡한 것부터 짜면 의존성이 많은 것부터 짜게 되고,<br>나중에 깨달은게 많을수록 더 많이 고치게 된다.</p>
+<h4 id="5-2-0-reset"><a href="#5-2-0-reset" class="headerlink" title="5.2.0 reset"></a>5.2.0 reset</h4><h2 id="선택항목이-2이하면-모두-초기화시킨다"><a href="#선택항목이-2이하면-모두-초기화시킨다" class="headerlink" title="선택항목이 2이하면 모두 초기화시킨다."></a>선택항목이 2이하면 모두 초기화시킨다.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">up</span> = _ =&gt; selected.<span class="property">length</span> &gt; <span class="number">2</span> ? <span class="title function_">remove</span>() : <span class="title function_">reset</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reset</span> = _ =&gt; &#123;</span><br><span class="line">  startBlock = currBlock = <span class="literal">null</span>;</span><br><span class="line">  selected.<span class="property">length</span> = <span class="number">0</span>;</span><br><span class="line">  isDown = <span class="literal">false</span>;</span><br><span class="line">  <span class="title function_">render</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h5 id="cf-7-쉬운것부터-짜자"><a href="#cf-7-쉬운것부터-짜자" class="headerlink" title="cf__7. 쉬운것부터 짜자!"></a>cf__7. 쉬운것부터 짜자!</h5><p>쉬운 것은 의존성이 없다. 고칠 일이 적다.<br>복잡한 것부터 짜면 의존성이 많은 것부터 짜게 되고,<br>나중에 깨달은게 많을수록 더 많이 고치게 된다.</p>
 <hr>
 <ol>
-<li>선택된 블록들을 지워주고 =&gt; remove</li>
-<li>떨어뜨린 다음에 =&gt; drop</li>
-<li>새로 생성하고 =&gt; readyToFill</li>
-<li>다시 내려와주면서, 합쳐줘야함. =&gt; fill </li>
+<li>선택된 블록들을 지워주고 &#x3D;&gt; remove</li>
+<li>떨어뜨린 다음에 &#x3D;&gt; drop</li>
+<li>새로 생성하고 &#x3D;&gt; readyToFill</li>
+<li>다시 내려와주면서, 합쳐줘야함. &#x3D;&gt; fill</li>
 </ol>
 <p><a name="4-5-2-1"></a></p>
 <h4 id="5-2-1-remove-😫😫"><a href="#5-2-1-remove-😫😫" class="headerlink" title="5.2.1 remove 😫😫"></a>5.2.1 remove 😫😫</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">remove</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">/* 데이터 내부의 row를 돌면서</span></span><br><span class="line"><span class="comment">    해당 row에 선택된 요소가 존재하면 null로 만드는 함수.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  data.<span class="title function_">forEach</span>(<span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">    selected.<span class="title function_">forEach</span>(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> i;</span><br><span class="line">      <span class="keyword">if</span> ((i = r.<span class="title function_">indexOf</span>(v)) !== -<span class="number">1</span>) r[i] = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="title function_">render</span>();</span><br><span class="line">  <span class="built_in">setTimeout</span>(drop, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -700,15 +681,15 @@
 <hr>
 <p>채울준비를 하는 것은 밖에부터 채워야하는 애들이 예쁘게 내려오게 하기 위해서.</p>
 <ol>
-<li>지워진 모양 그대로의 형태가 위에 형성되고 =&gt; readyToFill</li>
-<li>해당 형태가 떨어지는 상황 =&gt; fill</li>
+<li>지워진 모양 그대로의 형태가 위에 형성되고 &#x3D;&gt; readyToFill</li>
+<li>해당 형태가 떨어지는 상황 &#x3D;&gt; fill</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fills = [];</span><br><span class="line"><span class="comment">// fill 배열 초기화</span></span><br><span class="line"><span class="comment">// column은 똑같고, row만 계산해서 생성하면 됨.</span></span><br><span class="line"><span class="comment">// 실제 fills의 길이와 채워진 카운팅이 같게되면 다 채워졌다고 볼 예정 </span></span><br><span class="line"><span class="keyword">let</span> fillCnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">readyToFill</span> = _ =&gt; &#123;</span><br><span class="line">  fills.<span class="property">length</span> = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">  <span class="comment">// data를 돌면서 구멍난 부분을 찾는다.</span></span><br><span class="line">  data.<span class="title function_">some</span>(<span class="function"><span class="params">row</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (row.<span class="title function_">indexOf</span>(<span class="literal">null</span>) === -<span class="number">1</span>) <span class="keyword">return</span> ture; <span class="comment">// 구멍없는 row면 끝냄.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> r = [...row].<span class="title function_">fill</span>(<span class="literal">null</span>); <span class="comment">// 새로운 row를 만들어서 우선 null로 채움</span></span><br><span class="line">    fills.<span class="title function_">push</span>(r);</span><br><span class="line">    row.<span class="title function_">forEach</span>(<span class="function">(<span class="params">v, i</span>) =&gt;</span> !v &amp;&amp; (r[i] = <span class="title class_">Block</span>.<span class="title function_">GET</span>())); </span><br><span class="line">    <span class="comment">// v가 없으면 해당 구멍에 block으로 채움 </span></span><br><span class="line">  &#125;);</span><br><span class="line">  fillCnt = <span class="number">0</span>; <span class="comment">// ?</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(fill, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fill</span> = _ =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (fillCnt &gt; fills.<span class="property">length</span>) &#123; </span><br><span class="line">    <span class="comment">// fillCnt가 증가하다가 fills의 length와 일치하면 그만둘 때 </span></span><br><span class="line">    isDown = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; fillCnt; i++) &#123;</span><br><span class="line">    <span class="comment">// 채워야하는 fill 배열의 row에서 해당 요소가 null이 아니라 채워져있으면(v), </span></span><br><span class="line">    <span class="comment">// data의 해당 요소에 v를 넣는다.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// fills에 있는 마지막줄부터 윗줄을 채워가면 된다..</span></span><br><span class="line">    fills[fills.<span class="property">length</span> - i - <span class="number">1</span>].<span class="title function_">forEach</span>(<span class="function">(<span class="params">v, j</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (v) data[fillCnt - i - <span class="number">1</span>][j] = v;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  fillCnt++;</span><br><span class="line">  <span class="title function_">render</span>();</span><br><span class="line">  <span class="built_in">setTimeout</span>(fill, <span class="number">300</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <hr>
 <p><a name="4-5-3"></a></p>
-<h3 id="5-3-이벤트-gt-블럭을-down하면서-움직이는-상태-move"><a href="#5-3-이벤트-gt-블럭을-down하면서-움직이는-상태-move" class="headerlink" title="5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move"></a>5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move</h3><p>누른상태에서 다음(혹은 이전) 블럭으로 움직이는 상태</p>
+<h3 id="5-3-이벤트-블럭을-down하면서-움직이는-상태-move"><a href="#5-3-이벤트-블럭을-down하면서-움직이는-상태-move" class="headerlink" title="5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move"></a>5.3 이벤트 &gt; 블럭을 down하면서 움직이는 상태: move</h3><p>누른상태에서 다음(혹은 이전) 블럭으로 움직이는 상태</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">move</span> = e =&gt; &#123;</span><br><span class="line">  <span class="comment">// down이 아니라면 이탈</span></span><br><span class="line">  <span class="comment">// x,y 위치의 블록을 얻음</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 이전 블록의 타입이 같고 인접되어있는지 검사</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 선택목록에 없으면 추가</span></span><br><span class="line">    <span class="comment">// 위에서 얻은 블록이 선택목록에 있다면 전전 블록일 경우 하나 삭제</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">move</span> = (<span class="params">&#123; pageX: x, pageY: y &#125;</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDown) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> curr = <span class="title function_">getBlock</span>(x, y);</span><br><span class="line">  <span class="keyword">if</span> (!crr || curr.<span class="property">type</span> !== startBlock.<span class="property">type</span> || !<span class="title function_">isNext</span>(curr)) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> (selected.<span class="title function_">indexOf</span>(curr) == -<span class="number">1</span>) selected.<span class="title function_">push</span>(curr);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (selected[selected.<span class="property">length</span> - <span class="number">1</span>] == curr) selected.<span class="title function_">pop</span>();</span><br><span class="line">  currBlock = curr;</span><br><span class="line">  <span class="title function_">render</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 받아오는 curr 블럭과 cache해놓은 curr 블럭을 비교하여 인접해있는지 검사.</span></span><br><span class="line"><span class="comment">// 나와 위치가 한개 차이 난다는 것. x로 하나 차이 혹은 y로 하나 차이</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">isNext</span> = curr =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> r0,</span><br><span class="line">    c0,</span><br><span class="line">    r1,</span><br><span class="line">    c1,</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* data에서 들어온 </span></span><br><span class="line"><span class="comment">    curr의 x인덱스, y인덱스와 </span></span><br><span class="line"><span class="comment">    currBlock의 x인덱스와 y인덱스를 구하는 방법. </span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  data.<span class="title function_">some</span>(<span class="function">(<span class="params">row, i</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> j;</span><br><span class="line">    <span class="keyword">if</span> ((j = row.<span class="title function_">indexOf</span>(currBlock)) !== -<span class="number">1</span>) (r0 = i), (c0 = j), cnt++;</span><br><span class="line">    <span class="keyword">if</span> ((j = row.<span class="title function_">indexOf</span>(curr)) !== -<span class="number">1</span>) (r1 = i), (c1 = j), cnt++;</span><br><span class="line">    <span class="keyword">return</span> cnt === <span class="number">2</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    curr !== currBlock &amp;&amp; (<span class="title class_">Math</span>.<span class="title function_">abs</span>(r0 - r1) === <span class="number">1</span> || <span class="title class_">Math</span>.<span class="title function_">abs</span>(c0 - c1) === <span class="number">1</span>)</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -738,7 +719,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/23/OOP_08_2/" data-id="ckzv7cqja008fqobm2ihiwg0f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/23/OOP_08_2/" data-id="cm3u7mj1z007rhwb26qa685u0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

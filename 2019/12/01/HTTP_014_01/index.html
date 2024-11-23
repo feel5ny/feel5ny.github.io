@@ -420,8 +420,7 @@
 <li>HTTPS는 HTTP의 하부에 전송 레벨 암호 보안 계층에 의해 동작한다.</li>
 </ol>
 </li>
-<li>이 보안계층은<br>안전소켓계층, (Secure Sockets Layer, <strong>SSL</strong>)
-전송 계층 보안(Transport Layer Security, <strong>TLS</strong>)을 이용하여 구현된다.<ul>
+<li>이 보안계층은<br>안전소켓계층, (Secure Sockets Layer, <strong>SSL</strong>)<br>전송 계층 보안(Transport Layer Security, <strong>TLS</strong>)을 이용하여 구현된다.<ul>
 <li>네스케이프에 의해서 SSL이 발명되었고, 이것이 점차 폭넓게 사용되다가<br>표준화 기구인 IETF의 관리로 변경되면서 <strong>TLS</strong>라는 이름으로 바뀌었다.<br>TLS 1.0은 SSL 3.0을 계승한다.<br>하지만 TLS라는 이름보다 SSL이라는 이름이 훨씬 많이 사용되고 있다.</li>
 </ul>
 </li>
@@ -445,7 +444,7 @@
 <a name="cryptography"/>
 
 <h2 id="1-비밀코드의-기술과-과학"><a href="#1-비밀코드의-기술과-과학" class="headerlink" title="1. 비밀코드의 기술과 과학"></a>1. 비밀코드의 기술과 과학</h2><p>암호법 cryptography는 메세지 인코딩과 디코딩에 대한 과학이자 기술이다.</p>
-<h3 id="비밀-메세지-도청-변조-방지-저자-증명"><a href="#비밀-메세지-도청-변조-방지-저자-증명" class="headerlink" title="비밀 메세지 / 도청, 변조 방지 / 저자 증명"></a>비밀 메세지 / 도청, 변조 방지 / 저자 증명</h3><ul>
+<h3 id="비밀-메세지-도청-변조-방지-저자-증명"><a href="#비밀-메세지-도청-변조-방지-저자-증명" class="headerlink" title="비밀 메세지 &#x2F; 도청, 변조 방지 &#x2F; 저자 증명"></a>비밀 메세지 &#x2F; 도청, 변조 방지 &#x2F; 저자 증명</h3><ul>
 <li>사람들은 암호법의 방법론을 <strong>비밀 메세지</strong>를 보내는데에 적용해 왔다.</li>
 <li><strong>도청</strong>이나 메세지의 <strong>변조를 방지</strong>하기 위해 사용할 수 있다.</li>
 <li>암호법은 누군가가 정말로 어떤 메세지나 트랜잭션의 저자임을 <strong>증명</strong>하는 데도 사용될 수 있다.</li>
@@ -455,8 +454,7 @@
 
 <h2 id="2-암호-cipher"><a href="#2-암호-cipher" class="headerlink" title="2. 암호 cipher"></a>2. 암호 cipher</h2><ul>
 <li>암호법은 암호라 불리는 비밀코드에 기반한다.</li>
-<li>암호란,<br><strong>메세지를 인코딩하는 어떤 특정한 방법</strong>과 
-<strong>그 비밀 메세지를 디코딩하는 방법</strong>이다.</li>
+<li>암호란,<br><strong>메세지를 인코딩하는 어떤 특정한 방법</strong>과<br><strong>그 비밀 메세지를 디코딩하는 방법</strong>이다.</li>
 <li><code>텍스트, 평문</code>: 인코딩 되기 전의 <strong>원본</strong> 메세지</li>
 <li><code>암호문</code>: 암호가 적용되어 <strong>코딩</strong>된 메세지</li>
 </ul>
@@ -474,24 +472,22 @@
 <h3 id="2-3-디지털-암호"><a href="#2-3-디지털-암호" class="headerlink" title="2.3 디지털 암호"></a>2.3 디지털 암호</h3><ul>
 <li>디지털 계산의 도래로, 두가지 발전이 있다<ol>
 <li>복잡한 인코딩과 디코딩 알고리즘이 가능해졌다.</li>
-<li>단일 암호 알고리즘으로 <ul>
+<li>단일 암호 알고리즘으로</li>
+</ol>
+<ul>
 <li>키의 값마다<br>서로 다른 수조 개의 <strong>가상 암호 알고리즘</strong>을 만들어낼 수 있게 되었다. </li>
 <li>키가 길수록 인코딩의 많은 조합이 가능해지고,<br>무작위로 추측한 키에 의한 크래킹이 어려워진다.</li>
 </ul>
 </li>
-</ol>
-</li>
 <li>평문메세지 <code>P</code>, 인코딩 함수 <code>E</code>, 디지털 인코딩 키 <code>e</code>가 주어지면 부호화된 암호문 <code>C</code>를 생성할 수 있다.</li>
-<li>암호문 <code>C</code>를 디코더 함수 <code>D</code>와 디코딩 키 <code>d</code>를 사용해서 원래의 평문 <code>P</code>로 도로 디코딩할 수 있다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = E(P,e)</span><br><span class="line">P = D(C,d)</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>암호문 <code>C</code>를 디코더 함수 <code>D</code>와 디코딩 키 <code>d</code>를 사용해서 원래의 평문 <code>P</code>로 도로 디코딩할 수 있다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = E(P,e)</span><br><span class="line">P = D(C,d)</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <a name="symmetry"/>
 
 <h2 id="3-대칭키-암호법"><a href="#3-대칭키-암호법" class="headerlink" title="3. 대칭키 암호법"></a>3. 대칭키 암호법</h2><ul>
 <li>많은 디지털 암호 알고리즘은 대칭키 암호라고 불림</li>
-<li>인코딩을 할 때 사용하는 키가 디보딩을 할 때와 같기 때문 (e = d, k라 부르자)</li>
+<li>인코딩을 할 때 사용하는 키가 디보딩을 할 때와 같기 때문 (e &#x3D; d, k라 부르자)</li>
 <li>대칭키 암호에서, 발송자와 수신자 모두 통신을 위해 비밀키 k를 똑같이 공유할 필요가 있다.<ul>
 <li>발송자는 공유된 비밀 키로 메세지를 암호화하고 그 결과인 암호문을 수신자에게 발송하기 위해 사용한다.</li>
 <li>수신자도 암호문을 키를 사용하여 원래의 평문으로 복원한다.</li>
@@ -499,7 +495,7 @@
 </li>
 <li>잘 알려진 대칭키 암호 알고리즘<ul>
 <li>DES(Data Encryption Standard), Triple-DES, RC2, RC4</li>
-<li>DES는 취약하다는 결론 =&gt; 요즘은 AES를 사용한다.</li>
+<li>DES는 취약하다는 결론 &#x3D;&gt; 요즘은 AES를 사용한다.</li>
 <li><strong><a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80">AES</a></strong>, Advanced Encryption Standard: 고급 암호화 표준</li>
 </ul>
 </li>
@@ -524,7 +520,7 @@
 <ol>
 <li>‘this is the plain text’ 문자열이 들어간 plaintext.txt가 만들어진다</li>
 <li>plaintext.txt 안의(<code>-in</code>) 내용들을 des3방식으로 암호화를 하고, ciphertext.bin이라는 파일로 산출할(<code>-out</code>) 것이다 라는 뜻.</li>
-<li>비밀번호를 요구하는 input이 나온다. =&gt; 요게 <strong><code>대칭키</code>!</strong></li>
+<li>비밀번호를 요구하는 input이 나온다. &#x3D;&gt; 요게 <strong><code>대칭키</code>!</strong></li>
 </ol>
 <img src="/images/2019/44/04.png"/>
 
@@ -556,7 +552,7 @@
 </ol>
 </li>
 <li>이 모둔 요구를 만족하는 공개키 암호 체계중 유명한 하나는<br>RSA 알고리즘이다. <ul>
-<li>= Ribest Shamir Adelman / 발명한 세 명의 이름 첫글자를 따온 이름</li>
+<li>&#x3D; Ribest Shamir Adelman &#x2F; 발명한 세 명의 이름 첫글자를 따온 이름</li>
 </ul>
 </li>
 </ul>
@@ -580,36 +576,40 @@
 <h3 id="5-1-서명은-암호-체크섬이다"><a href="#5-1-서명은-암호-체크섬이다" class="headerlink" title="5.1 서명은 암호 체크섬이다."></a>5.1 서명은 암호 체크섬이다.</h3><ul>
 <li>디지털 서명은 <strong>메세지에 붙어있는 특별한 암호 체크섬</strong>이다.</li>
 <li>두가지 이점이 있다.<ol>
-<li>서명은 메세지를 작성한 <strong>저자가 누군지</strong> 알려준다.<ul>
+<li>서명은 메세지를 작성한 <strong>저자가 누군지</strong> 알려준다.</li>
+</ol>
+<ul>
 <li>저자는 저자의 극비 개인 키를 갖고 있기 때문에,<br>오직 저자만이 이 체크섬을 계산할 수 있다. </li>
 <li>체크섬은 저자의 개인 서명처럼 동작한다.</li>
 </ul>
-</li>
-<li>서명은 <strong>메세지 위조를 방지한다.</strong><ul>
+<ol start="2">
+<li>서명은 <strong>메세지 위조를 방지한다.</strong></li>
+</ol>
+<ul>
 <li>송신 중에 누군가 메세지를 수정했다면,<br>체크섬은 더 이상 그 메세지와 맞지 않게 될 것이다.</li>
 <li>체크섬은 저자의 비밀 개인 키에 관련되어 있기 때문에<br>침입자는 그 위조된 메세지에 대한 올바른 체크섬을 날조해낼 수 없을 것이다.</li>
 </ul>
-</li>
-</ol>
 </li>
 <li>디지털 서명은 보통 <strong>비대칭 공개키</strong>에 의해 생성된다.</li>
 <li>개인 키는 오직 소유자만이 알고 있기 때문에<br>저자의 개인 키는 일종의 <strong>지문</strong>처럼 사용된다.</li>
 </ul>
 <h4 id="예시"><a href="#예시" class="headerlink" title="예시"></a>예시</h4><p>노드A가 노드B에게 메세지를 보내고, 그것을 서명하는 전체 플로우.</p>
 <ol>
-<li>노드 A는 가변 길이 메세지를 정제하여<br>고정된 길이의 digest로 만든다.</li>
-<li>노드 A는 그 digest에 <strong>서명</strong> 함수를 적용한다.<br>(서명함수: <strong>사용자의 개인 키를 매개변수</strong>로 하는 함수)<ul>
+<li>노드 A는 가변 길이 메세지를 정제하여<br>  고정된 길이의 digest로 만든다.</li>
+<li>노드 A는 그 digest에 <strong>서명</strong> 함수를 적용한다.<br>  (서명함수: <strong>사용자의 개인 키를 매개변수</strong>로 하는 함수)</li>
+</ol>
+<ul>
 <li>오직 그 사용자만이 개인 키를 알고 있기 때문에,<br><strong>올바른 서명 함수는 서명자가 소유자임을 보여준다.</strong></li>
 <li>서명함수가 이미 개인 키를 입력으로 취했기 때문에 <strong>디코더 함수</strong>를 사용한다.</li>
 </ul>
-</li>
-<li>한번 서명이 계산되면,<br>노드 A는 그것을 메세지의 끝에 덧붙이고,<br>메세지와 그에 대한 설명을 둘다 노드 B에 전송한다.</li>
-<li>메세지를 받은 노드 B가,<br>만약 그 메세지를 쓴 것이 정말로 노드 A이며,<br>위조되지도 않았다는 것을 확인하길 원한다면,<br>노드 B는 서명을 검사할 수 있다.<ul>
+<ol start="3">
+<li>한번 서명이 계산되면,<br>  노드 A는 그것을 메세지의 끝에 덧붙이고,<br>  메세지와 그에 대한 설명을 둘다 노드 B에 전송한다.</li>
+<li>메세지를 받은 노드 B가,<br>  만약 그 메세지를 쓴 것이 정말로 노드 A이며,<br>  위조되지도 않았다는 것을 확인하길 원한다면,<br>  노드 B는 서명을 검사할 수 있다.</li>
+</ol>
+<ul>
 <li>노드 B는 개인 키로 알아보기 어렵게 변형된 서명에<br><strong>공개키를 이용한 역함수를 적용한다.</strong></li>
 <li>만약 풀어낸 요약이 노드 B가 갖고 있는 버전의 요약과 일치하지 않는다면, 메세지가 송신 중에 위조되었거나, 아니면 발송자가 노드 A의 개인 키를 갖고 있지 않은 것이다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <a name="certs"/>
 
@@ -643,7 +643,7 @@
 <li>여러가지 미묘하게 다른 스타일의 디지털 인증서들이 존재한다.</li>
 <li>오늘날 사용되는 대부분의 인증서가<br><strong><code>X.509</code>라 불리는 표준화된 서식</strong>에 그들의 정보를 저장하고 있다는 것이다.</li>
 <li><strong>공인인증서 대부분은 <code>X.509</code> 인증서 표준을 기반으로 한다.</strong></li>
-<li><code>X.509</code>기반 인증서에는<br>웹서버 인증서 / 클라 이메일 인증서 / 스프트웨어 코드사인 인증서 / 인증기관 인증서를 비롯한 몇가지 변종이 있다. </li>
+<li><code>X.509</code>기반 인증서에는<br>웹서버 인증서 &#x2F; 클라 이메일 인증서 &#x2F; 스프트웨어 코드사인 인증서 &#x2F; 인증기관 인증서를 비롯한 몇가지 변종이 있다. </li>
 <li><code>X.509</code> v3 인증서는<br>인증 정보를 파싱 가능한 필드에 넣어 구조화하는 표준화된 방법을 제공한다.</li>
 </ul>
 <hr>
@@ -659,7 +659,7 @@
 <li><strong>발급자의 고유 ID</strong>: 발급자의 이름이 겹치는 경우를 대비한, 인증서 발급자에 대한 선택적인 고유한 식별자</li>
 <li><strong>대상의 고유 ID</strong>: 대상의 이름이 겹치는 경우를 대비한, 인증 대상에 대한 선택적인 고유한 식별자</li>
 <li><strong>확장</strong>: 각 확장 필드는 중요한 것인지 그렇지 않은지가 표시되어 있음<ul>
-<li>기본제약 / 인증서 정책 / 키 사용</li>
+<li>기본제약 &#x2F; 인증서 정책 &#x2F; 키 사용</li>
 </ul>
 </li>
 <li><strong>인증기관 서명</strong>: 인증기관의 디지털 서명, 명시된 서명 알고리즘을 사용한다.</li>
@@ -682,8 +682,7 @@
 </blockquote>
 <ul>
 <li>브라우저가 인증서를 받으면, 서명 기관을 검사한다.</li>
-<li>만약 그 기관이 신뢰할만한 서명 기관이라면,<br>브라우저는 그것의 공개키를 이미 알고 있을 것이며<br><strong>(브라우저들은 여러 서명 기관의 인증서가 미리 설치된 채로 출하된다)</strong>, 
-브라우저는 그 서명을 검증할 수 있다.</li>
+<li>만약 그 기관이 신뢰할만한 서명 기관이라면,<br>브라우저는 그것의 공개키를 이미 알고 있을 것이며<br><strong>(브라우저들은 여러 서명 기관의 인증서가 미리 설치된 채로 출하된다)</strong>,<br>브라우저는 그 서명을 검증할 수 있다.</li>
 <li>만약 서명 기관이 모르는 곳이라면,<br>브라우저는 그 서명 기관을 신뢰해야 할지 확신할 수 없으므로,<br>대개 사용자가 서명 기관을 신뢰하는지 확인하기 위한<br>대화상자를 보여준다.</li>
 </ul>
 <img src="/images/2019/44/03.jpg"/>
@@ -691,7 +690,7 @@
 
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -722,7 +721,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_014_01/" data-id="ckzv7cqg8003uqobminsl5osq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_014_01/" data-id="cm3u7mj1k003nhwb2giyubp6p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

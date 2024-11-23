@@ -366,12 +366,12 @@
 <li>Purity (순수성, 데이터 플로우의 취급)<ul>
 <li>Immutable Data (불변성)</li>
 <li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Referential Transparency</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Lazy Evaluation</a> </li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Lazy Evaluation</a></li>
 </ul>
 </li>
 <li>Recursion</li>
 <li>커링</li>
-<li>bind (with call/apply)</li>
+<li>bind (with call&#x2F;apply)</li>
 <li>래퍼</li>
 <li>반복함수</li>
 </ul>
@@ -381,13 +381,13 @@
 <p><strong>FP의 목적</strong></p>
 <ol>
 <li>함수형 프로그래밍이 수학에서 출발한 문제 해결 방법론이므로 수학문제를 프로그래밍으로 해결하는 데 있어서 상당한 이득을 볼 수 있다.</li>
-<li>상태 변경과 가변 데이터를 피하려는.<ul>
+<li>상태 변경과 가변 데이터를 피하려는.</li>
+</ol>
+<ul>
 <li>FP의 목적은 상태 변경을 피하는 것이다.</li>
 <li>FP에서는 변수를 모든 오류의 근본적인 원인으로 치부한다.누군가에 의해 변수의 값이 변경되기 때문에 이로 인해 오류가 더욱 빈번하게 발생한다고 생각한다. -</li>
 <li>따라서 함수형 프로그래밍에서는 이런 변수가 외부에서 명확하게 드러나게 하여 통제 가능하게 만드는 것을 지향한다.</li>
 </ul>
-</li>
-</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f1 = encrypt1;</span><br><span class="line">f2 = encrypt2;</span><br><span class="line">f3 = encrypt3;</span><br><span class="line"></span><br><span class="line">pure_value = &#x27;zzon&#x27;;</span><br><span class="line">encrypted_value = get_encrypted(x);</span><br><span class="line"></span><br><span class="line">encrypted_value = get_encrypted(f1);</span><br><span class="line">encrypted_value = get_encrypted(f2);</span><br><span class="line">encrypted_value = get_encrypted(f3);</span><br></pre></td></tr></table></figure>
 
 <img src="/images/2018/40/01.jpeg">
@@ -421,13 +421,13 @@
 <li>Purity (순수성, 데이터 플로우의 취급)<ul>
 <li>Immutable Data (불변성)</li>
 <li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Referential Transparency</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Lazy Evaluation</a> </li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1">Lazy Evaluation</a></li>
 </ul>
 </li>
 <li>Recursion</li>
 </ul>
 <p><a name="cf__1"></a></p>
-<h3 id="cf-명령형-프로그래밍"><a href="#cf-명령형-프로그래밍" class="headerlink" title="cf__명령형 프로그래밍"></a>cf__명령형 프로그래밍</h3><p>순수함수도 있지만,<br>특정 작업을 수행하는 여러가지 명령이 기술되어 있는 함수도 있다.<br>=&gt; <strong>프로시저</strong>라고 한다. Procedure</p>
+<h3 id="cf-명령형-프로그래밍"><a href="#cf-명령형-프로그래밍" class="headerlink" title="cf__명령형 프로그래밍"></a>cf__명령형 프로그래밍</h3><p>순수함수도 있지만,<br>특정 작업을 수행하는 여러가지 명령이 기술되어 있는 함수도 있다.<br>&#x3D;&gt; <strong>프로시저</strong>라고 한다. Procedure</p>
 <hr>
 <hr>
 <p><a name="2"></a></p>
@@ -484,7 +484,7 @@
 <p><a name="2-3"></a></p>
 <h3 id="2-3-피보나치-수열"><a href="#2-3-피보나치-수열" class="headerlink" title="2-3. 피보나치 수열"></a>2-3. 피보나치 수열</h3><p>메모이제이션 기법 사용한 함수형 프로그래밍</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fibo = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> cache = &#123;<span class="string">&#x27;0&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;1&#x27;</span>: <span class="number">1</span>&#125;;</span><br><span class="line">  <span class="keyword">const</span> func = <span class="keyword">function</span>(<span class="params">n</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_">typeof</span>(cache[n]) === <span class="string">&#x27;number&#x27;</span>)&#123;</span><br><span class="line">      result = cache[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = cache[n] = <span class="title function_">func</span>(n-<span class="number">1</span>) + <span class="title function_">func</span>(n-<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> func;</span><br><span class="line">&#125;();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fibo</span>(<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
-<p>팩토리얼 함수와 패턴과 거의 비슷하다.<br><code>cache의 초기값</code>과 함수를 재귀 호출할 때 <code>산술식</code>만 다르다.<br>=&gt; 팩토리얼과 피보나치 수열을 계산하는 함수를 인자로 받는 함수를 모듈화할 수 있다.</p>
+<p>팩토리얼 함수와 패턴과 거의 비슷하다.<br><code>cache의 초기값</code>과 함수를 재귀 호출할 때 <code>산술식</code>만 다르다.<br>&#x3D;&gt; 팩토리얼과 피보나치 수열을 계산하는 함수를 인자로 받는 함수를 모듈화할 수 있다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cacher = <span class="keyword">function</span>(<span class="params">cache, func</span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> calculate = <span class="keyword">function</span>(<span class="params">n</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_">typeof</span>(cache[n]) === <span class="string">&#x27;number&#x27;</span>)&#123;</span><br><span class="line">      result = cache[n];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result = cache[n] = <span class="title function_">func</span>(calculate, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cacluate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fact = <span class="title function_">cacher</span>(&#123;<span class="string">&#x27;0&#x27;</span>: <span class="number">0</span>&#125;, <span class="keyword">function</span>(<span class="params">func,n</span>)&#123; <span class="keyword">return</span> n* <span class="title function_">func</span>(n-<span class="number">1</span>); &#125;)</span><br><span class="line"><span class="keyword">const</span> fibo = <span class="title function_">cacher</span>(&#123;<span class="string">&#x27;0&#x27;</span>: <span class="number">0</span>, <span class="string">&#x27;1&#x27;</span>: <span class="number">1</span>&#125;, <span class="keyword">function</span>(<span class="params">func,n</span>)&#123; <span class="keyword">return</span> <span class="title function_">func</span>(n-<span class="number">1</span>) + <span class="title function_">func</span>(n-<span class="number">2</span>); &#125;)</span><br></pre></td></tr></table></figure>
 
 <hr>
@@ -495,9 +495,9 @@
 <ul>
 <li>함수 적용(Applying functions)는 함수형 프로그래밍에서 사용되는 용어다.</li>
 <li>함수형 프로그래밍에서는 <strong>특정 데이터를 여러가지 함수를 적용시키는 방식으로 작업을 수행한다.</strong><br>여기서 함수는 단순히 입력을 넣고 출력을 받는 기능을 수행하는것 뿐만 아니라,<br>인자 혹은 반환값으로 전달된 함수를 <strong>특정 데이터에 적용시키는 개념으로 이해해야한다.</strong></li>
-<li><code>func.apply(Obj, Args)</code>와 같은 함수 호출을 <strong>‘func 함수를 Obj객체와 Args인자 배열에 적용시킨다’</strong>라고 표현할 수 있다.</li>
+<li><code>func.apply(Obj, Args)</code>와 같은 함수 호출을 **’func 함수를 Obj객체와 Args인자 배열에 적용시킨다’**라고 표현할 수 있다.</li>
 </ul>
-<p><a name="cf__3"></a><br>cf__3. 함수 호출<br>괄호 연산자 대비 call/apply를 사용할 때의 장점은<br><strong>함수가 실행되는 컨텍스트를 지정할 수 있다는 점</strong>이다(this의 값).<br>이러한 형태는 고차 함수, 특히 이러한 고차 함수가 나중에 실행되는 함수를 소비할 때 볼 수 있다.<br>Function 프로토타입에서 bind 메소드의 내부는 call/apply의 훌륭한 예다.</p>
+<p><a name="cf__3"></a><br>cf__3. 함수 호출<br>괄호 연산자 대비 call&#x2F;apply를 사용할 때의 장점은<br><strong>함수가 실행되는 컨텍스트를 지정할 수 있다는 점</strong>이다(this의 값).<br>이러한 형태는 고차 함수, 특히 이러한 고차 함수가 나중에 실행되는 함수를 소비할 때 볼 수 있다.<br>Function 프로토타입에서 bind 메소드의 내부는 call&#x2F;apply의 훌륭한 예다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Possible implementation of bind using apply</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bind</span>(<span class="params">func, context</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  func.<span class="title function_">apply</span>(context, <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">apply</span>(<span class="variable language_">arguments</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -564,7 +564,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/11/04/FP_01/" data-id="ckzv7cqf6001uqobmj0eu7m6o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/11/04/FP_01/" data-id="cm3u7mj1e001uhwb2ctj7gy4d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

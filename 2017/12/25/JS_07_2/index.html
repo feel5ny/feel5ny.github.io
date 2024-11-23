@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체  —- 1편 &#128070;  location 객체2.1 쿼리스트링 확장2.2 location 조작 navigator 객체3.1 플러그인 감지3.2 처리기 등록 screen 객체 history 객체">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체—- 1편 &#128070; location 객체  2.1 쿼리스트링 확장  2.2 location 조작 navigator 객체  3.1 플러그인 감지  3.2 처리기 등록 screen 객체 history 객">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7&#x2F; BOM (브라우저 객체 모델)">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/25/JS_07_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체  —- 1편 &#128070;  location 객체2.1 쿼리스트링 확장2.2 location 조작 navigator 객체3.1 플러그인 감지3.2 처리기 등록 screen 객체 history 객체">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체—- 1편 &#128070; location 객체  2.1 쿼리스트링 확장  2.2 location 조작 navigator 객체  3.1 플러그인 감지  3.2 처리기 등록 screen 객체 history 객">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/57/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-25T12:20:19.000Z">
@@ -235,12 +235,9 @@
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li>window 객체</li>
-</ol>
-<p>—- 1편 &#128070;</p>
-<ol start="2">
-<li><a href="#location">location 객체</a><br>2.1 쿼리스트링 확장<br>2.2 location 조작</li>
-<li><a href="#navigator">navigator 객체</a><br>3.1 플러그인 감지<br>3.2 처리기 등록</li>
+<li>window 객체<br>—- 1편 &#128070;</li>
+<li><a href="#location">location 객체</a><br>  2.1 쿼리스트링 확장<br>  2.2 location 조작</li>
+<li><a href="#navigator">navigator 객체</a><br>  3.1 플러그인 감지<br>  3.2 처리기 등록</li>
 <li><a href="#screen">screen 객체</a></li>
 <li><a href="#history">history 객체</a></li>
 </ol>
@@ -255,7 +252,7 @@
 </ul>
 <p>location의 프로퍼티들을 살펴보자.</p>
 <ul>
-<li><code>hash</code> (예: “#/0/1” <a href="http://slides.com/nayoung/deck-8#/0/1">http://slides.com/nayoung/deck-8#/0/1</a>)<ul>
+<li><code>hash</code> (예: “#&#x2F;0&#x2F;1” <a href="http://slides.com/nayoung/deck-8#/0/1">http://slides.com/nayoung/deck-8#/0/1</a>)<ul>
 <li>#기호 다음에 문자가 오는 형태의 URL 해시. URL에 해시가 없다면 빈 문자열</li>
 </ul>
 </li>
@@ -267,12 +264,12 @@
 <li>포트 번호를 제외한 서버 이름</li>
 </ul>
 </li>
-<li><code>href</code> (예: “<a href="http://localhost:4000/2017/12/28/JS_07/&quot;">http://localhost:4000/2017/12/28/JS_07/&quot;</a>)<ul>
+<li><code>href</code> (예: “<a href="http://localhost:4000/2017/12/28/JS_07/">http://localhost:4000/2017/12/28/JS_07/</a>“)<ul>
 <li>현재 페이지의 완전한 URL</li>
 <li>location의 <code>toString()</code>메서드는 이 값을 반환</li>
 </ul>
 </li>
-<li><code>pathname</code> (예: “/2017/12/28/JS_07/“)<ul>
+<li><code>pathname</code> (예: “&#x2F;2017&#x2F;12&#x2F;28&#x2F;JS_07&#x2F;“)<ul>
 <li>URL에 포함된 디렉터리 및 파일 이름</li>
 </ul>
 </li>
@@ -284,7 +281,7 @@
 <li>페이지에서 사용하는 프로토콜. 일반적으로 “http:”나 “https:”중 하나이다. 프로토콜을 <code>스키마</code>라고 부르기도 한다.</li>
 </ul>
 </li>
-<li><code>search</code> (예: “?q=window”)<ul>
+<li><code>search</code> (예: “?q&#x3D;window”)<ul>
 <li>URL의 쿼리스트링 부분. 물음표 기호로 시작하는 문자열을 반환</li>
 </ul>
 </li>
@@ -301,41 +298,39 @@
 <p><strong>결과</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.google.co.kr/search?newwindow=1&amp;tbm=isch&amp;q=그리드+다단&amp;cad=h</span><br><span class="line">args = &#123;newwindow: &quot;1&quot;, tbm: &quot;isch&quot;, q: &quot;그리드+다단&quot;, cad: &quot;h&quot;&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="* decodeURIComponent"></a>* <code>decodeURIComponent</code></h4><p>HTML에서 한글이 섞인 주소는 오작동할 수 있기 때문에 이스케이프 시켜야한다.<br>예 : “나영” =&gt; “%EB%82%98%EC%98%81”<br>이를 <code>인코딩</code>이라고 하며, 반대로 다시 언어화를 시켜주는 <code>디코딩</code>이 있습니다.<br><code>decodeURIComponent</code>는 <code>http://</code> 부터 모두 디코딩을 해줍니다.</p>
+<h4 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="* decodeURIComponent"></a>* <code>decodeURIComponent</code></h4><p>HTML에서 한글이 섞인 주소는 오작동할 수 있기 때문에 이스케이프 시켜야한다.<br>예 : “나영” &#x3D;&gt; “%EB%82%98%EC%98%81”<br>이를 <code>인코딩</code>이라고 하며, 반대로 다시 언어화를 시켜주는 <code>디코딩</code>이 있습니다.<br><code>decodeURIComponent</code>는 <code>http://</code> 부터 모두 디코딩을 해줍니다.</p>
 <hr>
 <h3 id="2-2-location-조작"><a href="#2-2-location-조작" class="headerlink" title="2.2 location 조작"></a>2.2 location 조작</h3><ul>
-<li>location.assign(“<a href="https://feel5ny.github.io/&quot;">https://feel5ny.github.io/&quot;</a>)<ul>
+<li>location.assign(“<a href="https://feel5ny.github.io/">https://feel5ny.github.io/</a>“)<ul>
 <li>메서드</li>
 <li>해당 URL로 이동한다.</li>
 </ul>
 </li>
-<li>location.href = “”<ul>
+<li>location.href &#x3D; “”<ul>
 <li>현재 위치해있는 URL 뒤에 추가된다.</li>
 </ul>
 </li>
-<li>location.hash = “”<ul>
+<li>location.hash &#x3D; “”<ul>
 <li><code>#</code>와 함께 인자가 URL 뒤에 추가된다.</li>
 <li>hash 프로퍼티를 바꿀 때는 새 URL로 페이지를 다시 읽지 않는다.</li>
 </ul>
 </li>
-<li>location.search = “q=test”<ul>
+<li>location.search &#x3D; “q&#x3D;test”<ul>
 <li>현재 주소값에 search가 있는 경우, <code>q=</code> 뒤에 검색 단어를 추가한다.</li>
 </ul>
 </li>
-<li>location.hostname = “<a href="http://www.naver.com&quot;">www.naver.com&quot;</a><ul>
+<li>location.hostname &#x3D; “<a href="http://www.naver.com/">www.naver.com</a>“<ul>
 <li>현재 주소에서 앞부분 main 주소값이 바뀐다.</li>
 </ul>
 </li>
 <li>location.pathname<ul>
-<li>첫번째 path가 바뀐다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://developer.mozilla.org/ko/?q=nayn</span></span><br><span class="line">location.<span class="property">pathname</span> = <span class="string">&quot;en-Us&quot;</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/en-US/?q=nayn</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>첫번째 path가 바뀐다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://developer.mozilla.org/ko/?q=nayn</span></span><br><span class="line">location.<span class="property">pathname</span> = <span class="string">&quot;en-Us&quot;</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/en-US/?q=nayn</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
 <p>위의 프로퍼티들은 브라우저 히스토리 스택에 쌓이기 때문에 뒤로가기 버튼이 적용된다.<br><strong>replace는 그렇지 않다.</strong></p>
 <ul>
-<li>location.replace(“<a href="http://www.naver.com&quot;">www.naver.com&quot;</a>)<ul>
+<li>location.replace(“<a href="http://www.naver.com/">www.naver.com</a>“)<ul>
 <li>히스토리 스택에 쌓이지 않는다.</li>
 </ul>
 </li>
@@ -353,11 +348,11 @@
 <table>
 <thead>
 <tr>
-<th align="left">프로퍼티/메서드</th>
+<th align="left">프로퍼티&#x2F;메서드</th>
 <th align="left">설명</th>
 <th align="left">IE</th>
 <th align="center">파이어폭스</th>
-<th align="center">사파리/크롬</th>
+<th align="center">사파리&#x2F;크롬</th>
 <th align="center">오페라</th>
 </tr>
 </thead>
@@ -601,11 +596,11 @@
 <table>
 <thead>
 <tr>
-<th align="left">프로퍼티/메서드</th>
+<th align="left">프로퍼티&#x2F;메서드</th>
 <th align="left">설명</th>
 <th align="left">IE</th>
 <th align="center">파이어폭스</th>
-<th align="center">사파리/크롬</th>
+<th align="center">사파리&#x2F;크롬</th>
 <th align="center">오페라</th>
 </tr>
 </thead>
@@ -753,9 +748,7 @@
 <li>창을 첫 번째 연 이후 사용자의 내비게이션 히스토리를 보관한다.</li>
 <li>브라우저 창, 탭, 프레임은 각각 자신의 window 객체에 속한 history객체를 가진다.</li>
 <li>보안을 이유로 사용자가 방문했던 URL은 알 수 없다. <img src ="/images/post_img/57/01.png">
-> 알 수 없는 url
-
-</li>
+> 알 수 없는 url</li>
 </ul>
 <h3 id="메서드"><a href="#메서드" class="headerlink" title="메서드"></a>메서드</h3><h4 id="1-go"><a href="#1-go" class="headerlink" title="1. go()"></a>1. go()</h4><p><code>history.go(-1)</code> : 한페이지 뒤로<br><code>history.go(1)</code> : 한페이지 앞으로<br><code>history.go(2)</code> : 두페이지 앞으로</p>
 <h4 id="2-back"><a href="#2-back" class="headerlink" title="2. back()"></a>2. back()</h4><p>한페이지 뒤로</p>
@@ -788,7 +781,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/25/JS_07_2/" data-id="ckzv7cqhg0059qobmkpax1l3i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/25/JS_07_2/" data-id="cm3u7mj1p004shwb2bsltdn6g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

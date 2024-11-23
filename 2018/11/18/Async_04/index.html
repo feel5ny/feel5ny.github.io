@@ -11,12 +11,12 @@
         <meta name="keywords" content="async,rxjs" />
     
     
-    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.      1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한">
+    <meta name="description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.      1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2부&#x2F; chap01. RxJs란 무엇인가?">
 <meta property="og:url" content="http://feel5ny.github.io/2018/11/18/Async_04/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.      1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한">
+<meta property="og:description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.      1. RxJS란?RxJS is a library for composing asynchronous and event-based programs by using observable sequences.RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/29/thumb_default.jpg">
 <meta property="article:published_time" content="2018-11-18T11:12:34.000Z">
@@ -342,7 +342,7 @@
 
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[📕 퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <hr>
 <a name="1" /> 
@@ -393,7 +393,7 @@
 <hr>
 <a name="3-1" /> 
 
-<h3 id="3-1-Observable"><a href="#3-1-Observable" class="headerlink" title="3.1 Observable"></a>3.1 Observable</h3><p><strong>시간을 축</strong>으로 연속적인 데이터를 저장하는 컬렉션을 표현한 객체이다.<br>Observable은 데이터를 제공하는 소스를<br>Observer에게 전달한다.<br>이를 <strong>스트림(stream)</strong>이라고 부른다.<br><a name="3-2" /> </p>
+<h3 id="3-1-Observable"><a href="#3-1-Observable" class="headerlink" title="3.1 Observable"></a>3.1 Observable</h3><p><strong>시간을 축</strong>으로 연속적인 데이터를 저장하는 컬렉션을 표현한 객체이다.<br>Observable은 데이터를 제공하는 소스를<br>Observer에게 전달한다.<br>이를 **스트림(stream)**이라고 부른다.<br><a name="3-2" /> </p>
 <h3 id="3-2-오퍼레이터"><a href="#3-2-오퍼레이터" class="headerlink" title="3.2 오퍼레이터"></a>3.2 오퍼레이터</h3><p><strong>Observable을 생성 및 조작하는 함수</strong>를 오퍼레이터(operator)라고 한다.<br>오퍼레이터는 Observable을 생성하기도 하고,<br>각각의 Observable을 연결하기도 한다.<br>Observable을 분리하거나 합치기도 한다. </p>
 <p>오퍼레이터는 현재의 Observable 인스턴스를 기반으로 항상 새로운 Observable 인스턴스를 반환한다.<br><a name="3-4" /> </p>
 <h3 id="3-3-Observer"><a href="#3-3-Observer" class="headerlink" title="3.3 Observer"></a>3.3 Observer</h3><p>Observable에 의해 전달된 데이터를 소비하는 주체이다.<br>Observers는 next, error, complete함수를 가진 객체를 가리킨다.</p>
@@ -408,8 +408,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">click$.<span class="title function_">subscribe</span>(<span class="function"><span class="params">x</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Observer가 Observable로 부터 받은 데이터: &#x27;</span> + x))</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>next, error, complete 콜백 함수를 전달하는 subscribe 사용 예</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">click$.<span class="title function_">subscribe</span>(</span><br><span class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Observer가 Observable로 부터 받은 데이터: &#x27;</span> + err),</span><br><span class="line">  <span class="function"><span class="params">err</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Observer가 Observable로부터 받은 에러 데이터: &#x27;</span> + err),</span><br><span class="line">  <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Observer가 Observable로부터 종료되었다는 알림을 받을 경우&#x27;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">click$.<span class="title function_">subscribe</span>(</span><br><span class="line">  <span class="function"><span class="params">x</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Observer가 Observable로 부터 받은 데이터: &#x27;</span> + err),</span><br><span class="line">  <span class="function"><span class="params">err</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Observer가 Observable로부터 받은 에러 데이터: &#x27;</span> + err),</span><br><span class="line">  <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Observer가 Observable로부터 종료되었다는 알림을 받을 경우&#x27;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <a name="3-4" />
@@ -445,7 +444,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/11/18/Async_04/" data-id="ckzv7cqey001gqobmy3fzlyf4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/11/18/Async_04/" data-id="cm3u7mj15000dhwb220kcalj5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

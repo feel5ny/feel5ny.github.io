@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.   목차   객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신 객체 프로퍼티에 접근하는 방법 for in문 객체 프로퍼티 출럭 객체 프로퍼티 삭제 delete   배열과 객체 배열과 객체의 유사점과 차이점 배열의 프로퍼티 동적생성 유사배열객체     1. 객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신1-1. 객체 프로퍼티에 접근하">
+    <meta name="description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.   목차   객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신   객체 프로퍼티에 접근하는 방법 for in문 객체 프로퍼티 출럭 객체 프로퍼티 삭제 delete   배열과 객체   배열과 객체의 유사점과 차이점 배열의 프로퍼티 동적생성 유사배열객체   1. 객체 프로퍼티 읽기&#x2F;쓰기&amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3&#x2F; 자바스크립트 데이터 타입과 연산자">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/23/JS_14/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.   목차   객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신 객체 프로퍼티에 접근하는 방법 for in문 객체 프로퍼티 출럭 객체 프로퍼티 삭제 delete   배열과 객체 배열과 객체의 유사점과 차이점 배열의 프로퍼티 동적생성 유사배열객체     1. 객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신1-1. 객체 프로퍼티에 접근하">
+<meta property="og:description" content="📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.   목차   객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신   객체 프로퍼티에 접근하는 방법 for in문 객체 프로퍼티 출럭 객체 프로퍼티 삭제 delete   배열과 객체   배열과 객체의 유사점과 차이점 배열의 프로퍼티 동적생성 유사배열객체   1. 객체 프로퍼티 읽기&#x2F;쓰기&amp;#x">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/30/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-23T12:20:19.000Z">
@@ -234,25 +234,27 @@
 <hr>
 <p>목차 </p>
 <ol>
-<li>객체 프로퍼티 읽기/쓰기/갱신<ul>
+<li>객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신</li>
+</ol>
+<ul>
 <li>객체 프로퍼티에 접근하는 방법</li>
 <li><code>for in</code>문 객체 프로퍼티 출럭</li>
 <li>객체 <strong>프로퍼티</strong> 삭제 <code>delete</code></li>
 </ul>
-</li>
-<li>배열과 객체<ul>
+<ol start="2">
+<li>배열과 객체</li>
+</ol>
+<ul>
 <li>배열과 객체의 유사점과 차이점</li>
 <li>배열의 프로퍼티 동적생성</li>
 <li>유사배열<strong>객체</strong></li>
 </ul>
-</li>
-</ol>
 <hr>
-<h3 id="1-객체-프로퍼티-읽기-쓰기-갱신"><a href="#1-객체-프로퍼티-읽기-쓰기-갱신" class="headerlink" title="1. 객체 프로퍼티 읽기/쓰기/갱신"></a>1. 객체 프로퍼티 읽기/쓰기/갱신</h3><h4 id="1-1-객체-프로퍼티에-접근하는-방법"><a href="#1-1-객체-프로퍼티에-접근하는-방법" class="headerlink" title="1-1. 객체 프로퍼티에 접근하는 방법"></a>1-1. 객체 프로퍼티에 접근하는 방법</h4><ul>
+<h3 id="1-객체-프로퍼티-읽기-쓰기-갱신"><a href="#1-객체-프로퍼티-읽기-쓰기-갱신" class="headerlink" title="1. 객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신"></a>1. 객체 프로퍼티 읽기&#x2F;쓰기&#x2F;갱신</h3><h4 id="1-1-객체-프로퍼티에-접근하는-방법"><a href="#1-1-객체-프로퍼티에-접근하는-방법" class="headerlink" title="1-1. 객체 프로퍼티에 접근하는 방법"></a>1-1. 객체 프로퍼티에 접근하는 방법</h4><ul>
 <li><p>대괄호 표기법</p>
 </li>
 <li><p>마침표 표기법</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;foo&#x27;</span>,</span><br><span class="line">  <span class="attr">major</span>: <span class="string">&#x27;computer science&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 읽기</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">name</span>) <span class="comment">// foo</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;name&#x27;</span>]) <span class="comment">// foo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 갱신</span></span><br><span class="line">foo.<span class="property">major</span> = <span class="string">&#x27;electronics engineering&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">major</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;major&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 동적 생성</span></span><br><span class="line">foo.<span class="property">age</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">age</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 대괄호 표기법만을 사용해야 할 경우</span></span><br><span class="line">foo[<span class="string">&#x27;full-name&#x27;</span>] = <span class="string">&#x27;foo bar&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;full-name&#x27;</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">full</span>-name);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">full</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br></pre></td></tr></table></figure>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;foo&#x27;</span>,</span><br><span class="line">  <span class="attr">major</span>: <span class="string">&#x27;computer science&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 읽기</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">name</span>) <span class="comment">// foo</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;name&#x27;</span>]) <span class="comment">// foo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 갱신</span></span><br><span class="line">foo.<span class="property">major</span> = <span class="string">&#x27;electronics engineering&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">major</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;major&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 객체 프로퍼티 동적 생성</span></span><br><span class="line">foo.<span class="property">age</span> = <span class="number">30</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">age</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 대괄호 표기법만을 사용해야 할 경우</span></span><br><span class="line">foo[<span class="string">&#x27;full-name&#x27;</span>] = <span class="string">&#x27;foo bar&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo[<span class="string">&#x27;full-name&#x27;</span>]);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">full</span>-name);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">full</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>대괄호 표기법만 사용해야하는 경우</strong> </p>
 <ul>
@@ -303,7 +305,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/23/JS_14/" data-id="ckzv7cqhu005mqobmqsjkdbig" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/23/JS_14/" data-id="cm3u7mj1r005bhwb21vnm1v1h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

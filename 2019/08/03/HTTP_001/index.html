@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study" />
     
     
-    <meta name="description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리케이션에">
+    <meta name="description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 개관">
 <meta property="og:url" content="http://feel5ny.github.io/2019/08/03/HTTP_001/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리케이션에">
+<meta property="og:description" content="책뽀개기 모임 중 http 완벽가이드 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)(모임 참여를 원하신다면 댓글로 문의 바랍니다.) HTTP 완벽가이드 책을 보고 이해한 내용을 저만의 순서로 정리 한 글입니다.     개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,사용자가 어플리">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/18/thumb_default.jpg">
 <meta property="article:published_time" content="2019-08-03T12:23:55.000Z">
@@ -376,64 +376,53 @@
         <div class="article-entry" itemprop="articleBody">
             <ul>
 <li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <a name="0"/>
 
-<h1 id="개요-클라이언트와-서버의-전체-흐름-보기"><a href="#개요-클라이언트와-서버의-전체-흐름-보기" class="headerlink" title="개요 / 클라이언트와 서버의 전체 흐름 보기"></a>개요 / 클라이언트와 서버의 전체 흐름 보기</h1><p>웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,<br>사용자가 어플리케이션에 입장할 시점에<br>서버에서 데이터(소스)를 받아와야한다. </p>
+<h1 id="개요-클라이언트와-서버의-전체-흐름-보기"><a href="#개요-클라이언트와-서버의-전체-흐름-보기" class="headerlink" title="개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기"></a>개요 &#x2F; 클라이언트와 서버의 전체 흐름 보기</h1><p>웹 어플리케이션은 사용자에게 어플리케이션을 보여주기 위해,<br>사용자가 어플리케이션에 입장할 시점에<br>서버에서 데이터(소스)를 받아와야한다. </p>
 <p>어플리케이션은 서버에게 어떻게 데이터를 받아오는지 http를 모른다고 생각하고 상상해보자.</p>
 <ol>
-<li><p>우선 데이터가 존재하는 서버의 <strong>위치부터 파악</strong> 해야한다. </p>
+<li>우선 데이터가 존재하는 서버의 <strong>위치부터 파악</strong> 해야한다.</li>
+</ol>
 <ul>
 <li>데이터는 보통 다른 서버에서 받아오게 되는데,<br>수많은 서버 중 특정 서버를 가리키기 위해서는 해당 서버의 <strong>주소</strong>를 알아야한다.</li>
 </ul>
-<img src="/images/2019/18/02">
+  <img src="/images/2019/18/02">
 
 <blockquote>
-<p>Host</p>
+<p>Host<br>2. 위치를 파악했다면 클라이언트와 서버의 연결이 필요하다.<br>  <img src="/images/2019/18/03"></p>
 </blockquote>
-</li>
-<li><p>위치를 파악했다면 클라이언트와 서버의 연결이 필요하다.</p>
-<img src="/images/2019/18/03">
-
 <blockquote>
-<p>TCP/IP 커넥션, port</p>
+<p>TCP&#x2F;IP 커넥션, port<br>3. 연결이 이루어졌다면, 서버에게 <strong>원하는 바를 요청</strong>해야한다.</p>
 </blockquote>
-</li>
-<li><p>연결이 이루어졌다면, 서버에게 <strong>원하는 바를 요청</strong>해야한다.</p>
 <ul>
 <li>서버와 클라이언트가 둘다 이해할 수 있는 공용 언어가 필요하다. </li>
 <li>공용 언어에서 어떤 <strong>대화방식</strong>이 이루어지는지,<br>어떤 <strong>약속된 규칙</strong>으로 메세지를 주고받는지를 파악하고,<br>이 규칙을 지킨 요청사항을 보내야한다.</li>
 </ul>
-<img src="/images/2019/18/04">
+  <img src="/images/2019/18/04">
 
 <blockquote>
-<p>HTTP: HTTP 프로토콜을 통해 요청/응답메세지를 보낸다.</p>
+<p>HTTP: HTTP 프로토콜을 통해 요청&#x2F;응답메세지를 보낸다.<br>4. 요청이나 응답에서 어떤 데이터를 보내고, 받았는지<br>  <strong>데이터의 위치, 종류를 알아야,</strong> 클라이언트에서 해석할 수 있다.</p>
 </blockquote>
-</li>
-<li><p>요청이나 응답에서 어떤 데이터를 보내고, 받았는지<br><strong>데이터의 위치, 종류를 알아야,</strong> 클라이언트에서 해석할 수 있다.</p>
 <ul>
 <li>데이터는 종류가 많다. 일반 text부터 이미지, pdf파일, 음악파일, 영상파일 등등</li>
 <li>어떤 종류의 데이터가 오가고 있고 어떻게 해석해줘야하는지에 대해 알려줘야한다.</li>
 </ul>
-<img src="/images/2019/18/05">
+  <img src="/images/2019/18/05">
 
 <blockquote>
-<p>Content-Type, URI</p>
+<p>Content-Type, URI<br>5. <strong>특정상황에선</strong> 통신을 원할하게 해주는 다른 요소들이 필요하다.</p>
 </blockquote>
-</li>
-<li><p><strong>특정상황에선</strong> 통신을 원할하게 해주는 다른 요소들이 필요하다.</p>
 <ul>
 <li>서버의 데이터를 필터하는 과정이 필요하거나,<br>받은 데이터를 저장해서 서버요청을 줄이는 등<br>특정상황에서의 처리를 위한 요소가 필요하다.</li>
 </ul>
-<img src="/images/2019/18/06">
+  <img src="/images/2019/18/06">
 
 <blockquote>
 <p>HTTP의 기반 시스템의 구성요소</p>
 </blockquote>
-</li>
-</ol>
 <p>이 모든 과정에 필요한 HTTP에 대해서 알아보고, 과정 순서대로 톺아보려고한다.</p>
 <hr>
 <hr>
@@ -481,12 +470,11 @@
 </ol>
 <h2 id="1-원하는-데이터가-있는-서버의-위치를-알아야한다"><a href="#1-원하는-데이터가-있는-서버의-위치를-알아야한다" class="headerlink" title="1. 원하는 데이터가 있는 서버의 위치를 알아야한다."></a>1. 원하는 데이터가 있는 서버의 위치를 알아야한다.</h2><p>데이터를 갖고 있는 서버의 위치를 알기 위해서 해당 서버의 <strong>주소</strong>, 즉 ip주소와 포트번호를 알아야한다. </p>
 <hr>
-<h3 id="1-1-접속-IP-주소-그리고-포트번호"><a href="#1-1-접속-IP-주소-그리고-포트번호" class="headerlink" title="1.1 접속, IP 주소 그리고 포트번호"></a>1.1 접속, IP 주소 그리고 포트번호</h3><p>뒤에 나올 TCP/IP 커넥션에 필요한 IP주소와 포트번호에 대한 내용이다. </p>
+<h3 id="1-1-접속-IP-주소-그리고-포트번호"><a href="#1-1-접속-IP-주소-그리고-포트번호" class="headerlink" title="1.1 접속, IP 주소 그리고 포트번호"></a>1.1 접속, IP 주소 그리고 포트번호</h3><p>뒤에 나올 TCP&#x2F;IP 커넥션에 필요한 IP주소와 포트번호에 대한 내용이다. </p>
 <ul>
 <li><ol start="2">
-<li>HTTP 클라이언트가 서버에 메세지를 전송할 수 있게 되기 전에, </li>
+<li>HTTP 클라이언트가 서버에 메세지를 전송할 수 있게 되기 전에,<br><strong>인터넷 프로토콜 주소와 포트번호</strong>를 사용해<br>클라이언트와 서버 사이에 TCP&#x2F;IP 커넥션을 맺어야 한다.</li>
 </ol>
-<p><strong>인터넷 프로토콜 주소와 포트번호</strong>를 사용해<br>클라이언트와 서버 사이에 TCP/IP 커넥션을 맺어야 한다.</p>
 </li>
 <li><p>TCP에서는<br>서버 컴퓨터에 대한 IP주소와<br>그 서버에서 실행 중인 프로그램이 사용중인 <a href="https://feel5ny.github.io/2018/01/02/CS_07/#port">포트번호</a>가 필요하다.<br>( 전화기로 치면, IP주소는 전화번호, 포트번호는 전화 걸고자 하는 상대방이 쓰는 번호 )</p>
 </li>
@@ -506,26 +494,29 @@
 
 
 <h2 id="2-위치를-파악했다면-연결이-필요하다"><a href="#2-위치를-파악했다면-연결이-필요하다" class="headerlink" title="2. 위치를 파악했다면 연결이 필요하다."></a>2. 위치를 파악했다면 연결이 필요하다.</h2><p>TCP 커넥션을 통해서 어떻게 데이터가 넘어가는지 알아보자.</p>
-<h3 id="TCP-IP-Transmission-Control-Protocol-Internet-Protocol"><a href="#TCP-IP-Transmission-Control-Protocol-Internet-Protocol" class="headerlink" title="TCP/IP (Transmission Control Protocol / Internet Protocol)"></a>TCP/IP (Transmission Control Protocol / Internet Protocol)</h3><ul>
-<li>인터넷 전송 프로토콜</li>
-<li>인터넷 자체가 TCP/IP에 기초하고 있다.</li>
-<li>TTCP/IP는 TCP와 IP가 층을 이루는, 패킷 교환 네트워크 프로토콜의 집합이다. </li>
-<li>TCP/IP는 각 네트워크와 하드웨어의 특성을 숨기고,<br>어떤 종류의 컴퓨터나 네트워크든 서로 <strong>신뢰성 있는 의사소통</strong>을 하게 해 준다.</li>
-</ul>
-  <img src="https://feel5ny.github.io/images/post_img/66/protocol.gif" />
+<h3 id="TCP-IP-Transmission-Control-Protocol-Internet-Protocol"><a href="#TCP-IP-Transmission-Control-Protocol-Internet-Protocol" class="headerlink" title="TCP&#x2F;IP (Transmission Control Protocol &#x2F; Internet Protocol)"></a>TCP&#x2F;IP (Transmission Control Protocol &#x2F; Internet Protocol)</h3><ul>
+<li><p>인터넷 전송 프로토콜</p>
+</li>
+<li><p>인터넷 자체가 TCP&#x2F;IP에 기초하고 있다.</p>
+</li>
+<li><p>TTCP&#x2F;IP는 TCP와 IP가 층을 이루는, 패킷 교환 네트워크 프로토콜의 집합이다. </p>
+</li>
+<li><p>TCP&#x2F;IP는 각 네트워크와 하드웨어의 특성을 숨기고,<br>어떤 종류의 컴퓨터나 네트워크든 서로 <strong>신뢰성 있는 의사소통</strong>을 하게 해 준다.</p>
+<img src="https://feel5ny.github.io/images/post_img/66/protocol.gif" />
 
-
+</li>
+<li><p>네트워크 개념상, HTTP프로토콜은 TCP위의 계층이다. </p>
 <ul>
-<li>네트워크 개념상, HTTP프로토콜은 TCP위의 계층이다. <ul>
 <li><ol start="2">
-<li>HTTP는 자신의 메세지 데이터를 전송하기 위해 TCP를 사용한다. </li>
+<li>HTTP는 자신의 메세지 데이터를 전송하기 위해 TCP를 사용한다.</li>
 </ol>
 </li>
 </ul>
 </li>
-<li>이와 유사하게 TCP는 IP위의 계층이다.</li>
+<li><p>이와 유사하게 TCP는 IP위의 계층이다.</p>
+</li>
 <li><ol start="2">
-<li>HTTP는 어플리케이션 계층 프로토콜이다. </li>
+<li>HTTP는 어플리케이션 계층 프로토콜이다.</li>
 </ol>
 </li>
 <li><ol start="2">
@@ -542,9 +533,7 @@
 <hr>
 <h3 id="텔넷을-이용한-예시"><a href="#텔넷을-이용한-예시" class="headerlink" title="텔넷을 이용한 예시"></a>텔넷을 이용한 예시</h3><ul>
 <li>텔넷 유틸리티는<br>당신의 키보드를 목적지의 TCP 포트로 연결해주고<br>출력 TCP 포트를 당신의 화면으로 연결해준다.</li>
-<li>텔넷은 직접 컴퓨터의 포트로 TCP 커넥션을 연결해서 그 포트로 글자를 타이핑해 넣을 수 있게 해준다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">telnet feel5ny.github.io 80 👈👩‍💻</span><br><span class="line">Trying 185.199.108.153...</span><br><span class="line">Connected to feel5ny.github.io.</span><br><span class="line">Escape character is &#x27;^]&#x27;.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET /index.html HTTP/1.1 👈👩‍💻</span><br><span class="line">Host: feel5ny.github.io 👈👩‍💻</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Server: GitHub.com</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Location: https://feel5ny.github.io/index.html</span><br><span class="line">X-GitHub-Request-Id: D618:10D7:EA3B81:F6E706:5D445B26</span><br><span class="line">Content-Length: 178</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Date: Fri, 02 Aug 2019 15:47:51 GMT</span><br><span class="line">Via: 1.1 varnish</span><br><span class="line">Age: 0</span><br><span class="line">Connection: keep-alive</span><br><span class="line">X-Served-By: cache-itm18822-ITM</span><br><span class="line">X-Cache: MISS</span><br><span class="line">X-Cache-Hits: 0</span><br><span class="line">X-Timer: S1564760871.463728,VS0,VE108</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">X-Fastly-Request-ID: 092f039231a1abe8f0a17ae484a57d8d54cf5810</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=&quot;white&quot;&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>텔넷은 직접 컴퓨터의 포트로 TCP 커넥션을 연결해서 그 포트로 글자를 타이핑해 넣을 수 있게 해준다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">telnet feel5ny.github.io 80 👈👩‍💻</span><br><span class="line">Trying 185.199.108.153...</span><br><span class="line">Connected to feel5ny.github.io.</span><br><span class="line">Escape character is &#x27;^]&#x27;.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">GET /index.html HTTP/1.1 👈👩‍💻</span><br><span class="line">Host: feel5ny.github.io 👈👩‍💻</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Server: GitHub.com</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Location: https://feel5ny.github.io/index.html</span><br><span class="line">X-GitHub-Request-Id: D618:10D7:EA3B81:F6E706:5D445B26</span><br><span class="line">Content-Length: 178</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Date: Fri, 02 Aug 2019 15:47:51 GMT</span><br><span class="line">Via: 1.1 varnish</span><br><span class="line">Age: 0</span><br><span class="line">Connection: keep-alive</span><br><span class="line">X-Served-By: cache-itm18822-ITM</span><br><span class="line">X-Cache: MISS</span><br><span class="line">X-Cache-Hits: 0</span><br><span class="line">X-Timer: S1564760871.463728,VS0,VE108</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">X-Fastly-Request-ID: 092f039231a1abe8f0a17ae484a57d8d54cf5810</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=&quot;white&quot;&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <hr>
@@ -570,24 +559,22 @@
 </ul>
 <p>HTTP 에서 흔히 쓰이는 5가지 메서드</p>
 <ol>
-<li><strong>GET</strong> (서버 ⇒ 클) 보내라.<br>서버에서 클라이언트로 지정한 소스를 </li>
-<li><strong>PUT</strong> 저장하라.<br>클라이언트에서 서버로 보낸 데이터를 지정한 이름의 리소스로</li>
-<li><strong>DELETE</strong> 삭제하라.<br>지정한 리소스를 서버에서</li>
-<li><strong>POST</strong> (클 ⇒ 서버) 보내라.<br>클라이언트 데이터를 서버 게이트웨이 어플리케이션으로</li>
-<li><strong>HEAD</strong> 보내라<br>지정한 리소스에 대한 응답에서, HTTP 헤더 부분만 보내라.</li>
+<li><strong>GET</strong> (서버 ⇒ 클) 보내라.<br>  서버에서 클라이언트로 지정한 소스를 </li>
+<li><strong>PUT</strong> 저장하라.<br>  클라이언트에서 서버로 보낸 데이터를 지정한 이름의 리소스로</li>
+<li><strong>DELETE</strong> 삭제하라.<br>  지정한 리소스를 서버에서</li>
+<li><strong>POST</strong> (클 ⇒ 서버) 보내라.<br>  클라이언트 데이터를 서버 게이트웨이 어플리케이션으로</li>
+<li><strong>HEAD</strong> 보내라<br>  지정한 리소스에 대한 응답에서, HTTP 헤더 부분만 보내라.</li>
 </ol>
 <h4 id="3-1-2-상태코드"><a href="#3-1-2-상태코드" class="headerlink" title="3.1.2 상태코드"></a>3.1.2 상태코드</h4><ul>
 <li>상태 코드는<br>클라이언트에게 요청이 성공했는지<br>아니면 추가 조치가 필요한지 알려주는 세자리 숫자다.</li>
 </ul>
 <p>흔히 쓰이는 상태 코드 몇가지.</p>
 <ol>
-<li>200 문서가 바르게 반환되었다.<br><strong>사유구절</strong><br>http는 각 숫자 상태 코드에 텍스트로 된 사유구절 (reason phrase)도 함께 보낸다.<ol>
+<li>200 문서가 바르게 반환되었다.<br>  <strong>사유구절</strong><br>  http는 각 숫자 상태 코드에 텍스트로 된 사유구절 (reason phrase)도 함께 보낸다.</li>
 <li>200 OK</li>
 <li>200 Document attached</li>
 <li>200 Success</li>
 <li>200 All’s cool, dude</li>
-</ol>
-</li>
 <li>302 다시 보내라. 다른 곳에 가서 리소스를 가져가라. </li>
 <li>404 리소스를 찾을 수 없다.</li>
 </ol>
@@ -618,9 +605,9 @@
 <p><a href="https://www.cs.umd.edu/~shankar/417-F01/Slides/chapter2a-aus/sld016.htm">출처</a></p>
 </blockquote>
 <ol>
-<li>시작줄<br>요청이라면 <strong>무엇을 해야 하는지</strong><br>응답이라면 <strong>무슨 일이 일어 났는지</strong><br>나타낸다.</li>
-<li>요청헤더<br>헤더 필드는 <code>:</code> 구분되어 있는 하나의 이름과 하나의 값으로 구성된다.<br>빈 줄로 끝난다.</li>
-<li>본문<br>본문은 필요에 따라 올 수 있다.<br>문자열이며, 임의의 이진 데이터를 포함할 수 있다. (이미지, 비디오, 오디오 트랙, 응용소프트웨어)</li>
+<li>시작줄<br>  요청이라면 <strong>무엇을 해야 하는지</strong><br>  응답이라면 <strong>무슨 일이 일어 났는지</strong><br>  나타낸다.</li>
+<li>요청헤더<br>  헤더 필드는 <code>:</code> 구분되어 있는 하나의 이름과 하나의 값으로 구성된다.<br>  빈 줄로 끝난다.</li>
+<li>본문<br>  본문은 필요에 따라 올 수 있다.<br>  문자열이며, 임의의 이진 데이터를 포함할 수 있다. (이미지, 비디오, 오디오 트랙, 응용소프트웨어)</li>
 </ol>
 <a name="4"/>
 
@@ -630,7 +617,7 @@
 <li>해당 컨텐츠가 어떤 타입인지를 알야아한다.</li>
 </ol>
 <p>어디에 있는 어떤 컨텐츠인지를 어떻게 알까. URI개념을 이용하면 된다.</p>
-<h3 id="4-1-URI"><a href="#4-1-URI" class="headerlink" title="4.1 URI"></a>4.1 URI</h3><p>Uniform Resource Identifier = 통합 자원 식별자</p>
+<h3 id="4-1-URI"><a href="#4-1-URI" class="headerlink" title="4.1 URI"></a>4.1 URI</h3><p>Uniform Resource Identifier &#x3D; 통합 자원 식별자</p>
 <ul>
 <li>웹 서버 리소스는 각자 이름을 갖고 있다.</li>
 </ul>
@@ -642,34 +629,36 @@
 <li>URL (locator)</li>
 <li>URN (name)</li>
 </ol>
-<h4 id="4-1-1-URL-locator"><a href="#4-1-1-URL-locator" class="headerlink" title="4.1.1 URL (locator)"></a>4.1.1 URL (locator)</h4><p>Uniform Resource locator = 통합 자원 지시자</p>
+<h4 id="4-1-1-URL-locator"><a href="#4-1-1-URL-locator" class="headerlink" title="4.1.1 URL (locator)"></a>4.1.1 URL (locator)</h4><p>Uniform Resource locator &#x3D; 통합 자원 지시자</p>
 <ul>
 <li>리소스 식별자의 가장 흔한 형태다.</li>
 <li>URL 은 특정 서버의<br>한 리소스에 대한<br><strong>구체적인 위치</strong>를 서술한다.</li>
 <li>오늘날 대부분의 URI는 URL이다.</li>
 <li>URL은 리소스가 정확히 어디에 있고, 어떻게 접근할 수 있는지 분명히 알려준다.</li>
 <li>대부분의 URL은 세 부분으로 이루어지고, 표준 포맷을 따른다.<br>( <a href="https://feel5ny.github.io/2019/07/07/Joylog_003/">https://feel5ny.github.io/2019/07/07/Joylog_003/</a> )<ol>
-<li><code>https://</code><br>URL의 첫번째 부분은 <strong>스킴</strong>이라고 불린다.<br>리소스에 접근하기 위해 사용되는 프로토콜을 서술한다.<ul>
+<li><code>https://</code><br>  URL의 첫번째 부분은 <strong>스킴</strong>이라고 불린다.<br>  리소스에 접근하기 위해 사용되는 프로토콜을 서술한다.</li>
+</ol>
+<ul>
 <li>보통은 http 프로토콜 <code>http://</code><blockquote>
 <p>스킴과 스키마의 차이점<br>스키마(schema)는 계획이나 도식을 가리키는 영어 낱말로, 다음을 가리킨다. 참고로 스킴(scheme)은 스키마와 거의 같은 의미로 쓰이나, 보통 스키마가 대략적인 계획이나 도식을 뜻하는 데 비해 스킴은 구체적이고 확정된 것을 말한다.</p>
 </blockquote>
 </li>
 </ul>
-</li>
-<li><code>feel5ny.github.io</code><br>두번째 부분은 서버의 인터넷 주소를 제공</li>
-<li><code>/2019/07/07/Joylog_003/</code><br>마지막은 웹 서버의 리소스를 가리킨다.</li>
+<ol start="2">
+<li><code>feel5ny.github.io</code><br>  두번째 부분은 서버의 인터넷 주소를 제공</li>
+<li><code>/2019/07/07/Joylog_003/</code><br>  마지막은 웹 서버의 리소스를 가리킨다.</li>
 </ol>
 </li>
 </ul>
 <h4 id="4-1-2-URN-name"><a href="#4-1-2-URN-name" class="headerlink" title="4.1.2 URN (name)"></a>4.1.2 URN (name)</h4><blockquote>
 <p>잘 모르겠다.</p>
 </blockquote>
-<p>Uniform Resource name = 통합 자원 이름</p>
+<p>Uniform Resource name &#x3D; 통합 자원 이름</p>
 <ul>
 <li>URN은 콘텐츠를 이루는 한 리소스에 대해,<br>그 리소스의 위치에 영향받지 않는 유일무이한 이름 역할을 한다. (?)</li>
 <li>이 위치 독립적인 URN은 리소스를 여기저기로 옮기더라도 문제없이 동작한다. </li>
 <li>리소스가 그 이름을 변하지 않게 유지한 한,<br>여러 종류의 네트워크 접속 프로토콜로 접근해도 문제없다.<ul>
-<li>예시) 인터넷 표준문서 RFC 2141이 어디에 잇거나 상관없이 그것을 지칭하기 위해 URN을 사용할 수 있다. </li>
+<li>예시) 인터넷 표준문서 RFC 2141이 어디에 잇거나 상관없이 그것을 지칭하기 위해 URN을 사용할 수 있다.</li>
 </ul>
 </li>
 <li>URN은 여전히 실험 중인 상태이고,<br>아직 널리 채택되지 않았다. </li>
@@ -677,7 +666,7 @@
 </ul>
 <p>어디에 있고, 어떤 이름을 갖는 파일인지를 알아보는 방법을 알아봤으니,<br>해당 컨텐츠가 어떤 종류의 타입인지를 알야아한다.</p>
 <h3 id="4-2-미디어-타입"><a href="#4-2-미디어-타입" class="headerlink" title="4.2 미디어 타입"></a>4.2 미디어 타입</h3><p>인터넷은 수천 가지 데이터 타입을 다루기 때문에<br>HTTP는 웹에서 전송되는 객체 각각에<br>신중하게 <strong>MIME 타입</strong>이라는 데이터 포맷 라벨을 붙인다.</p>
-<h4 id="4-2-1-MIME"><a href="#4-2-1-MIME" class="headerlink" title="4.2.1 MIME"></a>4.2.1 MIME</h4><p>MIME = multipurpose Internet Mail Extensions = 다목적 인터넷 메일 확장</p>
+<h4 id="4-2-1-MIME"><a href="#4-2-1-MIME" class="headerlink" title="4.2.1 MIME"></a>4.2.1 MIME</h4><p>MIME &#x3D; multipurpose Internet Mail Extensions &#x3D; 다목적 인터넷 메일 확장</p>
 <h5 id="왜-MIME"><a href="#왜-MIME" class="headerlink" title="왜 MIME?"></a>왜 MIME?</h5><ul>
 <li>MIME은 원래 각기 다른 <strong>전자메일 시스템 사이에서</strong><br><strong>메세지가 오갈 때 겪는 문제점을 해결하기 위해</strong> 설계되었다.</li>
 <li>MIME은 이메일에서 잘 동작하기 때문에<br>http에서도 멀티미디어 콘텐츠를 기술하고 라벨을 붙이기 위해 채택되었다.</li>
@@ -688,7 +677,7 @@
 <li>대부분의 웹브라우저는 잘 알려진 객체 타입 수백가지를 다룰 수 있다.</li>
 <li>이미지 파일을 보여주고<br>html 파일을 분석하거나 포매팅하고,<br>오디오 파일을 컴퓨터의 스피커를 통해 재생하고<br>특별한 포맷의 파일을 다루기 위해 외부 플러그인 소프트웨어를 실행한다.</li>
 </ul>
-<h5 id="MIME은-어떻게-표시되나"><a href="#MIME은-어떻게-표시되나" class="headerlink" title="MIME은 어떻게 표시되나?"></a>MIME은 어떻게 표시되나?</h5><p>MIME 타입은 사선 /으로 구분된 주 타입과 부타입으로 이루어진 문자열 라벨이다.</p>
+<h5 id="MIME은-어떻게-표시되나"><a href="#MIME은-어떻게-표시되나" class="headerlink" title="MIME은 어떻게 표시되나?"></a>MIME은 어떻게 표시되나?</h5><p>MIME 타입은 사선 &#x2F;으로 구분된 주 타입과 부타입으로 이루어진 문자열 라벨이다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">주타입/부타입 (primary object type / specific subtype)</span><br></pre></td></tr></table></figure>
 <p>종류</p>
 <ul>
@@ -701,7 +690,7 @@
 </ul>
 <a name="version"/>
 
-<h1 id="HTTP의-종류"><a href="#HTTP의-종류" class="headerlink" title="HTTP의 종류"></a>HTTP의 종류</h1><h3 id="HTTP-0-9"><a href="#HTTP-0-9" class="headerlink" title="HTTP/0.9"></a>HTTP/0.9</h3><p>1991년 HTTP 프로토타입 HTTP/0.9</p>
+<h1 id="HTTP의-종류"><a href="#HTTP의-종류" class="headerlink" title="HTTP의 종류"></a>HTTP의 종류</h1><h3 id="HTTP-0-9"><a href="#HTTP-0-9" class="headerlink" title="HTTP&#x2F;0.9"></a>HTTP&#x2F;0.9</h3><p>1991년 HTTP 프로토타입 HTTP&#x2F;0.9</p>
 <p>문제점</p>
 <ul>
 <li>심각한 디자인 결함</li>
@@ -714,7 +703,7 @@
 <li>원래 간단한 HTML 객체를 받아오기 위해 만들어진 것이다.</li>
 <li>바로 1.0으로 대체됨</li>
 </ul>
-<h3 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP/1.0"></a>HTTP/1.0</h3><p>처음으로 널리 쓰이기 시작한 HTTP 버전</p>
+<h3 id="HTTP-1-0"><a href="#HTTP-1-0" class="headerlink" title="HTTP&#x2F;1.0"></a>HTTP&#x2F;1.0</h3><p>처음으로 널리 쓰이기 시작한 HTTP 버전</p>
 <ul>
 <li>버전번호, HTTP 헤더, 추가 메서드, 멀티미디어 객체 처리를 추가가했다.</li>
 <li><ol start="2">
@@ -722,7 +711,7 @@
 </ol>
 </li>
 </ul>
-<h3 id="HTTP-1-0-1"><a href="#HTTP-1-0-1" class="headerlink" title="HTTP/1.0+"></a>HTTP/1.0+</h3><p>상황</p>
+<h3 id="HTTP-1-0-1"><a href="#HTTP-1-0-1" class="headerlink" title="HTTP&#x2F;1.0+"></a>HTTP&#x2F;1.0+</h3><p>상황</p>
 <ul>
 <li>월드와이드 웹이 급격히 성공하면서<br>클라이언트와 서버들은 그에 다른 요구를 만족시키기 위해<br>HTTP에 기능을 추가해갔다.</li>
 </ul>
@@ -733,8 +722,8 @@
 <li>프락시 연결 지원, </li>
 <li>공식은 아니지만 표준으로 추가됨.</li>
 </ul>
-<h3 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP/1.1"></a>HTTP/1.1</h3><p>HTTP 설계의 구조적 결함 교정,<br>두드러진 성능 최적화,<br>잘못된 기능제거에 집중했다.</p>
-<h3 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP/2.0"></a>HTTP/2.0</h3><p>1.1 성능 문제를 개선하기 위해<br><strong>구글의 SPDY 프로토콜</strong>을 기반으로 설계가 진행중인 프로토콜이다.</p>
+<h3 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP&#x2F;1.1"></a>HTTP&#x2F;1.1</h3><p>HTTP 설계의 구조적 결함 교정,<br>두드러진 성능 최적화,<br>잘못된 기능제거에 집중했다.</p>
+<h3 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP&#x2F;2.0"></a>HTTP&#x2F;2.0</h3><p>1.1 성능 문제를 개선하기 위해<br><strong>구글의 SPDY 프로토콜</strong>을 기반으로 설계가 진행중인 프로토콜이다.</p>
 <ul>
 <li>SPDY<ul>
 <li>SPDY는 ‘speedy’라는 단어를 기반으로 Google이 만든 조어로,<br>Google이 자신들의 ‘Make the Web Faster’ 노력의 하나로 제안한 새로운 프로토콜입니다.<br>이는 초창기 인터넷 환경에서 고안된 HTTP의 단점들을 보완하여,<br>지금과 앞으로의 인터넷 환경을 보다 효율적으로 이용할 수 있는 프로토콜로 제안된 것입니다.</li>
@@ -806,7 +795,7 @@
 <p>예시</p>
 <ul>
 <li><ol start="2">
-<li>HTTP/FTP 게이트웨이는 FTP URI에 대한 HTTP요청을 받아들인뒤<br>FTP 프로토콜을 이용해 문서를 가져온다.</li>
+<li>HTTP&#x2F;FTP 게이트웨이는 FTP URI에 대한 HTTP요청을 받아들인뒤<br>FTP 프로토콜을 이용해 문서를 가져온다.</li>
 </ol>
 </li>
 <li>받아온 문서는 HTTP 메세지에 담겨 클라이언트에게 보내다.</li>
@@ -860,7 +849,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/03/HTTP_001/" data-id="ckzv7cqfb0025qobmt9svun4b" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/03/HTTP_001/" data-id="cm3u7mj1f0021hwb2g6av7qkm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -340,7 +340,7 @@
 <li>함수 선언 (함수 표현식은 제외)</li>
 </ul>
 <p>Variable Object는 실행 컨텍스트의 프로퍼티이기 때문에 값을 갖는데, 이 값은 다른 객체를 가리킨다.<br>전역 컨텍스트와 함수 컨텍스트가 가리키는 객체는 다르다. 함수에만 파라미터가 존재한다.</p>
-<h4 id="전역-컨텍스트인-경우"><a href="#전역-컨텍스트인-경우" class="headerlink" title="전역 컨텍스트인 경우"></a><code>전역 컨텍스트인 경우</code></h4><p>Variable Object는 전역 변수, 전역 함수 등을 포함하는 전역 객체(Global Object/GO)를 가리킨다. 전역변수와 전역함수는 전역 객체의 프로퍼티이다.</p>
+<h4 id="전역-컨텍스트인-경우"><a href="#전역-컨텍스트인-경우" class="headerlink" title="전역 컨텍스트인 경우"></a><code>전역 컨텍스트인 경우</code></h4><p>Variable Object는 전역 변수, 전역 함수 등을 포함하는 전역 객체(Global Object&#x2F;GO)를 가리킨다. 전역변수와 전역함수는 전역 객체의 프로퍼티이다.</p>
 <img src="/images/post_img/36/ec-vo-global.png">
 
 <p>전역 컨텍스트란</p>
@@ -359,7 +359,7 @@
 <li><p>전역컨텍스트는 애플리케이션이 종료될 때, 웹페이지를 나가거나 브라우저를 닫을 때까지 유지된다.</p>
 </li>
 </ul>
-<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO/활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br><img src="/images/post_img/36/ec-vo-foo.png"></p>
+<h4 id="함수-컨텍스트인-경우"><a href="#함수-컨텍스트인-경우" class="headerlink" title="함수 컨텍스트인 경우"></a><code>함수 컨텍스트인 경우</code></h4><p>Variable Object는 Activation Object(AO&#x2F;활성객체)를 가리키며 arguments object가 추가된다.<br>arguments object 매개변수와 인수들의 정보를 배열의 형태로 담고 있는 객체이다.<br>(이전 글에서 함수의 매개변수로 값이 전달될 때 arguments object에 들어간다고 했다. 전달한 값이 argument라고 생각하면 된다. arguments object: 함수 호출 시 전달된 인수들의 정보를 담고 있는 유사배열객체.)<br><img src="/images/post_img/36/ec-vo-foo.png"></p>
 <h4 id="실행컨텍스트-스택"><a href="#실행컨텍스트-스택" class="headerlink" title="실행컨텍스트 스택"></a><code>실행컨텍스트 스택</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">&#x27;xxx&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="string">&#x27;yyy&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">bar</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="string">&#x27;zzz&#x27;</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x + y + z);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">bar</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
 <img src="/images/post_img/36/ec_1.png">
 1. 컨트롤이 실행 가능한 코드로 이동하면 논리적 스택 구조를 가지는 새로운 실행 컨텍스트 스택이 생성된다. 스택은 LIFO(Last In First Out, 후입 선출)의 구조를 가지는 나열 구조이다.
@@ -375,7 +375,7 @@ ECMAScript 프로그램은 모두 이런 식으로 실행된다.
 <li>함수가 중첩 상태일 때 하위함수 내에서 상위함수의 유효범위까지 참조할 수 있는데 이것는 스코프 체인을 검색하였기 때문이다. </li>
 <li>함수가 중첩되어 있으면 중첩될 때마다 부모 함수의 Scope가 자식 함수의 스코프 체인에 포함된다. </li>
 <li>함수 실행중에 변수를 만나면 그 변수를 우선 현재 Scope, 즉 Activation Object에서 검색해보고, </li>
-<li>만약 검색에 실패하면 스코프 체인에 담겨진 순서대로 그 검색을 이어가게 되는 것이다. </li>
+<li>만약 검색에 실패하면 스코프 체인에 담겨진 순서대로 그 검색을 이어가게 되는 것이다.</li>
 </ul>
 <p><strong>이것이 스코프 체인이라고 불리는 이유이다.</strong></p>
 <p>이와 같이 순차적으로 스코프 체인에서 변수를 검색하는데 결국 검색에 실패하면 정의되지 않은 변수에 접근하는 것으로 판단하여 Reference 에러를 발생시킨다.<br>스코프 체인은 <code>[[scope]]</code> 프로퍼티로 참조할 수 있다.</p>
@@ -411,7 +411,7 @@ ECMAScript 프로그램은 모두 이런 식으로 실행된다.
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="ckzv7cqh4004uqobmcbcs1e8v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/01/JS_03/" data-id="cm3u7mj1n004dhwb2fzzu3obq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

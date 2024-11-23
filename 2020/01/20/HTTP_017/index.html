@@ -347,13 +347,17 @@
 <li>서버에 있는 페이지들 중<br>어떤 것이 클라에게 맞는지 판단하는<br>3가지 방법</li>
 </ul>
 <ol>
-<li>클라에게 선택지를 주거나 = <strong>클라이언트 주도 협상</strong><ul>
+<li>클라에게 선택지를 주거나 &#x3D; <strong>클라이언트 주도 협상</strong></li>
+</ol>
+<ul>
 <li><strong>HOW</strong>: 클라가 요청을 보내면, 서버는 클라에게 선택지를 보내주고, <strong>클라가 선택한다.</strong></li>
 <li><strong>장점</strong>: 서버 입장에서 가장 구현하기 쉽다. 클라는 최선의 선택을 할 수 있다.</li>
 <li><strong>단점</strong>: 대기시간이 증가한다. 즉, 올바른 콘텐츠를 얻으려면 <strong>최소 두번의 요청</strong>이 필요하다.</li>
 </ul>
-</li>
-<li>서버가 자동으로 판단하는 방법 = <strong>서버 주도 협상</strong><ul>
+<ol start="2">
+<li>서버가 자동으로 판단하는 방법 &#x3D; <strong>서버 주도 협상</strong></li>
+</ol>
+<ul>
 <li><strong>HOW</strong>: 서버가 클라의 요청 헤더를 검증해서 <strong>어떤 버전을 제공</strong>할지 결정한다.</li>
 <li><strong>장점</strong>: 클라 주도 협상보다 빠르다. <ul>
 <li><ol start="2">
@@ -364,14 +368,14 @@
 </li>
 <li><strong>단점</strong>: 만약 결정이 뻔하지 않으면 (헤더에 맞는 것이 없으면), 서버는 추측을 해야만 한다.</li>
 </ul>
-</li>
-<li>중개자에게 선택하도록 부탁하는 방법 = <strong>투명한 협상</strong><ul>
+<ol start="3">
+<li>중개자에게 선택하도록 부탁하는 방법 &#x3D; <strong>투명한 협상</strong></li>
+</ol>
+<ul>
 <li><strong>HOW</strong>: 투명한 중간장치(주로 프락시 캐시)가 서버를 대신하여 협상을 한다.</li>
 <li><strong>장점</strong>: 웹서버가 협상을 할 필요가 없다. 클라 주도 협상보다 빠르다.</li>
 <li><strong>단점</strong>: 투명 협상을 어떻게 하는지에 대한 정형화된 명세가 없다.</li>
 </ul>
-</li>
-</ol>
 <a name="client"/>
 
 <h1 id="1-클라-주도-협상"><a href="#1-클라-주도-협상" class="headerlink" title="1. 클라 주도 협상"></a>1. 클라 주도 협상</h1><ul>
@@ -382,7 +386,9 @@
 </li>
 </ul>
 <h3 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h3><ol>
-<li>(<strong>기술</strong>측면) 각 페이지에 <strong>두 번의 요청</strong>이 필요하다는 것.<ul>
+<li>(<strong>기술</strong>측면) 각 페이지에 <strong>두 번의 요청</strong>이 필요하다는 것.</li>
+</ol>
+<ul>
 <li>한번은 <strong>목록</strong>을 얻고</li>
 <li>두번째는 <strong>선택한</strong> 사본을 얻는다.</li>
 <li>선택지를 표현하는 2가지 방법<ol>
@@ -391,13 +397,13 @@
 </ol>
 </li>
 </ul>
-</li>
-<li>(<strong>ux</strong>측면) 여러개의 url을 요구한다는 점<ul>
-<li>예)<br>아래처럼 여러 url을 요구할 것이다.<br><a href="https://feel5ny.github.io">https://feel5ny.github.io</a> <code>/korean</code><br><a href="https://feel5ny.github.io">https://feel5ny.github.io</a> <code>/english</code></li>
+<ol start="2">
+<li>(<strong>ux</strong>측면) 여러개의 url을 요구한다는 점</li>
+</ol>
+<ul>
+<li>예)<br>아래처럼 여러 url을 요구할 것이다.<br><a href="https://feel5ny.github.io/">https://feel5ny.github.io</a> <code>/korean</code><br><a href="https://feel5ny.github.io/">https://feel5ny.github.io</a> <code>/english</code></li>
 <li>어떤 링크를 메인 링크라고 생각할 것인가? (공유할때나, 북마킹할때 등등)</li>
 </ul>
-</li>
-</ol>
 <a name="server"/>
 
 <h1 id="2-서버-주도-협상"><a href="#2-서버-주도-협상" class="headerlink" title="2. 서버 주도 협상"></a>2. 서버 주도 협상</h1><ul>
@@ -407,15 +413,17 @@
 </li>
 <li><ol start="2">
 <li>HTTP 서버가 클라에게 보내줄 적절한 응답을 계산하기 위해 사용하는 메커니즘은 2가지</li>
-<li>내용 협상 헤더들을 살펴본다.<ul>
+<li>내용 협상 헤더들을 살펴본다.</li>
+</ol>
+<ul>
 <li>서버는 클라의 <code>Accept</code> 관련 헤더들을 들여다보고, 그에 알맞은 응답 헤더를 준비한다.</li>
 </ul>
-</li>
-<li>내용 협상 헤더 외의 다른 헤더들을 살펴본다.<ul>
+<ol start="2">
+<li>내용 협상 헤더 외의 다른 헤더들을 살펴본다.</li>
+</ol>
+<ul>
 <li>예_서버는 클라의 <code>User-Agent</code> 헤더에 기반하여 응답을 보내줄 수도 있다.</li>
 </ul>
-</li>
-</ol>
 </li>
 </ul>
 <h2 id="2-1-내용협상-헤더"><a href="#2-1-내용협상-헤더" class="headerlink" title="2.1 내용협상 헤더"></a>2.1 내용협상 헤더</h2><ul>
@@ -457,7 +465,7 @@
 <li>최선에 가장 가까운 대응을 찾아낼 수 있는 q값 매커니즘은 없다.</li>
 <li>서버는 정확한 대응을 찾아내거나,<br>그냥 갖고 있는 것을 제공해주어야 한다.</li>
 <li>캐시는 반드시 캐시된 문서의 올바른 ‘최선의’ 버전을 제공해주려 해야 하기 때문에,<br>HTTP 프르토콜은 서버가 응답에 넣어 보낼 수 있는 <code>Vary</code> 헤더를 정의한다.<ul>
-<li><code>Vary</code> 헤더는 캐시에게 서버가 내줄 응답의 최선의 버전을 결정하기 위해<br>어떤 요청 헤더를 참고하고 있는지 말해준다. </li>
+<li><code>Vary</code> 헤더는 캐시에게 서버가 내줄 응답의 최선의 버전을 결정하기 위해<br>어떤 요청 헤더를 참고하고 있는지 말해준다.</li>
 </ul>
 </li>
 </ul>
@@ -477,9 +485,9 @@
 </ul>
 <h2 id="3-2-Vary-헤더"><a href="#3-2-Vary-헤더" class="headerlink" title="3.2 Vary 헤더"></a>3.2 Vary 헤더</h2><ul>
 <li><ol start="2">
-<li>HTTP Vary 응답 헤더는<br>서버가 문서를 선택하거나, 커스텀 콘텐츠를 생성할 때 고려한 </li>
+<li>HTTP Vary 응답 헤더는<br>서버가 문서를 선택하거나, 커스텀 콘텐츠를 생성할 때 고려한<br><strong>클라 요청 헤더 모두를 나열한다.</strong></li>
 </ol>
-<strong>클라 요청 헤더 모두를 나열한다.</strong></li>
+</li>
 <li>새 요청이 도착했을 때, 캐시는 내용 협상 헤더들을 이용해 가장 잘 맞는 것을 찾는다.<ul>
 <li>캐시는 반드시 캐시된 응답 안에 서버가 보낸 <strong>Vary</strong> 헤더가 들어있는지 확인하고,<br>Vary 헤더가 명시하고 있는 헤더들은<br>새 요청과 오래된 캐시된 요청에서 그 값이 서로 맞아야만 한다.<ul>
 <li>서버는 클라의 요청 헤더에 따라 그들의 응답이 달라질 수 있기 때문에<br>투명 협상을 구현하기 위해 캐시는 반드시<br><strong>캐시된 variant</strong>와 함께<br>클라 요청 헤더와<br>그에 알맞은 서버 응답헤더 양쪽 모두를 저장해야한다.</li>
@@ -495,7 +503,7 @@
 <li>캐시가 검색을 할 때,<ol>
 <li>먼저 내용 협상 헤더로 적합한 콘텐츠를 맞춰보고</li>
 <li>다음에 요청의 배리언트를 캐시된 배리언트와 맞춰본다.</li>
-<li>만약 맞는 것이 없으면, 캐시는 문서를 서버에서 가져온다.<br>맞는 것이 있다면, 해당 콘텐츠를 보내준다.</li>
+<li>만약 맞는 것이 없으면, 캐시는 문서를 서버에서 가져온다.<br>  맞는 것이 있다면, 해당 콘텐츠를 보내준다.</li>
 </ol>
 </li>
 </ul>
@@ -518,11 +526,15 @@
 </ol>
 <hr>
 <ol>
-<li><strong>포맷 변환</strong><ul>
+<li><strong>포맷 변환</strong></li>
+</ol>
+<ul>
 <li>포맷변환은 데이터를 클라가 볼 수 있도록 한 포맷에서 다른 포맷으로 변환하는 것이다.</li>
 </ul>
-</li>
-<li><strong>정보 합성</strong><ul>
+<ol start="2">
+<li><strong>정보 합성</strong></li>
+</ol>
+<ul>
 <li>문서에서 정보의 요점을 추출하는 것을 정보 합성이라고 한다. <strong>information synthesis</strong></li>
 <li>각 절의 제목에 기반한 <strong>문서의 개요 생성</strong>이나,<br>페이지에서 광고 및 로고 제거를 들 수 있다.<ul>
 <li>본문의 키워드에 기반하여 페이지를 분류하는<br>더 복잡한 기술은 문서의 핵심을 요약할 때도 역시 유용하다.</li>
@@ -530,14 +542,18 @@
 </li>
 <li>이 기술을 포털사이트의 웹페이지 디렉터리와 같은<br>자동화된 웹페이지 분류 시스템에 의해 종종 사용된다.</li>
 </ul>
-</li>
-<li><strong>콘텐츠 주입</strong><ul>
+<ol start="3">
+<li><strong>콘텐츠 주입</strong></li>
+</ol>
+<ul>
 <li>포맷 변환과 정보 합성은 문서의 양을 줄이지만<br>주입 트랜스코딩은 오히려 양을 늘린다.</li>
 <li>내용 주입 트랜스 코딩의 예로 자동 광고 생성과 사용자 추적 시스템이 있다.</li>
 <li>동적으로 문서에 추가된다.</li>
 </ul>
-</li>
-<li><strong>트랜스 코딩 vs 정적으로 미리 생성해놓기</strong><ul>
+<ol start="4">
+<li><strong>트랜스 코딩 vs 정적으로 미리 생성해놓기</strong></li>
+</ol>
+<ul>
 <li>트랜스 코딩의 대안은 웹서버에서 웹페이지의 여러가지 사본을 만드는 것이다.<ul>
 <li>예_고해상도는 저해상도 이미지를 만든다.</li>
 </ul>
@@ -550,11 +566,9 @@
 </li>
 <li>변환은 더 싼 프락시나 캐시에 있는 외부 에이전트에 의해 수행될 수 있다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -580,7 +594,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/20/HTTP_017/" data-id="ckzv7cqgg004cqobm7uf7c9qa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/20/HTTP_017/" data-id="cm3u7mj1m0043hwb2bvq78h4w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

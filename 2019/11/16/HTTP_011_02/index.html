@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study,web,cookie" />
     
     
-    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인">
 <meta property="og:type" content="article">
 <meta property="og:title" content="쿠키 🍪">
 <meta property="og:url" content="http://feel5ny.github.io/2019/11/16/HTTP_011_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/39/thumb_default.jpg">
 <meta property="article:published_time" content="2019-11-16T14:23:55.000Z">
@@ -369,7 +369,7 @@
         <div class="article-entry" itemprop="articleBody">
             <p>현대의 웹 사이트들은 <strong>개인화</strong>된 서비스를 제공하고 싶어 한다.<br>개인화를 하는 방법은 여러 가지가 있다.</p>
 <ul>
-<li>개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보</li>
+<li>개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보</li>
 <li>세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.</li>
 </ul>
 <ol>
@@ -392,7 +392,7 @@
 <h1 id="1-💁‍♀️-쿠키의-타입-type"><a href="#1-💁‍♀️-쿠키의-타입-type" class="headerlink" title="1. 💁‍♀️ 쿠키의 타입 type"></a>1. 💁‍♀️ 쿠키의 타입 type</h1><img src="https://img2.looper.com/img/gallery/the-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel/intro-1529252113.jpg" >
 
 <blockquote>
-<p><a href="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwifgo7p9vDlAhVQw4sBHZCNBDYQjhx6BAgBEAI&url=https%3A%2F%2Fwww.looper.com%2F126230%2Fthe-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel%2F&psig=AOvVaw33Pe3U4ZSGg6yF4jZ1HcvQ&ust=1574069087195058">출처</a></p>
+<p><a href="https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwifgo7p9vDlAhVQw4sBHZCNBDYQjhx6BAgBEAI&url=https://www.looper.com/126230/the-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel/&psig=AOvVaw33Pe3U4ZSGg6yF4jZ1HcvQ&ust=1574069087195058">출처</a></p>
 </blockquote>
 <ul>
 <li>세션 쿠키와 지속 쿠키의 차이점은 파기되는 <strong>시점</strong>뿐이다.</li>
@@ -409,7 +409,7 @@
 </ul>
 <h2 id="Secure-cookie"><a href="#Secure-cookie" class="headerlink" title="Secure cookie"></a>Secure cookie</h2><ul>
 <li>암호화된 연결 HTTPS로만 전송할 수 있다.</li>
-<li>Secure 플래그를 추가해서 생성하며,<br>HTTPS로 전송하기 때문에 쿠키를 열어보는 걸 방지할 수 있다. </li>
+<li>Secure 플래그를 추가해서 생성하며,<br>HTTPS로 전송하기 때문에 쿠키를 열어보는 걸 방지할 수 있다.</li>
 </ul>
 <h2 id="Http-only-cookie"><a href="#Http-only-cookie" class="headerlink" title="Http-only cookie"></a>Http-only cookie</h2><ul>
 <li>자바스크립트 같은 클라이언트 사이드 API를 통해 접속할 수 없는 쿠키이며, XSS 위협을 없애준다.</li>
@@ -441,49 +441,53 @@
 </ul>
 <ol>
 <li>처음에 사용자가 웹사이트에 방문하면, 웹 서버는 사용자에 대해서 아무것도 모른다.</li>
-<li>웹 서버는 사용자가 다시 돌아왔을 때, 해당 사용자를 식별하기 위한 유일한 값을 쿠키에 할당한다.<ul>
+<li>웹 서버는 사용자가 다시 돌아왔을 때, 해당 사용자를 식별하기 위한 유일한 값을 쿠키에 할당한다.</li>
+</ol>
+<ul>
 <li>쿠키는 임의의 <code>이름=값</code> 형태의 리스트를 가지고,<br>그 리스트는 <code>Set-Cookie</code> 혹은 <code>Set-Cookie2</code> 같은 HTTP응답 헤더에 기술되어 사용자에게 전달한다. <a href="https://feel5ny.github.io/2019/08/18/HTTP_003_04/#3">참고</a><blockquote>
 <p><code>Set-Cookie2</code>은 더 이상 사용되지 않는다.</p>
 </blockquote>
 </li>
 </ul>
-</li>
-<li>쿠키는 어떤 정보든 포함할 수 있지만,<br><strong>서버가 사용자 추적 용도</strong>로 생성한<br>유일한 <strong>단순 식별 번호</strong>만 포함하기도 한다.<ul>
+<ol start="3">
+<li>쿠키는 어떤 정보든 포함할 수 있지만,<br>  <strong>서버가 사용자 추적 용도</strong>로 생성한<br>  유일한 <strong>단순 식별 번호</strong>만 포함하기도 한다.</li>
+</ol>
+<ul>
 <li>서버는 이 쿠키 값으로 DB에서 사용자의 정보를 찾는데 사용할 수 있다.</li>
 <li>브라우저는 서버로 온 Set-Cookie 헤더에 있는 쿠키 콘텐츠를 <strong>브라우저 쿠키 DB</strong>에 저장한다.</li>
 <li>사용자가 미래에 같은 사이트를 방문하면,<br>브라우저는 서버가 이 사용자에게 할당했던 쿠키를 Cookie요청 헤더에 기술해 전송한다.</li>
 </ul>
-</li>
-</ol>
 <img src="/images/2019/39/03.png" style="width:100%"/>
-
+  
 <h3 id="그니까-쿠키는-어떻게-동작-정리"><a href="#그니까-쿠키는-어떻게-동작-정리" class="headerlink" title="그니까 쿠키는 어떻게 동작? 정리"></a>그니까 쿠키는 어떻게 동작? <strong>정리</strong></h3><ol>
 <li>유저가 서버에 페이지를 요청한다.</li>
 <li>서버에서 응답과 함께 Set-Cookie 헤더를 전송한다.</li>
-<li>브라우저(User Agent)가 Set-Cookie 헤더에서 전달된 값을 갖고<br>쿠키를 생성해서 (브라우저에) 저장한다.</li>
-<li>이렇게 생성된 쿠키는 클라가 서버에 요청할 때마다<br><strong>브라우저가 같이 전송해준다.</strong></li>
+<li>브라우저(User Agent)가 Set-Cookie 헤더에서 전달된 값을 갖고<br>  쿠키를 생성해서 (브라우저에) 저장한다.</li>
+<li>이렇게 생성된 쿠키는 클라가 서버에 요청할 때마다<br>  <strong>브라우저가 같이 전송해준다.</strong></li>
 </ol>
 <hr>
 <a name="state"/>
 
 <h1 id="3-⏳쿠키-상태-관리"><a href="#3-⏳쿠키-상태-관리" class="headerlink" title="3. ⏳쿠키 상태 관리"></a>3. ⏳쿠키 상태 관리</h1><h2 id="3-1-클라이언트-측-상태"><a href="#3-1-클라이언트-측-상태" class="headerlink" title="3.1 클라이언트 측 상태"></a>3.1 클라이언트 측 상태</h2><ul>
 <li>쿠키의 기본적인 발상은<br>브라우저가 서버 관련 정보를 저장하고,<br>사용자가 해당 서버에 접근할 때마다 그 정보를 함께 전송하게 하는 것이다.</li>
-<li><strong>브라우저는 쿠키 정보를 저장할 책임</strong>이 있다.<br>= 클라이언트 측 상태<br>= HTTP 상태 관리체계 (HTTP State Management Mechnism)</li>
+<li><strong>브라우저는 쿠키 정보를 저장할 책임</strong>이 있다.<br>&#x3D; 클라이언트 측 상태<br>&#x3D; HTTP 상태 관리체계 (HTTP State Management Mechnism)</li>
 <li>각 브라우저는 각기 다른 방식으로 쿠키를 저장한다.</li>
 </ul>
 <h2 id="3-2-Domain-별-쿠키-상태-관리"><a href="#3-2-Domain-별-쿠키-상태-관리" class="headerlink" title="3.2 Domain 별 쿠키 상태 관리"></a>3.2 Domain 별 쿠키 상태 관리</h2><ul>
 <li>브라우저는 수백수천 개의 쿠키를 가지고 있을 수 있지만,<br>브라우저가 쿠키 전부를 모든 사이트에 보내지는 않는다.</li>
 <li>브라우저는 보통 각 사이트에 2개 혹은 3개의 쿠키만 보낸다.<ol>
-<li>🔥 쿠키를 모두 전달하면 <strong>성능이 크게 저하된다.</strong><ul>
+<li>🔥 쿠키를 모두 전달하면 <strong>성능이 크게 저하된다.</strong></li>
+</ol>
+<ul>
 <li>쿠키를 모두 전달하면, 브라우저는 실제 콘텐츠의 바이트보다 더 많은 쿠키 바이트를 전달하게 될 것이다.</li>
 </ul>
-</li>
-<li>🤷‍♂️ <strong>해당 도메인과 상관없는 쿠키를 보내면 무의미하다.</strong><ul>
-<li>이 쿠키들은 대부분은 서버에 특화된 이름/값 쌍을 포함하고 있기 때문에,<br>대부분 사이트에서는 인식하지 않는 무의미한 값이다.</li>
+<ol start="2">
+<li>🤷‍♂️ <strong>해당 도메인과 상관없는 쿠키를 보내면 무의미하다.</strong></li>
+</ol>
+<ul>
+<li>이 쿠키들은 대부분은 서버에 특화된 이름&#x2F;값 쌍을 포함하고 있기 때문에,<br>대부분 사이트에서는 인식하지 않는 무의미한 값이다.</li>
 <li>모든 사이트에 쿠키 전체를 전달하는 것은,<br>특정 사이트에서 제공한 정보를 신뢰하지 않는 사이트에서 가져갈 수 있어서,<br>잠재적인 <strong>개인 정보 문제</strong>를 일으킬 것이다.</li>
 </ul>
-</li>
-</ol>
 </li>
 <li>보통 브라우저는 쿠키를 생성한 서버에게만 쿠키에 담긴 정보를 전달한다.</li>
 <li>쿠키는 일종의 <strong>상태 정보</strong>라고 할 수 있으며<ol>
@@ -494,12 +498,12 @@
 </ul>
 <blockquote>
 <p>많은 <strong>웹 사이트는 광고를 관리하는 협력업체</strong>와 계약을 한다. (third-party 쿠키)</p>
+</blockquote>
 <ul>
 <li>이 광고들은 웹사이트 자체의 일부인 것처럼 제작되고, <strong>지속 쿠키</strong>를 만들어낸다.</li>
 <li>같은 광고사에서 제공하는 서로 다른 웹사이트에 사용자가 방문하면,<br>브라우저는 앞서 만든 지속 쿠키를 다시 광고사 서버로 전송한다.</li>
 <li>광고사는 이 기술에 <code>Referer</code>헤더를 접목하여,<br>사용자의 프로필과 웹사이트를 사용하는 습관에 대한 방대한 데이터를 구축할 수 있다.</li>
 </ul>
-</blockquote>
 <h3 id="쿠키-Domain-속성"><a href="#쿠키-Domain-속성" class="headerlink" title="쿠키 Domain 속성"></a>쿠키 Domain 속성</h3><ul>
 <li>서버는 쿠키를 생성할 때 Set-Cookie 응답 헤더에<br>Domain 속성을 시술해서, 어떤 사이트가 그 쿠키를 읽을 수 있는지 제어할 수 있다.<ul>
 <li>도메인에 해당하는 사이트를 방문하면 Cookie 헤더가 항상 적용될 것이다.</li>
@@ -516,9 +520,7 @@
 <h3 id="쿠키-Path-속성"><a href="#쿠키-Path-속성" class="headerlink" title="쿠키 Path 속성"></a>쿠키 Path 속성</h3><ul>
 <li>웹 사이트 일부에만 쿠키를 적용할 수 있다.</li>
 <li><ol start="2">
-<li><a href="HTTPs://www.google.com/">HTTPs://www.google.com/</a> + <code>/search</code><br><code>/search</code> 여기에만 해당하는 쿠키!<img src="/images/2019/39/06.png" style="width:100%" />
-
-</li>
+<li><a href="https://www.google.com/">HTTPs://www.google.com/</a> + <code>/search</code><br><code>/search</code> 여기에만 해당하는 쿠키!<img src="/images/2019/39/06.png" style="width:100%" /></li>
 </ol>
 </li>
 </ul>
@@ -526,9 +528,9 @@
 <a name="detail"/>
 
 <h1 id="4-🧩-쿠키-구성요소"><a href="#4-🧩-쿠키-구성요소" class="headerlink" title="4. 🧩 쿠키 구성요소"></a>4. 🧩 쿠키 구성요소</h1><ul>
-<li>현재 사용되는 쿠키 명세에는<br><strong>Version0</strong> 쿠키 (= 넷스케이프 쿠키)<br><strong>Version1</strong> 쿠키 (RFC 2965 =&gt; RFC 2965 =&gt; RFC 6265)</li>
+<li>현재 사용되는 쿠키 명세에는<br><strong>Version0</strong> 쿠키 (&#x3D; 넷스케이프 쿠키)<br><strong>Version1</strong> 쿠키 (RFC 2965 &#x3D;&gt; RFC 2965 &#x3D;&gt; RFC 6265)</li>
 <li>Version1 쿠키는 Version0 쿠키의 확장으로<br>널리 쓰이지는 않는다.</li>
-<li>Version0과 Version1 쿠키 명세 모두 HTTP/1.1 명세 일부로 기술되어 있지는 않는다.</li>
+<li>Version0과 Version1 쿠키 명세 모두 HTTP&#x2F;1.1 명세 일부로 기술되어 있지는 않는다.</li>
 </ul>
 <h2 id="Version-0"><a href="#Version-0" class="headerlink" title="Version 0"></a>Version 0</h2><h3 id="1-Set-Cookie-헤더"><a href="#1-Set-Cookie-헤더" class="headerlink" title="1. Set-Cookie 헤더"></a>1. Set-Cookie 헤더</h3><ul>
 <li>Set-Cookie 헤더는 쿠키의 이름과 값을 가져야 한다.</li>
@@ -536,23 +538,29 @@
 </ul>
 <ol>
 <li><code>이름=값</code>: 필수 값</li>
-<li><code>Expires</code>: 선택적인 속성. 쿠키의 생명주기를 가리키는 날짜 문자열<ul>
+<li><code>Expires</code>: 선택적인 속성. 쿠키의 생명주기를 가리키는 날짜 문자열</li>
+</ol>
+<ul>
 <li><strong>요일, DD-MM-YY HH:MM:SS GMT</strong></li>
 <li>사용할 수 있는 타임존은 GMT</li>
 <li>쿠키에 Expires를 명시하지 않으면 그 쿠키는 사용자의 세션이 끝날 때 파기될 것이다.</li>
 </ul>
-</li>
-<li><code>Domain</code>: 선택적인 속성. 브라우저는 이 속성에 기술된 도메인을 사용하는 서버 호스트명으로만 쿠키를 전송한다.<ul>
+<ol start="3">
+<li><code>Domain</code>: 선택적인 속성. 브라우저는 이 속성에 기술된 도메인을 사용하는 서버 호스트명으로만 쿠키를 전송한다.</li>
+</ol>
+<ul>
 <li>이는 서버가 해당 도메인에만 쿠키를 제한적으로 전달하게 한다.</li>
 <li>도메인이 명시되어 있지 않으면, Set-Cookie 응답을 생성한 서버의 호스트 명을 기본값으로 사용한다.</li>
 </ul>
-</li>
-<li><code>Path</code>: 선택적인 속성. 서버에 있는 특정 문서에만 쿠키를 할당할 수 있다.<ul>
+<ol start="4">
+<li><code>Path</code>: 선택적인 속성. 서버에 있는 특정 문서에만 쿠키를 할당할 수 있다.</li>
+</ol>
+<ul>
 <li><code>/foo</code>경로는 <code>/foobar</code>와 <code>/foo/bar.html</code>에 들어맞는다.</li>
 <li><code>/</code>는 모든 것에 들어맞는다.</li>
 <li>경로를 명시하지 않으면, Set-Cookie 응답을 전달하는 URL의 경로가 사용된다.</li>
 </ul>
-</li>
+<ol start="5">
 <li><code>Secure</code>: 선택적인 속성. 쿠키는 HTTP가 SSL 보안 연결을 사용할 때만 쿠키를 전송한다.</li>
 <li><code>HttpOnly</code>: HttpOnly는 쿠키의 범위를 HTTP 요청으로 제한한다.<br>HttpOnly가 설정된 경우 클라이언트 사이드 API로는 쿠키에 접근하지 못한다.</li>
 </ol>
@@ -603,14 +611,13 @@
 </ul>
 <h2 id="5-1-쿠키와-세션-추적"><a href="#5-1-쿠키와-세션-추적" class="headerlink" title="5.1 쿠키와 세션 추적"></a>5.1 쿠키와 세션 추적</h2><p>Amazon.com의 예를 통해 살펴보자.</p>
 <ol>
-<li>브라우저가 Amazon.com의 루트 페이지를 처음 요청한다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.0</span><br><span class="line">Host: www.amazon.com</span><br></pre></td></tr></table></figure></li>
-<li>서버는 클라를 전자상거래 소프트웨어 URL로 리다이렉트 시킨다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Location: http://www.amazon.com:80/exec/abidos/subst/home/redirect.html</span><br></pre></td></tr></table></figure></li>
-<li>클라는 리다이렉트 URL로 요청 보낸다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html HTTP/1.0 302 Found</span><br><span class="line">Host: http://www.amazon.com</span><br></pre></td></tr></table></figure></li>
-<li>서버는 응답에<br>두 개의 세션 쿠키를 기술하고 (<code>Set-Cookie</code> = 요 쿠키 브라우저에 넣어두세요)<br>사용자를 다른 URL로 리다이렉트 시키며<br>클라는 다시 이 쿠키들을 첨부하여 요청을 보낸다.(<code>Cookie</code>)
-새로운 URL(<a href="http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은">http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은</a> 자체에 상태 정보를 갖고 있으므로 = <strong>뚱뚱한 URL</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:20:47 GMT</span><br><span class="line">Set-Cookie: session-id=002-1135265-8016838; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: session-id-time=1007884800; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br></pre></td></tr></table></figure></li>
-<li>클라는 새로운 URL을 요청을 요청받았던 두 개의 쿠키와 함께 보낸다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800</span><br></pre></td></tr></table></figure></li>
-<li>서버는 home.html 페이지로 리다이렉트 시키고, 쿠키 두 개를 더 첨부한다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:45:40 GMT</span><br><span class="line">Set-Cookie: ubid-main=430-8248051-6231206; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: x-main=hQ...Bf; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Location: http://www.amazon.com/exec/abidos/subst/home/home.html/002-1135265-8016838</span><br></pre></td></tr></table></figure></li>
-<li>클라는 home.html 페이지를 가져오고, 총 4개의 쿠키를 전달한다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/home.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800; ubid-main=430-8248051-6231206; x-main=hQ...Bf</span><br></pre></td></tr></table></figure></li>
+<li>브라우저가 Amazon.com의 루트 페이지를 처음 요청한다  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.0</span><br><span class="line">Host: www.amazon.com</span><br></pre></td></tr></table></figure></li>
+<li>서버는 클라를 전자상거래 소프트웨어 URL로 리다이렉트 시킨다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Location: http://www.amazon.com:80/exec/abidos/subst/home/redirect.html</span><br></pre></td></tr></table></figure></li>
+<li>클라는 리다이렉트 URL로 요청 보낸다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html HTTP/1.0 302 Found</span><br><span class="line">Host: http://www.amazon.com</span><br></pre></td></tr></table></figure></li>
+<li>서버는 응답에<br>  두 개의 세션 쿠키를 기술하고 (<code>Set-Cookie</code> &#x3D; 요 쿠키 브라우저에 넣어두세요)<br>  사용자를 다른 URL로 리다이렉트 시키며<br>  클라는 다시 이 쿠키들을 첨부하여 요청을 보낸다.(<code>Cookie</code>)<br>  새로운 URL(<a href="http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)%EC%9D%80">http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은</a> 자체에 상태 정보를 갖고 있으므로 &#x3D; <strong>뚱뚱한 URL</strong>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:20:47 GMT</span><br><span class="line">Set-Cookie: session-id=002-1135265-8016838; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: session-id-time=1007884800; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT</span><br></pre></td></tr></table></figure></li>
+<li>클라는 새로운 URL을 요청을 요청받았던 두 개의 쿠키와 함께 보낸다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/redirect.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800</span><br></pre></td></tr></table></figure></li>
+<li>서버는 home.html 페이지로 리다이렉트 시키고, 쿠키 두 개를 더 첨부한다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Date: Sun, 02 Dec 2001 03:45:40 GMT</span><br><span class="line">Set-Cookie: ubid-main=430-8248051-6231206; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Set-Cookie: x-main=hQ...Bf; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT</span><br><span class="line">Location: http://www.amazon.com/exec/abidos/subst/home/home.html/002-1135265-8016838</span><br></pre></td></tr></table></figure></li>
+<li>클라는 home.html 페이지를 가져오고, 총 4개의 쿠키를 전달한다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /exec/abidos/subst/home/home.html/002-1135265-8016838 HTTP/1.0</span><br><span class="line">Host: http://www.amazon.com</span><br><span class="line">Cookie: session-id=002-1135265-8016838; session-id-time=1007884800; ubid-main=430-8248051-6231206; x-main=hQ...Bf</span><br></pre></td></tr></table></figure></li>
 <li>서버는 콘텐츠를 보낸다.</li>
 </ol>
 <blockquote>
@@ -623,22 +630,24 @@
 <li>이전 사용자의 쿠키가 다른 사용자에게 할당돼버리거나,<br>누군가의 개인 정보가 다른 이에게 노출되는 최악의 상황이 일어날 수도 있다.</li>
 </ul>
 <ol>
-<li>캐시 되지 말아야 할 문서가 있다면 표시하라<br><code>Control: no-cache=&quot;Set-Cookie&quot;</code></li>
-<li>Set-Cookie 해더를 캐시 하는 것에 유의하라<ul>
+<li>캐시 되지 말아야 할 문서가 있다면 표시하라<br>  <code>Control: no-cache=&quot;Set-Cookie&quot;</code></li>
+<li>Set-Cookie 해더를 캐시 하는 것에 유의하라</li>
+</ol>
+<ul>
 <li>같은 Set-Cookie 헤더를 여러 사용자에게 보내게 되면 사용자 추적에 실패할 것이기 때문</li>
 <li>어떤 캐시는 응답을 저장하기 전에 Set-Cookie 헤더를 제거하기 때문에, 그 캐시 데이터를 받은 클라는 Set-Cookie 헤더 정보가 없는 데이터를 받게 되어 문제가 발생할 수 있다. <ul>
 <li>캐시가 모든 요청마다 원 서버와 재검사시켜 클라로 가는 응답에 Set-Cookie 헤더 값을 기술하여 이 문제를 개선할 수 있다. (<a href="https://feel5ny.github.io/2019/10/05/HTTP_007-2/#control">참고</a>)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: must-revalidate, max-age=0</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Cookie 헤더를 가지고 있는 요청을 주의하라<ul>
+<ol start="3">
+<li>Cookie 헤더를 가지고 있는 요청을 주의하라</li>
+</ol>
+<ul>
 <li>클라 요청에 Cookie 헤더가 함께 오면,<br>결과 콘텐츠가 개인 정보를 담고 있을 수도 있다는 힌트다.</li>
 <li>개인 정보는 캐시 되지 않도록 표시되어 있어야 하지만, 그 표시를 하지 않는 서버도 있다.</li>
 <li>보수적인 캐시는 Cookie 헤더가 포함된 요청에 응답으로 가는 문서는 캐시 하지 않을 것이다.</li>
 </ul>
-</li>
-</ol>
 <h2 id="6-2-쿠키-보안-그리고-개인-정보"><a href="#6-2-쿠키-보안-그리고-개인-정보" class="headerlink" title="6.2 쿠키, 보안 그리고 개인 정보"></a>6.2 쿠키, 보안 그리고 개인 정보</h2><ul>
 <li>쿠키를 사용하지 않도록 비활성화 시킬 수 있고, 로그 분석 같은 다른 방법으로 대체하는 것도 가능하므로, 그 자체가 보안상으로 엄청나게 위험한 것은 아니다.</li>
 <li>원격 DB에 개인 정보를 저장하고,<br>해당 데이터의 키값을 쿠키에 저장하는 방식을 표준으로 사용하면,<br>클라와 서버 사이에 예민한 데이터가 오가는 것을 줄일 수 있다.</li>
@@ -646,7 +655,7 @@
 </ul>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -674,7 +683,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/16/HTTP_011_02/" data-id="ckzv7cqfy003eqobm3paay0i2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/16/HTTP_011_02/" data-id="cm3u7mj1i0033hwb2gxlc8drw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

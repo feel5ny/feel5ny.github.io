@@ -357,10 +357,7 @@
 <hr>
 <p><a name="2"></a></p>
 <h2 id="2-Optional-flow-control"><a href="#2-Optional-flow-control" class="headerlink" title="2. Optional flow control"></a>2. Optional flow control</h2><p>conditional Statement: 조건문<br><a name="2-1"></a></p>
-<h3 id="2-1-if-if-else"><a href="#2-1-if-if-else" class="headerlink" title="2.1 if, if else"></a>2.1 if, if else</h3><p><code>if (condition)
-   statement1
-[else
-   statement2]</code></p>
+<h3 id="2-1-if-if-else"><a href="#2-1-if-if-else" class="headerlink" title="2.1 if, if else"></a>2.1 if, if else</h3><p><code>if (condition)    statement1 [else    statement2]</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">switch</span> (c) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">for</span> (;;) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
@@ -368,7 +365,7 @@
 <h4 id="2-1-1-Truthy-Falsy"><a href="#2-1-1-Truthy-Falsy" class="headerlink" title="2.1.1 Truthy, Falsy"></a>2.1.1 Truthy, Falsy</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">mdn</a></p>
 <ul>
 <li>falsy는 <code>0, false, null, undefined,&quot;&quot;, NaN</code>이 있다.</li>
-<li>나머지는 truthy이다. </li>
+<li>나머지는 truthy이다.</li>
 </ul>
 <hr>
 <p><a name="2-1-2"></a></p>
@@ -387,7 +384,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a) <span class="comment">// mandatory</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (b &amp;&amp; a) </span><br><span class="line"><span class="keyword">else</span></span><br></pre></td></tr></table></figure>
 <p>위의 코든에서 첫번째 else뒤에는 mandatory되어야하지만, optional하다. </p>
 <ul>
-<li>a와 b의 상태에 따라 <code>b &amp;&amp; a</code>의 값이 다르기 때문 </li>
+<li>a와 b의 상태에 따라 <code>b &amp;&amp; a</code>의 값이 다르기 때문</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a)</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (b &amp;&amp; a)</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!b &amp;&amp; a)</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(b &amp;&amp; !a)</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!b &amp;&amp;!a)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -430,7 +427,7 @@
 <li><strong>nested되어있는 sub집합에 대한 조건일때 사용한다.</strong></li>
 <li>else if는 병행조건일 때 쓰면 원래 안되는 것.</li>
 </ul>
-<h5 id="병행조건-Parallel-일때는-무조건-gt-switch"><a href="#병행조건-Parallel-일때는-무조건-gt-switch" class="headerlink" title="병행조건(Parallel)일때는 무조건! =&gt; switch"></a>병행조건(Parallel)일때는 무조건! =&gt; switch</h5><ul>
+<h5 id="병행조건-Parallel-일때는-무조건-switch"><a href="#병행조건-Parallel-일때는-무조건-switch" class="headerlink" title="병행조건(Parallel)일때는 무조건! &#x3D;&gt; switch"></a>병행조건(Parallel)일때는 무조건! &#x3D;&gt; switch</h5><ul>
 <li><p>switch를 쓴다.</p>
 </li>
 <li><p>내가 평가해야할 식들이 동등할 경우 !!! switch문으로 간다.</p>
@@ -445,7 +442,7 @@
 <li>병행조건으로 빠졌지만, dafault가 붙어있는 이상 빠져 나올 구멍이 없다.</li>
 </ul>
 </li>
-<li>조건문을 중첩해서 사용할 때는 mandatory로 빠지는 건지 optional로 빠지는지 확인하면 된다. </li>
+<li>조건문을 중첩해서 사용할 때는 mandatory로 빠지는 건지 optional로 빠지는지 확인하면 된다.</li>
 </ul>
 <p>mandatory로 시작했으면 mandatory로 끝내야하고<br>optional로 시작했으면 optional로 끝내야하고<br>optional과 mandatory를 섞어 써야한다면 </p>
 <ul>
@@ -462,29 +459,20 @@
 <ul>
 <li>for</li>
 <li>while, do..while</li>
-<li>for ( of ); =&gt; for iteration</li>
-<li>for ( in ); =&gt; forEach와 유사 </li>
+<li>for ( of ); &#x3D;&gt; for iteration</li>
+<li>for ( in ); &#x3D;&gt; forEach와 유사</li>
 </ul>
 <p><a name="3-1"></a></p>
 <h3 id="3-1-For"><a href="#3-1-For" class="headerlink" title="3.1 For"></a>3.1 For</h3><p>for문의 3개의 선택식에 어떤 코드를 넣어야할지 반드시 이해해야한다.</p>
 <p><code>for ([initialization]; [condition]; [final-expression])</code></p>
 <ol>
-<li><p>Initialization<br><code>Limited Statement</code></p>
+<li>Initialization<br>  <code>Limited Statement</code></li>
+</ol>
 <ul>
 <li>원래 식만 와야하는데 선언문 한정으로 문이 올 수 있다.<br>(문중에 선언문만 올 수 있다.)</li>
 </ul>
-<p>선언문 또는 식이 올 수 있다.<br>혹은 <strong>공문</strong>도 올 수 있다.<br>식 또는 변수 선언. 주로 카운터 변수를 초기화할 때 사용한다.</p>
-</li>
-<li><p>condition (:조건)<br>매 반복마다 평가할 식.<br>평가 결과가 참이라면 statement를 실행한다.<br><strong>이 식을 넣지 않을 때(공문) 결과는 언제나 참이다.</strong> (<code>Empty Truthy</code>)</p>
-<ul>
-<li>무한루프</li>
-</ul>
-<p>결과가 거짓이라면 for문의 바로 다음 식으로 건너 뛴다.</p>
-</li>
-<li><p>final-expression<br>매 반복 후 평가할 식.<br>다음번 condition 평가 이전에 발생한다.<br>statement 끝에 있는것과 같는 상황이다.<br><strong>즉, statement 마지막에 실행된다.</strong> (<code>Last Execution</code>)
-반복해서 쓰지 않기 위해서 3번째 항목에 넣는것.</p>
-</li>
-</ol>
+<p>  선언문 또는 식이 올 수 있다.<br>  혹은 <strong>공문</strong>도 올 수 있다.<br>  식 또는 변수 선언. 주로 카운터 변수를 초기화할 때 사용한다.<br>2. condition (:조건)<br>  매 반복마다 평가할 식.<br>  평가 결과가 참이라면 statement를 실행한다.<br>  <strong>이 식을 넣지 않을 때(공문) 결과는 언제나 참이다.</strong> (<code>Empty Truthy</code>)<br>    - 무한루프</p>
+<p>  결과가 거짓이라면 for문의 바로 다음 식으로 건너 뛴다.<br>3. final-expression<br>  매 반복 후 평가할 식.<br>  다음번 condition 평가 이전에 발생한다.<br>  statement 끝에 있는것과 같는 상황이다.<br>  <strong>즉, statement 마지막에 실행된다.</strong> (<code>Last Execution</code>)<br>  반복해서 쓰지 않기 위해서 3번째 항목에 넣는것.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">3</span>; <span class="comment">// declare statement. 문이다.</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; turthy; ex)&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a name="3-2"></a></p>
@@ -495,9 +483,7 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(truthy)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while문 보다 1번은 먼저 더 실행하는 꼴</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">while</span> (truthy);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><code>do
-   statement
-while (condition);</code></p>
+<p><code>do    statement while (condition);</code></p>
 <ul>
 <li>do while문은 마지막에 <code>;</code> 붙이는게 공식문서에 명시되어있는 규칙</li>
 <li>do 다음의 statement가 단문일 경우 <code>;</code>붙이면 됨<br><code>do a++; while(a);</code></li>
@@ -540,7 +526,7 @@ while (condition);</code></p>
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_2/" data-id="ckzv7cqi7006bqobmpameeo9d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_2/" data-id="cm3u7mj1t005xhwb216ny1ls1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study,message,status code" />
     
     
-    <meta name="description" content="출처: http-decision-diagram   HTTP 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.       상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.&#x3D;&gt; 상태코드, 사유구절  HTTP&#x2F;1.1 기준이다.    상태코드 (HTTP&#x2F;1.1 기준)  정보성">
+    <meta name="description" content="출처: http-decision-diagram   HTTP 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.       상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.&#x3D;&gt; 상태코드, 사유구절  HTTP&#x2F;1.1 기준이다.    상태코드 (HTTP&amp;#x2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 메세지 - 상태코드">
 <meta property="og:url" content="http://feel5ny.github.io/2019/08/17/HTTP_003_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="출처: http-decision-diagram   HTTP 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.       상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.&#x3D;&gt; 상태코드, 사유구절  HTTP&#x2F;1.1 기준이다.    상태코드 (HTTP&#x2F;1.1 기준)  정보성">
+<meta property="og:description" content="출처: http-decision-diagram   HTTP 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.       상태코드와 사유구절 클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.&#x3D;&gt; 상태코드, 사유구절  HTTP&#x2F;1.1 기준이다.    상태코드 (HTTP&amp;#x2">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/22/thumb_default.jpg">
 <meta property="article:published_time" content="2019-08-17T12:23:55.000Z">
@@ -361,17 +361,17 @@
 <a name="status"/>
 
 <h1 id="상태코드와-사유구절"><a href="#상태코드와-사유구절" class="headerlink" title="상태코드와 사유구절"></a>상태코드와 사유구절</h1><ul>
-<li>클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.<br>=&gt; 상태코드, 사유구절</li>
+<li>클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.<br>&#x3D;&gt; 상태코드, 사유구절</li>
 <li><ol start="2">
-<li>HTTP/1.1 기준이다.</li>
+<li>HTTP&#x2F;1.1 기준이다.</li>
 </ol>
 </li>
 </ul>
-<h1 id="상태코드-HTTP-1-1-기준"><a href="#상태코드-HTTP-1-1-기준" class="headerlink" title="상태코드 (HTTP/1.1 기준)"></a>상태코드 (HTTP/1.1 기준)</h1><a name="1"/>
+<h1 id="상태코드-HTTP-1-1-기준"><a href="#상태코드-HTTP-1-1-기준" class="headerlink" title="상태코드 (HTTP&#x2F;1.1 기준)"></a>상태코드 (HTTP&#x2F;1.1 기준)</h1><a name="1"/>
 
 <h2 id="정보성-상태-코드-100-199"><a href="#정보성-상태-코드-100-199" class="headerlink" title="정보성 상태 코드 (100 - 199)"></a>정보성 상태 코드 (100 - 199)</h2><ul>
 <li><ol start="2">
-<li>HTTP/1.1에 도입되었다.</li>
+<li>HTTP&#x2F;1.1에 도입되었다.</li>
 </ol>
 </li>
 <li>복잡함을 감수할만한 가치가 있는지에 대한 논란이 되고 있다.</li>
@@ -407,19 +407,19 @@
 <li>서버: 음! 받을 수 있으니, 100을 보내야겠군</li>
 <li>클라: 왜 안 오지 그냥 entity 보내자.</li>
 <li>서버: 음? 100 아직 안보냈는데 entity가 왔네. 걍 받자</li>
-<li>서버: 잘 받았어 ~ 응답 보내줘야 함<ul>
+<li>서버: 잘 받았어 ~ 응답 보내줘야 함</li>
+</ol>
+<ul>
 <li>엔터티 읽다가 에러가 나와도, 연결을 닫아서는 안된다.</li>
 <li>클라가 응답을 받을 수 없게 되기 때문이다. (?)<ul>
 <li>아직 잘 모르겠다.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
 <h4 id="프락시와-100-Continue"><a href="#프락시와-100-Continue" class="headerlink" title="프락시와 100 Continue"></a>프락시와 100 Continue</h4><ol>
 <li>클라: 서버에게 expect 헤더 보냄</li>
 <li>프락시: 서버에게 expect 헤더 고대로 보냄<ol>
-<li>만약 다음 홉서버가(next-hope) HTTP/1.1 이전 버전이라는 걸 알게 되면 417 Expectation Failed를 클라에게 응답한다.</li>
+<li>만약 다음 홉서버가(next-hope) HTTP&#x2F;1.1 이전 버전이라는 걸 알게 되면 417 Expectation Failed를 클라에게 응답한다.</li>
 </ol>
 </li>
 </ol>
@@ -523,7 +523,7 @@
 <li>요청된 리소스가 Location 헤더가 지정한 URL로 <strong>일시적으로 이동</strong>되었음을 나타낸다. </li>
 <li>브라우저는 이 페이지로 리디렉션 되지만 검색 엔진은 리소스에 대한 링크를 업데이트하지 않는다.</li>
 <li>따라서 302 코드는 <code>GET</code> 또는 <code>HEAD</code> 방법에 대한 응답으로만 설정하고,<br>메서드 변경이 명시적으로 금지되므로 대신 <strong>307 임시 리디렉션</strong>을 사용하는 것이 좋다.</li>
-<li>사용된 메서드를 <code>GET</code>로 변경하려는 경우 대신 <strong>303 “기타”</strong>를 사용해야 한다. </li>
+<li>사용된 메서드를 <code>GET</code>로 변경하려는 경우 대신 **303 “기타”**를 사용해야 한다.</li>
 </ul>
 <img src="/images/2019/22/03.png" style="width:100%" >
 
@@ -562,7 +562,7 @@
 <li>리소스를 얻기 전에 클라에게 스스로 인증하라고 요구하는 내용의 응답을 적절한 헤더와 함께 반환한다.</li>
 </ul>
 <h3 id="402-Payment-Required"><a href="#402-Payment-Required" class="headerlink" title="402 - Payment Required"></a>402 - Payment Required</h3><ul>
-<li>이 상태 코드는 쓰이지 않지만, 미래에 사용될 수도 있어서 미리 준비해둔 비표준 응답 코드 </li>
+<li>이 상태 코드는 쓰이지 않지만, 미래에 사용될 수도 있어서 미리 준비해둔 비표준 응답 코드</li>
 </ul>
 <h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 - Forbidden"></a>403 - Forbidden</h3><ul>
 <li>요청이 서버에 의해 거부되었음을 알려주기 위해 사용된다.</li>
@@ -572,7 +572,7 @@
 </ul>
 <h3 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 - Not Found"></a>404 - Not Found</h3><ul>
 <li>서버가 요청한 URL을 찾을 수 없음을 알려주기 위해 사용한다.</li>
-<li>404 페이지를 띄우는 링크는 대체로 <strong>브로큰 링크(broken link)</strong> 또는 <strong>데드 링크(dead link)</strong>라고 부르며, link rot 대상일 수도 있습니다.</li>
+<li>404 페이지를 띄우는 링크는 대체로 <strong>브로큰 링크(broken link)</strong> 또는 **데드 링크(dead link)**라고 부르며, link rot 대상일 수도 있습니다.</li>
 <li>404 상태 코드는 리소스가 일시적, 또는 영구적으로 사라졌다는 것을 의미하지는 않다. </li>
 <li>리소스가 영구적 삭제되었다면 404 상태 코드 대신 <strong>410 (Gone)</strong> 상태 코드가 쓰여야 합니다.</li>
 </ul>
@@ -625,7 +625,7 @@
 <li>클라가 조건부 요청을 했는데, 그중 하나가 실패했을 때 사용한다.</li>
 <li>조건부 요청은 클라가 Expect 헤더를 포함했을 때 발생한다.</li>
 <li>대상 리소스에 대한 액세스가 거부되었음을 나타낸다. </li>
-<li>이는 <code>If-Unmodified-from</code> 또는 <code>If-None-Match</code> 헤더에 의해 정의된 조건이 충족되지 않을 때 <code>GET</code> 또는 <code>HEAD</code> 이외의 방법에 대한 조건부 요청에서 발생한다. </li>
+<li>이는 <code>If-Unmodified-from</code> 또는 <code>If-None-Match</code> 헤더에 의해 정의된 조건이 충족되지 않을 때 <code>GET</code> 또는 <code>HEAD</code> 이외의 방법에 대한 조건부 요청에서 발생한다.</li>
 </ul>
 <h3 id="413-Payload-Too-Large-Request-Entity-Too-Large"><a href="#413-Payload-Too-Large-Request-Entity-Too-Large" class="headerlink" title="413 - Payload Too Large (Request Entity Too Large)"></a>413 - Payload Too Large (Request Entity Too Large)</h3><ul>
 <li>서버가 처리할 수 있는 혹은 처리하고자 하는 한계를 넘은 크기의 요청을 클라가 보냈을 때 사용한다.</li>
@@ -688,8 +688,7 @@
 </ul>
 <h3 id="501-Not-Implemented"><a href="#501-Not-Implemented" class="headerlink" title="501 - Not Implemented"></a>501 - Not Implemented</h3><ul>
 <li>클라가 서버의 능력을 넘은 요청을 했을 때 사용한다.</li>
-<li>예
-서버가 지원하지 않는 메서드를 사용</li>
+<li>예<br>서버가 지원하지 않는 메서드를 사용</li>
 </ul>
 <h3 id="502-Bad-Gateway"><a href="#502-Bad-Gateway" class="headerlink" title="502 - Bad Gateway"></a>502 - Bad Gateway</h3><ul>
 <li>프락시나 게이트웨이처럼 행동하는 서버가<br>그 요청 응답 연쇄에 있는 다음 링크로부터<br>가짜 응답에 맞닥뜨렸을 때 사용한다.</li>
@@ -714,7 +713,7 @@
 <hr>
 <ul>
 <li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p>참고자료</p>
@@ -740,7 +739,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="ckzv7cqfe002eqobm4cf4zau0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="cm3u7mj1f002chwb29siy848v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

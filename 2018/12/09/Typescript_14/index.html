@@ -11,12 +11,12 @@
         <meta name="keywords" content="typeScript" />
     
     
-    <meta name="description" content="TL;DR*제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. *한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.  리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀 이유는 부딪힐 때마다 해결 방법을 타입스크립트에">
+    <meta name="description" content="TL;DR**제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.  리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀 이유는 부딪힐 때마다 해결 방법을 타입스크립">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Typescript의 Generic을 사용해보자.">
 <meta property="og:url" content="http://feel5ny.github.io/2018/12/09/Typescript_14/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="TL;DR*제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. *한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.  리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀 이유는 부딪힐 때마다 해결 방법을 타입스크립트에">
+<meta property="og:description" content="TL;DR**제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.  리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀 이유는 부딪힐 때마다 해결 방법을 타입스크립">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/44/thumb_default.jpg">
 <meta property="article:published_time" content="2018-12-09T06:13:22.000Z">
@@ -287,13 +287,13 @@
   </div>
 
         <div class="article-entry" itemprop="articleBody">
-            <p><strong>TL;DR</strong><br>*<em>제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. *</em>한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</p>
+            <p><strong>TL;DR</strong><br>**제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</p>
 <hr>
 <p>리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀 이유는 부딪힐 때마다 해결 방법을 타입스크립트에서 제공해줬기 때문..<br>이슈 중에 하나는, 비동기 처리를 <code>promise</code>와 <code>async</code> <code>await</code>를 사용하여 작업하고 있는데, 리턴값의 타입을 명시하기가 시점에 따라 달랐기 때문에 실행 시점에 타입을 명시하고 싶었다. 처음에는 예상되는 타입을 await를 받는 변수에 타입을 명시했는데 제네릭은 이를 해결할 수 있는 방법이었다.</p>
 <hr>
 <a name="1" />
 
-<h2 id="1-제네릭이란"><a href="#1-제네릭이란" class="headerlink" title="1. 제네릭이란."></a>1. 제네릭이란.</h2><p>*<em>제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. *</em>한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</p>
+<h2 id="1-제네릭이란"><a href="#1-제네릭이란" class="headerlink" title="1. 제네릭이란."></a>1. 제네릭이란.</h2><p>**제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</p>
 <p>즉, 선언 시점에서는 제네릭으로 타입을 받을 부분을 뚫어놓고(?) (템플릿화 <code>&lt;T&gt;</code>) 실행 시점에 제네릭으로 타입을 명시하는 것이다. 실행 시점에 제네릭으로 타입을 명시하게 되면, <code>&lt;T&gt;</code>로 뚫어놓은(?) 템플릿에 타입이 명시되면서, 실행 시점에 맞는 타입을 정의할 수 있다. <strong>마치 함수에서 인자를 받는 형태와 비슷하다.</strong></p>
 <p>너무 나만의 언어로 설명한 거 같으니.. 코드를 봅시다!</p>
 <blockquote>
@@ -386,7 +386,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/12/09/Typescript_14/" data-id="ckzv7cqk800arqobmtj41880r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/12/09/Typescript_14/" data-id="cm3u7mj25009uhwb24o576dnm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

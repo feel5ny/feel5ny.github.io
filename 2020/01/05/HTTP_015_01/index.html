@@ -411,7 +411,7 @@
 <h2 id="2-Content-Length-엔터티의-길이"><a href="#2-Content-Length-엔터티의-길이" class="headerlink" title="2. Content-Length 엔터티의 길이"></a>2. <code>Content-Length</code> 엔터티의 길이</h2><ul>
 <li>메세지의 엔터티 본문의 크기를 <strong>바이트 단위</strong>로 나타낸다.</li>
 <li>어떻게 인코딩 되었든 상관없이 크기를 표현할 수 있다.<ul>
-<li><strong>gzip</strong>으로 압축된 텍스트 파일이라면 =&gt; 원래 크기가 아니라 <strong>압축된 후의 크기</strong></li>
+<li><strong>gzip</strong>으로 압축된 텍스트 파일이라면 &#x3D;&gt; 원래 크기가 아니라 <strong>압축된 후의 크기</strong></li>
 </ul>
 </li>
 <li>엔터티 본문을 포함한 메세지에서는 필수적으로 있어야 한다.<ul>
@@ -439,7 +439,7 @@
 <li>캐싱 프락시 서버는 명시적으로 Content-Length 헤더를 갖고 있지 않은 HTTP본문은 <strong>보통 캐시하지 않는다.</strong></li>
 </ul>
 <h3 id="2-2-잘못된-Content-Length"><a href="#2-2-잘못된-Content-Length" class="headerlink" title="2.2 잘못된 Content-Length"></a>2.2 잘못된 Content-Length</h3><ul>
-<li>공식적으로 HTTP/1.1 사용자 에이전트는 잘못된 길이를 받고 그 사실을 인지했을 때 사용자에게 알려주게 되어 있다.</li>
+<li>공식적으로 HTTP&#x2F;1.1 사용자 에이전트는 잘못된 길이를 받고 그 사실을 인지했을 때 사용자에게 알려주게 되어 있다.</li>
 </ul>
 <h3 id="2-3-Content-Length와-지속커넥션"><a href="#2-3-Content-Length와-지속커넥션" class="headerlink" title="2.3 Content-Length와 지속커넥션"></a>2.3 Content-Length와 지속커넥션</h3><ul>
 <li>Content-Length는 지속커넥션을 위해 필수다.</li>
@@ -460,33 +460,41 @@
 </ul>
 <h3 id="2-5-엔터티-본문-길이-판별을-위한-규칙"><a href="#2-5-엔터티-본문-길이-판별을-위한-규칙" class="headerlink" title="2.5 엔터티 본문 길이 판별을 위한 규칙"></a>2.5 엔터티 본문 길이 판별을 위한 규칙</h3><p>switch (true)</p>
 <ol>
-<li>본문을 갖는 것이 허용되지 않은 특정타입의 HTTP 메세지<ul>
+<li>본문을 갖는 것이 허용되지 않은 특정타입의 HTTP 메세지</li>
+</ol>
+<ul>
 <li>Content-Length는 무시된다.</li>
 <li>ex_ <code>HEAD</code> 메서드</li>
 </ul>
-</li>
-<li>메세지가 Transfer-Encoding 헤더를 포함하고 있다면<ul>
+<ol start="2">
+<li>메세지가 Transfer-Encoding 헤더를 포함하고 있다면</li>
+</ol>
+<ul>
 <li>엔터티는 ‘0 바이트 청크’라 불리는 특별한 패턴으로 끝나야 한다.</li>
 </ul>
-</li>
-<li>메세지가 Content-Length 헤더를 갖는다면<ul>
+<ol start="3">
+<li>메세지가 Content-Length 헤더를 갖는다면</li>
+</ol>
+<ul>
 <li>본문의 길이를 담게 된다.</li>
 <li>Transfer-Encoding가 identity가 아닌값을 포함한 메세지를 받았을 경우 Content-Length는 무시된다.</li>
 </ul>
-</li>
-<li>(Content-type: multipart/byteranges) &amp;&amp; (Content-Length가 정의되어있지 않다면)<ul>
+<ol start="4">
+<li>(Content-type: multipart&#x2F;byteranges) &amp;&amp; (Content-Length가 정의되어있지 않다면)</li>
+</ol>
+<ul>
 <li>멀티파트 메세지의 각 부분은<br>각자 스스로의 크기를 정의할 것이다.</li>
 <li>멀티파트 유형은 자신의 크기를 스스로 결정할 수 있는 유일한 엔터티 본문 유형이다.</li>
 <li>수신자가 이것을 해석할 수 있다는 사실을 송신자가 알기 전까지 보내지 말아야 한다…</li>
 <li><em>RFC7230</em> 때 삭제됨.</li>
 </ul>
-</li>
-<li>(default)<ul>
+<ol start="5">
+<li>(default)</li>
+</ol>
+<ul>
 <li>엔터티는 커넥션이 닫힐 때 끝난다.</li>
 <li>Content-Length를 요구하고 싶을 경우 411 Length Required 응답을 보냄</li>
 </ul>
-</li>
-</ol>
 <a name="type">
 
 <h2 id="3-미디어-타입과-Charset"><a href="#3-미디어-타입과-Charset" class="headerlink" title="3. 미디어 타입과 Charset"></a>3. 미디어 타입과 Charset</h2><ul>
@@ -522,7 +530,7 @@
 <h4 id="2-멀티파트-범위-응답-multipart-byteranges"><a href="#2-멀티파트-범위-응답-multipart-byteranges" class="headerlink" title="2. 멀티파트 범위 응답 multipart/byteranges"></a>2. 멀티파트 범위 응답 <code>multipart/byteranges</code></h4><ul>
 <li><strong>범위 요청</strong>에 대한 HTTP 응답 또한 멀티파트가 될 수도 있다.</li>
 <li>각각 다른 범위를 담고 있는 멀티파트 본문이 함께 온다.</li>
-<li>multipart/byteranges는 브라우저로 회신하는 부분적인 응답 전송의 컨텍스트 내에서 사용된다. </li>
+<li>multipart&#x2F;byteranges는 브라우저로 회신하는 부분적인 응답 전송의 컨텍스트 내에서 사용된다. </li>
 <li><strong>206 Partial Content</strong> 상태 코드가 전송된 경우,<br>MIME 타입은 문서가 각각의 요청된 범위들 중 하나인 몇 가지 파트들로 구성되어 있음을 알려주기 위해 사용된다.</li>
 <li>다른 멀티파트 타입처럼, Content-Type은 경계선 문자열을 정의하기 위해 boundary 디렉티브를 사용한다.<br>각각의 다른 파트들은 문서의 실제 타입을 가진 Content-Type 헤더와 그들이 나타내는 범위를 가진 Content-Range를 지니고 있다.</li>
 </ul>
@@ -564,11 +572,13 @@
 </ol>
 <h3 id="1-과정"><a href="#1-과정" class="headerlink" title="1. 과정"></a>1. 과정</h3><ol>
 <li>웹서버가 원본 Content-Type과 Content-Length 헤더를 수반한 원본 응답 메세지를 생성</li>
-<li>콘텐츠 인코딩 서버가 인코딩된 메세지 생성 (원서버 or 프록시)<ul>
+<li>콘텐츠 인코딩 서버가 인코딩된 메세지 생성 (원서버 or 프록시)</li>
+</ol>
+<ul>
 <li>Content-Length는 변경된다.</li>
-<li>콘텐츠 인코딩 서버는 <strong>어떤 방식으로 인코딩했는지 정보가 담겨있는 Content-Encoding 헤더를</strong> 인코딩된 메세지에 추가<br>수신자가 디코딩할 수 있도록 한다.</li>
+<li>콘텐츠 인코딩 서버는 <strong>어떤 방식으로 인코딩했는지 정보가 담겨있는 Content-Encoding 헤더를</strong> 인코딩된 메세지에 추가<br>  수신자가 디코딩할 수 있도록 한다.</li>
 </ul>
-</li>
+<ol start="3">
 <li>수신자는 인코딩된 메세지를 디코딩하고 원본을 얻는다.</li>
 </ol>
 <blockquote>
@@ -589,9 +599,7 @@
 <h3 id="3-Accept-Encoding-헤더"><a href="#3-Accept-Encoding-헤더" class="headerlink" title="3. Accept-Encoding 헤더"></a>3. Accept-Encoding 헤더</h3><ul>
 <li>서버에서 클라가 지원하지 않는 인코딩을 사용하는 것을 막기 위해,<br>클라가 자신이 지원하는 인코딩의 목록을 Accept-Encoding 헤더에 포함한다.</li>
 <li>인코딩에 Q(quality)값을 매개변수로 더해<br><strong>선호도</strong>를 나타낼 수 있다.<ul>
-<li>Q의 범위는 원치않음 0.0 ~ 가장선호 1.0 사이이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip</span><br><span class="line">Accept-Encoding:</span><br><span class="line">Accept-Encoding: *</span><br><span class="line">Accept-Encoding: compress; q=0.5, gzip; q=1.0</span><br><span class="line">Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>Q의 범위는 원치않음 0.0 ~ 가장선호 1.0 사이이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip</span><br><span class="line">Accept-Encoding:</span><br><span class="line">Accept-Encoding: *</span><br><span class="line">Accept-Encoding: compress; q=0.5, gzip; q=1.0</span><br><span class="line">Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -618,8 +626,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Server: Apache/3.0</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li><strong><code>Transfer-encoding</code></strong><br>: 안전한 전송을 위해, 어떤 인코딩이 메세지에 적용되었는지 수신자에게 알려준다.<img src="https://media.geeksforgeeks.org/wp-content/uploads/20191029112629/1091.png"></li>
-<li><strong><code>TE</code></strong><br>: 어떤 확장된 전송 인코딩을 사용할 수 있는지 서버에게 알려주기 위해, 요청 헤더에 사용한다.</li>
+<li><strong><code>Transfer-encoding</code></strong><br>  : 안전한 전송을 위해, 어떤 인코딩이 메세지에 적용되었는지 수신자에게 알려준다.  <img src="https://media.geeksforgeeks.org/wp-content/uploads/20191029112629/1091.png"></li>
+<li><strong><code>TE</code></strong><br>  : 어떤 확장된 전송 인코딩을 사용할 수 있는지 서버에게 알려주기 위해, 요청 헤더에 사용한다.</li>
 </ol>
 <h3 id="3-3-청크-인코딩"><a href="#3-3-청크-인코딩" class="headerlink" title="3.3 청크 인코딩"></a>3.3 <strong>청크 인코딩</strong></h3><ul>
 <li>메세지를 일정 크기의 청크 여럿으로 쪼갠다. </li>
@@ -660,13 +668,10 @@
 <h4 id="청크-인코딩된-메세지의-트레일러"><a href="#청크-인코딩된-메세지의-트레일러" class="headerlink" title="청크 인코딩된 메세지의 트레일러"></a>청크 인코딩된 메세지의 트레일러</h4><ul>
 <li>다음 중 하나 이상 조건을 만족하면 청크 메세지에 트레일러를 추가할 수 있다.<ol>
 <li>클라의 <code>TE</code> 헤더가 트레일러를 받아들일 수 있음을 나타내고 있는 경우</li>
-<li>트레일러가 응답을 만든 서버에 의해 추가되었으며,<br>트레일러의 콘텐츠는 클라가 이해하고 사용할 필요가 없어서 <em>무시하고 버려도 되는 경우</em></li>
+<li>트레일러가 응답을 만든 서버에 의해 추가되었으며,<br>  트레일러의 콘텐츠는 클라가 이해하고 사용할 필요가 없어서 <em>무시하고 버려도 되는 경우</em></li>
 </ol>
 </li>
-<li>트레일러에는 본문의 콘텐츠가 먼저 생성되어야 한다거나 하는 등의 이유로</li>
-</ul>
-<p><strong>메세지 시작 시점에서 그 값을 알 수 없는 추가적인 헤더 필드를 담을 수 있다.</strong></p>
-<ul>
+<li>트레일러에는 본문의 콘텐츠가 먼저 생성되어야 한다거나 하는 등의 이유로<br><strong>메세지 시작 시점에서 그 값을 알 수 없는 추가적인 헤더 필드를 담을 수 있다.</strong></li>
 <li>트레일러로 보낼 수 있는 헤더의 예로 <code>Content-MD5</code> 헤더가 있다.</li>
 <li><code>Transfer-Encoding</code>, <code>Trailer</code>, <code>Content-Length</code>를 제외한 어떤 HTTP 헤더도 트레일러로 보낼 수 있다.</li>
 </ul>
@@ -681,7 +686,7 @@
 <p><a href="https://www.httpwatch.com/httpgallery/chunked/">이미지 청크 인코딩 예시</a></p>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -704,7 +709,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="ckzv7cqge0045qobmxv3a0thr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="cm3u7mj1l003rhwb2eh9z1hz7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -356,10 +356,9 @@
 </ol>
 </li>
 <li>서버는 클라에게 문서의 문자와 언어를<br><strong><code>Content-Type charset</code></strong> 매개변수와<br><strong><code>Content-Language</code></strong> 헤더를 통해 알려준다.</li>
-<li>클라는 서버에게<br>사용자가 어떤 언어를 이해할 수 있고,<br>어떤 알파벳의 코딩 알고리즘이 브라우저에 설치되어 있는지 말해줄 필요가 있다.<br><strong><code>Accept-Charset</code></strong>과
-<strong><code>Accept-Language</code></strong> 헤더를 보낸다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: fr, en;q=0.8</span><br><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure></li>
+<li>클라는 서버에게<br>사용자가 어떤 언어를 이해할 수 있고,<br>어떤 알파벳의 코딩 알고리즘이 브라우저에 설치되어 있는지 말해줄 필요가 있다.<br>**<code>Accept-Charset</code>**과<br><strong><code>Accept-Language</code></strong> 헤더를 보낸다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: fr, en;q=0.8</span><br><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure></li>
 <li>모국어를 선호하지만, 피치 못할 경우 영어도 사용하는 프랑스어 사용자가 보낸 케이스</li>
-<li><strong>iso-8859-1</strong> =&gt; 서유럽 차셋 인코딩과<br><strong>utf-8</strong> 유니코드 차셋 인코딩을<br>지원할 것이다.</li>
+<li><strong>iso-8859-1</strong> &#x3D;&gt; 서유럽 차셋 인코딩과<br><strong>utf-8</strong> 유니코드 차셋 인코딩을<br>지원할 것이다.</li>
 <li>q는 품질 인자로 프랑스어보다 영어에 낮은순위를 주었다. (기본은 1.0)</li>
 </ul>
 <hr>
@@ -381,22 +380,22 @@
 <li>비트들을 문자로 변환하는 디코딩 알고리즘을 지칭하고 적용하는<br>표준화된 방법이 필요하다.</li>
 </ul>
 <ol>
-<li>비트 =&gt; 문자로 변환 (의미 해석) - 02. HTTP</li>
-<li>문자 =&gt; 모양으로 표현 (시각적 표현) - 브라우저, 운영체제, 글꼴이 결정</li>
+<li>비트 &#x3D;&gt; 문자로 변환 (의미 해석) - 02. HTTP</li>
+<li>문자 &#x3D;&gt; 모양으로 표현 (시각적 표현) - 브라우저, 운영체제, 글꼴이 결정</li>
 </ol>
 <h2 id="1-3-잘못된-Charset은-잘못된-글자들을-낳는다"><a href="#1-3-잘못된-Charset은-잘못된-글자들을-낳는다" class="headerlink" title="1.3 잘못된 Charset은 잘못된 글자들을 낳는다."></a>1.3 잘못된 Charset은 잘못된 글자들을 낳는다.</h2><p>브라우저가 본문으로부터 225 (11100001)을 가져온 경우</p>
 <ul>
-<li>iso-8859-1 (서유럽 문자 코드) 인코딩 양음 악센트가 붙은 소문자 a = <code>á</code></li>
-<li>iso-8859-6 (아랍 코드) : <code>FEH</code> = <code>ف</code></li>
-<li>iso-8859-7 (그리스어) : 알파 = <code>α</code></li>
-<li>iso-8859-8 (히브리어) : <code>BET</code> = <code>ב</code></li>
+<li>iso-8859-1 (서유럽 문자 코드) 인코딩 양음 악센트가 붙은 소문자 a &#x3D; <code>á</code></li>
+<li>iso-8859-6 (아랍 코드) : <code>FEH</code> &#x3D; <code>ف</code></li>
+<li>iso-8859-7 (그리스어) : 알파 &#x3D; <code>α</code></li>
+<li>iso-8859-8 (히브리어) : <code>BET</code> &#x3D; <code>ב</code></li>
 </ul>
 <h2 id="1-4-표준화된-MIME-Charset-값"><a href="#1-4-표준화된-MIME-Charset-값" class="headerlink" title="1.4 표준화된 MIME Charset 값"></a>1.4 표준화된 MIME Charset 값</h2><ul>
 <li>특정 문자 인코딩과<br>특정 코딩된 문자집합의 결합을 MIME 차셋이라고 부른다.</li>
 <li><ol start="2">
-<li>HTTP는 표준화된 MIME 차셋 태그를</li>
+<li>HTTP는 표준화된 MIME 차셋 태그를<br><strong>Content-Type</strong>과 <strong>Accept-Charset</strong> 헤더에 사용한다.</li>
 </ol>
-<strong>Content-Type</strong>과 <strong>Accept-Charset</strong> 헤더에 사용한다.</li>
+</li>
 </ul>
 <h3 id="MIME-차셋-인코딩-태그"><a href="#MIME-차셋-인코딩-태그" class="headerlink" title="MIME 차셋 인코딩 태그"></a>MIME 차셋 인코딩 태그</h3><ul>
 <li><strong>us-ascii</strong> : ascii로도 불리지만, 여러가지 국제 변형때문에 us라는 접두어를 붙이는 것을 선호한다.</li>
@@ -418,13 +417,11 @@
 <p><strong>euc-kr과 utf-8</strong> <a href="https://ofcourse.kr/html-course/%EC%9D%B8%EC%BD%94%EB%94%A9">참고</a><br>euc-kr 방식은 원래 영어만을 고려한 1byte 길이의 ASCII 라는 인코딩 방식을 확장하여 한글을 사용할 수 있도록 만든 2byte 길이의 국가 언어 코드입니다.<br>국가 언어코드. <strong>즉 우리나라에서만 쓸 수 있도록 만든 코드</strong>이며 세계 어디에서나 공통으로 사용되는 인코딩 방식이 아니기 때문에, 다른 언어를 사용하는 환경(외국 등)에서는 <strong>한글 페이지를 제대로 볼 수 없는 문제가 발생합니다.</strong><br>이를 해결하기 위해 새로운 인코딩 방식이 개발되었는데, 그중 가장 보편화된 인코딩이 <strong>UTF-8</strong>입니다. (3byte)<br>예전에는 용량이 작은 euc-kr 방식을 선호하는 곳들도 많았으나, 현재는 용량 문제보다 표준화 및 글로벌 환경을 고려해야 하므로 UTF-8 인코딩 방식을 강력하게 권고하는 바입니다.</p>
 </blockquote>
 <h2 id="1-5-Content-Type-charset-헤더와-메타태그"><a href="#1-5-Content-Type-charset-헤더와-메타태그" class="headerlink" title="1.5 Content-Type charset 헤더와 메타태그"></a>1.5 Content-Type charset 헤더와 메타태그</h2><ol>
-<li>웹 서버는 클라에게 MIME charset 태그를 charset 매개변수와 함께 Content-Type 헤더에 담아 보낸다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></li>
-<li>만약 나열되지 않았다면, 수신자는 문서의 콘텐츠로부터 문자집합을 추측하려고 시도한다.<ol>
-<li>받은 HTML 파일에서 <code>meto</code>태그중 <code>HTTP-EQUIV</code>라는 속성을 갖고 있는 태그를 찾는다.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>웹 서버는 클라에게 MIME charset 태그를 charset 매개변수와 함께 Content-Type 헤더에 담아 보낸다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></li>
+<li>만약 나열되지 않았다면, 수신자는 문서의 콘텐츠로부터 문자집합을 추측하려고 시도한다.</li>
+<li>받은 HTML 파일에서 <code>meto</code>태그중 <code>HTTP-EQUIV</code>라는 속성을 갖고 있는 태그를 찾는다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li>만약 문서가 html이 아니라면, 혹은<br>meta Content-Type 태그가 없다면,<br>소프트웨어는 언어와 인코딩에 대한 일반적인 패턴을 찾기 위해 <strong>실제 텍스트를 스케닝하여 문자 인코딩을 추측한다.</strong></li>
 <li>클라가 문자 인코딩을 추측하지 못했다면 <code>iso-8859-1</code>인것으로 가정한다.</li>
-</ol>
-</li>
 </ol>
 <h2 id="1-6-Accept-Charset-헤더"><a href="#1-6-Accept-Charset-헤더" class="headerlink" title="1.6 Accept-Charset 헤더"></a>1.6 Accept-Charset 헤더</h2><ul>
 <li>대부분의 클라는 모든 종류의 문자 코딩과 매핑 시스템을 지원하지는 않는다.</li>
@@ -442,75 +439,86 @@
 
 <h1 id="2-다중언어-문자-인코딩에-대한-지침"><a href="#2-다중언어-문자-인코딩에-대한-지침" class="headerlink" title="2. 다중언어 문자 인코딩에 대한 지침"></a>2. 다중언어 문자 인코딩에 대한 지침</h1><h2 id="문자집합-용어"><a href="#문자집합-용어" class="headerlink" title="문자집합 용어"></a>문자집합 용어</h2><ol>
 <li>문자 : 글쓰기의 최소단위. </li>
-<li><strong>글리프</strong> glyph<ul>
+<li><strong>글리프</strong> glyph</li>
+</ol>
+<ul>
 <li>하나의 글자를 표현하기 위한, 획의 패턴이나 다른 것과 구분되는 유일한 시각적 형태</li>
 <li>글자를 여러 방식으로 쓰는 것이 가능하다면, 글리프를 여러 개 가질 수도 있다.</li>
 </ul>
-</li>
-<li><strong>코딩된 문자</strong> coded character<ul>
+<ol start="3">
+<li><strong>코딩된 문자</strong> coded character</li>
+</ol>
+<ul>
 <li>각 글자에 할당된 유일한 숫자</li>
 <li><a href="https://ko.wikipedia.org/wiki/%EA%B5%AD%EC%A0%9C_%EB%AC%B8%EC%9E%90_%EC%84%B8%ED%8A%B8">국제 문자 셋트</a></li>
 </ul>
-</li>
-<li><strong>코드 공간</strong> coding space<ul>
+<ol start="4">
+<li><strong>코드 공간</strong> coding space</li>
+</ol>
+<ul>
 <li>각 문자 코드의 비트 개수</li>
 <li>ex) UTF-8 인코딩은 유니코드 한 문자를 나타내기 위해 1바이트에서 4바이트까지를 사용한다.</li>
 </ul>
-</li>
-<li><strong>사용 가능 문자집합</strong> character repertoire<ul>
+<ol start="5">
+<li><strong>사용 가능 문자집합</strong> character repertoire</li>
+</ol>
+<ul>
 <li>글자들에 대한 특정한 작업 집합</li>
 </ul>
-</li>
-<li><strong>코딩된 문자집합</strong> coded character set<ul>
+<ol start="6">
+<li><strong>코딩된 문자집합</strong> coded character set</li>
+</ol>
+<ul>
 <li>사용 가능 문자집합을 받아서, 각 글자에 코드 공간의 코드를 할당해주는 코딩된 문자들의 집합.</li>
 <li>실제 글자들에 숫자로 된 문자코드를 대응시킨 것</li>
 </ul>
-</li>
-<li><strong>문자 인코딩 구조</strong><ul>
+<ol start="7">
+<li><strong>문자 인코딩 구조</strong></li>
+</ol>
+<ul>
 <li>숫자로 된 문자 코드들을 콘텐츠 비트의 연속으로 인코딩하는 알고리즘.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <h3 id="자세히-알아보기"><a href="#자세히-알아보기" class="headerlink" title="자세히 알아보기"></a>자세히 알아보기</h3><ol>
-<li><strong>문자</strong><ul>
+<li><strong>문자</strong></li>
+</ol>
+<ul>
 <li>하나의 문자는 하나의 알파벳 글자, 숫자, 구두점, 표의문자(중국어에서와 같은), 수학기호, 그 외에 다른 쓰기의 기본 단위</li>
 <li>문자는 글꼴이나 스타일에 독립적이다.</li>
-<li>같은 글자라도 그 글자가 단어에서 어디에 위치하느냐에 따라 각각 다른 모양을 갖는 표기 체계도 많다.<img src="/images/2020/03/01.png"></li>
+<li>같은 글자라도 그 글자가 단어에서 어디에 위치하느냐에 따라 각각 다른 모양을 갖는 표기 체계도 많다.  <img src="/images/2020/03/01.png"></li>
 </ul>
-</li>
-<li><strong>글리프(glyphs), 연자(ligatures), 표현형태</strong><ul>
+<ol start="2">
+<li><strong>글리프(glyphs), 연자(ligatures), 표현형태</strong></li>
+</ol>
+<ul>
 <li><strong>글리프</strong>는 각 글자를 그리는 특정한 방법니다.<ul>
 <li>글꼴이나 사소한 미적 양식에 의존하지 않는, 글자에 내재된 모양새이다.</li>
 </ul>
 </li>
 <li>연자 ligatures<ul>
-<li>FI 연자 / LA연자<img src="/images/2020/03/02.jpg"></li>
+<li>FI 연자 &#x2F; LA연자<img src="/images/2020/03/02.jpg"></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><strong>코딩된 문자집합</strong> Coded Character Set<ul>
+<ol start="3">
+<li><strong>코딩된 문자집합</strong> Coded Character Set</li>
+</ol>
+<ul>
 <li>코딩된 문자집합은 정수를 글자로 대응시킨다.</li>
 <li>코딩된 문자집합은 보통 코드번호로 인덱싱된 배열로 구현된다.</li>
 <li>그 배열의 원소들은 문자들이다.</li>
 </ul>
 <hr>
 <ol>
-<li><strong>US-ASCII</strong> (모든 문자집합의 어머니)<ul>
-<li>1968년 ANSI 표준 X3.4 ‘정보교환을 위한 미국 표준 코드’로 표준화된 가장 유명한 코딩된 문자집합이다.</li>
-<li>아스키는 오직 코드 값 0~127만 사용한다.</li>
-<li>코드 공간을 전체 표현하는데 7비트만 필요하다.</li>
-<li>다른 국제 변종과 구분하기 위해 ‘<strong>US-ASCII</strong>‘를 더 선호한다.</li>
+<li><strong>US-ASCII</strong> (모든 문자집합의 어머니)<br>- 1968년 ANSI 표준 X3.4 ‘정보교환을 위한 미국 표준 코드’로 표준화된 가장 유명한 코딩된 문자집합이다.<br>- 아스키는 오직 코드 값 0~127만 사용한다.<br>- 코드 공간을 전체 표현하는데 7비트만 필요하다.<br>- 다른 국제 변종과 구분하기 위해 ‘<strong>US-ASCII</strong>‘를 더 선호한다.</li>
+<li><strong>iso-8859</strong><br>- US-ASCII 의 8비트 확대 집합들이다.<ul>
+<li>국제적인 글쓰기를 위해 필요한 글자들을 하이비트를 이용하여 추가<ul>
+<li>추가비트에 의해 제공되는 추가공간은 모든 유럽 글자를 담기에는 충분히 크지 않으므로,<br> iso-8859는 지역에 따라 커스터마이징된 문자집합을 제공한다.</li>
 </ul>
 </li>
-<li><strong>iso-8859</strong><ul>
-<li>US-ASCII 의 8비트 확대 집합들이다.</li>
-<li>국제적인 글쓰기를 위해 필요한 글자들을 하이비트를 이용하여 추가</li>
-<li>추가비트에 의해 제공되는 추가공간은 모든 유럽 글자를 담기에는 충분히 크지 않으므로,<br>iso-8859는 지역에 따라 커스터마이징된 문자집합을 제공한다.</li>
 </ul>
 <ol>
-<li>iso-8859-1 : 서유럽어 (영어, 프랑스어) (= Latin1) - HTML을 위한 기본 문자집합</li>
+<li>iso-8859-1 : 서유럽어 (영어, 프랑스어) (&#x3D; Latin1) - HTML을 위한 기본 문자집합</li>
 <li>iso-8859-2 : 중앙 및 동유럽어 (체코어, 폴란드어)</li>
 <li>iso-8859-3 : 남유럽어</li>
 <li>iso-8859-4 : 북유럽어</li>
@@ -523,108 +531,56 @@
 <li>iso-8859-15 : 새로운 유로 통화 문자를 포함하기 위한 iso-8859-1의 변형</li>
 </ol>
 </li>
-<li><strong>JIS X 0201</strong><ul>
-<li>일본어 가타카나 반각문자를 더해, 확장한 극단적으로 작은 문자집합</li>
-<li>= <strong>JIS ROMAN</strong> 으로 불린다. (JIS = Japanese Industrial Standard = 일본 산업 표준)</li>
-</ul>
-</li>
-<li><strong>JIS X 0208과 JIS X 0212</strong><ul>
-<li>일본어는 여러 문자 체계로부터 온 수천개의 글자를 담고 있다.</li>
-<li>JIS X 0201의 63개 표음 가타카나 문자보다 완전한 문자집합이 필요하다.</li>
-<li>JIS X 02<strong>08</strong>은 최초의 멀티바이트 일본어 문자집합이다. = 일본식 한자인 <strong>6879</strong>개의 코딩문자를 정의했다.</li>
-<li>JIS X 02<strong>12</strong> 문자집합은 6607개의 문자를 <strong>추가</strong>했다.</li>
-</ul>
-</li>
-<li><strong>UCS</strong><ul>
-<li>국제 문자 셋트 Univeral Character Set 은 전 세계의 모든 글자를 하나의 코딩된 문자집합으로 통합하려 노력하는 세계적인 표준이다.</li>
-<li>UCS는 ISO 10646으로 정의된다.</li>
-<li>유니코드는 UCS 표준을 따르는 상업적인 컨소시업이다.</li>
-<li>UCS는 기본 집합은 단 50,000 글자만으로 이루어져 있음에도 불구하고,<br>수백만개의 글자를 위한 코드공간을 갖고 있다.</li>
-</ul>
-</li>
+<li><strong>JIS X 0201</strong><br>- 일본어 가타카나 반각문자를 더해, 확장한 극단적으로 작은 문자집합<br>- &#x3D; <strong>JIS ROMAN</strong> 으로 불린다. (JIS &#x3D; Japanese Industrial Standard &#x3D; 일본 산업 표준)</li>
+<li><strong>JIS X 0208과 JIS X 0212</strong><br>- 일본어는 여러 문자 체계로부터 온 수천개의 글자를 담고 있다.<br>- JIS X 0201의 63개 표음 가타카나 문자보다 완전한 문자집합이 필요하다.<br>- JIS X 02<strong>08</strong>은 최초의 멀티바이트 일본어 문자집합이다. &#x3D; 일본식 한자인 <strong>6879</strong>개의 코딩문자를 정의했다.<br>- JIS X 02<strong>12</strong> 문자집합은 6607개의 문자를 <strong>추가</strong>했다.</li>
+<li><strong>UCS</strong><br>- 국제 문자 셋트 Univeral Character Set 은 전 세계의 모든 글자를 하나의 코딩된 문자집합으로 통합하려 노력하는 세계적인 표준이다.<br>- UCS는 ISO 10646으로 정의된다.<br>- 유니코드는 UCS 표준을 따르는 상업적인 컨소시업이다.<br>- UCS는 기본 집합은 단 50,000 글자만으로 이루어져 있음에도 불구하고,<br> 수백만개의 글자를 위한 코드공간을 갖고 있다.</li>
+<li><strong>문자 인코딩 구조</strong></li>
 </ol>
-</li>
-<li><strong>문자 인코딩 구조</strong><ul>
+<ul>
 <li>숫자로 된 문자 코드를 콘텐츠 비트들로 변환</li>
 <li>다른 쪽에서는 그들을 다시 문자코드로 환원한다. </li>
-<li>문자 인코딩 구조는 3종류로 분류할 수 있다. (고정폭/가변폭(비모달)/가변폭(모달))</li>
+<li>문자 인코딩 구조는 3종류로 분류할 수 있다. (고정폭&#x2F;가변폭(비모달)&#x2F;가변폭(모달))</li>
 </ul>
 <hr>
 <ol>
-<li><strong>고정폭</strong><ul>
-<li>각 코딩된 문자를 고정된 길이의 비트로 표현한다.</li>
-<li>빠르게 처리될 수 있지만 공간을 낭비할 우려가 있다.</li>
-</ul>
-</li>
-<li><strong>가변폭 (비모달)</strong><ul>
-<li>다른 문자 코드 번호에 다른 길이의 비트를 사용한다.</li>
-<li>자주 사용하는 글자의 비트 길이를 줄일 수 있고,<br>국제 문자에 대해서는 여러 바이트를 사용하도록 함으로써<br>이전의 8비트 문자집합과의 호환성도 유지할 수 있다. </li>
-</ul>
-</li>
-<li><strong>가변폭 (모달)</strong><ul>
-<li>다른 모드로의 전환을 위해 특별한 escape 패턴을 사용한다.</li>
-<li>예를 들어<br>어떤 모달 인코딩은 텍스트에서 중첩된 여러가지 문자집합 간의 전환을 위해 사용될 수 있다.</li>
-<li>모달 인코딩은 처리하기 복잡하지만, 복잡한 표기 체계를 효과적으로 지원해 줄 수 있다.</li>
-</ul>
-</li>
+<li><strong>고정폭</strong><br>- 각 코딩된 문자를 고정된 길이의 비트로 표현한다.<br>- 빠르게 처리될 수 있지만 공간을 낭비할 우려가 있다.</li>
+<li><strong>가변폭 (비모달)</strong><br>- 다른 문자 코드 번호에 다른 길이의 비트를 사용한다.<br>- 자주 사용하는 글자의 비트 길이를 줄일 수 있고,<br> 국제 문자에 대해서는 여러 바이트를 사용하도록 함으로써<br> 이전의 8비트 문자집합과의 호환성도 유지할 수 있다. </li>
+<li><strong>가변폭 (모달)</strong><br>- 다른 모드로의 전환을 위해 특별한 escape 패턴을 사용한다.<br>- 예를 들어<br> 어떤 모달 인코딩은 텍스트에서 중첩된 여러가지 문자집합 간의 전환을 위해 사용될 수 있다.<br>- 모달 인코딩은 처리하기 복잡하지만, 복잡한 표기 체계를 효과적으로 지원해 줄 수 있다.</li>
 </ol>
 <hr>
 <ol start="4">
-<li>[고정폭] <strong>8비트</strong><ul>
-<li>간단히 각 문자 코드를 그에 대응하는 8비트 값으로 인코딩한다.</li>
-<li>256개 문자의 코드 범위에 대한 문자집합만을 지원한다.</li>
-<li>iso-8859 문자집합군은 8비트 아이덴티티 인코딩을 사용한다.</li>
-</ul>
-</li>
-<li>[가변폭(비모달)] <strong>UTF-8</strong><ul>
-<li>인기있는 UCS를 위해 설계된 문자 인코딩 구조다. (UTF = UCS Transformation Format)</li>
-<li>첫 바이트의 서두 비트들은 인코딩된 문자의 길이를 바이트 단위로 나타내고,<br>그 이후의 바이트들은 각 6비트 코드값을 담는다.<br>(0ccccccc, 110ccccc,…)</li>
-<li>문자 코드 90(아스키 ‘Z’)는 1바이트로 인코딩 되었을 것이며(01011010), 코드 5073(13비트 이진값 100111101001)은 3바이트로 인코딩되었을 것이다.</li>
-</ul>
-</li>
-<li>[가변폭(모달)]<strong>iso-2022-jp</strong><ul>
-<li>일본어 인터넷 문서를 위해 널리 사용되는 인코딩이다.</li>
-<li>128보다 작은 값으로만 이루어진 가변길이 모달 인코딩이다.</li>
-<li>인코딩 콘텍스트는 4가지 미리 정의된 문자집합 중 하나로 설정된다.</li>
+<li>[고정폭] <strong>8비트</strong><br>- 간단히 각 문자 코드를 그에 대응하는 8비트 값으로 인코딩한다.<br>- 256개 문자의 코드 범위에 대한 문자집합만을 지원한다.<br>- iso-8859 문자집합군은 8비트 아이덴티티 인코딩을 사용한다.</li>
+<li>[가변폭(비모달)] <strong>UTF-8</strong><br>- 인기있는 UCS를 위해 설계된 문자 인코딩 구조다. (UTF &#x3D; UCS Transformation Format)<br>- 첫 바이트의 서두 비트들은 인코딩된 문자의 길이를 바이트 단위로 나타내고,<br> 그 이후의 바이트들은 각 6비트 코드값을 담는다.<br> (0ccccccc, 110ccccc,…)<br>- 문자 코드 90(아스키 ‘Z’)는 1바이트로 인코딩 되었을 것이며(01011010), 코드 5073(13비트 이진값 100111101001)은 3바이트로 인코딩되었을 것이다.</li>
+<li>[가변폭(모달)]<strong>iso-2022-jp</strong><br>- 일본어 인터넷 문서를 위해 널리 사용되는 인코딩이다.<br>- 128보다 작은 값으로만 이루어진 가변길이 모달 인코딩이다.<br>- 인코딩 콘텍스트는 4가지 미리 정의된 문자집합 중 하나로 설정된다.<ul>
 <li>특별한 이스케이프 문자열(<code>ESC ( B</code>, <code>ESC ( J</code>, <code>ESC $ @</code>, <code>ESC $ B</code>)은 한 집합에서 다른 집합으로 전환시켜준다. (모달)</li>
 </ul>
 </li>
-<li>[가변폭(비모달)]<strong>euc-jp</strong><ul>
-<li>일본어 인코딩</li>
-<li>EUC는 Extended Unix Code의 약자 </li>
-<li>유닉스 운영체제에서 아시아 문자들을 지원하기 위해 처음 개발되었다.</li>
-<li>모드간의 전환을 위한 이스케이프 문자열이 없다.</li>
-<li>euc-jp는 4가지 코딩된 문자집합을 지원한다.<br>(JIS X 0201, JIS X 0208, 반각 가타카나, JIS X 0212)</li>
-</ul>
-</li>
-<li>[가변폭(비모달)]<strong>euc-kr</strong><ul>
-<li>한글 인터넷 문서를 위해 널리 사용되는 가변길이 인코딩</li>
-<li>2가지 문자집합을 지원한다. (KS X 1003, KS X 1001)</li>
-<li>KS X 1001은 총 2350자만 담고 있었고 표현하기에는 부족</li>
+<li>[가변폭(비모달)]<strong>euc-jp</strong><br>- 일본어 인코딩<br>- EUC는 Extended Unix Code의 약자<br>- 유닉스 운영체제에서 아시아 문자들을 지원하기 위해 처음 개발되었다.<br>- 모드간의 전환을 위한 이스케이프 문자열이 없다.<br>- euc-jp는 4가지 코딩된 문자집합을 지원한다.<br> (JIS X 0201, JIS X 0208, 반각 가타카나, JIS X 0212)</li>
+<li>[가변폭(비모달)]<strong>euc-kr</strong><br>- 한글 인터넷 문서를 위해 널리 사용되는 가변길이 인코딩<br>- 2가지 문자집합을 지원한다. (KS X 1003, KS X 1001)<br>- KS X 1001은 총 2350자만 담고 있었고 표현하기에는 부족<ul>
 <li>이를 보완하기 위해 <strong>한글 채움문자</strong>를 이용해 한글을 표현하는 방식을 규정하고 있다.</li>
 </ul>
 </li>
 </ol>
-</li>
-</ol>
 <h2 id="Charset은-문자집합이-아닌-매핑-알고리즘의-이름이다"><a href="#Charset은-문자집합이-아닌-매핑-알고리즘의-이름이다" class="headerlink" title="Charset은 문자집합이 아닌 매핑 알고리즘의 이름이다."></a>Charset은 문자집합이 아닌 매핑 알고리즘의 이름이다.</h2><ul>
 <li>MIME charset 태그는 문자집합을 의미하는 것이 아니다.</li>
-<li>MIME charset 값은 데이터 비트를 고유한 문자의 코드로 매핑하는 알고리즘의 이름이다.<br>= 문자 인코딩 구조 + 코딩된 문자집합</li>
+<li>MIME charset 값은 데이터 비트를 고유한 문자의 코드로 매핑하는 알고리즘의 이름이다.<br>&#x3D; 문자 인코딩 구조 + 코딩된 문자집합</li>
 </ul>
 <hr>
 <a name="tag"/>
 
 <h1 id="언어태그와-HTTP"><a href="#언어태그와-HTTP" class="headerlink" title="언어태그와 HTTP"></a>언어태그와 HTTP</h1><ul>
-<li>영어 en / 독일어 de / 한국어 ko<br>많은 다른 언어에 대한 언어 태그가 존재한다.</li>
-<li>브라질 포르투갈어 pt-BR / 미국 영어 en-US / 허난 중국어 zh-ziang<br>지역에 따라 변형된 언어나 방언을 표현할 수 있다.</li>
+<li>영어 en &#x2F; 독일어 de &#x2F; 한국어 ko<br>많은 다른 언어에 대한 언어 태그가 존재한다.</li>
+<li>브라질 포르투갈어 pt-BR &#x2F; 미국 영어 en-US &#x2F; 허난 중국어 zh-ziang<br>지역에 따라 변형된 언어나 방언을 표현할 수 있다.</li>
 </ul>
 <ol>
-<li><p><strong>Content-Language 헤더</strong></p>
+<li><strong>Content-Language 헤더</strong></li>
+</ol>
 <ul>
 <li>Content-Language 엔터티 헤더 필드는 엔터티가 어떤 언어 사용자를 대상으로 하고 있는지 서술한다.</li>
 </ul>
-</li>
-<li><p><strong>Accept-Lanugage 헤더</strong></p>
+<ol start="2">
+<li><strong>Accept-Lanugage 헤더</strong></li>
+</ol>
 <ul>
 <li><ol start="2">
 <li>HTTP는 우리에게 우리의 언어 제약과 선호도를 웹 서버에 전달할 수 있게 해준다.</li>
@@ -632,8 +588,9 @@
 </li>
 <li>Accept-Lanugage와 Accept-Charset을 사용할 수 있다.</li>
 </ul>
-</li>
-<li><p><strong>언어 태그의 종류</strong> ([RFC 3066] 기준)</p>
+<ol start="3">
+<li><strong>언어 태그의 종류</strong> ([RFC 3066] 기준)</li>
+</ol>
 <ul>
 <li>언어태그는 다음을 표현하기 위해 사용될 수 있다.<ul>
 <li>일반적인 언어의 종류 ex_<code>es</code> (스페인어)</li>
@@ -645,8 +602,9 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p><strong>서브태그</strong></p>
+<ol start="4">
+<li><strong>서브태그</strong></li>
+</ol>
 <ul>
 <li>언어 태그는 하이픈으로 분리된 하나 이상의 서브태그로 이루어져 있다.</li>
 <li>ex_<code>sgn-US-MA</code></li>
@@ -658,40 +616,28 @@
 </ol>
 <hr>
 <ol>
-<li><p><strong>첫번째 서브태그 : 이름공간</strong></p>
+<li><p><strong>첫번째 서브태그 : 이름공간</strong><br>- ISO 639 표준 언어 집합에서 선택된 표준화된 언어 토큰<br>- 첫번째 서브태그가</p>
 <ul>
-<li>ISO 639 표준 언어 집합에서 선택된 표준화된 언어 토큰</li>
-<li>첫번째 서브태그가<ul>
 <li>두 글자라면, ISO 639와 639-1 표준의 언어코드다.</li>
 <li>세 글자라면, ISO 639-2표준과 확장에 열거된 언어코드다.</li>
 <li>글자가 <code>i</code>라면, IANA에 등록된 것</li>
-<li>글자가 <code>x</code>라면, 특정 개인이나 집단 전용의 비표준 확장 서브태그다.</li>
+<li>글자가 <code>x</code>라면, 특정 개인이나 집단 전용의 비표준 확장 서브태그다.<br>- 한국어 : ko(ISO 639) &#x2F; kor(ISO 639-2)<br>- 영어 : en(ISO 639) &#x2F; eng(ISO 639-2)</li>
 </ul>
 </li>
-<li>한국어 : ko(ISO 639) / kor(ISO 639-2)</li>
-<li>영어 : en(ISO 639) / eng(ISO 639-2)</li>
-</ul>
-</li>
-<li><p><strong>두번째 서비태그: 이름공간</strong></p>
+<li><p><strong>두번째 서비태그: 이름공간</strong><br>- ISO 3166 국가 코드와 지역 표준 집합에서 선택된 표준화된 국가토큰이다.</p>
 <ul>
-<li>ISO 3166 국가 코드와 지역 표준 집합에서 선택된 표준화된 국가토큰이다.</li>
-<li>IANA에 등록된 다른 문자열일 수도 있다.</li>
-<li>두번째 서브태그는<ul>
-<li>두글자라면 ISO 3166에 정의된 국가/지역이다.</li>
+<li>IANA에 등록된 다른 문자열일 수도 있다.<ul>
+<li>두번째 서브태그는</li>
+<li>두글자라면 ISO 3166에 정의된 국가&#x2F;지역이다.</li>
 <li>3~8 글자라면, IANA에 등록된 것이다.</li>
 <li>한글자라면, 문가 잘못된 것..</li>
-</ul>
-</li>
 <li>일본: JP</li>
 <li>인도: IN</li>
 </ul>
 </li>
-<li><p><strong>나머지 서브태그: 이름공간</strong></p>
-<ul>
-<li>8자 이하의 알파벳과 숫자로 이루어져야 한다는 것을 제외하면 다른 규칙은 없다.</li>
 </ul>
 </li>
-</ol>
+<li><p><strong>나머지 서브태그: 이름공간</strong><br>- 8자 이하의 알파벳과 숫자로 이루어져야 한다는 것을 제외하면 다른 규칙은 없다.</p>
 </li>
 </ol>
 <hr>
@@ -701,7 +647,9 @@
 <li>오늘날 URI는 US-ASCII의 부분집합으로 구성되어 있다.</li>
 </ul>
 <ol>
-<li><strong>국제적 가독성 vs 의미있는 문자들</strong> <ul>
+<li><strong>국제적 가독성 vs 의미있는 문자들</strong></li>
+</ol>
+<ul>
 <li>URI에 들어가고 조작하고, 공유하기 쉽게 하기 위하여<br>설계자들은 매우 제한된 공통 문자집합을 선택했다.<ul>
 <li>기본적인 라틴 알파벳 문자, 숫자, 특수문자</li>
 </ul>
@@ -714,8 +662,10 @@
 </li>
 <li>그래서 <strong>아스키 문자들의 제한된 집합으로 이루어진 URI</strong>를 갖게 되었다.</li>
 </ul>
-</li>
-<li><strong>URI에서 사용될 수 있는 문자들</strong><ul>
+<ol start="2">
+<li><strong>URI에서 사용될 수 있는 문자들</strong></li>
+</ol>
+<ul>
 <li>URI에서 사용할 수 있는 US-ASCII 문자들의 부분집합은 <ul>
 <li>예약된 문자들, </li>
 <li>예약되지 않은 문자들, </li>
@@ -734,11 +684,13 @@
 <li>예약된 문자: <code>;</code> <code>/</code> <code>?</code> <code>:</code> <code>@</code> <code>&amp;</code> <code>=</code> <code>+</code> <code>$</code> <code>,</code></li>
 <li>이스케이프: <code>%</code> <code>&lt;HEX&gt;</code> <code>&lt;HEX&gt;</code></li>
 </ul>
-</li>
-<li><strong>이스케이핑과 역이스케이핑</strong><ul>
+<ol start="3">
+<li><strong>이스케이핑과 역이스케이핑</strong></li>
+</ol>
+<ul>
 <li>URI 이스케이프는 예약된 문자나 다른 지원하지 않은 글자들(space)을 안전하게 URI에 삽일할 수 있는 방법을 제공한다.</li>
 <li><strong>이스케이프</strong> : 퍼센트 글자 하나와, 뒤이은 16진수 글자 둘로 이루어진 3글자 문자열이다.<ul>
-<li><code></code>스페이스 (아스키 32): %20 (20은 32의 16진법 표현이다.)</li>
+<li><code> </code>스페이스 (아스키 32): %20 (20은 32의 16진법 표현이다.)</li>
 <li><code>%</code>(아스키 25): %25</li>
 </ul>
 </li>
@@ -749,14 +701,18 @@
 </li>
 <li>두번 인코딩 되지 않도록 주의한다.</li>
 </ul>
-</li>
-<li><strong>국제 문자들을 이스케이핑하기</strong><ul>
+<ol start="4">
+<li><strong>국제 문자들을 이스케이핑하기</strong></li>
+</ol>
+<ul>
 <li>이스케이프 값들은 US-ASCII 코드의 범위(0~127)에 있어야한다.</li>
 <li>어떤 어플리케이션은 iso-8859-1 확장 문자들(128~255)을 표현하기 위해 이스케이프 값을 사용하려 한다.</li>
 <li>그러나 오늘날에는 아스키 범위 밖의 문자를 인코딩하는 일은 상당히 흔하다.</li>
 </ul>
-</li>
-<li><strong>URI에서의 모달 전환</strong><ul>
+<ol start="5">
+<li><strong>URI에서의 모달 전환</strong></li>
+</ol>
+<ul>
 <li>몇몇 URI는 다른 문자집합의 글자를 표현하기 위해 아스키 문자열을 사용한다.<ul>
 <li>예를 들어 iso-2022-jp 인코딩은 JIS-Roman으로 변경하기 위해 <code>ESC ( J</code>를 삽입할 수 있으며 <code>ESC ( B</code>로 다시 아스키로 돌아올 수 있다.</li>
 </ul>
@@ -764,13 +720,13 @@
 <li>현재 URI는 그다지 국제화에 친화적이지 않다.</li>
 <li>당분간 HTTP 어플리케이션은 아스키와 함께 써야한다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <a name="etc"/>
 
 <h1 id="기타-고려사항"><a href="#기타-고려사항" class="headerlink" title="기타 고려사항"></a>기타 고려사항</h1><ol>
-<li><strong>헤더와 명세에 맞지 않는 데이터</strong><ul>
+<li><strong>헤더와 명세에 맞지 않는 데이터</strong></li>
+</ol>
+<ul>
 <li><ol start="2">
 <li>HTTP 헤더는 반드시 US-ASCII 문자집합의 글자들로만 이루어져야 한다.</li>
 </ol>
@@ -778,27 +734,29 @@
 <li>많은 HTTP 어플리케이션은 글자들을 처리하기 위해<br>운영체제와 라이브러리 루틴을 사용한다. </li>
 <li>이 모든 라이브러리가 아스키 범위(0~127)를 벗어난 글자를 지원하지 않는다.</li>
 </ul>
-</li>
-<li><strong>날짜</strong><ul>
+<ol start="2">
+<li><strong>날짜</strong></li>
+</ol>
+<ul>
 <li><ol start="2">
 <li>HTTP명세는 올바른 GMT 날짜 형식을 명확히 정의하고 있지만, 모든 웹 서버와 클라가 규칙을 따르고 있지 않음을 주의하라.</li>
 </ol>
 </li>
 </ul>
-</li>
-<li><strong>도메인 이름</strong><ul>
-<li>국제화 문자를 포함하는 도메인 이름을 = 국제화 도메인 이름 Internationalizing Domain Name</li>
+<ol start="3">
+<li><strong>도메인 이름</strong></li>
+</ol>
+<ul>
+<li>국제화 문자를 포함하는 도메인 이름을 &#x3D; 국제화 도메인 이름 Internationalizing Domain Name</li>
 <li>오늘날 대부분의 웹브라우저가 <strong>퓨니코드</strong>를 이용해 이를 지원한다. punycode<ul>
 <li>퓨지코드란 유니코드 문자열을 호스트 명에서 사용 가능한 문자만으로 이루어진 문자열로 변환하는 방법 (RFC 3492)</li>
-<li>웹브라우저들은 이 기법을 이용해, 사용자가 입력한 다국어로 된 도메인 이름을<br>알파벳과 숫자 등으로 된 도메인 이름으로 변환한다.<br>( <code>한글.com</code> =&gt; <code>xn--bj0bj06e.com</code> )</li>
+<li>웹브라우저들은 이 기법을 이용해, 사용자가 입력한 다국어로 된 도메인 이름을<br>알파벳과 숫자 등으로 된 도메인 이름으로 변환한다.<br>( <code>한글.com</code> &#x3D;&gt; <code>xn--bj0bj06e.com</code> )</li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -824,7 +782,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="ckzv7cqgh004gqobmfwzq6mzs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="cm3u7mj1m003xhwb20tcf4g6m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

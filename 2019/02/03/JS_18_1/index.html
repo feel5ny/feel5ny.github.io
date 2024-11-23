@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript,flow control" />
     
     
-    <meta name="description" content="🌕🌑🌑  코드스피츠 강의 정리록   복습Flow란?우리가 짠 파일이 메모리에 적재되고,적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에명령이 쭉 한꺼번에 실행되는데,명령이 차근차근 실행되는 과정.    0. Record, Completion Record자바스크립트 언어의 기본적인 문처리 기법을 알아보자.   0.1 Record자바스크립트는 문을 처">
+    <meta name="description" content="🌕🌑🌑  코드스피츠 강의 정리록   복습Flow란?우리가 짠 파일이메모리에 적재되고,적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에명령이 쭉 한꺼번에 실행되는데,명령이 차근차근 실행되는 과정.    0. Record, Completion Record자바스크립트 언어의 기본적인 문처리 기법을 알아보자.   0.1 Record자바스크립트는 문을 처리">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CodeSpitz77 2회_Flow control statement (1)">
 <meta property="og:url" content="http://feel5ny.github.io/2019/02/03/JS_18_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="🌕🌑🌑  코드스피츠 강의 정리록   복습Flow란?우리가 짠 파일이 메모리에 적재되고,적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에명령이 쭉 한꺼번에 실행되는데,명령이 차근차근 실행되는 과정.    0. Record, Completion Record자바스크립트 언어의 기본적인 문처리 기법을 알아보자.   0.1 Record자바스크립트는 문을 처">
+<meta property="og:description" content="🌕🌑🌑  코드스피츠 강의 정리록   복습Flow란?우리가 짠 파일이메모리에 적재되고,적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에명령이 쭉 한꺼번에 실행되는데,명령이 차근차근 실행되는 과정.    0. Record, Completion Record자바스크립트 언어의 기본적인 문처리 기법을 알아보자.   0.1 Record자바스크립트는 문을 처리">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/05/thumb_default.jpg">
 <meta property="article:published_time" content="2019-02-03T05:20:19.000Z">
@@ -373,25 +373,24 @@
 <p>코드스피츠 강의 정리록</p>
 </blockquote>
 <hr>
-<h3 id="복습"><a href="#복습" class="headerlink" title="복습"></a>복습</h3><p>Flow란?<br>우리가 짠 <strong>파일</strong>이
-<strong>메모리</strong>에 적재되고,<br>적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에<br><strong>명령이 쭉 한꺼번에 실행</strong>되는데,<br>명령이 차근차근 실행되는 과정.</p>
+<h3 id="복습"><a href="#복습" class="headerlink" title="복습"></a>복습</h3><p>Flow란?<br>우리가 짠 <strong>파일</strong>이<br><strong>메모리</strong>에 적재되고,<br>적재된 순간, 명령과 데이터로 나눠져서 적재된 다음에<br><strong>명령이 쭉 한꺼번에 실행</strong>되는데,<br>명령이 차근차근 실행되는 과정.</p>
 <hr>
 <hr>
 <p><a name="0"></a></p>
 <h2 id="0-Record-Completion-Record"><a href="#0-Record-Completion-Record" class="headerlink" title="0. Record, Completion Record"></a>0. Record, Completion Record</h2><p>자바스크립트 언어의 기본적인 문처리 기법을 알아보자.</p>
 <hr>
 <p><a name="0-1"></a></p>
-<h3 id="0-1-Record"><a href="#0-1-Record" class="headerlink" title="0.1 Record"></a>0.1 Record</h3><p>자바스크립트는 문을 처리할때 식과 다르게 처리한다.<br>식은 하나의 값으로 처리될 뿐이지만,<br>문은 <strong>실행단위</strong>로 처리된다.<br>문을 10개 쓰면, 10개의 실행단위가 생각난다.<br>(식은 10개 써도, 값 하나로 수렴될 뿐이다.)<br>문의 갯수를 늘리면, <strong>자바스크립트 엔진</strong>은 갯수만큼을 <strong>처리해야할 과제</strong>로 알고 있다.<br><strong>한줄한줄의 문이 생길때 마다 과제로 등록해 놓는다.</strong><br>=&gt; <strong>Record</strong></p>
+<h3 id="0-1-Record"><a href="#0-1-Record" class="headerlink" title="0.1 Record"></a>0.1 Record</h3><p>자바스크립트는 문을 처리할때 식과 다르게 처리한다.<br>식은 하나의 값으로 처리될 뿐이지만,<br>문은 <strong>실행단위</strong>로 처리된다.<br>문을 10개 쓰면, 10개의 실행단위가 생각난다.<br>(식은 10개 써도, 값 하나로 수렴될 뿐이다.)<br>문의 갯수를 늘리면, <strong>자바스크립트 엔진</strong>은 갯수만큼을 <strong>처리해야할 과제</strong>로 알고 있다.<br><strong>한줄한줄의 문이 생길때 마다 과제로 등록해 놓는다.</strong><br>&#x3D;&gt; <strong>Record</strong></p>
 <p>우리가 일반적으로 <strong>문</strong>을 짜면 <strong>Record</strong> 하나하나로 번역이 된다.<br><strong>자바스크립트 엔진</strong>은 우리가 짠 코드를 파싱할때 <strong>문</strong>들을 Record단위로 파싱한다.<br>Record가 하나하나 생성이되면 flow를 타고 쭉 움직인다. </p>
 <img src="/images/2019/05/flow_01.png">
 
 
 <p><strong>Record를 만들고<br>Record를 실행하는 과정이<br>자바스크립트 엔진의 주 작동원리이다.</strong></p>
 <blockquote>
-<p>요즘 현대 브라우저들은 자바스크립트 3.1엔진에서 돌지 않는다.<br>(인사이드 자바스크립트나 자바스크립트를 말하다와 같은 책들은 좋지만, 작동원리는 현대 브라우저와 다르다. (3.1버전 엔진기준으로 설명된 책))<br>모든 항목에 있어서 브라우저들이 해석하는 방식이 달라졌다. 스펙문서도 달라짐.<br>자바스크립트 엔진의 작동원리를 지금 버전에서 배워도, 매년 스펙이 갱신되기 때문에 내가 알고 있던 지식이 다음해에는 무의미해질 수 있다.<br>기저층의 작동원리보다는<br>무엇을 의미하고 추상적인 의미는 무엇인지 체계를 배우는 것이 더 의미있다..<br>= 작동원리보다는 근본적인 부분을 배우자.</p>
+<p>요즘 현대 브라우저들은 자바스크립트 3.1엔진에서 돌지 않는다.<br>(인사이드 자바스크립트나 자바스크립트를 말하다와 같은 책들은 좋지만, 작동원리는 현대 브라우저와 다르다. (3.1버전 엔진기준으로 설명된 책))<br>모든 항목에 있어서 브라우저들이 해석하는 방식이 달라졌다. 스펙문서도 달라짐.<br>자바스크립트 엔진의 작동원리를 지금 버전에서 배워도, 매년 스펙이 갱신되기 때문에 내가 알고 있던 지식이 다음해에는 무의미해질 수 있다.<br>기저층의 작동원리보다는<br>무엇을 의미하고 추상적인 의미는 무엇인지 체계를 배우는 것이 더 의미있다..<br>&#x3D; 작동원리보다는 근본적인 부분을 배우자.</p>
 </blockquote>
 <ul>
-<li>자바스크립트 엔진에서 Record를 부르는 말은 굉장히 많다. 언어의 버전마다 다르다 </li>
+<li>자바스크립트 엔진에서 Record를 부르는 말은 굉장히 많다. 언어의 버전마다 다르다</li>
 </ul>
 <h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><ul>
 <li>우리가 문을 작성하면 문을 하나의 Record로 바꿔준다는 것.</li>
@@ -423,7 +422,7 @@
 <li>다중 for문을 사용했을 때 바깥쪽 for문으로 빠져나오고 싶으면, break를 사용하면 된다.</li>
 </ul>
 <p><a name="1-1-1"></a></p>
-<h4 id="1-1-1-Identifier-식별자"><a href="#1-1-1-Identifier-식별자" class="headerlink" title="1.1.1 Identifier (= 식별자)"></a>1.1.1 Identifier (= 식별자)</h4><blockquote>
+<h4 id="1-1-1-Identifier-식별자"><a href="#1-1-1-Identifier-식별자" class="headerlink" title="1.1.1 Identifier (&#x3D; 식별자)"></a>1.1.1 Identifier (&#x3D; 식별자)</h4><blockquote>
 <p>자바스크립트 변수 identifier<br>A JavaScript identifier must start with<br>a letter, underscore (_), or dollar sign ($);<br>subsequent characters can also be digits (0-9). Because JavaScript is case sensitive, letters include the characters “A” through “Z” (uppercase) and the characters “a” through “z” (lowercase). (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Declarations">참고</a>)</p>
 </blockquote>
 <ul>
@@ -452,7 +451,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="attr">abc</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;start&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">break</span> abc;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;end&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;test&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><code>start</code><br><code>test</code></p>
 <ul>
-<li>break뒤에 명시된 label 스코프의 마지막으로 jump할 수 있다는 의미이다.<br>=&gt; flow 수동 제어에 성공</li>
+<li>break뒤에 명시된 label 스코프의 마지막으로 jump할 수 있다는 의미이다.<br>&#x3D;&gt; flow 수동 제어에 성공</li>
 <li>label 스코프를 생성하게 되면<br>label 스코프 내에서는 label을 빠져나올 수 있는 권리가 주어진다.<ul>
 <li>loop가 아니라서 continue는 사용하지 못하지만 <code>break</code>는 사용할 수 있다.</li>
 </ul>
@@ -471,22 +470,26 @@
 </ul>
 <ol>
 <li>이 label에서 다음 label까지가 하나의 label range를 이룬다.</li>
-<li>label다음에<br>iteration이 오거나,<br>switch가 오면 이것들이 다시 label 범위를 한정짓게 된다.</li>
+<li>label다음에<br>  iteration이 오거나,<br>  switch가 오면 이것들이 다시 label 범위를 한정짓게 된다.</li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;0&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">abc</span>: <span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">break</span> abc;</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;1&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">bbb</span>: <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;2&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><code>0</code><br><code>1</code><br><code>2</code></p>
 <ul>
-<li>label range로 확정했지만, jump하지 못했다.</li>
-<li>goto처럼 건너뛰려면<br>label 스코프를 선언하던지,<br>iteration label이 되던지,<br>switch label이 되던지 해야지 jump할 수 있다.</li>
-<li>자바스크립트에는 goto 구문이 없다는 것에 주의.<br>break나 continue에서만 레이블을 사용할 수 있다.<ul>
+<li><p>label range로 확정했지만, jump하지 못했다.</p>
+</li>
+<li><p>goto처럼 건너뛰려면<br>label 스코프를 선언하던지,<br>iteration label이 되던지,<br>switch label이 되던지 해야지 jump할 수 있다.</p>
+</li>
+<li><p>자바스크립트에는 goto 구문이 없다는 것에 주의.<br>break나 continue에서만 레이블을 사용할 수 있다.</p>
+<ul>
 <li>직접 레이블을 선택해서 goto는 안되고<br>break, continue로 <strong>아래로 내려가는 것만 가능하다.</strong></li>
 </ul>
 </li>
-<li>왔다갔다 할 수 없다. label만 갖고 loop문을 만들 수 없다.</li>
-<li>반복적인 실행만 할 수 없을 뿐 jump시킬 수 있다.</li>
-</ul>
-<ul>
-<li>if문에서는 break 문 뒤에 label을 작성해야하는데,<br>while이나 for문에서는 label을 명시적으로 쓰지않고 break문만 쓸 수 있는 이유는 무엇일까</li>
+<li><p>왔다갔다 할 수 없다. label만 갖고 loop문을 만들 수 없다.</p>
+</li>
+<li><p>반복적인 실행만 할 수 없을 뿐 jump시킬 수 있다.</p>
+</li>
+<li><p>if문에서는 break 문 뒤에 label을 작성해야하는데,<br>while이나 for문에서는 label을 명시적으로 쓰지않고 break문만 쓸 수 있는 이유는 무엇일까</p>
+</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (i === <span class="number">5</span>) <span class="keyword">break</span>;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;end&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>왜 error가 아닐까?</p>
@@ -494,7 +497,7 @@
 <p><a name="1-1-4"></a></p>
 <h4 id="1-1-4-Auto-label"><a href="#1-1-4-Auto-label" class="headerlink" title="1.1.4 Auto label"></a>1.1.4 Auto label</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="attr">temp38</span>:</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (i === <span class="number">5</span>) <span class="keyword">break</span> temp38;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;end&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>자바스크립트 엔진이 우리 대신에 label을 삽입해준 셈. = auto label<ul>
+<li>자바스크립트 엔진이 우리 대신에 label을 삽입해준 셈. &#x3D; auto label<ul>
 <li>iteration(for문)이나 switch문 앞에서 발동된다.</li>
 </ul>
 </li>
@@ -511,10 +514,8 @@
 <h4 id="1-1-5-label은-호출됐을-때-처음으로가나요"><a href="#1-1-5-label은-호출됐을-때-처음으로가나요" class="headerlink" title="1.1.5 label은 호출됐을 때 처음으로가나요?"></a>1.1.5 label은 호출됐을 때 처음으로가나요?</h4><p>jump구문은 jump가 시작하는 문장 블럭의 가장 처음으로 가게 되어있다.</p>
 <ul>
 <li>for문이 루프돌면, 가장 처음으로 간다.</li>
-<li>함수 호출하면 가장 처음으로 간다.<br>하지만 break의 label를 본다면.. 처음으로 가야하는 거 아닌가??<ul>
+<li>함수 호출하면 가장 처음으로 간다.<br>하지만 break의 label를 본다면.. 처음으로 가야하는 거 아닌가??</li>
 <li>break의 label은 블럭의 마지막으로 보낸다.</li>
-</ul>
-</li>
 </ul>
 <blockquote>
 <p>자바스크립트의 label 스펙은 자바의 label 스펙과 동일히다<br>레이블은 자바스크립트의 3.1버전때부터 있었던 스펙</p>
@@ -550,7 +551,7 @@
 <li>컴파일타임에 해석되는 정적인 레이블을 만드는 것이 아니라<br>case 안의 식을 동적으로 해석할 수 있는 특수한 레이블로 만들었을 뿐이다.</li>
 <li>switch는 case와 default label만 사용하도록 한다.</li>
 </ul>
-<p>우리는 switch 괄호안에 있는    값의 평가된 것을<br>런타임에 평가해서<br>case에 있는 값과 일치하는 label로 보낼 수 있는<br>특수한 레이블 구문을 만들 수 있는 switch문이라는 것을 알 수 있다.</p>
+<p>우리는 switch 괄호안에 있는	값의 평가된 것을<br>런타임에 평가해서<br>case에 있는 값과 일치하는 label로 보낼 수 있는<br>특수한 레이블 구문을 만들 수 있는 switch문이라는 것을 알 수 있다.</p>
 <p>그 안에 있는 label은 우리가 알고 있는 label과 동일하게 작동한다.</p>
 <p><a name="1-2-2"></a></p>
 <h4 id="1-2-2-Fall-Through"><a href="#1-2-2-Fall-Through" class="headerlink" title="1.2.2 Fall Through"></a>1.2.2 Fall Through</h4><p>case문 안에서 break를 안쓰면 그 다음 case문이 실행되는 현상</p>
@@ -578,7 +579,7 @@
 <li>runtime에 해석하는 기능때문에 자바스크립트를 2가지 방식으로 switch문을 쓸 수 있게 만든다.</li>
 </ul>
 <ol>
-<li>값에 대한 routing으로 (mini router)<br>특정 값에 대한 routing table</li>
+<li>값에 대한 routing으로 (mini router)<br>  특정 값에 대한 routing table</li>
 <li>조건 평가에 대한 분기</li>
 </ol>
 <p>값에 대한 routing이 정적인 경우 값에 대한 routing에 더 우선순위가 높다.</p>
@@ -613,7 +614,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_1/" data-id="ckzv7cqi20060qobm5pmj18ec" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_1/" data-id="cm3u7mj1r005hhwb22to75bly" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

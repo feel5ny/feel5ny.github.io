@@ -11,12 +11,12 @@
         <meta name="keywords" content="async,rxjs" />
     
     
-    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기&#x2F;비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
+    <meta name="description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기&#x2F;비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?   Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.     1. 웹 어플리케이">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1부&#x2F; chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/15/Async_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기&#x2F;비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?  Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.       1. 웹 어플리케이션의 입력 데이">
+<meta property="og:description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 입력 데이터 입력 데이터의 전달 시점이 다양하다. - 동기&#x2F;비동기 동기와 비동기를 함께 사용할 수 밖에 없는가? rxjs는 어떻게 개선하였나?   Observable 모든 데이터는 Observable 인스턴스로 만들 수 있다.     1. 웹 어플리케이">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/24/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-15T02:12:34.000Z">
@@ -230,18 +230,18 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[📕 퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
 <li>웹 어플리케이션의 입력 데이터</li>
-<li>입력 데이터의 <strong>전달 시점</strong>이 다양하다. - 동기/비동기</li>
+<li>입력 데이터의 <strong>전달 시점</strong>이 다양하다. - 동기&#x2F;비동기</li>
 <li>동기와 비동기를 함께 사용할 수 밖에 없는가?</li>
-<li>rxjs는 어떻게 개선하였나? <ul>
+<li>rxjs는 어떻게 개선하였나?</li>
+</ol>
+<ul>
 <li>Observable</li>
 <li>모든 데이터는 Observable 인스턴스로 만들 수 있다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <hr>
 <hr>
@@ -249,14 +249,14 @@
 <ul>
 <li>서버로부터 저장된 글에 대한 정보를 받아서 </li>
 <li>화면과 관련 UI작업을 한다.</li>
-<li>게시글 등록/수정하는 편집화면</li>
+<li>게시글 등록&#x2F;수정하는 편집화면</li>
 <li>수정이 끝나면 서버에 저장</li>
 </ul>
 <ol>
-<li>게시글 / 서버 -&gt; 브라우저 / <strong>비동기</strong> / ajax통신으로 json데이터를 받는다.</li>
-<li>게시글 / 브라우저 -&gt; 브라우저 UI객체 / <strong>동기</strong> / json 데이터를 ui에 반영한다.</li>
-<li>사용자가 입력한 내용 / 사용자 -&gt; 브라우저 UI 객체 / <strong>비동기</strong> / <code>&lt;textarea&gt;</code>를 통해 사용자 입력을 받는다.</li>
-<li>사용자가 입력한 내용 / 브라우저 UI객체 -&gt; 브라우저 -&gt; 서버 / <strong>동기, 비동기</strong> / <code>&lt;textarea&gt;</code>에 있는 데이터를 json객체로 저장 후, 서버로 ajax요청을 한다.</li>
+<li>게시글 &#x2F; 서버 -&gt; 브라우저 &#x2F; <strong>비동기</strong> &#x2F; ajax통신으로 json데이터를 받는다.</li>
+<li>게시글 &#x2F; 브라우저 -&gt; 브라우저 UI객체 &#x2F; <strong>동기</strong> &#x2F; json 데이터를 ui에 반영한다.</li>
+<li>사용자가 입력한 내용 &#x2F; 사용자 -&gt; 브라우저 UI 객체 &#x2F; <strong>비동기</strong> &#x2F; <code>&lt;textarea&gt;</code>를 통해 사용자 입력을 받는다.</li>
+<li>사용자가 입력한 내용 &#x2F; 브라우저 UI객체 -&gt; 브라우저 -&gt; 서버 &#x2F; <strong>동기, 비동기</strong> &#x2F; <code>&lt;textarea&gt;</code>에 있는 데이터를 json객체로 저장 후, 서버로 ajax요청을 한다.</li>
 </ol>
 <hr>
 <h2 id="2-입력-데이터의-전달-시점이-다양하다"><a href="#2-입력-데이터의-전달-시점이-다양하다" class="headerlink" title="2. 입력 데이터의 전달 시점이 다양하다."></a>2. 입력 데이터의 전달 시점이 다양하다.</h2><h3 id="동기-synchronous"><a href="#동기-synchronous" class="headerlink" title="동기 synchronous"></a>동기 synchronous</h3><p>: 작업이 들어온 순서에 맞게 차근차근 하나씩 진행되는 것을 의미한다.</p>
@@ -286,7 +286,7 @@
 > 동기
 
 
-<p>동기와 비동기는 시간의 축으로 봤을 때는 같은 형태이다.<br>=&gt; <strong>시간을 인덱스로 둔 컬렉션으로 생각할 수 있다.</strong><br>=&gt; Rxjs는 이를 <strong>스트림</strong>이라고 표현한다.<br>=&gt; Rxjs는 이런 스트림($)을 표현하는 Observable 클래스를 제공한다.</p>
+<p>동기와 비동기는 시간의 축으로 봤을 때는 같은 형태이다.<br>&#x3D;&gt; <strong>시간을 인덱스로 둔 컬렉션으로 생각할 수 있다.</strong><br>&#x3D;&gt; Rxjs는 이를 <strong>스트림</strong>이라고 표현한다.<br>&#x3D;&gt; Rxjs는 이런 스트림($)을 표현하는 Observable 클래스를 제공한다.</p>
 <h3 id="4-1-Observable"><a href="#4-1-Observable" class="headerlink" title="4.1 Observable"></a>4.1 Observable</h3><p><strong>시간을 인덱스로 둔 컬렉션을 추상화한 클래스이다.</strong><br>동기나 비동기 동작 방식으로 전달된 데이터를 하나의 컬렉션으로 바라볼 수 있게 해준다.<br>개발자는 데이터가 어떤 형태로 전달되는지에 대해 더이상 고민할 필요가 없어진다.<br>Observable을 통해 데이터를 전달받기만 하면된다.</p>
 <blockquote>
 <p>동기던 비동기던 옵저버블로 데이터를 받긔</p>
@@ -294,7 +294,7 @@
 <h3 id="4-2-모든-데이터는-Observable-인스턴스로-만들-수-있다"><a href="#4-2-모든-데이터는-Observable-인스턴스로-만들-수-있다" class="headerlink" title="4.2 모든 데이터는 Observable 인스턴스로 만들 수 있다."></a>4.2 모든 데이터는 Observable 인스턴스로 만들 수 있다.</h3><ul>
 <li>키보드를 눌러서 입력된 데이터</li>
 <li>마우스를 이동하거나 클릭해서 입력된 데이터</li>
-<li>ajax/fetch 요청을 통해 얻은 데이터</li>
+<li>ajax&#x2F;fetch 요청을 통해 얻은 데이터</li>
 <li>web socket을 통해 전달된 데이터</li>
 <li>messages를 통해 전달된 데이터<br>…</li>
 </ul>
@@ -321,7 +321,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="ckzv7cqe50009qobmohav5dgq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_01/" data-id="cm3u7mj120006hwb2d5lv6z8r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

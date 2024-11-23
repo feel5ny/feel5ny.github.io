@@ -11,12 +11,12 @@
         <meta name="keywords" content="TDD,mocha" />
     
     
-    <meta name="description" content="목차   단위테스트. 다들 중요하다고 하는데 왜 중요할까? 결국 클린코드를 위한 길 TDD : Test Driven Development 실습   1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다.  프로젝트에 단위 테스트를 적용하는 데">
+    <meta name="description" content="목차1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까?3. 결국 클린코드를 위한 길2. TDD : Test Driven Development4. 실습1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다.  프로젝트에 단위 테스트를 적용하">
 <meta property="og:type" content="article">
 <meta property="og:title" content="단위 테스트는 왜 해야할까">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/08/TDD_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="목차   단위테스트. 다들 중요하다고 하는데 왜 중요할까? 결국 클린코드를 위한 길 TDD : Test Driven Development 실습   1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다.  프로젝트에 단위 테스트를 적용하는 데">
+<meta property="og:description" content="목차1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까?3. 결국 클린코드를 위한 길2. TDD : Test Driven Development4. 실습1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다.  프로젝트에 단위 테스트를 적용하">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/45/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-08T09:23:55.000Z">
@@ -230,19 +230,11 @@
         
         <div class="article-entry" itemprop="articleBody">
             <hr>
-<p>목차 </p>
-<ol>
-<li>단위테스트. 다들 중요하다고 하는데 왜 중요할까?</li>
-<li>결국 클린코드를 위한 길</li>
-<li>TDD : Test Driven Development</li>
-<li>실습</li>
-</ol>
-<hr>
-<h2 id="1-단위테스트-다들-중요하다고-하는데-왜-중요할까"><a href="#1-단위테스트-다들-중요하다고-하는데-왜-중요할까" class="headerlink" title="1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +"></a>1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? <a href="https://cjh5414.github.io/why-pytest/">+</a></h2><p>단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다. </p>
+<h2 id="목차1-단위테스트-다들-중요하다고-하는데-왜-중요할까-3-결국-클린코드를-위한-길2-TDD-Test-Driven-Development4-실습"><a href="#목차1-단위테스트-다들-중요하다고-하는데-왜-중요할까-3-결국-클린코드를-위한-길2-TDD-Test-Driven-Development4-실습" class="headerlink" title="목차1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까?3. 결국 클린코드를 위한 길2. TDD : Test Driven Development4. 실습"></a>목차<br>1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까?<br>3. 결국 클린코드를 위한 길<br>2. TDD : Test Driven Development<br>4. 실습</h2><h2 id="1-단위테스트-다들-중요하다고-하는데-왜-중요할까"><a href="#1-단위테스트-다들-중요하다고-하는데-왜-중요할까" class="headerlink" title="1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? +"></a>1. 단위테스트. 다들 중요하다고 하는데 왜 중요할까? <a href="https://cjh5414.github.io/why-pytest/">+</a></h2><p>단위테스트는 모듈이나 어플리케이션 안에 있는 개별적인 코드 단위가 예상대로 작동하는지 확인하는 반복적인 행위이다. </p>
 <p>프로젝트에 단위 테스트를 적용하는 데에는 “내 코드가 제대로 동작하는지 확인하는 것”이라는 명백한 이유 외에도 몇 가지 장점이 있다.</p>
 <ul>
 <li>단위 테스트는 코드가 “어떻게!”작성하는지 생각하는데 도움을 준다. </li>
-<li>게다가 “무엇”을 해야하는지에 있어서 구현 선택을 검토하는데 해가 되지 않고, 그 선택들이 적절한지 아닌지 알아낸다. 주된 효과로는 단위 테스트를 추가하는 것은 애플리케이션의 유닛(함수/메소드)를 더 <code>작게</code> 만든다.</li>
+<li>게다가 “무엇”을 해야하는지에 있어서 구현 선택을 검토하는데 해가 되지 않고, 그 선택들이 적절한지 아닌지 알아낸다. 주된 효과로는 단위 테스트를 추가하는 것은 애플리케이션의 유닛(함수&#x2F;메소드)를 더 <code>작게</code> 만든다.</li>
 </ul>
 <blockquote>
 <p>많은 일을 하는 테스팅 코드는 어렵다.’<br>‘많은 일을 하는 디버깅 코드는 어렵다.’<br>이 두 가지 문제의 해결법은 많은 일을 하지 않도록 코드를 작성하는 것이다. 각각의 함수를 단 한가지만의 일을 하도록 작성해야 한다. 이렇게 하면 단위 테스트로 쉽게 테스트할 수 있다. (하나의 함수에 대해 많은 단위 테스트가 필요하지 않는다.)<br>내 동료가 메소드를 더 작게 분리해야 하는지에 대해 판단할 때 사용하는 문구가 있다. 만약 코드의 역할을 다른 프로그래머에게 설명할 때 ‘and’라는 단어를 사용했다면 그 메소드는 적어도 하나 이상의 부분으로 나눠야 한다는 것이다. <a href="http://softwareengineering.stackexchange.com/questions/195989/is-it-ok-to-split-long-functions-and-methods-into-smaller-ones-even-though-they/195992#195992">stackoverflow</a></p>
@@ -280,7 +272,7 @@
 <ol>
 <li><code>RED</code> : 실패하는 테스트</li>
 <li><code>GREEN</code> : 테스트에 통과하도록 코드를 작성</li>
-<li><code>REFACTOR</code> : 불필요한 코드를 삭제<br>장점 : 유지보수가 가능한 코드를 작성할수 있고, 버그가 생겨날 여지도 줄고, 높은 가독성을 추구할 수 있다. </li>
+<li><code>REFACTOR</code> : 불필요한 코드를 삭제<br>장점 : 유지보수가 가능한 코드를 작성할수 있고, 버그가 생겨날 여지도 줄고, 높은 가독성을 추구할 수 있다.</li>
 </ol>
 <blockquote>
 <p>참고한 글에서는 심리적인 안정감을 준다고 한다. 테스트 없이 개발하면 그물망 없는 막타워를 뛰어 내리는 심정이라면서.. 코드 한줄한줄이 부담스럽다고 한다.<br>생각해보면 이전 프로젝트에서는 테스트코드 없이 작업에 들어갔었고, 기능구현은 됐으나, 내가 보기 싫은 정도의 무자비한 코드들이 나왔다. 그러다보니 리팩토링조차 하지 못하는 상황.. 그런 의미에서 클린코드를 위한 작업이라고 생각하면, 좋을 듯하다.</p>
@@ -341,7 +333,7 @@ Mocha is a feature-rich JavaScript test framework running on Node.js and in the 
 <h4 id="Mock이란"><a href="#Mock이란" class="headerlink" title="Mock이란?"></a>Mock이란?</h4><p>실제 객체를 만들기엔 비용과 시간이 많이 들거나 의존성이 길게 걸쳐져 있어 제대로 구현하기 어려울 경우, 가짜 객체를 만들어 사용한다.</p>
 <ul>
 <li><ol start="3">
-<li>JavaScript는 비동기 상황을 테스트해야하기 때문에, 실제로 테스트 코드를 짜는 것은 굉장히 까다로운 작업이 될수 있다. </li>
+<li>JavaScript는 비동기 상황을 테스트해야하기 때문에, 실제로 테스트 코드를 짜는 것은 굉장히 까다로운 작업이 될수 있다.</li>
 </ol>
 </li>
 <li>이러한 것을 해결하기 위한 하나의 방법으로 stub, mock object를 만드는 방법이 있다.</li>
@@ -393,7 +385,7 @@ Mocha is a feature-rich JavaScript test framework running on Node.js and in the 
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/08/TDD_01/" data-id="ckzv7cqjn0093qobmhe4ashhl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/08/TDD_01/" data-id="cm3u7mj200087hwb23x7bbze1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

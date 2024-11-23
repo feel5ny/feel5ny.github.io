@@ -345,23 +345,29 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sym = <span class="title class_">Symbol</span>();</span><br></pre></td></tr></table></figure>
 <ol>
 <li>new 연산자를 사용하지 않는다.</li>
-<li>Symbol()로 생성된 값은 프로그램 전체를 통해 유일하고, 값을 변경할 수 없다.(immutable)<ul>
+<li>Symbol()로 생성된 값은 프로그램 전체를 통해 유일하고, 값을 변경할 수 없다.(immutable)</li>
+</ol>
+<ul>
 <li><strong>C언어의 enum과 비슷한 개념이다.</strong></li>
 </ul>
-</li>
+<ol start="3">
 <li>생성한 Symobol에 프로퍼티를 설정할 수 없다.</li>
-<li>반환자가 오브젝트가 아니므로, 오브젝트를 생성한다고 할 수 없다.<ul>
+<li>반환자가 오브젝트가 아니므로, 오브젝트를 생성한다고 할 수 없다.</li>
+</ol>
+<ul>
 <li><strong>symbol값을 생성한다</strong>는 표현이 적절하다.</li>
 </ul>
-</li>
-<li>String의 <code>&#39;&#39;</code>, Array의 <code>[]</code> 처럼 Symbol을 생성하는 리터럴이 없다.<ul>
+<ol start="5">
+<li>String의 <code>&#39;&#39;</code>, Array의 <code>[]</code> 처럼 Symbol을 생성하는 리터럴이 없다.</li>
+</ol>
+<ul>
 <li>undefined와 null 처럼 <strong>그 자체가 값이 되는 것도 아니다.</strong></li>
 <li><strong>함수로 호출해야 값을 생성하여 반환한다.</strong> <code>Symbol()</code></li>
 </ul>
-</li>
+<ol start="6">
 <li>Symbol()로 값을 생성하고 출력하면, Symbol()로 생성한 값을 반환하지 않고, Symbol 값을 생성했던 <code>형태를 반환한다.</code> 이는 symbol의 특징이다.</li>
 <li><strong>Symbol값을 외부에 노출시키지 않는 것이 Symbol의 특징이다.</strong></li>
-<li>Symbol()로 생성한 값의 설명이나 주석을 문자열로 작성한다.<br>Symbol값을 외부에 제공하지 않으므로 디버깅할 때 유용하다.<br>파라미터를 작성하지 않으면 <code>undefined</code>로 인식한다.</li>
+<li>Symbol()로 생성한 값의 설명이나 주석을 문자열로 작성한다.<br>  Symbol값을 외부에 제공하지 않으므로 디버깅할 때 유용하다.<br>  파라미터를 작성하지 않으면 <code>undefined</code>로 인식한다.</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feature1</span>: <span class="keyword">const</span> sym = <span class="title class_">Symbol</span>();</span><br><span class="line"><span class="attr">feature6</span>: sym              <span class="comment">// Symbol()</span></span><br><span class="line"><span class="attr">feature_</span>: <span class="keyword">typeof</span> sym       <span class="comment">// symbol</span></span><br><span class="line"><span class="attr">feature8</span>: <span class="title class_">Symbol</span>(<span class="string">&quot;주석&quot;</span>)    <span class="comment">// Symbole(주석)</span></span><br><span class="line"><span class="attr">feature2</span>: sym == <span class="title class_">Symbole</span>() <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
@@ -383,7 +389,7 @@
 <h2 id="5-오브젝트에서-Symbol-사용"><a href="#5-오브젝트에서-Symbol-사용" class="headerlink" title="5. 오브젝트에서 Symbol 사용"></a>5. 오브젝트에서 Symbol 사용</h2><p>유일한 값을 갖는 Symbol 특성을 활용하여<br>Symbol 값을 오브젝트의 프로퍼티 키로 사용하면 프로퍼티<br>키가 중복되지 않습니다.</p>
 <h3 id="symbol-keyed-property"><a href="#symbol-keyed-property" class="headerlink" title="symbol-keyed property"></a>symbol-keyed property</h3><p><code>[Symbol()]</code>형태와 같이 대괄호 안에 Symbol()을 작성 </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;[<span class="title class_">Symbol</span>()]: <span class="number">123</span>&#125;</span><br></pre></td></tr></table></figure>
-<p>이렇게 프로퍼티 키에 작성한 Symbol()을 <strong><code>symbol-keyed property</code></strong>라고 한다.</p>
+<p>이렇게 프로퍼티 키에 작성한 Symbol()을 **<code>symbol-keyed property</code>**라고 한다.</p>
 <ul>
 <li><code>&#123; ABC: 123 &#125;</code>에서 <code>ABC</code>에 Symbol값을 넣은 것이다.<br>여기서 Symbol값은 문자열이 아니라 그냥 <strong>Symbol값</strong>이라고 생각하면된다.</li>
 </ul>
@@ -398,7 +404,7 @@
 <ul>
 <li>Symbol이 <code>[[Enumerable]]: false</code>이기 때문.<br><a href="https://feel5ny.github.io/2017/12/04/JS_05_1/">(객체의 데이터 프로퍼티에서 <code>[[Enumerable]]</code>은 기본적으로 true이다.)</a></li>
 </ul>
-<h3 id="6-1-for-in-문에서-Symbol-사용-외부스코프에서-의미없는-키값-gt-symbol화"><a href="#6-1-for-in-문에서-Symbol-사용-외부스코프에서-의미없는-키값-gt-symbol화" class="headerlink" title="6.1 for-in 문에서 Symbol 사용 (외부스코프에서 의미없는 키값 =&gt; symbol화)"></a>6.1 for-in 문에서 Symbol 사용 (외부스코프에서 의미없는 키값 =&gt; symbol화)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">nine</span>: <span class="number">999</span>&#125;;</span><br><span class="line">obj[<span class="title class_">Symbol</span>(<span class="string">&quot;one&quot;</span>)] = <span class="number">111</span>;</span><br><span class="line">obj[<span class="title class_">Symbol</span>(<span class="string">&quot;two&quot;</span>)] = <span class="string">&quot;222&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &#123;nine: 999, Symbol(one): 111, Symbol(two): &quot;222&quot;&#125;</span></span><br><span class="line"><span class="comment">// nine</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-1-for-in-문에서-Symbol-사용-외부스코프에서-의미없는-키값-symbol화"><a href="#6-1-for-in-문에서-Symbol-사용-외부스코프에서-의미없는-키값-symbol화" class="headerlink" title="6.1 for-in 문에서 Symbol 사용 (외부스코프에서 의미없는 키값 &#x3D;&gt; symbol화)"></a>6.1 for-in 문에서 Symbol 사용 (외부스코프에서 의미없는 키값 &#x3D;&gt; symbol화)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">nine</span>: <span class="number">999</span>&#125;;</span><br><span class="line">obj[<span class="title class_">Symbol</span>(<span class="string">&quot;one&quot;</span>)] = <span class="number">111</span>;</span><br><span class="line">obj[<span class="title class_">Symbol</span>(<span class="string">&quot;two&quot;</span>)] = <span class="string">&quot;222&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &#123;nine: 999, Symbol(one): 111, Symbol(two): &quot;222&quot;&#125;</span></span><br><span class="line"><span class="comment">// nine</span></span><br></pre></td></tr></table></figure>
 <p>일반적으로 for-in문으로 객체를 순회하면서 symbol-keyd property는 접근할 수 없다.<br>때문에 객체의 고유한 식별자로써, 상수개념으로 사용한다.<br>외부 스코프에서 의미가 있지 않는 값들만 symbol화 시킨다.<br>은닉화의 목적이 있기때문에 외부 스코프에서는 접근가능하지 않아야하지만 <a href="'#6-4'">내부에서는 가능하도록 만들어야한다.</a></p>
 <ul>
 <li><code>Object.getOwnPropertySymbols()</code>를 사용하여 symbol-keyed property 키값들을 열거할 수 있다.</li>
@@ -417,8 +423,7 @@
 
 <h2 id="7-Symbol-for"><a href="#7-Symbol-for" class="headerlink" title="7. Symbol.for"></a>7. <code>Symbol.for</code></h2><p>public member 전역공간에서 공유되는 심볼.<br>여기저기서 많이 사용되는 공용상수를 사용할때 사용</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;abc&#x27;</span>) </span><br><span class="line"><span class="comment">// 새로 생성해서 넣음.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a) <span class="comment">// &quot;Symbol(abc)&quot;</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;abc&#x27;</span>) </span><br><span class="line"><span class="comment">// 기존에 &#x27;abc&#x27; 식별자로 되어있는 symbol을 찾아서 있으면 넣어준다.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b) <span class="comment">// &quot;Symbol(abc)&quot;</span></span><br><span class="line"></span><br><span class="line">a === b <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>?!
-a와 b가 값과 타입이 같다고 나온다.<br><code>Symbol.for</code>는 for의 인자를 식별자로 사용한다.</p>
+<p>?!<br>a와 b가 값과 타입이 같다고 나온다.<br><code>Symbol.for</code>는 for의 인자를 식별자로 사용한다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = (<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="title class_">COMMON1</span> = <span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;공유심볼&#x27;</span>)</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		[<span class="title class_">COMMON1</span>]: <span class="string">&#x27;공유할 프로퍼티 키값. 어디서든 접근 가능&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">obj1[<span class="title class_">Symbol</span>.<span class="title function_">for</span>(<span class="string">&#x27;공유심볼&#x27;</span>)]</span><br><span class="line"><span class="comment">// &quot;공유할 프로퍼티 키값. 어디서든 접근 가능&quot;</span></span><br></pre></td></tr></table></figure>
         </div>
         <footer class="article-footer">
@@ -438,7 +443,7 @@ a와 b가 값과 타입이 같다고 나온다.<br><code>Symbol.for</code>는 fo
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_23/" data-id="ckzv7cqia006hqobm3qsty42c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_23/" data-id="cm3u7mj1t0061hwb2cv9h911n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

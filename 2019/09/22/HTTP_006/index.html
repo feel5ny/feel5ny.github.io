@@ -365,7 +365,7 @@
 <h2 id="1-2-Proxy-vs-Gateway"><a href="#1-2-Proxy-vs-Gateway" class="headerlink" title="1.2 Proxy vs Gateway"></a>1.2 Proxy vs Gateway</h2><ul>
 <li><strong>프록시</strong>: 같은 프로토콜을 사용하는 둘 이상의 앱을 연결</li>
 <li><strong>게이트웨이</strong>: 서로 다른 프로토콜을 사용하는 둘 이상을 연결<br>프로토콜 변환기처럼 동작한다.<ul>
-<li>ex) HTTP/POP 게이트웨이: 이메일 서버와의 통신</li>
+<li>ex) HTTP&#x2F;POP 게이트웨이: 이메일 서버와의 통신</li>
 </ul>
 </li>
 </ul>
@@ -383,7 +383,9 @@
 <li><strong>문서 접근 제어자</strong>: 웹 리소스에 대한 단일한 접근 제어 전략을 구현하고 감사추적을 하기 위해.</li>
 <li><strong>보안 방화벽</strong>: 조직 안에 들어오거나 나가는 응용 레벨 프로토콜의 흐름을 네트워크의 한 지점에서 통제한다.</li>
 <li><strong>웹 캐시</strong>: 인기 있는 문서의 로컬 사본을 관리하고, 해당 문서에 대한 요청이 오면 빠르게 제공하여, 느리고 비싼 인터넷 커뮤니케이션을 줄인다.</li>
-<li><strong>대리 프락시</strong>(Surrogate)<ul>
+<li><strong>대리 프락시</strong>(Surrogate)</li>
+</ol>
+<ul>
 <li>웹 서버인 것처럼 위장한다.</li>
 <li>공용 콘텐츠에 대한 느린 웹 서버의 성능을 개선하기 위해 사용될 수 있다.<blockquote>
 <p>서버 가속기라고 불린다.</p>
@@ -391,34 +393,38 @@
 </li>
 <li>콘텐츠 라우팅 기능과 결합되어, 주문형 복제 콘텐츠의 분산 네트워크를 만들기 위해 사용될 수 있다.</li>
 </ul>
-</li>
-<li><strong>콘텐츠 라우터</strong><ul>
+<ol start="6">
+<li><strong>콘텐츠 라우터</strong></li>
+</ol>
+<ul>
 <li>인터넷 트래픽 조건과 콘텐츠의 종류에 따라, 요청을 특정 웹 서버로 유도하는 콘텐츠 라우터로 동작할 수 있다.</li>
 <li>사용자들에게 제공할 여러 서비스를 구현하는데 사용할 수 있다.<blockquote>
 <p>사용자가 필터링 서비스에 가입했다면, HTTP 요청이 필터링 프락시를 통과하도록 할 수 있다.</p>
 </blockquote>
 </li>
 </ul>
-</li>
-<li><strong>트랜스 코드</strong><ul>
+<ol start="7">
+<li><strong>트랜스 코드</strong></li>
+</ol>
+<ul>
 <li>콘텐츠를 클라에게 보내기 전에, 본문 포맷을 수정할 수 있다.<blockquote>
 <p><strong>트랜스 코딩</strong>: 데이터의 표현방식을 변환하는 것 </p>
 </blockquote>
 </li>
-<li>사례: gif 이미지 =&gt; jpg / 이미지의 크기 줄이기 / 텍스트 파일 압축 / 외국어 문서로 변환하기 / …</li>
+<li>사례: gif 이미지 &#x3D;&gt; jpg &#x2F; 이미지의 크기 줄이기 &#x2F; 텍스트 파일 압축 &#x2F; 외국어 문서로 변환하기 &#x2F; …</li>
 </ul>
-</li>
-<li><strong>익명화 프락시</strong> Anonymizer<ul>
-<li><ol start="2">
-<li>HTTP 메세지에서 신원을 식별할 수 있는 특성들을 제거 =&gt; 개인 정보보호와 익명성 보장에 기여한다.</li>
+<ol start="8">
+<li><strong>익명화 프락시</strong> Anonymizer</li>
 </ol>
 <ul>
-<li>User-Agent 헤더에서 OS종류 / From헤더 / Referer헤더(출처) / Cookie(프로필과 신원정보) 등을 <strong>제거</strong>한다.</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><ol start="2">
+<li>HTTP 메세지에서 신원을 식별할 수 있는 특성들을 제거 &#x3D;&gt; 개인 정보보호와 익명성 보장에 기여한다.</li>
 </ol>
+<ul>
+<li>User-Agent 헤더에서 OS종류 &#x2F; From헤더 &#x2F; Referer헤더(출처) &#x2F; Cookie(프로필과 신원정보) 등을 <strong>제거</strong>한다.</li>
+</ul>
+</li>
+</ul>
 <hr>
 <a name="where"/>
 
@@ -427,26 +433,32 @@
 <li>어떻게 프락시의 연쇄가 계층을 이루는가</li>
 </ul>
 <h2 id="3-1-프락시-서버-배치"><a href="#3-1-프락시-서버-배치" class="headerlink" title="3.1 프락시 서버 배치"></a>3.1 프락시 서버 배치</h2><ol>
-<li><strong>출구 프락시</strong> Egress<ul>
+<li><strong>출구 프락시</strong> Egress</li>
+</ol>
+<ul>
 <li>로컬 네트워크와 더 큰 인터넷 사이를 오가는 트래픽을 제어하기 위해 프락시를 로컬 네트워크의 출구에 박아 넣을 수 있다.</li>
-<li>해킹 방지 방화벽 제공을 위해 / 인터넷 트래픽 성능 개선 / 필터링 출구 프락시</li>
+<li>해킹 방지 방화벽 제공을 위해 &#x2F; 인터넷 트래픽 성능 개선 &#x2F; 필터링 출구 프락시</li>
 </ul>
-</li>
-<li>접근(입구) 프락시<ul>
+<ol start="2">
+<li>접근(입구) 프락시</li>
+</ol>
+<ul>
 <li>고객으로부터의 모든 요청을 종합적으로 처리하기 위해 ISP 접근 지점에 위치</li>
 </ul>
-</li>
-<li>대리 프락시 (=리버스 프락시)<ul>
+<ol start="3">
+<li>대리 프락시 (&#x3D;리버스 프락시)</li>
+</ol>
+<ul>
 <li>네트워크의 가장 끝에 있는 웹서버들의 바로 앞에 위치, 웹 서버로 향하는 모든 요청을 처리하고, 필요할 때만 웹 서버에게 자원을 요청할 수 있다.</li>
 <li>보안 기능을 추가</li>
 <li>성능 개선용: 빠른 웹서버 캐시를 느린 웹 서버 앞에 놓는다.</li>
 </ul>
-</li>
-<li>네트워크 교환 프락시<ul>
+<ol start="4">
+<li>네트워크 교환 프락시</li>
+</ol>
+<ul>
 <li>캐시를 이용해 인터넷 교차로의 혼잡을 완화하고, 트래픽 흐름을 감시하기 위해,<br><strong>충분한 처리 능력을 갖춘 프락시가 네트워크 사이의 인터넷 피어링 교환 지점들에 놓일 수 있다.</strong></li>
 </ul>
-</li>
-</ol>
 <h2 id="3-2-프락시-계층"><a href="#3-2-프락시-계층" class="headerlink" title="3.2 프락시 계층"></a>3.2 프락시 계층</h2><ul>
 <li>부모관계: 인바운드 프락시 방향 쪽의 프락시를 부모, 아웃바운드 프록시 방향 쪽을 자식으로 본다.</li>
 </ul>
@@ -457,7 +469,7 @@
 <ol>
 <li><strong>부하 균형</strong>: 자식 프록시는 부하를 분산하기 위해 현재 부모들의 작업량 수준에 근거하여 부모 프록시를 고른다.</li>
 <li><strong>지리적 인접성에 근거한 라우팅</strong>: 자식 프록시는 원 서버의 지역을 담당하는 부모를 선택할 수 있다.</li>
-<li><strong>프로토콜/타입 라우팅</strong>: URI에 근거하여 다른 부모나 원서버로 라우팅 할 수 있다.</li>
+<li><strong>프로토콜&#x2F;타입 라우팅</strong>: URI에 근거하여 다른 부모나 원서버로 라우팅 할 수 있다.</li>
 <li><strong>유료 서비스 가입자를 위한 라우팅</strong>: 사용자가 빠른 서비스를 위해 추가금을 지불했다면, 성능 개선을 위한 압축 엔진으로 라우팅 될 수 있다.</li>
 </ol>
 <h3 id="3-2-2-어떻게-프록시가-트래픽을-처리하는가"><a href="#3-2-2-어떻게-프록시가-트래픽을-처리하는가" class="headerlink" title="3.2.2 어떻게 프록시가 트래픽을 처리하는가"></a>3.2.2 어떻게 프록시가 트래픽을 처리하는가</h3><ul>
@@ -467,23 +479,25 @@
 <ol>
 <li>클라이언트를 수정한다.</li>
 <li>네트워크를 수정한다.: 클라가 컨트롤할 수 없다면, 네트워크 인프라를 가로채서 웹 트래픽을 프록시로 가도록 조장하는 방법.<blockquote>
-<p><strong>인터셉트 프록시</strong> (= transparent proxy): HTTP 트래픽을 지켜보고 가로채어 클라 모르게 트래픽을 프록시로 보내는 <strong>스위칭 장치</strong>와, 라우팅 장치가 필요.</p>
+<p><strong>인터셉트 프록시</strong> (&#x3D; transparent proxy): HTTP 트래픽을 지켜보고 가로채어 클라 모르게 트래픽을 프록시로 보내는 <strong>스위칭 장치</strong>와, 라우팅 장치가 필요.</p>
 </blockquote>
 </li>
-<li>DNS namespace를 수정한다.<ul>
+<li>DNS namespace를 수정한다.</li>
+</ol>
+<ul>
 <li>대리 프록시는 웹 서버의 이름과 IP주소를 자신이 직접 허용한다. </li>
 <li>DNS 이른 테이블을 수동으로 편집하거나,<br>사용할 적절한 프록시나 서버를 계산해주는 특별한 동적 DNS 서버를 이용해서 조정 가능하다.</li>
 </ul>
-</li>
-<li>웹 서버를 수정한다.<ul>
+<ol>
+<li>웹 서버를 수정한다.</li>
+</ol>
+<ul>
 <li><ol start="2">
 <li>HTTP 리다이렉션 명령을 클라에게 돌려줌으로써, 클라의 요청을 프록시로 리다이렉트 하도록 설정할 수 있다.</li>
 </ol>
 </li>
 <li>리다이렉트를 받는 즉시, 클라는 프록시와의 트랜잭션을 시작한다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <a name="how"/>
 
@@ -502,9 +516,7 @@
 <li>확장자: <code>.pac</code></li>
 <li>MIME타입: <code>application/x-ns-proxy-autoconfig</code></li>
 <li><code>FindProxyForURL(url, host)</code> 함수를 정의해야 한다.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">FindProxyForURL</span>(url, host): <span class="string">&quot;DIRECT&quot;</span> | <span class="string">`PROXY <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span> | <span class="string">`SOCKS <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FindProxyForURL</span>(<span class="params">url, host</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">5</span>) == <span class="string">&#x27;http:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY http-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">4</span>) == <span class="string">&#x27;ftp:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY ftp-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">&quot;DIRECT&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FindProxyForURL</span>(<span class="params">url, host</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">5</span>) == <span class="string">&#x27;http:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY http-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">4</span>) == <span class="string">&#x27;ftp:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY ftp-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">&quot;DIRECT&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file">MDN <strong>PAC 파일</strong> 참고자료</a></p>
 <h3 id="WPAD-파일"><a href="#WPAD-파일" class="headerlink" title="WPAD 파일"></a>WPAD 파일</h3><p>웹 프록시 자동 발견 프로토콜 Web Proxy Auto-Discovery Protocol<br><img src="/images/2019/28/01.png" style="width:100%"></p>
@@ -541,7 +553,7 @@
 <li>웹 서버와 웹 프록시 메세지의 문법은 간다.</li>
 <li>요청 URI가 달라진다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">클라 =&gt; 서버</span><br><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br><span class="line"></span><br><span class="line">클라 =&gt; 프록시</span><br><span class="line">GET http://www.mary.com/index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br></pre></td></tr></table></figure></li>
 <li>애초에 단일 서버 기준으로 메세지 설계가 되었었다. </li>
-<li>프록시가 부상하면서 부분 URI는 문제가 되었고, 프록시 기반 게이트웨이는 URI 스킴을 알 필요가 있었기 때문에 부분URI가 아닌 전체 URI를 보낸다. </li>
+<li>프록시가 부상하면서 부분 URI는 문제가 되었고, 프록시 기반 게이트웨이는 URI 스킴을 알 필요가 있었기 때문에 부분URI가 아닌 전체 URI를 보낸다.</li>
 </ul>
 <h2 id="5-2-가상-호스팅에서-일어나는-같은-문제"><a href="#5-2-가상-호스팅에서-일어나는-같은-문제" class="headerlink" title="5.2 가상 호스팅에서 일어나는 같은 문제"></a>5.2 가상 호스팅에서 일어나는 같은 문제</h2><ul>
 <li>명시적인 프록시는 요청 메세지가 완전한 URI를 갖도록 함</li>
@@ -554,14 +566,14 @@
 </ul>
 <h2 id="5-4-프록시는-프록시-요청과-서버-요청을-모두-다룰-수-있다"><a href="#5-4-프록시는-프록시-요청과-서버-요청을-모두-다룰-수-있다" class="headerlink" title="5.4 프록시는 프록시 요청과 서버 요청을 모두 다룰 수 있다."></a>5.4 프록시는 프록시 요청과 서버 요청을 모두 다룰 수 있다.</h2><ul>
 <li>다목적 프록시 서버는 요청 메세지에 완전URI와 부분URI를 모두 지원해야한다.</li>
-<li>프록시<br>=&gt; 프록시로 요청시, 완전 URI<br>=&gt; 웹서버로 요청시, Host 헤더</li>
+<li>프록시<br>&#x3D;&gt; 프록시로 요청시, 완전 URI<br>&#x3D;&gt; 웹서버로 요청시, Host 헤더</li>
 </ul>
 <h2 id="5-5-전송-중-URI-변경"><a href="#5-5-전송-중-URI-변경" class="headerlink" title="5.5 전송 중 URI 변경"></a>5.5 전송 중 URI 변경</h2><p>프록시 서버는 요청 URI의 변경에 엄격해서는 안된다.<br>사이드 이펙트를 일으킬 수 있다.</p>
 <hr>
 <a name="track"/>
 
 <h1 id="6-메세지-추적"><a href="#6-메세지-추적" class="headerlink" title="6. 메세지 추적"></a>6. 메세지 추적</h1><ul>
-<li>오늘날 웹 요청의 상당수가 프락시를 지나간다.<br>= 동시에 성능상의 이유로 세계 곳곳에 흩어져 있는 대리 캐시 저장고에 콘텐츠를 복제해두는 방식이 흔해지고있다.</li>
+<li>오늘날 웹 요청의 상당수가 프락시를 지나간다.<br>&#x3D; 동시에 성능상의 이유로 세계 곳곳에 흩어져 있는 대리 캐시 저장고에 콘텐츠를 복제해두는 방식이 흔해지고있다.</li>
 <li>프락시는 여러 벤더에 의해 개발된다.</li>
 <li>프락시가 점점 흔해지면서, 프락시를 넘나드는 메세지의 흐름을 추적하고 문제점을 찾아내는 것도 필요한 일이 되었다.</li>
 </ul>
@@ -592,7 +604,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.1 62e18ccb7bd6.cloudfront.net (CloudFront)</span><br><span class="line"></span><br><span class="line">protocol-name: HTTP</span><br><span class="line">protocol-version: 1.1</span><br><span class="line">host: 62e18ccb7bd6.cloudfront.net</span><br><span class="line">comment: (CloudFront)</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>프로토콜 이름</strong>: 중개자가 받은 프로토콜 / 프로토콜이 HTTP라면 이름이 없어도 된다.</li>
+<li><strong>프로토콜 이름</strong>: 중개자가 받은 프로토콜 &#x2F; 프로토콜이 HTTP라면 이름이 없어도 된다.</li>
 <li><strong>프로토콜 버전</strong>: 수신한 메세지의 버전. 버전포맷은 프로토콜에 달려있다.</li>
 <li><strong>노드 이름</strong>: 중개자의 호스트와 포트번호(포트번호가 없으면 사용하는 프로토콜의 기본 포트라고 간주), 보안을위해 가명으로 대체 가능하다.</li>
 <li><strong>노드 코멘트</strong>: 중개자 노드를 서술하는 선택적인 코멘트. 벤더나 버전 정보를 포함한다. 프락시 서버에서 일어난 진단정보를 포함하기도 한다.</li>
@@ -624,12 +636,12 @@
 
 <h2 id="6-2-TRACE-메서드"><a href="#6-2-TRACE-메서드" class="headerlink" title="6.2 TRACE 메서드"></a>6.2 <code>TRACE</code> 메서드</h2><ul>
 <li>프락시가 점점 복잡해지고, 더 많은 벤더가 프락시 제품을 배치하면서, <strong>상호운용성</strong> 문제가 증가한다.</li>
-<li>프락시 네트워크를 진단하기 위해, HTTP/1.1의 TRACE메서드는<br>요청 메세지를 프락시의 연쇄를 따라가면서 관찰/추적할 수 있도록 해준다.<ul>
+<li>프락시 네트워크를 진단하기 위해, HTTP&#x2F;1.1의 TRACE메서드는<br>요청 메세지를 프락시의 연쇄를 따라가면서 관찰&#x2F;추적할 수 있도록 해준다.<ul>
 <li>프락시 흐름을 디버깅하는데 매우 유용하다. (널리 구현되지 않았다)</li>
 </ul>
 </li>
 <li>TRACE 요청이 목적지 서버에 도착했을 때,<br>서버는 전체 요청 메세지를 HTTP 응답 메세지의 본문에 포함시켜 송신자에게 그대로 돌려보낸다. <ul>
-<li>Content-Type은 message/http</li>
+<li>Content-Type은 message&#x2F;http</li>
 </ul>
 </li>
 </ul>
@@ -676,7 +688,7 @@
 <li><code>OPTIONS</code> 메서드는 서버나 웹 서버의 특정 리소스가<br><strong>어떤 기능을 지원하는지(메서드 등)</strong> 클라(혹은 프락시)가 알아볼 수 있게 해준다.</li>
 <li>성공한다면, 200 OK 응답으로 반환한다.<br>(서버에서 지원하거나, 지정한 리소스에 대한 가능한 선택적인 기능들을 서술하느 ㄴ여러 헤더를 포함하여) </li>
 <li><ol start="2">
-<li>HTTP/1.1이 명시한 헤더는, 서버에 의해 어떤 메서드가 지원되는지 서술하는 Allow 헤더 하나뿐이다.</li>
+<li>HTTP&#x2F;1.1이 명시한 헤더는, 서버에 의해 어떤 메서드가 지원되는지 서술하는 Allow 헤더 하나뿐이다.</li>
 </ol>
 </li>
 </ul>
@@ -688,7 +700,7 @@
 </ul>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -715,7 +727,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/22/HTTP_006/" data-id="ckzv7cqft0032qobmn2l7qbw9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/22/HTTP_006/" data-id="cm3u7mj1j003fhwb2fs1wgbt1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

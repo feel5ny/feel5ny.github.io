@@ -371,21 +371,13 @@
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">arguments</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    result += <span class="variable language_">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">sum</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="comment">// 6</span></span><br><span class="line"><span class="title function_">sum</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>); <span class="comment">// 45</span></span><br></pre></td></tr></table></figure>
 
-<p><a name="4-2"></a></p>
-<h2 id="4-2-호출패턴과-this-바인딩"><a href="#4-2-호출패턴과-this-바인딩" class="headerlink" title="4.2 호출패턴과 this 바인딩"></a>4.2 호출패턴과 this 바인딩</h2><p>함수가 호출되는 방식<span class="mint">(호출패턴)</span>에 따라 this가 다른 객체를 참조한다.(this 바인딩)</p>
-<ul>
-<li>객체의 메서드 호출할 때 this바인딩</li>
-<li>함수 호출할 때 this바인딩</li>
-<li>생성자 함수를 호출할 때 this 바인딩</li>
-<li></li>
-</ul>
-<h3 id="4-2-1-객체의-메서드-호출할-때-this바인딩"><a href="#4-2-1-객체의-메서드-호출할-때-this바인딩" class="headerlink" title="4.2.1 객체의 메서드 호출할 때 this바인딩"></a>4.2.1 객체의 메서드 호출할 때 this바인딩</h3><p><span class="mint"><strong>자신을 호출한 객체</strong>에 바인딩된다!</span></p>
+<h2 id="4-2-호출패턴과-this-바인딩함수가-호출되는-방식-호출패턴-에-따라-this가-다른-객체를-참조한다-this-바인딩-객체의-메서드-호출할-때-this바인딩-함수-호출할-때-this바인딩-생성자-함수를-호출할-때-this-바인딩"><a href="#4-2-호출패턴과-this-바인딩함수가-호출되는-방식-호출패턴-에-따라-this가-다른-객체를-참조한다-this-바인딩-객체의-메서드-호출할-때-this바인딩-함수-호출할-때-this바인딩-생성자-함수를-호출할-때-this-바인딩" class="headerlink" title="## 4.2 호출패턴과 this 바인딩함수가 호출되는 방식(호출패턴)에 따라 this가 다른 객체를 참조한다.(this 바인딩)- 객체의 메서드 호출할 때 this바인딩- 함수 호출할 때 this바인딩- 생성자 함수를 호출할 때 this 바인딩"></a><a name="4-2"></a><br>## 4.2 호출패턴과 this 바인딩<br>함수가 호출되는 방식<span class="mint">(호출패턴)</span>에 따라 this가 다른 객체를 참조한다.(this 바인딩)<br>- 객체의 메서드 호출할 때 this바인딩<br>- 함수 호출할 때 this바인딩<br>- 생성자 함수를 호출할 때 this 바인딩</h2><h3 id="4-2-1-객체의-메서드-호출할-때-this바인딩"><a href="#4-2-1-객체의-메서드-호출할-때-this바인딩" class="headerlink" title="4.2.1 객체의 메서드 호출할 때 this바인딩"></a>4.2.1 객체의 메서드 호출할 때 this바인딩</h3><p><span class="mint"><strong>자신을 호출한 객체</strong>에 바인딩된다!</span></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myObject = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;foo&#x27;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// sayName은 function()&#123;console.log(this.nmae)&#125;을 가리킴</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> otherObject = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">otherObject.<span class="property">sayName</span> = myObject.<span class="property">sayName</span>;</span><br><span class="line"><span class="comment">// myObject.sayName의 참조값을 할당함.</span></span><br><span class="line"><span class="comment">// otherObject.sayName은 생성과 동시에 function()&#123;console.log(this.nmae)&#125;을 가리킴</span></span><br><span class="line"><span class="comment">// this는 자신을 호출한 객체에 바인딩되므로, 결과값이 다름</span></span><br><span class="line">myObject.<span class="title function_">sayName</span>(); <span class="comment">// foo</span></span><br><span class="line">otherObject.<span class="title function_">sayName</span>(); <span class="comment">//bar</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="4-2-2-함수-호출할-때-this바인딩"><a href="#4-2-2-함수-호출할-때-this바인딩" class="headerlink" title="4.2.2 함수 호출할 때 this바인딩"></a>4.2.2 함수 호출할 때 this바인딩</h3><p>자바스크립트의 모든 전역 변수는 전역 객체의 프로퍼티들이다.<br>(브라우저는 window, node는 global)</p>
 <ul>
 <li>함수 내부에서의 this는 전역 객체를 가리킨다.</li>
-<li>내부 함수에서도 this는 전역 객체를 가리킨다. </li>
+<li>내부 함수에서도 this는 전역 객체를 가리킨다.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> value = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> myObject = &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">func1</span>: <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> += <span class="number">1</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;func1()&#x27;</span> + <span class="variable language_">this</span>.<span class="property">value</span>); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">    func2 = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">value</span> += <span class="number">1</span>;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;func2()&#x27;</span> + <span class="variable language_">this</span>.<span class="property">value</span>); <span class="comment">// 101</span></span><br><span class="line"></span><br><span class="line">      func3 = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> += <span class="number">1</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;func3()&#x27;</span> + <span class="variable language_">this</span>.<span class="property">value</span>); <span class="comment">// 102</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">func3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">func2</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">myObject.<span class="title function_">func1</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <img src="/images/2018/32/02.jpeg">
@@ -418,21 +410,20 @@
 <li>new Person()을 통해서<ul>
 <li>빈 객체는 this로 바인딩된다. 즉, 생성자 함수 내의 this는 빈 객체를 가리킨다.</li>
 <li>빈 객체에는 기본적으로 [[Prototype]]이 생성된다.</li>
-<li>이 <code>__proto__</code>는 
-<span class="mint">자신을 생성한 <strong>생성자 함수</strong><code>Person()</code>의 prototype 프로퍼티가 가리키는 객체를 </span><br>자신의 프로토타입 객체로 설정한다.</li>
+<li>이 <code>__proto__</code>는<br><span class="mint">자신을 생성한 <strong>생성자 함수</strong><code>Person()</code>의 prototype 프로퍼티가 가리키는 객체를 </span><br>자신의 프로토타입 객체로 설정한다.</li>
 </ul>
 </li>
 </ul>
 <ol start="2">
-<li>this를 통한 프로퍼티 생성<ul>
+<li>this를 통한 프로퍼티 생성</li>
+</ol>
+<ul>
 <li>함수코드 내부에서 this를 통해 foo에 동적으로 프로퍼티나 메서드를 생성할 수 있다.</li>
 </ul>
-</li>
-<li>생성된 객체 리턴<ul>
-<li></li>
-</ul>
-</li>
+<ol start="3">
+<li>생성된 객체 리턴</li>
 </ol>
+<p>  - </p>
 <img src="/images/2018/32/01.png">
 
 
@@ -441,11 +432,12 @@
 
 
 <h4 id="3-생성자-함수를-new를-붙이지-않고-호출할-경우"><a href="#3-생성자-함수를-new를-붙이지-않고-호출할-경우" class="headerlink" title="3. 생성자 함수를 new를 붙이지 않고 호출할 경우"></a>3. 생성자 함수를 new를 붙이지 않고 호출할 경우</h4><ul>
-<li>객체 생성을 목적으로 작성한 생성자 함수를<br>new 없이 호출하거나 일반함수를 new를 붙여서 호출할 경우 오류 발생</li>
-<li>일반 함수 호출과 생성자 함수를 호출할 때 this 바인딩 방식이 다르기 때문</li>
-</ul>
-<ul>
-<li>일반함수의 경우 <span class="mint">this =&gt; <strong>window</strong></span><br>생성자함수의 경우 <span class="mint">this =&gt; <strong>새로 생성되는 빈 객체</strong></span></li>
+<li><p>객체 생성을 목적으로 작성한 생성자 함수를<br>new 없이 호출하거나 일반함수를 new를 붙여서 호출할 경우 오류 발생</p>
+</li>
+<li><p>일반 함수 호출과 생성자 함수를 호출할 때 this 바인딩 방식이 다르기 때문</p>
+</li>
+<li><p>일반함수의 경우 <span class="mint">this &#x3D;&gt; <strong>window</strong></span><br>생성자함수의 경우 <span class="mint">this &#x3D;&gt; <strong>새로 생성되는 빈 객체</strong></span></p>
+</li>
 </ul>
 <p>대문자 표기 네이밍 규칙을 권장하나 휴먼에러가 발생 할 수 있기 때문에 다음과 같은 분기문이 있는 코드 패턴을 사용하기도 한다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 강제로 인스턴스 생성하기</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">A</span>(<span class="params">arg</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="variable language_">this</span> <span class="keyword">instanceof</span> <span class="variable language_">arguments</span>.<span class="property">callee</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">A</span>(arg);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = arg? arg : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -459,7 +451,7 @@
 </ul>
 <p><strong>apply()메서드를 호출하는 주체가 <span class="mint">함수</span>고,<br>apply() 메서드도 this를 특정 객체에 바인딩할 뿐<br>결국 본질적인 기능은 <span class="mint">함수호출</span>이라는 것이다.</strong></p>
 <ul>
-<li>Person()이라는 함수가 있고, Person.apply() 이렇게 호출한다면 이것의 기본적인 기능은 Person() 함수를 호출하는 것이다. </li>
+<li>Person()이라는 함수가 있고, Person.apply() 이렇게 호출한다면 이것의 기본적인 기능은 Person() 함수를 호출하는 것이다.</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function.apply(thisArg, argArray)</span><br><span class="line">function.call(thisArg, argItem1, argItem2, argItem3, ...)</span><br></pre></td></tr></table></figure>
 <p><span class="mint"><code>function</code>을 호출하라, 이때 <strong>this</strong>는 <code>thisArg</code>에 바인딩해라.</span></p>
@@ -501,7 +493,7 @@
 <p>공용적으로 사용하는 메서드의 경우 prototype에 선언하긔<br>angular에서 pipe의 성격으로 사용하는 함수들을 prototype에 넣어도 됨</p>
 </blockquote>
 <p><a name="5-6"></a></p>
-<h2 id="5-6-프로토타입도-자바스크립트-객체다"><a href="#5-6-프로토타입도-자바스크립트-객체다" class="headerlink" title="5.6 프로토타입도 자바스크립트 객체다"></a>5.6 프로토타입도 자바스크립트 객체다</h2><p>프로토타입 객체 역시 자바스크립트 객체이므로, 일반 객체처럼 동적으로 프로퍼티를 추가/삭제하는 것이 가능하다.</p>
+<h2 id="5-6-프로토타입도-자바스크립트-객체다"><a href="#5-6-프로토타입도-자바스크립트-객체다" class="headerlink" title="5.6 프로토타입도 자바스크립트 객체다"></a>5.6 프로토타입도 자바스크립트 객체다</h2><p>프로토타입 객체 역시 자바스크립트 객체이므로, 일반 객체처럼 동적으로 프로퍼티를 추가&#x2F;삭제하는 것이 가능하다.</p>
 <p><a name="5-7"></a></p>
 <h2 id="5-7-프로토타입-메서드와-this-바인딩"><a href="#5-7-프로토타입-메서드와-this-바인딩" class="headerlink" title="5.7 프로토타입 메서드와 this 바인딩"></a>5.7 프로토타입 메서드와 this 바인딩</h2><p>메서드 호출패턴에서의 this는 <strong>그 메서드를 호출한 객체에 바인딩된다.</strong><br>프로토타입 객체도 이 this바인딩 규칙이 적용된다.</p>
 <p><a name="5-8"></a></p>
@@ -528,7 +520,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/25/JS_16/" data-id="ckzv7cqi60067qobmv6t3mw38" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/25/JS_16/" data-id="cm3u7mj1r005ehwb21937drzr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

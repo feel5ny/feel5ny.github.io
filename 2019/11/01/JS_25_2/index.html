@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript,codeSpitz" />
     
     
-    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   Fi">
+    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp; Timing   Language code Machine language로 트랜스파일한다.   여기서 machine이란.. 자기 언어가 실행되는 환경">
 <meta property="og:type" content="article">
 <meta property="og:title" content="코드스피츠85 1회-(2) Runtime때 일어나는 일들">
 <meta property="og:url" content="http://feel5ny.github.io/2019/11/01/JS_25_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp; Timing   Language code Machine language로 트랜스파일한다. 여기서 machine이란.. 자기 언어가 실행되는 환경   Fi">
+<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DR   작년 글     ProgramProgram &amp; Timing   Language code Machine language로 트랜스파일한다.   여기서 machine이란.. 자기 언어가 실행되는 환경">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/35/thumb_default.jpg">
 <meta property="article:published_time" content="2019-11-01T11:20:19.000Z">
@@ -335,14 +335,16 @@
 <hr>
 <a name="program" />
 
-<h1 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h1><h2 id="Program-amp-Timing"><a href="#Program-amp-Timing" class="headerlink" title="Program &amp; Timing"></a>Program &amp; Timing</h2><img src="/images/2019/35/01.png" style="width:100%">
+<h1 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h1><h2 id="Program-Timing"><a href="#Program-Timing" class="headerlink" title="Program &amp; Timing"></a>Program &amp; Timing</h2><img src="/images/2019/35/01.png" style="width:100%">
 
 <ol>
 <li>Language code</li>
-<li>Machine language로 트랜스파일한다.<ul>
+<li>Machine language로 트랜스파일한다.</li>
+</ol>
+<ul>
 <li>여기서 machine이란.. 자기 언어가 실행되는 환경</li>
 </ul>
-</li>
+<ol start="3">
 <li>File로 내린다. (Load)</li>
 <li>메모리에 적재되어 있는 File을 실행한다. (Run)</li>
 <li>실행이 끝나고나면 종료된다. (Terminate)</li>
@@ -350,31 +352,32 @@
 <a name="runtime" />
 
 <h1 id="1-Runtime"><a href="#1-Runtime" class="headerlink" title="1. Runtime"></a>1. Runtime</h1><h2 id="1-1-Runtime-Execution"><a href="#1-1-Runtime-Execution" class="headerlink" title="1.1 Runtime Execution"></a>1.1 Runtime Execution</h2><ol>
-<li><p><code>Loading</code>: 적재되는 중</p>
+<li><code>Loading</code>: 적재되는 중</li>
+</ol>
 <ul>
 <li>파일을 실행하면 메모리에 적재된다.</li>
 <li>파일은<br><strong>명령</strong>과 <strong>값</strong>으로 분리되어서 메모리에 적재된다.</li>
 </ul>
-</li>
-<li><p><code>instruction</code> - fetching &amp; decoding</p>
+<ol start="2">
+<li><code>instruction</code> - fetching &amp; decoding</li>
+</ol>
 <ul>
 <li>여기서부터는 OS가 하는 일</li>
 <li><code>instruction</code>: CPU에서 해석할 수 있는 명령체계로 우리의 코드를 바꿔놓는 것</li>
 </ul>
-<p>메모리의 첫번째 명령을 실행한다.</p>
+<p>  메모리의 첫번째 명령을 실행한다.</p>
 <ul>
 <li>instruction을 로딩할 때 fetching이라는 과정을 통해<br>실제로는 제어유닛의 디코더로 로드하고,<br>디코딩을 통해서 cpu가 원하는 명령어로 바꾼다.</li>
 <li>연산유닛에서 값이 필요한 연산일 경우 메모리에 있는 값을 로드해야하는데,<br>이때 데이터 유닛에 값을 로드해온다.</li>
 <li>데이터 유닛에서 받은 값을 연산유닛으로 다시 보내준다.</li>
 </ul>
-</li>
-<li><p><code>execution</code></p>
+<ol start="3">
+<li><code>execution</code></li>
+</ol>
 <ul>
 <li>명령을 처리한다.</li>
 <li>결과를 정리하여 반환해야한다는 명령이 있을 경우<br>다시 메모리의 값에 결과값을 보내준다</li>
 </ul>
-</li>
-</ol>
 <h3 id="폰-노이만-머신"><a href="#폰-노이만-머신" class="headerlink" title="폰 노이만 머신"></a>폰 노이만 머신</h3><ul>
 <li>첫번째 명령이 끝나면 두번째 명령이 실행되고<br>이렇게 메모리에 적재된 명령이 순차적으로 처리되어 없어지게된다.<br>모든 명령이 끝나면 <code>terminate</code>가 일어난다.</li>
 <li>폰 노이만 머신은 내장 메모리 순차처리 방식으로서,<br>데이터 메모리와 프로그램 메모리가 구분되어 있지 않고<br>하나의 버스를 가지고 있는 구조를 말한다. </li>
@@ -387,17 +390,21 @@
 <li>메모리에 sync flow를 태워서 flow대로 흐르는 것</li>
 </ul>
 <h2 id="1-2-Runtime-Details"><a href="#1-2-Runtime-Details" class="headerlink" title="1.2 Runtime Details"></a>1.2 Runtime Details</h2><ol>
-<li>essential definition loading<ul>
+<li>essential definition loading</li>
+</ol>
+<ul>
 <li>우리의 코드가 실행되기 위해서는<br>우리가 정의한 클래스, 함수 인터페이스가 다 떠있어야함</li>
 <li>실행코드에 앞서, 핵심적인 정의사항들이 올라감.</li>
 </ul>
-</li>
-<li>vtable mapping (<strong>v</strong>ariables table)<ul>
+<ol start="2">
+<li>vtable mapping (<strong>v</strong>ariables table)</li>
+</ol>
+<ul>
 <li>현대의 있는 컴파일러들은 우리가 정의한 메모리공간을 사용할때 가상 메모리 공간을 사용한다.</li>
 <li>컴파일러가 나의 변수를 가상으로 매핑해서 컴파일 했음<br>진짜 메모리와 컴파일러가 만든 가상의 변수와 매핑을 해줘야한다.</li>
 <li>내가 정의한 모든 변수를 실제 메모리에 매핑해주는 과정이 필요하다.</li>
 </ul>
-</li>
+<ol start="3">
 <li>run</li>
 <li>runtime definition loading</li>
 <li>run</li>
@@ -451,17 +458,17 @@
 </ul>
 <h3 id="사실-자료구조는-아래-2가지-원리에서-시작된다"><a href="#사실-자료구조는-아래-2가지-원리에서-시작된다" class="headerlink" title="사실 자료구조는 아래 2가지 원리에서 시작된다"></a>사실 자료구조는 아래 2가지 원리에서 시작된다</h3><ol>
 <li>메모리를 통으로 쓰는 배열과</li>
-<li>linked list형식을 빌린.. <ul>
+<li>linked list형식을 빌린..</li>
+</ol>
+<ul>
 <li>참조포인터를 이용하여 쿠션을 치는</li>
 </ul>
-</li>
-</ol>
 <hr>
 <hr>
 <h1 id="3-Flow-Control"><a href="#3-Flow-Control" class="headerlink" title="3. Flow Control"></a>3. Flow Control</h1><ul>
 <li>명령 관리의 어려운 점을 이야기하는 것도 있다.</li>
 <li>state 관리 + 명령진행에 대한 어려움<ul>
-<li>2가지 모두 챙겨야하기때문에 상태관리보다 더 어렵다. </li>
+<li>2가지 모두 챙겨야하기때문에 상태관리보다 더 어렵다.</li>
 </ul>
 </li>
 </ul>
@@ -472,8 +479,8 @@
 <li><code>goto</code>라는 명령어를 통해서 sync flow의 작동을 제어할 수 있다.</li>
 <li>메모리의 state에 따라서 분기를 한다.<ul>
 <li>sync flow control 핵심은 해당 시점의 메모리의 값 (분기칠때의 상태에 의존된다)</li>
-<li>condition control =&gt; 여기서 condition은 메모리의 상태값<blockquote>
-<p>cf__1 <strong>의존성 역전 / 제어 역전</strong></p>
+<li>condition control &#x3D;&gt; 여기서 condition은 메모리의 상태값<blockquote>
+<p>cf__1 <strong>의존성 역전 &#x2F; 제어 역전</strong></p>
 <ul>
 <li>의존성 역전: 추상적인 것에 의존하겠어.</li>
 <li>제어 역전: 추상적인 행동을 할 것이라고 전제하여 제어문을 짜는 것.</li>
@@ -484,7 +491,7 @@
 </li>
 </ul>
 </li>
-<li><strong>sub flow</strong> (== <strong>sub routine</strong>: 반복적으로 사용할 수 있는 sync flow)<br>: 함수 등을 통해 별도의 명령set을 여러번 실행함</li>
+<li><strong>sub flow</strong> (&#x3D;&#x3D; <strong>sub routine</strong>: 반복적으로 사용할 수 있는 sync flow)<br>: 함수 등을 통해 별도의 명령set을 여러번 실행함</li>
 </ul>
 <h2 id="Blocking"><a href="#Blocking" class="headerlink" title="Blocking"></a>Blocking</h2><ul>
 <li>Sync flow가 실행되는 동안 다른 일을 할 수 없는 현상</li>
@@ -497,7 +504,7 @@
 <li>현대브라우저는 병행적 프로그래밍을 요구한다.</li>
 </ul>
 </li>
-<li><strong>이벤트 루프</strong>: 동기화 명령 사이사이에 이벤트 루프가 작동해서, 다른 thread 작업을 기다리게된다. </li>
+<li><strong>이벤트 루프</strong>: 동기화 명령 사이사이에 이벤트 루프가 작동해서, 다른 thread 작업을 기다리게된다.</li>
 </ul>
 <h4 id="그럼-Non-Blocking이란"><a href="#그럼-Non-Blocking이란" class="headerlink" title="그럼 Non Blocking이란?"></a>그럼 Non Blocking이란?</h4><p>Sync Flow가 납득할 만한 <strong>시간</strong> 내에 종료되는 것</p>
 <ul>
@@ -506,7 +513,7 @@
 </ul>
 <hr>
 <hr>
-<h1 id="4-Async"><a href="#4-Async" class="headerlink" title="4. Async"></a>4. Async</h1><h2 id="Sync-amp-Async"><a href="#Sync-amp-Async" class="headerlink" title="Sync &amp; Async"></a>Sync &amp; Async</h2><ul>
+<h1 id="4-Async"><a href="#4-Async" class="headerlink" title="4. Async"></a>4. Async</h1><h2 id="Sync-Async"><a href="#Sync-Async" class="headerlink" title="Sync &amp; Async"></a>Sync &amp; Async</h2><ul>
 <li>앞에서 말한 sync flow와는 다른 개념이다. </li>
 <li><strong>Sync</strong>: 서브루틴이 즉시 값을 반환하는 것</li>
 <li><strong>Async</strong>: <strong>서브루틴이 <code>다른 수단</code>으로 값을 반환하는 것</strong><ul>
@@ -553,7 +560,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="ckzv7cqin006wqobmy1qixzoc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="cm3u7mj1u006bhwb273k2hyow" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

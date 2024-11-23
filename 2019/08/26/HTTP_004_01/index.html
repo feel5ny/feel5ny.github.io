@@ -355,7 +355,7 @@
 <a name="1"/>
 
 <h1 id="1-TCP-커넥션"><a href="#1-TCP-커넥션" class="headerlink" title="1. TCP 커넥션"></a>1. TCP 커넥션</h1><ul>
-<li>전 세계 모든 HTTP 통신은, 지구상의 컴퓨터와 네트워크 장비에서 널리 쓰이고 있는, 패킷 교환 네트워크 프로토콜들이 계층화된 집합인 TCP/IP를 통해 이루어진다.</li>
+<li>전 세계 모든 HTTP 통신은, 지구상의 컴퓨터와 네트워크 장비에서 널리 쓰이고 있는, 패킷 교환 네트워크 프로토콜들이 계층화된 집합인 TCP&#x2F;IP를 통해 이루어진다.</li>
 </ul>
 <p>웹 브라우저가 TCP 커넥션을 통해서 웹 서버에 요청을 보낸다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io/index.html</span><br></pre></td></tr></table></figure>
@@ -400,7 +400,7 @@
 <li>인터넷을 통해 데이터를 전달한다.</li>
 </ol>
 <ul>
-<li><strong>이 모든 것은 TCP/IP 소프트웨어에 의해 처리되며,</strong><br>그 과정은 HTTP 프로그래머에게 보이지 않는다.</li>
+<li><strong>이 모든 것은 TCP&#x2F;IP 소프트웨어에 의해 처리되며,</strong><br>그 과정은 HTTP 프로그래머에게 보이지 않는다.</li>
 <li>각 TCP 세그먼트는<br>하나의 IP 주소에서 다른 IP 주소로<br>IP 패킷에 담겨 전달된다.</li>
 </ul>
 <p>IP 패킷이 포함하는 것.</p>
@@ -428,7 +428,7 @@
 
 <h1 id="2-TCP의-성능에-대한-고려"><a href="#2-TCP의-성능에-대한-고려" class="headerlink" title="2. TCP의 성능에 대한 고려"></a>2. TCP의 성능에 대한 고려</h1><ul>
 <li><ol start="2">
-<li>HTTP는 TCP 바로 위에 있는 계층이기 때문에 </li>
+<li>HTTP는 TCP 바로 위에 있는 계층이기 때문에</li>
 </ol>
 <ul>
 <li>TCP의 성능이 문제가 될 경우 HTTP 트렌젝션 성능에 영향이 있다.</li>
@@ -443,19 +443,23 @@
 <li>대부분의 HTTP 지연은 <strong>TCP 네트워크 지연</strong> 때문에 발생한다.<br>(클라나 서버가 많은 데이터를 내려받거나, 복잡하고 동적인 자원들을 실행하지 않는 한)</li>
 </ul>
 <ol>
-<li>클라이언트는 URI에서 웹 서버의 IP 주소와 포트 번호를 알아내야 한다.<ul>
+<li>클라이언트는 URI에서 웹 서버의 IP 주소와 포트 번호를 알아내야 한다.</li>
+</ol>
+<ul>
 <li>만약 호스트에 방문한 적이 없으면 DNS 인프라를 사용하여 IP 주소로 변환하는데 수십 초의 시간이 걸릴 것이다. (DNS 캐시가 없을 경우)</li>
 </ul>
-</li>
-<li>클라는 TCP 커넥션 요청을 서버에게 보내고, 서버가 커넥션 허가 응답을 회신하기를 기다린다.<ul>
+<ol start="2">
+<li>클라는 TCP 커넥션 요청을 서버에게 보내고, 서버가 커넥션 허가 응답을 회신하기를 기다린다.</li>
+</ol>
+<ul>
 <li>커넥션 설정 시간은 새로운 TCP 커넥션에서 항상 발생한다.</li>
 </ul>
-</li>
-<li>커넥션이 맺어지면 클라는 HTTP 요청을 새로 생성한 TCP 파이프를 통해 전송한다.<ul>
+<ol start="3">
+<li>커넥션이 맺어지면 클라는 HTTP 요청을 새로 생성한 TCP 파이프를 통해 전송한다.</li>
+</ol>
+<ul>
 <li>웹 서버는 데이터가 도착하는 대로 TCP 커넥션에서 요청 메세지를 읽고 처리한다.</li>
 </ul>
-</li>
-</ol>
 <h2 id="2-2-성능-관련-중요-요소"><a href="#2-2-성능-관련-중요-요소" class="headerlink" title="2.2 성능 관련 중요 요소"></a>2.2 성능 관련 중요 요소</h2><p>다음과 같은 요인과 그로 인한 성능상의 문제를 포함해 영향을 주는 일반적인 TCP 관련 지연들에 대해서 다른다.</p>
 <ol>
 <li>TCP 커넥션의 <strong>핸드셰이크</strong> 설정</li>
@@ -468,32 +472,36 @@
 <img src="/images/2019/24/6.jpg" style="width:100%">
 
 <ol>
-<li>클라는 새로운 TCP 커넥션을 생성하기 위해<br><strong>작은 TCP 패킷</strong>을 서버에게 보낸다.<ul>
+<li>클라는 새로운 TCP 커넥션을 생성하기 위해<br>  <strong>작은 TCP 패킷</strong>을 서버에게 보낸다.</li>
+</ol>
+<ul>
 <li>그 패킷은 <code>SYN</code>(<strong>syn</strong>chronize sequence numbers)라는 특별한 flag를 가진다.<br>(TCP flags의 종류)</li>
 <li><strong>커넥션 생성 요청</strong>이라는 뜻</li>
 </ul>
-</li>
-<li>서버가 그 커넥션을 받으면 몇 가지 커넥션 매개변수를 산출하고,<ul>
-<li>커넥션 요청이 받아들여졌음을 의미하는 <code>SYN</code> + <code>ACK</code>(acknowledgment) flag를 포함한 TCP 패킷을 클라에게 보낸다.</li>
-</ul>
-</li>
-<li>마지막으로 클라는 커넥션이 잘 맺어졌음을 알리기 위해서 서버에게 다시 확인 응답 신호를 보낸다. (<code>ACK</code>)<ul>
-<li>오늘날 TCP는 클라가 이 확인 응답 패킷과 함께 + 데이터를 보낼 수 있다.</li>
-</ul>
-</li>
+<ol start="2">
+<li>서버가 그 커넥션을 받으면 몇 가지 커넥션 매개변수를 산출하고,</li>
 </ol>
 <ul>
-<li>실제 개발자들은 이 패킷들을 보지 못한다.</li>
-<li>TCP 커넥션이 생성될 때 발생하는 지연이 전부다.</li>
+<li>커넥션 요청이 받아들여졌음을 의미하는 <code>SYN</code> + <code>ACK</code>(acknowledgment) flag를 포함한 TCP 패킷을 클라에게 보낸다.</li>
 </ul>
+<ol start="3">
+<li>마지막으로 클라는 커넥션이 잘 맺어졌음을 알리기 위해서 서버에게 다시 확인 응답 신호를 보낸다. (<code>ACK</code>)</li>
+</ol>
 <ul>
-<li>크기가 작은 HTTP 트랜잭션은 50% 이상의 시간을 TCP를 구성하는 데 쓴다.</li>
-<li>TCP 구성으로 인한 지연을 제거하기 위해서 HTTP가 이미 존재하는 커넥션을 어떻게 재활용하는지 알아보자.</li>
+<li><p>오늘날 TCP는 클라가 이 확인 응답 패킷과 함께 + 데이터를 보낼 수 있다.</p>
+</li>
+<li><p>실제 개발자들은 이 패킷들을 보지 못한다.</p>
+</li>
+<li><p>TCP 커넥션이 생성될 때 발생하는 지연이 전부다.</p>
+</li>
+<li><p>크기가 작은 HTTP 트랜잭션은 50% 이상의 시간을 TCP를 구성하는 데 쓴다.</p>
+</li>
+<li><p>TCP 구성으로 인한 지연을 제거하기 위해서 HTTP가 이미 존재하는 커넥션을 어떻게 재활용하는지 알아보자.</p>
+</li>
 </ul>
 <h3 id="2-2-2-확인-응답-지연-알고리즘"><a href="#2-2-2-확인-응답-지연-알고리즘" class="headerlink" title="2.2.2 확인 응답 지연 알고리즘"></a>2.2.2 확인 응답 지연 알고리즘</h3><ul>
 <li>인터넷 자체가 패킷 전송을 완벽히 보장하지는 않기 때문에, TCP는 성공적인 데이터 전송을 보장하기 위해서 자체적인 확인 체계를 가진다.</li>
-<li>TCP 세그먼트는 <strong>순번</strong>과 
-<strong>데이터 무결성 체크섬</strong>을 가진다.</li>
+<li>TCP 세그먼트는 <strong>순번</strong>과<br><strong>데이터 무결성 체크섬</strong>을 가진다.</li>
 <li>송신자의 기준은 먼저 시작한 곳<ul>
 <li>수신자는 세그먼트를 온전히 받으면, 작은 확인 응답 패킷을 송신자에게 반환한다. (<code>ACK</code>)</li>
 <li>송신자가 특정 시간 안에 확인 응답 메세지를 받지 못하면, 패킷이 파기되었거나 오류가 있는 것으로 판단하고 데이터를 다시 전송한다.</li>
@@ -574,12 +582,14 @@
 <li>이때 HTTP Connection 헤더를 사용하면 맺고 있는 커넥션에만 값이 적용 가능하다.</li>
 <li>Connection 헤더에는 3가지 종류의 토큰이 전달될 수 있다.</li>
 <li><ol start="2">
-<li>HTTP/2에서는 무시된다.</li>
+<li>HTTP&#x2F;2에서는 무시된다.</li>
 </ol>
 </li>
 </ul>
 <ol>
-<li><code>HTTP header field name</code><br><strong>헤더 보호하기</strong><ul>
+<li><code>HTTP header field name</code><br>  <strong>헤더 보호하기</strong></li>
+</ol>
+<ul>
 <li>이 커넥션에만 해당되는 헤더들을 나열</li>
 <li>해당 필드들은 현재 커넥션만을 위한 정보이므로,<br>다음 커넥션에 해당 헤더를 전달하면 안된다.</li>
 <li>Connection 헤더에는 hop-by-hop 헤더 명을 기술한다.<ul>
@@ -588,7 +598,7 @@
 </li>
 <li>Connection 헤더에 있는 헤더 필드의 이름에 해당되는 헤더들은 모두 <strong>삭제</strong>되어야 한다.</li>
 </ul>
-</li>
+<ol start="2">
 <li><code>임시적인 토큰값</code>: 커넥션에 대한 비표준 옵션을 의미</li>
 <li><code>close</code>: 커넥션이 작업이 완료되면 종료되어야 함을 의미.</li>
 <li><code>keep-alive</code></li>
@@ -608,28 +618,34 @@
 </ul>
 <p>HTTP 커넥션의 성능을 향상시킬 수 있는 여러 최신 기술이 있다.</p>
 <ol>
-<li>병렬 커넥션 parallel<ul>
+<li>병렬 커넥션 parallel</li>
+</ol>
+<ul>
 <li>여러 개의 TCP 커넥션을 통한 <strong>동시</strong> HTTP 요청</li>
 </ul>
-</li>
-<li>지속 커넥션 persistent<ul>
+<ol start="2">
+<li>지속 커넥션 persistent</li>
+</ol>
+<ul>
 <li>커넥션을 맺고 끊는 데서 발생하는 지연을 제거하기 위한 TCP 커넥션의 <strong>재활용</strong></li>
 </ul>
-</li>
-<li>파이프라인 커넥션 pipelined<ul>
+<ol start="3">
+<li>파이프라인 커넥션 pipelined</li>
+</ol>
+<ul>
 <li><strong>공유 TCP 커넥션</strong>을 통한 병렬 HTTP 요청</li>
 </ul>
-</li>
-<li>다중 커넥션 multiplexed<ul>
+<ol start="4">
+<li>다중 커넥션 multiplexed</li>
+</ol>
+<ul>
 <li>요청과 응답들에 대한 <strong>중재</strong> (실험적인 기술이다..)</li>
 </ul>
-</li>
-</ol>
 <hr>
 <hr>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -659,7 +675,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/26/HTTP_004_01/" data-id="ckzv7cqfh002mqobmqm4t5n32" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/26/HTTP_004_01/" data-id="cm3u7mj1h002khwb2hqtm3eq2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

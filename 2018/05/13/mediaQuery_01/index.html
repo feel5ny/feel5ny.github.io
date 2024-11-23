@@ -11,12 +11,12 @@
         <meta name="keywords" content="css,media-query,mobile,log" />
     
     
-    <meta name="description" content="**목차** &#128075;&#128075;   서론 @media 대하여.. -webkit-device-pixel-ratio 2-1. 픽셀비율 계산하기 2-2. device width와 height 계산하기       0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히">
+    <meta name="description" content="**목차** &#128075;&#128075;   서론 @media 대하여.. -webkit-device-pixel-ratio   2-1. 픽셀비율 계산하기 2-2. device width와 height 계산하기   0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히 대응">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(mobile) device-pixel-ratio계산">
 <meta property="og:url" content="http://feel5ny.github.io/2018/05/13/mediaQuery_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="**목차** &#128075;&#128075;   서론 @media 대하여.. -webkit-device-pixel-ratio 2-1. 픽셀비율 계산하기 2-2. device width와 height 계산하기       0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히">
+<meta property="og:description" content="**목차** &#128075;&#128075;   서론 @media 대하여.. -webkit-device-pixel-ratio   2-1. 픽셀비율 계산하기 2-2. device width와 height 계산하기   0. 서론 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히 대응">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/11/thumb_default.jpg">
 <meta property="article:published_time" content="2018-05-13T12:20:19.000Z">
@@ -237,14 +237,12 @@
 <ol start="0">
 <li>서론</li>
 <li>@media 대하여..</li>
-<li>-webkit-device-pixel-ratio<ul>
-<li>2-1. 픽셀비율 계산하기</li>
-<li>2-2. device width와 height 계산하기</div>
-
-</li>
-</ul>
-</li>
+<li>-webkit-device-pixel-ratio</li>
 </ol>
+<ul>
+<li>2-1. 픽셀비율 계산하기</li>
+<li>2-2. device width와 height 계산하기</div></li>
+</ul>
 <hr>
 <h2 id="0-서론"><a href="#0-서론" class="headerlink" title="0. 서론"></a>0. 서론</h2><p> 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히 대응해야하지만!! 기기의 종류들의 크기가 다양해짐에 따라서 미디어쿼리를 적절히 사용해야할 필요가 생겼다.(아이폰X나 갤럭시S9같은.. 스크린이 긴 단말기ㅜ) 게다가 네이티브앱에서 웹뷰를 이용하는 일이 빈번했기 때문에 더더욱..</p>
 <hr>
@@ -271,7 +269,7 @@
 </ul>
 <hr>
 <ul>
-<li><code>aspect-ratio</code>, <code>min-aspect-ratio</code>, <code>max-aspect-ratio</code>(화면비율) : width/height (가로 나누기 세로)</li>
+<li><code>aspect-ratio</code>, <code>min-aspect-ratio</code>, <code>max-aspect-ratio</code>(화면비율) : width&#x2F;height (가로 나누기 세로)</li>
 <li><code>aspect-ratio:1</code> : 화면 비율이 1:1인경우</li>
 <li><code>aspect-ratio:16/9</code> : 일반적인 화면 비율인 16:9를 의미합니다(1920*1080)</li>
 <li><code>device-aspect-ratio</code>, <code>min-device-aspect-ratio</code>, <code>max-device-aspect-ratio</code> : 단말기의 물리적인 화면 비율</li>
@@ -279,7 +277,7 @@
 <hr>
 <ul>
 <li><code>color</code>, <code>min-color</code>, <code>max-color</code> : 단말기에서 사용하는 최대 색상 비트 수에 대응(단위는 자연수)</li>
-<li><code>color:3</code> : 2³ = 8개의 색상 사용</li>
+<li><code>color:3</code> : 2³ &#x3D; 8개의 색상 사용</li>
 <li><code>color-index</code>, <code>min-color-index</code>, <code>max-color-index</code> : 최대 색상 수에 대응</li>
 </ul>
 <hr>
@@ -306,21 +304,21 @@
 <h3 id="5-3인치-1280-720-294ppi"><a href="#5-3인치-1280-720-294ppi" class="headerlink" title="5.3인치 1280*720, 294ppi"></a><u style="background: #222222;color: white;padding: 10px 20px;"><strong>5.3인치 1280*720, 294ppi</strong></u></h3><p>@media only screen and<br>(<code>device-width: ?px</code>) and<br>(<code>device-height: ?px</code>) and<br>(<code>-webkit-device-pixel-ratio: ?</code>) {</p>
 <p>위의 값들이 필요하다. 먼저 픽셀 비율부터 구해보자.<br>디바이스 픽셀 비율을 계산하는 데는 세 단계가 필요하다. </p>
 <h4 id="1-1-들고있는-디바이스로부터-시야까지의-실제-거리와-레퍼런스-픽셀의-거리를-비교"><a href="#1-1-들고있는-디바이스로부터-시야까지의-실제-거리와-레퍼런스-픽셀의-거리를-비교" class="headerlink" title="1-1. 들고있는 디바이스로부터 시야까지의 실제 거리와 레퍼런스 픽셀의 거리를 비교."></a>1-1. 들고있는 디바이스로부터 시야까지의 실제 거리와 레퍼런스 픽셀의 거리를 비교.</h4><p>  스펙에 따르면 28인치에서 이상적인 것은 <strong>인치 당 96 픽셀</strong>이다.(표준밀도는 96ppi) 그러나 스마트 폰이기때문에 사람들은 노트북을 들고 다니는 것보다 디바이스를 얼굴에 가깝게 들고있는다. 그 거리를 18 인치로 추정 해본다.<br>  <img src="/images/2018/11/image01.png"></p>
-<h4 id="1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다"><a href="#1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다" class="headerlink" title="1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다."></a>1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다.</h4><p>idealPixelDensity = (28/18) * 96 = 150 픽셀/인치 (대략) </p>
-<h4 id="1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다"><a href="#1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다" class="headerlink" title="1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다."></a>1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다.</h4><p>devicePixelRatio = 294/150 = 1.96 =&gt; 반올림 =&gt; <strong>2</strong></p>
+<h4 id="1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다"><a href="#1-2-주어진-거리에-대해-이상적인-픽셀-밀도를-얻으려면-거리-비에-표준-밀도-96ppi-를-곱한다" class="headerlink" title="1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다."></a>1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다.</h4><p>idealPixelDensity &#x3D; (28&#x2F;18) * 96 &#x3D; 150 픽셀&#x2F;인치 (대략) </p>
+<h4 id="1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다"><a href="#1-3-물리적-픽셀-밀도와-이상적인-픽셀-밀도의-비율을-사용하여-장치-픽셀-비율을-얻는다" class="headerlink" title="1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다."></a>1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다.</h4><p>devicePixelRatio &#x3D; 294&#x2F;150 &#x3D; 1.96 &#x3D;&gt; 반올림 &#x3D;&gt; <strong>2</strong></p>
 <hr>
 <h3 id="2-device-width와-height"><a href="#2-device-width와-height" class="headerlink" title="2. device-width와 height"></a>2. device-width와 height</h3><p>현재 알 수 있었던 해상도는 표에서 1280*720 라고 알 수 있었다.<br>device의 너비와 height는 픽셀 비율을 해상도에서 나누면 된다.</p>
 <ul>
-<li><strong>device-width</strong> = 720/2 = 360</li>
-<li><strong>device-height</strong> = 1280/2 = 640</li>
+<li><strong>device-width</strong> &#x3D; 720&#x2F;2 &#x3D; 360</li>
+<li><strong>device-height</strong> &#x3D; 1280&#x2F;2 &#x3D; 640</li>
 </ul>
 <hr>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> <span class="keyword">only</span> screen <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">device-width</span>: <span class="number">360px</span>) <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">device-height</span>: <span class="number">640px</span>) <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">-webkit-device-pixel-ratio</span>: <span class="number">2</span>) &#123;</span><br><span class="line">  💅💅💅💅</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="요약"><a href="#요약" class="headerlink" title="요약"></a>요약</h3><ul>
-<li>해당기기의 ppi와 해상도를 알고 있다면,<br>devicePixelRatio = 해당 기기의 ppi / 150 (왜 150인지는 위에 설명)<br>deviceWidth = 해당기기의 해상도 / devicePixelRatio</li>
-<li>특정 기기 이외에는 min이나 max를 이용하여 정의하면 비슷한 해상도와 픽셀비율을 가진 디바이스에 적용가능하다. </li>
+<li>해당기기의 ppi와 해상도를 알고 있다면,<br>devicePixelRatio &#x3D; 해당 기기의 ppi &#x2F; 150 (왜 150인지는 위에 설명)<br>deviceWidth &#x3D; 해당기기의 해상도 &#x2F; devicePixelRatio</li>
+<li>특정 기기 이외에는 min이나 max를 이용하여 정의하면 비슷한 해상도와 픽셀비율을 가진 디바이스에 적용가능하다.</li>
 </ul>
 <hr>
 <h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="https://medium.com/@junghan_61455/css-media-query-5969b004bd7">https://medium.com/@junghan_61455/css-media-query-5969b004bd7</a><br><a href="https://www.html5rocks.com/en/mobile/high-dpi/">https://www.html5rocks.com/en/mobile/high-dpi/</a></p>
@@ -343,7 +341,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/05/13/mediaQuery_01/" data-id="ckzv7cqku00cqqobm9frui8kt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/05/13/mediaQuery_01/" data-id="cm3u7mj2d00bqhwb207ynhr4t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

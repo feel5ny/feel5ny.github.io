@@ -11,12 +11,12 @@
         <meta name="keywords" content="CS,network" />
     
     
-    <meta name="description" content="3 way handshakeClient와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청&#x2F;응답 후에 연결이 되는 것이다.">
+    <meta name="description" content="3 way handshakeClient와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청&#x2F;응답 후에 연결이 되는">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3 way handshake">
 <meta property="og:url" content="http://feel5ny.github.io/2018/01/01/CS_06/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="3 way handshakeClient와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청&#x2F;응답 후에 연결이 되는 것이다.">
+<meta property="og:description" content="3 way handshakeClient와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청&#x2F;응답 후에 연결이 되는">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/01/thumb_default.jpg">
 <meta property="article:published_time" content="2018-01-01T01:23:55.000Z">
@@ -229,14 +229,14 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="3-way-handshake"><a href="#3-way-handshake" class="headerlink" title="3 way handshake"></a>3 way handshake</h2><p>Client와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.<br>TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.<br>쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청/응답 후에 연결이 되는 것이다.</p>
+            <h2 id="3-way-handshake"><a href="#3-way-handshake" class="headerlink" title="3 way handshake"></a>3 way handshake</h2><p>Client와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다.<br>TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다.<br>쉽게 이야기 하면, 서로의 통신을 위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청&#x2F;응답 후에 연결이 되는 것이다.</p>
 <img src="/images/2018/01/handshake.jpg">
 
 <p>먼저 Server에서 열려있는 포트는 LISTEN 상태이고 Client에서는 Closed 상태이다.</p>
 <ol>
-<li><p>Client에서 Server에 연결 요청을 하기위해 SYN 데이터를 보낸다. (SYN = synchronize sequence numbers)</p>
+<li><p>Client에서 Server에 연결 요청을 하기위해 SYN 데이터를 보낸다. (SYN &#x3D; synchronize sequence numbers)</p>
 </li>
-<li><p>Server에서 해당 포트는 LISTEN 상태에서 SYN 데이터를 받고 SYN_RCV로 상태가 변경된다.<br>그리고 요청을 정상적으로 받았다는 대답(ACK)와 Client도 포트를 열어달라는 SYN 을 같이 보낸다.<br>(ACK = acknowledgment)</p>
+<li><p>Server에서 해당 포트는 LISTEN 상태에서 SYN 데이터를 받고 SYN_RCV로 상태가 변경된다.<br>그리고 요청을 정상적으로 받았다는 대답(ACK)와 Client도 포트를 열어달라는 SYN 을 같이 보낸다.<br>(ACK &#x3D; acknowledgment)</p>
 </li>
 <li><p>Client에서는 SYN+ACK 를 받고 ESTABLISHED로 상태를 변경하고 서버에 요청을 잘 받았다는 ACK 를 전송한다.<br>ACK를 받은 서버는 상태가 ESTABLSHED로 변경된다.</p>
 </li>
@@ -273,7 +273,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/01/01/CS_06/" data-id="ckzv7cqes0014qobm2uqoz4ec" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/01/01/CS_06/" data-id="cm3u7mj1b0019hwb23sio2kxk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

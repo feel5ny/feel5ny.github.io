@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study,web,Identification" />
     
     
-    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+    <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인">
 <meta property="og:type" content="article">
 <meta property="og:title" content="클라이언트 식별">
 <meta property="og:url" content="http://feel5ny.github.io/2019/11/15/HTTP_011_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
+<meta property="og:description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/38/thumb_default.jpg">
 <meta property="article:published_time" content="2019-11-15T14:23:55.000Z">
@@ -315,7 +315,7 @@
         <div class="article-entry" itemprop="articleBody">
             <p>현대의 웹 사이트들은 <strong>개인화</strong>된 서비스를 제공하고 싶어한다.<br>개인화를 하는 방법은 여러 가지가 있다.</p>
 <ul>
-<li>개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보</li>
+<li>개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보</li>
 <li>세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.</li>
 </ul>
 <ol>
@@ -395,7 +395,7 @@
 </li>
 <li><p>서버에서, 사용자가 사이트에 접근하기 전에 로그인을 시키고자 한다면 HTTP 401 Unauthorized 응답코드를 브라우저에 보낼 수 있다.</p>
 <ol>
-<li><a href="http://www.joy.com">www.joy.com</a> 사이트로 요청</li>
+<li><a href="http://www.joy.com/">www.joy.com</a> 사이트로 요청</li>
 <li>사용자의 식별 정보를 알지 못하므로 401 Unauthorized 코드를 내리고, <code>WWW-Authenticate</code>헤더를 반환하여 로그인하라고 요청한다.</li>
 <li>로그인 후 <code>Authorization</code>헤더에 토큰을 포함하여 전송하여, 사용자 식별을 시도한다.</li>
 <li>한번만 로그인하면, 브라우저는 요청마다 해당 사용자의 식별 토큰을 Authorization헤더에 담아서 서버로 전송해서, 한 세션이 진행되는 내내 그 사용자에 대한 식별을 유지한다.</li>
@@ -418,22 +418,18 @@
 </ul>
 <h3 id="단점-1"><a href="#단점-1" class="headerlink" title="단점"></a>단점</h3><p>사용자를 식별하는 데 사용할 수 있지만, 문제가 있다.</p>
 <ol>
-<li><strong>😵못생긴 URL</strong><br>뚱뚱한 URL은 새로운 사용자들에게 혼란을 준다.</li>
-<li>🙅‍개인 정보때문에 <strong>공유하지 못하는 URL</strong><br>뚱뚱한 URL은 특정 사용자와 세션에 대한 상태 정보를 포함하기 때문에<br>외부 공유 시 개인 정보를 공유하게 된다.</li>
-<li><strong>🔥부하</strong><ol>
+<li><strong>😵못생긴 URL</strong><br>  뚱뚱한 URL은 새로운 사용자들에게 혼란을 준다.</li>
+<li>🙅‍개인 정보때문에 <strong>공유하지 못하는 URL</strong><br>  뚱뚱한 URL은 특정 사용자와 세션에 대한 상태 정보를 포함하기 때문에<br>  외부 공유 시 개인 정보를 공유하게 된다.</li>
+<li><strong>🔥부하</strong></li>
 <li><strong>📦캐시를 사용할 수 없음</strong><br>URL로 만든 것은, URL이 달라지기 때문에 기존 캐시에 접근할 수 없다.</li>
 <li><strong>서버 부하 가중</strong><br>뚱뚱한 URL에 해당하는 HTML 페이지를 다시 그려야 한다.</li>
-</ol>
-</li>
-<li><strong>🏃‍♀️이탈</strong><ol>
+<li><strong>🏃‍♀️이탈</strong></li>
 <li><strong>초기화</strong><br>사용자가 링크를 타고 다른 사이트로 이동하거나, 특정 URL을 요청해서<br>의도치 않게 뚱뚱한 URL 세션에서 이탈하기 쉽다.<br>이탈하게 되면 모든 진척사항들이 <strong>초기화</strong>되고 다시 처음부터 시작해야 될 것이다.</li>
 <li><strong>세션 간 지속성의 부재</strong><br>북마킹하지 않는 이상, 로그아웃하면 모든 정보를 잃는다.</li>
 </ol>
-</li>
-</ol>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -459,7 +455,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/15/HTTP_011_01/" data-id="ckzv7cqfv0037qobmolizto2f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/15/HTTP_011_01/" data-id="cm3u7mj1j0039hwb21wzy9755" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

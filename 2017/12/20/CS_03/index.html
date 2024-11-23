@@ -11,12 +11,12 @@
         <meta name="keywords" content="CS,network" />
     
     
-    <meta name="description" content="수업 전 미리 알아보기  목차   네트워크란? 인터넷이란? OSI 7 Layer &amp; TCP&#x2F;IP Model Layer    네트워크란?두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것 네트워크의 종류 PAN (Personal Area Network) : 가장 작은 규모의 네트워크 LAN (Local Area Network) : 근">
+    <meta name="description" content="수업 전 미리 알아보기  목차   네트워크란? 인터넷이란? OSI 7 Layer &amp; TCP&#x2F;IP Model Layer    네트워크란?두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것 네트워크의 종류 PAN (Personal Area Network) : 가장 작은 규모의 네트워크 LAN (Local Area Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="네트워크 basic">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/20/CS_03/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="수업 전 미리 알아보기  목차   네트워크란? 인터넷이란? OSI 7 Layer &amp; TCP&#x2F;IP Model Layer    네트워크란?두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것 네트워크의 종류 PAN (Personal Area Network) : 가장 작은 규모의 네트워크 LAN (Local Area Network) : 근">
+<meta property="og:description" content="수업 전 미리 알아보기  목차   네트워크란? 인터넷이란? OSI 7 Layer &amp; TCP&#x2F;IP Model Layer    네트워크란?두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것 네트워크의 종류 PAN (Personal Area Network) : 가장 작은 규모의 네트워크 LAN (Local Area Network">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/66/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-20T09:23:55.000Z">
@@ -235,7 +235,7 @@
 <ol>
 <li><a href="#network">네트워크란?</a></li>
 <li><a href="#internet">인터넷이란?</a></li>
-<li><a href="#osi7">OSI 7 Layer &amp; TCP/IP Model Layer</a></li>
+<li><a href="#osi7">OSI 7 Layer &amp; TCP&#x2F;IP Model Layer</a></li>
 </ol>
 <hr>
 <h2 id="네트워크란"><a href="#네트워크란" class="headerlink" title=" 네트워크란?"></a><a name="network"></a> 네트워크란?</h2><p>두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것</p>
@@ -251,18 +251,18 @@
 <h3 id="1-LAN"><a href="#1-LAN" class="headerlink" title="1. LAN"></a>1. LAN</h3><p>Local Area Network : 근거리 통신망<br>LAN의 토폴로지에 따라 버스형, 링형, 스타형, 계층형, 메쉬형 등으로 구분할수 있다.<br>*토폴로지란 (Topologies) : 네트워크를 구성하는 노드와 노드간에 연결 상태에 대한 배치를 의미한다. </p>
 <img src="/images/post_img/66/topology.jpg">
 
-<h4 id="1-1-Bus-Topology-버스형"><a href="#1-1-Bus-Topology-버스형" class="headerlink" title="1-1. Bus Topology (버스형)"></a>1-1. Bus Topology (버스형)</h4><p>신뢰성과 확장성이 좋으며 모든 노드 들이 버스에 <code>T 자형</code>으로 연결 되어 상호 <code>Point - to - Point</code> 형태를 가지게 됩니다. 각 노드들의 연결은 <code>어뎁터(Adapter)</code>를 사용하며 양 끝 단에 <code>Terminator</code>를 두게 됩니다.<br>각 노드의 고장은 전체 네트워크 부분에 영향을 미치는 점을 가지며 CSMA/CD 방식을 주로 사용, 케이블 사용량이 적기 때문에 투자 비용이 적게 드는 편입니다.</p>
-<p>*CSMA/CD 방식이란</p>
+<h4 id="1-1-Bus-Topology-버스형"><a href="#1-1-Bus-Topology-버스형" class="headerlink" title="1-1. Bus Topology (버스형)"></a>1-1. Bus Topology (버스형)</h4><p>신뢰성과 확장성이 좋으며 모든 노드 들이 버스에 <code>T 자형</code>으로 연결 되어 상호 <code>Point - to - Point</code> 형태를 가지게 됩니다. 각 노드들의 연결은 <code>어뎁터(Adapter)</code>를 사용하며 양 끝 단에 <code>Terminator</code>를 두게 됩니다.<br>각 노드의 고장은 전체 네트워크 부분에 영향을 미치는 점을 가지며 CSMA&#x2F;CD 방식을 주로 사용, 케이블 사용량이 적기 때문에 투자 비용이 적게 드는 편입니다.</p>
+<p>*CSMA&#x2F;CD 방식이란</p>
 <ul>
 <li>호스트가 채널의 상태를 감지해 충돌을 피하는 매체접근방식</li>
 <li>CSMA(Carrier Sense Multiple Access)</li>
 <li>호스트가 전송하기 전에 매체의 전압을 점검하여 회선이 사용되지 않는 상태임을 확인하고 전송을 시작함</li>
 </ul>
 <h4 id="1-2-Ring-Topology-링형"><a href="#1-2-Ring-Topology-링형" class="headerlink" title="1-2. Ring Topology (링형)"></a>1-2. Ring Topology (링형)</h4><p>통신제어가 간단하고 신뢰성이 높으며 <code>장거리 네트워크</code>에서 사용 가능 합니다.<br><code>링(Ring) 형태</code>를 이루지만 노드간 통신은 <code>Point - to - Point</code> 를 가지며<br>각 노드에서 신호 재생이 가능 하기 때문에 버스 형태와 달리 <strong>거리 제약이 적으며 잡음에도 강합니다.</strong></p>
-<h4 id="1-3-Star-Topology-스타형-성형"><a href="#1-3-Star-Topology-스타형-성형" class="headerlink" title="1-3. Star Topology (스타형/성형)"></a>1-3. Star Topology (스타형/성형)</h4><p>중앙 제어 방식으로 모든 기기가 <code>Point - to - Point</code> 방식으로 연결 되어 있으며 문제 해결이 쉽고 하나의 기기의 고장은 전체에 영향을 미치지 않지만 중앙 제어 장비가 고장이 나면 모든 시스템에 영향을 미치게 됩니다. 케이블 사용량이 많으며 비용 또한 큰 편입니다.</p>
+<h4 id="1-3-Star-Topology-스타형-성형"><a href="#1-3-Star-Topology-스타형-성형" class="headerlink" title="1-3. Star Topology (스타형&#x2F;성형)"></a>1-3. Star Topology (스타형&#x2F;성형)</h4><p>중앙 제어 방식으로 모든 기기가 <code>Point - to - Point</code> 방식으로 연결 되어 있으며 문제 해결이 쉽고 하나의 기기의 고장은 전체에 영향을 미치지 않지만 중앙 제어 장비가 고장이 나면 모든 시스템에 영향을 미치게 됩니다. 케이블 사용량이 많으며 비용 또한 큰 편입니다.</p>
 <h4 id="1-4-Mash-Topology-메쉬형"><a href="#1-4-Mash-Topology-메쉬형" class="headerlink" title="1-4. Mash Topology (메쉬형)"></a>1-4. Mash Topology (메쉬형)</h4><p>네트워크 상의 모든 컴퓨터들이 연결되어진 형태로써 연결 된 기기나 노드가 고장나더라도 다른 경로를 통해 통신이 가능하며 어떠한 경우에도 네트워크가 동작한다는 장점을 가지게 됩니다.<br>하지만, 네트워크에 연결된 기기의 수가 많을 경우 모든 기기와 연결 해야 하기 때문에 <code>케이블 사용량이 많으며</code> 구조 또한 복잡하여 <code>네트워크 관리가 힘들어 진다</code>는 단점을 가지고 있습니다.</p>
 <h4 id="1-5-Fully-Connected"><a href="#1-5-Fully-Connected" class="headerlink" title="1-5. Fully Connected"></a>1-5. Fully Connected</h4><hr>
-<h2 id="2-인터넷이란"><a href="#2-인터넷이란" class="headerlink" title=" 2. 인터넷이란?"></a><a name="internet"></a> 2. 인터넷이란?</h2><p>International Network 의 합성어 로써 TCP/IP ( Transmission Control Protocol / Internet Protocol ) 을 기반으로 전세계의 네트워크를 하나로 연결 하여 각각 PC가 가지고 있는 자료나 정보를 주고 받을 수 있는 광역 네트워크를 인터넷 이라고 합니다.</p>
+<h2 id="2-인터넷이란"><a href="#2-인터넷이란" class="headerlink" title=" 2. 인터넷이란?"></a><a name="internet"></a> 2. 인터넷이란?</h2><p>International Network 의 합성어 로써 TCP&#x2F;IP ( Transmission Control Protocol &#x2F; Internet Protocol ) 을 기반으로 전세계의 네트워크를 하나로 연결 하여 각각 PC가 가지고 있는 자료나 정보를 주고 받을 수 있는 광역 네트워크를 인터넷 이라고 합니다.</p>
 <p>*다른 정의</p>
 <ul>
 <li>LAN 과 LAN 을 연결 하는 WAN 이 서로 다른 WAN 들과 연결 되어 하나의 네트워크를 구성한 네크워크를 칭함.</li>
@@ -281,18 +281,18 @@
 <li>순서 결정</li>
 <li>주소 설정</li>
 <li>다중화</li>
-<li>전송 서비스 </li>
+<li>전송 서비스</li>
 </ol>
 <p>순서 결정<br><img src="/images/post_img/66/protocol_order.png"><br>세분화와 재합성<br><img src="/images/post_img/66/protocol_segment.png"></p>
 <img src="/images/post_img/66/protocol.gif">
 
 <p>프로토콜은 특성에 따라 여러가지 형태로 분류할수 있으며 각각 형태를 구분 지어 본다면</p>
 <ol>
-<li>직접/간접 프로토콜</li>
-<li>단일체/구조적 프로토콜</li>
-<li>대칭/비대칭 프로토콜</li>
+<li>직접&#x2F;간접 프로토콜</li>
+<li>단일체&#x2F;구조적 프로토콜</li>
+<li>대칭&#x2F;비대칭 프로토콜</li>
 </ol>
-<p>네트워크 용어에서 나오는 P 는 Protocol 의 약자가 대부분이며 대표적으로 인터넷을 할 때 사용되는 프로토콜은 TCP/IP 가 있습니다.<br>TCP/IP 는 Transmission Control Protocol / Internet Protocol 의 약자로써 컴퓨터와 컴퓨터가 통신 회선 등으로 연결 하기 위한 통신 규약입니다.<br>그외 HTTP, ARP, ICMP, SNMP, SMTP, POP, FTP, TFTP, DHCP 등이 프로토콜의 종류입니다.</p>
+<p>네트워크 용어에서 나오는 P 는 Protocol 의 약자가 대부분이며 대표적으로 인터넷을 할 때 사용되는 프로토콜은 TCP&#x2F;IP 가 있습니다.<br>TCP&#x2F;IP 는 Transmission Control Protocol &#x2F; Internet Protocol 의 약자로써 컴퓨터와 컴퓨터가 통신 회선 등으로 연결 하기 위한 통신 규약입니다.<br>그외 HTTP, ARP, ICMP, SNMP, SMTP, POP, FTP, TFTP, DHCP 등이 프로토콜의 종류입니다.</p>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
 <li><a href="http://mindnet.tistory.com/entry/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1%ED%8E%B8-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%ACNetwork-%EB%9E%80?category=702276">http://mindnet.tistory.com/entry/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1%ED%8E%B8-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%ACNetwork-%EB%9E%80?category=702276</a></li>
@@ -318,7 +318,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/20/CS_03/" data-id="ckzv7cqem000qqobmoisjrsls" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/20/CS_03/" data-id="cm3u7mj1b001ghwb2ayhs383f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

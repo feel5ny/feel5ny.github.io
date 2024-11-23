@@ -238,7 +238,7 @@
 <p>UDP를 사용해서, 목적지의 IP(예: 112.140.20.10) 주소와 포트(예:52432)로 메시지를 보낼 수 있고,<br>컴퓨터를 거쳐 거쳐 목적지까지 도달할 수도 있고, 아님 도착하지 않을 수도 있다.</p>
 <p>받는 곳에서는 포트(52432)를 열어두고, 패킷이 올 때까지 기다린다.<br>이 때, 어떤 컴퓨터에서 온 것이든 모두 받아들인다. (커넥션이 없다는 것을 기억한다)<br>받는 쪽에서는 패킷이 도착했을 때 이게 어느 IP의 어느 포트에서 왔고 크기가 얼마나 되는지 알 수 있다.<br>그리곤 패킷 데이터를 읽을 수 있다.</p>
 <p><strong>UDP는 안정적이지 않은 프로토콜이다.</strong><br>일반적으로는 1~5% 정도의 데이터를 잃는 경우가 많고, 심지어는 전혀 받지 못할 수도 있다. 패킷이 전송된 순서 또한 보장되지 않는다.</p>
-<p>UDP는 IP에서 많은 일을 하지 않는다.<br>데이터가 전송될 수도 안될 수도 있지만, <strong>UDP가 보장해주는 건 데이터의 ‘양’</strong>이다.<br>한 쪽에서 256바이트를 보냈으면, 받는 쪽에서도 무조건 256바이트를 받는다.<br>처음 100바이트를 받을 수는 없다.</p>
+<p>UDP는 IP에서 많은 일을 하지 않는다.<br>데이터가 전송될 수도 안될 수도 있지만, **UDP가 보장해주는 건 데이터의 ‘양’**이다.<br>한 쪽에서 256바이트를 보냈으면, 받는 쪽에서도 무조건 256바이트를 받는다.<br>처음 100바이트를 받을 수는 없다.</p>
 <p>정리</p>
 <h4 id="TCP-1"><a href="#TCP-1" class="headerlink" title="TCP"></a>TCP</h4><ul>
 <li>커넥션 기반</li>
@@ -275,7 +275,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/21/CS_04/" data-id="ckzv7cqek000mqobmzp5jfng9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/21/CS_04/" data-id="cm3u7mj18000phwb2gl3kgi7v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -470,7 +470,7 @@
 <li>일정 시간 간격으로 다시 쓰여지지만, 같은 데이터를 포함한다. (내용변화가 없음)</li>
 <li>어떤 문서들의 변경은 다시 읽어들이기엔 사소한 것 (철자나 주석)</li>
 <li>어떤 서버들은 그들이 갖고 있는 페이지에 대한 최근 변경 일시를 정확하게 판별할 수 없다.</li>
-<li>1초보다 작은 간격으로 갱신되는 문서를 제공하는 서버들에게는,<br>변경일에 대한 1초의 정밀도는 충분하지 않을 수 있다.</li>
+<li>1초보다 작은 간격으로 갱신되는 문서를 제공하는 서버들에게는,<br>  변경일에 대한 1초의 정밀도는 충분하지 않을 수 있다.</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">조건부 요청</span><br><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">If-None-Match: &quot;v2.6&quot;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">응답</span><br><span class="line">HTTP/1.0 304 Not Modified</span><br><span class="line">Date: Wed, 03 Jul 2002, 19:18:23 GMT</span><br><span class="line">ETag: &quot;v2.6&quot;</span><br><span class="line">Expires: Fri, 05 Jul 2002, 05:00:00 GMT</span><br></pre></td></tr></table></figure>
@@ -484,7 +484,7 @@
 <li>엔터티 태그와 최근 변경일시는 둘 다 캐시 검사기다.</li>
 <li>서버는 때때로 모든 캐시 된 사본을 무효화시키지 않고,<br>문서를 살짝 고칠 수 있도록 허용하고 싶은 경우가 있다.</li>
 <li><ol start="2">
-<li>HTTP/1.1은 콘텐츠가 조금 변경되었더라도, <strong>그 정도면 같은 것</strong>이라고 서버가 주장할 수 있도록 해주는 <strong>약한 검사기</strong>를 지원한다.</li>
+<li>HTTP&#x2F;1.1은 콘텐츠가 조금 변경되었더라도, <strong>그 정도면 같은 것</strong>이라고 서버가 주장할 수 있도록 해주는 <strong>약한 검사기</strong>를 지원한다.</li>
 </ol>
 </li>
 </ul>
@@ -498,11 +498,11 @@
 
 <h3 id="언제-엔터티-태그를-사용하고-언제-Last-Modified-일시를-사용하는가"><a href="#언제-엔터티-태그를-사용하고-언제-Last-Modified-일시를-사용하는가" class="headerlink" title="언제 엔터티 태그를 사용하고 언제 Last-Modified 일시를 사용하는가"></a>언제 엔터티 태그를 사용하고 언제 Last-Modified 일시를 사용하는가</h3><ul>
 <li><ol start="2">
-<li>HTTP/1.1 클라는 만약 서버가 엔터티 태그를 반환했다면,<br>반드시 엔터티 태그 검사기를 사용해야 한다.</li>
+<li>HTTP&#x2F;1.1 클라는 만약 서버가 엔터티 태그를 반환했다면,<br>반드시 엔터티 태그 검사기를 사용해야 한다.</li>
 </ol>
 </li>
 <li>Last-Modified 값만을 반환했다면<br>클라는 If-Modified-Since 검사를 사용할 수 있다.</li>
-<li>만약 HTTP/1.1 캐시나 서버가 If-Modified-Since와 엔터티 태그, 조건부 헤더를 모두 받았다면,<br>요청의 모든 조건부 헤더 필드의 조건에 부합해야 200을 반환해야 한다.</li>
+<li>만약 HTTP&#x2F;1.1 캐시나 서버가 If-Modified-Since와 엔터티 태그, 조건부 헤더를 모두 받았다면,<br>요청의 모든 조건부 헤더 필드의 조건에 부합해야 200을 반환해야 한다.</li>
 </ul>
 <hr>
 <hr>
@@ -516,7 +516,7 @@
 <li><code>Cache-Control: max-age=&lt;seconds&gt;</code></li>
 <li><code>Cache-control: s-maxage=&lt;seconds&gt;</code></li>
 <li><code>Expires</code> 날짜 헤더를 응답에 첨부할 수 있다.</li>
-<li>아무 만료 정보도 주지 않고,<br>캐시가 스스로 체험적인(휴리스틱 heuristic) 방법으로 결정하게 할 수 있다.</li>
+<li>아무 만료 정보도 주지 않고,<br>  캐시가 스스로 체험적인(휴리스틱 heuristic) 방법으로 결정하게 할 수 있다.</li>
 </ol>
 <h2 id="9-1-no-cahce와-no-store-응답-헤더"><a href="#9-1-no-cahce와-no-store-응답-헤더" class="headerlink" title="9.1 no-cahce와 no-store 응답 헤더"></a>9.1 no-cahce와 no-store 응답 헤더</h2><p>캐시가 검증되지 않은 캐시 된 객체로 응답하는 것을 막는다.</p>
 <ol>
@@ -525,7 +525,7 @@
 <p>Do Not Serve From Cache Without Revalidation (재검사 없이 캐시에서 제공하지 마라)</p>
 </blockquote>
 </li>
-<li><code>Pragma: no-cache</code>: HTTP/1.0+ 하위 호환성을 위해 HTTP/1.1에 포함되어있다. 웬만하면 <code>Cache-control: no-store</code></li>
+<li><code>Pragma: no-cache</code>: HTTP&#x2F;1.0+ 하위 호환성을 위해 HTTP&#x2F;1.1에 포함되어있다. 웬만하면 <code>Cache-control: no-store</code></li>
 </ol>
 <h2 id="9-2-Max-Age-응답-헤더"><a href="#9-2-Max-Age-응답-헤더" class="headerlink" title="9.2 Max-Age 응답 헤더"></a>9.2 Max-Age 응답 헤더</h2><ul>
 <li><code>max-age</code> 신선하다고 간주되었던 문서가 서버로부터 온 이후로 흐른 시간</li>
@@ -559,8 +559,8 @@
 <li>LM 인자 알고리즘은 최근 변경일시를 문서가 얼마나 자주 바뀌는지에 대한 추정에 사용한다.</li>
 </ul>
 <ol>
-<li>캐시 된 문서가 마지막으로 변경된 것이 엄청 예전이라면,<br>=&gt; 안정적인 문서일 것이다<br>=&gt; 갑자기 바뀔 일을 크지 않을 것이고<br>=&gt; 캐시에 더 오래 보관하고 있어도 안전하다.</li>
-<li>캐시 된 문서가 최근 변경되었다면<br>=&gt; 자주 변경될 것이고,<br>=&gt; 서버와 재검사하기 전까지 짧은 기간 동안만 캐시해야 한다.</li>
+<li>캐시 된 문서가 마지막으로 변경된 것이 엄청 예전이라면,<br>  &#x3D;&gt; 안정적인 문서일 것이다<br>  &#x3D;&gt; 갑자기 바뀔 일을 크지 않을 것이고<br>  &#x3D;&gt; 캐시에 더 오래 보관하고 있어도 안전하다.</li>
+<li>캐시 된 문서가 최근 변경되었다면<br>  &#x3D;&gt; 자주 변경될 것이고,<br>  &#x3D;&gt; 서버와 재검사하기 전까지 짧은 기간 동안만 캐시해야 한다.</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$마지막_수정이후로_경과한_시간 = max(0, $서버의_Date - $서버의_Last_Modified)</span><br><span class="line">$서버_신선도_한계 = int($마지막_수정_이후로_경과한_시간 * $lm_인자)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -607,9 +607,7 @@
 <p><strong>클록 스큐 clock skew</strong>: 두 컴퓨터의 시계 설정 차이로 인한 문제<br>클록 스큐 때문에 겉보기 나이는 종종 부정확하며 때로는 음수가 되기도 한다.</p>
 </blockquote>
 </li>
-<li>겉보기 나이가 음수가 될 경우 0으로 만들어야 한다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$겉보기_나이 = max(0, $응답을_받은_시각 - $Date_헤더값) </span><br></pre></td></tr></table></figure>
-
-</li>
+<li>겉보기 나이가 음수가 될 경우 0으로 만들어야 한다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$겉보기_나이 = max(0, $응답을_받은_시각 - $Date_헤더값) </span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="2-점층적-나이-계산-Age-헤더"><a href="#2-점층적-나이-계산-Age-헤더" class="headerlink" title="2. 점층적 나이 계산 (Age 헤더)"></a>2. 점층적 나이 계산 (Age 헤더)</h3><ul>
 <li>문서가 프락시나 캐시를 통과할 때마다<br>그 장치들이 Age헤더에 상대적인 나이를 누적해서 더하도록 한다.</li>
@@ -618,11 +616,11 @@
 <p>Age 헤더 값은 문서가 프락시들을 통과하면서 점점 늘어난다.</p>
 <ul>
 <li><ol start="2">
-<li>HTTP/1.1을 이해하는 어플리케이션은 문서가 각 어플리케이션에 머무른 시간과 네트워크 사이를 이동한 시간만큼 Age 헤더의 값을 늘려야 한다.</li>
+<li>HTTP&#x2F;1.1을 이해하는 어플리케이션은 문서가 각 어플리케이션에 머무른 시간과 네트워크 사이를 이동한 시간만큼 Age 헤더의 값을 늘려야 한다.</li>
 </ol>
 </li>
 <li>각 중간 어플리케이션은 자신의 내부 시계를 이용해서 쉽게 문서의 체류 시간을 계산할 수 있다.</li>
-<li>비-HTTP/1.1 장치는 Age 헤더를 인식하지 못한다.</li>
+<li>비-HTTP&#x2F;1.1 장치는 Age 헤더를 인식하지 못한다.</li>
 </ul>
 <p>상대 나이값은 가장 큰 것(보수적)이 선택된다.</p>
 <ul>
@@ -631,10 +629,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$겉보기_나이 = max(0, $응답을_받은_시각 - $Date_헤더값) </span><br><span class="line">$보정된_겉보이_나이 = max($겉보기_나이, $Age_헤더값)</span><br><span class="line">$문서가_우리의_캐시에_도착했을_때의_나이 = $보정된_겉보기_나이</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-네트워크-지연에-대한-보상"><a href="#3-네트워크-지연에-대한-보상" class="headerlink" title="3. 네트워크 지연에 대한 보상"></a>3. 네트워크 지연에 대한 보상</h3><ul>
-<li>느린 네트워크나 과부하가 걸린 서버에서 =&gt; 문서가 네트워크나 서버의 교통 혼잡에 긴 시간 동안 갇혀있었던 경우 상대 나이 계산은 문서의 나이에 대한 상당히 모자란 추정이 될 수 있다. </li>
-<li>Date헤더는 문서가 캐시로 옮겨가는 도중에 <strong>얼마나 시간을 소비했는지</strong> 말해주지 않는다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$겉보기_나이 = max(0, $응답을_받은_시각 - $Date_헤더값) </span><br><span class="line">$보정된_겉보이_나이 = max($겉보기_나이, $Age_헤더값)</span><br><span class="line">$응답_지연_추정값 = $응답을_받은_시각 - $요청을_보낸_시각;</span><br><span class="line">$문서가_우리의_캐시에_도착했을_때의_나이 = $보정된_겉보기_나이 + $응답_지연_추정값;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>느린 네트워크나 과부하가 걸린 서버에서 &#x3D;&gt; 문서가 네트워크나 서버의 교통 혼잡에 긴 시간 동안 갇혀있었던 경우 상대 나이 계산은 문서의 나이에 대한 상당히 모자란 추정이 될 수 있다. </li>
+<li>Date헤더는 문서가 캐시로 옮겨가는 도중에 <strong>얼마나 시간을 소비했는지</strong> 말해주지 않는다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$겉보기_나이 = max(0, $응답을_받은_시각 - $Date_헤더값) </span><br><span class="line">$보정된_겉보이_나이 = max($겉보기_나이, $Age_헤더값)</span><br><span class="line">$응답_지연_추정값 = $응답을_받은_시각 - $요청을_보낸_시각;</span><br><span class="line">$문서가_우리의_캐시에_도착했을_때의_나이 = $보정된_겉보기_나이 + $응답_지연_추정값;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="4-캐시에-저장되면-나이를-더-먹는다"><a href="#4-캐시에-저장되면-나이를-더-먹는다" class="headerlink" title="4. 캐시에 저장되면, 나이를 더 먹는다."></a>4. 캐시에 저장되면, 나이를 더 먹는다.</h3><ul>
 <li>문서에 대한 요청이 캐시에 도착했을 때,<br>우리는 그 문서의 현재 나이를 계산하기 위해 그 문서가 캐시에 얼마나 오랫동안 머물렀는지 알 필요가 있다.</li>
@@ -654,7 +650,7 @@
 <p>전체 과정은 <strong>문서의 나이</strong>와 <strong>신선도 한계</strong>라는 두 가지 변수가 관련되어 있다. </p>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -677,7 +673,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/10/05/HTTP_007-2/" data-id="ckzv7cqfu0035qobma1mdnnwa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/10/05/HTTP_007-2/" data-id="cm3u7mj1j003bhwb2dpov3wyn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태3-1. 즉시실행함수3-2. 내부함수3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.    요약  arguments 함수에 전달된 파라미터를">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태  3-1. 즉시실행함수  3-2. 내부함수  3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.    요약- arguments 함수에 전달된">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4&#x2F; 참조타입_Function 타입 (2)">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/03/JS_04_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태3-1. 즉시실행함수3-2. 내부함수3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.    요약  arguments 함수에 전달된 파라미터를">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수의 내부 구조 함수 프로퍼티와 메서드 함수의 다양한 형태  3-1. 즉시실행함수  3-2. 내부함수  3-3. 콜백함수    1. 함수의 내부 구조함수 내부에는 객체들이 있다.    요약- arguments 함수에 전달된">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/39/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-03T11:11:53.000Z">
@@ -235,28 +235,14 @@
 <ol>
 <li><a href="#FunctionProperty">함수의 내부 구조</a></li>
 <li><a href="#FunctionMethod">함수 프로퍼티와 메서드</a></li>
-<li><a href="#several_type">함수의 다양한 형태</a><br>3-1. 즉시실행함수<br>3-2. 내부함수<br>3-3. 콜백함수</li>
+<li><a href="#several_type">함수의 다양한 형태</a><br>  3-1. 즉시실행함수<br>  3-2. 내부함수<br>  3-3. 콜백함수</li>
 </ol>
 <hr>
 <h2 id="1-함수의-내부-구조"><a href="#1-함수의-내부-구조" class="headerlink" title=" 1. 함수의 내부 구조"></a><a name="FunctionProperty"></a> 1. 함수의 내부 구조</h2><p>함수 내부에는 객체들이 있다. </p>
 <img src="/images/post_img/39/01.png" width="80%">
 
-<p>요약</p>
-<ul>
-<li><code>arguments</code> 함수에 전달된 파라미터를 모두 포함하는 유사배열객체</li>
-<li><code>this</code> 함수의 호출패턴에 따라 값이 달라진다. </li>
-<li><code>caller</code> 해당 함수를 호출한 함수를 참조하는 값을 갖고있다. 전역함수에서는 null. 재귀함수를 사용할 때 사용가능.</li>
-<li><code>length</code> arguments의 배열 길이. (파라미터의 갯수)</li>
-<li><code>name</code> 함수의 이름</li>
-<li><code>__proto__</code> 모든 객체가 갖고 있는 프로퍼티. [[Prototype]] 이며, 브라우저마다 다르게 명시한다. 해당 객체의 프로토타입을 가리키는 참조값을 갖고있다.</li>
-<li><code>prototype</code> 함수 객체가 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 객체를 가리킨다.</li>
-<li><code>apply</code> 함수를 호출하면서 해당함수의 this를 호출한 함수로 넘기는 역할을 한다.  </li>
-<li><code>call</code> apply와 같은 개념이며, apply와 다른 점은 parmeter를 각각 넘기는 스타일이다.</li>
-<li><code>bind</code> bind() 메소드는 호출될 때 그 this 키워드를 제공된 값으로 설정하고 새로운 함수가 호출될 때 제공되는 주어진 순서의 선행 인수가 있는 새로운 함수를 생성한다.</li>
-</ul>
-<hr>
-<h3 id="1-1-arguments"><a href="#1-1-arguments" class="headerlink" title="1-1. arguments"></a>1-1. <code>arguments</code></h3><p>순회가능한(iterable) 유사배열객체이며, 함수에 전달된 파라미터를 모두 포함한다.<br>arguments 프로퍼티는 arguments 객체를 값으로 가지며, 함수 내부에서 지역변수처럼 사용된다. 즉, 외부에서는 호출할 수 없다. </p>
-<p>arguments 객체에는<br><code>callee</code>, <code>length</code>, <code>Symbol</code> 프로퍼티가 존재한다.<br><code>callee</code> 프로퍼티는 arguments 객체의 소유자인 함수를/ 가리키는 포인터이다.</p>
+<h2 id="요약-arguments-함수에-전달된-파라미터를-모두-포함하는-유사배열객체-this-함수의-호출패턴에-따라-값이-달라진다-caller-해당-함수를-호출한-함수를-참조하는-값을-갖고있다-전역함수에서는-null-재귀함수를-사용할-때-사용가능-length-arguments의-배열-길이-파라미터의-갯수-name-함수의-이름-proto-모든-객체가-갖고-있는-프로퍼티-Prototype-이며-브라우저마다-다르게-명시한다-해당-객체의-프로토타입을-가리키는-참조값을-갖고있다-prototype-함수-객체가-생성자로-사용될-때-이-함수를-통해-생성된-객체의-부모-역할을-하는-객체를-가리킨다-apply-함수를-호출하면서-해당함수의-this를-호출한-함수로-넘기는-역할을-한다-call-apply와-같은-개념이며-apply와-다른-점은-parmeter를-각각-넘기는-스타일이다-bind-bind-메소드는-호출될-때-그-this-키워드를-제공된-값으로-설정하고-새로운-함수가-호출될-때-제공되는-주어진-순서의-선행-인수가-있는-새로운-함수를-생성한다"><a href="#요약-arguments-함수에-전달된-파라미터를-모두-포함하는-유사배열객체-this-함수의-호출패턴에-따라-값이-달라진다-caller-해당-함수를-호출한-함수를-참조하는-값을-갖고있다-전역함수에서는-null-재귀함수를-사용할-때-사용가능-length-arguments의-배열-길이-파라미터의-갯수-name-함수의-이름-proto-모든-객체가-갖고-있는-프로퍼티-Prototype-이며-브라우저마다-다르게-명시한다-해당-객체의-프로토타입을-가리키는-참조값을-갖고있다-prototype-함수-객체가-생성자로-사용될-때-이-함수를-통해-생성된-객체의-부모-역할을-하는-객체를-가리킨다-apply-함수를-호출하면서-해당함수의-this를-호출한-함수로-넘기는-역할을-한다-call-apply와-같은-개념이며-apply와-다른-점은-parmeter를-각각-넘기는-스타일이다-bind-bind-메소드는-호출될-때-그-this-키워드를-제공된-값으로-설정하고-새로운-함수가-호출될-때-제공되는-주어진-순서의-선행-인수가-있는-새로운-함수를-생성한다" class="headerlink" title="요약- arguments 함수에 전달된 파라미터를 모두 포함하는 유사배열객체- this 함수의 호출패턴에 따라 값이 달라진다.- caller 해당 함수를 호출한 함수를 참조하는 값을 갖고있다. 전역함수에서는 null. 재귀함수를 사용할 때 사용가능.- length arguments의 배열 길이. (파라미터의 갯수)- name 함수의 이름- __proto__ 모든 객체가 갖고 있는 프로퍼티. [[Prototype]] 이며, 브라우저마다 다르게 명시한다. 해당 객체의 프로토타입을 가리키는 참조값을 갖고있다.- prototype 함수 객체가 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 객체를 가리킨다.- apply 함수를 호출하면서 해당함수의 this를 호출한 함수로 넘기는 역할을 한다.- call apply와 같은 개념이며, apply와 다른 점은 parmeter를 각각 넘기는 스타일이다.- bind bind() 메소드는 호출될 때 그 this 키워드를 제공된 값으로 설정하고 새로운 함수가 호출될 때 제공되는 주어진 순서의 선행 인수가 있는 새로운 함수를 생성한다."></a>요약<br>- <code>arguments</code> 함수에 전달된 파라미터를 모두 포함하는 유사배열객체<br>- <code>this</code> 함수의 호출패턴에 따라 값이 달라진다.<br>- <code>caller</code> 해당 함수를 호출한 함수를 참조하는 값을 갖고있다. 전역함수에서는 null. 재귀함수를 사용할 때 사용가능.<br>- <code>length</code> arguments의 배열 길이. (파라미터의 갯수)<br>- <code>name</code> 함수의 이름<br>- <code>__proto__</code> 모든 객체가 갖고 있는 프로퍼티. [[Prototype]] 이며, 브라우저마다 다르게 명시한다. 해당 객체의 프로토타입을 가리키는 참조값을 갖고있다.<br>- <code>prototype</code> 함수 객체가 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 객체를 가리킨다.<br>- <code>apply</code> 함수를 호출하면서 해당함수의 this를 호출한 함수로 넘기는 역할을 한다.<br>- <code>call</code> apply와 같은 개념이며, apply와 다른 점은 parmeter를 각각 넘기는 스타일이다.<br>- <code>bind</code> bind() 메소드는 호출될 때 그 this 키워드를 제공된 값으로 설정하고 새로운 함수가 호출될 때 제공되는 주어진 순서의 선행 인수가 있는 새로운 함수를 생성한다.</h2><h3 id="1-1-arguments"><a href="#1-1-arguments" class="headerlink" title="1-1. arguments"></a>1-1. <code>arguments</code></h3><p>순회가능한(iterable) 유사배열객체이며, 함수에 전달된 파라미터를 모두 포함한다.<br>arguments 프로퍼티는 arguments 객체를 값으로 가지며, 함수 내부에서 지역변수처럼 사용된다. 즉, 외부에서는 호출할 수 없다. </p>
+<p>arguments 객체에는<br><code>callee</code>, <code>length</code>, <code>Symbol</code> 프로퍼티가 존재한다.<br><code>callee</code> 프로퍼티는 arguments 객체의 소유자인 함수를&#x2F; 가리키는 포인터이다.</p>
 <img src="/images/post_img/39/02.png" width="80%">
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">factorial</span>(<span class="params">num</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(num &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="title function_">factorial</span>(num-<span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -321,7 +307,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/03/JS_04_2/" data-id="ckzv7cqh6004xqobm28rvjdnl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/03/JS_04_2/" data-id="cm3u7mj1o004qhwb2aool7y9u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

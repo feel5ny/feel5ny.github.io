@@ -255,12 +255,12 @@
 <h3 id="1-Angular-CLI-1"><a href="#1-Angular-CLI-1" class="headerlink" title="1. Angular CLI"></a>1. Angular CLI</h3><p><code>tree src</code>라고 명령어를 입력하면 src 하위 파일 디렉토리 tree가 출력된다.<br><code>tree -L 1</code> 해당 디렉토리의 첫번째 레벨 트리만 출력된다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">src/</span><br><span class="line">├── app</span><br><span class="line">│   ├── app.component.css</span><br><span class="line">│   ├── app.component.html</span><br><span class="line">│   ├── app.component.spec.ts</span><br><span class="line">│   ├── app.component.ts</span><br><span class="line">│   └── app.module.ts</span><br><span class="line">├── assets</span><br><span class="line">├── environments</span><br><span class="line">│   ├── environment.prod.ts</span><br><span class="line">│   └── environment.ts</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.html</span><br><span class="line">├── main.ts</span><br><span class="line">├── polyfills.ts</span><br><span class="line">├── styles.css</span><br><span class="line">├── test.ts</span><br><span class="line">├── tsconfig.app.json</span><br><span class="line">├── tsconfig.spec.json</span><br><span class="line">└── typings.d.ts</span><br></pre></td></tr></table></figure>
 
-<h4 id="app-폴더"><a href="#app-폴더" class="headerlink" title="app 폴더"></a><code>app</code> 폴더</h4><dl><dt>어플리케이션 관련된 파일들이 들어가게 된다.<br>app/app.component.{ts, html, css, spec.ts}</dt><dd>루트 컴포넌트를 구성하는 컴포넌트 클래스, HTML 템플릿. CSS, 유닛테스트 파일</dd></dl><dl><dt>app/app.module.ts</dt><dd>Angular 구성요소를 등록하는 루트 모듈.</dd></dl><h4 id="environments"><a href="#environments" class="headerlink" title="environments"></a><code>environments</code></h4><p><code>.prod</code> 프로젝트를 빌드할 때 프러덕션 모드로 빌드하게 되면 environment.prod.ts 내용들이 environment.ts 여기에 덮여쓰여지게된다. 앱에서 쓴 환경변수(서버 url…)를 프러덕션용 환경변수로 쓸 수 있게 된다.</p>
+<h4 id="app-폴더"><a href="#app-폴더" class="headerlink" title="app 폴더"></a><code>app</code> 폴더</h4><dl><dt>어플리케이션 관련된 파일들이 들어가게 된다.<br>app&#x2F;app.component.{ts, html, css, spec.ts}</dt><dd>루트 컴포넌트를 구성하는 컴포넌트 클래스, HTML 템플릿. CSS, 유닛테스트 파일</dd></dl><dl><dt>app&#x2F;app.module.ts</dt><dd>Angular 구성요소를 등록하는 루트 모듈.</dd></dl><h4 id="environments"><a href="#environments" class="headerlink" title="environments"></a><code>environments</code></h4><p><code>.prod</code> 프로젝트를 빌드할 때 프러덕션 모드로 빌드하게 되면 environment.prod.ts 내용들이 environment.ts 여기에 덮여쓰여지게된다. 앱에서 쓴 환경변수(서버 url…)를 프러덕션용 환경변수로 쓸 수 있게 된다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng serve</span><br></pre></td></tr></table></figure>
 <p>서버를 실행시키면 로컬호스트에서 확인이 가능하다.</p>
 <h3 id="CLI를-살펴보자"><a href="#CLI를-살펴보자" class="headerlink" title="CLI를 살펴보자."></a>CLI를 살펴보자.</h3><p><code>ng help</code>를 입력하면 ng cli 리스트들이 쭉 나온다. 아래는 자주 사용하는 명령어만 적어둠.</p>
 <ol>
-<li><code>ng build &lt;options...&gt;</code><br>Build커맨드는 소스코드를 빌드해서 dist/ 에 빌드해주는 명령어이다.</li>
+<li><code>ng build &lt;options...&gt;</code><br>Build커맨드는 소스코드를 빌드해서 dist&#x2F; 에 빌드해주는 명령어이다.</li>
 </ol>
 <ul>
 <li>주로 사용하는 CLI<ul>
@@ -313,8 +313,8 @@
 <img src="/images/post_img/35/angular-process.png">
 > Anuglar 어플리케이션의 흐름 [+](http://poiemaweb.com/angular-architecture)
 
-<h3 id="3-index-html"><a href="#3-index-html" class="headerlink" title="3. index.html"></a>3. index.html</h3><p><code>/dist/index.html</code>는 빌드(ng build)의 결과물로 실제 배포 시에는 서버로 이관된다.<br>ng serve 명령어에 의해 <strong>내장 개발 서버</strong>를 사용하여 로컬 환경에서 프로젝트를 실행(preview)하는 경우, Angular CLI 내부적으로 <code>빌드를 자동 수행</code>하므로 빌드(ng build)를 별도 실행하여 /my-app/dist/index.html를 생성할 필요는 없다.<br>자동으로 빌드되어 가상 드라이브에 저장되어 있는 index.html를 내장개발 서버가 로드한다고 이해하면 된다.</p>
-<p><code>inline.bundle.js</code> : 웹팩 유틸리티가 포함된 Webpack loader<br><code>polifills.bundle.js</code> : polyfil 의존성 모듈(core-js, zone.js)를 번들링한 파일<br><code>styles.bundle.js</code> : 스타일 전의를 번들링한 파일<br><code>vendor.bundle.js</code> : 의존성 모듈(@angular/*, RxJS 등)을 번들링한 파일<br><code>main.bundle.js</code> : 개발자가 작성한 컴포넌트, 디렉티브, 서비스 등 소스코드를 번들링한 파일</p>
+<h3 id="3-index-html"><a href="#3-index-html" class="headerlink" title="3. index.html"></a>3. index.html</h3><p><code>/dist/index.html</code>는 빌드(ng build)의 결과물로 실제 배포 시에는 서버로 이관된다.<br>ng serve 명령어에 의해 <strong>내장 개발 서버</strong>를 사용하여 로컬 환경에서 프로젝트를 실행(preview)하는 경우, Angular CLI 내부적으로 <code>빌드를 자동 수행</code>하므로 빌드(ng build)를 별도 실행하여 &#x2F;my-app&#x2F;dist&#x2F;index.html를 생성할 필요는 없다.<br>자동으로 빌드되어 가상 드라이브에 저장되어 있는 index.html를 내장개발 서버가 로드한다고 이해하면 된다.</p>
+<p><code>inline.bundle.js</code> : 웹팩 유틸리티가 포함된 Webpack loader<br><code>polifills.bundle.js</code> : polyfil 의존성 모듈(core-js, zone.js)를 번들링한 파일<br><code>styles.bundle.js</code> : 스타일 전의를 번들링한 파일<br><code>vendor.bundle.js</code> : 의존성 모듈(@angular&#x2F;*, RxJS 등)을 번들링한 파일<br><code>main.bundle.js</code> : 개발자가 작성한 컴포넌트, 디렉티브, 서비스 등 소스코드를 번들링한 파일</p>
 <h2 id="3-Module"><a href="#3-Module" class="headerlink" title="3. Module"></a>3. Module</h2><h4 id="3-1-ES6-모듈"><a href="#3-1-ES6-모듈" class="headerlink" title="3-1. ES6 모듈"></a>3-1. ES6 모듈</h4><p>모듈이란</p>
 <ul>
 <li>세부 구현이 숨겨지고 공개 API를 이용해 다른 코드에서 재사용 가능한 코드</li>
@@ -325,7 +325,7 @@
 <ul>
 <li>모든 앵귤러 어플리케이션은 하나의 Root Module을 가진다.</li>
 <li>여러 Feature Module을 가질 수 있다.</li>
-<li>재사용할 수 있는 기능을 외부에 배포하기 위해 사용되기도 한다. </li>
+<li>재사용할 수 있는 기능을 외부에 배포하기 위해 사용되기도 한다.</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng g m todo</span><br></pre></td></tr></table></figure>
 <p>app 하위에 todo라는 폴더가 생성되고 todo.module.ts라는 모듈파일이 만들어진다.</p>
@@ -373,7 +373,7 @@ todos라는 객체의 todo요소들을 referencing한다고 생각하면 된다.
 
 <p><strong>ngFor</strong><br>Angular의 ngFor “repeater” 지시자(directive)</p>
 <h3 id="5-1-내장-directive"><a href="#5-1-내장-directive" class="headerlink" title="5-1. 내장 directive"></a>5-1. 내장 directive</h3><ul>
-<li>디렉티브(Directive / 지시자)는 <code>DOM의 모든 것(모양이나 동작 등)을 관리하기 위한 지시(명령)</code>이다. HTML 요소 또는 어트리뷰트의 형태로 사용하여 디렉티브가 사용된 요소에게 무언가를 하라는 지시(directive)를 전달한다.</li>
+<li>디렉티브(Directive &#x2F; 지시자)는 <code>DOM의 모든 것(모양이나 동작 등)을 관리하기 위한 지시(명령)</code>이다. HTML 요소 또는 어트리뷰트의 형태로 사용하여 디렉티브가 사용된 요소에게 무언가를 하라는 지시(directive)를 전달한다.</li>
 <li>디렉티브는 애플리케이션 전역에서 사용할 수 있는 공통 관심사를 컴포넌트에서 분리하여 구현한 것으로 컴포넌트의 복잡도를 낮추고 가독성을 향상시킨다. 컴포넌트도 뷰를 생성하고 이벤트를 처리하는 등 DOM을 관리하기 때문에 큰 의미에서 디렉티브로 볼 수 있다.</li>
 </ul>
 <h4 id="5-1-1-컴포넌트-디렉티브"><a href="#5-1-1-컴포넌트-디렉티브" class="headerlink" title="5-1-1. 컴포넌트 디렉티브"></a>5-1-1. 컴포넌트 디렉티브</h4><ul>
@@ -396,9 +396,9 @@ todos라는 객체의 todo요소들을 referencing한다고 생각하면 된다.
 <p>ngIf 디렉티브 앞에 붙은 *(asterisk)는 아래 구문의 문법적 설탕(syntactic sugar)이다. 즉 위 코드는 아래의 코드로 변환된다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ng-template [ngIf]=<span class="string">&quot;expression&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">element</span>&gt;</span>...<span class="tag">&lt;/<span class="name">element</span>&gt;</span></span></span><br><span class="line">&lt;/ng-template&gt;</span><br></pre></td></tr></table></figure>
 
-<p>Angular는 <em>ngIf를 만나면 호스트 요소를 <code>ng-template</code> 디렉티브로 래핑하고 *ngIf를 *</em>프로퍼티 바인딩으로 변환한다.**(<code>[ngIf]=&quot;expression&quot;</code>) ngFor와 ngSwitch 디렉티브도 동일한 패턴을 따른다.</p>
+<p>Angular는 *ngIf를 만나면 호스트 요소를 <code>ng-template</code> 디렉티브로 래핑하고 *ngIf를 <strong>프로퍼티 바인딩으로 변환한다.</strong>(<code>[ngIf]=&quot;expression&quot;</code>) ngFor와 ngSwitch 디렉티브도 동일한 패턴을 따른다.</p>
 <ul>
-<li>ng-template 디렉티브는 페이지에서 렌더링 될 요소를 div 또는 span 등의 요소와 함께 사용할 필요가 없는 요소들을 그룹화할 때 사용한다. </li>
+<li>ng-template 디렉티브는 페이지에서 렌더링 될 요소를 div 또는 span 등의 요소와 함께 사용할 필요가 없는 요소들을 그룹화할 때 사용한다.</li>
 </ul>
 <p><strong>ngIf else</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- <span class="keyword">if</span> <span class="keyword">else</span> --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">element</span> *<span class="attr">ngIf</span>=<span class="string">&quot;expression; else elseBlock&quot;</span>&gt;</span>Truthy condition<span class="tag">&lt;/<span class="name">element</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">elseBlock</span>&gt;</span>Falsy condition<span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="keyword">if</span> <span class="keyword">else</span> --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">element</span> *<span class="attr">ngIf</span>=<span class="string">&quot;expression; then thenBlock else elseBlock&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">element</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">thenBlock</span>&gt;</span>Truthy condition<span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">elseBlock</span>&gt;</span>Falsy condition<span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="keyword">if</span> --&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">element</span> *<span class="attr">ngIf</span>=<span class="string">&quot;expression; then thenBlock&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">element</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ng-template</span> #<span class="attr">thenBlock</span>&gt;</span>Truthy condition<span class="tag">&lt;/<span class="name">ng-template</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
@@ -435,7 +435,7 @@ todos라는 객체의 todo요소들을 referencing한다고 생각하면 된다.
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/02/15/Angular_practice/" data-id="ckzv7cqe20005qobm0itdkxv0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/02/15/Angular_practice/" data-id="cm3u7mj0v0001hwb274sk1kos" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

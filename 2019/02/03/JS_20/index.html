@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="javaScript,generator,yield,loop" />
+        <meta name="keywords" content="javaScript,yield,generator,loop" />
     
     
     <meta name="description" content="🌕🌑🌑 TL;DR복습할때나 이 문제가 까먹었을 즈음에 풀어보기  iterable객체 완성하기??? 구해보기(2가지 방법으로)1234567&#123;  [Symbol.iterator]()&#123;return this;&#125;  data: [&#123;a:[1,2,3,4], b:&#x27;-&#x27;&#125;, [5,6,7], 8, 9],  ne">
@@ -23,8 +23,8 @@
 <meta property="article:modified_time" content="2024-11-23T12:10:16.973Z">
 <meta property="article:author" content="Joy Kim">
 <meta property="article:tag" content="javaScript">
-<meta property="article:tag" content="generator">
 <meta property="article:tag" content="yield">
+<meta property="article:tag" content="generator">
 <meta property="article:tag" content="loop">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/10/thumb_default.jpg">
@@ -299,9 +299,7 @@
             <p>🌕🌑🌑</p>
 <h3 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h3><p>복습할때나 이 문제가 까먹었을 즈음에 풀어보기</p>
 <ol>
-<li>iterable객체 완성하기<br><code>???</code> 구해보기<br>(2가지 방법으로)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>;&#125;</span><br><span class="line">  <span class="attr">data</span>: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">&#x27;-&#x27;</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> ???</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>iterable객체 완성하기<br><code>???</code> 구해보기<br>(2가지 방법으로)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>;&#125;</span><br><span class="line">  <span class="attr">data</span>: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">&#x27;-&#x27;</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> ???</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <blockquote>
 <p>코드스피츠 강의 정리록입니다.</p>
@@ -315,44 +313,44 @@
 
 <h4 id="복잡한-다층형-그래프는-어떻게-이터레이션-할-것인가"><a href="#복잡한-다층형-그래프는-어떻게-이터레이션-할-것인가" class="headerlink" title="복잡한 다층형 그래프는 어떻게 이터레이션 할 것인가?"></a>복잡한 다층형 그래프는 어떻게 이터레이션 할 것인가?</h4><p>es6와 es6이전의 객체 리터럴의 큰 차이점이 무엇인가 </p>
 <ol>
-<li>es6이전<ul>
+<li>es6이전</li>
+</ol>
+<ul>
 <li>기존의 객체 리터럴에서는 객체 리터럴의 순서가 없다.</li>
 <li>자바로 따지면 hash memory로 되어있다.</li>
 </ul>
-</li>
-<li>es6<ul>
+<ol start="2">
+<li>es6</li>
+</ol>
+<ul>
 <li>es6의 객체 리터럴은에서는 객체 리터럴의 순서가 있다.</li>
 <li><strong>linked hash memory</strong>로 되어있다.</li>
 <li>반드시 순서대로 해석된다.</li>
 </ul>
-</li>
-</ol>
 <h4 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()&#123;<span class="keyword">return</span> <span class="variable language_">this</span>;&#125;</span><br><span class="line">  <span class="attr">data</span>: [&#123;<span class="attr">a</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>], <span class="attr">b</span>:<span class="string">&#x27;-&#x27;</span>&#125;, [<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>], <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">  <span class="title function_">next</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> ???</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="생각해보기-글쓴이-생각"><a href="#생각해보기-글쓴이-생각" class="headerlink" title="생각해보기 (글쓴이 생각..)"></a>생각해보기 (글쓴이 생각..)</h5><ol>
 <li>iterable 프로토콜 유지하기 </li>
-<li>배열 요소들의 타입 검사 <ol>
+<li>배열 요소들의 타입 검사 </li>
 <li>객체일 경우<br>객체 내부 키값의 요소들의 타입 검사 <ol>
 <li>객체일 경우</li>
 <li>배열일 경우 </li>
-<li>일반 값인 경우<br>=&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다. <ul>
+<li>일반 값인 경우<br>   &#x3D;&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다.</li>
+</ol>
+<ul>
 <li>어떻게 같은 루프를 다시 태우지..</li>
 </ul>
-</li>
-</ol>
 </li>
 <li>배열일 경우<br>배열 요소의 타입 검사<ol>
 <li>객체일 경우</li>
 <li>배열일 경우 </li>
-<li>일반 값인 경우<br>=&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다. <ul>
+<li>일반 값인 경우<br>   &#x3D;&gt; 처음 타입 검사와 같은 흐름이므로 해당 flow를 recursive 되도록 한다.</li>
+</ol>
+<ul>
 <li>어떻게 같은 루프를 다시 태우지..</li>
 </ul>
 </li>
-</ol>
-</li>
-<li>일반 값인 경우<br>값 반환 </li>
-</ol>
-</li>
+<li>일반 값인 경우<br>값 반환</li>
 </ol>
 <hr>
 <h5 id="cf-1-루프를-어떻게하면-잘-짤-수-있을까"><a href="#cf-1-루프를-어떻게하면-잘-짤-수-있을까" class="headerlink" title="cf__1. 루프를 어떻게하면 잘 짤 수 있을까."></a>cf__1. 루프를 어떻게하면 잘 짤 수 있을까.</h5><p>루프를 잘 짜고<br>보다 어려운 로직을 짜는 방법은<br><strong>내 머리가 선언한 변수만큼을 추적할 수 있어야 한다…</strong></p>
@@ -363,15 +361,14 @@
 
 <h5 id="정답-내의-오류"><a href="#정답-내의-오류" class="headerlink" title="정답 내의 오류"></a>정답 내의 오류</h5><p><code>for(var k in v)</code></p>
 <ol>
-<li><p>for…in문은 <strong>prototype의 key까지 다 나오기 때문에</strong> <code>hasOwnProperty</code>를 조건에 추가해야한다.</p>
+<li>for…in문은 <strong>prototype의 key까지 다 나오기 때문에</strong> <code>hasOwnProperty</code>를 조건에 추가해야한다.</li>
+</ol>
 <ul>
 <li>hasOwnProperty는 자신의 고유 속성, 즉 상속받은 프로퍼티가 아닌 순수 자신의 속성인 경우에만 true라는 값을 반환하는 특징이 있습니다.</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v)&#123;</span><br><span class="line">  <span class="keyword">if</span>(v.<span class="title function_">hasOwnProperty</span>(k)) <span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">unshift</span>(...x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>현재 상태에서는 순서 보장이 안된다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = [];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v) x.<span class="title function_">push</span>(v[k])</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">unshift</span>(...x);</span><br></pre></td></tr></table></figure>
-
-</li>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v)&#123;</span><br><span class="line">  <span class="keyword">if</span>(v.<span class="title function_">hasOwnProperty</span>(k)) <span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">unshift</span>(...x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>현재 상태에서는 순서 보장이 안된다.  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = [];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> v) x.<span class="title function_">push</span>(v[k])</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">data</span>.<span class="title function_">unshift</span>(...x);</span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <h5 id="한번더-리팩토링"><a href="#한번더-리팩토링" class="headerlink" title="한번더 리팩토링"></a>한번더 리팩토링</h5><p>값인 타입을 <code>v instanceof Object</code>로 판단할 수 있다!</p>
@@ -381,7 +378,7 @@
 <h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><p>자바스크립트 언어는 2가지로 되어있다. </p>
 <ol>
 <li>언어자체의 문법적인 내용, </li>
-<li>클래스 라이브러리<br>자바스크립트의 클래스 라이브러리는 <strong>코어객체</strong> (Built-in)<br>Math, Date, RegEx…<br>=&gt; 표준으로 제공되고 있는 언어 표준의 일부<br>=&gt; 언어 스팩의 일부</li>
+<li>클래스 라이브러리<br>자바스크립트의 클래스 라이브러리는 <strong>코어객체</strong> (Built-in)<br>Math, Date, RegEx…<br>&#x3D;&gt; 표준으로 제공되고 있는 언어 표준의 일부<br>&#x3D;&gt; 언어 스팩의 일부</li>
 </ol>
 <p><strong>코어객체에 있는 메서드들을 사용하는 것이<br>기본 언어자체의 문법을 사용하는 것보다 더 안전하다.</strong><br>ex. for..in보다 Object.values</p>
 <blockquote>
@@ -406,7 +403,7 @@
 <p><a name="1-2"></a></p>
 <h3 id="1-2-abstract-loop"><a href="#1-2-abstract-loop" class="headerlink" title="1.2 abstract loop"></a>1.2 abstract loop</h3><p>위의 루프는 목적이 있는 루프이다.<br>목적이 있는 루프를 만들고 목적을 바꾸면 루프를 다시 짜야한다.</p>
 <h4 id="다양한-구조의-루프와-무관하게-해당-값이나-상황의-개입만-하고-싶은-경우"><a href="#다양한-구조의-루프와-무관하게-해당-값이나-상황의-개입만-하고-싶은-경우" class="headerlink" title="다양한 구조의 루프와 무관하게 해당 값이나 상황의 개입만 하고 싶은 경우"></a>다양한 구조의 루프와 무관하게 해당 값이나 상황의 개입만 하고 싶은 경우</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(data, f) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> v;</span><br><span class="line">  <span class="keyword">while</span>(v = data.<span class="title function_">shift</span>())&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="title class_">Object</span>))&#123;</span><br><span class="line">      <span class="comment">// v로 뭔가 하는 부분</span></span><br><span class="line">      <span class="title function_">f</span>(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(v)) v = <span class="title class_">Object</span>.<span class="title function_">values</span>(v);</span><br><span class="line">      data.<span class="title function_">unshift</span>(...v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이 상황에서 f(v)를 호출하는 body에 본래 목적과 다른 로직이 추가 될 경우,<br>같은 로직을 복사하고 원하는 로직을 추가해야하는 상황이 발생한다.<br>문으로 로직을 작성할 때는 별다른 방법이 없다.<br><strong>=&gt; 제어문을 재활용할 수 없으므로 중복정의할 수 밖에 없다.</strong><br>=&gt; 문은 사용하고 나면 재활용할 수 없는데 이걸 어떻게 객체화하지?</p>
+<p>이 상황에서 f(v)를 호출하는 body에 본래 목적과 다른 로직이 추가 될 경우,<br>같은 로직을 복사하고 원하는 로직을 추가해야하는 상황이 발생한다.<br>문으로 로직을 작성할 때는 별다른 방법이 없다.<br><strong>&#x3D;&gt; 제어문을 재활용할 수 없으므로 중복정의할 수 밖에 없다.</strong><br>&#x3D;&gt; 문은 사용하고 나면 재활용할 수 없는데 이걸 어떻게 객체화하지?</p>
 <h4 id="결국-제어문을-직접-사용할-수-없고-구조객체를-이용해-루프-실행기를-별도로-구현"><a href="#결국-제어문을-직접-사용할-수-없고-구조객체를-이용해-루프-실행기를-별도로-구현" class="headerlink" title="결국 제어문을 직접 사용할 수 없고 구조객체를 이용해 루프 실행기를 별도로 구현"></a>결국 제어문을 직접 사용할 수 없고 구조객체를 이용해 루프 실행기를 별도로 구현</h4><p>구조를 추상화해보자.</p>
 <ul>
 <li>루프 공통 골격 </li>
@@ -421,10 +418,8 @@
 <ol>
 <li>array일때 </li>
 <li>object일때</li>
-<li>primitive일때<br>3개만큼의 객체를 만들어놓고 바깥쪽에서 객체를 결정하게 끔 만들어 주면 값으로 분리할 수 있게 된다. =&gt; 이렇게 if문이 하나씩 제거된다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(data, f) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> v;</span><br><span class="line">  <span class="keyword">while</span>(v = data.<span class="title function_">shift</span>())&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="title class_">Object</span>))&#123;</span><br><span class="line">      <span class="title function_">f</span>(v)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(v)) v = <span class="title class_">Object</span>.<span class="title function_">values</span>(v);</span><br><span class="line">      data.<span class="title function_">unshift</span>(...v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="/images/2019/10/01.png">
-
-</li>
+<li>primitive일때<br>3개만큼의 객체를 만들어놓고 바깥쪽에서 객체를 결정하게 끔 만들어 주면 값으로 분리할 수 있게 된다. &#x3D;&gt; 이렇게 if문이 하나씩 제거된다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(data, f) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> v;</span><br><span class="line">  <span class="keyword">while</span>(v = data.<span class="title function_">shift</span>())&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(v <span class="keyword">instanceof</span> <span class="title class_">Object</span>))&#123;</span><br><span class="line">      <span class="title function_">f</span>(v)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(v)) v = <span class="title class_">Object</span>.<span class="title function_">values</span>(v);</span><br><span class="line">      data.<span class="title function_">unshift</span>(...v);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/images/2019/10/01.png"></li>
 </ol>
 <h4 id="팩토리-컴포지트"><a href="#팩토리-컴포지트" class="headerlink" title="팩토리 + 컴포지트"></a>팩토리 + 컴포지트</h4><ul>
 <li>선택기는 팩토리 패턴으로</li>
@@ -461,7 +456,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_20/" data-id="ckzv7cqib006kqobm3hhaivb3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_20/" data-id="cm3u7mj1s005uhwb237ho6g7f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

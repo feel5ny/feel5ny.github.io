@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수와 재귀 클로저2-1. 클로저 사용 (반복문)2-2. 클로저의 메모리 누수2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)   &#x3D; 은닉화    1. 함수의 재귀함수의">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차1. 함수와 재귀2. 클로저  2-1. 클로저 사용 (반복문)  2-2. 클로저의 메모리 누수  2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)      &#x3D; 은닉화">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6&#x2F; 함수표현식의 다른 용도">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/07/JS_06/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   함수와 재귀 클로저2-1. 클로저 사용 (반복문)2-2. 클로저의 메모리 누수2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)   &#x3D; 은닉화    1. 함수의 재귀함수의">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차1. 함수와 재귀2. 클로저  2-1. 클로저 사용 (반복문)  2-2. 클로저의 메모리 누수  2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)      &#x3D; 은닉화">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/43/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-07T12:20:19.000Z">
@@ -231,13 +231,9 @@
             <blockquote>
 <p>‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
-<p>목차 </p>
-<ol>
-<li><a href="#recursion">함수와 재귀</a></li>
-<li><a href="#closure">클로저</a><br>2-1. 클로저 사용 (반복문)<br>2-2. 클로저의 메모리 누수<br>2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)<br>   = 은닉화</li>
-</ol>
-<hr>
-<h2 id="1-함수의-재귀"><a href="#1-함수의-재귀" class="headerlink" title=" 1. 함수의 재귀"></a><a name="oop"></a> 1. 함수의 재귀</h2><p>함수의 재귀 부분은 <a href="https://feel5ny.github.io/2017/12/02/JS_04/">함수Part 포스팅</a>의 callee의 예시를 보면서 설명했었다. 추가로 스트릭트 모드일 경우에 <code>arguments.callee</code>에 접근할 수 없으므로 이를 보완하는 방법을 알아본다.</p>
+<h2 id="목차1-함수와-재귀2-클로저-2-1-클로저-사용-반복문-2-2-클로저의-메모리-누수-2-3-클로저를-이용한-고유-변수-private-variable-객체-외부에서-접근할-수-없는-변수-은닉화"><a href="#목차1-함수와-재귀2-클로저-2-1-클로저-사용-반복문-2-2-클로저의-메모리-누수-2-3-클로저를-이용한-고유-변수-private-variable-객체-외부에서-접근할-수-없는-변수-은닉화" class="headerlink" title="목차1. 함수와 재귀2. 클로저  2-1. 클로저 사용 (반복문)  2-2. 클로저의 메모리 누수  2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)      &#x3D; 은닉화
+      "></a>목차<br>1. <a href="#recursion">함수와 재귀</a><br>2. <a href="#closure">클로저</a><br>  2-1. 클로저 사용 (반복문)<br>  2-2. 클로저의 메모리 누수<br>  2-3. 클로저를 이용한 고유 변수(private variable : 객체 외부에서 접근할 수 없는 변수)<br>      &#x3D; 은닉화
+      </h2><h2 id="1-함수의-재귀"><a href="#1-함수의-재귀" class="headerlink" title=" 1. 함수의 재귀"></a><a name="oop"></a> 1. 함수의 재귀</h2><p>함수의 재귀 부분은 <a href="https://feel5ny.github.io/2017/12/02/JS_04/">함수Part 포스팅</a>의 callee의 예시를 보면서 설명했었다. 추가로 스트릭트 모드일 경우에 <code>arguments.callee</code>에 접근할 수 없으므로 이를 보완하는 방법을 알아본다.</p>
 <ul>
 <li>이름 붙은 함수 표현식을 써서 같은 결과를 낼 수 있게 한다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> factorial = (<span class="keyword">function</span> <span class="title function_">f</span>(<span class="params">num</span>)&#123; <span class="comment">// f()를 생성하여 factorial에 할당.</span></span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num * <span class="title function_">f</span>(num-<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 f라는 이름은 함수를 다른 변수에 할당하더라도 그대로 유지되므로 재귀 호출은 정확히 실행됨.</li>
@@ -250,15 +246,17 @@ f라는 이름은 함수를 다른 변수에 할당하더라도 그대로 유지
 내부 함수가 반환되어 다른 컨텍스트에서 실행되는 동안에도 `propertyName`에 접근하 수 있다. 이런 일이 가능한 것은 내부 함수의 스코프 체인에 `createComparisonFunction()`의 스코프가 포함되기 때문이다.
 
 <ol>
-<li>외부함수가 실행을 마치고 익명함수를 반환하면 익명함수의 스코프체인은 외부함수의 활성화객체AO와 전역변수객체GO를 포함하도록 초기화된다. <ul>
+<li>외부함수가 실행을 마치고 익명함수를 반환하면 익명함수의 스코프체인은 외부함수의 활성화객체AO와 전역변수객체GO를 포함하도록 초기화된다.</li>
+</ol>
+<ul>
 <li>이 때문에 익명 함수는 외부 함수의 번수 전체에 접근할 수 있다.</li>
 </ul>
-</li>
-<li>아직 익명함수의 스코프 체인에서 활성객체를 참조하기 때문에 외부 함수가 실행을 마쳤는데도 활성객체는 파괴디지 않는다.<ul>
-<li>즉 활성화객체는 익명함수가 파괴될 때까지 메모리에 남는다. </li>
-</ul>
-</li>
+<ol start="2">
+<li>아직 익명함수의 스코프 체인에서 활성객체를 참조하기 때문에 외부 함수가 실행을 마쳤는데도 활성객체는 파괴디지 않는다.</li>
 </ol>
+<ul>
+<li>즉 활성화객체는 익명함수가 파괴될 때까지 메모리에 남는다.</li>
+</ul>
 <h3 id="중간지점-개념정리"><a href="#중간지점-개념정리" class="headerlink" title="중간지점..개념정리"></a>중간지점..개념정리</h3><p>자신을 포함하고 있는 외부함수보다 내부함수가 더 오래 유지되는 경우,<br>내부함수가 외부함수의 스코프에 접근할 수 있고,<br>외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 못하고 상태가 유지되며<br>내부함수에 의해서 소멸하게 되는 특성을 클로저라고 부른다.</p>
 <p>외부함수의 지역변수를 Free variable(자유변수)이라고 부르는데, 클로저라는 이름은 <strong>자유변수에 함수가 닫혀있다(Closed)라는 의미로, 자유변수에 엮여있는 함수라는 뜻</strong>이다.</p>
 <p>외부함수가 이미 반환되었어도 <strong>외부함수 내의 변수는 이를 필요로 하는 내부함수가 하나 이상 존재하는 경우, 계속 유지된다.</strong> (내부함수가 외부함수에 있는 변수의 복사본이 아니라 실제변수에 접근한다.)</p>
@@ -302,7 +300,7 @@ f라는 이름은 함수를 다른 변수에 할당하더라도 그대로 유지
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/07/JS_06/" data-id="ckzv7cqhd0051qobmpsad385r" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/07/JS_06/" data-id="cm3u7mj1p004vhwb2agubamgp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

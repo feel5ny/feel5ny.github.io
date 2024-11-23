@@ -412,31 +412,39 @@
 <img src="/images/2019/42/02.png" style="width:100%"/>
 
 <ol>
-<li>1단계<ul>
+<li>1단계</li>
+</ol>
+<ul>
 <li>서버는 난스값을 계산한다.</li>
 </ul>
-</li>
-<li>2단계<ul>
+<ol start="2">
+<li>2단계</li>
+</ol>
+<ul>
 <li>서버는 난스를 <code>WWW-Authenticate</code> 인증요구 메세지에 담아,<br>서버가 지원하는 알고리즘 목록과 함께 클라에 전송한다.</li>
 </ul>
-</li>
-<li>3단계<ul>
+<ol start="3">
+<li>3단계</li>
+</ol>
+<ul>
 <li>클라는 알고리즘을 선택하고, 비밀번호와 그 외 데이터에 대한 요약을 계산한다.</li>
 </ul>
-</li>
-<li>4단계<ul>
+<ol start="4">
+<li>4단계</li>
+</ol>
+<ul>
 <li>클라는 Authorization 메세지에 요약을 담아 서버에게 돌려준다.</li>
 <li>만약 서버가 인증을 원한다면 난스를 보낼 수 있다.</li>
 </ul>
-</li>
-<li>5단계<ul>
+<ol start="5">
+<li>5단계</li>
+</ol>
+<ul>
 <li>서버는 요약, 선택한 알고리즘, 그 외 보조 데이터들을 받고, 클라가 했던 그대로 요약을 계산한다.</li>
 <li>서버는 그 다음 자신이 계산한 요약과 네트워크로 전송되어 온 요약이 서로 같은지 확인한다.</li>
 <li>만약 클라가 대칭적으로 서버에게 클라 난스를 갖고 인증을 요구했다면,<br>클라 요약이 만들어진다.</li>
 <li>서버는 클라가 미리 다음번 요약을 올바르게 생성할 수 있도록 다음번 난스를 미리 계산해서 클라에게 넘겨줄 수도 있다.</li>
 </ul>
-</li>
-</ol>
 <hr>
 <hr>
 <a name="calc"/>
@@ -446,7 +454,7 @@
 <ol>
 <li>공개된 정보,</li>
 <li>비밀 정보,</li>
-<li>시한부 난스 </li>
+<li>시한부 난스</li>
 </ol>
 <p>값을 조합한 단방향 요약이다.</p>
 </li>
@@ -455,48 +463,34 @@
 </ul>
 <h2 id="3-1-요약-알고리즘과-입력-데이터"><a href="#3-1-요약-알고리즘과-입력-데이터" class="headerlink" title="3.1 요약 알고리즘과 입력 데이터"></a>3.1 요약 알고리즘과 입력 데이터</h2><p>요약은 다음 3가지 요소로부터 계산된다.<br>A1, A2 두 조각의 데이터는 요약을 생성하기 위해 H와 KD에 의해 처리됨</p>
 <ol>
-<li>action: <strong>함수들</strong><ol>
+<li>action: <strong>함수들</strong></li>
 <li>단방향 해시 함수 H(d)</li>
-<li>요약 함수 KD(s,d) // s는 비밀, d는 data</li>
-</ol>
-</li>
-<li>core: <strong>데이터</strong><ol>
-<li>보안정보 데이터<ul>
-<li>비밀번호 등 보안 정보를 담고 있는 데이터 덩어리 (<strong>A1</strong>이라 칭하자)</li>
-</ul>
-</li>
-<li>요청메세지의 비밀 외의 속성 데이터 <ul>
-<li>요청 메세지의 비밀이 아닌 속성을 담고 있는 데이터 덩어리 (<strong>A2</strong>이라 칭하자)</li>
-</ul>
-</li>
-</ol>
-</li>
+<li>요약 함수 KD(s,d) &#x2F;&#x2F; s는 비밀, d는 data</li>
+<li>core: <strong>데이터</strong></li>
+<li>보안정보 데이터<br>- 비밀번호 등 보안 정보를 담고 있는 데이터 덩어리 (<strong>A1</strong>이라 칭하자)</li>
+<li>요청메세지의 비밀 외의 속성 데이터<br>- 요청 메세지의 비밀이 아닌 속성을 담고 있는 데이터 덩어리 (<strong>A2</strong>이라 칭하자)</li>
 </ol>
 <h3 id="보안-관련-데이터-A1"><a href="#보안-관련-데이터-A1" class="headerlink" title="보안 관련 데이터 A1"></a>보안 관련 데이터 A1</h3><ul>
-<li>A1 데이터에는<br>사용자 이름 / 비밀번호 / 보호 영역 / 난스가 포함된다.</li>
+<li>A1 데이터에는<br>사용자 이름 &#x2F; 비밀번호 &#x2F; 보호 영역 &#x2F; 난스가 포함된다.</li>
 <li>“&lt;알고리즘&gt;”인 경우 (예 : “SHA-256”),<br>A1은 사용자 이름, 영역, 비밀번호를 콜론으로 연결한 것이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A1 = &lt;사용자&gt;:&lt;영역&gt;:&lt;비밀번호&gt; </span><br></pre></td></tr></table></figure></li>
-<li><code>&lt;알고리즘&gt; -sess</code>인 경우 (예 : “SHA-256-sess”),<br>A1은 서버의 인증 요청에 제공된 nonce 값과 다음 클라이언트 요청의 cnonce 값을 사용하여 계산됩니다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A1 = H( unq(username) &quot;:&quot; unq(realm) &quot;:&quot; passwd )</span><br><span class="line">     &quot;:&quot; unq(nonce-prime) &quot;:&quot; unq(cnonce-prime)</span><br></pre></td></tr></table></figure>
-
-</li>
+<li><code>&lt;알고리즘&gt; -sess</code>인 경우 (예 : “SHA-256-sess”),<br>A1은 서버의 인증 요청에 제공된 nonce 값과 다음 클라이언트 요청의 cnonce 값을 사용하여 계산됩니다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A1 = H( unq(username) &quot;:&quot; unq(realm) &quot;:&quot; passwd )</span><br><span class="line">     &quot;:&quot; unq(nonce-prime) &quot;:&quot; unq(cnonce-prime)</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="메세지-관련-데이터-A2"><a href="#메세지-관련-데이터-A2" class="headerlink" title="메세지 관련 데이터 A2"></a>메세지 관련 데이터 A2</h3><ul>
-<li>A2 데이터에는 메세지 자체의 정보를 나타냄<br>URL / 요청메서드 / 메세지 엔터티 본문</li>
+<li>A2 데이터에는 메세지 자체의 정보를 나타냄<br>URL &#x2F; 요청메서드 &#x2F; 메세지 엔터티 본문</li>
 <li>메서드, 리소스, 메세지의 위조를 방지하기 위해 사용됨</li>
-<li>RFC7616 <del>2617</del>은 <strong>선택된 보호 수준 (quality of protection, qop)</strong>에 따른<br>A2의 두가지 사용법을 정의하고 있다.<ol>
-<li>HTTP 요청 메서드와 URL만 포함하는 것이다.<br>이것은 기본값이기도한 qop=”auth”일 때 사용된다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A2 = Method &quot;:&quot; request-uri</span><br></pre></td></tr></table></figure></li>
-<li>메세지 무결성 검사를 제공하기 위해 메세지 엔터티 본문을 추가하는 것<br>qop=”auth-init”일 때 사용된다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A2 = Method &quot;:&quot; request-uri &quot;:&quot; H(entity-body)</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>RFC7616 <del>2617</del>은 **선택된 보호 수준 (quality of protection, qop)**에 따른<br>A2의 두가지 사용법을 정의하고 있다.<ol>
+<li>HTTP 요청 메서드와 URL만 포함하는 것이다.<br>  이것은 기본값이기도한 qop&#x3D;”auth”일 때 사용된다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A2 = Method &quot;:&quot; request-uri</span><br></pre></td></tr></table></figure></li>
+<li>메세지 무결성 검사를 제공하기 위해 메세지 엔터티 본문을 추가하는 것<br>  qop&#x3D;”auth-init”일 때 사용된다.  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A2 = Method &quot;:&quot; request-uri &quot;:&quot; H(entity-body)</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
 <h3 id="H와-KD-알고리즘"><a href="#H와-KD-알고리즘" class="headerlink" title="H와 KD 알고리즘"></a>H와 KD 알고리즘</h3><ul>
 <li>다이제스트 인증은 여러가지 요약 알고리즘을 선택할 수 있도록 지원한다.</li>
-<li>MD5와 MD5-sess, SHA-256 등이 있다. </li>
+<li>MD5와 MD5-sess, SHA-256 등이 있다.</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 개인적으로 빠른 인지를 위해 자바스크립트 문법 사용</span><br><span class="line">KD = (비밀, 데이터) =&gt; H(연결(비밀:데이터)) // 요약 함수</span><br><span class="line">H = (데이터) =&gt; MD5(데이터) // 해시함수</span><br></pre></td></tr></table></figure>
 
-<h3 id="요약-알고리즘-전반"><a href="#요약-알고리즘-전반" class="headerlink" title="요약 알고리즘 전반"></a>요약 알고리즘 전반</h3><p>RFC7616 <del>2617</del>은 주어진 H, KD, A1, A2로 요약을 계산하는 방법에는,<br><strong>난스 횟수 집계(nc) 및 대칭 인증의 지원(qop)</strong>을 포함한다.</p>
+<h3 id="요약-알고리즘-전반"><a href="#요약-알고리즘-전반" class="headerlink" title="요약 알고리즘 전반"></a>요약 알고리즘 전반</h3><p>RFC7616 <del>2617</del>은 주어진 H, KD, A1, A2로 요약을 계산하는 방법에는,<br>**난스 횟수 집계(nc) 및 대칭 인증의 지원(qop)**을 포함한다.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">response = &lt;&quot;&gt; &lt; KD ( H(A1), unq(nonce)</span><br><span class="line">                              &quot;:&quot; nc</span><br><span class="line">                              &quot;:&quot; unq(cnonce)</span><br><span class="line">                              &quot;:&quot; unq(qop)</span><br><span class="line">                              &quot;:&quot; H(A2)</span><br><span class="line">                      ) &lt;&quot;&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-2-다이제스트-인증-세션"><a href="#3-2-다이제스트-인증-세션" class="headerlink" title="3.2 다이제스트 인증 세션"></a>3.2 다이제스트 인증 세션</h2><ul>
@@ -515,8 +509,8 @@
 </li>
 </ul>
 <h2 id="3-3-사전-인가-preemptive"><a href="#3-3-사전-인가-preemptive" class="headerlink" title="3.3 사전 인가 preemptive"></a>3.3 사전 인가 preemptive</h2><ul>
-<li>일반적인 인증에서는, 각 요청은 트랜잭션이 완료되기 전에<br>요청/인증 요구 사이클을 필요로 한다.</li>
-<li>만약 클라가 다음 난스가 무엇이 될지 미리 알고 있어서,<br>서버가 물어보기 전에 올바른 Authorization 헤더를 생성할 수 있다면,<br>이 요청/인증요구 사이클은 생략할 수 있다.</li>
+<li>일반적인 인증에서는, 각 요청은 트랜잭션이 완료되기 전에<br>요청&#x2F;인증 요구 사이클을 필요로 한다.</li>
+<li>만약 클라가 다음 난스가 무엇이 될지 미리 알고 있어서,<br>서버가 물어보기 전에 올바른 Authorization 헤더를 생성할 수 있다면,<br>이 요청&#x2F;인증요구 사이클은 생략할 수 있다.</li>
 </ul>
 <hr>
 <ul>
@@ -543,7 +537,7 @@
 <li>서버는 <code>Authentication-Info</code> 성공헤더를 통해 다음 난스 값을 미리 제공할 수 있다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authentication-Info: nextnonce=&quot;&lt;난스 값&gt;&quot;</span><br></pre></td></tr></table></figure></li>
 <li>주어진 다음 난스로 클라는 Authorization 헤더를 미리 만들어 둘 수 있다.</li>
 </ul>
-<h4 id="장-단점"><a href="#장-단점" class="headerlink" title="장/단점"></a>장/단점</h4><ul>
+<h4 id="장-단점"><a href="#장-단점" class="headerlink" title="장&#x2F;단점"></a>장&#x2F;단점</h4><ul>
 <li>장점: 트랜잭션 속도 향상</li>
 <li>단점: <ul>
 <li>다음요청 보내기 전에 반드시 다음 난스 값을 받아야하기 때문에<br>다중요청을 파이프라이능하는 능력은 실질적으로 쓸모없어진다.(?)</li>
@@ -559,7 +553,7 @@
 <li>클라는 난스를 미리 알 수 있으므로, 자유롭게 Authorization 헤더와 함께 요청을 발행하여 파이프라이닝 할 수 있다.</li>
 <li>난스가 만료되면 서버는 서버에게 401 Unauthorized 인증요구를 보낼 것이다.<br>(<code>WWW-Authenticate</code>에 <code>stale=true</code>로 정의)</li>
 </ul>
-<h4 id="장-단점-1"><a href="#장-단점-1" class="headerlink" title="장/단점"></a>장/단점</h4><ul>
+<h4 id="장-단점-1"><a href="#장-단점-1" class="headerlink" title="장&#x2F;단점"></a>장&#x2F;단점</h4><ul>
 <li>단점: 공격자의 재전송 공격이 성공하기 쉬워지므로 보안성이 감소된다.</li>
 </ul>
 <hr>
@@ -603,17 +597,17 @@
 </ul>
 <ol>
 <li>서버는 우선 WWW-Authenticate 헤더에 qop 옵션을 수비표로 구분된 목록 형태로 내보낸다.</li>
-<li>클라는 그 옵션들 중 지원할 수 있으면서 동시에 자신의 요구에도 맞는 것을 선택하고<br>Authorization 헤더의 qop 필드에 담아 돌려준다.</li>
+<li>클라는 그 옵션들 중 지원할 수 있으면서 동시에 자신의 요구에도 맞는 것을 선택하고<br>  Authorization 헤더의 qop 필드에 담아 돌려준다.</li>
 </ol>
 <ul>
 <li>인증을 의미하는 auth 와<br>메세지 무결성 보호를 의미하는 auth-init이 있다.</li>
 </ul>
 <h2 id="메세지-무결성-보호-auth-init"><a href="#메세지-무결성-보호-auth-init" class="headerlink" title="메세지 무결성 보호 auth-init"></a>메세지 무결성 보호 auth-init</h2><ul>
-<li>무결성 보호가 적용되었을 때 계산되는 <strong>H(엔터티 본문)</strong>은, 메세지 본문의 해시가 아닌 <strong>엔터티 본문의 해시</strong>이다.</li>
+<li>무결성 보호가 적용되었을 때 계산되는 **H(엔터티 본문)**은, 메세지 본문의 해시가 아닌 <strong>엔터티 본문의 해시</strong>이다.</li>
 </ul>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -641,7 +635,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/24/HTTP_013_01/" data-id="ckzv7cqg4003qqobmgdfqgzsk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/24/HTTP_013_01/" data-id="cm3u7mj1k003hhwb251fp84kh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

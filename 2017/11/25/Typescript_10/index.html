@@ -325,27 +325,36 @@
 
 
 <hr>
-<h3 id="3-Symbol-iterator"><a href="#3-Symbol-iterator" class="headerlink" title=" 3. Symbol.iterator"></a><a name="3"></a> 3. Symbol.iterator</h3><h4 id="이터러블-iterable"><a href="#이터러블-iterable" class="headerlink" title="이터러블(iterable)"></a><code>이터러블(iterable)</code></h4><p>iterate = 반복하다<br>이터러블은 <strong>순회 가능한 자료 구조</strong>이다. <code>Symbol.iterator</code>를 프로퍼티 key로 사용한 메소드를 구현하는 것에 의해 순회 가능한 자료 구조인 이터러블이 된다.</p>
+<h3 id="3-Symbol-iterator"><a href="#3-Symbol-iterator" class="headerlink" title=" 3. Symbol.iterator"></a><a name="3"></a> 3. Symbol.iterator</h3><h4 id="이터러블-iterable"><a href="#이터러블-iterable" class="headerlink" title="이터러블(iterable)"></a><code>이터러블(iterable)</code></h4><p>iterate &#x3D; 반복하다<br>이터러블은 <strong>순회 가능한 자료 구조</strong>이다. <code>Symbol.iterator</code>를 프로퍼티 key로 사용한 메소드를 구현하는 것에 의해 순회 가능한 자료 구조인 이터러블이 된다.</p>
 <h4 id="이터레이터"><a href="#이터레이터" class="headerlink" title="이터레이터"></a><code>이터레이터</code></h4><p><code>Symbol.iterator</code>를 프로퍼티 key로 사용한 메소드는 이터레이터로 반환한다. 이터레이터는 순회 가능한 자료 구조인 이터러블의 요소를 탐색하기 위한 포인터로서 <code>next()</code> 메소드를 갖는 객체이다. next() 메소드는 value, done 프로퍼티를 갖는 객체를 반환하며 이 메소드를 통해 이터러블 객체를 순회할 수 있다.</p>
 <p>ES6에서 제공하는 built-in iterable은 아래와 같다.</p>
 <ul>
-<li>Array <code>Array.prototype[Symbol.iterator]</code></li>
-<li>String <code>String.prototype[Symbol.iterator]</code></li>
-<li>Map <code>Map.prototype[Symbol.iterator]</code></li>
-<li>Set <code>Set.prototype[Symbol.iterator]</code></li>
-<li>DOM data structures <code>NodeList.prototype[Symbol.iterator]</code> <code>HTMLCollection.prototype[Symbol.iterator]</code></li>
-</ul>
+<li><p>Array <code>Array.prototype[Symbol.iterator]</code></p>
+</li>
+<li><p>String <code>String.prototype[Symbol.iterator]</code></p>
+</li>
+<li><p>Map <code>Map.prototype[Symbol.iterator]</code></p>
+</li>
+<li><p>Set <code>Set.prototype[Symbol.iterator]</code></p>
+</li>
+<li><p>DOM data structures <code>NodeList.prototype[Symbol.iterator]</code> <code>HTMLCollection.prototype[Symbol.iterator]</code></p>
+</li>
+<li><p>프로퍼티이며, 함수가 구현되어있으면, iterable 이라고 한다.</p>
+</li>
+<li><p>Array, Map, Set, String, Int32Array, Uint32Array, etc. 에는 내장된 구현체가 있으므로 이터러블 하다.</p>
+</li>
+<li><p>그냥 객체는 이터러블하지 않다.</p>
+</li>
+<li><p>이터레이터를 통해 이터러블한 객체의 Symbol.iterator 함수를 호출한다.</p>
+</li>
+<li><p>target : es3 or es5</p>
 <ul>
-<li>프로퍼티이며, 함수가 구현되어있으면, iterable 이라고 한다.</li>
-<li>Array, Map, Set, String, Int32Array, Uint32Array, etc. 에는 내장된 구현체가 있으므로 이터러블 하다.</li>
-<li>그냥 객체는 이터러블하지 않다.</li>
-<li>이터레이터를 통해 이터러블한 객체의 Symbol.iterator 함수를 호출한다.</li>
-<li>target : es3 or es5<ul>
 <li>Array 에만 for..of 사용 가능</li>
 <li>일반 객체에 사용하면 오류</li>
 </ul>
 </li>
-<li>target : es6<ul>
+<li><p>target : es6</p>
+<ul>
 <li>Symbol.iterator 함수를 구현하면 어떤 객체에도 for..of 사용 가능</li>
 </ul>
 </li>
@@ -381,7 +390,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/25/Typescript_10/" data-id="ckzv7cqk300abqobm5x9ointz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/25/Typescript_10/" data-id="cm3u7mj230096hwb28qzp0sjy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

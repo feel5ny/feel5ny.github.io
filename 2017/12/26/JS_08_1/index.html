@@ -251,44 +251,48 @@
 <li><p>달리 말하면 정적인 웹페이지에 접근하여 동적으로 웹페이지를 변경하기 위한 유일한 방법은 메모리 상에 존재하는 DOM을 변경하는 것이고, 이때 필요한 것이 DOM에 접근하고 변경하는 프로퍼티와 메소드의 집합인 DOM API이다.</p>
 </li>
 </ul>
-<p>DOM은 HTML, JavaScript에서 정의한 표준이 아닌 별개의 W3C의 공식 표준이며 플랫폼/프로그래밍 언어 중립적이다. DOM은 다음 두 가지 기능을 담당한다.</p>
+<p>DOM은 HTML, JavaScript에서 정의한 표준이 아닌 별개의 W3C의 공식 표준이며 플랫폼&#x2F;프로그래밍 언어 중립적이다. DOM은 다음 두 가지 기능을 담당한다.</p>
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li><a href="#node">Node 타입</a><ul>
+<li><a href="#node">Node 타입</a></li>
+</ol>
+<ul>
 <li>nodeName, nodeValue<ul>
 <li>요소의 경우 nodeName은 태그명, nodeValue는 null</li>
 </ul>
 </li>
 <li>노드 사이의 관계<ul>
-<li>ChildNodes / ParentNodes / firstChild / lastChild / hasChildNodes(), ownerDocument 프로퍼티</li>
+<li>ChildNodes &#x2F; ParentNodes &#x2F; firstChild &#x2F; lastChild &#x2F; hasChildNodes(), ownerDocument 프로퍼티</li>
 </ul>
 </li>
 <li>노드 조작<ul>
-<li>appendChild() / insertBefore() / replaceChild() / removeChild()</li>
+<li>appendChild() &#x2F; insertBefore() &#x2F; replaceChild() &#x2F; removeChild()</li>
 </ul>
 </li>
 <li>기타 메서드<ul>
-<li>cloneNode() / nomalize()</li>
+<li>cloneNode() &#x2F; nomalize()</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a href="#document">Document 타입</a><ul>
+<ol start="2">
+<li><a href="#document">Document 타입</a></li>
+</ol>
+<ul>
 <li>Document 자식 노드<ul>
-<li>documentElement(=<code>&lt;html&gt;</code>)</li>
+<li>documentElement(&#x3D;<code>&lt;html&gt;</code>)</li>
 </ul>
 </li>
 <li>문서 정보<ul>
-<li>document.title / document.URL / document.domain / document.referrer</li>
+<li>document.title &#x2F; document.URL &#x2F; document.domain &#x2F; document.referrer</li>
 </ul>
 </li>
 <li>요소 위치<ul>
-<li>getElementById() / getElementByTagName() (namedItem) / getElementByName()</li>
+<li>getElementById() &#x2F; getElementByTagName() (namedItem) &#x2F; getElementByName()</li>
 </ul>
 </li>
 <li>특별한 컬렉션<ul>
-<li>document.anchors / document.applets / document.forms / document.images / document.links</li>
+<li>document.anchors &#x2F; document.applets &#x2F; document.forms &#x2F; document.images &#x2F; document.links</li>
 </ul>
 </li>
 <li>DOM 준수 탐지<ul>
@@ -296,14 +300,16 @@
 </ul>
 </li>
 <li>문서에 쓰기<ul>
-<li>write() / writeIn() / open() / close()</li>
+<li>write() &#x2F; writeIn() &#x2F; open() &#x2F; close()</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a href="#element">Element 타입</a><ul>
+<ol start="3">
+<li><a href="#element">Element 타입</a></li>
+</ol>
+<ul>
 <li>HTML 요소<ul>
-<li>id / title / lang / dir / className</li>
+<li>id &#x2F; title &#x2F; lang &#x2F; dir &#x2F; className</li>
 </ul>
 </li>
 <li>속성 얻기<ul>
@@ -319,18 +325,15 @@
 </ul>
 </li>
 <li>attributes 프로퍼티<ul>
-<li>getNamedItem() / removeNamedItem(name) / setNamedItem(), item()</li>
+<li>getNamedItem() &#x2F; removeNamedItem(name) &#x2F; setNamedItem(), item()</li>
 </ul>
 </li>
 <li>요소 생성<ul>
 <li>createElement()</li>
 </ul>
 </li>
-<li>요소의 자식</li>
+<li>요소의 자식<br>—- 2편 &#128071;</li>
 </ul>
-</li>
-</ol>
-<p>—- 2편 &#128071;</p>
 <ol start="4">
 <li>Text 타입</li>
 <li>Comment 타입</li>
@@ -393,21 +396,17 @@
 <li>노드 리스트에 저장된 노드를 접근하는 방법 (어느쪽을 더 권잔하진 않는다.)<ul>
 <li>대괄호 표기법</li>
 <li>item() 메서드<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> firstChild = someNode.<span class="property">childNodes</span>[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">const</span> secondChild = someNode.<span class="property">childNodes</span>.<span class="title function_">item</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> count = someNode.<span class="property">childNodes</span>.<span class="property">length</span>;</span><br></pre></td></tr></table></figure>
-<img src= "/images/post_img/58/03.png">
-
-</li>
+<img src= "/images/post_img/58/03.png"></li>
 </ul>
 </li>
 </ul>
 <h4 id="1-2-2-parentNode-프로퍼티"><a href="#1-2-2-parentNode-프로퍼티" class="headerlink" title="1-2-2. parentNode 프로퍼티"></a>1-2-2. parentNode 프로퍼티</h4><ul>
 <li>childNodes 목록에 포함된 노드는 모두 부모가 같으므로 각각의 parentNode 프로퍼티는 같은 노드를 가리킨다.</li>
 <li>childeNOdes 목록의 각 노드들은 형제관계이며 <code>previousSibling</code> 및 <code>nextSibling</code> 프로퍼티로 이동할 수 있다.</li>
-<li>자식 노드가 하나 뿐이라면 해당 노드의 nextSibling과 previousSibling은 모두 null이다.<img src= "/images/post_img/58/04.png">
-
-</li>
+<li>자식 노드가 하나 뿐이라면 해당 노드의 nextSibling과 previousSibling은 모두 null이다.<img src= "/images/post_img/58/04.png"></li>
 </ul>
-<h4 id="1-2-3-firstChild-프로퍼티"><a href="#1-2-3-firstChild-프로퍼티" class="headerlink" title="1-2-3. firstChild 프로퍼티"></a>1-2-3. firstChild 프로퍼티</h4><p>childNodes 목록에서 첫번째 노드를 가리킨다.<br>someNode.firstChild = someNode.childNodes[0]</p>
-<h4 id="1-2-4-lastChild-프로퍼티"><a href="#1-2-4-lastChild-프로퍼티" class="headerlink" title="1-2-4. lastChild 프로퍼티"></a>1-2-4. lastChild 프로퍼티</h4><p>childNodes 목록에서 마지막 노드를 가리킨다.<br>someNode.lastChild = someNode.childNodes[someNode.childNodes.length-1]</p>
+<h4 id="1-2-3-firstChild-프로퍼티"><a href="#1-2-3-firstChild-프로퍼티" class="headerlink" title="1-2-3. firstChild 프로퍼티"></a>1-2-3. firstChild 프로퍼티</h4><p>childNodes 목록에서 첫번째 노드를 가리킨다.<br>someNode.firstChild &#x3D; someNode.childNodes[0]</p>
+<h4 id="1-2-4-lastChild-프로퍼티"><a href="#1-2-4-lastChild-프로퍼티" class="headerlink" title="1-2-4. lastChild 프로퍼티"></a>1-2-4. lastChild 프로퍼티</h4><p>childNodes 목록에서 마지막 노드를 가리킨다.<br>someNode.lastChild &#x3D; someNode.childNodes[someNode.childNodes.length-1]</p>
 <img src= "/images/post_img/58/05.jpg">
 
 <h4 id="1-2-5-hasChildNodes-메서드"><a href="#1-2-5-hasChildNodes-메서드" class="headerlink" title="1-2-5. hasChildNodes() 메서드"></a>1-2-5. hasChildNodes() 메서드</h4><p>노드에 자식 노드가 있으면 true를 반환.<br>length로 자식 노드 확인하는 것보다 효과적.</p>
@@ -543,21 +542,17 @@
   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> images = <span class="variable language_">document</span>.<span class="title function_">getElementByTagName</span>(<span class="string">&quot;img&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> myImage = images.<span class="title function_">namedItem</span>(<span class="string">&quot;myImage&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> myImage = images[<span class="string">&quot;myImage&quot;</span>]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>HTMLCollection 객체에서는 대괄호 표기법에 <ul>
-<li>숫자형 색인과 =&gt; <code>item()</code>사용</li>
-<li>문자형 색은을 모두 사용할 수 있다. =&gt; <code>namedItme()</code> 사용</li>
-<li>문서 전체는 아리테스크<code>*</code>를 사용한다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allElements = <span class="variable language_">document</span>.<span class="title function_">getElementByTagName</span>(<span class="string">&quot;*&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>숫자형 색인과 &#x3D;&gt; <code>item()</code>사용</li>
+<li>문자형 색은을 모두 사용할 수 있다. &#x3D;&gt; <code>namedItme()</code> 사용</li>
 </ul>
 </li>
+<li>문서 전체는 아리테스크<code>*</code>를 사용한다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allElements = <span class="variable language_">document</span>.<span class="title function_">getElementByTagName</span>(<span class="string">&quot;*&quot;</span>)</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="2-3-4-getElementByName"><a href="#2-3-4-getElementByName" class="headerlink" title="2-3-4. getElementByName()"></a>2-3-4. <code>getElementByName()</code></h4><p>name 속성 값이 주어진 문자열에 일치하는 요소를 반환한다.</p>
 <ul>
 <li>라디오 버튼에 자주 사용한다.</li>
 <li>id 속성은 label요소와 연결하는 역할을 하며</li>
-<li>name 속석은 값을 서버에 보낼 때 이중 단 하나만 보내는 역할을 한다. (체크된)<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Which color do you prefer?<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;red&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;green&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;white&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorBlue&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorBlue&quot;</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>name 속석은 값을 서버에 보낼 때 이중 단 하나만 보내는 역할을 한다. (체크된)<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Which color do you prefer?<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;red&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;green&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;white&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorBlue&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorBlue&quot;</span>&gt;</span>Blue<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <h3 id="2-4-특별한-컬렉션"><a href="#2-4-특별한-컬렉션" class="headerlink" title="2-4. 특별한 컬렉션"></a><span style="color:#26d0ce">2-4. 특별한 컬렉션</span></h3><p>document객체에는 특별하 컬렉션이 몇가지 있다.<br>각 컬렉션은 모두 HTML Collection 객체이고,<br>문서에 공통된 요소들에 빠르게 접근할 수 있도록 만들어졌다.</p>
@@ -584,7 +579,7 @@
 </ul>
 <hr>
 <h3 id="3-1-HTML-요소"><a href="#3-1-HTML-요소" class="headerlink" title="3-1. HTML 요소"></a><span style="color:#26d0ce">3-1. HTML 요소</span></h3><p>HTMLElement 타입을 통해 표현된다.<br>HTMLElement는 Element를 직접적으로 상속한다.</p>
-<p><code>id</code> : 요소의 고유한 식별자<br><code>title</code> : 요소에 대한 추가 정보, 일반적으로 툴팁으로 표현됨<br><code>lang</code> : 요소 콘텐츠의 언어 코드. 거의 사용되지 않는다.<br><code>dir</code> : 언어의 표기 반향. <code>ltr</code>은 왼쪽 =&gt; 오른쪽, <code>rtl</code>은 오른쪽 =&gt; 왼쪽. 거의 사용되지 않는다.<br><code>className</code> : CSS 클래스인 class 속성을 나타낸다. class가 ECMAScript의 예약어이기 때문에 className이라고 사용한다.</p>
+<p><code>id</code> : 요소의 고유한 식별자<br><code>title</code> : 요소에 대한 추가 정보, 일반적으로 툴팁으로 표현됨<br><code>lang</code> : 요소 콘텐츠의 언어 코드. 거의 사용되지 않는다.<br><code>dir</code> : 언어의 표기 반향. <code>ltr</code>은 왼쪽 &#x3D;&gt; 오른쪽, <code>rtl</code>은 오른쪽 &#x3D;&gt; 왼쪽. 거의 사용되지 않는다.<br><code>className</code> : CSS 클래스인 class 속성을 나타낸다. class가 ECMAScript의 예약어이기 때문에 className이라고 사용한다.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span> <span class="attr">class</span>=<span class="string">&quot;bd&quot;</span> <span class="attr">title</span>=<span class="string">&quot;Body text&quot;</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">dir</span>=<span class="string">&quot;ltr&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <img src=" /images/post_img/58/HTMLElement.jpg">
@@ -678,7 +673,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/26/JS_08_1/" data-id="ckzv7cqhm005fqobm96i5o33k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/26/JS_08_1/" data-id="cm3u7mj1p004yhwb21rum9l6n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="cleanCode,refactoring" />
     
     
-    <meta name="description" content="[읽기 좋은 코드가 좋은 코드다.]를 보고 메모할 부분을 정리했습니다.  목차 읽기 쉽게 흐름제어 만들기 ⇒ 거대한 표현을 잘게 쪼개기 ⇒ 변수와 가독성 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고, 자신에게도 더 좋은 코드를 만들어야 하겠다는 욕구를 불러일으키기도 한다.  PART 2 ) 루프와 논리를 단순화">
+    <meta name="description" content="**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모할 부분을 정리했습니다.  목차 읽기 쉽게 흐름제어 만들기 ⇒ 거대한 표현을 잘게 쪼개기 ⇒ 변수와 가독성 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고, 자신에게도 더 좋은 코드를 만들어야 하겠다는 욕구를 불러일으키기도 한다.  PART 2 ) 루프와 논리를">
 <meta property="og:type" content="article">
 <meta property="og:title" content="📓 읽기 좋은 코드가 좋은 코드다. || part2. 루프와 논리를 단순화하기">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/02/Clean_code_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[읽기 좋은 코드가 좋은 코드다.]를 보고 메모할 부분을 정리했습니다.  목차 읽기 쉽게 흐름제어 만들기 ⇒ 거대한 표현을 잘게 쪼개기 ⇒ 변수와 가독성 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고, 자신에게도 더 좋은 코드를 만들어야 하겠다는 욕구를 불러일으키기도 한다.  PART 2 ) 루프와 논리를 단순화">
+<meta property="og:description" content="**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모할 부분을 정리했습니다.  목차 읽기 쉽게 흐름제어 만들기 ⇒ 거대한 표현을 잘게 쪼개기 ⇒ 변수와 가독성 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고, 자신에게도 더 좋은 코드를 만들어야 하겠다는 욕구를 불러일으키기도 한다.  PART 2 ) 루프와 논리를">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/20/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-02T11:12:34.000Z">
@@ -230,7 +230,7 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[읽기 좋은 코드가 좋은 코드다.]</strong>를 보고 메모할 부분을 정리했습니다.</p>
+<p>**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모할 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol start="7">
 <li>읽기 쉽게 흐름제어 만들기 <a href="#first">⇒</a></li>
@@ -252,7 +252,7 @@
 <li>오른쪽 : 더 고정적인 값, 비교대상으로 사용되는 표현</li>
 </ul>
 <p>cf_ 요다표기법 (옛날에 쓰던.. <code>NULL == obj</code> )</p>
-<h3 id="7-2-if-else-블록의-순서"><a href="#7-2-if-else-블록의-순서" class="headerlink" title="7-2. if/else 블록의 순서"></a><strong>7-2. if/else 블록의 순서</strong></h3><ul>
+<h3 id="7-2-if-else-블록의-순서"><a href="#7-2-if-else-블록의-순서" class="headerlink" title="7-2. if&#x2F;else 블록의 순서"></a><strong>7-2. if&#x2F;else 블록의 순서</strong></h3><ul>
 <li>부정이 아닌 <strong>긍정을 다루어라.</strong> 즉 <code>if(!debug)</code>가 아니라 <code>if(debug)</code>를 선호하자.</li>
 <li>간단한 것을 먼저 처리하라.</li>
 <li>더 흥미롭고, 확실한 것을 먼저 다루어라.</li>
@@ -260,44 +260,51 @@
 <h3 id="7-3-삼항-연산자로-알려진-를-이용하는-조건문-표현"><a href="#7-3-삼항-연산자로-알려진-를-이용하는-조건문-표현" class="headerlink" title="7-3. (삼항 연산자로 알려진) ?:를 이용하는 조건문 표현"></a><strong>7-3. (삼항 연산자로 알려진) <code>?:</code>를 이용하는 조건문 표현</strong></h3><ul>
 <li>줄 수를 최소화하는 일보다 다른 사람이 코드를 읽고 이해하는 데 걸리는 시간을 최소화하는 일이 더 중요하다.</li>
 </ul>
-<h3 id="7-4-do-while-루프를-피하라"><a href="#7-4-do-while-루프를-피하라" class="headerlink" title="7-4. do/while 루프를 피하라"></a>7-4. do/while 루프를 피하라</h3><h3 id="7-5-함수-중간에서-반환하기"><a href="#7-5-함수-중간에서-반환하기" class="headerlink" title="7-5. 함수 중간에서 반환하기"></a>7-5. 함수 중간에서 반환하기</h3><h3 id="7-7-중첩을-최소화하기"><a href="#7-7-중첩을-최소화하기" class="headerlink" title="7-7. 중첩을 최소화하기"></a>7-7. 중첩을 최소화하기</h3><p>루프와 조건문을 비롯한 그외 분기문을 읽기 쉽게 만드는 방법을 살펴본 것이다.<br>하지만 자신의 프로그램에 존재하는 ‘흐름’을 상위수준에서 조망해볼 필요가 있다.<br>프로그램의 전체 실행 경로를 쉽게 따라갈 수 있게 만드는 게 궁극의 목표다.</p>
+<h3 id="7-4-do-while-루프를-피하라"><a href="#7-4-do-while-루프를-피하라" class="headerlink" title="7-4. do&#x2F;while 루프를 피하라"></a>7-4. do&#x2F;while 루프를 피하라</h3><h3 id="7-5-함수-중간에서-반환하기"><a href="#7-5-함수-중간에서-반환하기" class="headerlink" title="7-5. 함수 중간에서 반환하기"></a>7-5. 함수 중간에서 반환하기</h3><h3 id="7-7-중첩을-최소화하기"><a href="#7-7-중첩을-최소화하기" class="headerlink" title="7-7. 중첩을 최소화하기"></a>7-7. 중첩을 최소화하기</h3><p>루프와 조건문을 비롯한 그외 분기문을 읽기 쉽게 만드는 방법을 살펴본 것이다.<br>하지만 자신의 프로그램에 존재하는 ‘흐름’을 상위수준에서 조망해볼 필요가 있다.<br>프로그램의 전체 실행 경로를 쉽게 따라갈 수 있게 만드는 게 궁극의 목표다.</p>
 <hr>
 <p><a id="second"></a></p>
 <h2 id="8-거대한-표현을-잘게-쪼개기"><a href="#8-거대한-표현을-잘게-쪼개기" class="headerlink" title="8. 거대한 표현을 잘게 쪼개기"></a>8. 거대한 표현을 잘게 쪼개기</h2><p>코드의 표현이 커지면 커질수록 이해하기 더 여렵다. ⇒ 예시: 대왕오징어 식도주변의 도넛뇌</p>
 <ol>
-<li>설명 변수<ul>
-<li>커다란 표현을 쪼개는 가장 쉬운 방법은 작은 <strong>하위표현을 담을 ‘추가변수</strong>‘를 만드는 것이다.<br>( 추가변수 == 설명변수 )</li>
+<li>설명 변수</li>
+</ol>
+<ul>
+<li>커다란 표현을 쪼개는 가장 쉬운 방법은 작은 <strong>하위표현을 담을 ‘추가변수</strong>‘를 만드는 것이다.<br>  ( 추가변수 &#x3D;&#x3D; 설명변수 )</li>
 </ul>
-</li>
-<li>요약 변수<ul>
+<ol start="2">
+<li>요약 변수</li>
+</ol>
+<ul>
 <li>의미를 쉽게 파악할 수 있어 별도의 설명을 요구하지 않는 표현이라고 해도, 새로운 변수로 담아두는 방법은 여전히 유용할 수 있다.</li>
 </ul>
-</li>
-<li>드모르간의 법칙 사용하기 De Morgan’s Laws<ul>
+<ol start="3">
+<li>드모르간의 법칙 사용하기 De Morgan’s Laws</li>
+</ol>
+<ul>
 <li><code>if (!(file_exists &amp;&amp; !is_protected))</code></li>
 <li><code>if (!file_exists &amp;&amp; is_protected)</code></li>
 </ul>
-</li>
-<li>쇼트 서킷 논리 오용 말기<ul>
+<ol start="4">
+<li>쇼트 서킷 논리 오용 말기</li>
+</ol>
+<ul>
 <li><strong>if ( a || b ) a가 참이면 b는 평가하지 않는다.</strong></li>
 </ul>
-</li>
+<ol start="5">
 <li><strong>예; 복잡한 논리와 씨름하기</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool <span class="title class_">Range</span>:;<span class="title class_">OverlapsWith</span>(<span class="title class_">Range</span> other)&#123;</span><br><span class="line">  <span class="comment">// &#x27;begin&#x27;dlsk &#x27;end&#x27;가 &#x27;other&#x27;에 속하는지검사한다.</span></span><br><span class="line">  <span class="keyword">return</span> (begin &gt;= other.<span class="property">begin</span> &amp;&amp; begin &lt; other.<span class="property">end</span>) ||</span><br><span class="line">          (end &gt; other.<span class="property">begin</span> &amp;&amp; end &lt;= other.<span class="property">end</span>) ||</span><br><span class="line">          (begin &lt;= other.<span class="property">begin</span> &amp;&amp; end &gt;= other.<span class="property">end</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <ul>
-<li>더 우아하게 접근하기<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool <span class="title class_">Range</span>:;<span class="title class_">OverlapsWith</span>(<span class="title class_">Range</span> other)&#123;</span><br><span class="line">  <span class="keyword">if</span> (other.<span class="property">end</span> &lt;= begin) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 우리가 시작하기 전에 끝난다.</span></span><br><span class="line">  <span class="keyword">if</span> (other.<span class="property">begin</span> &gt;= begin) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 우리가 끝난 후에 시작한다.</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 마지막 가능성만 남았다. 즉 겹친다.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>더 우아하게 접근하기<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bool <span class="title class_">Range</span>:;<span class="title class_">OverlapsWith</span>(<span class="title class_">Range</span> other)&#123;</span><br><span class="line">  <span class="keyword">if</span> (other.<span class="property">end</span> &lt;= begin) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 우리가 시작하기 전에 끝난다.</span></span><br><span class="line">  <span class="keyword">if</span> (other.<span class="property">begin</span> &gt;= begin) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 우리가 끝난 후에 시작한다.</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 마지막 가능성만 남았다. 즉 겹친다.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <ol start="6">
-<li><p>거대한 구문 나누기<br>반복되는 부분을 ⇒ 요약변수로 추출할 때 (DRY : Don’t Repeat Yourself)</p>
+<li>거대한 구문 나누기<br>  반복되는 부분을 ⇒ 요약변수로 추출할 때 (DRY : Don’t Repeat Yourself)</li>
+</ol>
 <ul>
 <li>타이핑 실수를 피할 수 있다.</li>
 <li>코드를 한눈에 훓어보는게 용이하도록 코드의 길이를 조이라도 더 줄여준다.</li>
 <li>클래스명을 변경해야 할 때 한 곳만 바꾸면 된다.</li>
 </ul>
-</li>
-<li><p>표현을 단순화하는 다른 창의적인 방법들</p>
-</li>
+<ol start="7">
+<li>표현을 단순화하는 다른 창의적인 방법들</li>
 </ol>
 <hr>
 <p><a id="third"></a></p>
@@ -314,33 +321,22 @@
 <li>한번만 사용되어 중복된 코드를 압축하지 않는다.</li>
 </ul>
 </li>
-<li>중간 결과 삭제하기<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> remove_one = <span class="keyword">function</span> (<span class="params">array, value_to_remove</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> index_to_remove = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; i +=<span class="number">1</span> )&#123;</span><br><span class="line">    <span class="keyword">if</span> (array[i] === value_to_remove) &#123;</span><br><span class="line">      index_to_remove = i;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (index_to_remove !== <span class="literal">null</span>) &#123;</span><br><span class="line">    array.<span class="title function_">splice</span>(index_to_remove, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 위의 방법보다는 아래방법 **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> remove_one = <span class="keyword">function</span> (<span class="params">array, value_to_remove</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> index_to_remove = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; i +=<span class="number">1</span> )&#123;</span><br><span class="line">    <span class="keyword">if</span> (array[i] === value_to_remove) &#123;</span><br><span class="line">      array.<span class="title function_">splice</span>(i, <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>중간 결과 삭제하기  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> remove_one = <span class="keyword">function</span> (<span class="params">array, value_to_remove</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> index_to_remove = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; i +=<span class="number">1</span> )&#123;</span><br><span class="line">    <span class="keyword">if</span> (array[i] === value_to_remove) &#123;</span><br><span class="line">      index_to_remove = i;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (index_to_remove !== <span class="literal">null</span>) &#123;</span><br><span class="line">    array.<span class="title function_">splice</span>(index_to_remove, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 위의 방법보다는 아래방법 **/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> remove_one = <span class="keyword">function</span> (<span class="params">array, value_to_remove</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> index_to_remove = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.<span class="property">length</span>; i +=<span class="number">1</span> )&#123;</span><br><span class="line">    <span class="keyword">if</span> (array[i] === value_to_remove) &#123;</span><br><span class="line">      array.<span class="title function_">splice</span>(i, <span class="number">1</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="9-2-흐름-제어-변수-제거하기"><a href="#9-2-흐름-제어-변수-제거하기" class="headerlink" title="9-2. 흐름 제어 변수 제거하기"></a>9-2. 흐름 제어 변수 제거하기</h3><ul>
 <li>흐름제어 변수? : 프로그램의 실행과 관련된 방향을 설정하는 데 있다.</li>
 </ul>
 <h3 id="9-3-변수의-범위를-좁혀라"><a href="#9-3-변수의-범위를-좁혀라" class="headerlink" title="9-3. 변수의 범위를 좁혀라"></a>9-3. 변수의 범위를 좁혀라</h3><ul>
-<li><p>‘전역변수를 피하라’는 조언을 한번쯤 들었을 것이다.</p>
-<ul>
+<li>‘전역변수를 피하라’는 조언을 한번쯤 들었을 것이다.<ul>
 <li>전역 변수는 어디에서 어떻게 사용되는지 일일이 확인하기 어려우므로 이는 합당한 조언이다.</li>
 <li>또한, 전역 변수의 이름과 지역 변수의 이름이 중복되어 이름공간이 더러워질 수도 있고, 어떤 코드가 지역 변수를 변경할 때 실수로 전역 변수를 변경하거나 혹은 그 반대의 경우가 일어날 수 있으므로 타당하다.</li>
 </ul>
 </li>
-<li><p>사실 전역 변수 뿐만 아니라 <strong>모든 변수의 범위를 좁히는 일은 언제나 좋다.</strong></p>
-</li>
-<li><p>많은 프로그래밍 언어는 모듈, 클래스, 함수, 블록 범위 같은 다양한 범위/접근 수준을 제공한다.</p>
-</li>
-<li><p><strong>자바스크립트에서 프라이빗 변수 만들기</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">submitted = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> submit_form = <span class="keyword">function</span>(<span class="params">form_name</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(submitted)&#123;</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// 폼을 두 번 제출하지 말라.</span></span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  submitted = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>submit_form()</code>만이 전역변수 submitted를 사용하는 유일한 함수처럼 보이지만,<br>확실히 알 수 없다.<br>⇒ 다른 자바스크립트 파일에서 이와는 다른 목적으로 submitted라는 이름이 붙은 전역 변수를 사용할 지도 모르는 일이다!
-⇒ submitted 변수를 <strong><a href="https://feel5ny.github.io/2017/12/07/JS_06/">클로저</a> 내부에 집어 넣어서 이런 문제를 해결한다.</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> submit_form = (<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> submitted = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">form_name</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(submitted)&#123;</span><br><span class="line">			<span class="keyword">return</span>; <span class="comment">// 폼을 두 번 제출하지 말라.</span></span><br><span class="line">		&#125;</span><br><span class="line">		...</span><br><span class="line">		submitted = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
-<p>⇒ 프라이빗한 범위를 만드는 효과를 갖는다.</p>
-</li>
+<li>사실 전역 변수 뿐만 아니라 <strong>모든 변수의 범위를 좁히는 일은 언제나 좋다.</strong></li>
+<li>많은 프로그래밍 언어는 모듈, 클래스, 함수, 블록 범위 같은 다양한 범위&#x2F;접근 수준을 제공한다.</li>
+<li><strong>자바스크립트에서 프라이빗 변수 만들기</strong>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">submitted = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> submit_form = <span class="keyword">function</span>(<span class="params">form_name</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(submitted)&#123;</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// 폼을 두 번 제출하지 말라.</span></span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  submitted = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
+<p>  <code>submit_form()</code>만이 전역변수 submitted를 사용하는 유일한 함수처럼 보이지만,<br>  확실히 알 수 없다.<br>  ⇒ 다른 자바스크립트 파일에서 이와는 다른 목적으로 submitted라는 이름이 붙은 전역 변수를 사용할 지도 모르는 일이다!<br>    ⇒ submitted 변수를 <strong><a href="https://feel5ny.github.io/2017/12/07/JS_06/">클로저</a> 내부에 집어 넣어서 이런 문제를 해결한다.</strong><br>    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> submit_form = (<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> submitted = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">form_name</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(submitted)&#123;</span><br><span class="line">			<span class="keyword">return</span>; <span class="comment">// 폼을 두 번 제출하지 말라.</span></span><br><span class="line">		&#125;</span><br><span class="line">		...</span><br><span class="line">		submitted = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure><br>    ⇒ 프라이빗한 범위를 만드는 효과를 갖는다.</p>
 
         </div>
         <footer class="article-footer">
@@ -360,7 +356,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/02/Clean_code_2/" data-id="ckzv7cqep000xqobmy2ozvbiy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/02/Clean_code_2/" data-id="cm3u7mj19000uhwb218f37ikt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

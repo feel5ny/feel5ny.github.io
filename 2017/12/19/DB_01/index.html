@@ -289,14 +289,12 @@
 <li>UNIQUE</li>
 <li>CHECK</li>
 </ul>
-<h4 id="PRIMARY-KEY-gt-PRIMARY-KEY는-NOT-NULL-UNIQUE하다"><a href="#PRIMARY-KEY-gt-PRIMARY-KEY는-NOT-NULL-UNIQUE하다" class="headerlink" title="PRIMARY KEY =&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다."></a>PRIMARY KEY =&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다.</h4><ul>
+<h4 id="PRIMARY-KEY-PRIMARY-KEY는-NOT-NULL-UNIQUE하다"><a href="#PRIMARY-KEY-PRIMARY-KEY는-NOT-NULL-UNIQUE하다" class="headerlink" title="PRIMARY KEY &#x3D;&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다."></a>PRIMARY KEY &#x3D;&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다.</h4><ul>
 <li>PK는 한테이블당 한개만 존재</li>
 <li>인덱스 자동생성</li>
-<li>여러 컬럼을 하나의 PK로 설정 가능<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  ssn1 NUMBER(<span class="number">6</span>),</span><br><span class="line">  ssn2 NUMBER(<span class="number">7</span>),</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (ssn1, ssn2)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>여러 컬럼을 하나의 PK로 설정 가능<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  ssn1 NUMBER(<span class="number">6</span>),</span><br><span class="line">  ssn2 NUMBER(<span class="number">7</span>),</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (ssn1, ssn2)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="FOREIGN-KEY-gt-주의-PRIMARY-KEY에게만-FOREIGN-KEY-가능"><a href="#FOREIGN-KEY-gt-주의-PRIMARY-KEY에게만-FOREIGN-KEY-가능" class="headerlink" title="FOREIGN KEY =&gt; 주의 PRIMARY KEY에게만 FOREIGN KEY 가능"></a>FOREIGN KEY =&gt; 주의 PRIMARY KEY에게만 FOREIGN KEY 가능</h4><ul>
+<h4 id="FOREIGN-KEY-주의-PRIMARY-KEY에게만-FOREIGN-KEY-가능"><a href="#FOREIGN-KEY-주의-PRIMARY-KEY에게만-FOREIGN-KEY-가능" class="headerlink" title="FOREIGN KEY &#x3D;&gt; 주의 PRIMARY KEY에게만 FOREIGN KEY 가능"></a>FOREIGN KEY &#x3D;&gt; 주의 PRIMARY KEY에게만 FOREIGN KEY 가능</h4><ul>
 <li>ON DELETE SET NULL : 해당하는 FK를 NULL로 바꾼다.</li>
 <li>ON DELETE CASCADE : 해당하는 FK를 가진 참조행도 삭제</li>
 </ul>
@@ -312,7 +310,7 @@
 <hr>
 <h1 id="3-Aggregate-Group-Function"><a href="#3-Aggregate-Group-Function" class="headerlink" title=" 3. Aggregate, Group Function"></a><a name="aggregate"></a> 3. Aggregate, Group Function</h1><h2 id="Aggregate-Function"><a href="#Aggregate-Function" class="headerlink" title="Aggregate Function"></a>Aggregate Function</h2><h3 id="1-AVG"><a href="#1-AVG" class="headerlink" title="1. AVG"></a>1. AVG</h3><p>평균 구하기<br><code>SELECT AVG(salary) FROM Student;</code></p>
 <ul>
-<li>Group By<br><code>SELECT 부서명, AVG(salary) FROM 직장; =&gt; 오류 발생</code><br>=&gt; <code>SELECT 부서명, AVG(salary) FROM 직장 GROUP BY 부서명</code></li>
+<li>Group By<br><code>SELECT 부서명, AVG(salary) FROM 직장; =&gt; 오류 발생</code><br>&#x3D;&gt; <code>SELECT 부서명, AVG(salary) FROM 직장 GROUP BY 부서명</code></li>
 <li>Having</li>
 </ul>
 <h3 id="2-SUM"><a href="#2-SUM" class="headerlink" title="2. SUM"></a>2. SUM</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(col_name) <span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(salary) <span class="keyword">FROM</span> Student;</span><br></pre></td></tr></table></figure>
@@ -341,8 +339,11 @@
 </ul>
 <h3 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h3><p>둘 이상의 테이블을 합쳐서 하나의 테이블로 만든다.</p>
 <ul>
-<li><code>Cross Join</code> (Cartasian Product) 모든 가능한 쌍이 나타난다.<h4 id="Inner-Join-조건을-만족하는-tuple만-나타난다"><a href="#Inner-Join-조건을-만족하는-tuple만-나타난다" class="headerlink" title="Inner Join 조건을 만족하는 tuple만 나타난다."></a><code>Inner Join</code> 조건을 만족하는 tuple만 나타난다.</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Inner</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure></li>
-<li><code>Outer Join</code> 조건을 만족하지 않는 tuple도 나타난다. =&gt; null로 표기<br>Left Outer Join =&gt; join table의 왼쪽 table 값중 null인 것도 가져온다.<br>Right Outer Join =&gt; join table의 오른쪽 table 값중 null인 것도 가져온다.<br>Full Outer Join =&gt; 양쪽 table 값중 null인 것도 가져온다.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Left</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job </span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
+<li><code>Cross Join</code> (Cartasian Product) 모든 가능한 쌍이 나타난다.</li>
+</ul>
+<h4 id="Inner-Join-조건을-만족하는-tuple만-나타난다"><a href="#Inner-Join-조건을-만족하는-tuple만-나타난다" class="headerlink" title="Inner Join 조건을 만족하는 tuple만 나타난다."></a><code>Inner Join</code> 조건을 만족하는 tuple만 나타난다.</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Inner</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Outer Join</code> 조건을 만족하지 않는 tuple도 나타난다. &#x3D;&gt; null로 표기<br>Left Outer Join &#x3D;&gt; join table의 왼쪽 table 값중 null인 것도 가져온다.<br>Right Outer Join &#x3D;&gt; join table의 오른쪽 table 값중 null인 것도 가져온다.<br>Full Outer Join &#x3D;&gt; 양쪽 table 값중 null인 것도 가져온다.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Left</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job </span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Right</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Full</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure></li>
 <li><code>Natural Join</code> 조건을 만족하는 tuple들의 동일한 col이 합쳐져서 나타난다.</li>
@@ -371,7 +372,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/19/DB_01/" data-id="ckzv7cqfa0021qobmv7gkcijb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/19/DB_01/" data-id="cm3u7mj1d001nhwb212dg7cly" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

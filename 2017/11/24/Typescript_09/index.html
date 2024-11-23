@@ -344,7 +344,7 @@
 </blockquote>
 <p><strong>요약</strong><br>제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를 보다 범용적으로 재사용하기 위한 요구가 있기 때문에 제네릭이라는 프로그래밍 기법이 생긴 게 아닐까한다. </p>
 <hr>
-<h3 id="1-any-gt-generic"><a href="#1-any-gt-generic" class="headerlink" title=" 1. any =&gt; generic"></a><a name="1"></a> 1. <del>any</del> =&gt; generic</h3><p>any의 사용을 지양하고자 타입을 인자로 넘긴다.</p>
+<h3 id="1-any-generic"><a href="#1-any-generic" class="headerlink" title=" 1. any &#x3D;&gt; generic"></a><a name="1"></a> 1. <del>any</del> &#x3D;&gt; generic</h3><p>any의 사용을 지양하고자 타입을 인자로 넘긴다.</p>
 <ul>
 <li>탬플릿을 만드는 개념. 인자값과 출력값의 타입을 같게 탬플릿을 만들어준다.</li>
 <li>제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 <code>하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다.</code> 한번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.</li>
@@ -367,7 +367,7 @@
 <hr>
 <h3 id="4-Generic-Type"><a href="#4-Generic-Type" class="headerlink" title=" 4. Generic Type"></a><a name="4"></a> 4. Generic Type</h3><p>구현체에 return T 를 설정하지 않아도, return false 시 오류가 나지 않는다?</p>
 <ul>
-<li>때에 따라서 적합하지 않을 수 있다. </li>
+<li>때에 따라서 적합하지 않을 수 있다.</li>
 </ul>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">HelloGeneric</span> = &lt;T&gt;<span class="function">(<span class="params"><span class="attr">message</span>: T</span>) =&gt;</span> T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">hello</span>: <span class="title class_">HelloGeneric</span> = &lt;T&gt;(<span class="attr">message</span>: T): <span class="function"><span class="params">T</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(hello&lt;<span class="built_in">string</span>&gt;(<span class="string">&#x27;Hello&#x27;</span>).<span class="property">length</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -385,7 +385,7 @@
 <hr>
 <h3 id="8-type-lookup-system"><a href="#8-type-lookup-system" class="headerlink" title=" 8. type lookup system"></a><a name="8"></a> 8. type lookup system</h3><p>keyof 키워드를 알아야한다.</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Test</span> = keyof <span class="title class_">Person</span>;</span><br><span class="line"><span class="comment">// 리터럴 타입의 유니온 타입이 나온다. &quot;name&quot; | &quot;age&quot;</span></span><br></pre></td></tr></table></figure>
-<p>객체와 key값을 인자로 받아서 perperty의 타입값을 알아내는 함수를 만들었다고 치자.<br>함수에서 컴파일 타입을 검증할 수 있는 시스템이 필요하다. =&gt; type lookup system</p>
+<p>객체와 key값을 인자로 받아서 perperty의 타입값을 알아내는 함수를 만들었다고 치자.<br>함수에서 컴파일 타입을 검증할 수 있는 시스템이 필요하다. &#x3D;&gt; type lookup system</p>
 <ul>
 <li><code>getProperty</code>: Generic과 type alias를 결합하여 사용하여 type을 찾아낼 수 있는 시스템을 만든다.</li>
 <li><code>setProperty</code>: Generic과 type alias를 결합하여 사용하여 type을 찾아내고, 타입을 다시 재정의 하는 함수</li>
@@ -418,7 +418,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/24/Typescript_09/" data-id="ckzv7cqk000a3qobmbyraivw2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/24/Typescript_09/" data-id="cm3u7mj230093hwb2gof15n03" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="async,rxjs" />
     
     
-    <meta name="description" content="[퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 환경의 변화 웹 개발 복잡도 증가 웹 애플리케이션은 상태 머신이다. &#x3D;&gt; 웹 애플리케이션 오류가 발생하는 경우 &#x3D;&gt; RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?   서론대부분 처음 개발을 시작할 때는 요구사항을 어떻게 프로그래밍할 것인지를 고민하게 된다.">
+    <meta name="description" content="**[퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 환경의 변화 웹 개발 복잡도 증가 웹 애플리케이션은 상태 머신이다. &#x3D;&gt; 웹 애플리케이션 오류가 발생하는 경우 &#x3D;&gt; RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?   서론대부분 처음 개발을 시작할 때는 요구사항을 어떻게 프로그래밍할">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1부&#x2F; chap0. RxJs를 시작하기 전에">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/10/Async_00/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 환경의 변화 웹 개발 복잡도 증가 웹 애플리케이션은 상태 머신이다. &#x3D;&gt; 웹 애플리케이션 오류가 발생하는 경우 &#x3D;&gt; RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?   서론대부분 처음 개발을 시작할 때는 요구사항을 어떻게 프로그래밍할 것인지를 고민하게 된다.">
+<meta property="og:description" content="**[퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 환경의 변화 웹 개발 복잡도 증가 웹 애플리케이션은 상태 머신이다. &#x3D;&gt; 웹 애플리케이션 오류가 발생하는 경우 &#x3D;&gt; RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?   서론대부분 처음 개발을 시작할 때는 요구사항을 어떻게 프로그래밍할">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/23/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-10T11:12:34.000Z">
@@ -230,13 +230,13 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
 <li>웹 환경의 변화</li>
 <li>웹 개발 복잡도 증가</li>
-<li>웹 애플리케이션은 상태 머신이다. <a href="#third">=&gt;</a></li>
-<li>웹 애플리케이션 오류가 발생하는 경우 <a href="#forth">=&gt;</a></li>
+<li>웹 애플리케이션은 상태 머신이다. <a href="#third">&#x3D;&gt;</a></li>
+<li>웹 애플리케이션 오류가 발생하는 경우 <a href="#forth">&#x3D;&gt;</a></li>
 <li>RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?</li>
 </ol>
 <hr>
@@ -255,23 +255,17 @@
 <p>웹 어플리케이션은 이런 기능들의 집합으로 구성되어있다.<br>크게 보면 웹 어플리케이션도 하나의 큰 상태 머신인 셈.</p>
 <hr>
 <p><a id="forth"></a></p>
-<h2 id="4-웹-애플리케이션-오류가-발생하는-경우"><a href="#4-웹-애플리케이션-오류가-발생하는-경우" class="headerlink" title="4. 웹 애플리케이션 오류가 발생하는 경우**"></a>4. 웹 애플리케이션 오류가 발생하는 경우**</h2><p>웹 어플리케이션을 하나의 상태 머신으로 본다면<br>정확한 <strong>입력</strong>과 <strong>로직</strong>으로 상태를 관리하는 방법이 중요하다.<br>=&gt; 이에 따라 오류의 발생 여부가 결정된다.</p>
+<h2 id="4-웹-애플리케이션-오류가-발생하는-경우"><a href="#4-웹-애플리케이션-오류가-발생하는-경우" class="headerlink" title="4. 웹 애플리케이션 오류가 발생하는 경우**"></a>4. 웹 애플리케이션 오류가 발생하는 경우**</h2><p>웹 어플리케이션을 하나의 상태 머신으로 본다면<br>정확한 <strong>입력</strong>과 <strong>로직</strong>으로 상태를 관리하는 방법이 중요하다.<br>&#x3D;&gt; 이에 따라 오류의 발생 여부가 결정된다.</p>
 <p>∴ <strong>각 구성요소의 상태를 어떻게 관리하느냐</strong>에 따라 안정적인 어플리케이션을 만들 수 있다.</p>
 <h3 id="4-1-입력-오류"><a href="#4-1-입력-오류" class="headerlink" title="4-1. 입력 오류"></a>4-1. 입력 오류</h3><p>서버로부터 전달받은 데이터를 입력값으로 사용하는 경우</p>
 <ol>
-<li>서버에서 전달받은 응답 결괏값이 정상적으로 왔을 경우에만 입력값을 전달해야 한다.<ul>
-<li>입력값을 별도로 제어해야함.</li>
-</ul>
-</li>
-<li>응답 데이터의 결과가 미처 오기도 전에 데이터를 입력값으로 전달하거나 응답 중에 에러가 발생하여 비정상적인 응답 데이터를 입력값으로 전달하면 오류가 발생할 수 있다.<ul>
-<li>오류처리 필요</li>
-</ul>
-</li>
+<li>서버에서 전달받은 응답 결괏값이 정상적으로 왔을 경우에만 입력값을 전달해야 한다.<br>- 입력값을 별도로 제어해야함.</li>
+<li>응답 데이터의 결과가 미처 오기도 전에 데이터를 입력값으로 전달하거나 응답 중에 에러가 발생하여 비정상적인 응답 데이터를 입력값으로 전달하면 오류가 발생할 수 있다.<br>- 오류처리 필요</li>
 </ol>
 <h3 id="4-2-상태-오류"><a href="#4-2-상태-오류" class="headerlink" title="4-2. 상태 오류"></a>4-2. 상태 오류</h3><p>상태 오류가 발생하는 이유는 상태 변화를 정확하게 전달하지 못하는 경우이다.</p>
 <ol>
-<li><strong>구성요소 간</strong>에 의존도가 있는 경우<br>구성요소 간 의존도가 있는 경우, 구성요소의 변경 상태는 적시에 다른 구성요소에 전달되어야 한다.</li>
-<li>두번째 <strong>호출 순서</strong>에 의존도가 있는 경우<br>구성요소 간 호출 순서에 의존도가 있는 경우, 구성요소는 <strong>순서</strong>에 맞게 호출되어야만 한다.</li>
+<li><strong>구성요소 간</strong>에 의존도가 있는 경우<br>  구성요소 간 의존도가 있는 경우, 구성요소의 변경 상태는 적시에 다른 구성요소에 전달되어야 한다.</li>
+<li>두번째 <strong>호출 순서</strong>에 의존도가 있는 경우<br>  구성요소 간 호출 순서에 의존도가 있는 경우, 구성요소는 <strong>순서</strong>에 맞게 호출되어야만 한다.</li>
 </ol>
 <hr>
 <p>cf__1. redux의 옵저버 패턴</p>
@@ -294,7 +288,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/10/Async_00/" data-id="ckzv7cqdq0000qobmxxjim3u0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/10/Async_00/" data-id="cm3u7mj110005hwb2hq7o94lg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

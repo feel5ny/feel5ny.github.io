@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="docker_volume,docker_network,docker_log,docker" />
+        <meta name="keywords" content="docker,docker_volume,docker_network,docker_log" />
     
     
     <meta name="description" content="왜 우린 도커를 써야하나요?   지속가능한 데이터를 활용하기 위해 볼륨을 사용할 수 있으며, 호스트볼륨을 공유하거나, 볼륨컨테이터를 만들어 활용하거나, 도커 볼륨을 활용할 수 있다.  도커는 컨테이너 내부IP를 순차적으로 할당하며,(컨테이너 별로 내부망이 생성) veth 인터페이스로 접근가능하다. 도커가 자체적으로 제공하는 5가지 네트워크 드라이버가 존재한">
@@ -22,10 +22,10 @@
 <meta property="article:published_time" content="2022-02-20T13:00:00.000Z">
 <meta property="article:modified_time" content="2024-11-23T12:25:51.932Z">
 <meta property="article:author" content="Joy Kim">
+<meta property="article:tag" content="docker">
 <meta property="article:tag" content="docker_volume">
 <meta property="article:tag" content="docker_network">
 <meta property="article:tag" content="docker_log">
-<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2022/02/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
@@ -374,8 +374,8 @@
 </ul>
 <h4 id="fy-Stateless-설계"><a href="#fy-Stateless-설계" class="headerlink" title="fy; Stateless 설계"></a>fy; Stateless 설계</h4><ul>
 <li>컨테이너가 아닌, 외부에서 데이터를 저장하고<br><strong>컨테이너는 외부에서의 데이터로 동작하도록</strong> 설계하는 것</li>
-<li>== 컨테이너 자체는 상태가 없고,<br>상태를 결정하는 데이터는 외부로부터 제공받는다.</li>
-<li>== 컨테이너가 삭제돼도, 데이터는 보존되므로,<br>stateless한 컨테이너 설계는 도커사용시 바람직한 설계</li>
+<li>&#x3D;&#x3D; 컨테이너 자체는 상태가 없고,<br>상태를 결정하는 데이터는 외부로부터 제공받는다.</li>
+<li>&#x3D;&#x3D; 컨테이너가 삭제돼도, 데이터는 보존되므로,<br>stateless한 컨테이너 설계는 도커사용시 바람직한 설계</li>
 <li>stateful한 컨테이너는 지양해야함.</li>
 </ul>
 <a name="networking" />
@@ -433,8 +433,7 @@ Docker DNS, Round-Robin 방식</li>
 <li>매번 달라지는 IP를 결정하는 것은 별도의 알고리즘이 아닌, round-robin 방식</li>
 <li>하나의 중앙처리장치를 여러 프로세스들이 우선순위 없이 돌아가며 할당받아 실행되는 방식</li>
 <li>도커에 내장된 DNS가 alicek106 호스트 이름을 alicek106 을 설정한 컨테이너로 변환 resolve 하기 때문이다.</li>
-<li><code>dig</code>라는 명령어로 확인가능.<img src="/images/2022/02/04.jpg">
-</li>
+<li><code>dig</code>라는 명령어로 확인가능.<img src="/images/2022/02/04.jpg"></li>
 </ul>
 </li>
 <li><p><strong>Docker DNS</strong></p>
@@ -454,9 +453,7 @@ Docker DNS, Round-Robin 방식</li>
 <h3 id="호스트-네트워크"><a href="#호스트-네트워크" class="headerlink" title="호스트 네트워크"></a>호스트 네트워크</h3><ul>
 <li>컨테이너의 네트워크를 → 호스트 모드로 설정하면,<ul>
 <li>컨테이너 내부의 어플리케이션을 별도의 port forwarding없이 바로 서비스할 수 있다.</li>
-<li>실제 호스트에서 어플리케이션을 외부에 노출하는 것과 같다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_host \</span><br><span class="line">--net host \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>실제 호스트에서 어플리케이션을 외부에 노출하는 것과 같다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_host \</span><br><span class="line">--net host \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -474,9 +471,7 @@ Docker DNS, Round-Robin 방식</li>
 <h3 id="container-네트워크"><a href="#container-네트워크" class="headerlink" title="container 네트워크"></a>container 네트워크</h3><ul>
 <li>다른 컨테이너의 네트워크 네임스페이스 환경을 공유할 수 있다.</li>
 <li>공유되는 속성 : 내부 IP, 네트워크 인터페이스의 mac주소 등..<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_none \</span><br><span class="line">--net container:network_container_1 \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure>
-<img src="/images/2022/02/03.jpeg">
-
-</li>
+<img src="/images/2022/02/03.jpeg"></li>
 </ul>
 <a name="logging"/>
 
@@ -509,9 +504,9 @@ Docker DNS, Round-Robin 방식</li>
 <h3 id="1-syslog-로그"><a href="#1-syslog-로그" class="headerlink" title="1. syslog 로그"></a>1. syslog 로그</h3><ul>
 <li>컨테이너 로그는 JSON뿐만아니라, syslog로 보내 저장하도록 설정가능</li>
 <li>syslog: 유닉스 계역 운영체제에서 로그를 수집하는 오래된 표준 중 하나.<ul>
-<li>커널, 보안 등 <strong>시스템과 관련된 로그</strong>, </li>
+<li>커널, 보안 등 <strong>시스템과 관련된 로그</strong>,<br>  <strong>어플리케이션의 로그</strong> 등<br>  다양한 종류의 로그를 수집해  저장.</li>
 </ul>
-  <strong>어플리케이션의 로그</strong> 등<br>  다양한 종류의 로그를 수집해  저장.</li>
+</li>
 </ul>
 <h3 id="2-fluentd-로그"><a href="#2-fluentd-로그" class="headerlink" title="2. fluentd 로그"></a>2. fluentd 로그</h3><ul>
 <li>오픈소스 도구</li>
@@ -522,7 +517,7 @@ Docker DNS, Round-Robin 방식</li>
 <li>도커를 aws ec3에서 사용하고 있다면, 다른 도구 별도 설치없이 컨테이너에서 드라이버 옵션을 설정하여, 클라우드워치 로깅 드라이버 사용가능</li>
 </ul>
 <blockquote>
-<p>도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.</p>
+<p>도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커&#x2F;쿠버네티스” 책으로 진행합니다.</p>
 </blockquote>
 <hr>
 <h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3>
@@ -544,7 +539,7 @@ Docker DNS, Round-Robin 방식</li>
 
 
 
-    <a data-url="http://feel5ny.github.io/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" data-id="cm2pm85e0000bblb2stlxacqy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" data-id="cm3u7mj2c00bdhwb204izbq0x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

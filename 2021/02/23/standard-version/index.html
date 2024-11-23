@@ -413,9 +413,7 @@
 <ul>
 <li>CHANGLOG의 경우 조금 더 개발레벨의 변경사항을 작성한거에 가깝다고 생각한다. </li>
 <li>만약 지금과같은 문제사항이서 CS담당자에게는 CHANGLOG파일보다는 기능요약, 버그수정을 비개발자가 알 수 있는 언어로 정리된 릴리즈노트를 제공하는게 맞다고 생각한다.</li>
-<li>만약 릴리즈 노트를 작성하지 않는 팀이라면, 비개발용어로 commit 타입을 생성하여 개발자가 일반용어로 작성하여 CHANGLOG에 포함하는 것도 나쁘지 않다고 본다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .versionrc</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;types&quot;</span>: [</span><br><span class="line">    ...</span><br><span class="line">    &#123;<span class="string">&quot;type&quot;</span>:<span class="string">&quot;release&quot;</span>&#125;, <span class="comment">// release용으로 생성</span></span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>만약 릴리즈 노트를 작성하지 않는 팀이라면, 비개발용어로 commit 타입을 생성하여 개발자가 일반용어로 작성하여 CHANGLOG에 포함하는 것도 나쁘지 않다고 본다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .versionrc</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;types&quot;</span>: [</span><br><span class="line">    ...</span><br><span class="line">    &#123;<span class="string">&quot;type&quot;</span>:<span class="string">&quot;release&quot;</span>&#125;, <span class="comment">// release용으로 생성</span></span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <img src="/images/2021/03/04.png" alt="Gatsby.js내의 릴리즈노트 페이지"/>
 
@@ -452,7 +450,7 @@
 </ul>
 </li>
 <li>내가 개발한 코드가 어떤 목적인지 카테고라이징을 하는 기준이 각자 정의하기 애매하다면?<ul>
-<li><a href="https://github.com/commitizen/cz-cli">commitizen/cz-cli</a>라는 라이브러리</li>
+<li><a href="https://github.com/commitizen/cz-cli">commitizen&#x2F;cz-cli</a>라는 라이브러리</li>
 </ul>
 </li>
 </ul>
@@ -499,8 +497,8 @@
 </ul>
 </li>
 <li>standard-version 이외에 필요한 라이브러리는<ul>
-<li>(필수) @commitlint/cli : 커밋 작성시 컨벤션용 린트</li>
-<li>(옵션) commitizen/cz-cli : conventional commit의 규격을 하나씩 문항에 답하면서 커밋을 완성한다.</li>
+<li>(필수) @commitlint&#x2F;cli : 커밋 작성시 컨벤션용 린트</li>
+<li>(옵션) commitizen&#x2F;cz-cli : conventional commit의 규격을 하나씩 문항에 답하면서 커밋을 완성한다.</li>
 </ul>
 </li>
 </ul>
@@ -525,7 +523,7 @@
 <li><a href="https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%9D%B8%EC%A7%80%EB%A1%9C%EA%B7%B8">wiki-CHANGELOG</a></li>
 <li><a href="https://github.com/conventional-CHANGLOG/standard-version">standard-version</a></li>
 <li><a href="https://github.com/conventional-CHANGLOG/commitlint">commitlint</a></li>
-<li><a href="https://github.com/commitizen/cz-cli">commitizen/cz-cli</a></li>
+<li><a href="https://github.com/commitizen/cz-cli">commitizen&#x2F;cz-cli</a></li>
 <li><a href="https://github.com/conventional-CHANGLOG/commitlint/blob/master/docs/reference-rules.md">규격화</a></li>
 </ol>
 
@@ -547,7 +545,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2021/02/23/standard-version/" data-id="ckzv7cql200ddqobmmrhd2xfd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2021/02/23/standard-version/" data-id="cm3u7mj2e00byhwb20nis51zd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

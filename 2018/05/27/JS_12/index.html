@@ -249,7 +249,7 @@
 <ul>
 <li>name: 로컬 시스템의 파일 이름</li>
 <li>size: 바이트 단위인 파일 크기</li>
-<li>type: 파일의 망미 타입을 나타내는 문자열 (ex_ “image/png”)</li>
+<li>type: 파일의 망미 타입을 나타내는 문자열 (ex_ “image&#x2F;png”)</li>
 <li>lastModifiedDate: 파일이 마지막으로 수정된 시점을 나타내는 문자열입니다. 이 프로퍼티는 크롬에만 구현되어있습니다.</li>
 </ul>
 <img src="/images/2018/12/01.png">
@@ -267,7 +267,7 @@
 <ul>
 <li>progress : 읽어올 데이터가 더 있을 때<ul>
 <li>50밀리 초마다 발생, lengthComputable, loaded, total 같은 정보를 제공한다.</li>
-<li><strong>loaded / total = 버퍼링</strong></li>
+<li><strong>loaded &#x2F; total &#x3D; 버퍼링</strong></li>
 </ul>
 </li>
 <li>error : 에러 생겼을 때<ul>
@@ -284,7 +284,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- html 🚀🚀 --&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;upload-wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;upload&quot;</span> <span class="attr">class</span>=<span class="string">&quot;upload-label&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>✨UPLOAD IMAGE ✨<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;upload-imgBtn&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://uploads.codesandbox.io/uploads/user/1dcc6c5f-ac13-4c27-b2e3-32ade1d213e9/2Go1-photo.svg&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- fileReader를 통해 읽은 파일을 넣는 부분 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;image-preview&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">accept</span>=<span class="string">&quot;image/*&quot;</span> <span class="attr">id</span>=<span class="string">&quot;upload&quot;</span> <span class="attr">class</span>=<span class="string">&quot;image-upload&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span> <span class="attr">multiple</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>input type=”file” 태그에 onchange 이벤트를 걸어둡니다.</li>
+<li>input type&#x3D;”file” 태그에 onchange 이벤트를 걸어둡니다.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">load_image</span> = e =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> files = e.<span class="property">target</span>.<span class="property">files</span>;</span><br><span class="line">  <span class="keyword">const</span> filesArr = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(files);</span><br><span class="line">  <span class="comment">// 여러장의 이미지를 불러올 경우, 배열화</span></span><br><span class="line"></span><br><span class="line">  filesArr.<span class="title function_">forEach</span>(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line">    reader.<span class="property">onload</span> = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 뭔가 썸팅 할 것을 넣습니다.</span></span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">    reader.<span class="title function_">readAsDataURL</span>(file); ✨✨</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;.image-upload&quot;</span>).<span class="title function_">on</span>(<span class="string">&quot;change&quot;</span>, <span class="function"><span class="params">e</span> =&gt;</span> <span class="title function_">load_image</span>(e));</span><br></pre></td></tr></table></figure>
 
@@ -300,7 +300,7 @@
 <li>해당 image의 높이와 폭을 측정한 후, </li>
 <li>원하는 최대 사이즈의 크기보다 높이가 클 경우 리사이징할 비율을 폭에 곱하고, 반대의 경우 반대로 적용합니다. ( 폭이 클 경우 비율을 높에 곱한다. )</li>
 <li>리사이징된 폭과 높이를 canvas의 높이와 폭이 할당한 후 </li>
-<li>drawing 합니다. canvas의 drawImage() 사용합니다. 매개변수로는 이미지/ 원본의 x y 좌표 / 너비와 높이 / 컨텍스트의 x y 좌표 / 컨텍스트 너비/ 높이</li>
+<li>drawing 합니다. canvas의 drawImage() 사용합니다. 매개변수로는 이미지&#x2F; 원본의 x y 좌표 &#x2F; 너비와 높이 &#x2F; 컨텍스트의 x y 좌표 &#x2F; 컨텍스트 너비&#x2F; 높이</li>
 <li>canvas의 dataURL을 toDataURL 메서드를 이용하여 구합니다. toDataURL 메서드에 이미지 마임 타입을 매개변수로 전달하여 data URI를 받습니다.</li>
 </ol>
 <ul>
@@ -365,7 +365,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/05/27/JS_12/" data-id="ckzv7cqhz005tqobmvy1mkmuk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/05/27/JS_12/" data-id="cm3u7mj1r0058hwb2hq9g3580" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

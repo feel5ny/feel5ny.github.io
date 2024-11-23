@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript,codeSpitz" />
     
     
-    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item 실행될 시간과실행할 시간을 갖고 있는">
+    <meta name="description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item   실행될 시간과실행할 시간을 갖고">
 <meta property="og:type" content="article">
 <meta property="og:title" content="코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.">
 <meta property="og:url" content="http://feel5ny.github.io/2019/11/11/JS_26_2/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item 실행될 시간과실행할 시간을 갖고 있는">
+<meta property="og:description" content="코드스피츠 85에서는 none blocking에 대한 이야기와자바스크립트를 짜는 근본적인 방법에 대한 고찰을 이야기해본다.  🌕🌑🌑 TL;DRsetTimer에서부터 promise까지 동시성 모델을 기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다.     1. setTimer를 구현해보기entity Item   실행될 시간과실행할 시간을 갖고">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/37/thumb_default.jpg">
 <meta property="article:published_time" content="2019-11-11T11:20:19.000Z">
@@ -312,16 +312,18 @@
 <a name="setTimer" />
 
 <h2 id="1-setTimer를-구현해보기"><a href="#1-setTimer를-구현해보기" class="headerlink" title="1. setTimer를 구현해보기"></a>1. setTimer를 구현해보기</h2><h3 id="entity"><a href="#entity" class="headerlink" title="entity"></a>entity</h3><ol>
-<li>Item<ul>
+<li>Item</li>
+</ol>
+<ul>
 <li>실행될 시간과<br>실행할 시간을 갖고 있는 객체</li>
 </ul>
-</li>
-<li>queue<ul>
+<ol start="2">
+<li>queue</li>
+</ol>
+<ul>
 <li>callback queue 역할을 하는 큐</li>
 <li>객체 리스트 형태인 Set으로 생성</li>
 </ul>
-</li>
-</ol>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Item</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="attr">time</span>: <span class="built_in">number</span>; <span class="comment">// 몇초 후에 실행할지</span></span><br><span class="line">  <span class="attr">block</span>: <span class="title class_">Function</span>; <span class="comment">// 몇초 후에 실행할 함수</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">block, time</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">block</span> = block;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">time</span> = time + performance.<span class="title function_">now</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> queue = <span class="keyword">new</span> <span class="title class_">Set</span>;</span><br></pre></td></tr></table></figure>
 <details>
   <summary>cf__1. performace, Set, value</summary>
@@ -354,7 +356,9 @@
 
 <hr>
 <h3 id="Core-Action"><a href="#Core-Action" class="headerlink" title="Core Action"></a>Core Action</h3><ol>
-<li>callback 큐를 지속적으로 체크한다.<ul>
+<li>callback 큐를 지속적으로 체크한다.</li>
+</ol>
+<ul>
 <li>큐에 호출시간보다 작으면 실행하지 않는다.</li>
 <li>큐에 호출시간보다 크면<ol>
 <li>실행하고</li>
@@ -362,17 +366,15 @@
 </ol>
 </li>
 </ul>
-</li>
-</ol>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@params</span> time 현재시간</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">checkQueue</span> = (<span class="params"><span class="attr">time</span>: <span class="built_in">number</span></span>) =&gt; &#123;</span><br><span class="line">  queue.<span class="title function_">forEach</span>(<span class="function">(<span class="params"><span class="attr">item</span>: &#123;time: <span class="built_in">number</span>, block: <span class="built_in">Function</span>&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(item.<span class="property">time</span> &gt; time) <span class="keyword">return</span>; <span class="comment">// 현재시간이 호출시간보다 작다면 실행하지 않음.</span></span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 현재시간이 호출시간보다 작다면 실행.</span></span><br><span class="line">      queue.<span class="title function_">delete</span>(item); <span class="comment">// 실행할 예정이기때문에 삭제</span></span><br><span class="line">      item.<span class="title function_">block</span>(); <span class="comment">// 실행</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(checkQueue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">requestAnimationFrame</span>(checkQueue);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>cf__2 <code>requestAnimationFrame</code></strong></p>
+</blockquote>
 <ul>
 <li>브라우저에게 수행하기를 원하는 애니메이션을 알리고, 다음 리페인트가 진행되기 전에 해당 애니메이션을 업데이트하는 함수를 호출하게 한다.</li>
 <li>리페인트 이전에 실행할 콜백을 인자로 받는다. </li>
 <li>엔진이 렌더링이 끝나면 직접 발생시키는 함수</li>
 </ul>
-</blockquote>
 <hr>
 <h4 id="트리거"><a href="#트리거" class="headerlink" title="트리거"></a>트리거</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">timeout</span> = (<span class="params"><span class="attr">block</span>: <span class="title class_">Funtion</span>, <span class="attr">time</span>:<span class="built_in">number</span></span>) =&gt;</span><br><span class="line">   queue.<span class="title function_">add</span>(<span class="keyword">new</span> <span class="title class_">Item</span>(block, time))</span><br></pre></td></tr></table></figure>
 <hr>
@@ -391,12 +393,14 @@
 <ol>
 <li><code>requestAnimationFrame</code>으로 내부함수 <code>f</code>가 실행</li>
 <li>load기준으로 반복 카운트가 chunk된다.</li>
-<li>while문이 한 셋트가(load 카운트가 종료) 끝나면, <code>requestAnimationFrame</code>으로 <code>f</code>함수를 다시 실행시킨다.<ul>
+<li>while문이 한 셋트가(load 카운트가 종료) 끝나면, <code>requestAnimationFrame</code>으로 <code>f</code>함수를 다시 실행시킨다.</li>
+</ol>
+<ul>
 <li>하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.</li>
 </ul>
-</li>
+<ol start="4">
 <li>다시</li>
-<li>max까지 루프가 끝나면 더이상 f를 실행하지 않음. </li>
+<li>max까지 루프가 끝나면 더이상 f를 실행하지 않음.</li>
 </ol>
 <ul>
 <li>하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.</li>
@@ -412,7 +416,7 @@
 <li>제너레이터는 <strong>유사 iterable</strong>이다.<ul>
 <li>제너레이터 자체는 iterable이 아니다.</li>
 <li>iterable은 iterator라는 함수(<code>[Symbol.iterator]()</code>)를 호출하면 iterator 객체를 주는데,<br>generator를 호출하면 iterator가 반환된다.</li>
-<li>generator는 <code>for...of</code>를 사용하지 못한다.<br>for…of는 iterable이 와야하기 때문에  </li>
+<li>generator는 <code>for...of</code>를 사용하지 못한다.<br>for…of는 iterable이 와야하기 때문에</li>
 </ul>
 </li>
 <li><code>yield</code>가 일어날 때마다 <code>next</code>로 다음 턴을 줄 수 있다.</li>
@@ -444,9 +448,9 @@
 <li><code>gene.next()</code></li>
 </ul>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">nbFor</span> = (<span class="params">max, load, block</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">iterator</span>: <span class="title class_">Iterator</span> = <span class="title function_">gene</span>(max, load, block);</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">f</span> = _ =&gt; iterator.<span class="title function_">next</span>().<span class="property">done</span> || <span class="title function_">timeout</span>(f);</span><br><span class="line">  <span class="title function_">timeout</span>(f); <span class="comment">// timeout을 쓰는 위치를 밖으로 옮겼다.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>제어 시스템의 반제어권을 외부에 줌으로써</strong><br>내부에서 제어와 관련된 로직을 분리시킬수 있게 된다는게<br>제너레이터의 장점</p>
-<hr>
-<hr>
+<h2 id="제어-시스템의-반제어권을-외부에-줌으로써내부에서-제어와-관련된-로직을-분리시킬수-있게-된다는게제너레이터의-장점"><a href="#제어-시스템의-반제어권을-외부에-줌으로써내부에서-제어와-관련된-로직을-분리시킬수-있게-된다는게제너레이터의-장점" class="headerlink" title="제어 시스템의 반제어권을 외부에 줌으로써내부에서 제어와 관련된 로직을 분리시킬수 있게 된다는게제너레이터의 장점
+ "></a><strong>제어 시스템의 반제어권을 외부에 줌으로써</strong><br>내부에서 제어와 관련된 로직을 분리시킬수 있게 된다는게<br>제너레이터의 장점
+ </h2><hr>
 <a name="promise" />
 
 <h2 id="4-Promise-구현해보기"><a href="#4-Promise-구현해보기" class="headerlink" title="4. Promise 구현해보기"></a>4. Promise 구현해보기</h2><ul>
@@ -456,12 +460,12 @@
 <li>트리거를 걸었음</li>
 <li>서버가 3초만에 데이터를 줬음</li>
 <li>3초 안에는 제어할 권한이 없음</li>
-<li>3초 이후에는 제어할 권한이 있음<ul>
+<li>3초 이후에는 제어할 권한이 있음</li>
+</ol>
+<ul>
 <li>Promise에 바로 <code>then</code>을 사용하는 것은<br>반제어권이 이점을 활용하지 않고 <strong>콜백처럼 쓰는 형태</strong></li>
 <li>내가 원할때 then을 호출할 수 있다.</li>
 </ul>
-</li>
-</ol>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gene2 = <span class="keyword">function</span>*(max, load, block) &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(i &lt; max)&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> curr = load;</span><br><span class="line">      <span class="keyword">while</span>(curr-- &amp;&amp; i &lt; max) &#123;</span><br><span class="line">        <span class="title function_">block</span>();</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">      <span class="title function_">timeout</span>(res, <span class="number">0</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>yield를 보낼때 Promise로 감싸서 보내고 있다.</li>
@@ -496,7 +500,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/11/JS_26_2/" data-id="ckzv7cqir0070qobms4a1uljz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/11/JS_26_2/" data-id="cm3u7mj1u006ehwb23i1u95im" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

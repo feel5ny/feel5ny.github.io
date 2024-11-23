@@ -299,10 +299,7 @@
 <li>다이제스트 인증에서,<br>지시자나 그 값이 적절하지 않거나,<br>요구된 지시자가 빠져있는 경우<br><code>400 Bad Request</code></li>
 <li><strong>로그를 남기자</strong><br>비밀번호가 반복적으로 실패할 경우,<br>공격자의 비밀번호 추측의 시도가 있을 수 있으므로 로그를 남기는게 좋다.</li>
 <li>URI 지시자가 가리키는 리소스가 요청줄에 명시된 리소스와 같음을 확인해야한다.    (중간 프락시가 변조할 수도 있음)<ul>
-<li>요청줄에 명시된 리소스는 domain필드에 같이 명시해준다.<img src="/images/2019/43/02.png" style="width:100%"/>
-
-
-</li>
+<li>요청줄에 명시된 리소스는 domain필드에 같이 명시해준다.<img src="/images/2019/43/02.png" style="width:100%"/></li>
 </ul>
 </li>
 </ul>
@@ -325,17 +322,19 @@
 </li>
 <li><p>보호공간의 구체적인 계산은 인증 메커니즘에 달려있다.</p>
 <ol>
-<li><strong>기본 인증</strong><ul>
+<li><strong>기본 인증</strong></li>
+</ol>
+<ul>
 <li>클라는 요청 URI와 그 하위의 모든 경로는<br>같은 보호 공간에 있는 것으로 가정한다.</li>
 <li>클라는 이 공간에서 서버로부터의 또 다른 인증 요구를 기다리지 않고, 미리 리소스에 대한 인가를 받을 수 있다.</li>
 </ul>
-</li>
-<li><strong>다이제스트 인증</strong><ul>
+<ol start="2">
+<li><strong>다이제스트 인증</strong></li>
+</ol>
+<ul>
 <li><code>WWW-Authenticate: domain</code> 필드는<br>보호 공간을 보다 엄밀하게 정의한다.</li>
 <li>domain 필드는 작은 따옴표로 묶인 URI의 공백으로 분리된 목록이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domain = &quot;&#x27;/cart&#x27; &#x27;/main&#x27;&quot;</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-</ol>
 </li>
 <li><p>이 domain 목록의 모든 URI와<br>논리적으로 그 하위에 위치한 모든 URI는<br>같은 보호 공간에 있는 것으로 가정한다.</p>
 </li>
@@ -366,23 +365,24 @@
 <a name="guard"/>
 
 <h1 id="2-보안에-대한-고려사항"><a href="#2-보안에-대한-고려사항" class="headerlink" title="2. 보안에 대한 고려사항"></a>2. 보안에 대한 고려사항</h1><h2 id="TL-DR-1"><a href="#TL-DR-1" class="headerlink" title="TL;DR"></a>TL;DR</h2><ol>
-<li>헤더 부당 변경: <strong>양종단 암호화 / 디지털 서명</strong></li>
+<li>헤더 부당 변경: <strong>양종단 암호화 &#x2F; 디지털 서명</strong></li>
 <li>재전송 공격: <strong>매 트랜잭션마다 유일한 난스값</strong></li>
 <li>다중 인증 매커니즘: <strong>가장 강력한 인증 제도만을 유지하는 프락시 서버 사용</strong></li>
 <li>사전 공격: <strong>복잡한 비밀번호사용 및 비밀번호 만료 정책</strong></li>
 <li>악의적인 프락시와 중간 공격: <strong>SSL을 사용하는 것</strong></li>
-<li>선택 평문 공격: <strong>선택적 c난스 사용 / 만료매커니즘 / 강력 비밀번호</strong></li>
+<li>선택 평문 공격: <strong>선택적 c난스 사용 &#x2F; 만료매커니즘 &#x2F; 강력 비밀번호</strong></li>
 <li>비밀번호 저장: -</li>
 </ol>
 <hr>
 <ol>
-<li><p><strong>헤더 부당 변경</strong></p>
+<li><strong>헤더 부당 변경</strong></li>
+</ol>
 <ul>
-<li>헤더 부당 변경에 대해 항상 안전한 시스템을 제공하기 위해서<br><strong>양 종단 암호화</strong>나
-헤더에 대한 <strong>디지털 서명</strong>이 필요할 것이다.</li>
+<li>헤더 부당 변경에 대해 항상 안전한 시스템을 제공하기 위해서<br><strong>양 종단 암호화</strong>나<br>헤더에 대한 <strong>디지털 서명</strong>이 필요할 것이다.</li>
 </ul>
-</li>
-<li><p><strong>재전송 공격</strong></p>
+<ol start="2">
+<li><strong>재전송 공격</strong></li>
+</ol>
 <ul>
 <li>재전송 공격이란, 누군가 어떤 트랜잭션에서 엿들은 인증자격을<br>다른 트랜잭션을 위해 사용하는 것을 말한다.</li>
 <li>GET 요청에 대한 이슈이긴 하지만<br>POST나 PUT 요청에 대한 재전송 공격에 대해서도 항상 잘 동작하는 예방책은 필수적으로 가지고 있어야 한다.</li>
@@ -392,8 +392,9 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p><strong>다중 인증 메커니즘</strong></p>
+<ol start="3">
+<li><strong>다중 인증 메커니즘</strong></li>
+</ol>
 <ul>
 <li>서버가 다중 인증 제도를 지원할때, 선택지를 제공할 것이다.<br>클라에게 가장 강력한 인증 메커니즘을 선택해야 할 의무가 있는 것은 아니기 때문에,<br>결국 인증의 강도는 선택지 중 <strong>가장 약한 것과 같다고 보아야 한다.</strong></li>
 <li>클라가 언제나 가능한 한 가장 강력한 인증제도를 선택하면 문제가 해결하면 되지만,<br>현실적으로 불가능하다면,<br><strong>가장 강력한 인증 제도만을 유지하는 프락시 서버를 사용하여</strong> 해결하는 것이다.<ul>
@@ -401,16 +402,17 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p><strong>사전 공격 dictionary</strong></p>
+<ol start="4">
+<li><strong>사전 공격 dictionary</strong></li>
+</ol>
 <ul>
 <li>사전공격은 <strong>전형적인 비밀번호 추측 공격</strong>이다.</li>
-<li>악의적인 사용자는 트랜잭션을 엿들을 수 있고,<br>난스/응답 쌍에 대해 (흔히 구할 수 있는) 비밀번호 추측 프로그램을 사용할 수 있다.</li>
-<li>크래킹하기 어렵도록 <strong>상대적으로 복잡한 비밀번호를 사용하는 것</strong>과 
-<strong>괜찮은 비밀번호 만료 정책</strong> 외에는 실질적으로 없다.</li>
+<li>악의적인 사용자는 트랜잭션을 엿들을 수 있고,<br>난스&#x2F;응답 쌍에 대해 (흔히 구할 수 있는) 비밀번호 추측 프로그램을 사용할 수 있다.</li>
+<li>크래킹하기 어렵도록 <strong>상대적으로 복잡한 비밀번호를 사용하는 것</strong>과<br><strong>괜찮은 비밀번호 만료 정책</strong> 외에는 실질적으로 없다.</li>
 </ul>
-</li>
-<li><p><strong>악의적인 프락시와 중간 공격</strong> Man in the Middle Attack</p>
+<ol start="5">
+<li><strong>악의적인 프락시와 중간 공격</strong> Man in the Middle Attack</li>
+</ol>
 <ul>
 <li><p>리다이렉션 기술과 차단 프락시의 도입으로 사용자는 그의 요청이 프락시를 통과한다는 것조차 눈치 채지 못하고 한다.</p>
 </li>
@@ -419,34 +421,23 @@
 <li><p>해결할 좋은 방법은 없지만, 가능한 해결책은,</p>
 <ol>
 <li>클라가 사용자에게 인증의 강도를 시각적으로 보여주는 것</li>
-<li>클라가 언제나 가능한 한 <strong>가장 강력한 인증을 선택하도록</strong> 설정하는 것 </li>
+<li>클라가 언제나 가능한 한 <strong>가장 강력한 인증을 선택하도록</strong> 설정하는 것</li>
 </ol>
 <p>등이 있다.</p>
 </li>
 <li><p>공격을 방어하는 제일 좋은 방법은 <strong>SSL을 사용하는 것</strong>이다.</p>
 </li>
 </ul>
-</li>
-<li><p><strong>선택 평문 공격</strong></p>
+<ol start="6">
+<li><strong>선택 평문 공격</strong></li>
+</ol>
 <ul>
 <li>다이제스트 인증을 사용하는 클라는 응답을 생성하기 위해 서버가 제공한 난스를 사용한다.</li>
-<li>그러나 악의적인 서버나 프락시가 있을 중간에 있을 경우<br>클라 응답 게산을 하기 위한 난스를 제공할 수 있다.<br><strong>= 선택적 평문 공격</strong></li>
+<li>그러나 악의적인 서버나 프락시가 있을 중간에 있을 경우<br>클라 응답 게산을 하기 위한 난스를 제공할 수 있다.<br><strong>&#x3D; 선택적 평문 공격</strong></li>
 </ul>
 <ol>
-<li><strong>미리 계산된 사전 공격</strong><ul>
-<li>사전공격과 선택 평문 공격의 조합</li>
-</ul>
-<ol>
-<li>공격서버는 미리 결정된 난스와 자주 쓰이는 비밀번호들로 응답의 집합을 생성하고, 사전을 만든다.</li>
-<li>공격 서버/프락시는 트래픽을 차단하고<br>미리 결정된 난스를 클라로 전송하기 시작한다.</li>
-<li>클라로부터 응답을 받을 때, 공격자는 대응되는 항목을 사전에서 찾는다.</li>
-<li>대응되는 것이 있으면, 공격자는 특정 사용자의 비밀번호를 손에 넣은 것</li>
-</ol>
-</li>
-<li><strong>자동화된 무차별 대입 공격</strong><ul>
-<li>많은 컴퓨터를 동원하여 주어진 범위에서 가능한 모든 비밀번호를 열거한다.</li>
-</ul>
-</li>
+<li><strong>미리 계산된 사전 공격</strong><br>- 사전공격과 선택 평문 공격의 조합<br>1. 공격서버는 미리 결정된 난스와 자주 쓰이는 비밀번호들로 응답의 집합을 생성하고, 사전을 만든다.<br>2. 공격 서버&#x2F;프락시는 트래픽을 차단하고<br> 미리 결정된 난스를 클라로 전송하기 시작한다.<br>3. 클라로부터 응답을 받을 때, 공격자는 대응되는 항목을 사전에서 찾는다.<br>4. 대응되는 것이 있으면, 공격자는 특정 사용자의 비밀번호를 손에 넣은 것</li>
+<li><strong>자동화된 무차별 대입 공격</strong><br>- 많은 컴퓨터를 동원하여 주어진 범위에서 가능한 모든 비밀번호를 열거한다.</li>
 </ol>
 <ul>
 <li>이런 공격으로 인한 위협을 방어하는 방법<ul>
@@ -455,24 +446,23 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p><strong>비밀번호 저장</strong></p>
+<ol start="7">
+<li><strong>비밀번호 저장</strong></li>
+</ol>
 <ul>
 <li>다이제스트 인증 메커니즘은 사용자 응답을<br>서버 내부에 저장된 것과 비교한다.</li>
 <li>비밀번호가 유출되는 문제를 완화하는 몇가지 방법<ol>
-<li>비밀번호 파일이<br>평문으로 된 비밀번호를 포함하고 있다고 생각하고 안전하게 보호한다. (?)</li>
-<li>영역 이름이 유일함을 보장하며, 비밀번호 파일이 유출되더라도,<br><strong>피해를 특정 영역으로 국소화</strong>한다.<ul>
+<li>비밀번호 파일이<br>  평문으로 된 비밀번호를 포함하고 있다고 생각하고 안전하게 보호한다. (?)</li>
+<li>영역 이름이 유일함을 보장하며, 비밀번호 파일이 유출되더라도,<br>  <strong>피해를 특정 영역으로 국소화</strong>한다.</li>
+</ol>
+<ul>
 <li>호스트와 도메인을 포함한 완전한 영역 이름을 이 요구를 만족한다.</li>
 </ul>
 </li>
-</ol>
-</li>
 </ul>
-</li>
-</ol>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -498,7 +488,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_013_02/" data-id="ckzv7cqg2003mqobmbv154bsl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_013_02/" data-id="cm3u7mj1k003khwb24gefe94p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

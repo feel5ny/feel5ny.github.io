@@ -262,12 +262,12 @@
 <img src="/images/2018/02/ipaddress.jpg">
 </li>
 <li><ol start="2">
-<li><a href="HTTPs://www.icann.org/">HTTPs://www.icann.org/</a></li>
+<li><a href="https://www.icann.org/">HTTPs://www.icann.org/</a></li>
 </ol>
 </li>
 </ul>
 <hr>
-<h1 id="3-NAT-Network-Address-Translation"><a href="#3-NAT-Network-Address-Translation" class="headerlink" title=" 3. NAT (= Network Address Translation)"></a><a name="NAT"></a> 3. NAT (= Network Address Translation)</h1><ul>
+<h1 id="3-NAT-Network-Address-Translation"><a href="#3-NAT-Network-Address-Translation" class="headerlink" title=" 3. NAT (&#x3D; Network Address Translation)"></a><a name="NAT"></a> 3. NAT (&#x3D; Network Address Translation)</h1><ul>
 <li><p>NAT는 외부 네트웍에 알려진 것과 다른 IP 주소를 사용하는 내부 네트웍에서, IP 주소를 변환하는 것이다. </p>
 </li>
 <li><p>일반적으로, 한 회사는 자신의 내부 네트웍 주소를 하나 또는 그 이상의 공인 IP 주소로 사상한다. 그리고 들어오는 패킷들 상의 공인 IP 주소를 다시 사설 IP 주소로 변환한다. </p>
@@ -294,23 +294,23 @@
 <img src="/images/2018/02/nat.gif">
 
 <hr>
-<h1 id="4-port"><a href="#4-port" class="headerlink" title=" 4. port"></a><a name="port"></a> 4. port</h1><p>네트워크의 입출력단자들을 포트(PORT)라고 하며 번호로 지정되는데 포트의 번호는 0에서 65535까지 입니다.<br>TCP/IP 네트웍에서 포트 번호는, 들어오는 트래픽을 컴퓨터 내에서 실행되고 있는 적절한 프로그램에 분배시키기 위해 할당되는 숫자를 말한다. 이것은 물리적인 플러그나 소켓이 아니며, 다만 <strong>논리적인 할당</strong>일 뿐이다</p>
+<h1 id="4-port"><a href="#4-port" class="headerlink" title=" 4. port"></a><a name="port"></a> 4. port</h1><p>네트워크의 입출력단자들을 포트(PORT)라고 하며 번호로 지정되는데 포트의 번호는 0에서 65535까지 입니다.<br>TCP&#x2F;IP 네트웍에서 포트 번호는, 들어오는 트래픽을 컴퓨터 내에서 실행되고 있는 적절한 프로그램에 분배시키기 위해 할당되는 숫자를 말한다. 이것은 물리적인 플러그나 소켓이 아니며, 다만 <strong>논리적인 할당</strong>일 뿐이다</p>
 <ul>
-<li>프로그래밍에서, 포트는 “논리적인 접속장소”이며, 특히 인터넷 프로토콜인 TCP/IP를 사용할 때에는 클라이언트 프로그램이 네트웍 상의 특정 서버 프로그램을 지정하는 방법으로 사용된다. </li>
-<li>웹 프로토콜인 HTTP와 같이, TCP/IP의 상위 프로토콜을 사용하는 응용프로그램에서는 미리 지정된 포트번호들을 가지고 있다. </li>
+<li>프로그래밍에서, 포트는 “논리적인 접속장소”이며, 특히 인터넷 프로토콜인 TCP&#x2F;IP를 사용할 때에는 클라이언트 프로그램이 네트웍 상의 특정 서버 프로그램을 지정하는 방법으로 사용된다. </li>
+<li>웹 프로토콜인 HTTP와 같이, TCP&#x2F;IP의 상위 프로토콜을 사용하는 응용프로그램에서는 미리 지정된 포트번호들을 가지고 있다. </li>
 <li>이런 것들은 IANA에 의해 지정되었으며, “잘 알려진 포트들”이라고 불린다. </li>
 <li>다른 응용프로그램 프로세스들은 매번 접속할 때마다 포트번호가 동적으로 부여된다. 서버 프로그램이 처음 시작되면, 지정된 포트번호로 바인드된다. 그 서버를 사용하려는 모든 클라이언트 프로그램들은 지정된 포트번호에 바인드해야만 한다. </li>
-<li>바인드가 되면  두개의 컴퓨터간 네트워크를 이용한 통신시 발신지 컴퓨터에서 출발한 사용자 데이터(패킷)는 TCP/IP의 각 계층을 거치면서 최종적으로 목적지 주소(IP)를 가지고 있는 컴퓨터에 도착하게 됩니다. 패킷을 수신한 컴퓨터는 전송시에 사용되었던 주소필드를 제거하고, 패킷 안에 있는 데이터만을 응용프로그램에 넘겨줍니다. </li>
+<li>바인드가 되면  두개의 컴퓨터간 네트워크를 이용한 통신시 발신지 컴퓨터에서 출발한 사용자 데이터(패킷)는 TCP&#x2F;IP의 각 계층을 거치면서 최종적으로 목적지 주소(IP)를 가지고 있는 컴퓨터에 도착하게 됩니다. 패킷을 수신한 컴퓨터는 전송시에 사용되었던 주소필드를 제거하고, 패킷 안에 있는 데이터만을 응용프로그램에 넘겨줍니다.</li>
 </ul>
 <p>이 포트들은 크게 세 가지 영역으로 나누어서 지정되어 있습니다.</p>
 <h3 id="1-0번-포트에서-1023포트-까지"><a href="#1-0번-포트에서-1023포트-까지" class="headerlink" title="1. 0번 포트에서 1023포트 까지"></a>1. 0번 포트에서 1023포트 까지</h3><p>well-known port number 라고 하며 미리 특수용도로 지정되어 있습니다. (IANA(Internet Assigned Numbers Authority)에서 관리한다.)</p>
 <p>21번: FTP<br>22번: SSH<br>23번: TELNET<br>25번: SMTP(이메일송신)<br>53번: DNS<br>61번: SNMP(네트워크관리)<br>80번: HTTP(웹페이지를 열기 위한 용도)<br>110번: POP3(이메일수신)<br>115번: SFTP<br>135번: RPC<br>139번: NetBIOS<br>143번: IMAP<br>194: IRC<br>443: SSL<br>445: SMB</p>
 <h3 id="2-등록된-포트로-사용할-경우-1024-49151번을-사용합니다"><a href="#2-등록된-포트로-사용할-경우-1024-49151번을-사용합니다" class="headerlink" title="2. 등록된 포트로 사용할 경우 1024~49151번을 사용합니다."></a>2. 등록된 포트로 사용할 경우 1024~49151번을 사용합니다.</h3><p>1433: MSQL<br>3306: MySQL<br>3389: Remote Desktop<br>5632: PCAnywhere<br>5900: VNC<br>6112: Warcraft III</p>
-<h3 id="3-개인적-용도라면-49152-65535번을-사용하도록-규정되어-있습니다"><a href="#3-개인적-용도라면-49152-65535번을-사용하도록-규정되어-있습니다" class="headerlink" title="3. 개인적 용도라면 49152~65535번을 사용하도록 규정되어 있습니다."></a>3. 개인적 용도라면 49152~65535번을 사용하도록 규정되어 있습니다.</h3><p>클라이언트/서버 방식의 프로그램에서 포트의 사용</p>
+<h3 id="3-개인적-용도라면-49152-65535번을-사용하도록-규정되어-있습니다"><a href="#3-개인적-용도라면-49152-65535번을-사용하도록-규정되어-있습니다" class="headerlink" title="3. 개인적 용도라면 49152~65535번을 사용하도록 규정되어 있습니다."></a>3. 개인적 용도라면 49152~65535번을 사용하도록 규정되어 있습니다.</h3><p>클라이언트&#x2F;서버 방식의 프로그램에서 포트의 사용</p>
 <ol>
-<li>서버/클라이언트 프로그램에서는 서버에서 사용하는 포트번호를 클라이언트 프로그램에서도 동일하게 맞추어 주어야 합니다.</li>
-<li>서버/클라이언트 프로그램에서 사용하는 포트가 개방되도록 라우터 또는 공유기 등의 설정메뉴에서 개방해야 합니다.</li>
-<li>서버/클라이언트 프로그램에서 포트를 설정하지 않으면 임의로 포트를 설정해 주는 프로그램이 일부 있습니다.</li>
+<li>서버&#x2F;클라이언트 프로그램에서는 서버에서 사용하는 포트번호를 클라이언트 프로그램에서도 동일하게 맞추어 주어야 합니다.</li>
+<li>서버&#x2F;클라이언트 프로그램에서 사용하는 포트가 개방되도록 라우터 또는 공유기 등의 설정메뉴에서 개방해야 합니다.</li>
+<li>서버&#x2F;클라이언트 프로그램에서 포트를 설정하지 않으면 임의로 포트를 설정해 주는 프로그램이 일부 있습니다.</li>
 </ol>
 <hr>
 <h1 id="5-socket"><a href="#5-socket" class="headerlink" title=" 5. socket"></a><a name="socket"></a> 5. socket</h1><ul>
@@ -320,9 +320,9 @@
 </li>
 <li><p>결국 소켓이 구현됨으로써 네트워크 및 전송 계층의 캡슐화가 가능해집니다. </p>
 </li>
-<li><p>소켓은 원래 캘리포니아 버클리 대학 분교에서 UNIX용으로 개발되었으며,  UNIX에서의 입출력 메소드의 표준인 개방/읽기/쓰기/닫기 메커니즘을 따릅니다.</p>
+<li><p>소켓은 원래 캘리포니아 버클리 대학 분교에서 UNIX용으로 개발되었으며,  UNIX에서의 입출력 메소드의 표준인 개방&#x2F;읽기&#x2F;쓰기&#x2F;닫기 메커니즘을 따릅니다.</p>
 </li>
-<li><p>소켓 함수는 동기모드(블록킹) / 비동기 모드 (논블록킹)으로 동작합니다.</p>
+<li><p>소켓 함수는 동기모드(블록킹) &#x2F; 비동기 모드 (논블록킹)으로 동작합니다.</p>
 </li>
 <li><p>차이점은 만약 데이터가 도착하지 않는 상태에서 recv()로 데이터를 수신하고자 했을 때 데이터가 올 때까지 대기(block)하느냐 , 그냥 수신된 데이터가 없다는 정보만 리턴하고 넘어가느냐 입니다.</p>
 </li>
@@ -333,16 +333,18 @@
 <li><p>그리고 직접적인 소켓 통신을 처리하는 함수는 아니지만 소켓 처리에 대해서 Multiplex처리(하나의 쓰레드, 혹은 적은 수의 쓰레드에서 여러 개의 소켓을 처리)를 해주는 select , epoll , IOCP 같은 기능적인 함수군도 염두해 두어야겠습니다.</p>
 </li>
 </ul>
-<h2 id="6-MAC-address-Media-Access-Control-Address"><a href="#6-MAC-address-Media-Access-Control-Address" class="headerlink" title=" 6. MAC address (= Media Access Control Address)"></a><a name="mac-address"></a> 6. MAC address (= Media Access Control Address)</h2><p>MAC 주소는, 무선 LAN 카드 또는 무선 LAN 기능 내장 기기에 개별적으로 부여되는 16진수 12자리의 단말 식별 번호(예:12:34:56:78:90:AB)입니다. OS에 따라 “물리적 주소” 또는”Wi-Fi 주소”라고 표시됩니다.</p>
+<h2 id="6-MAC-address-Media-Access-Control-Address"><a href="#6-MAC-address-Media-Access-Control-Address" class="headerlink" title=" 6. MAC address (&#x3D; Media Access Control Address)"></a><a name="mac-address"></a> 6. MAC address (&#x3D; Media Access Control Address)</h2><p>MAC 주소는, 무선 LAN 카드 또는 무선 LAN 기능 내장 기기에 개별적으로 부여되는 16진수 12자리의 단말 식별 번호(예:12:34:56:78:90:AB)입니다. OS에 따라 “물리적 주소” 또는”Wi-Fi 주소”라고 표시됩니다.</p>
 <h2 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h2><ul>
 <li>동적 IP 할당</li>
 </ul>
 <ol>
-<li>특정 IP에서 오는 것 차단<ul>
+<li>특정 IP에서 오는 것 차단</li>
+</ol>
+<ul>
 <li>ex. 특정 사이트 차단. 접속을 못하게 함. </li>
 <li>공유기 안에 혹은 라우팅 컴퓨터 안에서 설정.</li>
 </ul>
-</li>
+<ol start="2">
 <li>특정 포트만 전송 가능</li>
 </ol>
 <hr>
@@ -375,7 +377,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="ckzv7cqer0010qobm7tenta5f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/01/02/CS_07/" data-id="cm3u7mj19000thwb27b708klp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   Function 타입 함수 선언 vs 함수 표현식 값처럼 쓰는 함수(일급객체) 함수의 내부 구조 함수 프로퍼티와 메서드 4,5번은 Function 2편에서    1. Function 타입함수는 객체이다. 모든 함수는 Funct">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차0. Function 타입1. 함수 선언 vs 함수 표현식2. 값처럼 쓰는 함수(일급객체)3. 함수의 내부 구조3. 함수 프로퍼티와 메서드    4,5번은 Function 2편에서 1. Function 타입함수는 객체이다. 모든 함">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4&#x2F; 참조타입_Function 타입 (1)">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/02/JS_04_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차   Function 타입 함수 선언 vs 함수 표현식 값처럼 쓰는 함수(일급객체) 함수의 내부 구조 함수 프로퍼티와 메서드 4,5번은 Function 2편에서    1. Function 타입함수는 객체이다. 모든 함수는 Funct">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.  목차0. Function 타입1. 함수 선언 vs 함수 표현식2. 값처럼 쓰는 함수(일급객체)3. 함수의 내부 구조3. 함수 프로퍼티와 메서드    4,5번은 Function 2편에서 1. Function 타입함수는 객체이다. 모든 함">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/38/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-02T02:20:12.000Z">
@@ -231,51 +231,39 @@
             <blockquote>
 <p>‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
-<p>목차 </p>
-<ol start="0">
-<li><a href="#Function">Function 타입</a></li>
-<li><a href="#declarations_expressions">함수 선언 vs 함수 표현식</a></li>
-<li><a href="#First_class_object">값처럼 쓰는 함수(일급객체)</a></li>
-<li><span style="color:lightgray">함수의 내부 구조</span></li>
-<li><span style="color:lightgray">함수 프로퍼티와 메서드</span><br> <span style="color:gray">4,5번은 Function 2편에서</span></li>
-</ol>
-<hr>
-<h2 id="1-Function-타입"><a href="#1-Function-타입" class="headerlink" title=" 1. Function 타입"></a><a name="Function"></a> 1. Function 타입</h2><p>함수는 객체이다. 모든 함수는 Function타입의 인스턴스이며, 프로퍼티와 메서드가 있다.<br>함수란 어떤 특정 작업을 수행하기 위해 필요한 일련의 구문들을 그룹화하기 위한 개념이다.</p>
+<h2 id="목차0-Function-타입1-함수-선언-vs-함수-표현식2-값처럼-쓰는-함수-일급객체-3-함수의-내부-구조3-함수-프로퍼티와-메서드-4-5번은-Function-2편에서"><a href="#목차0-Function-타입1-함수-선언-vs-함수-표현식2-값처럼-쓰는-함수-일급객체-3-함수의-내부-구조3-함수-프로퍼티와-메서드-4-5번은-Function-2편에서" class="headerlink" title="목차0. Function 타입1. 함수 선언 vs 함수 표현식2. 값처럼 쓰는 함수(일급객체)3. 함수의 내부 구조3. 함수 프로퍼티와 메서드    4,5번은 Function 2편에서"></a>목차<br>0. <a href="#Function">Function 타입</a><br>1. <a href="#declarations_expressions">함수 선언 vs 함수 표현식</a><br>2. <a href="#First_class_object">값처럼 쓰는 함수(일급객체)</a><br>3. <span style="color:lightgray">함수의 내부 구조</span><br>3. <span style="color:lightgray">함수 프로퍼티와 메서드</span><br>    <span style="color:gray">4,5번은 Function 2편에서</span></h2><h2 id="1-Function-타입"><a href="#1-Function-타입" class="headerlink" title=" 1. Function 타입"></a><a name="Function"></a> 1. Function 타입</h2><p>함수는 객체이다. 모든 함수는 Function타입의 인스턴스이며, 프로퍼티와 메서드가 있다.<br>함수란 어떤 특정 작업을 수행하기 위해 필요한 일련의 구문들을 그룹화하기 위한 개념이다.</p>
 <h3 id="함수-정의"><a href="#함수-정의" class="headerlink" title="함수 정의"></a>함수 정의</h3><ol>
 <li><p>함수 선언식</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span> (<span class="params">num1, num2</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>함수 표현식 Function expression</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="keyword">function</span>(<span class="params">num1, num2</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="keyword">function</span>(<span class="params">num1, num2</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>일급객체라는 함수의 특징 때문에 함수 리터럴 방식으로 선언 후 변수에 할당할 수 있다.</li>
 <li>할당된 함수를 가리키는 참조값을 저장하게 된다.</li>
 <li>이렇게 생성된 함수는 function 키워드 다음에 함수 이름이 없으므로 <code>익명 함수</code>로 간주한다. <ul>
-<li>익명함수(anonymous function) = 람다함수(lambda)</li>
+<li>익명함수(anonymous function) &#x3D; 람다함수(lambda)</li>
 <li>name 프로퍼티는 빈 문자열이다.</li>
-<li>함수표현식으로 재귀, 클로저, 고유변수 등을 설명할 수 있다. <br>
-</li>
+<li>함수표현식으로 재귀, 클로저, 고유변수 등을 설명할 수 있다. <br></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>Function 생성자 사용 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;num1&#x27;</span>,<span class="string">&#x27;num2&#x27;</span>,<span class="string">&#x27;return num1 + num2&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Function 생성자 사용 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sum = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;num1&#x27;</span>,<span class="string">&#x27;num2&#x27;</span>,<span class="string">&#x27;return num1 + num2&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>함수 리터럴 방식</li>
 <li>당연히 권장하지 않는다.</li>
 <li>ECMAScript 생성자에 전달할 문자열을 다시 평가해야 하므로 성능에 영향이 있다.</li>
 </ul>
-</li>
-</ol>
 <p><strong><code>괄호를 쓰지않는 sum</code></strong><br>괄호를 쓰지 않고 함수 이름만 쓰면 함수를 실행하지 않고 <strong>함수를 가리키는 포인터에 접근(만)하는 것</strong>이다.</p>
 <hr>
 <h2 id="2-함수-선언-vs-함수-표현식"><a href="#2-함수-선언-vs-함수-표현식" class="headerlink" title=" 2. 함수 선언 vs 함수 표현식"></a><a name="declarations_expressions"></a> 2. 함수 선언 vs 함수 표현식</h2><p>자바스크립트 엔진이 <a href="https://feel5ny.github.io/2017/12/01/JS_03/">실행 컨텍스트</a>에 데이터를 불러올 때 중요한 차이가 하나 있다.<br><span style="color: tomato">함수 선언</span>은 어떤 코드도 실행하기 전에 이미 모든 실행 컨텍스트에서 접근하고 실행할 수 있지만<br><span style="color: white">함수 표현식</span>은 코드 실행이 해당 줄까지 진행하기 전에는 사용할 수 없다.</p>
-<p>실행 컨텍스트와 같이 생각해보자!
-<strong>자바스크립트 엔진은 코드를 평가할 때 제일 먼저 함수 선언을 찾은 다음 이들을 맨 위로 올린다 (함수 호이스팅). <code>함수 표현식</code>은 변수에 함수가 할당된 개념이기 때문에, 해당 변수에 값(함수)이 들어오기 전까지는 <code>undefined</code>로만 선언되어있는 상태이다.(변수 호이스팅)</strong></p>
+<p>실행 컨텍스트와 같이 생각해보자!<br><strong>자바스크립트 엔진은 코드를 평가할 때 제일 먼저 함수 선언을 찾은 다음 이들을 맨 위로 올린다 (함수 호이스팅). <code>함수 표현식</code>은 변수에 함수가 할당된 개념이기 때문에, 해당 변수에 값(함수)이 들어오기 전까지는 <code>undefined</code>로만 선언되어있는 상태이다.(변수 호이스팅)</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">alert</span>(<span class="title function_">sum</span>(<span class="number">10</span>,<span class="number">10</span>));</span><br><span class="line"><span class="keyword">const</span> sum = <span class="keyword">function</span>(<span class="params">num1, num2</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>즉, 위 코드를 보면 에러가 나는데, sum은 컨텍스트에 있지만 매개변수를 넘길 수 있는 형태가 아니기 때문에(2번째 줄 오기 전까지는 <code>undefined</code>) 해당 코드까지 실행하기 전에는 <code>unexpected identifier</code> 에러를 낸다.<br>(예기치 못한 식별자 = <code>sum(10,10)</code>을 보고 함수형태의 식별자 sum을 기대하고 찾았는데, 함수형태가 아니라서) </p>
-<h4 id="함수-표현식만-사용하자고-권고한다-참고"><a href="#함수-표현식만-사용하자고-권고한다-참고" class="headerlink" title="함수 표현식만 사용하자고 권고한다 : 참고"></a>함수 표현식만 사용하자고 권고한다 : <a href="http://poiemaweb.com/js-function#2-함수-호이스팅function-hoisting">참고</a></h4><p>JavaScript : The Good Parts의 저자이며 자바스크립트의 권위자인 더글러스 크락포드(Douglas Crockford)는 이와 같은 문제 때문에 <code>함수표현식만을 사용할 것을 권고하고 있다.</code> 함수 호이스팅이 함수 호출 전 반드시 함수를 선언하여야 한다는 규칙을 무시하므로 <strong>1. 코드의 구조를 엉성하게 만들 수 있다고 지적한다.</strong></p>
+<p>즉, 위 코드를 보면 에러가 나는데, sum은 컨텍스트에 있지만 매개변수를 넘길 수 있는 형태가 아니기 때문에(2번째 줄 오기 전까지는 <code>undefined</code>) 해당 코드까지 실행하기 전에는 <code>unexpected identifier</code> 에러를 낸다.<br>(예기치 못한 식별자 &#x3D; <code>sum(10,10)</code>을 보고 함수형태의 식별자 sum을 기대하고 찾았는데, 함수형태가 아니라서) </p>
+<h4 id="함수-표현식만-사용하자고-권고한다-참고"><a href="#함수-표현식만-사용하자고-권고한다-참고" class="headerlink" title="함수 표현식만 사용하자고 권고한다 : 참고"></a>함수 표현식만 사용하자고 권고한다 : <a href="http://poiemaweb.com/js-function#2-%ED%95%A8%EC%88%98-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85function-hoisting">참고</a></h4><p>JavaScript : The Good Parts의 저자이며 자바스크립트의 권위자인 더글러스 크락포드(Douglas Crockford)는 이와 같은 문제 때문에 <code>함수표현식만을 사용할 것을 권고하고 있다.</code> 함수 호이스팅이 함수 호출 전 반드시 함수를 선언하여야 한다는 규칙을 무시하므로 <strong>1. 코드의 구조를 엉성하게 만들 수 있다고 지적한다.</strong></p>
 <p>또한 함수선언식으로 함수를 정의하면 사용하기에 쉽지만 대규모 애플리케이션을 개발하는 경우 <strong>2. 인터프리터가 너무 많은 코드를 변수 객체(VO)에 저장하므로 애플리케이션의 응답속도는 현저히 떨어질 수 있으므로 주의해야 할 필요가 있다.</strong></p>
 <hr>
 <h2 id="3-값처럼-쓰는-함수-일급객체"><a href="#3-값처럼-쓰는-함수-일급객체" class="headerlink" title=" 3. 값처럼 쓰는 함수 (일급객체)"></a><a name="First_class_object"></a> 3. 값처럼 쓰는 함수 (일급객체)</h2><p>자바스크립트 함수는 <strong>일급 객체</strong>이다. </p>
@@ -284,7 +272,7 @@
 <li>생성(인스턴스 생성가능), </li>
 <li>대입, </li>
 <li>연산, </li>
-<li>인자 또는 반환값으로서의 전달 등 </li>
+<li>인자 또는 반환값으로서의 전달 등</li>
 </ol>
 <p><strong>프로그래밍 언어의 기본적 조작을 제한없이 사용할 수 있는 대상</strong>을 의미한다.<br>일급객체일 경우 아래와 같은 특징을 갖는다.</p>
 <div style="background-color: #303337; padding: 21px;"> 1. 무명의 [리터럴](https://feel5ny.github.io/2017/11/17/Typescript_04/#literal)로 표현이 가능하다.
@@ -295,16 +283,12 @@
 
 <p>함수와 다른 객체를 구분 짓는 특징은 호출할 수 있다는 것이다.</p>
 <ol start="4">
-<li>함수가 다른 함수를 반환하는 상황<br>예시1_callSomeFunction<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sample example</span></span><br><span class="line"><span class="comment">// callSomeFuncion은 범용함수이다. 범용함수란 더 많은 상황에서 더 잘 적용할 수 있는 함수를 말한다.</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">callSomeFunction</span>(<span class="params">someFunction, someArgument</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">someFunction</span>(someArgument) <span class="comment">// 반환값으로 사용됨</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add10</span>(<span class="params">num</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result1 = <span class="title function_">callSomeFunction</span>(add10, <span class="number">19</span>);</span><br><span class="line"><span class="title function_">alert</span>(result); <span class="comment">//20</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>함수가 다른 함수를 반환하는 상황<br>예시1_callSomeFunction<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sample example</span></span><br><span class="line"><span class="comment">// callSomeFuncion은 범용함수이다. 범용함수란 더 많은 상황에서 더 잘 적용할 수 있는 함수를 말한다.</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">callSomeFunction</span>(<span class="params">someFunction, someArgument</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">someFunction</span>(someArgument) <span class="comment">// 반환값으로 사용됨</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">add10</span>(<span class="params">num</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> num + <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result1 = <span class="title function_">callSomeFunction</span>(add10, <span class="number">19</span>);</span><br><span class="line"><span class="title function_">alert</span>(result); <span class="comment">//20</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>예시2_sort의 createComparisonFunction함수</p>
 <ul>
 <li>해당 객체의 프로퍼티 이름을 확인하여 순서를 배치하는 함수를 반환하는 비교함수이다.</li>
-<li>개체는 해당 속성 중 하나의 값을 기준으로 정렬 할 수 있습니다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sort</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createComparisonFunction</span>(<span class="params">propertyName</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">object1, object2</span>)&#123; <span class="comment">// return 연산자 뒤에 내부함수</span></span><br><span class="line">    <span class="keyword">let</span> value1 = object1[propertyName]</span><br><span class="line">    <span class="keyword">let</span> value2 = object2[propertyName]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">// value1이 앞에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// value1이 뒤에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = [&#123;<span class="attr">name</span>: <span class="string">&#x27;Joy&#x27;</span>, <span class="attr">age</span>: <span class="number">27</span>&#125;, &#123;<span class="attr">name</span>:<span class="string">&#x27;Clara&#x27;</span>, <span class="attr">age</span>:<span class="number">28</span>&#125;]</span><br><span class="line">data.<span class="title function_">sort</span>(<span class="title function_">createComparisonFunction</span>(<span class="string">&#x27;name&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data[<span class="number">0</span>].<span class="property">name</span>) <span class="comment">// Clara</span></span><br><span class="line">data.<span class="title function_">sort</span>(<span class="title function_">createComparisonFunction</span>(<span class="string">&#x27;age&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data[<span class="number">0</span>].<span class="property">age</span>) <span class="comment">// 27</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>개체는 해당 속성 중 하나의 값을 기준으로 정렬 할 수 있습니다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sort</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createComparisonFunction</span>(<span class="params">propertyName</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">object1, object2</span>)&#123; <span class="comment">// return 연산자 뒤에 내부함수</span></span><br><span class="line">    <span class="keyword">let</span> value1 = object1[propertyName]</span><br><span class="line">    <span class="keyword">let</span> value2 = object2[propertyName]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value1 &lt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">// value1이 앞에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value1 &gt; value2)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// value1이 뒤에 옴</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = [&#123;<span class="attr">name</span>: <span class="string">&#x27;Joy&#x27;</span>, <span class="attr">age</span>: <span class="number">27</span>&#125;, &#123;<span class="attr">name</span>:<span class="string">&#x27;Clara&#x27;</span>, <span class="attr">age</span>:<span class="number">28</span>&#125;]</span><br><span class="line">data.<span class="title function_">sort</span>(<span class="title function_">createComparisonFunction</span>(<span class="string">&#x27;name&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data[<span class="number">0</span>].<span class="property">name</span>) <span class="comment">// Clara</span></span><br><span class="line">data.<span class="title function_">sort</span>(<span class="title function_">createComparisonFunction</span>(<span class="string">&#x27;age&#x27;</span>))</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data[<span class="number">0</span>].<span class="property">age</span>) <span class="comment">// 27</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="sort-compareFunction"><a href="#sort-compareFunction" class="headerlink" title="sort(compareFunction)"></a><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"><strong><code>sort(compareFunction)</code></strong></a></h3><p>compareFunction이 제공되지 않으면 <strong>요소를 문자열(toString)로 변환하고 유니 코드 코드 포인트 순서로 문자열을 비교하여 정렬</strong>됩니다. 예를 들어 “바나나”는 “체리”앞에옵니다. 숫자 정렬에서는 9가 80보다 앞에 오지만 숫자는 문자열로 변환되기 때문에 <strong>“80”은 유니 코드 순서에서 “9”앞에옵니다.</strong></p>
 <p>문자열 대신 숫자일 경우 value1과 value2를 빼는방법으로 색인을 반환한다.</p>
@@ -335,7 +319,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/02/JS_04_1/" data-id="ckzv7cqh0004rqobmw1hxsa1j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/02/JS_04_1/" data-id="cm3u7mj1o004ghwb28b0r3648" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

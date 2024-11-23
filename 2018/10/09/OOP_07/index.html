@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript,OOP" />
     
     
-    <meta name="description" content="🌕🌑🌑  🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판 마지막 판이 몇 판일까? &#x3D; 몇 판까지 있을까?  속도** 판마다 속도가 증가한다.**  최소 속도 최대 속도  ** 속도는 어떤 객체가 가져가야할까?**  Game보다는 Stage가 적합. 캡슐화와 은닉화">
+    <meta name="description" content="🌕🌑🌑  🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판  마지막 판이 몇 판일까? &#x3D; 몇 판까지 있을까? 속도 ** 판마다 속도가 증가한다.**   최소 속도 최대 속도   ** 속도는 어떤 객체가 가져가야할까?**    - Game보다는 Stage가">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CodeSpitz78 5&#x2F; OOAD와 테트리스 (2)">
 <meta property="og:url" content="http://feel5ny.github.io/2018/10/09/OOP_07/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="🌕🌑🌑  🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판 마지막 판이 몇 판일까? &#x3D; 몇 판까지 있을까?  속도** 판마다 속도가 증가한다.**  최소 속도 최대 속도  ** 속도는 어떤 객체가 가져가야할까?**  Game보다는 Stage가 적합. 캡슐화와 은닉화">
+<meta property="og:description" content="🌕🌑🌑  🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.아직 정리중..    1. StageStage 클래스는 뭘 필요로 할까? 판  마지막 판이 몇 판일까? &#x3D; 몇 판까지 있을까? 속도 ** 판마다 속도가 증가한다.**   최소 속도 최대 속도   ** 속도는 어떤 객체가 가져가야할까?**    - Game보다는 Stage가">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/37/thumb_default.jpg">
 <meta property="article:published_time" content="2018-10-09T12:20:19.000Z">
@@ -295,24 +295,14 @@
 <hr>
 <p><a name="1"></a></p>
 <h2 id="1-Stage"><a href="#1-Stage" class="headerlink" title="1. Stage"></a>1. Stage</h2><h3 id="Stage-클래스는-뭘-필요로-할까"><a href="#Stage-클래스는-뭘-필요로-할까" class="headerlink" title="Stage 클래스는 뭘 필요로 할까?"></a>Stage 클래스는 뭘 필요로 할까?</h3><ol>
-<li><p>판
-마지막 판이 몇 판일까? = 몇 판까지 있을까?</p>
-</li>
-<li><p>속도<br>** 판마다 속도가 증가한다.**</p>
+<li>판<br>  마지막 판이 몇 판일까? &#x3D; 몇 판까지 있을까?</li>
+<li>속도<br> ** 판마다 속도가 증가한다.**</li>
+</ol>
 <ul>
 <li>최소 속도</li>
 <li>최대 속도</li>
 </ul>
-<p>** 속도는 어떤 객체가 가져가야할까?**</p>
-<ul>
-<li>Game보다는 Stage가 적합.</li>
-<li>캡슐화와 은닉화의 속성을 이용하여,<br>속도의 처리는 stage내에서만 처리하게 한 후,<br>외부에서는 최종 속도만 받을 수 있도록 한다. (getter)<ul>
-<li>초기 속도</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
+<p> ** 속도는 어떤 객체가 가져가야할까?**<br>    - Game보다는 Stage가 적합.<br>    - 캡슐화와 은닉화의 속성을 이용하여,<br>      속도의 처리는 stage내에서만 처리하게 한 후,<br>      외부에서는 최종 속도만 받을 수 있도록 한다. (getter)<br>      - 초기 속도</p>
 <ul>
 <li>자기의 변화를 listener한테 통보하는 것으로 처리만 하고 <ul>
 <li>listner의 형태를 직접 알 필요는 없게 한다.</li>
@@ -331,7 +321,7 @@
 <hr>
 <h3 id="cf-1-역할-책임-협력"><a href="#cf-1-역할-책임-협력" class="headerlink" title="cf__1 역할, 책임, 협력"></a>cf__1 역할, 책임, 협력</h3><p>프로그래밍의 실체는 <strong>수행해야하는 job이 누구의 역할과 책임으로 넘어가야하는지를 의사결정하는 행위.</strong></p>
 <h4 id="🍡-객체지향"><a href="#🍡-객체지향" class="headerlink" title="🍡 객체지향"></a>🍡 객체지향</h4><p>객체지향에서는 <strong>컨텍스트</strong>라는 방법이 있다.<br>인스턴스별로 컨텍스트라는 유지한다. (컨텍스트: 인스턴스마다 고유하게 부여되어 있는 메모리). </p>
-<p>*<em>함수에서 값을 가져오는 방법 2가지. *</em></p>
+<p>**함수에서 값을 가져오는 방법 2가지. **</p>
 <ol>
 <li>내가 인자로 값을 가져올지, </li>
 <li>컨텍스트로 가져올지.</li>
@@ -346,7 +336,7 @@
 <h4 id="🍭-객체지향을-통해서-클래스의-인스턴스를-만드는-행위를-함수형으로-바꾸면"><a href="#🍭-객체지향을-통해서-클래스의-인스턴스를-만드는-행위를-함수형으로-바꾸면" class="headerlink" title="🍭 객체지향을 통해서 클래스의 인스턴스를 만드는 행위를 함수형으로 바꾸면?"></a>🍭 객체지향을 통해서 클래스의 인스턴스를 만드는 행위를 함수형으로 바꾸면?</h4><ul>
 <li>필요한 자유변수를 함수를 만들어서 리턴하는 행위와 같다.  </li>
 <li>그 함수가 컨텍스트 대신 <strong>자유변수로 해당 상태를 기억하고 있을테니까.</strong></li>
-<li><span class="mint"><strong>객체지향</strong></span>에서 인스턴스의 수만큼 =&gt;  함수를 생성하는 걸로 <span class="orange"><strong>함수지향</strong></span>으로 바꿀 수 있다. </li>
+<li><span class="mint"><strong>객체지향</strong></span>에서 인스턴스의 수만큼 &#x3D;&gt;  함수를 생성하는 걸로 <span class="orange"><strong>함수지향</strong></span>으로 바꿀 수 있다.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Score</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">listener</span>)&#123;</span><br><span class="line">    <span class="title function_">prop</span>(<span class="variable language_">this</span>, &#123;listener&#125;);</span><br><span class="line">    <span class="comment">// 스코어의 그래픽을 갱신시키기 위해서 통보용으로 listener 추가</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">clear</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">curr</span> = <span class="number">0</span>; </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">total</span> = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">add</span>(<span class="params">line, stage</span>)&#123;</span><br><span class="line">    <span class="comment">// score 계산을 위해서는 stage만 알 수 있는 값을 이용해야하기 때문에</span></span><br><span class="line">    <span class="comment">// stage 내부에 score를 계산하는 책임을 주고,(위임)</span></span><br><span class="line">    <span class="comment">// Score의 add함수에서는 score를 호출, 점수만 더하는 책임만 준다.(협력) </span></span><br><span class="line">    <span class="keyword">const</span> score = stage.<span class="title function_">score</span>(line);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">curr</span> += score; <span class="comment">// 현재 점수값에도 반영</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">total</span> += score; <span class="comment">// 전체 점수값에도 반영</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">listener</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Stage</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="title function_">score</span>(<span class="params">line</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>((<span class="variable language_">this</span>.<span class="property">curr</span> * <span class="number">5</span>) * (<span class="number">2</span> ** line))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -370,19 +360,17 @@ score와 stage간의 의존성이 생김
 <hr>
 <p><a name="3"></a></p>
 <h2 id="3-Block"><a href="#3-Block" class="headerlink" title="3. Block"></a>3. Block</h2><h4 id="클래스일까-인스턴스일까"><a href="#클래스일까-인스턴스일까" class="headerlink" title="클래스일까 인스턴스일까."></a>클래스일까 인스턴스일까.</h4><ul>
-<li>찍어낼 수 있어야 한다. =&gt; 클래스 </li>
+<li>찍어낼 수 있어야 한다. &#x3D;&gt; 클래스 </li>
 <li>부모클래스 &gt;&gt; 자식클래스</li>
 </ul>
 <h4 id="블럭-정의"><a href="#블럭-정의" class="headerlink" title="블럭 정의"></a>블럭 정의</h4><ul>
 <li>테트리스 블럭은 회전을 할 수 있다.<br><strong>회전축, 회전점</strong>을 정의하자.<img src="/images/2018/38/02.png" style="width: 120px; margin: 0">
-세로와 가로의 모습을 보면 **2차원 배열**로 구현할 수 있다는 것이 보인다. (행과 열)
-
-</li>
+세로와 가로의 모습을 보면 **2차원 배열**로 구현할 수 있다는 것이 보인다. (행과 열)</li>
 </ul>
 <p>cf__2 연산은 데이터로 바꿀 수 있다.<br><code>데이터 하나로 연산화 시킴</code> or <code>데이터 2개로 연산비용을 낮춤.</code></p>
 <ul>
 <li>예전에는 머신이 낮고 메모리가 낮았기 때문에 연산을 중심으로 움직이고 메모리 비용을 낮추는 방향으로 갔음.</li>
-<li>cpu 비용을 아끼고(연산비용을 줄이고) 메모리 비용을 사용하는 방향이 요즘 추세 </li>
+<li>cpu 비용을 아끼고(연산비용을 줄이고) 메모리 비용을 사용하는 방향이 요즘 추세</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Block 클래스 : 카테고라이제이션 하는 중.. </span></span><br><span class="line"><span class="comment">// =&gt; 모든 자식 블럭들이 공통으로 가져야하는 속성들 </span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Block</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">color</span>) &#123;</span><br><span class="line">    <span class="title function_">prop</span>(<span class="variable language_">this</span>, &#123;color, <span class="attr">rotate</span>:<span class="number">0</span>&#125;;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// rotate: CW, CCW (시계방향, 시계반대방향 개념)</span></span><br><span class="line">  <span class="title function_">left</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(--<span class="variable language_">this</span>.<span class="property">rotate</span> &lt; <span class="number">0</span>) <span class="variable language_">this</span>.<span class="property">rotate</span> = <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">right</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(++<span class="variable language_">this</span>.<span class="property">rotate</span> &gt; <span class="number">3</span>) <span class="variable language_">this</span>.<span class="property">rotate</span> = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">getBlock</span>(<span class="params"></span>)&#123;<span class="keyword">throw</span> <span class="string">&#x27;override!&#x27;</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> blocks = [<span class="keyword">class</span> <span class="title class_">extends</span> <span class="title class_">Block</span>, ...]</span><br></pre></td></tr></table></figure>
 
@@ -458,7 +446,7 @@ score와 stage간의 의존성이 생김
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/10/09/OOP_07/" data-id="ckzv7cqj80087qobmcrxat1tq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/10/09/OOP_07/" data-id="cm3u7mj1x0076hwb2eun20lyu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

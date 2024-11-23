@@ -379,8 +379,14 @@
 <li>함수 이름이 포함된 함수 표현식<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add 변수가 sum 함수를 참조한다. </span></span><br><span class="line"><span class="comment">// 때문에 외부에서 sum함수에 접근할 수 없고, add변수를 통해 접근가능하다.</span></span><br><span class="line"><span class="keyword">var</span> add = <span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">x,y</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">add</span>(<span class="number">3</span>,<span class="number">4</span>)) <span class="comment">//7</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">3</span>,<span class="number">4</span>)) <span class="comment">//error</span></span><br></pre></td></tr></table></figure></li>
 <li>함수를 재귀적으로 호출하거나, 디버거에서 함수를 구분할 때 사용</li>
 <li><span class="mint">함수 선언문은 <strong>자바스크립트 엔진</strong>에 의해서 <strong>함수 표현식</strong> 형태로 변경되기 때문에 호출가능하다.</span><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x,y</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 위 함수는 자바스크립트 엔진에 의해서 아래와 같은 형태로 변환되다.</span></span><br><span class="line"><span class="keyword">var</span> add =<span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">x,y</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 팩토리얼 함수</span></span><br><span class="line"><span class="keyword">var</span> factorialVar = <span class="keyword">function</span> <span class="title function_">factorial</span>(<span class="params">n</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(n &lt;= <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n * <span class="title function_">factorial</span>(n-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">factorialVar</span>(<span class="number">3</span>); <span class="comment">// 6</span></span><br><span class="line"><span class="title function_">factorial</span>(<span class="number">3</span>); <span class="comment">// error</span></span><br></pre></td></tr></table></figure></li>
-<li>관습적으로 <span class="mint">함수 표현식 뒤에는 세미콜론을 붙인다.</span><br><a name="1-3"></a><h2 id="Function-생성자-함수"><a href="#Function-생성자-함수" class="headerlink" title="Function() 생성자 함수"></a>Function() 생성자 함수</h2>함수도 일반 객체처럼 값으로 취급된다. (일급객체)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;return x + y&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
-<li>자주 사용되지 않는다.<br><a name="1-4"></a><h2 id="함수-호이스팅"><a href="#함수-호이스팅" class="headerlink" title="함수 호이스팅"></a>함수 호이스팅</h2></li>
+<li>관습적으로 <span class="mint">함수 표현식 뒤에는 세미콜론을 붙인다.</span><br><a name="1-3"></a></li>
+</ul>
+<h2 id="Function-생성자-함수"><a href="#Function-생성자-함수" class="headerlink" title="Function() 생성자 함수"></a>Function() 생성자 함수</h2><p>함수도 일반 객체처럼 값으로 취급된다. (일급객체)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;x&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;return x + y&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>자주 사용되지 않는다.<br><a name="1-4"></a></li>
+</ul>
+<h2 id="함수-호이스팅"><a href="#함수-호이스팅" class="headerlink" title="함수 호이스팅"></a>함수 호이스팅</h2><ul>
 <li>함수 호이스팅은 함수를 사용하기 전에 반드시 선언해야 한다는 규칙을 무시하므로, 코드의 구조를 엉성하게 만들 수 있다.</li>
 <li>함수 표현식을 권장한다.<br><span class="mint">이를 자세히 알기 위해서는 <strong>실행컨택스트</strong>를 이해하면 된다.</span></li>
 <li>자바스크립트의 변수 생성과 초기화의 작업이 분리되서 진행되기 때문이다.</li>
@@ -402,9 +408,7 @@
 </ul>
 <p>이 특징때문에 함수형 프로그래밍이 가능하다.<br>자바스크립트의 함수를 제대로 이해하려면<br>함수가 일급 객체이며<br>이는 곧 함수가 일반 객체처럼 <span class="mint">값</span>으로 취급된다는 것을 이해해야한다.</p>
 <h3 id="2-2-1-변수나-프로퍼티의-값으로-할당"><a href="#2-2-1-변수나-프로퍼티의-값으로-할당" class="headerlink" title="2.2.1 변수나 프로퍼티의 값으로 할당"></a>2.2.1 변수나 프로퍼티의 값으로 할당</h3><ul>
-<li>변수나 <span class="mint">프로퍼티의 값</span>으로 할당될 수 있다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> bar = <span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">return</span> <span class="number">100</span>;&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">bar</span>()); <span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj.<span class="property">baz</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">return</span> <span class="number">200</span>;&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">baz</span>()) <span class="comment">// 200;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  obj = &#123;</span></span><br><span class="line"><span class="comment">    baz: function()&#123;reutrn 200&#125;</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>변수나 <span class="mint">프로퍼티의 값</span>으로 할당될 수 있다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> bar = <span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">return</span> <span class="number">100</span>;&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">bar</span>()); <span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">obj.<span class="property">baz</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="keyword">return</span> <span class="number">200</span>;&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">baz</span>()) <span class="comment">// 200;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  obj = &#123;</span></span><br><span class="line"><span class="comment">    baz: function()&#123;reutrn 200&#125;</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="2-2-2-함수-인자로-전달"><a href="#2-2-2-함수-인자로-전달" class="headerlink" title="2.2.2 함수 인자로 전달."></a>2.2.2 함수 인자로 전달.</h3><h3 id="2-2-3-리턴값으로-활용"><a href="#2-2-3-리턴값으로-활용" class="headerlink" title="2.2.3 리턴값으로 활용."></a>2.2.3 리턴값으로 활용.</h3><blockquote>
 <p>클로저</p>
@@ -419,19 +423,25 @@
 <li><code>__proto__</code></li>
 </ul>
 <ol>
-<li>name<ul>
+<li>name</li>
+</ol>
+<ul>
 <li>함수의 이름</li>
 <li>익명함수라면 빈배열</li>
 </ul>
-</li>
-<li>caller<ul>
+<ol start="2">
+<li>caller</li>
+</ol>
+<ul>
 <li>자신을 호출한 함수를 나타낸다.</li>
 </ul>
-</li>
-<li>arguments<ul>
+<ol start="3">
+<li>arguments</li>
+</ol>
+<ul>
 <li>파라미터값을 모아둔 유사배열객체이다.</li>
 </ul>
-</li>
+<ol start="4">
 <li><code>__proto__</code></li>
 </ol>
 <h3 id="Function-prototype객체의-프로토타입-객체는"><a href="#Function-prototype객체의-프로토타입-객체는" class="headerlink" title="Function.prototype객체의 프로토타입 객체는?"></a><span class="mint">Function.prototype객체</span>의 프로토타입 객체는?</h3><blockquote>
@@ -476,21 +486,22 @@
 </li>
 </ul>
 <p><a name="3-2"></a></p>
-<h2 id="3-2-즉시실행함수"><a href="#3-2-즉시실행함수" class="headerlink" title="3.2 즉시실행함수"></a>3.2 즉시실행함수</h2><p>= 함수를 정의함과 동시에 바로 실행하는 함수</p>
+<h2 id="3-2-즉시실행함수"><a href="#3-2-즉시실행함수" class="headerlink" title="3.2 즉시실행함수"></a>3.2 즉시실행함수</h2><p>&#x3D; 함수를 정의함과 동시에 바로 실행하는 함수</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">name</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
 <h3 id="사용하는-곳"><a href="#사용하는-곳" class="headerlink" title="사용하는 곳"></a>사용하는 곳</h3><ol>
-<li>초기화 코드<ul>
+<li>초기화 코드</li>
+</ol>
+<ul>
 <li>같은 함수를 다시 호출할 수 없다.</li>
 <li><span class="mint">최초 <strong>한번</strong>의 실행만을 필요로 하는 <strong>초기화 코드</strong> 부분</span> 등에 사용한다.</li>
 </ul>
-</li>
-<li>자바스크립트 라이브러리나 프레임워크 소스들 (like Jquery)<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="title function_">fucntion</span>(<span class="params"><span class="variable language_">window</span>, <span class="literal">undefined</span></span>)&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)(<span class="variable language_">window</span>)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>자바스크립트 라이브러리나 프레임워크 소스들 (like Jquery)  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="title function_">fucntion</span>(<span class="params"><span class="variable language_">window</span>, <span class="literal">undefined</span></span>)&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)(<span class="variable language_">window</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>변수 스코프를 위해서 사용한다. 함수 코드 내부에서만 유효할 수 있도록</li>
 <li>라이브러리 내의 변수들은 함수 외부에서 접근할 수 없다.</li>
 </ul>
-</li>
-</ol>
 <p><a name="3-3"></a></p>
 <h2 id="3-3-내부-함수"><a href="#3-3-내부-함수" class="headerlink" title="3.3 내부 함수"></a>3.3 내부 함수</h2><p>함수 코드 내부에서 함수 정의</p>
 <ul>
@@ -502,19 +513,13 @@
 <li><p>내부함수에서는 자신을 둘러싼 부모 함수의 변수에 접근이 가능하다.</p>
 </li>
 <li><p>내부 함수는 일반적으로 자신이 정의된 부모함수내부에서만 호출 가능하다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">const</span> b = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">child</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> b = <span class="number">300</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 내부에서 참조가 시작하므로, 내부에서 참조가능했다면 부모스코프까지 가지 않는다.</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">child</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">parent</span>(); <span class="comment">// 100 300</span></span><br><span class="line"><span class="title function_">child</span>(); <span class="comment">//error</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">const</span> b = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">child</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> b = <span class="number">300</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// 내부에서 참조가 시작하므로, 내부에서 참조가능했다면 부모스코프까지 가지 않는다.</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">child</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">parent</span>(); <span class="comment">// 100 300</span></span><br><span class="line"><span class="title function_">child</span>(); <span class="comment">//error</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <img src="/images/2018/31/inner_function.jpeg" width="500">
 
 <ul>
 <li>하지만, 함수 외부에서도 특정 함수 스코프 안에 선언된 내부 함수 호출이 가능하다. <span class="mint">(클로저)</span><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">child</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> child</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> inner = <span class="title function_">parent</span>(); <span class="comment">// inner에 child 함수변수가 리턴된다. </span></span><br><span class="line"><span class="title function_">inner</span>(); <span class="comment">// 클로저</span></span><br></pre></td></tr></table></figure>
-<img src="/images/2018/31/closure.jpeg" width="500">
-
-
-
-</li>
+<img src="/images/2018/31/closure.jpeg" width="500"></li>
 </ul>
 <hr>
 <p><a name="3-4"></a></p>
@@ -537,7 +542,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/24/JS_15/" data-id="ckzv7cqi1005yqobm555233eq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/24/JS_15/" data-id="cm3u7mj1s005rhwb2477t6ip9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

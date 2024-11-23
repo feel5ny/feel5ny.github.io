@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,study,message,method" />
     
     
-    <meta name="description" content="HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP&#x2F;1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다.    모든 서버가 모든 메서드를 구현하지 않는다. 모든 메서드를 구현하지 않았다 하더라도 메서드">
+    <meta name="description" content="HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP&#x2F;1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다.    모든 서버가 모든 메서드를 구현하지 않는다. 모든 메서드를 구현하지 않았다 하더라">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 메세지 - 메서드">
 <meta property="og:url" content="http://feel5ny.github.io/2019/08/16/HTTP_003_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP&#x2F;1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다.    모든 서버가 모든 메서드를 구현하지 않는다. 모든 메서드를 구현하지 않았다 하더라도 메서드">
+<meta property="og:description" content="HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP&#x2F;1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다.    모든 서버가 모든 메서드를 구현하지 않는다. 모든 메서드를 구현하지 않았다 하더라">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2019/21/thumb_default.jpg">
 <meta property="article:published_time" content="2019-08-16T12:23:55.000Z">
@@ -419,7 +419,7 @@
   </div>
 
         <div class="article-entry" itemprop="articleBody">
-            <p>HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP/1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다. </p>
+            <p>HTTP 메세지 중 요청 줄에 존재하는 메서드에 대해서 알아본다. 요청 메서드에 따라서 서버에서 처리되는 과정, 반환되는 메세지의 형태가 달라진다. HTTP&#x2F;1.1에서 정의한 메서드에는 총 9가지가 존재하며, 서비스에 따라 커스텀한 확장 메서드를 만들 수 있다. </p>
 <hr>
 <ul>
 <li>모든 서버가 모든 메서드를 구현하지 않는다.</li>
@@ -449,13 +449,13 @@
 <ol>
 <li>잠재적으로 유해하거나, </li>
 <li>완전히 읽기 전용이 아니거나, </li>
-<li>안전한 메소드를 호출하는 동안 사이드 이팩트를 일으키는 행동 </li>
+<li>안전한 메소드를 호출하는 동안 사이드 이팩트를 일으키는 행동</li>
 </ol>
 <p>  을 포함시키지 않았다.<br>  중요한 것은 client가 추가젹인 행동을 요구하지 않았고, 그것에 대해 책임을 질 수 없다는 것이다.</p>
 <p>  예를 들어 대부분의 서버는 메소드에 관계없이 모든 응답이 완료될 때 로그 파일에 액세스하기 위해 요청 정보를 추가하며, 로그 저장소가 가득 차서 서버가 손상될 수 있음에도 불구하고 안전한 것으로 간주된다. 마찬가지로, 웹 상에서 광고를 선택함으로써 시작된 안전한 요청은 종종 광고 계정을 청구하는 부작용을 낳을 것이다.</p>
 <p>  이 사양에서 정의한 요청 메서드 중 GET, HEAD, OPTIONS 및 TRACE 메서드는 안전하도록 정의되어 있습니다.</p>
 <p>  안전한 메서드과 안전하지 않은 메서드을 구분하는 목적은 자동 검색 프로세스(스파이더)와 캐시 성능 최적화(프리페치)가 해를 일으킬 염려 없이 작동할 수 있도록 하는 것이다.<br>  또한, 사용자 에이전트는 신뢰할 수 없는 콘텐츠를 처리할 때 안전하지 않은 메서드의 자동 사용에 적절한 제약을 가할 수 있다.<br>  사용자 에이전트는 사용자에게 잠재적 조치를 제시할 때 안전과 안전하지 않은 메서드을 구분하여 사용자가 요청하기 전에 안전하지 않은 조치를 인지할 수 있도록 해야 한다.</p>
-<p>  효과적인 요청 URI 내의 매개 변수가 action을 선택하는 효과를 가지도록 리소스를 구성하는 경우 action이 요청 메서드의 의미와 일치하는지 확인하는 것은 리소스 소유자의 책임이다.<br>  예를 들어 웹 기반 콘텐츠 편집 소프트웨어는 “page?do=delete”와 같은 쿼리 매개 변수 내의 action을 사용하는 것이 일반적이다.<br>  이러한 리소스의 목적이 안전하지 않은 action을 수행하는 것이라면(GET, HEAD, OPTIONS가 아닌) 리소스 소유자는 안전한 요청 방법을 사용하여 액세스할 때 해당 action을 실행 중지하거나 허용하지 않아야 한다. </p>
+<p>  효과적인 요청 URI 내의 매개 변수가 action을 선택하는 효과를 가지도록 리소스를 구성하는 경우 action이 요청 메서드의 의미와 일치하는지 확인하는 것은 리소스 소유자의 책임이다.<br>  예를 들어 웹 기반 콘텐츠 편집 소프트웨어는 “page?do&#x3D;delete”와 같은 쿼리 매개 변수 내의 action을 사용하는 것이 일반적이다.<br>  이러한 리소스의 목적이 안전하지 않은 action을 수행하는 것이라면(GET, HEAD, OPTIONS가 아닌) 리소스 소유자는 안전한 요청 방법을 사용하여 액세스할 때 해당 action을 실행 중지하거나 허용하지 않아야 한다. </p>
 <p>  그렇게 하지 않으면 자동화된 프로세스가 링크 유지보수, 프리 페치(사전 검색), 검색 색인 구축 등을 위해 모든 URI 참조에 GET를 수행할 때 사이드 이팩트가 발생할 수 있다.</p>
   <details>
     <summary>원문</summary>
@@ -503,7 +503,7 @@
 
 <hr>
 <a name="cachable"/>
-
+ 
 <h1 id="캐시-가능성-Cachable"><a href="#캐시-가능성-Cachable" class="headerlink" title="캐시 가능성 Cachable"></a>캐시 가능성 Cachable</h1><ul>
 <li>향후 재사용을 위해 이에 대한 응답을 저장할 수 있음을 나타낼 수 있다.</li>
 <li>일반적으로 현재 시점의 응답이나 권한 있는 응답에 의존하지 않는 <code>안전한 메서드</code>는 캐시 가능한 것으로 정의한다.<ul>
@@ -519,7 +519,7 @@
 </details>
 
 
-<h1 id="메서드-종류-HTTP-1-1-기준"><a href="#메서드-종류-HTTP-1-1-기준" class="headerlink" title="메서드 종류 (HTTP/1.1 기준)"></a>메서드 종류 (HTTP/1.1 기준)</h1><a name="1"/>
+<h1 id="메서드-종류-HTTP-1-1-기준"><a href="#메서드-종류-HTTP-1-1-기준" class="headerlink" title="메서드 종류 (HTTP&#x2F;1.1 기준)"></a>메서드 종류 (HTTP&#x2F;1.1 기준)</h1><a name="1"/>
 
 <h2 id="1-GET"><a href="#1-GET" class="headerlink" title="1. GET"></a>1. GET</h2><p>서버에게 리소스를 달라고 요청하기 위해 쓰인다.</p>
 <table>
@@ -621,12 +621,14 @@
 </ul>
 <p>PUT 메서드의 의미는</p>
 <ul>
-<li>서버가 요청의 본문을 가지고 요청 URL의 이름대로 <strong>새 자료를 만들거나</strong>,</li>
-<li>이미 URL이 존재한다면, 본문을 사용해서 <strong>교체</strong>하는 것이다.</li>
-</ul>
-<ul>
-<li>데이터를 변경할 수 있는 메서드이기 때문에 서버 입장에서는 위험할 수 있다.</li>
-<li>PUT은 콘텐츠를 변경할 수 있게 해주기 때문에,<br>많은 웹 서버가 PUT을 수행하기 전에 사용자에게<br>비밀번호를 입력해서 <strong>로그인을 하도록 요구할 것이다.</strong></li>
+<li><p>서버가 요청의 본문을 가지고 요청 URL의 이름대로 <strong>새 자료를 만들거나</strong>,</p>
+</li>
+<li><p>이미 URL이 존재한다면, 본문을 사용해서 <strong>교체</strong>하는 것이다.</p>
+</li>
+<li><p>데이터를 변경할 수 있는 메서드이기 때문에 서버 입장에서는 위험할 수 있다.</p>
+</li>
+<li><p>PUT은 콘텐츠를 변경할 수 있게 해주기 때문에,<br>많은 웹 서버가 PUT을 수행하기 전에 사용자에게<br>비밀번호를 입력해서 <strong>로그인을 하도록 요구할 것이다.</strong></p>
+</li>
 </ul>
 <table>
 <thead>
@@ -666,7 +668,7 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 201 Created</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">http://feel5ny.github.io/joy.txt</span><br></pre></td></tr></table></figure>
 <ul>
 <li>새로운 생성 시에는 성공 응답코드로 201 Created을 내려줘야 한다.</li>
-<li>수정 작업 시에는 성공 응답코드로 200을 내려줘야 한다. </li>
+<li>수정 작업 시에는 성공 응답코드로 200을 내려줘야 한다.</li>
 </ul>
 <h4 id="PUT과-POST의-차이점은-PUT은-멱등하다"><a href="#PUT과-POST의-차이점은-PUT은-멱등하다" class="headerlink" title="PUT과 POST의 차이점은 PUT은 멱등하다."></a>PUT과 POST의 차이점은 PUT은 멱등하다.</h4><ul>
 <li>PUT은 한번 혹은 연속적으로 여러 번 하더라도 동일하지만 영향(부작용이 아님)을 미치지만, </li>
@@ -731,10 +733,10 @@
 </ul>
 <h4 id="TRACE-요청은-목적지-서버에서-루프백-loopback-진단을-시작한다"><a href="#TRACE-요청은-목적지-서버에서-루프백-loopback-진단을-시작한다" class="headerlink" title="TRACE 요청은 목적지 서버에서 루프백 loopback 진단을 시작한다."></a>TRACE 요청은 목적지 서버에서 루프백 loopback 진단을 시작한다.</h4><ul>
 <li>요청 전송의 마지막 단계에 있는 서버는<br>자신이 받은 요청 메세지를 본문에 넣어서<br>TRACE 응답을 돌려준다.</li>
-<li>클라이언트는 자신과 목적지 서버 사이에 있는 모든 HTTP 어플리케이션의 요청/응답 연쇄를 따라가면서<br><strong>자신이 보낸 메세지가 망가졌거나 수정되었는지, 만약 그렇다면 어떻게 변경되었는지 확인</strong>할 수 있다.</li>
+<li>클라이언트는 자신과 목적지 서버 사이에 있는 모든 HTTP 어플리케이션의 요청&#x2F;응답 연쇄를 따라가면서<br><strong>자신이 보낸 메세지가 망가졌거나 수정되었는지, 만약 그렇다면 어떻게 변경되었는지 확인</strong>할 수 있다.</li>
 </ul>
 <h4 id="TRACE는-주로-진단을-위해-사용된다-디버깅용"><a href="#TRACE는-주로-진단을-위해-사용된다-디버깅용" class="headerlink" title="TRACE는 주로 진단을 위해 사용된다. (디버깅용)"></a>TRACE는 주로 진단을 위해 사용된다. (디버깅용)</h4><ul>
-<li><p>요청이 의도한 요청/응답 연쇄를 거쳐가는지 <strong>검사</strong>할 수 있다.</p>
+<li><p>요청이 의도한 요청&#x2F;응답 연쇄를 거쳐가는지 <strong>검사</strong>할 수 있다.</p>
 </li>
 <li><p>중간 어플리케이션이 여러 다른 종류의 요청들을 일관되게 다룬다고 가정하는 문제가 있다.</p>
 <ul>
@@ -962,7 +964,7 @@
 </blockquote>
 <ul>
 <li><ol start="2">
-<li>HTTP <code>CONNECT</code> 메소드는 요청된 리소스와 양방향 통신을 시작한다. </li>
+<li>HTTP <code>CONNECT</code> 메소드는 요청된 리소스와 양방향 통신을 시작한다.</li>
 </ol>
 </li>
 <li>터널을 여는 데 사용할 수 있다.</li>
@@ -1032,7 +1034,7 @@
 <hr>
 <ul>
 <li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)</li>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p>참고자료</p>
@@ -1042,10 +1044,12 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">http method 참고</a></li>
 <li><a href="http://wiki.gurubee.net/display/SWDEV/CORS+%28Cross-Origin+Resource+Sharing%29">preflight 참고 1</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request">preflight 참고 2</a></li>
-<li><a href="github.com/for-GET/http-decision-diagram">http 응답 다이어그램</a> <ul>
+<li><a href="github.com/for-GET/http-decision-diagram">http 응답 다이어그램</a></li>
+</ol>
+<ul>
 <li>도움이 많이 된 시각화 자료</li>
 </ul>
-</li>
+<ol start="7">
 <li><a href="https://stackoverflow.com/questions/28459418/rest-api-put-vs-patch-with-real-life-examples">PUT과 PATCH의 차이 1</a></li>
 <li><a href="https://papababo.tistory.com/269">PUT과 PATCH의 차이 2</a></li>
 <li><a href="https://tools.ietf.org/html/rfc7231#section-4">rfc7231</a></li>
@@ -1069,7 +1073,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/16/HTTP_003_02/" data-id="ckzv7cqfc0027qobmng5x75cx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/16/HTTP_003_02/" data-id="cm3u7mj1f0024hwb2glh58hj8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

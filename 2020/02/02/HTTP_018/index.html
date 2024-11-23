@@ -335,8 +335,7 @@
 <a name="virtual" />
 
 <h1 id="2-가상-호스팅"><a href="#2-가상-호스팅" class="headerlink" title="2. 가상 호스팅"></a>2. 가상 호스팅</h1><ul>
-<li>많은 웹 호스팅 업자는 <strong>컴퓨터 한 대</strong>를 
-<strong>여러 고객이 공유</strong>하게 해서<br><strong>저렴한</strong> 웹 호스팅 서비스를 제공한다.<ul>
+<li>많은 웹 호스팅 업자는 <strong>컴퓨터 한 대</strong>를<br><strong>여러 고객이 공유</strong>하게 해서<br><strong>저렴한</strong> 웹 호스팅 서비스를 제공한다.<ul>
 <li>이를 <strong>공유호스팅</strong> 혹은 <strong>가상호스팅</strong> 이라고 부른다.</li>
 <li>각 웹사이트는 다른 서버에서 호스팅하는 것처럼 보이겠지만,<br>사실은 물리적으로 <strong>같은 서버</strong>에서 호스팅되는 것이다.<ul>
 <li>최종 사용자의 관점에서 가상 호스팅에 있는 웹사이트는,<br>물리적으로 분리된 전용 서버에서 호스팅 하는 사이트와 구분할 수 없어야 한다.</li>
@@ -353,11 +352,11 @@
 </ul>
 <h2 id="2-1-호스트-정보가-없는-가상-서버-요청"><a href="#2-1-호스트-정보가-없는-가상-서버-요청" class="headerlink" title="2.1 호스트 정보가 없는 가상 서버 요청"></a>2.1 호스트 정보가 없는 가상 서버 요청</h2><ul>
 <li><ol start="2">
-<li>HTTP/1.0 명세는 공용 웹 서버가 호스팅하고 있는 가상 웹사이트에 </li>
+<li>HTTP&#x2F;1.0 명세는 공용 웹 서버가 호스팅하고 있는 가상 웹사이트에<br><strong>누가 접근하고 있는지</strong> 식별하는 기능을 제공하지 않는다.</li>
 </ol>
-<strong>누가 접근하고 있는지</strong> 식별하는 기능을 제공하지 않는다.</li>
+</li>
 <li><ol start="2">
-<li><a href="HTTPs://feel5ny.github.io/index.html을">HTTPs://feel5ny.github.io/index.html을</a> 요청한다면, HTTP/1.0 요청은 호스트명에 대한 별다른 언급 없이 “GET /index.html”이라는 요청을 한다.</li>
+<li><a href="https://feel5ny.github.io/index.html%EC%9D%84">HTTPs://feel5ny.github.io/index.html을</a> 요청한다면, HTTP&#x2F;1.0 요청은 호스트명에 대한 별다른 언급 없이 “GET &#x2F;index.html”이라는 요청을 한다.</li>
 </ol>
 <ul>
 <li>서버가 여러개의 사이트를 가상 호스팅하고 있으면, 사용자가 어떤 가상 웹 사이트로 접근하려고 하는것인지 아는 데 필요한 정보가 충분하지 않다.</li>
@@ -376,35 +375,38 @@
 <li>이를 해결하기 위해서, HTTP 요청 메세지에<br><strong>완전한 URL도 포함</strong>해서 보내게 해서 간단히 해결하였다.</li>
 </ul>
 <ol>
-<li><p>URL경로를 통한 가상 호스팅</p>
+<li>URL경로를 통한 가상 호스팅</li>
+</ol>
 <ul>
 <li>서버가 어떤 사이트를 요청하는 것인지 알 수 있게<br>URL에 특별한 경로 컴포넌트를 추가한다.</li>
-<li>“GET /joy/index.html” 조이 사이트에 대한 요청이다.<br>“GET /grey/index.html” 그레이 사이트에 대한 요청이다.</li>
+<li>“GET &#x2F;joy&#x2F;index.html” 조이 사이트에 대한 요청이다.<br>“GET &#x2F;grey&#x2F;index.html” 그레이 사이트에 대한 요청이다.</li>
 <li>거의 사용하지 않는다.</li>
 </ul>
-</li>
-<li><p>포트번호를 통한 가상 호스팅</p>
+<ol start="2">
+<li>포트번호를 통한 가상 호스팅</li>
+</ol>
 <ul>
 <li>각 사이트에 다른 포트번호를 할당,<br>분리된 웹 서버의 인스턴스가 요청을 처리한다.</li>
 </ul>
-</li>
-<li><p>IP 주소를 통한 가상 호스팅</p>
+<ol start="3">
+<li>IP 주소를 통한 가상 호스팅</li>
+</ol>
 <ul>
 <li>각 가상 사이트에 별도의 IP 주소를 할당하고, 모든 IP 주소를 장비 하나에 연결한다.</li>
 <li>웹 서버는 IP 주소로 사이트 이름을 식별한다.</li>
 <li>각 가상 웹 사이트에 유일한 IP 주소를 한 개 이상 부여한다. 모든 가상 서버의 IP주소는 같은 공용 서버에 연결되어 있다.</li>
 <li>예<ul>
 <li><ol start="2">
-<li><a href="HTTP://feel5ny.github.io은">HTTP://feel5ny.github.io은</a> 210.89.164.90<br><a href="http://feel5ny.me는">http://feel5ny.me는</a> 210.89.164.91 이라고 가정해보자</li>
+<li><a href="http://feel5ny.github.io은/">HTTP://feel5ny.github.io은</a> 210.89.164.90<br><a href="http://feel5ny.me는/">http://feel5ny.me는</a> 210.89.164.91 이라고 가정해보자</li>
 </ol>
 </li>
 </ul>
 <ol>
-<li>클라A는 <a href="http://feel5ny.github.io/index.html을">http://feel5ny.github.io/index.html을</a> 요청한다.</li>
+<li>클라A는 <a href="http://feel5ny.github.io/index.html%EC%9D%84">http://feel5ny.github.io/index.html을</a> 요청한다.</li>
 <li>클라A는 IP 주소를 요청해 210.89.164.90를 얻는다.</li>
 <li>클라A는 210.89.164.90에 공용 웹서버에 TCP 커넥션을 맺는다.</li>
-<li>클라A는 “GET /index.html HTTP/1.0” 요청을 보낸다.</li>
-<li>실제 목적지 IP 주소를(210.89.164.90) 기록하고,<br>이것이 조이의 웹사이트에 대한 가상IP 주소라는 것을 판단하고 요청을 처리한다.</li>
+<li>클라A는 “GET &#x2F;index.html HTTP&#x2F;1.0” 요청을 보낸다.</li>
+<li>실제 목적지 IP 주소를(210.89.164.90) 기록하고,<br>  이것이 조이의 웹사이트에 대한 가상IP 주소라는 것을 판단하고 요청을 처리한다.</li>
 </ol>
 <ul>
 <li>클라B도 유사하게 처리된다.</li>
@@ -422,23 +424,22 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>Host 헤더를 통한 가상 호스팅</p>
+<ol start="4">
+<li>Host 헤더를 통한 가상 호스팅</li>
+</ol>
 <ul>
 <li><ol start="2">
-<li>HTTP/1.1에 Host 요청 헤더를 정의했다.</li>
+<li>HTTP&#x2F;1.1에 Host 요청 헤더를 정의했다.</li>
 </ol>
 </li>
 <li>웹 서버는 Host 헤더로 가상 사이트를 식별할 수 있다.</li>
 <li>브라우저와 서버 개발자들은 서버가 원 호스트 명을 받아 볼 수 있게 HTTP를 확장했다.</li>
 <li>모든 요청에 호스트 명(그리고 포트)를 Host 확장 헤더에 기술해서 전달한다.</li>
 </ul>
-</li>
-</ol>
 <img src="/images/2020/05/01.png">
 
 
-<h2 id="2-3-HTTP-1-1-Host-헤더"><a href="#2-3-HTTP-1-1-Host-헤더" class="headerlink" title="2.3 HTTP/1.1 Host 헤더"></a>2.3 HTTP/1.1 Host 헤더</h2><ul>
+<h2 id="2-3-HTTP-1-1-Host-헤더"><a href="#2-3-HTTP-1-1-Host-헤더" class="headerlink" title="2.3 HTTP&#x2F;1.1 Host 헤더"></a>2.3 HTTP&#x2F;1.1 Host 헤더</h2><ul>
 <li><a href="https://tools.ietf.org/html/rfc7230#section-5.4">RFC 7230</a></li>
 </ul>
 <h3 id="문법과-사용방법"><a href="#문법과-사용방법" class="headerlink" title="문법과 사용방법"></a>문법과 사용방법</h3><ul>
@@ -459,15 +460,15 @@
 <li>웹 클라는 모든 요청 메세지에 Host헤더를 기술해야 한다.</li>
 <li>웹 프락시는 요청을 전달하기 전에 요청 메세지에 Host 헤더를 추가해야 한다</li>
 <li><ol start="2">
-<li>HTTP/1.1 웹 서버는 </li>
+<li>HTTP&#x2F;1.1 웹 서버는<br><strong>Host 헤더 필드가 없는</strong> HTTP&#x2F;1.1 요청 메세지를 받으면<br>400 상태 코드로 응답해야 한다.</li>
 </ol>
-<strong>Host 헤더 필드가 없는</strong> HTTP/1.1 요청 메세지를 받으면<br>400 상태 코드로 응답해야 한다. </li>
+</li>
 </ul>
 <h3 id="Host-헤더-해석하기"><a href="#Host-헤더-해석하기" class="headerlink" title="Host 헤더 해석하기"></a>Host 헤더 해석하기</h3><ul>
-<li><p>호스트를 기준으로 리소스를 구분하는 모든 웹 서버는 HTTP/1.1을 통해 오는 리소스를 결정하려면 다음과 같은 규칙을 사용해야 한다.</p>
+<li><p>호스트를 기준으로 리소스를 구분하는 모든 웹 서버는 HTTP&#x2F;1.1을 통해 오는 리소스를 결정하려면 다음과 같은 규칙을 사용해야 한다.</p>
 </li>
 <li><ol start="2">
-<li>HTTP 요청 메세지에 </li>
+<li>HTTP 요청 메세지에</li>
 </ol>
 <ul>
 <li>전체 URL이 기술되어 있으면<br>Host 헤더에 있는 값은 무시하고<br>URL을 사용한다.</li>
@@ -504,20 +505,20 @@
 <li>서버팜의 서버에 있는 콘텐츠들은 한 곳에 문제가 생기면,<br>다른 한 곳에서 대신 전달할 수 있게 미러링 할 수 있다.</li>
 <li>미러링된 서버는 계층적인 관계에 있다.<ul>
 <li>한 서버는 (원본 콘텐츠를 가지고 있는) ‘콘텐츠의 원본 제작자’ 같이 행동한다.<ul>
-<li>=&gt; <strong>마스터 원 서버</strong>라 부른다. Master Origin Server</li>
+<li>&#x3D;&gt; <strong>마스터 원 서버</strong>라 부른다. Master Origin Server</li>
 </ul>
 </li>
 <li>마스터 원 서버로부터 콘텐츠를 받은 미러링된 서버는<ul>
-<li>=&gt; <strong>복제 원 서버</strong>라 부른다. Replica Origin Server</li>
+<li>&#x3D;&gt; <strong>복제 원 서버</strong>라 부른다. Replica Origin Server</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <img src="/images/2020/05/03.png">
-
+  
 <ul>
-<li>서버 팜에 배포하는 간단한 방법 하나는<br><strong><a href="https://ko.wikipedia.org/wiki/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EC%8A%A4%EC%9C%84%EC%B9%98">네트워크 스위치</a></strong>를 사용해서 서버에 분산 요청을 보내는 것이다.<ul>
+<li>서버 팜에 배포하는 간단한 방법 하나는<br>**<a href="https://ko.wikipedia.org/wiki/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC_%EC%8A%A4%EC%9C%84%EC%B9%98">네트워크 스위치</a>**를 사용해서 서버에 분산 요청을 보내는 것이다.<ul>
 <li>서버에 호스팅 되고 있는<br>각 웹사이트의 IP주소는<br>스위치의 IP주소가 된다.</li>
 </ul>
 </li>
@@ -531,8 +532,8 @@
 
 <ul>
 <li>위 그림의 시나리오에서는, 클라의 요청이 특정 서버로 가는 2가지 방법이 있다.<ol>
-<li><strong>HTTP 리다이렉션</strong><br>: 콘텐츠에 대한 URL은 <strong>마스터 서버의 IP</strong>를 가리키고,<br> 마스터 서버는 요청을 받는 즉시 복제 서버로 리다이렉트 시킨다.</li>
-<li><strong>DNS 리다이렉션</strong><br>: 콘텐츠의 URL은 4개의 IP주소를 가리킬 수 있고,<br> DNS 서버는 클라에게 전송할 IP주소를 선택할 수 있다.</li>
+<li><strong>HTTP 리다이렉션</strong><br>  : 콘텐츠에 대한 URL은 <strong>마스터 서버의 IP</strong>를 가리키고,<br> 마스터 서버는 요청을 받는 즉시 복제 서버로 리다이렉트 시킨다.</li>
+<li><strong>DNS 리다이렉션</strong><br>  : 콘텐츠의 URL은 4개의 IP주소를 가리킬 수 있고,<br> DNS 서버는 클라에게 전송할 IP주소를 선택할 수 있다.</li>
 </ol>
 </li>
 </ul>
@@ -550,9 +551,9 @@
 <blockquote>
 <p>기본적으로 사용자가 원격지에 있는 서버(Origin Server)로 부터 Content(예. Web Object, Video, Music, Image, Document 등)를 다운로드 받을 때 가까이 있는 서버에서 받는 것보다 시간이 오래 걸리므로, <strong>사용자와 가까운 곳에 위치한 Cache Server에 해당 Content를 저장(캐싱)하고</strong> Content 요청시에 Cache Server가 응답을 주는 기술입니다.<br><a href="https://cdn.hosting.kr/cdn%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94/">참고</a></p>
 </blockquote>
-<h2 id="3-3-CDN의-대리-캐시-리버스-프락시"><a href="#3-3-CDN의-대리-캐시-리버스-프락시" class="headerlink" title="3.3 CDN의 대리 캐시 ( == 리버스 프락시 )"></a>3.3 <code>CDN</code>의 대리 캐시 ( == 리버스 프락시 )</h2><ul>
+<h2 id="3-3-CDN의-대리-캐시-리버스-프락시"><a href="#3-3-CDN의-대리-캐시-리버스-프락시" class="headerlink" title="3.3 CDN의 대리 캐시 ( &#x3D;&#x3D; 리버스 프락시 )"></a>3.3 <code>CDN</code>의 대리 캐시 ( &#x3D;&#x3D; 리버스 프락시 )</h2><ul>
 <li><strong>Gateway 캐시</strong>: 실제 요청을 담당하는 서버에서 관리되는 캐시</li>
-<li>== Reverse 프락시 : forward 프락시의 반대 방향</li>
+<li>&#x3D;&#x3D; Reverse 프락시 : forward 프락시의 반대 방향</li>
 <li>대리 서버는 <strong>복제 원 서버를 대신해 사용될 수 있다.</strong></li>
 <li>대리 서버는 미러링 된 웹 서버처럼, 콘텐츠에 대한 요청을 받는다.</li>
 <li>그들은 특정 원 서버 집합을 대신해 요청을 받는다.<ul>
@@ -599,14 +600,14 @@
 </li>
 <li><p>리소스의 로딩속도를 좌우하는 요소</p>
 <ol>
-<li><strong>리다이렉션</strong><br>어떻게 요청과 응답이 클라와 서버 사이에서 연결을 맺고 인터넷을 가로질러 데이터를 전송하는 지.</li>
+<li><strong>리다이렉션</strong><br>  어떻게 요청과 응답이 클라와 서버 사이에서 연결을 맺고 인터넷을 가로질러 데이터를 전송하는 지.</li>
 <li><strong>인코딩</strong> 콘텐츠를 인코딩 하는 것.</li>
 </ol>
 </li>
 </ul>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
@@ -633,7 +634,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/02/02/HTTP_018/" data-id="ckzv7cqgf0048qobmoarxa0l4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/02/02/HTTP_018/" data-id="cm3u7mj1m0045hwb2bcef0hby" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

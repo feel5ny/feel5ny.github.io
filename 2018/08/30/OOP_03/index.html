@@ -397,8 +397,7 @@
 <p><strong>서브루틴 안에 서브루틴이 들어가면 기본적으로 이런 일이 일어난다.</strong></p>
 </blockquote>
 <p><a name="1-4"></a></p>
-<h2 id="1-4-Value-vs-Reference-값과-참조"><a href="#1-4-Value-vs-Reference-값과-참조" class="headerlink" title="1-4. Value vs Reference 값과 참조"></a>1-4. Value vs Reference 값과 참조</h2><p>값은 메모리상에서 전달할 때마다 <strong>복사되는 형태</strong>,
-참조는 메모리상에서 공유된 객체의 <strong>포인터만 전달되는 형식</strong></p>
+<h2 id="1-4-Value-vs-Reference-값과-참조"><a href="#1-4-Value-vs-Reference-값과-참조" class="headerlink" title="1-4. Value vs Reference 값과 참조"></a>1-4. Value vs Reference 값과 참조</h2><p>값은 메모리상에서 전달할 때마다 <strong>복사되는 형태</strong>,<br>참조는 메모리상에서 공유된 객체의 <strong>포인터만 전달되는 형식</strong></p>
 <img src="/images/2018/34/07.png" width="500">
 <span class="mint">POINT</span>
 - 값이 넘어가면 복사된 값이 넘어가기 때문에 해당 루틴에서 값이 변화가 일어나도 main flow에서는 값에 영향을 주지 않는다.
@@ -463,7 +462,7 @@
 <h2 id="2-1-결합도-coupling-👎👌👍"><a href="#2-1-결합도-coupling-👎👌👍" class="headerlink" title="2-1. 결합도 coupling 👎👌👍"></a>2-1. 결합도 coupling 👎👌👍</h2><h3 id="Content-👎-초강결합"><a href="#Content-👎-초강결합" class="headerlink" title="Content (👎 초강결합)"></a>Content (👎 초강결합)</h3><p>A클래스 속성v가 변경되면 즉시 B클래스가 깨짐</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> A = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">v</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">v</span> = v;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> B = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">a</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">v</span> = a.<span class="property">v</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> <span class="title function_">B</span>(<span class="keyword">new</span> <span class="title function_">A</span>(<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
 <ul>
-<li>A와 B는 content coupling하고 있다. </li>
+<li>A와 B는 content coupling하고 있다.</li>
 </ul>
 <h3 id="Common-👎-초강결합"><a href="#Common-👎-초강결합" class="headerlink" title="Common (👎 초강결합)"></a>Common (👎 초강결합)</h3><p>Common클래스 변경 시 즉시 A,B클래스가 깨짐</p>
 <ul>
@@ -545,7 +544,7 @@
 
 <h3 id="Communicational-👌"><a href="#Communicational-👌" class="headerlink" title="Communicational 👌"></a>Communicational 👌</h3><ul>
 <li>하나의 구조에 대해 다양한 작업이 모여있음.</li>
-<li>역할에 맞게 묶음. </li>
+<li>역할에 맞게 묶음.</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Array</span> = <span class="keyword">class</span> &#123;</span><br><span class="line">  <span class="title function_">push</span>(<span class="params">v</span>)&#123;&#125;</span><br><span class="line">  <span class="title function_">pop</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">  <span class="title function_">shift</span>(<span class="params"></span>)&#123;&#125;</span><br><span class="line">  <span class="title function_">unshift</span>(<span class="params">v</span>)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -580,7 +579,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/30/OOP_03/" data-id="ckzv7cqj0007oqobmgf7e8kbw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/30/OOP_03/" data-id="cm3u7mj1v006vhwb25lqu2lqf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

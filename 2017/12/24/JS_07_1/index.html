@@ -11,12 +11,12 @@
         <meta name="keywords" content="javaScript" />
     
     
-    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체1.1 전역 스코프 : window.전역변수명, window.전역함수명1.2 창 사이의 관계와 프레임1.3 창의 위치 : screenLeft, screenTop1.4 창의 크기 : innerWidth, out">
+    <meta name="description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체  1.1 전역 스코프 : window.전역변수명, window.전역함수명  1.2 창 사이의 관계와 프레임  1.3 창의 위치 : screenLeft, screenTop  1.4 창의 크기 : innerWi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7&#x2F; BOM (브라우저 객체 모델)">
 <meta property="og:url" content="http://feel5ny.github.io/2017/12/24/JS_07_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체1.1 전역 스코프 : window.전역변수명, window.전역함수명1.2 창 사이의 관계와 프레임1.3 창의 위치 : screenLeft, screenTop1.4 창의 크기 : innerWidth, out">
+<meta property="og:description" content="‘프론트엔드 개발자를 위한 자바스크립트 프로그래밍’ 책을 참고하여 정리합니다. 오류가 있다면 언제든지 댓글 남겨주세요.    목차  window 객체  1.1 전역 스코프 : window.전역변수명, window.전역함수명  1.2 창 사이의 관계와 프레임  1.3 창의 위치 : screenLeft, screenTop  1.4 창의 크기 : innerWi">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/post_img/56/thumb_default.jpg">
 <meta property="article:published_time" content="2017-12-24T12:20:19.000Z">
@@ -235,10 +235,7 @@
 <hr>
 <p><strong>목차</strong></p>
 <ol>
-<li><a href="#window">window 객체</a><br>1.1 <a href="#global">전역 스코프</a> : window.전역변수명, window.전역함수명<br>1.2 <a href="#frame">창 사이의 관계와 프레임</a><br>1.3 <a href="#screen-position">창의 위치</a> : screenLeft, screenTop<br>1.4 <a href="#screen-size">창의 크기</a> : innerWidth, outerWidth<br>1.5 <a href="#navigation&open">내비게이션과 열기</a> : window.open, window.close<br>1.6 <a href="#interval&timeout">인터벌과 타임아웃</a> : setInterval, setTimeout<br>1.7 <a href="#system-popup">시스템 대화상자</a> : alert, prompt, confirm, print, find</li>
-</ol>
-<p>—- 2편 &#128071;</p>
-<ol start="2">
+<li><a href="#window">window 객체</a><br>  1.1 <a href="#global">전역 스코프</a> : window.전역변수명, window.전역함수명<br>  1.2 <a href="#frame">창 사이의 관계와 프레임</a><br>  1.3 <a href="#screen-position">창의 위치</a> : screenLeft, screenTop<br>  1.4 <a href="#screen-size">창의 크기</a> : innerWidth, outerWidth<br>  1.5 <a href="#navigation&open">내비게이션과 열기</a> : window.open, window.close<br>  1.6 <a href="#interval&timeout">인터벌과 타임아웃</a> : setInterval, setTimeout<br>  1.7 <a href="#system-popup">시스템 대화상자</a> : alert, prompt, confirm, print, find<br>—- 2편 &#128071;</li>
 <li>location 객체</li>
 <li>navigator 객체</li>
 <li>screen 객체</li>
@@ -249,7 +246,7 @@
 <h2 id="1-window-객체"><a href="#1-window-객체" class="headerlink" title=" 1. window 객체"></a><a name="window"></a> 1. window 객체</h2><p>BOM은 웹 페이지 콘텐츠와 무관하게 <code>브라우저 기능을 노출하는 객체</code>이다.</p>
 <img src ="/images/post_img/56/BOM-01.png">
 
-<p>브라우저의 인스턴스 =&gt; window 객체<br>웹페이지에서 정의한 모든 객체, 변수, 함수에서는<br><strong>window가 Global 객체(= 표준내장객체) 구실을 하고,</strong><br>window에 정의된 parseInt()등의 메서드를 이용한다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects">+</a></p>
+<p>브라우저의 인스턴스 &#x3D;&gt; window 객체<br>웹페이지에서 정의한 모든 객체, 변수, 함수에서는<br><strong>window가 Global 객체(&#x3D; 표준내장객체) 구실을 하고,</strong><br>window에 정의된 parseInt()등의 메서드를 이용한다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects">+</a></p>
 <blockquote>
 <p>global objects와 global object는 다르다.<br>global objects는 표중내장객체, global object는 전역객체이다.(실행 컨택스트에서 GO)</p>
 </blockquote>
@@ -267,7 +264,7 @@
 <hr>
 <h3 id="1-2-창-사이의-관계와-프레임"><a href="#1-2-창-사이의-관계와-프레임" class="headerlink" title=" 1.2 창 사이의 관계와 프레임"></a><a name="frame"></a> 1.2 창 사이의 관계와 프레임</h3><p>페이지에 프레임이 들어 있으면 각 프레임은 독자적인 window객체를 가지며, frames 컬렉션에 저장된다.</p>
 <hr>
-<h3 id="1-3-창의-위치"><a href="#1-3-창의-위치" class="headerlink" title=" 1.3 창의 위치"></a><a name="screen-position"></a> 1.3 창의 위치</h3><p><code>screenLeft</code>  : 디바이스 화면 왼쪽에서 브라우저 창까지 가로 거리<br><code>screenTop</code> : 디바이스 화면 위쪽에서 브라우저 창까지 세로 거리<br><code>moveBy(가로이동 픽셀수, 세로이동 픽셀수)</code> : (왼-&gt;오 / 위-&gt; 아래)<br><code>moveTo(x좌표, y좌표)</code></p>
+<h3 id="1-3-창의-위치"><a href="#1-3-창의-위치" class="headerlink" title=" 1.3 창의 위치"></a><a name="screen-position"></a> 1.3 창의 위치</h3><p><code>screenLeft</code>  : 디바이스 화면 왼쪽에서 브라우저 창까지 가로 거리<br><code>screenTop</code> : 디바이스 화면 위쪽에서 브라우저 창까지 세로 거리<br><code>moveBy(가로이동 픽셀수, 세로이동 픽셀수)</code> : (왼-&gt;오 &#x2F; 위-&gt; 아래)<br><code>moveTo(x좌표, y좌표)</code></p>
 <ul>
 <li><code>moveBy</code> <code>moveTo</code> 크롬, 오페라, IE7이상은 안됨</li>
 </ul>
@@ -378,9 +375,9 @@
 
 <p><code>clearInterval()</code> : 인터벌을 취소한다.<br>인터벌을 취소하지 않으면 페이지가 떠 있는 동안은 계속 실행되므로 <strong>인터벌 취소는 timeout 취소보다 중요</strong></p>
 <hr>
-<h3 id="1-7-시스템-대화상자"><a href="#1-7-시스템-대화상자" class="headerlink" title=" 1.7 시스템 대화상자"></a><a name="system-popup"></a> 1.7 시스템 대화상자</h3><p><code>alert()</code> : Ok<br><code>confirm()</code> : Ok / cancel<br><code>prompt()</code> : input / Ok / cancel</p>
+<h3 id="1-7-시스템-대화상자"><a href="#1-7-시스템-대화상자" class="headerlink" title=" 1.7 시스템 대화상자"></a><a name="system-popup"></a> 1.7 시스템 대화상자</h3><p><code>alert()</code> : Ok<br><code>confirm()</code> : Ok &#x2F; cancel<br><code>prompt()</code> : input &#x2F; Ok &#x2F; cancel</p>
 <ul>
-<li>대화상자의 외관은 css가 아니라 운영체제/브라우저 설정에 따라 다르다.</li>
+<li>대화상자의 외관은 css가 아니라 운영체제&#x2F;브라우저 설정에 따라 다르다.</li>
 <li>동기적이고 modal 성질이 있어서 대화상자가 떠 있을 때는 코드 실행이 중지된다.</li>
 </ul>
 <p><code>window.print()</code> : 인쇄 대화상자 표시<br><code>window.find(&#39;찾을 단어&#39;)</code> : 찾기 대화상자 표시</p>
@@ -408,7 +405,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="ckzv7cqhe0055qobmbvdj3ufy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cm3u7mj1o004nhwb28bfo4o0f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

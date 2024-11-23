@@ -11,12 +11,12 @@
         <meta name="keywords" content="programming,principle" />
     
     
-    <meta name="description" content="[프로그래밍의 정석]를 보고 메모한 부분을 정리했습니다.  목차1.1 프로그래밍에 은제탄환은 없다.1.2 코드는 설계서다1.3 코드는 반드시 변경된다.  서론  1.1 프로그래밍에 은제 탄환은 없다.*WHY_소프트웨어는 본질적으로 난해하다. 복잡성 동조성 : 실세계와 계속 동조해야한다. 가변성 : 소프트웨어가 사용자의 인식에 영향을 미치며 새로운 요구사항">
+    <meta name="description" content="**[프로그래밍의 정석]**를 보고 메모한 부분을 정리했습니다.  목차1.1 프로그래밍에 은제탄환은 없다.1.2 코드는 설계서다1.3 코드는 반드시 변경된다.  서론  1.1 프로그래밍에 은제 탄환은 없다.*WHY_소프트웨어는 본질적으로 난해하다. 복잡성 동조성 : 실세계와 계속 동조해야한다. 가변성 : 소프트웨어가 사용자의 인식에 영향을 미치며 새로운">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chap01.전제 - 프로그래밍 불변의 진실">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/11/principle_01/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[프로그래밍의 정석]를 보고 메모한 부분을 정리했습니다.  목차1.1 프로그래밍에 은제탄환은 없다.1.2 코드는 설계서다1.3 코드는 반드시 변경된다.  서론  1.1 프로그래밍에 은제 탄환은 없다.*WHY_소프트웨어는 본질적으로 난해하다. 복잡성 동조성 : 실세계와 계속 동조해야한다. 가변성 : 소프트웨어가 사용자의 인식에 영향을 미치며 새로운 요구사항">
+<meta property="og:description" content="**[프로그래밍의 정석]**를 보고 메모한 부분을 정리했습니다.  목차1.1 프로그래밍에 은제탄환은 없다.1.2 코드는 설계서다1.3 코드는 반드시 변경된다.  서론  1.1 프로그래밍에 은제 탄환은 없다.*WHY_소프트웨어는 본질적으로 난해하다. 복잡성 동조성 : 실세계와 계속 동조해야한다. 가변성 : 소프트웨어가 사용자의 인식에 영향을 미치며 새로운">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/25/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-11T11:12:34.000Z">
@@ -230,7 +230,7 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[프로그래밍의 정석]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[프로그래밍의 정석]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><p>1.1 프로그래밍에 은제탄환은 없다.<br>1.2 코드는 설계서다<br>1.3 코드는 반드시 변경된다.</p>
 <hr>
@@ -244,13 +244,16 @@
 </ol>
 <h3 id="HOW-역사를-배워-복잡함에-맞선다"><a href="#HOW-역사를-배워-복잡함에-맞선다" class="headerlink" title="*HOW_역사를 배워 복잡함에 맞선다."></a>*HOW_<span style="color:white">역사를 배워 복잡함에 맞선다.</span></h3><p>소프트웨어 개발의 역사는 복잡함과 투쟁의 역사.</p>
 <h3 id="소프트웨어의-우유적인-부분을-개선"><a href="#소프트웨어의-우유적인-부분을-개선" class="headerlink" title="*소프트웨어의 우유적인 부분을 개선"></a>*소프트웨어의 우유적인 부분을 개선</h3><ul>
-<li>본질 : 어떤 대상에서 그것이 없으면 대상물이라고 할 수 없는 성질</li>
-<li>비본질(우유) : 부차적이고 부수적이라는 의미로 그것이 없어도 대상물이라고 할 수 있는 성질</li>
-</ul>
-<ul>
-<li>소프트웨어 개발 현장에서 필요한 기술이라고 알려진 것의 대부분은 우유적인 부분<br>빌드 환경, 프로그래밍언어, 라이브러리, 프레임워크 등등은 우유적..</li>
-<li>우유적인 부분의 개선 중에서 큰 성과는 <strong>자동화</strong><br>(테스트, 빌드, 환경 설정 등을 자동화 <i class="fa fa-long-arrow-right"> 작업 품질 향상)</li>
-<li>우유적인 부분을 <i class="fa fa-long-arrow-right"> 자동화<br><i class="fa fa-long-arrow-right"> <u>본질적인 부분에 시간을 할애하자.</u></li>
+<li><p>본질 : 어떤 대상에서 그것이 없으면 대상물이라고 할 수 없는 성질</p>
+</li>
+<li><p>비본질(우유) : 부차적이고 부수적이라는 의미로 그것이 없어도 대상물이라고 할 수 있는 성질</p>
+</li>
+<li><p>소프트웨어 개발 현장에서 필요한 기술이라고 알려진 것의 대부분은 우유적인 부분<br>빌드 환경, 프로그래밍언어, 라이브러리, 프레임워크 등등은 우유적..</p>
+</li>
+<li><p>우유적인 부분의 개선 중에서 큰 성과는 <strong>자동화</strong><br>(테스트, 빌드, 환경 설정 등을 자동화 <i class="fa fa-long-arrow-right"> 작업 품질 향상)</p>
+</li>
+<li><p>우유적인 부분을 <i class="fa fa-long-arrow-right"> 자동화<br><i class="fa fa-long-arrow-right"> <u>본질적인 부분에 시간을 할애하자.</u></p>
+</li>
 </ul>
 <hr>
 <h2 id="1-2-코드는-설계서다"><a href="#1-2-코드는-설계서다" class="headerlink" title="1.2 코드는 설계서다."></a>1.2 코드는 설계서다.</h2><h3 id="what-코드가-곧-설계서"><a href="#what-코드가-곧-설계서" class="headerlink" title="*what_코드가 곧 설계서"></a>*what_코드가 곧 설계서</h3><ul>
@@ -274,7 +277,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="how-우수한-설계자-프로그래머-가-필요"><a href="#how-우수한-설계자-프로그래머-가-필요" class="headerlink" title="*how_우수한 설계자(프로그래머)가 필요"></a>*how_우수한 설계자(프로그래머)가 필요</h3><p>설계란 창조적이며 기예가 필요한 행위다.<br>(설계 = 기본설계 + 상세설계 + 프로그래밍 + 테스트 + 디버깅)<br>신입에게 맡길 첫 업무가 아니라 고도로 숙련된 프로그래머의 업무여야 한다.</p>
+<h3 id="how-우수한-설계자-프로그래머-가-필요"><a href="#how-우수한-설계자-프로그래머-가-필요" class="headerlink" title="*how_우수한 설계자(프로그래머)가 필요"></a>*how_우수한 설계자(프로그래머)가 필요</h3><p>설계란 창조적이며 기예가 필요한 행위다.<br>(설계 &#x3D; 기본설계 + 상세설계 + 프로그래밍 + 테스트 + 디버깅)<br>신입에게 맡길 첫 업무가 아니라 고도로 숙련된 프로그래머의 업무여야 한다.</p>
 <h3 id="로제타-스톤"><a href="#로제타-스톤" class="headerlink" title="*로제타 스톤"></a>*로제타 스톤</h3><dl><dt><strong>장래의 유지보수 담당자에게 필요한 가이드북</strong><br>: 소프트웨어 개발 환경을 이해하기 위한 정보와</dt><dd>소프트웨어 아키텍처를 이해하기 위한 정보가 담겨 있다.</dd></dl><h4 id="소프트웨어-개발-환경을-이해하기-위한-정보"><a href="#소프트웨어-개발-환경을-이해하기-위한-정보" class="headerlink" title="소프트웨어 개발 환경을 이해하기 위한 정보"></a>소프트웨어 개발 환경을 이해하기 위한 정보</h4><ul>
 <li>빌드와 테스트 프로세스를 수행하는 방법</li>
 <li>소프트웨어를 파악할 때 함정에 빠지는 일을 방지해 준다.</li>
@@ -307,7 +310,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/11/principle_01/" data-id="ckzv7cqkt00clqobmoyjs36q6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/11/principle_01/" data-id="cm3u7mj2c00bahwb23u8t2dag" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -11,12 +11,12 @@
         <meta name="keywords" content="cleanCode,refactoring" />
     
     
-    <meta name="description" content="[읽기 좋은 코드가 좋은 코드다.]를 보고 메모한 부분을 정리했습니다.  목차 코드는 이해하기 쉬워야 한다. ⇒ 이름에 정보 담기 ⇒ 오해할 수 없는 이름들 ⇒ 미학 ⇒ 주석에 담아야 하는 대상 ⇒ 명확하고 간결한 주석 달기 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고,자신에게도 더 좋은 코드를 만들어야 하겠다">
+    <meta name="description" content="**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모한 부분을 정리했습니다.  목차 코드는 이해하기 쉬워야 한다. ⇒ 이름에 정보 담기 ⇒ 오해할 수 없는 이름들 ⇒ 미학 ⇒ 주석에 담아야 하는 대상 ⇒ 명확하고 간결한 주석 달기 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고,자신에게도 더 좋은 코드를 만들어야">
 <meta property="og:type" content="article">
 <meta property="og:title" content="📓 읽기 좋은 코드가 좋은 코드다. || part1. 표면적 수준에서의 개선">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/01/Clean_code_1/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[읽기 좋은 코드가 좋은 코드다.]를 보고 메모한 부분을 정리했습니다.  목차 코드는 이해하기 쉬워야 한다. ⇒ 이름에 정보 담기 ⇒ 오해할 수 없는 이름들 ⇒ 미학 ⇒ 주석에 담아야 하는 대상 ⇒ 명확하고 간결한 주석 달기 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고,자신에게도 더 좋은 코드를 만들어야 하겠다">
+<meta property="og:description" content="**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모한 부분을 정리했습니다.  목차 코드는 이해하기 쉬워야 한다. ⇒ 이름에 정보 담기 ⇒ 오해할 수 없는 이름들 ⇒ 미학 ⇒ 주석에 담아야 하는 대상 ⇒ 명확하고 간결한 주석 달기 ⇒   서론좋은 코드는 무슨 일이 일어나고 있는지를 빠르게 전달해준다.사용하기에도 즐겁고,자신에게도 더 좋은 코드를 만들어야">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/19/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-01T11:12:34.000Z">
@@ -230,7 +230,7 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[읽기 좋은 코드가 좋은 코드다.]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[읽기 좋은 코드가 좋은 코드다.]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
 <li>코드는 이해하기 쉬워야 한다. <a href="#first">⇒</a></li>
@@ -246,9 +246,9 @@
 <hr>
 <h1 id="PART-1-표면적-수준에서의-개선"><a href="#PART-1-표면적-수준에서의-개선" class="headerlink" title="PART 1 ) 표면적 수준에서의 개선"></a>PART 1 ) 표면적 수준에서의 개선</h1><p><a id="first"></a></p>
 <h2 id="1-코드는-이해하기-쉬워야-한다"><a href="#1-코드는-이해하기-쉬워야-한다" class="headerlink" title="1. 코드는 이해하기 쉬워야 한다."></a>1. 코드는 이해하기 쉬워야 한다.</h2><ol>
-<li>코드는 다른 사람이 그것을 이해하는 데 들이는 시간을 <strong>최소화</strong>하는 방식으로 작성되어야 한다.<br>⇒ 바로 인지 가능하도록<br>time-til-understanding</li>
-<li>분량이 적으면 항상 더 좋은가?<br>더 분량이 적은 코드로 똑같은 문제를 해결할 수 있다면 그것이 더 낫다.</li>
-<li>이해를 위한 시간은 다른 목표와 충돌되는가?<br><strong>정리가 되지 않은 코드를 고치고 싶을 때는<br>뒤로 한걸음 물러나서 스스로에게 물어보는 게 중요하다.</strong><br><strong>이 코드는 이해하기 쉬운가?</strong></li>
+<li>코드는 다른 사람이 그것을 이해하는 데 들이는 시간을 <strong>최소화</strong>하는 방식으로 작성되어야 한다.<br>  ⇒ 바로 인지 가능하도록<br>  time-til-understanding</li>
+<li>분량이 적으면 항상 더 좋은가?<br>  더 분량이 적은 코드로 똑같은 문제를 해결할 수 있다면 그것이 더 낫다.</li>
+<li>이해를 위한 시간은 다른 목표와 충돌되는가?<br>  <strong>정리가 되지 않은 코드를 고치고 싶을 때는<br>  뒤로 한걸음 물러나서 스스로에게 물어보는 게 중요하다.</strong><br>  <strong>이 코드는 이해하기 쉬운가?</strong></li>
 </ol>
 <h3 id="1-1-표면적-수준"><a href="#1-1-표면적-수준" class="headerlink" title="1-1. 표면적 수준"></a>1-1. 표면적 수준</h3><ul>
 <li>좋은 이름을 짓고,</li>
@@ -311,33 +311,39 @@
 </ul>
 <hr>
 <h3 id="2-3-추상적인-이름-대신-구체적인-이름-사용하기"><a href="#2-3-추상적인-이름-대신-구체적인-이름-사용하기" class="headerlink" title="2-3. 추상적인 이름 대신 구체적인 이름 사용하기"></a>2-3. <strong>추상적인 이름 대신 구체적인 이름 사용하기</strong></h3><hr>
-<h3 id="2-4-접두사-혹은-접미사로-이름에-추가적인-정보-덧붙이기"><a href="#2-4-접두사-혹은-접미사로-이름에-추가적인-정보-덧붙이기" class="headerlink" title="2-4. 접두사 혹은 접미사로 이름에 추가적인 정보 덧붙이기"></a>2-4. <strong>접두사 혹은 접미사로 이름에 추가적인 정보 덧붙이기</strong></h3><h4 id="2-4-1-단위를-포함하는-값들-ex-밀리세컨즈-ms"><a href="#2-4-1-단위를-포함하는-값들-ex-밀리세컨즈-ms" class="headerlink" title="2-4-1. 단위를 포함하는 값들 (ex. 밀리세컨즈 : ~_ms)"></a>2-4-1. 단위를 포함하는 값들 (ex. 밀리세컨즈 : ~<code>_ms</code>)</h4><p>변수가 시간의 양이나 바이트의 수와 같은 측정치를 담고 있다면,<br>⇒ 변수명에 단위를 포함시키는 게 도움이 된다.</p>
+<h3 id="2-4-접두사-혹은-접미사로-이름에-추가적인-정보-덧붙이기"><a href="#2-4-접두사-혹은-접미사로-이름에-추가적인-정보-덧붙이기" class="headerlink" title="2-4. 접두사 혹은 접미사로 이름에 추가적인 정보 덧붙이기"></a>2-4. <strong>접두사 혹은 접미사로 이름에 추가적인 정보 덧붙이기</strong></h3><h4 id="2-4-1-단위를-포함하는-값들-ex-밀리세컨즈-ms"><a href="#2-4-1-단위를-포함하는-값들-ex-밀리세컨즈-ms" class="headerlink" title="2-4-1. 단위를 포함하는 값들 (ex. 밀리세컨즈 : ~&#96;_ms&#96;)"></a>2-4-1. 단위를 포함하는 값들 (ex. 밀리세컨즈 : ~&#96;_ms&#96;)</h4><p>변수가 시간의 양이나 바이트의 수와 같은 측정치를 담고 있다면,<br>⇒ 변수명에 단위를 포함시키는 게 도움이 된다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> start = (<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">const</span> elapsed = (<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>() - start;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">writeIn</span>(<span class="string">&quot;Load time was: &quot;</span> + elapsed + <span class="string">&quot;seconds&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 위보다는 아래 **/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> start_ms = (<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">const</span> elapsed_ms = (<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">getTime</span>() - start_ms;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">writeIn</span>(<span class="string">&quot;Load time was: &quot;</span> + elapsed_ms + <span class="string">&quot;seconds&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <h4 id="2-4-2-다른-중요한-속성-포함하기-ex-인코딩된-data-data-urlenc"><a href="#2-4-2-다른-중요한-속성-포함하기-ex-인코딩된-data-data-urlenc" class="headerlink" title="2-4-2. 다른 중요한 속성 포함하기 (ex. 인코딩된 data : data_urlenc)"></a>2-4-2. 다른 중요한 속성 포함하기 (ex. 인코딩된 data : <code>data_urlenc</code>)</h4><ul>
 <li><strong>보안 취약한, 불안전함을 인지하고 싶을 때</strong><ul>
-<li>untrustedUrl / unsafeMessageBody …<br>⇒  안전하게 만드는 함수 호출 후에는<br>⇒ trustedUrl, safeMessageBody에 담는다.</li>
+<li>untrustedUrl &#x2F; unsafeMessageBody …<br>⇒  안전하게 만드는 함수 호출 후에는<br>⇒ trustedUrl, safeMessageBody에 담는다.</li>
 </ul>
 </li>
 <li>변수의 의미를 제대로 이해하는 것이 중요한 상황일때 사용하긔</li>
 <li>예시<ol>
-<li>패스워드가 plaintext에 담겨 있고, 추가적인 처리를 하기 전에 반드시 암호화되어야 한다.<ul>
+<li>패스워드가 plaintext에 담겨 있고, 추가적인 처리를 하기 전에 반드시 암호화되어야 한다.</li>
+</ol>
+<ul>
 <li>password 보다는 ⇒ <strong>plaintext_password</strong></li>
 </ul>
-</li>
-<li>사용자에게 보여지는 설명문이 화면에 나타나기 전에 이스케이프 처리가 되어야한다.<ul>
+<ol start="2">
+<li>사용자에게 보여지는 설명문이 화면에 나타나기 전에 이스케이프 처리가 되어야한다.</li>
+</ol>
+<ul>
 <li>comment 보다는 ⇒ <strong>unescaped_comment</strong></li>
 </ul>
-</li>
-<li>html의 바이트가 UTF-8으로 변환되었다.<ul>
+<ol start="3">
+<li>html의 바이트가 UTF-8으로 변환되었다.</li>
+</ol>
+<ul>
 <li>html ⇒ <strong>html_utf8</strong></li>
 </ul>
-</li>
-<li>입력데이터가 url encoded 되었다.<ul>
+<ol start="4">
+<li>입력데이터가 url encoded 되었다.</li>
+</ol>
+<ul>
 <li>data 보다는  ⇒ <strong>data_urlenc</strong></li>
 </ul>
-</li>
-</ol>
 </li>
 </ul>
 <hr>
@@ -345,39 +351,39 @@
 <li>좁은 범위에서는 짧은 이름이 괜찮다.</li>
 </ul>
 <h4 id="2-5-1-약어와-축약형"><a href="#2-5-1-약어와-축약형" class="headerlink" title="2-5-1. 약어와 축약형"></a>2-5-1. 약어와 축약형</h4><ul>
-<li>특정 프로젝트에 국한된 의미를 가진 약어 사용은 좋은 생각이 아니다.</li>
-<li><strong>팀에 새로 합류한 사람이 이름이 의미하는 바를 이해할 수 있을까?</strong></li>
-</ul>
-<ul>
-<li>축약할 때는 보편적인 것은 괜찮다.</li>
-<li>string 대신 <code>str</code>, evaluation 대신 <code>eval</code></li>
+<li><p>특정 프로젝트에 국한된 의미를 가진 약어 사용은 좋은 생각이 아니다.</p>
+</li>
+<li><p><strong>팀에 새로 합류한 사람이 이름이 의미하는 바를 이해할 수 있을까?</strong></p>
+</li>
+<li><p>축약할 때는 보편적인 것은 괜찮다.</p>
+</li>
+<li><p>string 대신 <code>str</code>, evaluation 대신 <code>eval</code></p>
+</li>
 </ul>
 <h4 id="2-5-2-불필요한-단어-제거하기"><a href="#2-5-2-불필요한-단어-제거하기" class="headerlink" title="2-5-2. 불필요한 단어 제거하기"></a>2-5-2. 불필요한 단어 제거하기</h4><ul>
 <li>convertToString()보다는 <code>ToString()</code></li>
 <li>DoServeLoop()보다는 <code>ServeLoop()</code></li>
 </ul>
 <hr>
-<h3 id="2-6-추가적인-정보를-담을-수-있게-이름-구성하기"><a href="#2-6-추가적인-정보를-담을-수-있게-이름-구성하기" class="headerlink" title="2-6. 추가적인 정보를 담을 수 있게 이름 구성하기"></a>2-6. <strong>추가적인 정보를 담을 수 있게 이름 구성하기</strong></h3><p>&lt; 다른 포맷팅 <strong>관습</strong> &gt;</p>
+<h3 id="2-6-추가적인-정보를-담을-수-있게-이름-구성하기"><a href="#2-6-추가적인-정보를-담을-수-있게-이름-구성하기" class="headerlink" title="2-6. 추가적인 정보를 담을 수 있게 이름 구성하기"></a>2-6. <strong>추가적인 정보를 담을 수 있게 이름 구성하기</strong></h3><p>&lt; 다른 포맷팅 **관습** &gt;</p>
 <ol>
-<li>jQuery 함수 호출시 jQuery의 결과를 저장하는 변수 앞에 <code>$</code> 붙이기<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $all_images = $(<span class="string">&quot;img&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li>밑줄로 id안에는 단어를 구분하고, 대시로 클래스 안에 있는 단어를 구분 할 수 있다.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;middle_column&quot;</span> <span class="attr">class</span>=<span class="string">&quot;main-content&quot;</span>&gt;</span> ...</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>jQuery 함수 호출시 jQuery의 결과를 저장하는 변수 앞에 <code>$</code> 붙이기<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $all_images = $(<span class="string">&quot;img&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>밑줄로 id안에는 단어를 구분하고, 대시로 클래스 안에 있는 단어를 구분 할 수 있다.<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;middle_column&quot;</span> <span class="attr">class</span>=<span class="string">&quot;main-content&quot;</span>&gt;</span> ...</span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
 <hr>
 <p><a id="third"></a></p>
-<h2 id="3-오해할-수-없는-이름들"><a href="#3-오해할-수-없는-이름들" class="headerlink" title="3. 오해할 수 없는 이름들"></a>3. 오해할 수 없는 이름들</h2><p>본인이 지은 이름을<br><strong>‘다른 사람들이 다른 의미로 해석할 수 있을까?’</strong>라는 질문을 던져보며<br>철저하게 확인해야 한다. </p>
+<h2 id="3-오해할-수-없는-이름들"><a href="#3-오해할-수-없는-이름들" class="headerlink" title="3. 오해할 수 없는 이름들"></a>3. 오해할 수 없는 이름들</h2><p>본인이 지은 이름을<br>**’다른 사람들이 다른 의미로 해석할 수 있을까?’**라는 질문을 던져보며<br>철저하게 확인해야 한다. </p>
 <h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter()"></a>Filter()</h3><ul>
-<li>고르는 행위인지 제거하는 행위인지 모호하다.<br>⇒ 보편적인 뜻을 갖고 있는 단어를 최대한 사용을 자제하자.</li>
+<li>고르는 행위인지 제거하는 행위인지 모호하다.<br>  ⇒ 보편적인 뜻을 갖고 있는 단어를 최대한 사용을 자제하자.</li>
 <li><code>select()</code>나 <code>exclude()</code></li>
 </ul>
 <h3 id="접두어"><a href="#접두어" class="headerlink" title="접두어**"></a>접두어**</h3><ul>
 <li>경계를 포함하는 <strong>한계값</strong>을 다룰 때는 <code>min</code>과 <code>max</code>를 사용하라</li>
 <li>경계를 포함하는 <strong>범위</strong>에는 <code>first</code>와 <code>last</code>를 사용하라</li>
-<li>경계를 포함하고/배제하는 범위에는 <code>begind</code>과 <code>end</code>를 사용하라</li>
+<li>경계를 포함하고&#x2F;배제하는 범위에는 <code>begind</code>과 <code>end</code>를 사용하라</li>
 <li>불리언 변수에 이름 붙이기<ul>
-<li><code>is</code> / <code>has</code> / <code>can</code> / <code>should</code></li>
+<li><code>is</code> &#x2F; <code>has</code> &#x2F; <code>can</code> &#x2F; <code>should</code></li>
 </ul>
 </li>
 <li>사용자의 기대에 부응하기<ul>
@@ -394,16 +400,16 @@
 <p><a id="forth"></a></p>
 <h2 id="4-미학"><a href="#4-미학" class="headerlink" title="4. 미학"></a>4. 미학</h2><p><strong>좋은 소스 코드는 ‘눈을 편하게’ 해야한다.</strong></p>
 <ul>
-<li>코드의 열을 맞춰라</li>
-<li>의미 있는 순서를 선택하고 일관성 있게 사용하라<br>⇒ 개인적인 기준이 있으면 좋을듯<br>⇒ 중요한 것 먼저 등등..</li>
-</ul>
-<ul>
+<li><p>코드의 열을 맞춰라</p>
+</li>
+<li><p>의미 있는 순서를 선택하고 일관성 있게 사용하라<br>⇒ 개인적인 기준이 있으면 좋을듯<br>⇒ 중요한 것 먼저 등등..</p>
+</li>
 <li><p>선언문을 블록으로 구성하라</p>
 <ul>
 <li><strong>우리의 뇌는 자연스럽게 그룹과 계층구조를 따라서 동작하므로,</strong><br>코드를 이런 방식으로 조작하면 코드를 읽는 데 도움을 준다.</li>
 </ul>
 </li>
-<li><p>코드를 <strong><code>문단</code></strong>으로 쪼개라</p>
+<li><p>코드를 **<code>문단</code>**으로 쪼개라</p>
 <ul>
 <li>문단 첫줄에는 주석으로 사용한다.</li>
 </ul>
@@ -433,8 +439,9 @@
 </li>
 </ul>
 <h3 id="5-2-코딩을-행하면서-머릿속에-있는-정보를-기록하기"><a href="#5-2-코딩을-행하면서-머릿속에-있는-정보를-기록하기" class="headerlink" title="5-2. 코딩을 행하면서 머릿속에 있는 정보를 기록하기"></a>5-2. <strong>코딩을 행하면서 머릿속에 있는 정보를 기록하기</strong></h3><ol>
-<li><strong>감독의 설명</strong>을 포함하라<br><strong>중요한 통찰은 기록하자.</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 이 클래스는 점점 엉망이 되어가고 있다. 어쩌면 &#x27;ResourceNode&#x27; </span></span><br><span class="line"><span class="comment">// 하위 클래스를 만들어서 정리해야할지도 모르겠다.</span></span><br></pre></td></tr></table></figure></li>
-<li>코드에 있는 결함을 설명하라<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">TODO:</span> 더 빠른 알고리즘을 사용하라.</span></span><br><span class="line"><span class="comment">// TODO(더스틴): JPEG말고 다른 이미지 포맷도 처리할 수 있어야 한다.</span></span><br></pre></td></tr></table></figure>
+<li><strong>감독의 설명</strong>을 포함하라<br>  <strong>중요한 통찰은 기록하자.</strong>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 이 클래스는 점점 엉망이 되어가고 있다. 어쩌면 &#x27;ResourceNode&#x27; </span></span><br><span class="line"><span class="comment">// 하위 클래스를 만들어서 정리해야할지도 모르겠다.</span></span><br></pre></td></tr></table></figure></li>
+<li>코드에 있는 결함을 설명하라  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">TODO:</span> 더 빠른 알고리즘을 사용하라.</span></span><br><span class="line"><span class="comment">// TODO(더스틴): JPEG말고 다른 이미지 포맷도 처리할 수 있어야 한다.</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 <ul>
 <li>코드가 불완전 할 때는 개선 아이디어를 설명하는 것도 좋다.</li>
 <li>널리 사용되는 표시<ul>
@@ -446,20 +453,20 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>상수에 대한 설명<ul>
+<ol start="3">
+<li>상수에 대한 설명</li>
+</ol>
+<ul>
 <li>그 상수가 무엇을 하는지, 그것이 왜 특정한 값을 갖게 되었는지 ‘사연’이 존재하기 마련</li>
 <li>사연을 주석에 남기면 좋다. 명확한 변수명이면 구지 안붙여도 됨.</li>
 </ul>
-</li>
-</ol>
 <h3 id="5-3-코드읽는-사람의-입장에서-필요한-정보가-무엇인지-유추하기"><a href="#5-3-코드읽는-사람의-입장에서-필요한-정보가-무엇인지-유추하기" class="headerlink" title="5-3. 코드읽는 사람의 입장에서 필요한 정보가 무엇인지 유추하기"></a>5-3. <strong>코드읽는 사람의 입장에서 필요한 정보가 무엇인지 유추하기</strong></h3><ul>
 <li>나올 것 같은 지문 예측하기</li>
 <li>사람들이 쉽게 빠질 것 같은 함정을 경고하기</li>
 </ul>
 <h4 id="5-3-1-큰-그림에-대한-주석"><a href="#5-3-1-큰-그림에-대한-주석" class="headerlink" title="5-3-1. 큰 그림에 대한 주석"></a>5-3-1. 큰 그림에 대한 주석</h4><p><strong>팀에 새롭게 합류한 사람들은 ‘큰 그림’을 이해하는 데 어려움을 겪는다. 클래스들이 어떻게 상호작용하고, 전체 시스템에서 데이터가 어떻게 흘러 다니고, 출발점이 어디인지 등을 파악해야한다.</strong></p>
 <ul>
-<li>이는 <strong><a href="#upper_note">상위 수준 주석</a></strong>에 포함되어야 한다.</li>
+<li>이는 **<a href="#upper_note">상위 수준 주석</a>**에 포함되어야 한다.</li>
 <li>파일 수준의 주석의 설명은<ul>
 <li>파일 시스템에 편리한 인터페이스를 제공하는 헬퍼 함수들을 담고 있다.</li>
 <li>파일의 퍼미션과 다른 자세한 세부 사항을 처리한다.</li>
@@ -468,9 +475,7 @@
 </ul>
 <h4 id="5-3-2-요약-주석"><a href="#5-3-2-요약-주석" class="headerlink" title="5-3-2. 요약 주석"></a>5-3-2. 요약 주석</h4><ul>
 <li>함수가 수행하는 기능의 글머리 요약 역할을 수행할 수 있다.</li>
-<li>주석을 보고 요점을 파악할 수 있다.<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">GenerateUserReport</span>():</span><br><span class="line">	<span class="comment"># 이 사용자를 위한 lock을 얻는다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 데이터베이스에서 사용자의 정보를 읽는다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 정보를 파일에 작성한다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 사용자를 위한 lock을 되덜려 넣는다.</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>주석을 보고 요점을 파악할 수 있다.<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">GenerateUserReport</span>():</span><br><span class="line">	<span class="comment"># 이 사용자를 위한 lock을 얻는다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 데이터베이스에서 사용자의 정보를 읽는다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 정보를 파일에 작성한다.</span></span><br><span class="line">	...</span><br><span class="line">	<span class="comment"># 사용자를 위한 lock을 되덜려 넣는다.</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <p><a id="sixth"></a></p>
@@ -479,7 +484,7 @@
 <li>모호한 대명사는 피하라</li>
 <li>엉터리 문장을 다듬어라</li>
 <li>함수의 동작을 명확하게 설명하라</li>
-<li>코너케이스를 설명해주는 입/출력 예를 사용하라<ul>
+<li>코너케이스를 설명해주는 입&#x2F;출력 예를 사용하라<ul>
 <li>예시를 주석에 적는 것도 좋다.</li>
 <li>인자로 어떤 데이터가 들어가고 (입력)<br>어떤 데이터를 반환하는지를 적으면 된다. (출력)</li>
 </ul>
@@ -510,7 +515,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/01/Clean_code_1/" data-id="ckzv7cqet0017qobmfzy3xniy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/01/Clean_code_1/" data-id="cm3u7mj1a0016hwb2gj2g0mve" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

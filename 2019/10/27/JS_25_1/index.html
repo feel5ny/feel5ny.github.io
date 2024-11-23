@@ -374,27 +374,23 @@
 <img src="/images/2019/34/01.png" style="width:100%">
 
 <ol>
-<li><strong>Code</strong><ul>
+<li><strong>Code</strong></li>
+</ol>
+<ul>
 <li>코드를 작성한다.</li>
-<li>ES3.1 ~ 5, 6 ~ / TypeScript / Kotlin / Dart / CoffeeScript / …</li>
+<li>ES3.1 ~ 5, 6 ~ &#x2F; TypeScript &#x2F; Kotlin &#x2F; Dart &#x2F; CoffeeScript &#x2F; …</li>
 </ul>
-</li>
-<li><strong>Transpiler</strong><ul>
+<ol start="2">
+<li><strong>Transpiler</strong></li>
+</ol>
+<ul>
 <li>컴파일러와는 다르다. <a href="https://feel5ny.github.io/2017/11/08/Typescript_01/">글 참조</a></li>
 <li>트랜스파일러라는 것을 이용해서 코드를 자바스크립트로 번역한다.</li>
 </ul>
 <hr>
 <ol>
-<li>(1단계) <strong>언어마다</strong> 컴파일러가 있다.<ul>
-<li>(타입스크립트) tsc / (코들린) kotlinc / …</li>
-</ul>
-</li>
-<li>(2단계) 원하는 형태의 자바스크립트로 바꾸거나, 원하는 <strong>버전</strong>의 자바스크립트로 바꿔줌<ul>
-<li>babel</li>
-</ul>
-</li>
-</ol>
-</li>
+<li>(1단계) <strong>언어마다</strong> 컴파일러가 있다.<br>- (타입스크립트) tsc &#x2F; (코들린) kotlinc &#x2F; …</li>
+<li>(2단계) 원하는 형태의 자바스크립트로 바꾸거나, 원하는 <strong>버전</strong>의 자바스크립트로 바꿔줌<br>- babel</li>
 <li><strong>Packaging</strong> : 최적화 과정. (webpack)</li>
 <li><strong>CI</strong> : 테스트..등등의 여러 job</li>
 <li><strong>Deploy</strong> : 최종 deploy</li>
@@ -436,19 +432,25 @@
 <p>C#이후에 업데이트가 가장 많이 일어나는 언어이다.</p>
 </blockquote>
 <ol>
-<li>매년 상반기 새로운 버전을 출시함 <ul>
-<li>버전과 연도가 1차이<br>ES6 = ES2015</li>
+<li>매년 상반기 새로운 버전을 출시함</li>
+</ol>
+<ul>
+<li>버전과 연도가 1차이<br>ES6 &#x3D; ES2015</li>
 <li>현재는 ES11 (ES2020)이 최종 조정중 (2019년 10월기준)</li>
 </ul>
-</li>
-<li>ES6 이후 급격한 언어의 변화를 지양하고 <strong>점진적인 버전업</strong>을 진행<ul>
+<ol start="2">
+<li>ES6 이후 급격한 언어의 변화를 지양하고 <strong>점진적인 버전업</strong>을 진행</li>
+</ol>
+<ul>
 <li>새롭게 반영될 내용은 Stage0 ~ 3까지 단계별 승격을 통해 정식 반영시 Stage4가 됨</li>
 <li>공개적으로 스펙을 원하는 사람이 발제를 하면 stage0이라는 최초의 proposal로 보고, 위원회가 회의를 거쳐서 승격을 시켜줌.</li>
 <li>현재 제안 중이 내용의 상태 <a href="https://github.com/tc39/proposals">확인</a></li>
 <li>대부분은 사장된다.</li>
 </ul>
-</li>
-<li>실제로는..<ul>
+<ol start="3">
+<li>실제로는..</li>
+</ol>
+<ul>
 <li>tc39위원회에서 회의를 통해 결정되며, 위원회는 다양한 업계와 관계자로 구성됨</li>
 <li>stage0이던 1이던 tc39에 프로포절을 제안하기 위해서는<br><strong>챔피온</strong>이라는 사람을 끼고 발제를 하게 되어있다.</li>
 <li>실제 각 제안의 담당자(<strong>챔피온</strong>)가 구글관련 개발자인 경우가 많음</li>
@@ -462,8 +464,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ol>
 <blockquote>
 <p>최신판을 쓰기 위해서는 크롬을 사용해야하고,<br>  크롬에서만 반영된 스펙을 안볼 수 없다.</p>
 </blockquote>
@@ -492,12 +492,10 @@
 <h2 id="2-ECMAScript-7"><a href="#2-ECMAScript-7" class="headerlink" title="2. ECMAScript 7"></a>2. ECMAScript 7</h2><ul>
 <li>중첩된 rest해체: rest안에 rest로 해체가 가능한 것.</li>
 <li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">참고:변수에 배열의 나머지를 할당하기</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, ...[b, ...c]] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">// a=1, b=2, c=[3,4]</span></span><br></pre></td></tr></table></figure>
-<a name="es8" />
-
-</li>
+<a name="es8" /></li>
 </ul>
 <h2 id="3-ECMAScript-8"><a href="#3-ECMAScript-8" class="headerlink" title="3. ECMAScript 8"></a>3. ECMAScript 8</h2><ul>
-<li><strong>async/await</strong></li>
+<li><strong>async&#x2F;await</strong></li>
 <li><strong>shared memory</strong></li>
 <li><strong>atomics</strong></li>
 </ul>
@@ -529,29 +527,31 @@
 </li>
 <li><p>웹 워커 종류</p>
 <ol>
-<li><p>Dedicated Worker</p>
+<li>Dedicated Worker</li>
+</ol>
 <ul>
-<li><strong>Message System</strong>을 통해 Worker와 메인 스레드 간에 데이터를 교환할 수 있다.<br><code>Worker.postMessage()</code> 메세지 전송<br><code>Worker.onmessage</code> 응답</li>
+<li><strong>Message System</strong>을 통해 Worker와 메인 스레드 간에 데이터를 교환할 수 있다.<br>  <code>Worker.postMessage()</code> 메세지 전송<br>  <code>Worker.onmessage</code> 응답</li>
 </ul>
-</li>
-<li><p>Shared worker <a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker">참고</a></p>
+<ol start="2">
+<li>Shared worker <a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker">참고</a></li>
+</ol>
 <ul>
 <li>Shared Worker는 Dedicated worker보다 좀더 복잡성을 가지고 있다.</li>
 <li>윈도우 창이나 iframe, 워커등의 다른 브라우징 컨텍스트에서도 접근이 가능한 특정 종류의 워커를 의미한다. 기존의 다른 종류의 워커들과 다른 전역 스코프를 갖는 인터페이스를 구현합니다. (SharedWorkerGlobalScope)</li>
 <li>Shared Worker는 웹 어플리케이션 사이의 Proxy Server와 브라우저로서 역할을 하며 (만약 가능하다면)통신을 구축한다.</li>
 </ul>
-</li>
-<li><p>Chrome Worker </p>
+<ol start="3">
+<li>Chrome Worker</li>
+</ol>
 <ul>
 <li>Chrome Worker는 Firefox에서만 사용가능한 worker유형</li>
 </ul>
-</li>
-<li><p>Audio Workers</p>
+<ol start="4">
+<li>Audio Workers</li>
+</ol>
 <ul>
 <li>직접적인 오디오 처리를 web worker에서 처리할 수 있도록 해준다.</li>
 </ul>
-</li>
-</ol>
 </li>
 </ul>
 <blockquote>
@@ -564,7 +564,7 @@
 <ul>
 <li>컨텍스트를 하나만 가지기 때문에 동기화 문제가 일어나지 않는 패턴이다.</li>
 <li>밖의 쓰레드는 언제나 별도의 작업을 한 이후에 싱크로 문제되지 않는 새 객체를 전달해야한다.</li>
-<li>새 객체로 공유하기 때문에 동기화 문제가 일어나지 않는다. </li>
+<li>새 객체로 공유하기 때문에 동기화 문제가 일어나지 않는다.</li>
 </ul>
 </li>
 <li><p>웹워커가 만들어졌을 때는 스레드를 여러개 지원하지만<br>싱글 스레드라는 컨텍스트를 깨먹지 않도록 설계되었다.</p>
@@ -589,7 +589,7 @@
 <h2 id="4-ECMAScript-9"><a href="#4-ECMAScript-9" class="headerlink" title="4. ECMAScript 9"></a>4. ECMAScript 9</h2><ul>
 <li>object 해체 </li>
 <li><strong>asynchronous iterators</strong><ul>
-<li>generator의 장점과 async/await의 장점을 합쳐서<br>비동기적인 코루틴을 만들 수 있는 구조를 제공한다.</li>
+<li>generator의 장점과 async&#x2F;await의 장점을 합쳐서<br>비동기적인 코루틴을 만들 수 있는 구조를 제공한다.</li>
 <li>현대의 크롬 브라우저는 이 기능을 사용하기 위한 성능 최적화를 이미 구현해 두었다.</li>
 </ul>
 </li>
@@ -598,9 +598,7 @@
 
 <h2 id="5-ECMAScript-10"><a href="#5-ECMAScript-10" class="headerlink" title="5. ECMAScript 10"></a>5. ECMAScript 10</h2><ul>
 <li>Optional catch<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>(err)&#123;</span><br><span class="line">  <span class="comment">// 새로운 어휘공간으로 되어서 err를 사용할 수 있도록했지만</span></span><br><span class="line">  <span class="comment">// 불필요한 컨텍스트</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="comment">// err 인자 없이 사용가능</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="comment">// err 인자 없이 사용가능</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <a name="es11" />
 
@@ -658,7 +656,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/10/27/JS_25_1/" data-id="ckzv7cqid006nqobm699cbc3c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/10/27/JS_25_1/" data-id="cm3u7mj1t0068hwb23itwaujq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

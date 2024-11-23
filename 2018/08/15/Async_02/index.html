@@ -11,12 +11,12 @@
         <meta name="keywords" content="async,rxjs" />
     
     
-    <meta name="description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagation 1">
+    <meta name="description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagati">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1부&#x2F; chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제">
 <meta property="og:url" content="http://feel5ny.github.io/2018/08/15/Async_02/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagation 1">
+<meta property="og:description" content="**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.  목차 웹 어플리케이션의 상태 웹 어플리케이션의 상태 변화로 인한 문제점 우리가 이미 알고 있는 솔류션 흔한 예 적용하기 rxjs는 무엇을 해결하고자 했는가? rxjs는 어떻게 개선하였나? observable은 리액티브하다.     상태 전파 오류상태 전파. state propagati">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2018/27/thumb_default.jpg">
 <meta property="article:published_time" content="2018-08-15T05:12:34.000Z">
@@ -230,7 +230,7 @@
         
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><strong>[📕 퀵스타트 Rxjs]</strong>를 보고 메모한 부분을 정리했습니다.</p>
+<p>**[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.</p>
 </blockquote>
 <h2 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h2><ol>
 <li>웹 어플리케이션의 상태</li>
@@ -254,7 +254,7 @@
 <h2 id="3-우리가-이미-알고-있는-솔류션"><a href="#3-우리가-이미-알고-있는-솔류션" class="headerlink" title="3. 우리가 이미 알고 있는 솔류션"></a>3. 우리가 이미 알고 있는 솔류션</h2><h3 id="3-1-Loosely-Coupling"><a href="#3-1-Loosely-Coupling" class="headerlink" title="3.1 Loosely Coupling"></a>3.1 Loosely Coupling</h3><ul>
 <li>옵저버 패턴에서는 상태가 변경될 대상을 Subject라고 한다.<br>그리고, 그 상태 변화를 관찰하는 대상을 Observer라고 한다.</li>
 <li>subject와 observer는 서로 <strong>느슨하게 연결되어 있다.</strong> (낮은 결합도)<ul>
-<li>여기서 <strong>느슨하게(Loosely Coupling)</strong>의 의미는 Subject와 Observer가 서로 상호작용을 하지만 <strong>서로 잘 모른다라는 뜻!!</strong></li>
+<li>여기서 **느슨하게(Loosely Coupling)**의 의미는 Subject와 Observer가 서로 상호작용을 하지만 <strong>서로 잘 모른다라는 뜻!!</strong></li>
 <li>subject가 observer에 대해서 아는건 <strong>observer가 특정 인터페이스를 구현한다는 것 뿐.</strong></li>
 <li>subject와 observer는 서로 <strong>독립적</strong>으로 사용할 수 있으며, observer가 바뀌더라도 서로에게 영향을 미치지 않는다.</li>
 </ul>
@@ -273,7 +273,7 @@
 <h3 id="3-3-인터페이스의-단일화"><a href="#3-3-인터페이스의-단일화" class="headerlink" title="3.3 인터페이스의 단일화"></a>3.3 인터페이스의 단일화</h3><p>옵저버 패턴은 Observer.update만 존재하기 때문에 Subject에서는 옵저버 인터페이스에 대한 별도의 비용이 존재하지 않는다.</p>
 <hr>
 <h2 id="4-옵저버-패턴의-흔한-예"><a href="#4-옵저버-패턴의-흔한-예" class="headerlink" title="4. 옵저버 패턴의 흔한 예"></a>4. <span class="mint">옵저버 패턴</span>의 흔한 예</h2><p>뉴스를 발행하는 신문사와 이를 구독하는 고객</p>
-<p>뉴스를 발행하는 신문사 = subject<br>고객 = observer</p>
+<p>뉴스를 발행하는 신문사 &#x3D; subject<br>고객 &#x3D; observer</p>
 <p>신문사는 고객을 등록하고 신문이 발행될 때 각각의 고객에게 신문이 발행되었다고 알려준다.(notify)</p>
 <p>신문이 발행되면<br>어떤 고객은 뉴스를 스크랩하거나,<br>어떤 고객은 뉴스를 읽기 시작한다.</p>
 <hr>
@@ -316,7 +316,7 @@
 <p>rxjs의 subject는 기능적으로 정확히 옵저버패턴의 subject와 일치한다.<br>rxjs의 subject는 다수의 observer에게 <strong>공통의 데이터</strong>를 전달하고, update와 같은 메소드가 존재하여 데이터 변경도 가능하다.</p>
 <p>rxjs의 observable은 기능적으로 옵저버 패턴의 subject와는 엄격히 다르다.<br>observable은 하나의 observer에게 독립적인 데이터를 전달한다.</p>
 <h3 id="7-1-인터페이스의-확장"><a href="#7-1-인터페이스의-확장" class="headerlink" title="7.1 인터페이스의 확장"></a>7.1 인터페이스의 확장</h3><ol>
-<li><p><span class="mint">update</span> =&gt; <span class="pink">next</span><br>데이터의 연속적인 변화를 observer에서 표현할 수 있도록 기존 update메서드를 next로 바꾸었다.</p>
+<li><p><span class="mint">update</span> &#x3D;&gt; <span class="pink">next</span><br>데이터의 연속적인 변화를 observer에서 표현할 수 있도록 기존 update메서드를 next로 바꾸었다.</p>
 <blockquote>
 <p>개인적으로는 update가 더 명시적이다 ..ㅜ</p>
 </blockquote>
@@ -331,7 +331,7 @@
 > 옵저버패턴
 
 <h4 id="왜-객체가-아닌-함수를-사용하는-것인가"><a href="#왜-객체가-아닌-함수를-사용하는-것인가" class="headerlink" title="왜 객체가 아닌 함수를 사용하는 것인가?"></a>왜 객체가 아닌 함수를 사용하는 것인가?</h4><p>observable.subscribe는 객체, 함수 모든 형태로 전달 받을 수는 있다.<br>subscribe는 특별한 경우를 제외하고는 가급적 함수 형태를 사용한다.</p>
-<p>객체는 상태를 가질 수 없기 때문이다.<br>객체가 상태를 가진다는 의미 =&gt; <strong>또다른 상태 머신</strong>이 될 수 있다는 의미.<br>반면 함수는 상태가 존재하지 않는 <strong>기능만을 담당하기 때문에</strong> 상태에 관한 문제에서는 보다 자유롭다.</p>
+<p>객체는 상태를 가질 수 없기 때문이다.<br>객체가 상태를 가진다는 의미 &#x3D;&gt; <strong>또다른 상태 머신</strong>이 될 수 있다는 의미.<br>반면 함수는 상태가 존재하지 않는 <strong>기능만을 담당하기 때문에</strong> 상태에 관한 문제에서는 보다 자유롭다.</p>
 <h3 id="7-2-옵저버블은-Read-only"><a href="#7-2-옵저버블은-Read-only" class="headerlink" title="7.2 옵저버블은 Read-only"></a>7.2 옵저버블은 Read-only</h3><p>observable은 subscribe를 통해 데이터를 전달할 대상에게 데이터를 전달할 수는 있지만,<br>반대로 observer에게 데이터를 전달받을 수 없다.</p>
 <ul>
 <li>데이터 흐름을 단순화함으로 복잡도를 낮추고 오류 발생 빈도를 줄인다.</li>
@@ -362,7 +362,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="ckzv7cqe00004qobm51qwzcqz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="cm3u7mj130009hwb27wvy1vo8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

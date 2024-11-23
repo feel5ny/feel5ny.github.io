@@ -362,7 +362,7 @@
 <p>처리가 완료된 후에도 계속 연결된 상태로 있는 TCP 커넥션을 <strong>지속 커넥션</strong>이라고 부른다.</p>
 <ul>
 <li><ol start="2">
-<li>HTTP/1.1을 지원하는 기기는 처리가 완료된 후에도<br>TCP 커넥션을 유지하여 앞으로 있을 HTTP 요청에 <strong>재사용</strong> 할 수 있다.</li>
+<li>HTTP&#x2F;1.1을 지원하는 기기는 처리가 완료된 후에도<br>TCP 커넥션을 유지하여 앞으로 있을 HTTP 요청에 <strong>재사용</strong> 할 수 있다.</li>
 </ol>
 </li>
 <li>커넥션을 맺기 위한 준비 작업에 따르는 시간을 절약할 수 있다.</li>
@@ -386,26 +386,26 @@
 </ol>
 <p><strong>지속 커넥션 + 병렬 커넥션은 가장 효과적</strong></p>
 <ol>
-<li>HTTP/1.0+ 에는 keep-alive 커넥션이 있고,<br>HTTP/1.1에는 지속 커넥션이 있다.</li>
+<li>HTTP&#x2F;1.0+ 에는 keep-alive 커넥션이 있고,<br>HTTP&#x2F;1.1에는 지속 커넥션이 있다.</li>
 </ol>
 <hr>
 <a name="2-2"/>
 
-<h2 id="2-2-HTTP-1-0-의-Keep-Alive-커넥션"><a href="#2-2-HTTP-1-0-의-Keep-Alive-커넥션" class="headerlink" title="2.2 HTTP/1.0+의 Keep-Alive 커넥션"></a>2.2 HTTP/1.0+의 Keep-Alive 커넥션</h2><ul>
+<h2 id="2-2-HTTP-1-0-의-Keep-Alive-커넥션"><a href="#2-2-HTTP-1-0-의-Keep-Alive-커넥션" class="headerlink" title="2.2 HTTP&#x2F;1.0+의 Keep-Alive 커넥션"></a>2.2 HTTP&#x2F;1.0+의 Keep-Alive 커넥션</h2><ul>
 <li>초기의 지속 커넥션은 상호 운용과 관련된 설계에 문제가 있었지만,<br>아직 많은 클라와 서버는 이 초기 keep-alive 커넥션을 사용하고 있다.<ul>
-<li>설계상의 문제는 HTTP/1.1에서 수정되었다.</li>
+<li>설계상의 문제는 HTTP&#x2F;1.1에서 수정되었다.</li>
 </ul>
 </li>
 </ul>
 <h3 id="2-2-1-Keep-Alive-동작"><a href="#2-2-1-Keep-Alive-동작" class="headerlink" title="2.2.1 Keep-Alive 동작"></a>2.2.1 Keep-Alive 동작</h3><ul>
 <li><ol start="2">
-<li>HTTP/1.1에서는 keep-alive는 사용하지 않기로 결정</li>
+<li>HTTP&#x2F;1.1에서는 keep-alive는 사용하지 않기로 결정</li>
 </ol>
 </li>
 <li><p>아직 keep-alive 핸드셰이크가 널리 사용되고 있음.</p>
 </li>
 <li><ol start="2">
-<li>HTTP/1.0 keep-alive 커넥션을 구현한 클라는 커넥션을 유지하기 위해서 요청에<br><code>Connection: Keep-Alive</code> 헤더를 포함시킨다.</li>
+<li>HTTP&#x2F;1.0 keep-alive 커넥션을 구현한 클라는 커넥션을 유지하기 위해서 요청에<br><code>Connection: Keep-Alive</code> 헤더를 포함시킨다.</li>
 </ol>
 </li>
 <li><p>이 요청을 받은 서버는 그다음 요청도 이 커넥션을 통해 받고자 한다면, 응답 메세지에 같은 헤더를 포함시켜 응답한다.</p>
@@ -418,7 +418,7 @@
 <li>클라나 서버가 keep-alive 요청을 받았다고 해서 무조건 그것을 따를 필요는 없다.</li>
 <li><code>Connection: Keep-Alive</code>가 있을 때만 사용 가능하다.</li>
 <li><ol start="2">
-<li>HTTP/2에서는 무시된다.</li>
+<li>HTTP&#x2F;2에서는 무시된다.</li>
 </ol>
 </li>
 </ul>
@@ -426,21 +426,23 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keep-Alive: timeout=5, max=1000</span><br><span class="line">5초 동안 1000개의 커넥션을 유지하라는 내용</span><br></pre></td></tr></table></figure>
 
 <ol>
-<li><strong>timeout</strong><ul>
+<li><strong>timeout</strong></li>
+</ol>
+<ul>
 <li>커넥션이 얼마간 유지될 것인지를 의미한다.</li>
 <li>이대로 동작한다는 보장은 없다.</li>
 </ul>
-</li>
-<li><strong>max</strong><ul>
+<ol start="2">
+<li><strong>max</strong></li>
+</ol>
+<ul>
 <li>커넥션이 몇 개의 HTTP 트렌젝션을 처리할 때까지 유지될 것인지를 의미한다.</li>
 <li>이대로 동작한다는 보장은 없다.</li>
 </ul>
-</li>
-</ol>
 <p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive">mdn 참고</a></p>
 <h3 id="2-2-3-Keep-Alive-커넥션-제한과-규칙"><a href="#2-2-3-Keep-Alive-커넥션-제한과-규칙" class="headerlink" title="2.2.3 Keep-Alive 커넥션 제한과 규칙"></a>2.2.3 Keep-Alive 커넥션 제한과 규칙</h3><ul>
 <li><ol start="2">
-<li>HTTP/1.0과 HTTP/2.0에서는 사용되지 않는다.</li>
+<li>HTTP&#x2F;1.0과 HTTP&#x2F;2.0에서는 사용되지 않는다.</li>
 </ol>
 </li>
 </ul>
@@ -467,7 +469,7 @@
 <li>프락시와 게이트웨이는 Connection 헤더의 규칙을 철저히 지켜야 한다. (명시된 헤더는 다 제거되기 때문)</li>
 <li>keep-alive 커넥션은 connection 헤더를 인식하지 못하는 프락시 서버와 맺어지면 안 된다.</li>
 <li><ol start="2">
-<li>HTTP/1.0 을 따르는 기기로부터 받는 모든 Connection 헤더 필드는 무시해야 한다.<br>오래된 프락시 서버로부터 실수로 전달될 수 있기 때문.</li>
+<li>HTTP&#x2F;1.0 을 따르는 기기로부터 받는 모든 Connection 헤더 필드는 무시해야 한다.<br>오래된 프락시 서버로부터 실수로 전달될 수 있기 때문.</li>
 </ol>
 </li>
 </ul>
@@ -475,12 +477,12 @@
 
 <p><strong>Connection 헤더의 무조건 전달</strong></p>
 <ol>
-<li>웹 클라는 프락시에 <code>Connection: Keep-Alive</code> 헤더와 함께 메세지를 보내고, 커넥션을 유지하기를 요청한다.<br>클라는 커넥션을 유지하자는 요청이 받아들여졌는지 확인하기 위해 응답을 기다린다.</li>
-<li>멍청한 프락시는 <code>Connection</code> 헤더를 이해하지 못해서 다음 서버에 메세지를 그대로 전달한다.<br><code>Connection</code>헤더는 홉별 헤더다.(hop-by-hop): 오직 한 개의 전송 링크에만 적용되며, 다음 서버로 전달되어서는 안 된다.</li>
-<li><code>Connection: Keep-Alive</code>를 받은 웹 서버는 커넥션을 유지하자고 요청하는 것으로 잘못 판단하게 된다.<br>클라가 아닌 프락시와 커넥션을 유지하는 것에 동의하고 <code>Connection: Keep-Alive</code> 헤더를 포함하여 응답한다.<br>하지만 프락시는 <code>Connection</code>를 모른다.</li>
-<li>프락시는 <code>Connection: Keep-Alive</code> 헤더를 포함하고 있는 응답메세지를 클라에게 전달한다.<br>클라는 이 헤더를 통해 프락시가 커넥션을 유지하는 것에 동의했다고 추정한다.<br>클라와 서버는 커넥션을 유지한다고 생각하지만, 정작 프락시는 모름.</li>
-<li><code>Connection</code>를 모르는 프락시는 모든 데이터를 클라에게 전달하고 서버가 커넥션을 끊기를 기다린다.<br>하지만 서버는 커넥션을 유지하고, 프락시는 끊어지기 전까지 기다린다.</li>
-<li>클라는 유지되고 있다고 생각되는 커넥션으로 다음 요청을 보내는데, 프락시는 예상치 못한 요청이 들어온 거라 프락시로부터 무시되고,<br>브라우저는 아무런 응답 없이 로드 중이라는 표시만 나온다.</li>
+<li>웹 클라는 프락시에 <code>Connection: Keep-Alive</code> 헤더와 함께 메세지를 보내고, 커넥션을 유지하기를 요청한다.<br>  클라는 커넥션을 유지하자는 요청이 받아들여졌는지 확인하기 위해 응답을 기다린다.</li>
+<li>멍청한 프락시는 <code>Connection</code> 헤더를 이해하지 못해서 다음 서버에 메세지를 그대로 전달한다.<br>  <code>Connection</code>헤더는 홉별 헤더다.(hop-by-hop): 오직 한 개의 전송 링크에만 적용되며, 다음 서버로 전달되어서는 안 된다.</li>
+<li><code>Connection: Keep-Alive</code>를 받은 웹 서버는 커넥션을 유지하자고 요청하는 것으로 잘못 판단하게 된다.<br>  클라가 아닌 프락시와 커넥션을 유지하는 것에 동의하고 <code>Connection: Keep-Alive</code> 헤더를 포함하여 응답한다.<br>  하지만 프락시는 <code>Connection</code>를 모른다.</li>
+<li>프락시는 <code>Connection: Keep-Alive</code> 헤더를 포함하고 있는 응답메세지를 클라에게 전달한다.<br>  클라는 이 헤더를 통해 프락시가 커넥션을 유지하는 것에 동의했다고 추정한다.<br>  클라와 서버는 커넥션을 유지한다고 생각하지만, 정작 프락시는 모름.</li>
+<li><code>Connection</code>를 모르는 프락시는 모든 데이터를 클라에게 전달하고 서버가 커넥션을 끊기를 기다린다.<br>  하지만 서버는 커넥션을 유지하고, 프락시는 끊어지기 전까지 기다린다.</li>
+<li>클라는 유지되고 있다고 생각되는 커넥션으로 다음 요청을 보내는데, 프락시는 예상치 못한 요청이 들어온 거라 프락시로부터 무시되고,<br>  브라우저는 아무런 응답 없이 로드 중이라는 표시만 나온다.</li>
 <li>브라우저는 자신이나 서버가 타임아웃이 나서 커넥션이 끊길 때까지 기다린다.</li>
 </ol>
 <p><strong>프락시와 홉별 헤더</strong><br>위의 잘못된 통신을 피하려면</p>
@@ -508,15 +510,15 @@
 <hr>
 <a name="2-3"/>
 
-<h2 id="2-3-HTTP-1-1의-지속-커넥션"><a href="#2-3-HTTP-1-1의-지속-커넥션" class="headerlink" title="2.3 HTTP/1.1의 지속 커넥션"></a>2.3 HTTP/1.1의 지속 커넥션</h2><ul>
+<h2 id="2-3-HTTP-1-1의-지속-커넥션"><a href="#2-3-HTTP-1-1의-지속-커넥션" class="headerlink" title="2.3 HTTP&#x2F;1.1의 지속 커넥션"></a>2.3 HTTP&#x2F;1.1의 지속 커넥션</h2><ul>
 <li>설계가 더 개선된 지속 커넥션을 지원한다.</li>
 <li>default로 활성화되어있다.</li>
 <li><ol start="2">
-<li>HTTP/1.1 어플리케이션은 트랜잭션이 끝난 다음 커넥션을 끊으려면 <code>Connection:close</code> 헤더를 명시해야 한다.</li>
+<li>HTTP&#x2F;1.1 어플리케이션은 트랜잭션이 끝난 다음 커넥션을 끊으려면 <code>Connection:close</code> 헤더를 명시해야 한다.</li>
 </ol>
 </li>
 <li><ol start="2">
-<li>HTTP/1.1 클라는 응답에 <code>Connection:close</code> 헤더가 없으면 응답 후에도 커넥션을 계속 유지하는 것으로 추정한다.</li>
+<li>HTTP&#x2F;1.1 클라는 응답에 <code>Connection:close</code> 헤더가 없으면 응답 후에도 커넥션을 계속 유지하는 것으로 추정한다.</li>
 </ol>
 <ul>
 <li>클라와 서버는 언제든지 커넥션을 끊을 수 있다.</li>
@@ -539,7 +541,7 @@
 
 <h1 id="3-파이프라인-커넥션-pipelined"><a href="#3-파이프라인-커넥션-pipelined" class="headerlink" title="3. 파이프라인 커넥션 pipelined"></a>3. 파이프라인 커넥션 pipelined</h1><ul>
 <li><ol start="2">
-<li>HTTP/1.1은 지속 커넥션을 통해서 요청을 파이프라이팅할 수 있다.</li>
+<li>HTTP&#x2F;1.1은 지속 커넥션을 통해서 요청을 파이프라이팅할 수 있다.</li>
 </ol>
 <ul>
 <li>keep-alive 커넥션의 성능을 더 높여준다.</li>
@@ -619,13 +621,13 @@
 <hr>
 <hr>
 <ul>
-<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href="%22http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=%22">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
 <li><a href="https://fetch.spec.whatwg.org/#connections">fetch 공식문서</a></li>
-<li><a href="https://javaScript.info/fetch-api">fetch api</a></li>
+<li><a href="https://javascript.info/fetch-api">fetch api</a></li>
 <li><a href="https://xhr.spec.whatwg.org/">XMLhttprequest 공식문서</a></li>
 <li><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2">keep alive관련 RFC문서</a></li>
 </ul>
@@ -648,7 +650,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="ckzv7cqfk002tqobmkrrr129e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="cm3u7mj1h002phwb231nxebvk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
