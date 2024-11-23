@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Category: 01_Web | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+    <meta name="description" content="프론트엔드 공부를 하며 기록하는 공간입니다. JavaScript에 관심이 많으며 TypeScript, React를 주로 선호합니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="필오의 개발일지">
+<meta property="og:url" content="http://feel5ny.github.io/categories/01-Web/page/6/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="프론트엔드 공부를 하며 기록하는 공간입니다. JavaScript에 관심이 많으며 TypeScript, React를 주로 선호합니다.">
+<meta property="og:locale">
+<meta property="article:author" content="Joy Kim">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/categories/01-Web/page/6/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style_night.css">
+
+    
+<script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- 
+<script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+ -->
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65963601-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-65963601-5');
+  gtag('config', 'G-LBPKPXPZJ6');
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <meta name="google-signin-client_id" content="657683199292-cume7g4tomld10jkgpv1p7cm5buttboa.apps.googleusercontent.com">
+        <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/">00_Clean Code</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/Principle/">Principle</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/Refactoring/">Refactoring</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/">01_Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/00-UX-%F0%9F%92%85/">00. UX 💅</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/01-Browser/">01. Browser</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/02-HTTP/">02. HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/02-Network/">02. Network</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-CSS/">03. CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Html/">03. Html</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-JavaScript/">03. JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Library/">03. Library</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Motion/">03. Motion</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-TypeScript/">03. TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/zz-Algorithm/">zz. Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-Web/">02_!Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-Web/DB/">DB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/">03_DevOps</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/02-Code/">02. Code</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/04-Test/">04. Test</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/05-Release/">05. Release</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/06-Deploy/">06. Deploy</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/">04_AARRR</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/00-Analyze/">00. Analyze</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/Acquisition/">Acquisition</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/">Personal 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/Reflection/">Reflection</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/Retrospective/">Retrospective</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <i class="icon fa fa-folder-open"></i>Category: <em class="page-title-link">01_Web</em>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <!-- The API response will be printed here. -->
+
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/10/01/OOP_06/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/38/thumb_default.jpg)" alt="CodeSpitz78 4/ OOAD와 테트리스 (1)" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/10/01/OOP_06/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a>
+            </div>
+            <div class="date"><time datetime="2018-10-01T12:20:19.000Z" itemprop="datePublished">2018-10-01</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/10/01/OOP_06/">CodeSpitz78 4/ OOAD와 테트리스 (1)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            🌕🌑🌑
+
+🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.OOA, OOD까지만의 내용만 다루었습니다. 강의와 추가로 찾아본 자료와 섞여있습니다.
+
+
+
+1. 개요1-1 OOAD? 개념 (Object-Oriented Analysis and Design)소프트웨어를 개발하는 하나의 방법론으로모든 소프트웨어 시스템의 주요 기본요소를사물을 가리키는
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/09/24/OOP_05/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/36/thumb_default.jpg)" alt="CodeSpitz78 3/ (stack 구조) HTML parser ✨✨" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/09/24/OOP_05/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a>
+            </div>
+            <div class="date"><time datetime="2018-09-24T12:20:19.000Z" itemprop="datePublished">2018-09-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/09/24/OOP_05/">CodeSpitz78 3/ (stack 구조) HTML parser ✨✨</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            🌕🌑🌑
+
+🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.참고 : 렌더링 엔진 - 파싱
+
+
+
+1. 개요어떤 상황을 보고 구조적이고 재귀적인 형태로 파악을 할 수 있느냐,데이터 분석을 할 수 있느냐..
+BNF&lt;기호&gt; ::= &lt;표현식&gt;
+
+내부 구성요소로부터 응용구성요소 확장하는 것을 BNF 정의방식
+언어의 구성요소를 정의
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/09/07/OOP_04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/35/thumb_default.jpg)" alt="CodeSpitz78 2/ 루틴 심화" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/09/07/OOP_04/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a>
+            </div>
+            <div class="date"><time datetime="2018-09-07T12:20:19.000Z" itemprop="datePublished">2018-09-07</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/09/07/OOP_04/">CodeSpitz78 2/ 루틴 심화</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            🌕🌑🌑
+
+🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.
+
+
+
+1. 참조 전파의 문제
+
+
+LA는 간접적으로 B를 물고 있다.
+상호 참조(연쇄참조)가 되어서 서로 오염이 된다..
+디버깅이 어려워진다.
+
+
+참조값은 전체를 오염시키기 쉽다.
+복사본을 넘겨야한다.
+
+
+
+2. 서브루틴의 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/30/OOP_03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/34/thumb_default.jpg)" alt="CodeSpitz78 1/ 루틴과 결합도-응집도 모델" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/30/OOP_03/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a>
+            </div>
+            <div class="date"><time datetime="2018-08-30T12:20:19.000Z" itemprop="datePublished">2018-08-30</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/30/OOP_03/">CodeSpitz78 1/ 루틴과 결합도-응집도 모델</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            🌕🌑🌑
+
+🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다.공부 후에는 풀어서 쉬운 언어로 설명할 수 있도록 연습하자.
+
+
+
+1. Sub Routine
+1-1. sub routine flowflow
+메모리에 적재되어있는 명령이 순차적으로 실행되는 과정을 의미한다.
+sync라고도 한다.
+
+routine
+메모리에 적재되어있는 명령어 세트
+명령어
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/25/JS_16/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/32/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (2)" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/25/JS_16/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-JavaScript/">03. JavaScript</a>
+            </div>
+            <div class="date"><time datetime="2018-08-25T12:20:19.000Z" itemprop="datePublished">2018-08-25</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/25/JS_16/">4/ 함수와 프로토타입 체이닝 (2)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.
+
+
+
+4. 함수 호출과 this
+함수호출시 암묵적으로 arguments 객체와 this인자가 전달된다.
+
+
+4.1 arguments 객체
+유사배열 객체
+정의된 함수의 인자보다 적게 함수를 호출할 경우 넘겨지지 않은 인자는 undefined
+함수 코드를 작성할 때, 런타임 시에 호출된 인자의 개수
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/24/JS_15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/31/thumb_default.jpg)" alt="4/ 함수와 프로토타입 체이닝 (1)" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/24/JS_15/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-JavaScript/">03. JavaScript</a>
+            </div>
+            <div class="date"><time datetime="2018-08-24T12:20:19.000Z" itemprop="datePublished">2018-08-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/24/JS_15/">4/ 함수와 프로토타입 체이닝 (1)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.
+
+
+
+1. 함수 정의
+함수 선언문1234// 함수 선언문function add(x,y)&#123;  return x + y;&#125;
+
+
+함수 표현식1234// 함수 표현식var add = function (x,y)&#123;  return x + y;&#125;
+
+
+add는 함수 변수
+add
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/23/JS_14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/30/thumb_default.jpg)" alt="3/ 자바스크립트 데이터 타입과 연산자" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/23/JS_14/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-JavaScript/">03. JavaScript</a>
+            </div>
+            <div class="date"><time datetime="2018-08-23T12:20:19.000Z" itemprop="datePublished">2018-08-23</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/23/JS_14/">3/ 자바스크립트 데이터 타입과 연산자</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.
+
+
+목차 
+
+객체 프로퍼티 읽기/쓰기/갱신
+객체 프로퍼티에 접근하는 방법
+for in문 객체 프로퍼티 출럭
+객체 프로퍼티 삭제 delete
+
+
+배열과 객체
+배열과 객체의 유사점과 차이점
+배열의 프로퍼티 동적생성
+유사배열객체
+
+
+
+
+1. 객체 프로퍼티 읽기/쓰기/갱신1-1. 객체 프로퍼티에 접근하
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/15/Async_03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/28/thumb_default.jpg)" alt="1부/ chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/15/Async_03/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-Library/">03. Library</a>
+            </div>
+            <div class="date"><time datetime="2018-08-15T11:12:34.000Z" itemprop="datePublished">2018-08-15</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/15/Async_03/">1부/ chap03. RxJs가 해결하려고 했던 문제(3)_로직 오류</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.
+
+목차
+웹 어플리케이션의 로직
+로직의 복잡성 그리고 오류
+자바스크립트의 솔루션
+
+
+
+
+1. 웹 어플리케이션의 로직데이터를 추출하고 변환하는 작업을 빈번하게 하고 있다.
+
+반복문 사용, 분기문 사용, 변수 사용
+
+
+2. 로직의 복잡성 그리고 오류반복문, 분기문, 변수는 우리 코드를 복잡하게 만든
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/15/Async_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/27/thumb_default.jpg)" alt="1부/ chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/15/Async_02/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-Library/">03. Library</a>
+            </div>
+            <div class="date"><time datetime="2018-08-15T05:12:34.000Z" itemprop="datePublished">2018-08-15</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/15/Async_02/">1부/ chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.
+
+목차
+웹 어플리케이션의 상태
+웹 어플리케이션의 상태 변화로 인한 문제점
+우리가 이미 알고 있는 솔류션
+흔한 예
+적용하기
+rxjs는 무엇을 해결하고자 했는가?
+rxjs는 어떻게 개선하였나?
+observable은 리액티브하다.
+
+
+
+
+상태 전파 오류상태 전파. state propagation
+1
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2018/08/15/Async_01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018/24/thumb_default.jpg)" alt="1부/ chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류" class="thumbnail-image"></span>
+    
+    
+        
+    <span class="comment-counter">
+        <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://feel5ny.github.io/2018/08/15/Async_01/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-Library/">03. Library</a>
+            </div>
+            <div class="date"><time datetime="2018-08-15T02:12:34.000Z" itemprop="datePublished">2018-08-15</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2018/08/15/Async_01/">1부/ chap01. RxJs가 해결하려고 했던 문제(1)_입력데이터의 오류</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+[📕 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다.
+
+목차
+웹 어플리케이션의 입력 데이터
+입력 데이터의 전달 시점이 다양하다. - 동기/비동기
+동기와 비동기를 함께 사용할 수 밖에 없는가?
+rxjs는 어떻게 개선하였나? 
+Observable
+모든 데이터는 Observable 인스턴스로 만들 수 있다.
+
+
+
+
+
+
+1. 웹 어플리케이션의 입력 데이
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 6 of 11</span>
+        <a class="extend prev" rel="prev" href="/categories/01-Web/page/5/">👈</a><a class="page-number" href="/categories/01-Web/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/01-Web/page/4/">4</a><a class="page-number" href="/categories/01-Web/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/categories/01-Web/page/7/">7</a><a class="page-number" href="/categories/01-Web/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/categories/01-Web/page/11/">11</a><a class="extend next" rel="next" href="/categories/01-Web/page/7/">👉</a>
+    </nav>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/15/Communication_005_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%A5%E1%84%8B%E1%85%B4-%E1%84%82%E1%85%AC/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2022/06/thumb_default.jpg)" alt="레거시를 잘 만들기, 해석하기 (feat. 프로그래머의 뇌 🧠)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/00-Clean-Code/">00_Clean Code</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/00-Clean-Code/Refactoring/">Refactoring</a></p>
+                            <p class="item-title"><a href="/2022/05/15/Communication_005_%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%A5%E1%84%8B%E1%85%B4-%E1%84%82%E1%85%AC/" class="title">레거시를 잘 만들기, 해석하기 (feat. 프로그래머의 뇌 🧠)</a></p>
+                            <p class="item-date"><time datetime="2022-05-15T14:23:55.000Z" itemprop="datePublished">2022-05-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2022/02/thumb_default.jpg)" alt="도커 볼륨, 네트워킹, 로깅" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-DevOps/">03_DevOps</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-DevOps/06-Deploy/">06. Deploy</a></p>
+                            <p class="item-title"><a href="/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" class="title">도커 볼륨, 네트워킹, 로깅</a></p>
+                            <p class="item-date"><time datetime="2022-02-20T13:00:00.000Z" itemprop="datePublished">2022-02-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/13/docker_01_%E1%84%80%E1%85%A2%E1%84%82%E1%85%A7%E1%86%B7/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2022/01/thumb_default.jpg)" alt="도커 개념과 컨테이너" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-DevOps/">03_DevOps</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-DevOps/06-Deploy/">06. Deploy</a></p>
+                            <p class="item-title"><a href="/2022/02/13/docker_01_%E1%84%80%E1%85%A2%E1%84%82%E1%85%A7%E1%86%B7/" class="title">도커 개념과 컨테이너</a></p>
+                            <p class="item-date"><time datetime="2022-02-13T11:00:00.000Z" itemprop="datePublished">2022-02-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/12/31/2021-%E1%84%92%E1%85%AC%E1%84%80%E1%85%A9/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/06/thumb_default.jpg)" alt="2021 회고" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/">Personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/Reflection/">Reflection</a></p>
+                            <p class="item-title"><a href="/2021/12/31/2021-%E1%84%92%E1%85%AC%E1%84%80%E1%85%A9/" class="title">2021 회고</a></p>
+                            <p class="item-date"><time datetime="2021-12-31T11:00:00.000Z" itemprop="datePublished">2021-12-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2021/06/28/svg-line/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2021/04/thumb_default.jpg)" alt="Svg로 Rounded rect형태의 progress bar 만들기 (feat. animation, path)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/03-Html/">03. Html</a></p>
+                            <p class="item-title"><a href="/2021/06/28/svg-line/" class="title">Svg로 Rounded rect형태의 progress bar 만들기 (feat. animation, path)</a></p>
+                            <p class="item-date"><time datetime="2021-06-28T14:00:00.000Z" itemprop="datePublished">2021-06-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Accept-header/" style="font-size: 10px;">Accept header</a> <a href="/tags/Accessibility/" style="font-size: 10px;">Accessibility</a> <a href="/tags/CHANGLOG/" style="font-size: 10px;">CHANGLOG</a> <a href="/tags/CS/" style="font-size: 14.55px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.91px;">File API</a> <a href="/tags/Fitts-Law/" style="font-size: 10px;">Fitts Law</a> <a href="/tags/Frontend/" style="font-size: 10.91px;">Frontend</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 13.64px;">Joy</a> <a href="/tags/LTV/" style="font-size: 10.91px;">LTV</a> <a href="/tags/OOP/" style="font-size: 16.36px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/Reflection/" style="font-size: 10px;">Reflection</a> <a href="/tags/SemVr/" style="font-size: 10px;">SemVr</a> <a href="/tags/TCP-IP/" style="font-size: 10.91px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.91px;">TDD</a> <a href="/tags/Touch-Target/" style="font-size: 10px;">Touch Target</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/UX/" style="font-size: 10.91px;">UX</a> <a href="/tags/UX-Law/" style="font-size: 10px;">UX Law</a> <a href="/tags/Web/" style="font-size: 11.82px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.91px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.82px;">angular</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.55px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.91px;">authorization</a> <a href="/tags/blog/" style="font-size: 13.64px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/browser/" style="font-size: 11.82px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.91px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.82px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.73px;">codeSpitz</a> <a href="/tags/cognitive/" style="font-size: 10px;">cognitive</a> <a href="/tags/commitlint/" style="font-size: 10px;">commitlint</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.91px;">connection</a> <a href="/tags/conventional-commit/" style="font-size: 10px;">conventional-commit</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.91px;">css</a> <a href="/tags/customer/" style="font-size: 10px;">customer</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.91px;">digest</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/docker-log/" style="font-size: 10px;">docker_log</a> <a href="/tags/docker-network/" style="font-size: 10px;">docker_network</a> <a href="/tags/docker-volume/" style="font-size: 10px;">docker_volume</a> <a href="/tags/encoding/" style="font-size: 10.91px;">encoding</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/flow-control/" style="font-size: 10.91px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.91px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.91px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hosting/" style="font-size: 10px;">hosting</a> <a href="/tags/http/" style="font-size: 19.09px;">http</a> <a href="/tags/https/" style="font-size: 10.91px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 12.73px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.73px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.91px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.91px;">principle</a> <a href="/tags/programmer/" style="font-size: 10px;">programmer</a> <a href="/tags/programming/" style="font-size: 11.82px;">programming</a> <a href="/tags/progress-bar/" style="font-size: 10px;">progress bar</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 12.73px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.64px;">refactoring</a> <a href="/tags/release/" style="font-size: 10px;">release</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rounded-rect/" style="font-size: 10px;">rounded rect</a> <a href="/tags/rxjs/" style="font-size: 13.64px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/standard-version/" style="font-size: 10px;">standard-version</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/symbol/" style="font-size: 10px;">symbol</a> <a href="/tags/transcoding/" style="font-size: 10px;">transcoding</a> <a href="/tags/typeScript/" style="font-size: 17.27px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/variant/" style="font-size: 10px;">variant</a> <a href="/tags/vary/" style="font-size: 10px;">vary</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/web/" style="font-size: 15.45px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10px;">글쓰기</a> <a href="/tags/%EC%9B%B9%EC%84%9C%EB%B2%84/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2024 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'feel5ny';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javaScript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+<!-- 
+<script src="/js/lottie.js"></script>
+
+
+<script src="/js/lottie_index.js"></script>
+ -->
+
+    </div>
+</body>
+</html>
