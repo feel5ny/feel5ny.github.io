@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/09/Refactoring/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/09/refactoring/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -229,7 +229,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="코드의-구린내"><a href="#코드의-구린내" class="headerlink" title="코드의 구린내 +"></a>코드의 구린내 <a href="https://github.com/KWSStudy/Refactoring/wiki/%EC%BD%94%EB%93%9C%EC%9D%98-%EA%B5%AC%EB%A6%B0%EB%82%B4" target="_blank" rel="noopener">+</a></h2><p>구린게 있으면 그 부분을 바로 잡으세요.<br>리팩토링을 어떨 때 시작하고 어떨 때 그만둬야 할지 판단하는 일은 리팩토링 기법을 적용하는 방법만큼 중요하다.</p>
+            <h2 id="코드의-구린내"><a href="#코드의-구린내" class="headerlink" title="코드의 구린내 +"></a>코드의 구린내 <a href="https://github.com/KWSStudy/Refactoring/wiki/%EC%BD%94%EB%93%9C%EC%9D%98-%EA%B5%AC%EB%A6%B0%EB%82%B4">+</a></h2><p>구린게 있으면 그 부분을 바로 잡으세요.<br>리팩토링을 어떨 때 시작하고 어떨 때 그만둬야 할지 판단하는 일은 리팩토링 기법을 적용하는 방법만큼 중요하다.</p>
 <hr>
 <h3 id="1-중복코드"><a href="#1-중복코드" class="headerlink" title="1. 중복코드"></a>1. 중복코드</h3><p>구린내의 제왕 중복코드.<br>똑같은 코드 구조가 두 군데 이상 있을 때는 그 부분을 하나로 통일하면 프로그램이 개선<br>한 클래스의 두 메서드 안에 같은 코드가 들어있는경우 -&gt; 메서드 추출 기법을 적용해서 겹치는 코드를 빼내어 별도의 메서드로 만들고 그 메서 드를 두 곳에서 호출<br>수퍼클래스의 두 하위 클래스에 같은 코드가 들어 있는 경우 -&gt; 메서드 추출 기법을 적용해서 중복을 없앤 후 메서드 상향 기법을 적용하면 된다.<br>위 상황에 코드가 똑같지 않고 비슷하다면 메서드 추출기법을 적용해서 같은 부분과 다른 부분을 분리해야 한다. 그런 다음 경우에 따라 템플릿 메서드 형성 기법을 적용해야 할 수도있다.<br>두 메서드가 알고리즘만 다르고 기능이 같다면 개발자는 그 두 알고리즘 중에서 더 간단한 것을 택해서 알고리즘 전환 기법을 적용하면 된다.<br>중복 코드가 메서드 가운데에 있다면 주변 메서드 추출을 적용하면된다.<br>서로 상관 없는 두 클래스 안에 중복코드가 있을 때 -&gt; 한 클래스 안의 중복 코드를 클래스 추출 이나 모듈 추출 을 적용해 제 3의 클래스나 모듈로 떼어낸 후 그것을 다른 클래스에서 호출하는 방법이 있다. 또는 중복 코드를 빼서 메서드로 만든 후 그 메서드를 두 클래스 중 하나에 넣고 다른클래스에서 그 메서드를 호출하거나 코드를 빼내어 만든 메서드를 제 3의 클래스에 넣고 그걸 두 클래스에서 호출하는 방법이 있다.</p>
 <h3 id="2-장황한-메서드"><a href="#2-장황한-메서드" class="headerlink" title="2. 장황한 메서드"></a>2. 장황한 메서드</h3><p>최적의 상태로 장수하는 객체 프로그램을 보면 공통적으로 메서드 길이가 짧다.<br>짧은 메서드를 이해하기 쉽게하려면 메서드 명을 잘 정해야한다. 메섣의 기능을 한눈에 알 수 있는 메서드명을 사용하면 그 메서드안의 코드를 분석하지 않아도된다.<br>메서드 호출이 원래 코드보다 길어지는 한이 있어도, 메서드 명은 그 코드의 의도를 잘 반영하는 것으로 정해야한다.<br>메서드명은 기능 수행 방식이 아니라 목적(즉, 기능자체)을 나타내는 이름으로 정한다.<br>메서드 추출기법을 적용한다.<br>코드를 여러 덩어리로 분리하려면?<br>주석을 찾는 것 -&gt; 기능 설명이 주석으로 처리된 코드 구간을 메서드로 만들면 된다. (긴 메서드에서 기능 설명이 주석으로 되어있는 부분)<br>조건문과 루프도 역시 메서드로 추출</p>
@@ -254,7 +254,7 @@
 <h3 id="21-방치된-상속물"><a href="#21-방치된-상속물" class="headerlink" title="21. 방치된 상속물"></a>21. 방치된 상속물</h3><p>하위클래스가 부모클래스에게 상속받은 메서드나 데이터가 하위클래스에서 더이상 쓰이지 않거나 필요 없게 되었을때.<br>위 문제의 원인은 잘못된 계층구조<br>새 대등 클래스를 작서하고 메서드 하향과 필드하향을 실시해서 사용되지 않는 모든 메서드를 그 형제 클래스에 몰아 넣는다.</p>
 <h3 id="22-불필요한-주석"><a href="#22-불필요한-주석" class="headerlink" title="22. 불필요한 주석"></a>22. 불필요한 주석</h3><p>주석을 넣어야겠다는 생각이 들 땐 먼저 코드를 리팩토링해서 주석을 없앨 수 있게 만들어보자.<br>주석은 무슨 작업을 해야 좋을지 모를 때만 넣는 것이 좋다.<br>어떤 코드를 넣은 이유를 메모해 놓을 경우에도 주석을 넣는 것이 적절하다.</p>
 <hr>
-<h2 id="레거시-코드를-받았을-때-좋은-코드로-바꾸는-방법"><a href="#레거시-코드를-받았을-때-좋은-코드로-바꾸는-방법" class="headerlink" title="레거시 코드를 받았을 때 좋은 코드로 바꾸는 방법 +"></a>레거시 코드를 받았을 때 좋은 코드로 바꾸는 방법 <a href="https://m.blog.naver.com/PostView.nhn?blogId=tmondev&logNo=220638991588&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F" target="_blank" rel="noopener">+</a></h2><img src="/images/post_img/45/legacy.png">
+<h2 id="레거시-코드를-받았을-때-좋은-코드로-바꾸는-방법"><a href="#레거시-코드를-받았을-때-좋은-코드로-바꾸는-방법" class="headerlink" title="레거시 코드를 받았을 때 좋은 코드로 바꾸는 방법 +"></a>레거시 코드를 받았을 때 좋은 코드로 바꾸는 방법 <a href="https://m.blog.naver.com/PostView.nhn?blogId=tmondev&logNo=220638991588&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F">+</a></h2><img src ="/images/post_img/45/legacy.png">
 
 <p>레거시 코드의 양이 방대할 경우 부분별로 리팩토링을 진행해야 한다. 이 때, 유의할 점은 정확한 목표를 가져야 한다는 것이다. 대부분의 개발자는 성능 개선에만 초점을 두는데, 이는 또 다른 레거시 코드를 만들어 낼 수 있다. 레거시 코드를 변경하는 목적은 변경 자체가 아니라 변경시키는 행위이다. 따라서 각각의 작업 끝에는 항상 테스트 코드가 있어야 한다. 이 점을 항상 유념하며 리팩토링을 진행해야 한다.</p>
 <h5 id="1-변경지점-식별"><a href="#1-변경지점-식별" class="headerlink" title="1. 변경지점 식별"></a>1. 변경지점 식별</h5><p>변경시킬 지점을 알기 위해서는 대상 프로그램의 전체적인 아키텍처를 보아야한다. 노트/스케치나 스크래치 리팩토링 기법과 같은 방법을 통해 변경해야 할 지점을 식별하자.</p>
@@ -282,7 +282,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/09/Refactoring/" data-id="cm3u5tb2u008knjb2xgqrhlw2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/09/Refactoring/" data-id="ckzv7cqjd008rqobmmpajltvk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

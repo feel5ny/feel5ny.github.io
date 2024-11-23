@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/09/10/aboutHEXO/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/09/10/abouthexo/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -379,22 +379,22 @@
 <p> 무언가를 배울때 하루하루의 기록을 남기는 것은 자기계발의 첫 스타트라고 생각합니다. 머리속에 있는 것을 그대로 옮기는 작업은, 정리하며 내것으로 만들기에도 좋고, 그때그때의 생각을 기록하는 용으로도 좋기 때문입니다. 그래서 우리는 일기를 쓰고, 일지를 쓰고, 이렇게 블로그도 만들며 기록합니다. 특히나 개발은 많은 개념을 숙지하면서 공부해야하기 때문에 블로깅 자체가 공부가 됩니다.</p>
 <p> 이왕 <code>node.js</code>까지 배우고 있으니, <code>jekyll</code>이 아닌, <code>hexo</code>를 사용해서 블로그를 만들었습니다. </p>
 <hr>
-<a naem="0">
+<a naem = "0">
 ## 0. Github 간단 소개
 
 <p>깃에 대해서 잘 알고 있다면 1번으로 넘어가도 됩니다.</p>
-<a naem="0-1">
+<a naem = "0-1">
 ### 0-1. 원격저장소
 <img src="/images/post_img/01/post_1-01.svg" width="600px">
 [Git](https://backlogtool.com/git-tutorial/kr/intro/intro1_1.html)이란 소스코드를 효과적으로 관리하기 위해 개발된 '분산형 버전 관리 시스템'입니다.
 git은 저장소에서 관리를 하는데, 내 컴퓨터에 있는 저장소를 `로컬저장소`라고 하고, 웹 상에 있는 저장소를 `원격저장소`라고 합니다. 우리가 흔히 알고 있는 원격저장소를 제공하는 서비스에는 **깃헙, 비트버킷, 깃랩**등이 있습니다다. 헥소를 이용한 블로그 개설을 위해서는 **깃헙**을 사용해야합니다.
 
-<a naem="0-2">
+<a naem = "0-2">
 ### 0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages
 <img src="/images/post_img/01/post_1-02.svg" width="600px">
 Github에서 제공하는 Static Website, Github Pages가 있다. 깃헙 저장소에 리소스를 `push`만 해도(push란 저장소에 리소스를 넣을때 사용하는 명령어) 간단하게 웹사이트를 만들 수 있다. 즉, 다른 호스팅 서비스의 도움없이, 원격저장소에 올리기만해도 호스팅이 가능하다.
 
-<a naem="0-3">
+<a naem = "0-3">
 ### 0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll & HEXO
 <img src="/images/post_img/01/post_1-04.svg" width="600px">
 
@@ -403,22 +403,21 @@ Github에서 제공하는 Static Website, Github Pages가 있다. 깃헙 저장�
 <hr>
 
 <p>그럼 generator을 셋팅하기 전, 내 컴퓨터에 디렉토리(폴더)를 생성하고, 원격저장소(github)에 연결을 시켜보자.</p>
-<a naem="1">
+<a naem = "1">
 ## 1. Github Pages로 정적 페이지 호스팅하기
 Github Pages를 사용하기 위해 Github의 원격저장소에 리소스를 올려야한다는 사실을 잊지말자. 아래 그림의 저장소들이 필요하다.
 
 <img src="/images/post_img/01/post_1-05.svg" width="600px">
 
-<a naem="1-1">
+<a naem = "1-1">
 ### 1-1. 로컬에 저장소 생성하기
 내 컴퓨터 원하는 장소에 폴더를 생성한다.
 terminal없이도 생성해도 된다. 
 아래는 terminal을 이용한 생성방법
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 바탕화면에 생성한다는 가정 </span><br><span class="line">(글쓴이는 운영체제가 mac입니다.) --&gt;</span><br><span class="line">$ <span class="built_in">cd</span> Desktop</span><br><span class="line">$ mkdir github-blog</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 바탕화면에 생성한다는 가정 </span><br><span class="line">(글쓴이는 운영체제가 mac입니다.) --&gt;</span><br><span class="line">$ <span class="built_in">cd</span> Desktop</span><br><span class="line">$ <span class="built_in">mkdir</span> github-blog</span><br></pre></td></tr></table></figure>
 <p>바탕화면에 <code>github-blog</code>라는 이름의 폴더가 생성이 되었다.</p>
-<a naem="1-2">
+<a naem = "1-2">
 ### 1-2. 원격 저장소 생성하기 (Github Repository)
 <img src="/images/post_img/01/post_1-11.jpg" width="600px">
 github pages를 통해 손쉽게 `USERNAME.github.io`를 통해 정적 페이지를 호스팅 할 수 있다. 
@@ -432,7 +431,7 @@ github pages를 통해 손쉽게 `USERNAME.github.io`를 통해 정적 페이지
 </ol>
 <img src="/images/post_img/01/post_1-12.jpg" width="600px">
 
-<a naem="1-3">
+<a naem = "1-3">
 ### 1-3. 원격 저장소와 로컬 저장소 연결하기
 <img src="/images/post_img/01/post_1-06.svg" width="600px">
 내 컴퓨터에 저장소를 만들고, 원격에도 만들었으니, 연결을 해야한다. 연결하는 방법은 간단하다. 지금은 터미널을 열고 명령어를 입력해야하는 타이밍이다.
@@ -444,24 +443,24 @@ github pages를 통해 손쉽게 `USERNAME.github.io`를 통해 정적 페이지
 <li>생성된 README.md파일을 푸시한다. (commit &gt; push)</li>
 </ol>
 <p>위의 순서를 코드로 옮기면. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 1. 해당 디렉토리로 이동 --&gt;</span><br><span class="line"><span class="built_in">cd</span> Desktop</span><br><span class="line"><span class="built_in">cd</span> github-blog</span><br><span class="line"></span><br><span class="line">&lt;!-- 2. git <span class="built_in">clone</span> --&gt;</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/feel5ny/TEST.github.io.git</span><br><span class="line"><span class="built_in">cd</span> test.github.io</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 3. README.md파일 생성 --&gt;</span><br><span class="line"><span class="built_in">echo</span> README.md</span><br><span class="line"></span><br><span class="line">&lt;!-- 4. 원격저장소에 올리기 --&gt;</span><br><span class="line">git add --all</span><br><span class="line">git commit -m <span class="string">"first commit"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 1. 해당 디렉토리로 이동 --&gt;</span><br><span class="line"><span class="built_in">cd</span> Desktop</span><br><span class="line"><span class="built_in">cd</span> github-blog</span><br><span class="line"></span><br><span class="line">&lt;!-- 2. git <span class="built_in">clone</span> --&gt;</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/feel5ny/TEST.github.io.git</span><br><span class="line"><span class="built_in">cd</span> test.github.io</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 3. README.md파일 생성 --&gt;</span><br><span class="line"><span class="built_in">echo</span> README.md</span><br><span class="line"></span><br><span class="line">&lt;!-- 4. 원격저장소에 올리기 --&gt;</span><br><span class="line">git add --all</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 
 <p>step 1이 끝났다! 그리고 벌써 호스팅이 완료되었다.<br><strong>USERNAME.github.io</strong>에 가보자.</p>
 <p>–<br>아직 블로그의 형태를 띄지 않았다. 위에서 말했던 generator를 이용하여 블로그의 구조를 짤 예정인데, 우리는 HEXO를 이용할 것이다. </p>
-<a naem="2">
+<a naem = "2">
 ## 2. Hexo 설치하기
 Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하다. 다양한 plugin과 테마를 지원하고 있다.
 <img src="/images/post_img/01/post_1-07.svg" width="600px">
 
-<h3 id="2-1-Hexo-설치-전-준비"><a href="#2-1-Hexo-설치-전-준비" class="headerlink" title="2-1. Hexo 설치 전 준비"></a>2-1. Hexo 설치 전 준비</h3><p>Hexo는 말했다 싶이 node.js 기반이기 때문에 node.js가 로컬에 기본적으로 설치되어있어야 한다. node.js는 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">공식 사이트</a>에서 설치가 가능하다. stable버전을 추천한다.</p>
+<h3 id="2-1-Hexo-설치-전-준비"><a href="#2-1-Hexo-설치-전-준비" class="headerlink" title="2-1. Hexo 설치 전 준비"></a>2-1. Hexo 설치 전 준비</h3><p>Hexo는 말했다 싶이 node.js 기반이기 때문에 node.js가 로컬에 기본적으로 설치되어있어야 한다. node.js는 <a href="https://nodejs.org/en/">공식 사이트</a>에서 설치가 가능하다. stable버전을 추천한다.</p>
 <h3 id="2-2-Hexo-npm-설치하기"><a href="#2-2-Hexo-npm-설치하기" class="headerlink" title="2-2. Hexo npm 설치하기"></a>2-2. Hexo npm 설치하기</h3><p>Node.js를 설치 한 후에 아래 CLI를 순서대로 입력하여 npm을 설치한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <p>node.js를 설치하면 npm을 사용할 수 있는데, 패키지 중에 hexo-cli를 설치한다. blog파일을 생성하여 hexo를 초기화한다. blog 디렉토리로 이동후, npm install을 사용하여, blog에 필요한 파일들을 자동으로 설치한다.</p>
-<h3 id="2-3-설정파일-업데이트"><a href="#2-3-설정파일-업데이트" class="headerlink" title="2-3. 설정파일 업데이트"></a>2-3. 설정파일 업데이트</h3><p>위의 순서가 끝나면, root 디렉토리에 <code>_config.yml</code>이라는 설정파일이 생성된다. (yml파일은 사람이 쉽게 읽을 수 있는 데이터 직력화 양식으로,…<a href="http://www.openthefile.net/ko/extension/yml" target="_blank" rel="noopener">more</a>) 해당 파일에 블로그 정보를 수정한다. 나머지 정보는 <a href="https://hexo.io/docs/" target="_blank" rel="noopener">hexo 공식 문서</a>에서.</p>
+<h3 id="2-3-설정파일-업데이트"><a href="#2-3-설정파일-업데이트" class="headerlink" title="2-3. 설정파일 업데이트"></a>2-3. 설정파일 업데이트</h3><p>위의 순서가 끝나면, root 디렉토리에 <code>_config.yml</code>이라는 설정파일이 생성된다. (yml파일은 사람이 쉽게 읽을 수 있는 데이터 직력화 양식으로,…<a href="http://www.openthefile.net/ko/extension/yml">more</a>) 해당 파일에 블로그 정보를 수정한다. 나머지 정보는 <a href="https://hexo.io/docs/">hexo 공식 문서</a>에서.</p>
 <ol>
 <li><p>Site 정보<br>블로그 정보를 수정할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 제목(html head에 들어가는 title태그에 들어가는 제목과 같다.)</span><br><span class="line">subtitle: </span><br><span class="line">description:</span><br><span class="line">author: Nayoung Kim</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 제목(html <span class="built_in">head</span>에 들어가는 title태그에 들어가는 제목과 같다.)</span><br><span class="line">subtitle: </span><br><span class="line">description:</span><br><span class="line">author: Nayoung Kim</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>URL 정보<br>블로그 URL 정보를 설정할 수 있다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url: https://USERNAME.github.io</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure>
@@ -472,38 +471,30 @@ Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하�
 </li>
 </ol>
 <p>테마별로 구성을 수정하는 스타일이 다르다. 테마 적용하기 파트에서 anatol 레이아웃 수정방법을 설명하겠다.</p>
-<a naem="2-4">
+<a naem = "2-4">
 ### 2-4. 로컬에서 테스트하기
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+blog 디렉토리에 위치되어있는 상태에서 서버를 구동한다. blog에 위치되어있지 않으면 서버구동이 안된다. 서버 구동이 완료되면 4000번 포트로 접속이 가능하다. 
+- 02. HTTP://localhost:4000
 
-<p>blog 디렉토리에 위치되어있는 상태에서 서버를 구동한다. blog에 위치되어있지 않으면 서버구동이 안된다. 서버 구동이 완료되면 4000번 포트로 접속이 가능하다. </p>
-<ul>
-<li><ol start="2">
-<li><a href="HTTP://localhost:4000" target="_blank" rel="noopener">HTTP://localhost:4000</a></li>
-</ol>
-</li>
-</ul>
 <p>테스트시 구동이 잘 안될 경우, 서버를 껐다가 다시 실행해 보면된다. 서버를 끄는 방법은 터미널에서 <code>ctrl+c</code>를 두번 입력하면 된다. </p>
 <hr>
 
-<a naem="3">
+<a naem = "3">
 ## 3. Github에 배포하기
 로컬에서 테스트를 완료하면 USERNAME.github.io 주소로 배포해보자.
 <img src="/images/post_img/01/post_1-08.svg" width="600px">
 
 <h3 id="3-1-hexo-설정을-통해-정적-리소스를-생성하기"><a href="#3-1-hexo-설정을-통해-정적-리소스를-생성하기" class="headerlink" title="3-1. hexo 설정을 통해 정적 리소스를 생성하기"></a>3-1. hexo 설정을 통해 정적 리소스를 생성하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-
 <p>위 명령어를 입력하면, github에 올라갈 리소스만 정리되어 따로 폴더가 생성된다.</p>
 <h3 id="3-2-배포하기"><a href="#3-2-배포하기" class="headerlink" title="3-2. 배포하기"></a>3-2. 배포하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
 <p>위 명령어를 입력하면 배고가 완료된다. generate와 deploy를 한번에 진행하고 싶은 경우 아래 명령어를 입력한다. </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
-
 <p>약자로 <code>hexo d g</code>를 사용해도 됩니다.</p>
 <h3 id="3-3-배포가-잘-안될-경우"><a href="#3-3-배포가-잘-안될-경우" class="headerlink" title="3-3. 배포가 잘 안될 경우"></a>3-3. 배포가 잘 안될 경우</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
 
 <hr>
-</a></a></a></a></a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -522,7 +513,7 @@ Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하�
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/09/10/aboutHEXO/" data-id="cm3u5tb3000aonjb2juv00260" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/09/10/aboutHEXO/" data-id="ckzv7cqk700amqobmba0yhn68" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

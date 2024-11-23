@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2018/10/01/OOP_06/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2018/10/01/oop_06/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -381,7 +381,7 @@
 <p>최대한 은닉하고<br>최대한 캡슐화해서 상대방과 대화한다.</p>
 <ul>
 <li>솔리드 원칙</li>
-<li>헐리우드 원칙 (<a href="https://m.blog.naver.com/premiummina/220632744186" target="_blank" rel="noopener">참고</a>)</li>
+<li>헐리우드 원칙 (<a href="https://m.blog.naver.com/premiummina/220632744186">참고</a>)</li>
 <li>드라이 원칙</li>
 <li>…</li>
 </ul>
@@ -398,11 +398,8 @@
 <hr>
 <h4 id="1-2-5-다형성-polymorphism-내적-동질성"><a href="#1-2-5-다형성-polymorphism-내적-동질성" class="headerlink" title="1-2-5 다형성 polymorphism == 내적 동질성"></a>1-2-5 다형성 polymorphism == 내적 동질성</h4><p>상속성의 계층을 따라서 각각의 클래스에 한가지 이름을 줄 수 있다.</p>
 <ul>
-<li><p>같은 명령을 각기 다른 오브젝트에 줄 수 있다. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Dog d;</span><br><span class="line">d = <span class="keyword">new</span> Poodle()</span><br><span class="line">d.bark()</span><br><span class="line"></span><br><span class="line">d = <span class="keyword">new</span> Bulldog()</span><br><span class="line">d.bark()</span><br><span class="line"></span><br><span class="line">d = <span class="keyword">new</span> Husky()</span><br><span class="line">d.bark()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>처음 만들어졌을 때 원형이 누구냐에 따라서 오버라이드 되어있거나 오버라이딩 된 속성을 반드시 만들어진 구상객체를 사용하도록 되어있다.</p>
-</li>
+<li>같은 명령을 각기 다른 오브젝트에 줄 수 있다. <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Dog</span> d;</span><br><span class="line">d = <span class="keyword">new</span> <span class="title class_">Poodle</span>()</span><br><span class="line">d.<span class="title function_">bark</span>()</span><br><span class="line"></span><br><span class="line">d = <span class="keyword">new</span> <span class="title class_">Bulldog</span>()</span><br><span class="line">d.<span class="title function_">bark</span>()</span><br><span class="line"></span><br><span class="line">d = <span class="keyword">new</span> <span class="title class_">Husky</span>()</span><br><span class="line">d.<span class="title function_">bark</span>()</span><br></pre></td></tr></table></figure></li>
+<li>처음 만들어졌을 때 원형이 누구냐에 따라서 오버라이드 되어있거나 오버라이딩 된 속성을 반드시 만들어진 구상객체를 사용하도록 되어있다.</li>
 </ul>
 <p>cf__ <strong>메세지 전달 message passing</strong><br>객체지향관점에서 프로그램은 오브젝트에 message를 보내는 것으로 실행</p>
 <ul>
@@ -530,7 +527,7 @@
 <h3 id="프로토콜을-적용하냐-마냐는"><a href="#프로토콜을-적용하냐-마냐는" class="headerlink" title="프로토콜을 적용하냐 마냐는?"></a>프로토콜을 적용하냐 마냐는?</h3><p><strong>변화율</strong>에 따라서!
 변화율이 극심한 경우에는 중간에 반드시 <strong>프로토콜</strong>을 넣어주어야한다!</p>
 <hr>
-<p><strong>참고자료</strong><br>OOAD : <a href="http://dollipolly.tistory.com/entry/OOAD-Object-Oriented-Analysis-Design" target="_blank" rel="noopener">http://dollipolly.tistory.com/entry/OOAD-Object-Oriented-Analysis-Design</a><br><a href="http://egloos.zum.com/nom3203/v/2502870" target="_blank" rel="noopener">http://egloos.zum.com/nom3203/v/2502870</a><br>객체지향 :  <a href="https://www.slideshare.net/plusjune/ss-46109239" target="_blank" rel="noopener">https://www.slideshare.net/plusjune/ss-46109239</a></p>
+<p><strong>참고자료</strong><br>OOAD : <a href="http://dollipolly.tistory.com/entry/OOAD-Object-Oriented-Analysis-Design">http://dollipolly.tistory.com/entry/OOAD-Object-Oriented-Analysis-Design</a><br><a href="http://egloos.zum.com/nom3203/v/2502870">http://egloos.zum.com/nom3203/v/2502870</a><br>객체지향 :  <a href="https://www.slideshare.net/plusjune/ss-46109239">https://www.slideshare.net/plusjune/ss-46109239</a></p>
 
         </div>
         <footer class="article-footer">
@@ -550,7 +547,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/10/01/OOP_06/" data-id="cm3u5tb2r007pnjb2uo6x4hrn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/10/01/OOP_06/" data-id="ckzv7cqj4007zqobm67hx2fzi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

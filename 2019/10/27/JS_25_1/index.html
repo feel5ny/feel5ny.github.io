@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/10/27/JS_25_1/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/10/27/js_25_1/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -368,7 +368,7 @@
 <p>🌕🌑🌑</p>
 <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>오늘날의 자바스크립트 동향과 ECMAScript에 대해서 알아본다. ECMAScript가 버전업이 될때의 과정과, ES6 이후(~ES10)에 표준이 된 스펙들 중 일부를 알아본다. 또한 proposal에 올라온 목록과 체택되진 않았지만 이미 몇몇 브라우저에 적용된 개념들에 대해서 알아본다.</p>
 <hr>
-<a name="pipeline">
+<a name="pipeline" />
 
 <h1 id="JavaScript-PipeLine"><a href="#JavaScript-PipeLine" class="headerlink" title="JavaScript PipeLine"></a>JavaScript PipeLine</h1><p>자바스크립트의 ECMAScript를 알아보기전에 우리는 프론트 개발자로써 어느 과정까지 건드리고 있는지를 알아보고, ECMAScript에 조금 더 집중할 수 있는 상황에 대해서 알아본다.</p>
 <img src="/images/2019/34/01.png" style="width:100%">
@@ -444,7 +444,7 @@
 <li>ES6 이후 급격한 언어의 변화를 지양하고 <strong>점진적인 버전업</strong>을 진행<ul>
 <li>새롭게 반영될 내용은 Stage0 ~ 3까지 단계별 승격을 통해 정식 반영시 Stage4가 됨</li>
 <li>공개적으로 스펙을 원하는 사람이 발제를 하면 stage0이라는 최초의 proposal로 보고, 위원회가 회의를 거쳐서 승격을 시켜줌.</li>
-<li>현재 제안 중이 내용의 상태 <a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">확인</a></li>
+<li>현재 제안 중이 내용의 상태 <a href="https://github.com/tc39/proposals">확인</a></li>
 <li>대부분은 사장된다.</li>
 </ul>
 </li>
@@ -453,7 +453,7 @@
 <li>stage0이던 1이던 tc39에 프로포절을 제안하기 위해서는<br><strong>챔피온</strong>이라는 사람을 끼고 발제를 하게 되어있다.</li>
 <li>실제 각 제안의 담당자(<strong>챔피온</strong>)가 구글관련 개발자인 경우가 많음</li>
 <li>Stage4기준 보다 구글이 원하는 순서대로 크롬에 빨리 반영되는 경우가 많음<ul>
-<li><a href="https://developers.google.com/web/updates/capabilities" target="_blank" rel="noopener">크롬 업데이트</a></li>
+<li><a href="https://developers.google.com/web/updates/capabilities">크롬 업데이트</a></li>
 <li>많은 스펙들은 회사의 사정에 따라 움직이고 있다.<ul>
 <li>예) 꼬리물기 최적화를 제안한 애플직원의 프로포절은 반영되지 않았지만, 사파리에는 반영되었다.</li>
 <li><code>CSS</code>나 <code>W3C</code>도 비슷한 사정</li>
@@ -467,7 +467,7 @@
 <blockquote>
 <p>최신판을 쓰기 위해서는 크롬을 사용해야하고,<br>  크롬에서만 반영된 스펙을 안볼 수 없다.</p>
 </blockquote>
-<a name="es6">
+<a name="es6" />
 
 <h1 id="1-ECMAScript-6"><a href="#1-ECMAScript-6" class="headerlink" title="1. ECMAScript 6"></a>1. ECMAScript 6</h1><p>ES<code>5</code>이후에 중요한 부분</p>
 <ul>
@@ -485,25 +485,24 @@
 <li>근본적으로 생성하는 방식서에부터 사용하는 방식까지 ES6이전과 이후가 다르다.</li>
 </ul>
 <blockquote>
-<p><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" target="_blank" rel="noopener">참고: ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a></p>
+<p><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/">참고: ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a></p>
 </blockquote>
-<h1 id="ECMAScript-7-10-Stage3-11"><a href="#ECMAScript-7-10-Stage3-11" class="headerlink" title="ECMAScript 7 ~ 10, Stage3(11)"></a>ECMAScript 7 ~ 10, Stage3(11)</h1><a name="es7">
+<h1 id="ECMAScript-7-10-Stage3-11"><a href="#ECMAScript-7-10-Stage3-11" class="headerlink" title="ECMAScript 7 ~ 10, Stage3(11)"></a>ECMAScript 7 ~ 10, Stage3(11)</h1><a name="es7" />
 
 <h2 id="2-ECMAScript-7"><a href="#2-ECMAScript-7" class="headerlink" title="2. ECMAScript 7"></a>2. ECMAScript 7</h2><ul>
 <li>중첩된 rest해체: rest안에 rest로 해체가 가능한 것.</li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="noopener">참고:변수에 배열의 나머지를 할당하기</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, ...[b, ...c]] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">// a=1, b=2, c=[3,4]</span></span><br></pre></td></tr></table></figure>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">참고:변수에 배열의 나머지를 할당하기</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, ...[b, ...c]] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">// a=1, b=2, c=[3,4]</span></span><br></pre></td></tr></table></figure>
+<a name="es8" />
 
 </li>
 </ul>
-<a name="es8">
-
 <h2 id="3-ECMAScript-8"><a href="#3-ECMAScript-8" class="headerlink" title="3. ECMAScript 8"></a>3. ECMAScript 8</h2><ul>
 <li><strong>async/await</strong></li>
 <li><strong>shared memory</strong></li>
 <li><strong>atomics</strong></li>
 </ul>
 <blockquote>
-<p><a href="https://d2.naver.com/helloworld/7495331" target="_blank" rel="noopener">참고: SharedArrayBuffer 객체와 Atomics 객체를 사용한 메모리 공유
+<p><a href="https://d2.naver.com/helloworld/7495331">참고: SharedArrayBuffer 객체와 Atomics 객체를 사용한 메모리 공유
 </a></p>
 </blockquote>
 <p>shared memory와 atomics를 알아보기 전에 알아야할 웹 워커 개념</p>
@@ -535,7 +534,7 @@
 <li><strong>Message System</strong>을 통해 Worker와 메인 스레드 간에 데이터를 교환할 수 있다.<br><code>Worker.postMessage()</code> 메세지 전송<br><code>Worker.onmessage</code> 응답</li>
 </ul>
 </li>
-<li><p>Shared worker <a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker" target="_blank" rel="noopener">참고</a></p>
+<li><p>Shared worker <a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker">참고</a></p>
 <ul>
 <li>Shared Worker는 Dedicated worker보다 좀더 복잡성을 가지고 있다.</li>
 <li>윈도우 창이나 iframe, 워커등의 다른 브라우징 컨텍스트에서도 접근이 가능한 특정 종류의 워커를 의미한다. 기존의 다른 종류의 워커들과 다른 전역 스코프를 갖는 인터페이스를 구현합니다. (SharedWorkerGlobalScope)</li>
@@ -556,7 +555,7 @@
 </li>
 </ul>
 <blockquote>
-<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javaScript-execution?hl=ko#%EB%B3%B5%EC%9E%A1%EC%84%B1_%EA%B0%90%EC%86%8C_%EB%98%90%EB%8A%94_web_workers_%EC%82%AC%EC%9A%A9" target="_blank" rel="noopener">참고1: 복잡성 감소 또는 Web Workers 사용</a><br><a href="https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API" target="_blank" rel="noopener">참고2: Web Workers API</a></p>
+<p><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javaScript-execution?hl=ko#%EB%B3%B5%EC%9E%A1%EC%84%B1_%EA%B0%90%EC%86%8C_%EB%98%90%EB%8A%94_web_workers_%EC%82%AC%EC%9A%A9">참고1: 복잡성 감소 또는 Web Workers 사용</a><br><a href="https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API">참고2: Web Workers API</a></p>
 </blockquote>
 <h4 id="shared-memory와-atomics"><a href="#shared-memory와-atomics" class="headerlink" title="shared memory와 atomics"></a>shared memory와 atomics</h4><ul>
 <li><p>웹 어셈블리어에서 적극적으로 사용 중.</p>
@@ -585,7 +584,7 @@
 </ul>
 </li>
 </ul>
-<a name="es9">
+<a name="es9" />
 
 <h2 id="4-ECMAScript-9"><a href="#4-ECMAScript-9" class="headerlink" title="4. ECMAScript 9"></a>4. ECMAScript 9</h2><ul>
 <li>object 해체 </li>
@@ -595,17 +594,15 @@
 </ul>
 </li>
 </ul>
-<a name="es10">
+<a name="es10" />
 
 <h2 id="5-ECMAScript-10"><a href="#5-ECMAScript-10" class="headerlink" title="5. ECMAScript 10"></a>5. ECMAScript 10</h2><ul>
-<li><p>Optional catch</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>(err)&#123;</span><br><span class="line">  <span class="comment">// 새로운 어휘공간으로 되어서 err를 사용할 수 있도록했지만</span></span><br><span class="line">  <span class="comment">// 불필요한 컨텍스트</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<li>Optional catch<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>(err)&#123;</span><br><span class="line">  <span class="comment">// 새로운 어휘공간으로 되어서 err를 사용할 수 있도록했지만</span></span><br><span class="line">  <span class="comment">// 불필요한 컨텍스트</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">  <span class="comment">// err 인자 없이 사용가능</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<a name="es11">
+<a name="es11" />
 
 <h2 id="6-Stage3-ECMAScript-11"><a href="#6-Stage3-ECMAScript-11" class="headerlink" title="6. Stage3 (ECMAScript 11)"></a>6. Stage3 (ECMAScript 11)</h2><p>아래 것은 크롬이 이미 구현</p>
 <ul>
@@ -633,16 +630,16 @@
 <hr>
 <p><strong>참고자료</strong></p>
 <ol>
-<li><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/" target="_blank" rel="noopener">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a></li>
-<li><a href="https://d2.naver.com/helloworld/7495331" target="_blank" rel="noopener">SharedArrayBuffer 객체와 Atomics 객체를 사용한 메모리 공유
+<li><a href="https://gomugom.github.io/is-class-only-a-syntactic-sugar/">ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?</a></li>
+<li><a href="https://d2.naver.com/helloworld/7495331">SharedArrayBuffer 객체와 Atomics 객체를 사용한 메모리 공유
 </a></li>
-<li><a href="https://github.com/tc39/proposals" target="_blank" rel="noopener">ECMAScript 발제 레포</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank" rel="noopener">변수에 배열의 나머지를 할당하기</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker" target="_blank" rel="noopener">SharedWorker</a></li>
-<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javaScript-execution?hl=ko#%EB%B3%B5%EC%9E%A1%EC%84%B1_%EA%B0%90%EC%86%8C_%EB%98%90%EB%8A%94_web_workers_%EC%82%AC%EC%9A%A9" target="_blank" rel="noopener">복잡성 감소 또는 Web Workers 사용</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API" target="_blank" rel="noopener">Web Workers API</a></li>
+<li><a href="https://github.com/tc39/proposals">ECMAScript 발제 레포</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">변수에 배열의 나머지를 할당하기</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/API/SharedWorker">SharedWorker</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/optimize-javaScript-execution?hl=ko#%EB%B3%B5%EC%9E%A1%EC%84%B1_%EA%B0%90%EC%86%8C_%EB%98%90%EB%8A%94_web_workers_%EC%82%AC%EC%9A%A9">복잡성 감소 또는 Web Workers 사용</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API">Web Workers API</a></li>
 </ol>
-</a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -661,7 +658,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/10/27/JS_25_1/" data-id="cm3u5tb2m006snjb2tph8jssp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/10/27/JS_25_1/" data-id="ckzv7cqid006nqobm699cbc3c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -32,7 +32,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2020/01/20/HTTP_017/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2020/01/20/http_017/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -341,7 +341,7 @@
 <li>서버는 특정 url에 대해 어떤 콘텐츠가 클라에게 보내주기 가장 적절한지에 대한 판단도 할 수 있어야 한다.</li>
 <li>트랜스코딩은 http 클라와 서버 사이의 내용 협상에 대한 응답에서 수행된다.</li>
 </ul>
-<a name="negotiation">
+<a name="negotiation" />
 
 <h1 id="내용-협상-기법"><a href="#내용-협상-기법" class="headerlink" title="내용 협상 기법"></a>내용 협상 기법</h1><ul>
 <li>서버에 있는 페이지들 중<br>어떤 것이 클라에게 맞는지 판단하는<br>3가지 방법</li>
@@ -372,7 +372,7 @@
 </ul>
 </li>
 </ol>
-<a name="client">
+<a name="client"/>
 
 <h1 id="1-클라-주도-협상"><a href="#1-클라-주도-협상" class="headerlink" title="1. 클라 주도 협상"></a>1. 클라 주도 협상</h1><ul>
 <li>서버에게 있어 가장 쉬운 방법은<ul>
@@ -398,7 +398,7 @@
 </ul>
 </li>
 </ol>
-<a name="server">
+<a name="server"/>
 
 <h1 id="2-서버-주도-협상"><a href="#2-서버-주도-협상" class="headerlink" title="2. 서버 주도 협상"></a>2. 서버 주도 협상</h1><ul>
 <li>불필요한 커뮤니케이션 비용을 줄이는 방향으로<br>서버가 어떤 페이지를 돌려줄 것인지 결정하게 하는 것.<ul>
@@ -445,14 +445,11 @@
 </ul>
 <h2 id="2-2-내용-협상-헤더의-품질값"><a href="#2-2-내용-협상-헤더의-품질값" class="headerlink" title="2.2 내용 협상 헤더의 품질값"></a>2.2 내용 협상 헤더의 품질값</h2><ul>
 <li><ol start="2">
-<li>HTTP 프로토콜은 클라가 각 선호의 카테고리마다, 여러 선택 가능한 항목을<br>선호도와 함께 나열할 수 있도록 품질값을 정의하였다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: en;q=0.5, fr;q=0.0, nl;q=1.0, tr;q=0.0</span><br></pre></td></tr></table></figure>
-</li>
+<li>HTTP 프로토콜은 클라가 각 선호의 카테고리마다, 여러 선택 가능한 항목을<br>선호도와 함께 나열할 수 있도록 품질값을 정의하였다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: en;q=0.5, fr;q=0.0, nl;q=1.0, tr;q=0.0</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
-<li><p>q는 0.0부터 1.0까지의 값을 가질 수 있다.</p>
-</li>
-<li><p>위 상황은 네덜란드어(nl)로 된 문서를 받기 원하고 잇으나<br>영어(en)로 된 문서라도 받아들일 것임을 의미한다.</p>
-</li>
+<li>q는 0.0부터 1.0까지의 값을 가질 수 있다.</li>
+<li>위 상황은 네덜란드어(nl)로 된 문서를 받기 원하고 잇으나<br>영어(en)로 된 문서라도 받아들일 것임을 의미한다.</li>
 </ul>
 <p>때때로 서버는 클라의 선호에 대응하는 문서를 하나도 갖고있지 않을 수 도 있다.<br>이 경우, 서버는 클라의 선호에 맞추기 위해<br><strong>문서를 고치거나 트랜스코딩</strong> 할 수 있다.</p>
 <h2 id="2-3-그-외의-헤더들에-의해-결정"><a href="#2-3-그-외의-헤더들에-의해-결정" class="headerlink" title="2.3 그 외의 헤더들에 의해 결정"></a>2.3 그 외의 헤더들에 의해 결정</h2><ul>
@@ -464,7 +461,7 @@
 </ul>
 </li>
 </ul>
-<a name="cache">
+<a name="cache"/>
 
 <h1 id="3-투명-협상"><a href="#3-투명-협상" class="headerlink" title="3. 투명 협상"></a>3. 투명 협상</h1><ul>
 <li>클라 입장에서 협상하는 중개자 프락시를 둠으로써,<br>클라와의 메세지 교환을 최소화하는 동시에<br>서버 주도 협상으로 인한 부하를 서버에서 제거한다.</li>
@@ -491,8 +488,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vary: User-Agent, Cookie</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vary: User-Agent, Cookie</span><br></pre></td></tr></table></figure>
 <ul>
 <li>서버의 Vary 헤더가 이렇다면, 거대한 수의 다른 User-Agent와 Cookie이 많은 배리언트 variant를 만들어낼 것이다.</li>
 <li>캐시는 각 배리언트마다 알맞은 문서 버전을 저장해야 한다.</li>
@@ -507,7 +503,7 @@
 
 <hr>
 <hr>
-<a name="transcoding">
+<a name="transcoding"/>
 
 <h1 id="트랜스-코딩"><a href="#트랜스-코딩" class="headerlink" title="트랜스 코딩"></a>트랜스 코딩</h1><ul>
 <li>서버가 클라의 요구에 맞는 문서를 아예 갖고 있지 않다면?<br>이론적으로는 서버는 기존의 문서를 클라가 사용할 수 있는 무언가로 변환할 수도 있다.<br>-&gt; 이 옵션을 <strong>트랜스코딩</strong>이라고 부른다.</li>
@@ -558,14 +554,14 @@
 </ol>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Content_negotiation" target="_blank" rel="noopener">http 콘텐츠 협상</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Content_negotiation">http 콘텐츠 협상</a></li>
 </ul>
-</a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -584,7 +580,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/20/HTTP_017/" data-id="cm3u5tb2a004anjb24i9ta8oa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/20/HTTP_017/" data-id="ckzv7cqgg004cqobm7uf7c9qa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

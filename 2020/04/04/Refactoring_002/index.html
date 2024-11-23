@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2020/04/04/Refactoring_002/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2020/04/04/refactoring_002/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -369,7 +369,13 @@
 <h3 id="예시로-접근해보기"><a href="#예시로-접근해보기" class="headerlink" title="예시로 접근해보기"></a>예시로 접근해보기</h3><ul>
 <li>다양한 연극을 외주로 받아서 공연하는 극단에서<br>공연 요청이 들어오면,<br>연극의 장르와 관객 규모를 기초로 비용을 책정하는데,<br>이때 발생했던 공연료와 포인트를 확인하는 프로그램이다.</li>
 </ul>
-<h1 id="최초-코드"><a href="#최초-코드" class="headerlink" title="최초 코드"></a>최초 코드</h1><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Finit%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<h1 id="최초-코드"><a href="#최초-코드" class="headerlink" title="최초 코드"></a>최초 코드</h1><iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Finit%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
 
 <p>발견부분</p>
 <ol>
@@ -380,7 +386,7 @@
 <li>비슷한 함수를 복사할 경우 중복되는 부분의 수정이 <strong>일관되게 반영되도록 보장해야한다.</strong></li>
 <li>리팩터링이 필요한 이유는 <strong>변경</strong>때문이다.</li>
 </ul>
-<h2 id="리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다"><a href="#리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다" class="headerlink" title="리팩토링하기 전에 제대로 된 테스트부터 마련한다.테스트는 반드시 자가진단하도록 만든다."></a>리팩토링하기 전에 제대로 된 <code>테스트부터 마련</code>한다.<br>테스트는 반드시 <code>자가진단</code>하도록 만든다.</h2><ul>
+<h2 id="리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다"><a href="#리팩토링하기-전에-제대로-된-테스트부터-마련한다-테스트는-반드시-자가진단하도록-만든다" class="headerlink" title="리팩토링하기 전에 제대로 된 테스트부터 마련한다.테스트는 반드시 자가진단하도록 만든다."></a>리팩토링하기 전에 제대로 된 <code>테스트부터 마련</code>한다.<br/>테스트는 반드시 <code>자가진단</code>하도록 만든다.</h2><ul>
 <li>테스트코드들부터 마련해야한다.</li>
 <li>리팩터링에서 테스트의 역할은 굉장히 중요하다.</li>
 <li>리팩터링 기법들이 버그 발생 여지를 최소화하도록 구성됐다고는 하나,<br>실제 작업은 사람이 수행하기 때문에 언제든지 실수할 수 있다.</li>
@@ -391,7 +397,7 @@
 <li>테스트를 작성하는 데 시간이 좀 걸리지만,<br>신경 써서 만들어두면 디버깅시간이 줄어서 전체 작업시간은 오히려 단축된다.</li>
 <li>리펙터링 후에는 반드시 테스트하는 습관을 가져야한다.</li>
 </ul>
-<h2 id="프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다"><a href="#프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다" class="headerlink" title="프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면,먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서원하는 기능을 추가한다."></a>프로그램이 새로운 기능을 추가하기에 <code>편한 구조가 아니라면</code>,<br>먼저 <code>기능을 추가하기 쉬운 형태로 리팩터링</code>하고 나서<br>원하는 기능을 추가한다.</h2><ul>
+<h2 id="프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다"><a href="#프로그램이-새로운-기능을-추가하기에-편한-구조가-아니라면-먼저-기능을-추가하기-쉬운-형태로-리팩터링하고-나서원하는-기능을-추가한다" class="headerlink" title="프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면,먼저 기능을 추가하기 쉬운 형태로 리팩터링하고 나서원하는 기능을 추가한다."></a>프로그램이 새로운 기능을 추가하기에 <code>편한 구조가 아니라면</code>,<br/>먼저 <code>기능을 추가하기 쉬운 형태로 리팩터링</code>하고 나서<br/>원하는 기능을 추가한다.</h2><ul>
 <li><p>프로그램이 잘 작동하는 상황에서 그저 코드가 ‘<strong>지저분하다</strong>‘는 이유료 불평하는 것은<br>프로그램의 구조를 너무 미적인 기준으로만 판단하는 건 아닐까</p>
 <ul>
 <li>코드를 수정하려면 <strong>사람이 개입되고</strong>, 
@@ -403,7 +409,13 @@
 <li><p>수백줄짜리 코드를 수정할 때면,<br>먼저 프로그램의 작동방식을 더 쉽게 파악할 수 있도록<br>코드를 여러 함수와 프로그램 요소로 재구성한다.</p>
 </li>
 </ul>
-<h2 id="리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다"><a href="#리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다" class="headerlink" title="리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다."></a>리팩터링은 프로그램 수정을 <code>작은 단계</code>로 나눠 진행한다. <br>그래서 중간에 실수하더라도 <code>버그</code>를 쉽게 찾을 수 있다.</h2><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F02%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<h2 id="리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다"><a href="#리팩터링은-프로그램-수정을-작은-단계로-나눠-진행한다-그래서-중간에-실수하더라도-버그를-쉽게-찾을-수-있다" class="headerlink" title="리팩터링은 프로그램 수정을 작은 단계로 나눠 진행한다. 그래서 중간에 실수하더라도 버그를 쉽게 찾을 수 있다."></a>리팩터링은 프로그램 수정을 <code>작은 단계</code>로 나눠 진행한다. <br/>그래서 중간에 실수하더라도 <code>버그</code>를 쉽게 찾을 수 있다.</h2><iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F02%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
 
 <ul>
 <li>함수 추출하기</li>
@@ -427,7 +439,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다"><a href="#컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다" class="headerlink" title="컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.사람이 이해하도록 작성하는 프로그래머가 진정한 실력자다."></a>컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.<br><code>사람이 이해하도록 작성하는 프로그래머</code>가 진정한 실력자다.</h2><ul>
+<h2 id="컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다"><a href="#컴퓨터가-이해하는-코드는-바보도-작성할-수-있다-사람이-이해하도록-작성하는-프로그래머가-진정한-실력자다" class="headerlink" title="컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.사람이 이해하도록 작성하는 프로그래머가 진정한 실력자다."></a>컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.<br/><code>사람이 이해하도록 작성하는 프로그래머</code>가 진정한 실력자다.</h2><ul>
 <li><strong>임시변수를 질의함수로 바꾸기</strong>(7장): 긴 함수를 쪼갤때마다 변수를 최대한 제거한다.<ul>
 <li>지역변수를 제거해서 얻는 가장 큰 장점은 추출 작업이 훨씬 쉬워진다는 것이다.</li>
 <li>유효범위를 신경써야 할 대상이 줄어들기 때문이다.</li>
@@ -453,7 +465,13 @@
 <li><strong>문장 슬라이드하기</strong>(8장): 문장 위치를 바꾸는것..?</li>
 </ul>
 <hr>
-<h2 id="캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다"><a href="#캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다" class="headerlink" title="캠핑자들에게는 도착했을 때보다 깔끔하게 정돈하고 떠난다는 규칙이 있다.프로그래밍도 마찬가지다.항시 코드베이스를 작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다."></a>캠핑자들에게는 <code>도착했을 때보다 깔끔하게 정돈하고 떠난다</code>는 규칙이 있다.<br>프로그래밍도 마찬가지다.<br>항시 코드베이스를 <code>작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.</code></h2><iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F03%2Findex.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<h2 id="캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다"><a href="#캠핑자들에게는-도착했을-때보다-깔끔하게-정돈하고-떠난다는-규칙이-있다-프로그래밍도-마찬가지다-항시-코드베이스를-작업-시작-전보다-건강하게-healthy-만들어놓고-떠나야-한다" class="headerlink" title="캠핑자들에게는 도착했을 때보다 깔끔하게 정돈하고 떠난다는 규칙이 있다.프로그래밍도 마찬가지다.항시 코드베이스를 작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다."></a>캠핑자들에게는 <code>도착했을 때보다 깔끔하게 정돈하고 떠난다</code>는 규칙이 있다.<br/>프로그래밍도 마찬가지다.<br/>항시 코드베이스를 <code>작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.</code></h2><iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F03%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
 
 <ul>
 <li><strong>단계 쪼개기</strong>(6장): 1. 필요한 데이터를 처리하고 =&gt; 2. 그 다음 단계 =&gt; …</li>
@@ -462,8 +480,7 @@
 <li>간결함이 지혜의 정수일지 몰라도, 프로그래밍에서만큼은 명료함이 진화할 수 있는 소프트웨어의 정수다.</li>
 </ul>
 <hr>
-<h2 id="좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기"><a href="#좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기" class="headerlink" title="좋은코드를 가늠하는 확실한 방법은 얼마나 수정하기 쉬운가다.다형성을 활용해 계산 코드 재구성하기"></a>좋은코드를 가늠하는 확실한 방법은 <code>얼마나 수정하기 쉬운가</code>다.<br><code>다형성</code>을 활용해 계산 코드 재구성하기</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">amountFor</span>(<span class="params">aPerformance</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (aPerformance.play.type) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"tragedy"</span>: <span class="comment">//비극</span></span><br><span class="line">        result = <span class="number">40000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.audience &gt; <span class="number">30</span>)</span><br><span class="line">          result += <span class="number">1000</span> * (aPerformance.audience - <span class="number">30</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"comedy"</span>: <span class="comment">//희극</span></span><br><span class="line">        result = <span class="number">30000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.audience &gt; <span class="number">20</span>)</span><br><span class="line">          result += <span class="number">1000</span> + <span class="number">500</span> * (aPerformance.audience - <span class="number">20</span>);</span><br><span class="line">        result += <span class="number">300</span> * aPerformance.audience;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`알 수 없는 장르: <span class="subst">$&#123;aPerformance.play.type&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기"><a href="#좋은코드를-가늠하는-확실한-방법은-얼마나-수정하기-쉬운가다-다형성을-활용해-계산-코드-재구성하기" class="headerlink" title="좋은코드를 가늠하는 확실한 방법은 얼마나 수정하기 쉬운가다.다형성을 활용해 계산 코드 재구성하기"></a>좋은코드를 가늠하는 확실한 방법은 <code>얼마나 수정하기 쉬운가</code>다.<br/><code>다형성</code>을 활용해 계산 코드 재구성하기</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">amountFor</span>(<span class="params">aPerformance</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (aPerformance.<span class="property">play</span>.<span class="property">type</span>) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;tragedy&quot;</span>: <span class="comment">//비극</span></span><br><span class="line">        result = <span class="number">40000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.<span class="property">audience</span> &gt; <span class="number">30</span>)</span><br><span class="line">          result += <span class="number">1000</span> * (aPerformance.<span class="property">audience</span> - <span class="number">30</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;comedy&quot;</span>: <span class="comment">//희극</span></span><br><span class="line">        result = <span class="number">30000</span>;</span><br><span class="line">        <span class="keyword">if</span> (aPerformance.<span class="property">audience</span> &gt; <span class="number">20</span>)</span><br><span class="line">          result += <span class="number">1000</span> + <span class="number">500</span> * (aPerformance.<span class="property">audience</span> - <span class="number">20</span>);</span><br><span class="line">        result += <span class="number">300</span> * aPerformance.<span class="property">audience</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="attr">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`알 수 없는 장르: <span class="subst">$&#123;aPerformance.play.type&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>위 코드는 타입이 추가될수록 <strong>복잡도가 올라간다.</strong><ul>
 <li>다형성을 활용하는 것이 자연스럽다.</li>
@@ -476,7 +493,13 @@
 <li><strong>타입코드를 서브클래스로 바꾸기</strong>(12장)</li>
 <li><strong>생성자 팩터리 함수로 바꾸기</strong>(11장)</li>
 </ul>
-<iframe src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F04%2FcreateStatementData.js&theme=dark&view=editor" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="[리팩토링2판]_예시" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F04%2FcreateStatementData.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
 
 <ol>
 <li>원본함수를 중첩 함수 여러개로 나눴다.</li>
@@ -489,7 +512,7 @@
 <li>건강한 코드베이스는 <strong>생산성을 극대화</strong>하고,<br>고객에게 필요한 기능을<br><strong>더 빠르고 저렴한 비용으로 제공</strong>하도록 해준다.</li>
 </ul>
 <hr>
-<h2 id="코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다"><a href="#코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다" class="headerlink" title="코드를 건강하게 관리하려면프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,이상에 가까워지도록 리팩토링해야한다."></a>코드를 건강하게 관리하려면<br>프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,<br><code>이상에 가까워지도록 리팩토링</code>해야한다.</h2><p>리팩토링을 효과적으로 하는 핵심은</p>
+<h2 id="코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다"><a href="#코드를-건강하게-관리하려면프로그래밍-팀의-현재와-이상의-차이에-항상-신경-쓰면서-이상에-가까워지도록-리팩토링해야한다" class="headerlink" title="코드를 건강하게 관리하려면프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,이상에 가까워지도록 리팩토링해야한다."></a>코드를 건강하게 관리하려면<br/>프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,<br/><code>이상에 가까워지도록 리팩토링</code>해야한다.</h2><p>리팩토링을 효과적으로 하는 핵심은</p>
 <ul>
 <li>단계를 잘게 나눠야 더 빠르게 처리할 수 있고</li>
 <li>코드는 절대 깨지지 않으며</li>
@@ -514,7 +537,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/04/04/Refactoring_002/" data-id="cm3u5tb2v008snjb228jwti6m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/04/04/Refactoring_002/" data-id="ckzv7cqje008vqobmhg148puu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

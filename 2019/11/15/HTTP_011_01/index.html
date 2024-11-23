@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="http,study,Identification,web" />
+        <meta name="keywords" content="http,study,web,Identification" />
     
     
     <meta name="description" content="현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어한다.개인화를 하는 방법은 여러 가지가 있다.  개별 인사 &#x2F; 사용자 맞춤 추천 &#x2F; 저장된 사용자 정보 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.   사용자 식별 관련 정보를 전달하는 HTTP 헤더 IP 주소로 사용자를 식별 사용자 로그인 인증을 통한 사용자">
@@ -24,14 +24,14 @@
 <meta property="article:author" content="Joy Kim">
 <meta property="article:tag" content="http">
 <meta property="article:tag" content="study">
-<meta property="article:tag" content="Identification">
 <meta property="article:tag" content="web">
+<meta property="article:tag" content="Identification">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/38/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/11/15/HTTP_011_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/15/http_011_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -325,7 +325,7 @@
 <li>URL에 식별자를 포함하는 <strong>뚱뚱한 URL</strong></li>
 <li>식별 정보를 지속해서 유지하는 <strong>쿠키</strong></li>
 </ol>
-<a name="header">
+<a name="header"/>
 
 <h2 id="1-HTTP-헤더"><a href="#1-HTTP-헤더" class="headerlink" title="1. HTTP 헤더"></a>1. HTTP 헤더</h2><ul>
 <li><code>From</code> (요창): 사용자 이메일 주소</li>
@@ -342,16 +342,16 @@
 <li>운영체제에 대한 정보까지 포함하여 서버에게 알려준다.</li>
 <li>특정 사용자를 식별하는 데는 큰 도움이 되지 않는다.</li>
 </ul>
-<img src="/images/2019/38/01.png">
+<img src="/images/2019/38/01.png" />
 
 <h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a><code>Referer</code></h3><ul>
 <li>사용자가 현재 페이지로 유입하게 한 웹페이지의 URL을 가리킨다.</li>
 <li>사용자의 웹 사용 형태나 사용자이 취향을 더 잘 파악할 수 있다.(?)</li>
 </ul>
-<img src="/images/2019/38/02.png">
+<img src="/images/2019/38/02.png" />
 
 
-<a name="ip">
+<a name="ip"/>
 
 <h2 id="2-클라이언트-IP-주소"><a href="#2-클라이언트-IP-주소" class="headerlink" title="2. 클라이언트 IP 주소"></a>2. 클라이언트 IP 주소</h2><ul>
 <li>초기 웹 선구자들은 사용자 식별에 클라이언트 IP 주소를 사용하려 했다.</li>
@@ -371,14 +371,14 @@
 </ol>
 <ul>
 <li>일부 프락시는 원본 IP 주소를 보존하려고 <code>Client-ip</code>나 <code>X-Forwarded-For</code>같은 확장 헤더를 추가하여 이 문제를 해결하려 했다.<blockquote>
-<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For" target="_blank" rel="noopener">X-Forwarded-For</a><br>HTTP 프록시나 로드 밸런서를 통해 웹 서버에 접속하는 클라이언트의 원 IP 주소를 식별하는 사실상의 표준 헤더다. </p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/X-Forwarded-For">X-Forwarded-For</a><br>HTTP 프록시나 로드 밸런서를 통해 웹 서버에 접속하는 클라이언트의 원 IP 주소를 식별하는 사실상의 표준 헤더다. </p>
 </blockquote>
 </li>
 <li>모든 프락시가 이런 식으로 동작하진 않는다.</li>
 </ul>
 </li>
 </ul>
-<a name="auth">
+<a name="auth"/>
 
 <h2 id="3-사용자-로그인-인증"><a href="#3-사용자-로그인-인증" class="headerlink" title="3. 사용자 로그인 인증"></a>3. 사용자 로그인 인증</h2><ul>
 <li><p>웹 서버는 사용자 이름과 비밀번호로 인증할 것을 요구해서, 사용자에게 명시적으로 식별 요청을 할 수 있다.</p>
@@ -386,8 +386,8 @@
 <li><p>웹 사이트 로그인이 더 쉽도록 <code>WWW-Authenticate</code>와 <code>Authorization</code>헤더를 사용해 웹 사이트에 사용자 이름이 전달하는 자체적인 체계를 가지고 있다.</p>
 <blockquote>
 <ol>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate" target="_blank" rel="noopener">WWW-Authenticate</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Authorization" target="_blank" rel="noopener">Authorization</a><br>HTTP Authorization 요청 헤더는 서버의 사용자 에이전트임을 증명하는 자격을 포함하여, 보통 서버에서 401 Unauthorized 상태를 WWW-Authenticate 헤더로 알려준 이후에 나옵니다.</li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate">WWW-Authenticate</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Authorization">Authorization</a><br>HTTP Authorization 요청 헤더는 서버의 사용자 에이전트임을 증명하는 자격을 포함하여, 보통 서버에서 401 Unauthorized 상태를 WWW-Authenticate 헤더로 알려준 이후에 나옵니다.</li>
 </ol>
 </blockquote>
 </li>
@@ -395,14 +395,14 @@
 </li>
 <li><p>서버에서, 사용자가 사이트에 접근하기 전에 로그인을 시키고자 한다면 HTTP 401 Unauthorized 응답코드를 브라우저에 보낼 수 있다.</p>
 <ol>
-<li><a href="http://www.joy.com" target="_blank" rel="noopener">www.joy.com</a> 사이트로 요청</li>
+<li><a href="http://www.joy.com">www.joy.com</a> 사이트로 요청</li>
 <li>사용자의 식별 정보를 알지 못하므로 401 Unauthorized 코드를 내리고, <code>WWW-Authenticate</code>헤더를 반환하여 로그인하라고 요청한다.</li>
 <li>로그인 후 <code>Authorization</code>헤더에 토큰을 포함하여 전송하여, 사용자 식별을 시도한다.</li>
 <li>한번만 로그인하면, 브라우저는 요청마다 해당 사용자의 식별 토큰을 Authorization헤더에 담아서 서버로 전송해서, 한 세션이 진행되는 내내 그 사용자에 대한 식별을 유지한다.</li>
 </ol>
 </li>
 </ul>
-<a name="fat">
+<a name="fat"/>
 
 <h2 id="4-뚱뚱한-URL"><a href="#4-뚱뚱한-URL" class="headerlink" title="4. 뚱뚱한 URL"></a>4. 뚱뚱한 URL</h2><ul>
 <li>사용자의 URL마다 <strong>버전</strong>을 기술하여 사용자를 식별하고, 추적하였다.</li>
@@ -433,14 +433,14 @@
 </ol>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ol>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate" target="_blank" rel="noopener">WWW-Authenticate (:mdn)</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/WWW-Authenticate">WWW-Authenticate (:mdn)</a></li>
 </ol>
-</a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -459,7 +459,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/15/HTTP_011_01/" data-id="cm3u5tb25003cnjb20dr8pqu0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/15/HTTP_011_01/" data-id="ckzv7cqfv0037qobmolizto2f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

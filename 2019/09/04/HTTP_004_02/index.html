@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/09/04/HTTP_004_02/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/09/04/http_004_02/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -322,7 +322,7 @@
 <li>병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화</li>
 <li>커넥션 관리를 위해 따라야 할 규칙들</li>
 </ol>
-<a name="1">
+<a name="1"/>
 
 <h1 id="1-병렬-커넥션-parallel"><a href="#1-병렬-커넥션-parallel" class="headerlink" title="1. 병렬 커넥션 parallel"></a>1. 병렬 커넥션 parallel</h1><ul>
 <li><ol start="2">
@@ -353,7 +353,7 @@
 <li>사실 사람들은 페이지의 총 다운로드 시간이 더 걸린다 하더라도, 화면 전체에서 여러 작업이 일어나는 것으 ㄹ눈으로 확인할 수 있으면 그것을 더 빠르다고 여긴다.</li>
 </ul>
 <hr>
-<a name="2">
+<a name="2"/>
 
 <h1 id="2-지속-커넥션-persistent"><a href="#2-지속-커넥션-persistent" class="headerlink" title="2. 지속 커넥션 persistent"></a>2. 지속 커넥션 persistent</h1><p>웹 클라는 보통 같은 사이트에 여러 개의 커넥션을 맺는다. 즉 같은 서버에 계속 요청</p>
 <ul>
@@ -389,7 +389,7 @@
 <li>HTTP/1.0+ 에는 keep-alive 커넥션이 있고,<br>HTTP/1.1에는 지속 커넥션이 있다.</li>
 </ol>
 <hr>
-<a name="2-2">
+<a name="2-2"/>
 
 <h2 id="2-2-HTTP-1-0-의-Keep-Alive-커넥션"><a href="#2-2-HTTP-1-0-의-Keep-Alive-커넥션" class="headerlink" title="2.2 HTTP/1.0+의 Keep-Alive 커넥션"></a>2.2 HTTP/1.0+의 Keep-Alive 커넥션</h2><ul>
 <li>초기의 지속 커넥션은 상호 운용과 관련된 설계에 문제가 있었지만,<br>아직 많은 클라와 서버는 이 초기 keep-alive 커넥션을 사용하고 있다.<ul>
@@ -423,7 +423,7 @@
 </li>
 </ul>
 <p>keep-alive의 동작은 <code>Keep-Alive</code> 헤더의 옵션들로 제어 가능하다</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keep-Alive: timeout=5, max=1000</span><br><span class="line">5초 동안 1000개의 커넥션을 유지하라는 내용</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keep-Alive: timeout=5, max=1000</span><br><span class="line">5초 동안 1000개의 커넥션을 유지하라는 내용</span><br></pre></td></tr></table></figure>
 
 <ol>
 <li><strong>timeout</strong><ul>
@@ -437,7 +437,7 @@
 </ul>
 </li>
 </ol>
-<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive" target="_blank" rel="noopener">mdn 참고</a></p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Keep-Alive">mdn 참고</a></p>
 <h3 id="2-2-3-Keep-Alive-커넥션-제한과-규칙"><a href="#2-2-3-Keep-Alive-커넥션-제한과-규칙" class="headerlink" title="2.2.3 Keep-Alive 커넥션 제한과 규칙"></a>2.2.3 Keep-Alive 커넥션 제한과 규칙</h3><ul>
 <li><ol start="2">
 <li>HTTP/1.0과 HTTP/2.0에서는 사용되지 않는다.</li>
@@ -504,9 +504,9 @@
 <li>웹 서버는 Proxy-Connection를 무시한다.</li>
 <li>영리한 프락시라면, 의미 없는 Proxy-Connection헤더를 Connection 헤더로 바꿈으로써 원하던 효과를 얻게 된다.</li>
 </ol>
-<p><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2" target="_blank" rel="noopener">RFC 7230</a><br><a href="https://stackoverflow.com/questions/15460819/what-is-the-difference-between-connection-and-proxy-connection-in-http-header" target="_blank" rel="noopener">Proxy-Connection vs Connection header</a></p>
+<p><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2">RFC 7230</a><br><a href="https://stackoverflow.com/questions/15460819/what-is-the-difference-between-connection-and-proxy-connection-in-http-header">Proxy-Connection vs Connection header</a></p>
 <hr>
-<a name="2-3">
+<a name="2-3"/>
 
 <h2 id="2-3-HTTP-1-1의-지속-커넥션"><a href="#2-3-HTTP-1-1의-지속-커넥션" class="headerlink" title="2.3 HTTP/1.1의 지속 커넥션"></a>2.3 HTTP/1.1의 지속 커넥션</h2><ul>
 <li>설계가 더 개선된 지속 커넥션을 지원한다.</li>
@@ -535,7 +535,7 @@
 <li>Connection 헤더의 값과 상관없이 언제든지 커넥션을 끊을 수 있다.</li>
 </ul>
 <hr>
-<a name="3">
+<a name="3"/>
 
 <h1 id="3-파이프라인-커넥션-pipelined"><a href="#3-파이프라인-커넥션-pipelined" class="headerlink" title="3. 파이프라인 커넥션 pipelined"></a>3. 파이프라인 커넥션 pipelined</h1><ul>
 <li><ol start="2">
@@ -565,7 +565,7 @@
 </li>
 </ul>
 <hr>
-<a name="4">
+<a name="4"/>
 
 <h1 id="4-커넥션-끊기에-대한-미스터리"><a href="#4-커넥션-끊기에-대한-미스터리" class="headerlink" title="4. 커넥션 끊기에 대한 미스터리"></a>4. 커넥션 끊기에 대한 미스터리</h1><h2 id="4-1-마음대로-커넥션-끊기"><a href="#4-1-마음대로-커넥션-끊기" class="headerlink" title="4.1 마음대로 커넥션 끊기"></a>4.1 마음대로 커넥션 끊기</h2><ul>
 <li>보통 커넥션은 메세지를 다 보낸 다음 끊지만,<br>에러가 있는 상황에서는 헤더의 중간이나, 다른 엉뚱한 곳에서 끊길 수 있다.</li>
@@ -619,17 +619,17 @@
 <hr>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://fetch.spec.whatwg.org/#connections" target="_blank" rel="noopener">fetch 공식문서</a></li>
-<li><a href="https://javaScript.info/fetch-api" target="_blank" rel="noopener">fetch api</a></li>
-<li><a href="https://xhr.spec.whatwg.org/" target="_blank" rel="noopener">XMLhttprequest 공식문서</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2" target="_blank" rel="noopener">keep alive관련 RFC문서</a></li>
+<li><a href="https://fetch.spec.whatwg.org/#connections">fetch 공식문서</a></li>
+<li><a href="https://javaScript.info/fetch-api">fetch api</a></li>
+<li><a href="https://xhr.spec.whatwg.org/">XMLhttprequest 공식문서</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7230#appendix-A.1.2">keep alive관련 RFC문서</a></li>
 </ul>
-</a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -648,7 +648,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="cm3u5tb23002xnjb2c9r2fh3g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/04/HTTP_004_02/" data-id="ckzv7cqfk002tqobmkrrr129e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

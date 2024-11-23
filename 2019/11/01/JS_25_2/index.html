@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/11/01/JS_25_2/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/01/js_25_2/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -333,7 +333,7 @@
 <li><a href="https://feel5ny.github.io/2019/01/22/JS_17/">작년 글</a></li>
 </ul>
 <hr>
-<a name="program">
+<a name="program" />
 
 <h1 id="Program"><a href="#Program" class="headerlink" title="Program"></a>Program</h1><h2 id="Program-amp-Timing"><a href="#Program-amp-Timing" class="headerlink" title="Program &amp; Timing"></a>Program &amp; Timing</h2><img src="/images/2019/35/01.png" style="width:100%">
 
@@ -347,7 +347,7 @@
 <li>메모리에 적재되어 있는 File을 실행한다. (Run)</li>
 <li>실행이 끝나고나면 종료된다. (Terminate)</li>
 </ol>
-<a name="runtime">
+<a name="runtime" />
 
 <h1 id="1-Runtime"><a href="#1-Runtime" class="headerlink" title="1. Runtime"></a>1. Runtime</h1><h2 id="1-1-Runtime-Execution"><a href="#1-1-Runtime-Execution" class="headerlink" title="1.1 Runtime Execution"></a>1.1 Runtime Execution</h2><ol>
 <li><p><code>Loading</code>: 적재되는 중</p>
@@ -378,7 +378,7 @@
 <h3 id="폰-노이만-머신"><a href="#폰-노이만-머신" class="headerlink" title="폰 노이만 머신"></a>폰 노이만 머신</h3><ul>
 <li>첫번째 명령이 끝나면 두번째 명령이 실행되고<br>이렇게 메모리에 적재된 명령이 순차적으로 처리되어 없어지게된다.<br>모든 명령이 끝나면 <code>terminate</code>가 일어난다.</li>
 <li>폰 노이만 머신은 내장 메모리 순차처리 방식으로서,<br>데이터 메모리와 프로그램 메모리가 구분되어 있지 않고<br>하나의 버스를 가지고 있는 구조를 말한다. </li>
-<li><a href="https://ko.wikipedia.org/wiki/%ED%8F%B0_%EB%85%B8%EC%9D%B4%EB%A7%8C_%EA%B5%AC%EC%A1%B0" target="_blank" rel="noopener">위키</a>, <a href="https://www.slideshare.net/sunnykwak90/ss-43131241" target="_blank" rel="noopener">참고</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%ED%8F%B0_%EB%85%B8%EC%9D%B4%EB%A7%8C_%EA%B5%AC%EC%A1%B0">위키</a>, <a href="https://www.slideshare.net/sunnykwak90/ss-43131241">참고</a></li>
 </ul>
 <h3 id="결국-런타임이란"><a href="#결국-런타임이란" class="headerlink" title="결국 런타임이란!"></a>결국 런타임이란!</h3><ul>
 <li>이 과정이 반복되고 모든 명령어를 소비하면 실행이 끝난다.</li>
@@ -421,8 +421,7 @@
 <li>메모리 관리의 어려운 점을 이야기하는 것도 있다.</li>
 <li>값이라는 것은 계속 변하기 때문에 <strong>상태</strong>라고 부른다.</li>
 </ul>
-<h2 id="Directive-Reference-직접참조"><a href="#Directive-Reference-직접참조" class="headerlink" title="Directive Reference 직접참조"></a>Directive Reference 직접참조</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = &apos;TEST&apos;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &amp;a // b에 a의 주소값을 할당</span><br><span class="line">c = &amp;b // c에 b의 주소값(a의 주소값)을 할당.</span><br><span class="line">a = b &amp; b =c (a=c) // 결국 a와 c도 같은 상황</span><br><span class="line">d = &apos;ABC&apos;</span><br><span class="line">b = &amp;d // b에 d의 주소를 재할당</span><br><span class="line">b = d &amp; b != c (a=c)</span><br></pre></td></tr></table></figure>
-
+<h2 id="Directive-Reference-직접참조"><a href="#Directive-Reference-직접참조" class="headerlink" title="Directive Reference 직접참조"></a>Directive Reference 직접참조</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = &#x27;TEST&#x27;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &amp;a // b에 a의 주소값을 할당</span><br><span class="line">c = &amp;b // c에 b의 주소값(a의 주소값)을 할당.</span><br><span class="line">a = b &amp; b =c (a=c) // 결국 a와 c도 같은 상황</span><br><span class="line">d = &#x27;ABC&#x27;</span><br><span class="line">b = &amp;d // b에 d의 주소를 재할당</span><br><span class="line">b = d &amp; b != c (a=c) </span><br></pre></td></tr></table></figure>
 <ul>
 <li>마지막은 b와 d는 같고<br>b는 d의 주소값을 갖고 있기때문에<br>b는 c와 같은 상태가 아니다.<br>하지만 a와 c는 아직 같은 상태</li>
 <li>b와 d는 같다는것이 바로 인지되지만,<br>b에 다른 값을 넣었을 때 변하는 b와 c가 같지 않다 라는 사실을 바로 이해하고 인지할 수 있을까? <ul>
@@ -438,11 +437,8 @@
 </li>
 </ul>
 <h2 id="Indirective-Reference-간접참조"><a href="#Indirective-Reference-간접참조" class="headerlink" title="Indirective Reference 간접참조"></a>Indirective Reference 간접참조</h2><ul>
-<li><p><strong>중간에 쿠션</strong>을 두는 개념</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &quot;TEST&quot;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &#123; target: &amp;a &#125;</span><br><span class="line">c = &amp;b</span><br><span class="line">d = &apos;ABC&apos;</span><br><span class="line">b.target = &amp;d // b를 직접 바꾸지 않기 때문에 더이상 싱크가 깨지는 문제가 일어나지 않는다.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>.</code>: 쿠션을 친다.</p>
-<ul>
+<li><strong>중간에 쿠션</strong>을 두는 개념<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &quot;TEST&quot;</span><br><span class="line">a주소 = 00, a크기 = 4</span><br><span class="line">b = &#123; target: &amp;a &#125;</span><br><span class="line">c = &amp;b</span><br><span class="line">d = &#x27;ABC&#x27;</span><br><span class="line">b.target = &amp;d // b를 직접 바꾸지 않기 때문에 더이상 싱크가 깨지는 문제가 일어나지 않는다.</span><br></pre></td></tr></table></figure></li>
+<li><code>.</code>: 쿠션을 친다.<ul>
 <li>런타임에 계산된다.</li>
 <li>비용이 든다.<ul>
 <li><strong>연산</strong>비용과 <strong>안정성</strong>을 바꿨다고 보면 된다.</li>
@@ -451,8 +447,7 @@
 </li>
 </ul>
 </li>
-<li><p>이 원리를 사용하여 linked list, 디자인패턴, 객체지향의 추상클래스도 만든다.</p>
-</li>
+<li>이 원리를 사용하여 linked list, 디자인패턴, 객체지향의 추상클래스도 만든다.</li>
 </ul>
 <h3 id="사실-자료구조는-아래-2가지-원리에서-시작된다"><a href="#사실-자료구조는-아래-2가지-원리에서-시작된다" class="headerlink" title="사실 자료구조는 아래 2가지 원리에서 시작된다"></a>사실 자료구조는 아래 2가지 원리에서 시작된다</h3><ol>
 <li>메모리를 통으로 쓰는 배열과</li>
@@ -539,7 +534,7 @@
 </ul>
 </li>
 </ul>
-</a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -558,7 +553,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="cm3u5tb2n006vnjb2l1db9bd1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/01/JS_25_2/" data-id="ckzv7cqin006wqobmy1qixzoc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

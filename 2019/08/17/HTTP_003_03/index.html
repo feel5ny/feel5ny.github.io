@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/08/17/HTTP_003_03/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/08/17/http_003_03/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -350,7 +350,7 @@
         <div class="article-entry" itemprop="articleBody">
             <img src="https://camo.githubusercontent.com/4e15cccf2a9277dcca2c8824092547dee7058744/68747470733a2f2f7261776769746875622e636f6d2f666f722d4745542f687474702d6465636973696f6e2d6469616772616d2f6d61737465722f6874747064642e706e67" style="width:100%">
 
-<p><a href="https://github.com/for-GET/http-decision-diagram" target="_blank" rel="noopener">출처: http-decision-diagram</a></p>
+<p><a href="https://github.com/for-GET/http-decision-diagram">출처: http-decision-diagram</a></p>
 <ul>
 <li><ol start="2">
 <li>HTTP 응답에, 어떤 상황에 해당 상태코드가 반환되는지를 보여주는 시각화 다이어그램 자료이다.</li>
@@ -358,7 +358,7 @@
 </li>
 </ul>
 <hr>
-<a name="status">
+<a name="status"/>
 
 <h1 id="상태코드와-사유구절"><a href="#상태코드와-사유구절" class="headerlink" title="상태코드와 사유구절"></a>상태코드와 사유구절</h1><ul>
 <li>클라이언트에게 그들의 트랜잭션을 이해할 수 있는 쉬운 방법을 제공한다.<br>=&gt; 상태코드, 사유구절</li>
@@ -367,7 +367,7 @@
 </ol>
 </li>
 </ul>
-<h1 id="상태코드-HTTP-1-1-기준"><a href="#상태코드-HTTP-1-1-기준" class="headerlink" title="상태코드 (HTTP/1.1 기준)"></a>상태코드 (HTTP/1.1 기준)</h1><a name="1">
+<h1 id="상태코드-HTTP-1-1-기준"><a href="#상태코드-HTTP-1-1-기준" class="headerlink" title="상태코드 (HTTP/1.1 기준)"></a>상태코드 (HTTP/1.1 기준)</h1><a name="1"/>
 
 <h2 id="정보성-상태-코드-100-199"><a href="#정보성-상태-코드-100-199" class="headerlink" title="정보성 상태 코드 (100 - 199)"></a>정보성 상태 코드 (100 - 199)</h2><ul>
 <li><ol start="2">
@@ -382,15 +382,16 @@
 <li>클라가 서버에 엔터티 본문을 전송하기 전에<br>그 엔터티 본문을 서버가 받아들일 것인지 확인하려고 할 때,<br>그 확인 작업을 최적화하기 위한 의도로 도입된 것이다.</li>
 </ul>
 <h4 id="클라이언트와-100-Continue"><a href="#클라이언트와-100-Continue" class="headerlink" title="클라이언트와 100 Continue"></a>클라이언트와 100 Continue</h4><ul>
-<li>클라이언트가 엔터티를 서버에게 보내려고 하고, 100 continue 응답을 기다리겠다면, 클라는 <strong>Expect 요청 헤더</strong>를 보낼 필요가 있다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expect: 100-continue</span><br></pre></td></tr></table></figure>
-
+<li><p>클라이언트가 엔터티를 서버에게 보내려고 하고, 100 continue 응답을 기다리겠다면, 클라는 <strong>Expect 요청 헤더</strong>를 보낼 필요가 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expect: 100-continue</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Expect">Expect</a></p>
 </li>
-</ul>
-<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Expect" target="_blank" rel="noopener">Expect</a></p>
+<li><p>최적화를 위한 것이다.</p>
+</li>
+<li><p>서버가 다루거나 사용할 수 없는 큰 엔터티를 서버에게 보내지 않으려는 목적으로만 사용해야 한다.</p>
+</li>
+<li><p>100 Continue 값이 담긴 Expect 헤더를 보낸 클라 서버가 100 Continue 응답을 보내주기를 막연히 기다리면 안 된다. 약간의 타임아웃 후에 클라는 그냥 엔터티를 보내야 한다.</p>
 <ul>
-<li>최적화를 위한 것이다.</li>
-<li>서버가 다루거나 사용할 수 없는 큰 엔터티를 서버에게 보내지 않으려는 목적으로만 사용해야 한다.</li>
-<li>100 Continue 값이 담긴 Expect 헤더를 보낸 클라 서버가 100 Continue 응답을 보내주기를 막연히 기다리면 안 된다. 약간의 타임아웃 후에 클라는 그냥 엔터티를 보내야 한다.<ul>
 <li>프론트 개발자는 예상치 못한 100 Continue 응답에도 대비해야한다..</li>
 </ul>
 </li>
@@ -427,10 +428,11 @@
 <li>웹 소켓과 함께 사용될 수 있다.</li>
 </ul>
 <p>아래는 upgrade 헤더의 웹소켓으로 서버가 프로토콜을 바꿨다는 의미이다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket </span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket </span><br><span class="line">Connection: Upgrade</span><br></pre></td></tr></table></figure>
+
 
 <hr>
-<a name="2">
+<a name="2"/>
 
 <h2 id="성공-상태-코드-200-299"><a href="#성공-상태-코드-200-299" class="headerlink" title="성공 상태 코드 (200 - 299)"></a>성공 상태 코드 (200 - 299)</h2><h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 - OK"></a>200 - OK</h3><ul>
 <li>요청은 정상이고, 엔터티 본문은 요청된 리소스를 포함하고 있다.<ul>
@@ -490,7 +492,7 @@
 </ul>
 </li>
 </ul>
-<a name="3">
+<a name="3"/>
 
 <h2 id="리다이렉션-상태-코드-300-399"><a href="#리다이렉션-상태-코드-300-399" class="headerlink" title="리다이렉션 상태 코드 (300 - 399)"></a>리다이렉션 상태 코드 (300 - 399)</h2><ul>
 <li>클라이언트가 관심 있어 하는 리소스에 대해 다른 위치를 사용하라고 말해주거나, 그 리소스의 내용 대신 다른 대안 응답을 제공한다.</li>
@@ -514,7 +516,7 @@
 <li>따라서 301 코드는 <code>GET</code> 또는 <code>HEAD</code> 방법에 대한 응답으로만 사용하고,<br>대신 POST 방법에 대한 <strong>308 영구 리디렉션</strong>을 사용하는 것이 좋다.</li>
 <li>이 상태에서는 메서드 변경이 명시적으로 금지되기 때문이다.</li>
 </ul>
-<img src="/images/2019/22/02.png">
+<img src="/images/2019/22/02.png" >
 
 
 <h3 id="302-Found"><a href="#302-Found" class="headerlink" title="302 - Found"></a>302 - Found</h3><ul>
@@ -523,7 +525,7 @@
 <li>따라서 302 코드는 <code>GET</code> 또는 <code>HEAD</code> 방법에 대한 응답으로만 설정하고,<br>메서드 변경이 명시적으로 금지되므로 대신 <strong>307 임시 리디렉션</strong>을 사용하는 것이 좋다.</li>
 <li>사용된 메서드를 <code>GET</code>로 변경하려는 경우 대신 <strong>303 “기타”</strong>를 사용해야 한다. </li>
 </ul>
-<img src="/images/2019/22/03.png" style="width:100%">
+<img src="/images/2019/22/03.png" style="width:100%" >
 
 
 <h3 id="303-See-Other"><a href="#303-See-Other" class="headerlink" title="303 - See Other"></a>303 - See Other</h3><ul>
@@ -547,7 +549,7 @@
 <li>Location 헤더로 주어진 URL을 리소스를 임시로 가리키기 위한 목적으로 사용해야 한다.</li>
 </ul>
 <h3 id="308-Permanent-Redirect"><a href="#308-Permanent-Redirect" class="headerlink" title="308 - Permanent Redirect"></a>308 - Permanent Redirect</h3><hr>
-<a name="4">
+<a name="4"/>
 
 <h2 id="클라이언트-에러-상태-코드-400-499"><a href="#클라이언트-에러-상태-코드-400-499" class="headerlink" title="클라이언트 에러 상태 코드 (400 - 499)"></a>클라이언트 에러 상태 코드 (400 - 499)</h2><ul>
 <li>클라이언트는 서버가 다룰 수 없는 무엇인가를 보낸다.</li>
@@ -674,7 +676,7 @@
 <li>법적 이유로 사용할 수 없는 클라이언트 오류 응답 코드는 사용자가 법적 조치가 발행된 웹 페이지와 같이<br>법적 이유로 사용할 수 없는 리소스를 요청했음을 나타낸다.</li>
 </ul>
 <hr>
-<a name="5">
+<a name="5"/>
 
 <h2 id="서버-에러-상태-코드-500-599"><a href="#서버-에러-상태-코드-500-599" class="headerlink" title="서버 에러 상태 코드 (500 - 599)"></a>서버 에러 상태 코드 (500 - 599)</h2><ul>
 <li>클라가 올바른 요청을 보냈음에도 서버 자체에서 에러가 발생하는 경우가 있다.</li>
@@ -711,15 +713,15 @@
 </ul>
 <hr>
 <ul>
-<li><a href="https://github.com/bookcrush?type=source" target="_blank" rel="noopener">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p>참고자료</p>
 <ol>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank" rel="noopener">MDN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">MDN</a></li>
 </ol>
-</a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -738,7 +740,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="cm3u5tb22002lnjb23qhnc5ia" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/17/HTTP_003_03/" data-id="ckzv7cqfe002eqobm4cf4zau0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

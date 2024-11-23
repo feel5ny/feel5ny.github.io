@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="http,study,web,robot" />
+        <meta name="keywords" content="http,study,robot,web" />
     
     
     <meta name="description" content="웹 로봇(스스로 움직이는 사용자 에이전트)에 대해서 알아본다.웹 로봇은 사람과의 상호작용 없이 연속된 웹 트랜잭션들을 자동으로 수행하는 소프트웨어 프로그램이다.  방식에 따라 크롤러, 스파이더, 웜, 봇 등 각양각색의 이름으로 불린다.   주식 그래프 봇 (매분 HTTP GET 요청을 보내 얻은 데이터로 그래프 생성)웹 통계조사 로봇 (통계 정보를 수집)검">
@@ -24,14 +24,14 @@
 <meta property="article:author" content="Joy Kim">
 <meta property="article:tag" content="http">
 <meta property="article:tag" content="study">
-<meta property="article:tag" content="web">
 <meta property="article:tag" content="robot">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2019/33/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/10/21/HTTP_009/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/10/21/http_009/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -313,7 +313,7 @@
 <blockquote>
 <p>주식 그래프 봇 (매분 HTTP GET 요청을 보내 얻은 데이터로 그래프 생성)<br>웹 통계조사 로봇 (통계 정보를 수집)<br>검색엔진 로봇 (모든 문서를 수집)<br>가격 비교 로봇 (상품 가격 DB를 만들기 위해 온라인 쇼핑몰 웹페이지 수집)</p>
 </blockquote>
-<a name="crawl">
+<a name="crawl"/>
 
 <h1 id="1-크롤러와-크롤링"><a href="#1-크롤러와-크롤링" class="headerlink" title="1. 크롤러와 크롤링"></a>1. 크롤러와 크롤링</h1><ul>
 <li>웹 크롤러는<ol>
@@ -436,66 +436,66 @@ URL들을 선택해야한다</li>
 <ol>
 <li>기본 포트가 80번일 때<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/bar.html" target="_blank" rel="noopener">HTTP://www.foo.com/bar.html</a></li>
+<li><a href="HTTP://www.foo.com/bar.html">HTTP://www.foo.com/bar.html</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com:80/bar.html" target="_blank" rel="noopener">HTTP://www.foo.com:80/bar.html</a></li>
+<li><a href="HTTP://www.foo.com:80/bar.html">HTTP://www.foo.com:80/bar.html</a></li>
 </ol>
 </li>
 </ul>
 </li>
 <li>이스케이프 문자가 원래 문자와 같을때<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/~fred" target="_blank" rel="noopener">HTTP://www.foo.com/~fred</a></li>
+<li><a href="HTTP://www.foo.com/~fred">HTTP://www.foo.com/~fred</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/%7fred" target="_blank" rel="noopener">HTTP://www.foo.com/%7fred</a></li>
+<li><a href="HTTP://www.foo.com/%7fred">HTTP://www.foo.com/%7fred</a></li>
 </ol>
 </li>
 </ul>
 </li>
 <li>태그에 따라 페이지가 바뀌지 않을 때<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/x.html#early" target="_blank" rel="noopener">HTTP://www.foo.com/x.html#early</a></li>
+<li><a href="HTTP://www.foo.com/x.html#early">HTTP://www.foo.com/x.html#early</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/x.html#middle" target="_blank" rel="noopener">HTTP://www.foo.com/x.html#middle</a></li>
+<li><a href="HTTP://www.foo.com/x.html#middle">HTTP://www.foo.com/x.html#middle</a></li>
 </ol>
 </li>
 </ul>
 </li>
 <li>서버가 대소문자를 구분하지 않을 때<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/readme.htm" target="_blank" rel="noopener">HTTP://www.foo.com/readme.htm</a></li>
+<li><a href="HTTP://www.foo.com/readme.htm">HTTP://www.foo.com/readme.htm</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/README.HTM" target="_blank" rel="noopener">HTTP://www.foo.com/README.HTM</a></li>
+<li><a href="HTTP://www.foo.com/README.HTM">HTTP://www.foo.com/README.HTM</a></li>
 </ol>
 </li>
 </ul>
 </li>
 <li>기본 페이지가 index.html일 때<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/" target="_blank" rel="noopener">HTTP://www.foo.com/</a></li>
+<li><a href="HTTP://www.foo.com/">HTTP://www.foo.com/</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/index.html" target="_blank" rel="noopener">HTTP://www.foo.com/index.html</a></li>
+<li><a href="HTTP://www.foo.com/index.html">HTTP://www.foo.com/index.html</a></li>
 </ol>
 </li>
 </ul>
 </li>
 <li>도메인과 ip 주소<ul>
 <li><ol start="2">
-<li><a href="HTTP://www.foo.com/index.html" target="_blank" rel="noopener">HTTP://www.foo.com/index.html</a></li>
+<li><a href="HTTP://www.foo.com/index.html">HTTP://www.foo.com/index.html</a></li>
 </ol>
 </li>
 <li><ol start="2">
-<li><a href="HTTP://209.231.87.45/index.html" target="_blank" rel="noopener">HTTP://209.231.87.45/index.html</a></li>
+<li><a href="HTTP://209.231.87.45/index.html">HTTP://209.231.87.45/index.html</a></li>
 </ol>
 </li>
 </ul>
@@ -507,11 +507,11 @@ URL들을 선택해야한다</li>
 <p>WIP..</p>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
-</a>
+
         </div>
         <footer class="article-footer">
             
@@ -530,7 +530,7 @@ URL들을 선택해야한다</li>
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/10/21/HTTP_009/" data-id="cm3u5tb27003knjb2v8jolj6s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/10/21/HTTP_009/" data-id="ckzv7cqfs002zqobm6v2kkn5g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

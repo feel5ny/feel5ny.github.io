@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/08/16/HTTP_003_02/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/08/16/http_003_02/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -426,7 +426,7 @@
 <li>모든 메서드를 구현하지 않았다 하더라도 메서드는 대부분 제한적으로 사용될 것이다.</li>
 <li>일반적으로 서버 설정에 의해 메서드의 제한이 정해지며, 따라서 사이트마다 또 서버마다 다를 수 있다.</li>
 </ul>
-<a name="safe">
+<a name="safe"/>
 
 <h1 id="안전성-Safe"><a href="#안전성-Safe" class="headerlink" title="안전성 Safe"></a>안전성 Safe</h1><ul>
 <li><ol start="2">
@@ -476,7 +476,7 @@
 </details>
 
 <hr>
-<a name="idempotent">
+<a name="idempotent"/>
 
 <h1 id="멱등성-Idempotent"><a href="#멱등성-Idempotent" class="headerlink" title="멱등성 Idempotent"></a>멱등성 Idempotent</h1><ul>
 <li>특정 메서드의 요청을 여러 번 했을 경우, 한번 요청했을 때와 결과가 같다면 멱등으로 간주한다.</li>
@@ -502,7 +502,7 @@
 </details>
 
 <hr>
-<a name="cachable">
+<a name="cachable"/>
 
 <h1 id="캐시-가능성-Cachable"><a href="#캐시-가능성-Cachable" class="headerlink" title="캐시 가능성 Cachable"></a>캐시 가능성 Cachable</h1><ul>
 <li>향후 재사용을 위해 이에 대한 응답을 저장할 수 있음을 나타낼 수 있다.</li>
@@ -515,11 +515,11 @@
   <summary>RFC 7231 설명</summary>
   요청 method는 "cacheable"로 정의되어 향후의 재사용을 위해 이에 대한 응답을 저장할 수 있음을 나타낼 수 있다. 구체적인 요건은 [RFC7234](https://tools.ietf.org/html/rfc7234)를 참조한다. 일반적으로 현재 또는 권한 있는 응답에 의존하지 않는 안전한 메서드를 캐시 가능한 것으로 정의된다. 이 규격은 압도적으로 많은 캐시 구현이 GET와 HEAD만 지원하지만 GET, HEAD 및 POST는 캐시 가능한 것으로 정의한다.
 
-<p>  Request methods can be defined as “cacheable” to indicate that responses to them are allowed to be stored for future reuse; for specific requirements see <a href="https://tools.ietf.org/html/rfc7234" target="_blank" rel="noopener">RFC7234</a>.  In general, safe methods that do not depend on a current or authoritative response are defined as cacheable; this specification defines GET, HEAD, and POST as cacheable, although the overwhelming majority of cache implementations only support GET and HEAD.</p>
+<p>  Request methods can be defined as “cacheable” to indicate that responses to them are allowed to be stored for future reuse; for specific requirements see <a href="https://tools.ietf.org/html/rfc7234">RFC7234</a>.  In general, safe methods that do not depend on a current or authoritative response are defined as cacheable; this specification defines GET, HEAD, and POST as cacheable, although the overwhelming majority of cache implementations only support GET and HEAD.</p>
 </details>
 
 
-<h1 id="메서드-종류-HTTP-1-1-기준"><a href="#메서드-종류-HTTP-1-1-기준" class="headerlink" title="메서드 종류 (HTTP/1.1 기준)"></a>메서드 종류 (HTTP/1.1 기준)</h1><a name="1">
+<h1 id="메서드-종류-HTTP-1-1-기준"><a href="#메서드-종류-HTTP-1-1-기준" class="headerlink" title="메서드 종류 (HTTP/1.1 기준)"></a>메서드 종류 (HTTP/1.1 기준)</h1><a name="1"/>
 
 <h2 id="1-GET"><a href="#1-GET" class="headerlink" title="1. GET"></a>1. GET</h2><p>서버에게 리소스를 달라고 요청하기 위해 쓰인다.</p>
 <table>
@@ -555,14 +555,13 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /index.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 617</span><br><span class="line"></span><br><span class="line">&lt;html&gt;...&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 617</span><br><span class="line"></span><br><span class="line">&lt;html&gt;...&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
-<h4 id="cf-1-왜-안전성과-멱등이-중요할까"><a href="#cf-1-왜-안전성과-멱등이-중요할까" class="headerlink" title="cf__1 왜 안전성과 멱등이 중요할까?"></a>cf__1 왜 안전성과 멱등이 중요할까?</h4><p>안전성과 멱등은 신뢰할 수 없는 네트워크 상의 HTTP를 신뢰할 수 있게 만들어 준다. 만일 GET 요청을 보내고 응답을 못 받았을 경우 그냥 한 번 더 보내면 된다. 이 동작은 안전하다. 먼저 보낸 요청이 벌써 처리되었다 하더라도 서버에 다른 영향은 없다. 마찬가지로 PUT 요청을 보내고 응답을 못 받았다면 단지 한 번 더 동일한 요청을 보내면 된다.<br>그러나 POST는 안전하지도 않고 멱등도 아니다. 따라서 POST 메소드는 주의해서 사용해야 한다. <a href="https://greatkim91.tistory.com/14" target="_blank" rel="noopener">출처(행복한 아빠)</a></p>
+<h4 id="cf-1-왜-안전성과-멱등이-중요할까"><a href="#cf-1-왜-안전성과-멱등이-중요할까" class="headerlink" title="cf__1 왜 안전성과 멱등이 중요할까?"></a>cf__1 왜 안전성과 멱등이 중요할까?</h4><p>안전성과 멱등은 신뢰할 수 없는 네트워크 상의 HTTP를 신뢰할 수 있게 만들어 준다. 만일 GET 요청을 보내고 응답을 못 받았을 경우 그냥 한 번 더 보내면 된다. 이 동작은 안전하다. 먼저 보낸 요청이 벌써 처리되었다 하더라도 서버에 다른 영향은 없다. 마찬가지로 PUT 요청을 보내고 응답을 못 받았다면 단지 한 번 더 동일한 요청을 보내면 된다.<br>그러나 POST는 안전하지도 않고 멱등도 아니다. 따라서 POST 메소드는 주의해서 사용해야 한다. <a href="https://greatkim91.tistory.com/14">출처(행복한 아빠)</a></p>
 <hr>
-<a name="2">
+<a name="2"/>
 
 <h2 id="2-HEAD"><a href="#2-HEAD" class="headerlink" title="2. HEAD"></a>2. HEAD</h2><p>GET처럼 행동하지만, 서버는 응답으로 <strong>헤더</strong>만을 돌려준다.<br>엔터티 본문은 반환되지 않는다.</p>
 <p>이럴 때 사용한다.</p>
@@ -605,13 +604,12 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HEAD /index.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HEAD /index.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 617</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 617</span><br></pre></td></tr></table></figure>
 
 <hr>
-<a name="3">
+<a name="3"/>
 
 <h2 id="3-PUT"><a href="#3-PUT" class="headerlink" title="3. PUT"></a>3. PUT</h2><p>서버에 문서를 쓴다….(?)</p>
 <ul>
@@ -663,11 +661,9 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUT /joy.txt HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 34</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PUT /joy.txt HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 34</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 201 Created</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">http://feel5ny.github.io/joy.txt</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 201 Created</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">http://feel5ny.github.io/joy.txt</span><br></pre></td></tr></table></figure>
 <ul>
 <li>새로운 생성 시에는 성공 응답코드로 201 Created을 내려줘야 한다.</li>
 <li>수정 작업 시에는 성공 응답코드로 200을 내려줘야 한다. </li>
@@ -679,7 +675,7 @@
 <li>이미 존재하는 리소스에 PUT을 보낼 경우<br>동일한 내용으로 몇 번을 보내더라도<br>동일한 내용으로 상태가 저장되므로<br>리소스 상태는 변하지 않는다.</li>
 </ul>
 <hr>
-<a name="4">
+<a name="4"/>
 
 <h2 id="4-POST"><a href="#4-POST" class="headerlink" title="4. POST"></a>4. POST</h2><ul>
 <li>서버에 입력 데이터를 전송하기 위해 설계되었다.</li>
@@ -719,13 +715,14 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /inventory-check.cgi HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 18</span><br><span class="line"></span><br><span class="line">item=bandsaw 2647</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /inventory-check.cgi HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 18</span><br><span class="line"></span><br><span class="line">item=bandsaw 2647</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 37</span><br><span class="line"></span><br><span class="line">The bandsaw model 2647 is in stock!</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 37</span><br><span class="line"></span><br><span class="line">The bandsaw model 2647 is in stock!</span><br></pre></td></tr></table></figure>
+
+
 
 <hr>
-<a name="5">
+<a name="5"/>
 
 <h2 id="5-TRACE"><a href="#5-TRACE" class="headerlink" title="5. TRACE"></a>5. TRACE</h2><h4 id="자신의-요청이-서버에-도달했을-때-어떻게-보이게-되는지-알려준다"><a href="#자신의-요청이-서버에-도달했을-때-어떻게-보이게-되는지-알려준다" class="headerlink" title="자신의 요청이 서버에 도달했을 때 어떻게 보이게 되는지 알려준다."></a>자신의 요청이 서버에 도달했을 때 어떻게 보이게 되는지 알려준다.</h4><ul>
 <li>클라이언트가 어떤 요청을 할 때,<br>그 요청은 방화벽, 프락시, 게이트웨이 등의 어플리케이션을 통과할 수 있다.</li>
@@ -783,19 +780,16 @@
 </tr>
 </tbody></table>
 <p>클라 요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br></pre></td></tr></table></figure>
 <p>프록시 요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
 <p>서버 응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 96</span><br><span class="line"></span><br><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 96</span><br><span class="line"></span><br><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
 <p>프록시 응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 96</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br><span class="line"></span><br><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/plain</span><br><span class="line">Content-Length: 96</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br><span class="line"></span><br><span class="line">TRACE /product-list.txt HTTP/1.1</span><br><span class="line">Accept: *</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Via: 1.1 proxy3.company.com 👈</span><br></pre></td></tr></table></figure>
 
 <hr>
-<a name="6">
+<a name="6"/>
 
 <h2 id="6-OPTIONS"><a href="#6-OPTIONS" class="headerlink" title="6. OPTIONS"></a>6. OPTIONS</h2><ul>
 <li>options 메서드는 웹 서버에게 여러 가지 종류의 <strong>지원 범위에 대해 물어본다</strong>. </li>
@@ -812,7 +806,7 @@
 <li><code>Origin</code></li>
 </ul>
 </li>
-<li>Preflight Request 필요시 브라우저에서 자동으로 전송되므로, 일반적인 경우 프론트 개발자는 이러한 요청을 직접 만들 필요가 없다.<br><a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request" target="_blank" rel="noopener">참고</a></li>
+<li>Preflight Request 필요시 브라우저에서 자동으로 전송되므로, 일반적인 경우 프론트 개발자는 이러한 요청을 직접 만들 필요가 없다.<br><a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request">참고</a></li>
 </ul>
 <table>
 <thead>
@@ -847,13 +841,12 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS * HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS * HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">Accept: *</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, PUT, OPTIONS</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Allow: GET, POST, PUT, OPTIONS</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
 
 <hr>
-<a name="7">
+<a name="7"/>
 
 <h2 id="7-DELETE"><a href="#7-DELETE" class="headerlink" title="7. DELETE"></a>7. DELETE</h2><ul>
 <li>서버에게 요청 URL로 지정한 리소스를 삭제할 것을 요청한다. </li>
@@ -898,18 +891,16 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE /joy.txt HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE /joy.txt HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br></pre></td></tr></table></figure>
 <p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 201 Created</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">I have your delete request, will take time to process.</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 201 Created</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 47</span><br><span class="line"></span><br><span class="line">I have your delete request, will take time to process.</span><br></pre></td></tr></table></figure>
 <ul>
 <li>200 OK</li>
 <li>202 Accepted</li>
 <li>204 No content</li>
 </ul>
 <hr>
-<a name="8">
+<a name="8"/>
 
 <h2 id="8-PATCH"><a href="#8-PATCH" class="headerlink" title="8. PATCH"></a>8. PATCH</h2><ul>
 <li>리소스의 부분 수정 시 사용된다.</li>
@@ -954,21 +945,17 @@
 </tr>
 </tbody></table>
 <p>요청전 데이터</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"joy"</span>,</span><br><span class="line">  <span class="attr">"company"</span>: <span class="string">"goodoc"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;joy&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;company&quot;</span><span class="punctuation">:</span> <span class="string">&quot;goodoc&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><code>PATCH</code> 요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PATCH /api/user/123 HTTP/1.1 </span><br><span class="line">Host: www.example.com</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;company&quot;: &quot;protopie&quot;&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PATCH /api/user/123 HTTP/1.1 </span><br><span class="line">Host: www.example.com</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;company&quot;: &quot;protopie&quot;&#125;</span><br></pre></td></tr></table></figure>
 <p><code>PATCH</code> 결과</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"joy"</span>,</span><br><span class="line">  <span class="attr">"company"</span>: <span class="string">"protopie"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;joy&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;company&quot;</span><span class="punctuation">:</span> <span class="string">&quot;protopie&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><code>PUT</code> 요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/user/123 HTTP/1.1 </span><br><span class="line">Host: www.example.com</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;company&quot;: &quot;JOYI&quot;&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/user/123 HTTP/1.1 </span><br><span class="line">Host: www.example.com</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;company&quot;: &quot;JOYI&quot;&#125;</span><br></pre></td></tr></table></figure>
 <p><code>PUT</code> 결과</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">"company"</span>: <span class="string">"JOYI"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;company&quot;</span><span class="punctuation">:</span> <span class="string">&quot;JOYI&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<a name="9">
+<a name="9"/>
 
 <h2 id="9-CONNECT"><a href="#9-CONNECT" class="headerlink" title="9. CONNECT"></a>9. CONNECT</h2><blockquote>
 <p>잘 모르겠다.</p>
@@ -1020,9 +1007,9 @@
 </tr>
 </tbody></table>
 <p>요청</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CONNECT server.example.com:80 HTTP/1.1 </span><br><span class="line">Host: server.example.com:80 </span><br><span class="line">Proxy-Authorization: basic aGVsbG86d29ybGQ=</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CONNECT server.example.com:80 HTTP/1.1 </span><br><span class="line">Host: server.example.com:80 </span><br><span class="line">Proxy-Authorization: basic aGVsbG86d29ybGQ=</span><br></pre></td></tr></table></figure>
 
-<a name="10">
+<a name="10"/>
 
 <h2 id="10-확장-메서드"><a href="#10-확장-메서드" class="headerlink" title="10. 확장 메서드"></a>10. 확장 메서드</h2><ul>
 <li><ol start="2">
@@ -1044,26 +1031,26 @@
 <p>확장메서드를 다룰 때는 ‘엄격하게 보내고 관대하게 받아들여라’라는 오랜 규칙에 다르는 것이 가장 좋다.</p>
 <hr>
 <ul>
-<li><a href="https://github.com/bookcrush?type=source" target="_blank" rel="noopener">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)</li>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행중입니다. (~8월말) (다음 모임은 2장)</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p>참고자료</p>
 <ol>
-<li><a href="https://uniksy1106.tistory.com/160" target="_blank" rel="noopener">http 멱등성참고 1</a></li>
-<li><a href="https://greatkim91.tistory.com/14" target="_blank" rel="noopener">http 멱등성참고 2</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank" rel="noopener">http method 참고</a></li>
-<li><a href="http://wiki.gurubee.net/display/SWDEV/CORS+%28Cross-Origin+Resource+Sharing%29" target="_blank" rel="noopener">preflight 참고 1</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request" target="_blank" rel="noopener">preflight 참고 2</a></li>
+<li><a href="https://uniksy1106.tistory.com/160">http 멱등성참고 1</a></li>
+<li><a href="https://greatkim91.tistory.com/14">http 멱등성참고 2</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">http method 참고</a></li>
+<li><a href="http://wiki.gurubee.net/display/SWDEV/CORS+%28Cross-Origin+Resource+Sharing%29">preflight 참고 1</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request">preflight 참고 2</a></li>
 <li><a href="github.com/for-GET/http-decision-diagram">http 응답 다이어그램</a> <ul>
 <li>도움이 많이 된 시각화 자료</li>
 </ul>
 </li>
-<li><a href="https://stackoverflow.com/questions/28459418/rest-api-put-vs-patch-with-real-life-examples" target="_blank" rel="noopener">PUT과 PATCH의 차이 1</a></li>
-<li><a href="https://papababo.tistory.com/269" target="_blank" rel="noopener">PUT과 PATCH의 차이 2</a></li>
-<li><a href="https://tools.ietf.org/html/rfc7231#section-4" target="_blank" rel="noopener">rfc7231</a></li>
+<li><a href="https://stackoverflow.com/questions/28459418/rest-api-put-vs-patch-with-real-life-examples">PUT과 PATCH의 차이 1</a></li>
+<li><a href="https://papababo.tistory.com/269">PUT과 PATCH의 차이 2</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7231#section-4">rfc7231</a></li>
 </ol>
-</a></a></a></a></a></a></a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -1082,7 +1069,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/16/HTTP_003_02/" data-id="cm3u5tb21002jnjb2h95tsjjm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/16/HTTP_003_02/" data-id="ckzv7cqfc0027qobmng5x75cx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

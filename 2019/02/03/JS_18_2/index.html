@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/JS_18_2/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/02/03/js_18_2/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -362,11 +362,10 @@
 [else
    statement2]</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">switch</span> (c) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (c &gt; <span class="number">5</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">for</span> (;;) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p><a name="2-1-1"></a></p>
-<h4 id="2-1-1-Truthy-Falsy"><a href="#2-1-1-Truthy-Falsy" class="headerlink" title="2.1.1 Truthy, Falsy"></a>2.1.1 Truthy, Falsy</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" target="_blank" rel="noopener">mdn</a></p>
+<h4 id="2-1-1-Truthy-Falsy"><a href="#2-1-1-Truthy-Falsy" class="headerlink" title="2.1.1 Truthy, Falsy"></a>2.1.1 Truthy, Falsy</h4><p><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">mdn</a></p>
 <ul>
 <li>falsy는 <code>0, false, null, undefined,&quot;&quot;, NaN</code>이 있다.</li>
 <li>나머지는 truthy이다. </li>
@@ -386,7 +385,6 @@
 
 <p><strong>암묵적인 오류(context error)</strong><br>예1)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a) <span class="comment">// mandatory</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (b &amp;&amp; a) </span><br><span class="line"><span class="keyword">else</span></span><br></pre></td></tr></table></figure>
-
 <p>위의 코든에서 첫번째 else뒤에는 mandatory되어야하지만, optional하다. </p>
 <ul>
 <li>a와 b의 상태에 따라 <code>b &amp;&amp; a</code>의 값이 다르기 때문 </li>
@@ -396,10 +394,8 @@
 <hr>
 <p>에2)</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(c === <span class="number">1</span>)&#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">  <span class="keyword">if</span> (c === <span class="number">2</span>)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>else 다음에 옵셔널한 if만 놓여있다.<br>else 안에는 mandatory해야한다.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(c === <span class="number">1</span>)&#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; <span class="keyword">if</span> (c === <span class="number">2</span>)&#123;</span><br><span class="line">  </span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>if..else문에서 else if문을 사용할 경우 육안으로는 많은 경우를 대비하는 처리하기 헷갈린다.</li>
 <li>이는 후방 결합때문이다.</li>
@@ -497,7 +493,7 @@
 <li>condition이 공문일 경우 syntax error를 반환한다.</li>
 <li>while문은 중문이 오는 것이 정상.<br>2줄이 오는 것이 정상이다.</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(truthy)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while문 보다 1번은 먼저 더 실행하는 꼴</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">while</span> (truthy);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(truthy)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while문 보다 1번은 먼저 더 실행하는 꼴</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">while</span> (truthy);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><code>do
    statement
@@ -509,8 +505,7 @@ while (condition);</code></p>
 <p><a name="3-2-1"></a></p>
 <h4 id="3-2-1-Infinite-Loop"><a href="#3-2-1-Infinite-Loop" class="headerlink" title="3.2.1 Infinite Loop"></a>3.2.1 Infinite Loop</h4><p>while문과 do..while문은 평가식에 관여되어있는<br>상태값을 바꾸지 않으면 무한루프에 빠질 위험이 높다.</p>
 <p><strong><code>식별자와 관련된 코드가 안나온다면 무한루프</code></strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">while</span>(a &gt; <span class="number">2</span>)&#123;</span><br><span class="line">  a++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = -<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(a &gt; <span class="number">2</span>)&#123;</span><br><span class="line">  a++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>조건식(condition)에 나오는 상태가 body에 나오는지 안나오는지부터 봐야한다.</li>
 </ul>
@@ -518,18 +513,14 @@ while (condition);</code></p>
 <blockquote>
 <p>현실코드</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(act.method().c)&#123;</span><br><span class="line">  author.action();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(act.<span class="title function_">method</span>().<span class="property">c</span>)&#123;</span><br><span class="line">  author.<span class="title function_">action</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>??? 뭔지 모름.</p>
 <ul>
-<li><p>이런 코드는 무조건 배재해야한다..</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = act.method().c</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(a)&#123;</span><br><span class="line">  author.action();</span><br><span class="line">  a = act.method().c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>적어도 body안에 조건식에 나오는 상태가 되었다..</p>
-</li>
+<li>이런 코드는 무조건 배재해야한다..<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = act.<span class="title function_">method</span>().<span class="property">c</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(a)&#123;</span><br><span class="line">  author.<span class="title function_">action</span>();</span><br><span class="line">  a = act.<span class="title function_">method</span>().<span class="property">c</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>적어도 body안에 조건식에 나오는 상태가 되었다..</li>
 </ul>
 <hr>
-<p>참고자료<br><a href="https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html" target="_blank" rel="noopener">https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html</a></p>
+<p>참고자료<br><a href="https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html">https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html</a></p>
 
         </div>
         <footer class="article-footer">
@@ -549,7 +540,7 @@ while (condition);</code></p>
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_2/" data-id="cm3u5tb2l006anjb2ofgl4iae" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/02/03/JS_18_2/" data-id="ckzv7cqi7006bqobmpameeo9d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

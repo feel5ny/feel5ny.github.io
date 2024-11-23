@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/19/DB_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/19/db_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -248,7 +248,7 @@
 <hr>
 <h1 id="2-DDL-DML"><a href="#2-DDL-DML" class="headerlink" title=" 2. DDL, DML"></a><a name="ddl"></a> 2. DDL, DML</h1><h2 id="DDL-Data-Definition-Language"><a href="#DDL-Data-Definition-Language" class="headerlink" title="DDL (Data Definition Language)"></a>DDL (Data Definition Language)</h2><p>Table 자체를 구성하는대 사용한다.</p>
 <hr>
-<h3 id="1-Create-db-스키마-객체를-생성"><a href="#1-Create-db-스키마-객체를-생성" class="headerlink" title="1. Create : db 스키마 객체를 생성"></a>1. <code>Create</code> : db 스키마 객체를 생성</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  bookno <span class="built_in">NUMBER</span>(<span class="number">5</span>), <span class="comment">/* 데이터타입을 설정해 주는 것이다. 숫자 5자리까지 */</span></span><br><span class="line">  title VARCHAR2(<span class="number">50</span>), <span class="comment">/* 문자열 50자까지 설정 */</span></span><br><span class="line">  author VARCHAR2(<span class="number">10</span>), <span class="comment">/* 문자열 10자리까지 설정 */</span></span><br><span class="line">  pubdate <span class="built_in">DATE</span> <span class="comment">/* 날짜 데이터타입 */</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="1-Create-db-스키마-객체를-생성"><a href="#1-Create-db-스키마-객체를-생성" class="headerlink" title="1. Create : db 스키마 객체를 생성"></a>1. <code>Create</code> : db 스키마 객체를 생성</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  bookno NUMBER(<span class="number">5</span>), <span class="comment">/* 데이터타입을 설정해 주는 것이다. 숫자 5자리까지 */</span></span><br><span class="line">  title VARCHAR2(<span class="number">50</span>), <span class="comment">/* 문자열 50자까지 설정 */</span></span><br><span class="line">  author VARCHAR2(<span class="number">10</span>), <span class="comment">/* 문자열 10자리까지 설정 */</span></span><br><span class="line">  pubdate <span class="type">DATE</span> <span class="comment">/* 날짜 데이터타입 */</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="2-Data-Type"><a href="#2-Data-Type" class="headerlink" title="2. Data Type"></a>2. <code>Data Type</code></h3><ul>
@@ -292,7 +292,7 @@
 <h4 id="PRIMARY-KEY-gt-PRIMARY-KEY는-NOT-NULL-UNIQUE하다"><a href="#PRIMARY-KEY-gt-PRIMARY-KEY는-NOT-NULL-UNIQUE하다" class="headerlink" title="PRIMARY KEY =&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다."></a>PRIMARY KEY =&gt; PRIMARY KEY는  NOT NULL + UNIQUE하다.</h4><ul>
 <li>PK는 한테이블당 한개만 존재</li>
 <li>인덱스 자동생성</li>
-<li>여러 컬럼을 하나의 PK로 설정 가능<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  ssn1 <span class="built_in">NUMBER</span>(<span class="number">6</span>),</span><br><span class="line">  ssn2 <span class="built_in">NUMBER</span>(<span class="number">7</span>),</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (ssn1, ssn2)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<li>여러 컬럼을 하나의 PK로 설정 가능<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book (</span><br><span class="line">  ssn1 NUMBER(<span class="number">6</span>),</span><br><span class="line">  ssn2 NUMBER(<span class="number">7</span>),</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (ssn1, ssn2)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -315,8 +315,7 @@
 <li>Group By<br><code>SELECT 부서명, AVG(salary) FROM 직장; =&gt; 오류 발생</code><br>=&gt; <code>SELECT 부서명, AVG(salary) FROM 직장 GROUP BY 부서명</code></li>
 <li>Having</li>
 </ul>
-<h3 id="2-SUM"><a href="#2-SUM" class="headerlink" title="2. SUM"></a>2. SUM</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(col_name) <span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(salary) <span class="keyword">FROM</span> Student;</span><br></pre></td></tr></table></figure>
-
+<h3 id="2-SUM"><a href="#2-SUM" class="headerlink" title="2. SUM"></a>2. SUM</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(col_name) <span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(salary) <span class="keyword">FROM</span> Student;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>COUNT</li>
 <li>MAX</li>
@@ -342,25 +341,16 @@
 </ul>
 <h3 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h3><p>둘 이상의 테이블을 합쳐서 하나의 테이블로 만든다.</p>
 <ul>
-<li><p><code>Cross Join</code> (Cartasian Product) 모든 가능한 쌍이 나타난다.</p>
-<h4 id="Inner-Join-조건을-만족하는-tuple만-나타난다"><a href="#Inner-Join-조건을-만족하는-tuple만-나타난다" class="headerlink" title="Inner Join 조건을 만족하는 tuple만 나타난다."></a><code>Inner Join</code> 조건을 만족하는 tuple만 나타난다.</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, jobname <span class="keyword">FROM</span> Student <span class="keyword">Inner</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id = Job.student_id;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>Outer Join</code> 조건을 만족하지 않는 tuple도 나타난다. =&gt; null로 표기<br>Left Outer Join =&gt; join table의 왼쪽 table 값중 null인 것도 가져온다.<br>Right Outer Join =&gt; join table의 오른쪽 table 값중 null인 것도 가져온다.<br>Full Outer Join =&gt; 양쪽 table 값중 null인 것도 가져온다.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, jobname <span class="keyword">FROM</span> Student <span class="keyword">Left</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job </span><br><span class="line"><span class="keyword">ON</span> Student.id = Job.student_id;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, jobname <span class="keyword">FROM</span> Student <span class="keyword">Right</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id = Job.student_id;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>, jobname <span class="keyword">FROM</span> Student <span class="keyword">Full</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id = Job.student_id;</span><br></pre></td></tr></table></figure>
-
-<ul>
+<li><code>Cross Join</code> (Cartasian Product) 모든 가능한 쌍이 나타난다.<h4 id="Inner-Join-조건을-만족하는-tuple만-나타난다"><a href="#Inner-Join-조건을-만족하는-tuple만-나타난다" class="headerlink" title="Inner Join 조건을 만족하는 tuple만 나타난다."></a><code>Inner Join</code> 조건을 만족하는 tuple만 나타난다.</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Inner</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure></li>
+<li><code>Outer Join</code> 조건을 만족하지 않는 tuple도 나타난다. =&gt; null로 표기<br>Left Outer Join =&gt; join table의 왼쪽 table 값중 null인 것도 가져온다.<br>Right Outer Join =&gt; join table의 오른쪽 table 값중 null인 것도 가져온다.<br>Full Outer Join =&gt; 양쪽 table 값중 null인 것도 가져온다.<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Left</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job </span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Right</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, jobname <span class="keyword">FROM</span> Student <span class="keyword">Full</span> <span class="keyword">Outer</span> <span class="keyword">Join</span> Job</span><br><span class="line"><span class="keyword">ON</span> Student.id <span class="operator">=</span> Job.student_id;</span><br></pre></td></tr></table></figure></li>
 <li><code>Natural Join</code> 조건을 만족하는 tuple들의 동일한 col이 합쳐져서 나타난다.</li>
 <li><code>Self Join</code> 자기 자신과 Join</li>
 </ul>
 <hr>
 <h1 id="5-ERD"><a href="#5-ERD" class="headerlink" title=" 5. ERD"></a><a name="erd"></a> 5. ERD</h1><p>Entity-Relationship Diagram<br>mySql에서 자동으로 그려준다.</p>
-<img src="/images/post_img/47/01.png">
+<img src ="/images/post_img/47/01.png">
 
 <h2 id="auto-increment"><a href="#auto-increment" class="headerlink" title="auto increment"></a>auto increment</h2>
         </div>
@@ -381,7 +371,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/19/DB_01/" data-id="cm3u5tb200028njb2u1c3y26z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/19/DB_01/" data-id="ckzv7cqfa0021qobmv7gkcijb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

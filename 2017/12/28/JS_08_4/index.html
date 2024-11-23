@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/28/JS_08_4/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/28/js_08_4/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -294,14 +294,14 @@
 <li>매개변수로 CSS 쿼리를 받는다.</li>
 <li>패턴에 일치하는 첫번째 자손 요소를 반환한다. 없으면 null</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// body 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">document</span>.querySelector(<span class="string">"body"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ID가 "myDiv"인 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> myDiv = <span class="built_in">document</span>.querySelector(<span class="string">"#myDiv"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 "selected"인 요소 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> selected = <span class="built_in">document</span>.querySelector(<span class="string">".selected"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 "button"인 이미지 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> img = <span class="built_in">document</span>.querySelector(<span class="string">"img.button"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// body 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;body&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ID가 &quot;myDiv&quot;인 요소를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> myDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#myDiv&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 &quot;selected&quot;인 요소 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> selected = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.selected&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스가 &quot;button&quot;인 이미지 중 첫 번째를 가져온다.</span></span><br><span class="line"><span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;img.button&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <h3 id="1-2-querySelectorAll-메서드"><a href="#1-2-querySelectorAll-메서드" class="headerlink" title="1-2. querySelectorAll() 메서드"></a>1-2. querySelectorAll() 메서드</h3><ul>
 <li>querySelector()와 유사한데, 일치하는 노드 전체를 반환한다.</li>
 <li>즉, HTMLCollection(live)이 아닌 NodeList(non-live), 정적 인스턴스를 반환한다. (유사배열 형태)</li>
 <li>매개변수에는 여러 CSS 쿼리를 넣어도 된다. <code>&quot;h1, h2, h3&quot;</code></li>
 </ul>
-<h3 id="1-3-matchesSelector-메서드-matches-로-변경됨"><a href="#1-3-matchesSelector-메서드-matches-로-변경됨" class="headerlink" title="1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) +"></a>1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) <a href="https://developer.mozilla.org/ko/docs/Web/API/Element/matches" target="_blank" rel="noopener">+</a></h3><ul>
+<h3 id="1-3-matchesSelector-메서드-matches-로-변경됨"><a href="#1-3-matchesSelector-메서드-matches-로-변경됨" class="headerlink" title="1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) +"></a>1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) <a href="https://developer.mozilla.org/ko/docs/Web/API/Element/matches">+</a></h3><ul>
 <li>선택자 API 레벨2 명세</li>
 <li>매개변수로 CSS 선택자를 받고 요소가 그에 일치하면 true, 일치하지 않으면 false</li>
 </ul>
@@ -331,14 +331,12 @@
 <li>반환값 : HTMLCollection (live)</li>
 <li>호출한 요소의 자손만 쿼리하여 반환한다.</li>
 </ul>
-<h4 id="반환값이-살아있는-객체라서-생기는-이슈"><a href="#반환값이-살아있는-객체라서-생기는-이슈" class="headerlink" title="반환값이 살아있는 객체라서 생기는 이슈"></a>반환값이 살아있는 객체라서 생기는 이슈</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTMLCollection을 반환한다.</span></span><br><span class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'red'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">  <span class="comment">// 클래스 어트리뷰트의 값을 변경한다.</span></span><br><span class="line">  elems[i].className = <span class="string">'white'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// white red white</span></span><br></pre></td></tr></table></figure>
-
+<h4 id="반환값이-살아있는-객체라서-생기는-이슈"><a href="#반환값이-살아있는-객체라서-생기는-이슈" class="headerlink" title="반환값이 살아있는 객체라서 생기는 이슈"></a>반환값이 살아있는 객체라서 생기는 이슈</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTMLCollection을 반환한다.</span></span><br><span class="line"><span class="keyword">var</span> elems = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;red&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// 클래스 어트리뷰트의 값을 변경한다.</span></span><br><span class="line">  elems[i].<span class="property">className</span> = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// white red white</span></span><br></pre></td></tr></table></figure>
 <p>HTMLCollection은 실시간으로 Node의 상태 변경을 반영한다. (live HTMLCollection)<br>실시간으로 Node의 상태 변경을 반영하기 때문에 loop가 필요한 경우 주의가 필요하다.<br>아래와 같은 방법으로 회피할 수 있다.</p>
 <p>방법1 &gt; 역방향으로 돌리기</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'red'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = elems.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">  elems[i].className = <span class="string">'white'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elems = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&#x27;red&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = elems.<span class="property">length</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">  elems[i].<span class="property">className</span> = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>방법2 &gt; none-live NodeList를 반환하는 querySelectorAll을 사용한다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// querySelectorAll는 Nodelist(non-live)를 반환한다. IE8+</span></span><br><span class="line"><span class="keyword">var</span> elems = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.red'</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.length; i++) &#123;</span><br><span class="line">  elems[i].className = <span class="string">'white'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// querySelectorAll는 Nodelist(non-live)를 반환한다. IE8+</span></span><br><span class="line"><span class="keyword">var</span> elems = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.red&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elems.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  elems[i].<span class="property">className</span> = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h4 id="classList-프로퍼티"><a href="#classList-프로퍼티" class="headerlink" title="classList 프로퍼티"></a>classList 프로퍼티</h4><ul>
@@ -346,7 +344,7 @@
 <li>한 요소에 클래스가 3가지가 적용되어 있을 경우 이름 변경에 불편함이 있다.</li>
 </ul>
 </li>
-<li>classList 프로퍼티는 <a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList" target="_blank" rel="noopener">DOMTokenList</a>란 새 컬렉션 타입의 인스턴스이다.<ul>
+<li>classList 프로퍼티는 <a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList">DOMTokenList</a>란 새 컬렉션 타입의 인스턴스이다.<ul>
 <li>다른 DOM 컬렉션과 마찬가지로 length존재 item() 메서드나 대괄호 표기법을 통해 데이터를 갖고올 수 있다.</li>
 </ul>
 </li>
@@ -354,7 +352,7 @@
 </ul>
 <img src="/images/post_img/61/01.png">
 
-<p><a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList" target="_blank" rel="noopener">DOMTokenList</a>의 메서드</p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList">DOMTokenList</a>의 메서드</p>
 <ul>
 <li>add(value) : 주어진 문자열 값을 목록에 추가한다.</li>
 <li>contains(value) : 주어진 값이 목록에 존재하면 true, 그렇지 않으면 false</li>
@@ -412,7 +410,7 @@
 
 
 <hr>
-<h3 id="3-6-마크업-삽입"><a href="#3-6-마크업-삽입" class="headerlink" title="3-6. 마크업 삽입"></a>3-6. 마크업 삽입</h3><p>마크업이 포함된 콘텐츠를 추가하는 것은 <a href="https://namu.wiki/w/XSS" target="_blank" rel="noopener">크로스 스크립팅 공격</a>(XSS: Cross-Site Scripting Attacks)에 취약하다.</p>
+<h3 id="3-6-마크업-삽입"><a href="#3-6-마크업-삽입" class="headerlink" title="3-6. 마크업 삽입"></a>3-6. 마크업 삽입</h3><p>마크업이 포함된 콘텐츠를 추가하는 것은 <a href="https://namu.wiki/w/XSS">크로스 스크립팅 공격</a>(XSS: Cross-Site Scripting Attacks)에 취약하다.</p>
 <hr>
 <h4 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h4><ol>
 <li>읽기모드 : 요소와 주석, 텍스트 노드 등의 자식 노드를 모두 나타내는 HTML 표현을 반환한다.<ul>
@@ -481,7 +479,7 @@
 </ol>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://poiemaweb.com/js-dom" target="_blank" rel="noopener">http://poiemaweb.com/js-dom</a></li>
+<li><a href="http://poiemaweb.com/js-dom">http://poiemaweb.com/js-dom</a></li>
 </ol>
 <h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3>
         </div>
@@ -502,7 +500,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/28/JS_08_4/" data-id="cm3u5tb2g005hnjb2uixfe3rx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/28/JS_08_4/" data-id="ckzv7cqhr005lqobmt4hn4hqb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

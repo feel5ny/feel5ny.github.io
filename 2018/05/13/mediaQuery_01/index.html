@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2018/05/13/mediaQuery_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2018/05/13/mediaquery_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -239,17 +239,17 @@
 <li>@media 대하여..</li>
 <li>-webkit-device-pixel-ratio<ul>
 <li>2-1. 픽셀비율 계산하기</li>
-<li>2-2. device width와 height 계산하기</li></ul></li></ol></div>
+<li>2-2. device width와 height 계산하기</div>
 
-
-
-
-
+</li>
+</ul>
+</li>
+</ol>
 <hr>
 <h2 id="0-서론"><a href="#0-서론" class="headerlink" title="0. 서론"></a>0. 서론</h2><p> 현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도 진행해야한다. 너무도 당연히 대응해야하지만!! 기기의 종류들의 크기가 다양해짐에 따라서 미디어쿼리를 적절히 사용해야할 필요가 생겼다.(아이폰X나 갤럭시S9같은.. 스크린이 긴 단말기ㅜ) 게다가 네이티브앱에서 웹뷰를 이용하는 일이 빈번했기 때문에 더더욱..</p>
 <hr>
 <h2 id="1-특정-모바일-디바이스-대응-media"><a href="#1-특정-모바일-디바이스-대응-media" class="headerlink" title="1. 특정 모바일 디바이스 대응 @media"></a>1. 특정 모바일 디바이스 대응 <code>@media</code></h2><p>CSS3의 @media 쿼리를 이용해서 screen의 크기에 따라서 레이아웃 구성을 다르게하는 방법을 구현할 수 있다. 반응형 웹에서는 다른 특별한 설정 없이 max-width같은 media features를 추가하여 브라우저의 width값마다 스타일을 조정할 수 있다. </p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*syntax*/</span></span><br><span class="line">@<span class="keyword">media</span> not|only (media type) and (media feature) &#123;</span><br><span class="line">    <span class="selector-tag">CSS-Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*syntax*/</span></span><br><span class="line"><span class="keyword">@media</span> <span class="keyword">not</span>|<span class="keyword">only</span> (media type) <span class="keyword">and</span> (media feature) &#123;</span><br><span class="line">    CSS-<span class="selector-tag">Code</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="media-type"><a href="#media-type" class="headerlink" title="media type"></a>media type</h3><ul>
 <li><code>all</code> : 모든 디바이스에 적용</li>
@@ -299,7 +299,7 @@
 </ul>
 <hr>
 <hr>
-<h2 id="2-webkit-device-pixel-ratio"><a href="#2-webkit-device-pixel-ratio" class="headerlink" title="2. -webkit-device-pixel-ratio"></a>2. -webkit-device-pixel-ratio</h2><p>사실 단말기에 따른 media query는 인터넷 서핑을 잘 하다보면 구할 수 있다.<br>(<a href="http://vizdevices.yesviz.com/" target="_blank" rel="noopener">여긴</a> 내가 좋아하는 정리 사이트)<br>나 또한 정리되어있는 자료에서 device width와 height, -webkit-min-device-pixel-ratio를 구할 수 있었다. 정리된 수치로 잘 사용하고 있었지만, 종종 서치하기 힘든 디바이스까지 대응해야할 경우도 생기곤 한다. 그리고 나에게도 그런 상황이 다가왔다!</p>
+<h2 id="2-webkit-device-pixel-ratio"><a href="#2-webkit-device-pixel-ratio" class="headerlink" title="2. -webkit-device-pixel-ratio"></a>2. -webkit-device-pixel-ratio</h2><p>사실 단말기에 따른 media query는 인터넷 서핑을 잘 하다보면 구할 수 있다.<br>(<a href="http://vizdevices.yesviz.com/">여긴</a> 내가 좋아하는 정리 사이트)<br>나 또한 정리되어있는 자료에서 device width와 height, -webkit-min-device-pixel-ratio를 구할 수 있었다. 정리된 수치로 잘 사용하고 있었지만, 종종 서치하기 힘든 디바이스까지 대응해야할 경우도 생기곤 한다. 그리고 나에게도 그런 상황이 다가왔다!</p>
 <h3 id="1-픽셀-비율을-계산해보자"><a href="#1-픽셀-비율을-계산해보자" class="headerlink" title="1. 픽셀 비율을 계산해보자."></a>1. 픽셀 비율을 계산해보자.</h3><p>내가 대응해야할 폰은 LG X400이라는 디바이스였다. 최근에 나온 기종이고, 내가 알 수 있는 정보는 아래 표밖에 없었다.<br><img src="/images/2018/11/image.png"></p>
 <img style="border-radius: 6px;" src="/images/2018/11/image02.png">
 
@@ -315,7 +315,7 @@
 <li><strong>device-height</strong> = 1280/2 = 640</li>
 </ul>
 <hr>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> only screen and</span><br><span class="line">(device-width: <span class="number">360px</span>) and</span><br><span class="line">(device-height: <span class="number">640px</span>) and</span><br><span class="line">(-webkit-device-pixel-ratio: <span class="number">2</span>) &#123;</span><br><span class="line">  💅💅💅💅</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> <span class="keyword">only</span> screen <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">device-width</span>: <span class="number">360px</span>) <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">device-height</span>: <span class="number">640px</span>) <span class="keyword">and</span></span><br><span class="line">(<span class="attribute">-webkit-device-pixel-ratio</span>: <span class="number">2</span>) &#123;</span><br><span class="line">  💅💅💅💅</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="요약"><a href="#요약" class="headerlink" title="요약"></a>요약</h3><ul>
@@ -323,7 +323,7 @@
 <li>특정 기기 이외에는 min이나 max를 이용하여 정의하면 비슷한 해상도와 픽셀비율을 가진 디바이스에 적용가능하다. </li>
 </ul>
 <hr>
-<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="https://medium.com/@junghan_61455/css-media-query-5969b004bd7" target="_blank" rel="noopener">https://medium.com/@junghan_61455/css-media-query-5969b004bd7</a><br><a href="https://www.html5rocks.com/en/mobile/high-dpi/" target="_blank" rel="noopener">https://www.html5rocks.com/en/mobile/high-dpi/</a></p>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><p><a href="https://medium.com/@junghan_61455/css-media-query-5969b004bd7">https://medium.com/@junghan_61455/css-media-query-5969b004bd7</a><br><a href="https://www.html5rocks.com/en/mobile/high-dpi/">https://www.html5rocks.com/en/mobile/high-dpi/</a></p>
 
         </div>
         <footer class="article-footer">
@@ -343,7 +343,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/05/13/mediaQuery_01/" data-id="cm3u5tb3400brnjb2ii366q80" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/05/13/mediaQuery_01/" data-id="ckzv7cqku00cqqobm9frui8kt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

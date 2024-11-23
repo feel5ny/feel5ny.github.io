@@ -429,7 +429,7 @@
             <blockquote>
 <p><strong>[UX/UI의 10가지 심리학 법칙]</strong> 책을 읽으며 법칙별로<br>내용 요약 + 개인적으로 찾았던 레퍼런스 + 그밖에 자료들을 모아서 작성한 글입니다.</p>
 </blockquote>
-<a name="ux">
+<a name="ux"/>
 
 <h2 id="사용하기-위해-움직이는-소비하는-시간을-줄인다-→-접근성"><a href="#사용하기-위해-움직이는-소비하는-시간을-줄인다-→-접근성" class="headerlink" title="사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성"></a>사용하기 위해 움직이는(소비하는) 시간을 줄인다. → 접근성</h2><ul>
 <li>인터렉션은 최소한의 노력만으로 불편없이 간단하게 이뤄져야 한다.</li>
@@ -441,13 +441,13 @@
 </li>
 <li>마우스나 손처럼 정밀도가 제각기 다른 다양한 입력 방식이 존재하는 오늘날의 사용환경을 고려하면, 꽤 어려운 과제다.</li>
 </ul>
-<a name="Fitts">
+<a name="Fitts"/>
 
 <h3 id="피츠의-법칙"><a href="#피츠의-법칙" class="headerlink" title="피츠의 법칙"></a>피츠의 법칙</h3><ul>
 <li>대상이 커지면, → 대상 선택에 드는 시간이 줄어든다. (W)</li>
 <li>대상 선택을 위해 움직이는 거리가 줄면, → 대상을 선택하는 데 드는 시간도 줄어든다. (D)</li>
 </ul>
-<a name="history">
+<a name="history"/>
 
 <h4 id="기원"><a href="#기원" class="headerlink" title="기원"></a>기원</h4><ul>
 <li><p>1954년 미국의 심리학자 : 폴 피츠</p>
@@ -462,7 +462,7 @@
 </ul>
 </li>
 <li><p>피츠는 대상 선택 작업의 난이도 ID를 정량화하는 측정 기준도 제시했다.</p>
-  <img src="/images/2021/02/01.png" style="width: 200px;margin-top:10px">
+  <img src ="/images/2021/02/01.png" style="width: 200px;margin-top:10px">
 
 <ul>
 <li>D : 대상 중심까지의 거리 → 신호 signal</li>
@@ -470,9 +470,9 @@
 </ul>
 </li>
 </ul>
-<img src="/images/2021/02/Fitts_Law.svg" alt="출처: wikipidia">
+<img src ="/images/2021/02/Fitts_Law.svg" alt="출처: wikipidia">
 
-<a name="Accessibility">
+<a name="Accessibility"/>
 
 <h3 id="피츠의-법칙과-Accessibility"><a href="#피츠의-법칙과-Accessibility" class="headerlink" title="피츠의 법칙과 Accessibility"></a>피츠의 법칙과 Accessibility</h3><ul>
 <li>피츠의 법칙에서는 2가지 개념이 나온다.<br>대상 선택을 위해 움직인 <strong>거리</strong>와 대상 선택이 용이하게끔 <strong>키우는 것</strong>.</li>
@@ -493,7 +493,7 @@
 </ul>
 </li>
 <li>여기서 프론트 개발자가 제어할 수 있는 부분은 <strong>UI 엘리먼트</strong>이다.</li>
-<li><a href="http://www.kwacc.or.kr/WAI/wcag21/#target-size" target="_blank" rel="noopener">웹 콘텐츠 접근성 가이드(WCAG 2.0)</a>에서도 타겟 사이즈에 대한 내용이 나온다.</li>
+<li><a href="http://www.kwacc.or.kr/WAI/wcag21/#target-size">웹 콘텐츠 접근성 가이드(WCAG 2.0)</a>에서도 타겟 사이즈에 대한 내용이 나온다.</li>
 <li>이처럼 피츠의 법칙은 접근성과 관련이 있으며, 이중에서도 터치 타겟과 관련이 있다.</li>
 </ul>
 <hr>
@@ -511,7 +511,7 @@
 <li>터치 대상 사이에 <strong>충분한 거리</strong>를 확보해야 한다.</li>
 <li>터치 대상은 인터페이스상에서 <strong>쉽게 도달할 수 있는 영역에 배치</strong>해야 한다.</li>
 </ol>
-<a name="guideline">
+<a name="guideline"/>
 
 <h3 id="터치-대상의-최소-권장-규격"><a href="#터치-대상의-최소-권장-규격" class="headerlink" title="터치 대상의 최소 권장 규격"></a>터치 대상의 최소 권장 규격</h3><ul>
 <li>Human interface guideLine : <strong>44 * 44 pt</strong></li>
@@ -519,37 +519,36 @@
 <li>Web contents Access GuideLine(WCAG) : <strong>44 * 44 CSS px</strong></li>
 <li>닐슨 노먼 그룹 : <strong>1 * 1cm</strong></li>
 </ul>
-<a name="design-system">
+<a name="design-system"/>
 
 <h3 id="디자인-시스템에-적용하긔"><a href="#디자인-시스템에-적용하긔" class="headerlink" title="디자인 시스템에 적용하긔"></a>디자인 시스템에 적용하긔</h3><ul>
 <li>프론트에서는 프로젝트에 디자인 가이드라인이나 basic philosophy부분에 디자이너와 협의하여 최소 권장규격을 지정하고, (혹은 위에서 제안하는 권장규격을 따르거나) 개발자는 input 성격을 갖고 있는 컴포넌트 소스에 기본 값으로 해당 값을 지정하는 코드를 넣어두면 될 듯 하다.</li>
 <li>아래에 머테리얼 디자인에서 구현한 방식을 따르는 것도 좋은 방법인듯하다.</li>
 <li>최근에는 구글 머테리얼 디자인의 desgin foundation을 따르는 곳이 많아진 듯 하다. (글쓴이 피셜)</li>
 </ul>
-<a name="media-query">
+<a name="media-query"/>
 
 <h4 id="대상이-다를-경우"><a href="#대상이-다를-경우" class="headerlink" title="대상이 다를 경우"></a>대상이 다를 경우</h4><ul>
 <li>웹의 경우 데스크탑웹과 모바일 웹이 존재하는데, 각각 사용대상이 다르다.</li>
 <li>데스크탑의 경우 마우스 포인터를 사용, 모바일 웹에서는 손가락 터치를 사용한다.</li>
 <li>만약 이를 구분하여 적용해야할 여백등이 고려되어야할 경우 미디어 쿼리의 pointer를 활용하면 된다.</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">media</span> (pointer: coarse) &#123;</span><br><span class="line">  <span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: .<span class="number">8em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a name="touch-target">
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: .<span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">pointer</span>: coarse) &#123;</span><br><span class="line">  <span class="selector-class">.container</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: .<span class="number">8em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a name="touch-target"/>
 
 <h3 id="Material-design-Touch-Target"><a href="#Material-design-Touch-Target" class="headerlink" title="Material design - Touch Target"></a>Material design - Touch Target</h3><ul>
 <li>구글 머테리얼 디자인에서는 최소 규격을 48dp로 지정하였다. 웹에서도 터치 최소 규격이 48px로 계산된다.</li>
 <li>구글 머테리얼 디자인에서 <code>@material/touch-target</code>라는 패키지를 제공하는데, 추가적인 sass파일을 적용시켜준다.</li>
 </ul>
 <p><strong>기본 버튼</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"mdc-button"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__ripple"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"mdc-button__label"</span>&gt;</span>My Inaccessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button__ripple&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button__label&quot;</span>&gt;</span>My Inaccessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>touch-target로 감싸기</strong></p>
 <ul>
 <li><p>mdc-touch-target-wrapper로 감싸고 </p>
 </li>
 <li><p>mdc-button__touch를 추가해두었다. → 여기에 absolute로 height값이 지정된다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-touch-target-wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"mdc-button mdc-button--touch"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__ripple"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"mdc-button__label"</span>&gt;</span>My Accessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mdc-button__touch"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mdc-touch-target-wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button mdc-button--touch&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button__ripple&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button__label&quot;</span>&gt;</span>My Accessible Button<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mdc-button__touch&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>touch-target의 scss 파일을 보면, height값과 width값에 default값으로 48px을 적용한 부분이 보인다.</p>
 </li>
@@ -559,18 +558,18 @@
 </blockquote>
 </li>
 </ul>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/@material/touch-target/_touch-target.scss</span></span><br><span class="line"></span><br><span class="line">@use <span class="string">'@material/base/mixins'</span> as base-mixins;</span><br><span class="line">@use <span class="string">'@material/feature-targeting/feature-targeting'</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$height</span>: <span class="number">48px</span> !default; 👈👈👈</span><br><span class="line"><span class="variable">$width</span>: <span class="variable">$height</span> !default;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Styles applied to the component's touch target wrapper element.</span></span><br><span class="line">@<span class="keyword">mixin</span> wrapper(<span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.mdc-touch-target-wrapper</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      @<span class="keyword">include</span> base-mixins.emit-once(<span class="string">'mdc-touch-target/wrapper'</span>) &#123;</span><br><span class="line">        <span class="attribute">display</span>: inline;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> touch-target(<span class="variable">$set-width</span>: false, <span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$height</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">if</span> <span class="variable">$set-width</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="comment">/* @noflip */</span></span><br><span class="line">      <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="variable">$width</span>;</span><br><span class="line">      <span class="attribute">transform</span>: translate(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; @<span class="keyword">else</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">transform</span>: translateY(-<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> margin(</span><br><span class="line">  <span class="variable">$component-height</span>,</span><br><span class="line">  <span class="variable">$component-width</span>: null,</span><br><span class="line">  <span class="variable">$touch-target-height</span>: <span class="variable">$height</span>,</span><br><span class="line">  <span class="variable">$touch-target-width</span>: <span class="variable">$width</span>,</span><br><span class="line">  <span class="variable">$query</span>: feature-targeting.all()</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.create-target(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$vertical-margin-value</span>: (<span class="variable">$touch-target-height</span> - <span class="variable">$component-height</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">if</span> <span class="variable">$component-width</span> &#123;</span><br><span class="line">    <span class="variable">$horizontal-margin-value</span>: (<span class="variable">$touch-target-width</span> - <span class="variable">$component-width</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    @<span class="keyword">include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">      <span class="attribute">margin-left</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node_modules/@material/touch-target/_touch-target.scss</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@use</span> <span class="string">&#x27;@material/base/mixins&#x27;</span> as base-mixins;</span><br><span class="line"><span class="keyword">@use</span> <span class="string">&#x27;@material/feature-targeting/feature-targeting&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$height</span>: <span class="number">48px</span> !default; 👈👈👈</span><br><span class="line"><span class="variable">$width</span>: <span class="variable">$height</span> !default;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Styles applied to the component&#x27;s touch target wrapper element.</span></span><br><span class="line"><span class="keyword">@mixin</span> wrapper(<span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.<span class="built_in">create-target</span>(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.mdc-touch-target-wrapper</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="keyword">@include</span> base-mixins.emit-once(<span class="string">&#x27;mdc-touch-target/wrapper&#x27;</span>) &#123;</span><br><span class="line">        <span class="attribute">display</span>: inline;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> touch-target(<span class="variable">$set-width</span>: false, <span class="variable">$query</span>: feature-targeting.all()) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.<span class="built_in">create-target</span>(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$height</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@if</span> <span class="variable">$set-width</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="comment">/* @noflip */</span></span><br><span class="line">      <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">      <span class="attribute">width</span>: <span class="variable">$width</span>;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">@else</span> &#123;</span><br><span class="line">    <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">50%</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> margin(</span><br><span class="line">  <span class="variable">$component-height</span>,</span><br><span class="line">  <span class="variable">$component-width</span>: null,</span><br><span class="line">  <span class="variable">$touch-target-height</span>: <span class="variable">$height</span>,</span><br><span class="line">  <span class="variable">$touch-target-width</span>: <span class="variable">$width</span>,</span><br><span class="line">  <span class="variable">$query</span>: feature-targeting.all()</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="variable">$feat-structure</span>: feature-targeting.<span class="built_in">create-target</span>(<span class="variable">$query</span>, structure);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$vertical-margin-value</span>: (<span class="variable">$touch-target-height</span> - <span class="variable">$component-height</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="variable">$vertical-margin-value</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">@if</span> <span class="variable">$component-width</span> &#123;</span><br><span class="line">    <span class="variable">$horizontal-margin-value</span>: (<span class="variable">$touch-target-width</span> - <span class="variable">$component-width</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">@include</span> feature-targeting.targets(<span class="variable">$feat-structure</span>) &#123;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">      <span class="attribute">margin-left</span>: <span class="variable">$horizontal-margin-value</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<a name="space-methods">
+<a name="space-methods"/>
 
 <h3 id="Material-design-Space-methods"><a href="#Material-design-Space-methods" class="headerlink" title="Material design - Space methods"></a>Material design - Space methods</h3><ul>
 <li>구글 머테리얼 디자인에서는 UI 요소사이의 공간을 8dp 혹은 4dp 단위로 측정한다.</li>
 <li>웹에서도 8px, 4px 단위로 여백을 조정한다.<ul>
-<li>보통은 8px로 진행하는 듯 하다. <a href="https://brunch.co.kr/@blackindigo-red/8" target="_blank" rel="noopener">이 글</a>과 연관이 있지 않을까 싶다.</li>
+<li>보통은 8px로 진행하는 듯 하다. <a href="https://brunch.co.kr/@blackindigo-red/8">이 글</a>과 연관이 있지 않을까 싶다.</li>
 </ul>
 </li>
 </ul>
-<a name="layout">
+<a name="layout"/>
 
 <h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><ul>
 <li>사용자의 <strong>맥락</strong>을 고려한 레이아웃은 <strong>디자이너의 영역</strong>에 가깝지만,<br>사용자의 <strong>기기</strong>와 관련된 나용은 한번은 읽어볼만한 내용이였다.</li>
@@ -592,29 +591,29 @@
 <li>양손을 쓸 수 있어서 한손으로 기기를 쥐고 다른 손으로 터치하는 경우 동일한 영역도 쉽게 선택할 수 있다.</li>
 </ul>
 <hr>
-<p>위 내용은 uxmatters의 글을 읽어보는 것이 더 재밌다. 해당 포스팅에서는 자세히 다루진 않겠다.<br><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 1</a><br><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 2</a><br><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 3</a></p>
+<p>위 내용은 uxmatters의 글을 읽어보는 것이 더 재밌다. 해당 포스팅에서는 자세히 다루진 않겠다.<br><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php">Design for Fingers, Touch, and People, Part 1</a><br><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php">Design for Fingers, Touch, and People, Part 2</a><br><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php">Design for Fingers, Touch, and People, Part 3</a></p>
 <h2 id="적용한-컴포넌트-사례"><a href="#적용한-컴포넌트-사례" class="headerlink" title="적용한 컴포넌트 사례"></a>적용한 컴포넌트 사례</h2><ul>
 <li>요즘은 개발자도구에도 접근성이 아주 잘나온다..!</li>
 <li>토스는 전체적으로 시원시원한 UI를 갖고있다는 느낌이 들곤했는데, 아무래도 이런 Touch Target의 최소규격을 사용성이 좋게 적당히 잡아둔 듯 하다.</li>
 </ul>
-<a name="touch-target-example">
+<a name="touch-target-example"/>
 
 <h3 id="Touch-Target-1"><a href="#Touch-Target-1" class="headerlink" title="Touch Target"></a>Touch Target</h3><ol>
-<li>(Material design) Radio <img src="/images/2021/02/10.png" style="margin-top:10px" alt="Material design의 Radio - 라디오 버튼은 48px보다 작지만, touch영역은 48px을 유지"></li>
-<li>(Material design) Slider <img src="/images/2021/02/11.png" style="margin-top:10px" alt="Material design의 Slider - 슬라이더의 pointer부분의 높이값을 48px을 유지"></li>
-<li>(Material design) Switch <img src="/images/2021/02/12.png" style="margin-top:10px" alt="Material design의 Switch"></li>
-<li>(Facebook) Button <img src="/images/2021/02/02.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 높이 영역을 50px로 유지"></li>
-<li>(Facebook) Button - icon <img src="/images/2021/02/04.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 터치영역을 44px로 유지"></li>
-<li>(Airbnb) Input <img src="/images/2021/02/07.png" style="margin-top:10px" alt="Airbnb의 Button - input의 터치영역을 44px로 유지"></li>
-<li>(토스) Button - fullfilled <img src="/images/2021/02/05.png" style="margin-top:10px" alt="Toss의 Button - 버튼의 터치영역을 58px로 유지 (wow)">
+<li>(Material design) Radio <img src ="/images/2021/02/10.png" style="margin-top:10px" alt="Material design의 Radio - 라디오 버튼은 48px보다 작지만, touch영역은 48px을 유지"></li>
+<li>(Material design) Slider <img src ="/images/2021/02/11.png" style="margin-top:10px" alt="Material design의 Slider - 슬라이더의 pointer부분의 높이값을 48px을 유지"></li>
+<li>(Material design) Switch <img src ="/images/2021/02/12.png" style="margin-top:10px" alt="Material design의 Switch"></li>
+<li>(Facebook) Button <img src ="/images/2021/02/02.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 높이 영역을 50px로 유지"></li>
+<li>(Facebook) Button - icon <img src ="/images/2021/02/04.png" style="margin-top:10px" alt="Facebook의 Button - 버튼의 터치영역을 44px로 유지"></li>
+<li>(Airbnb) Input <img src ="/images/2021/02/07.png" style="margin-top:10px" alt="Airbnb의 Button - input의 터치영역을 44px로 유지"></li>
+<li>(토스) Button - fullfilled <img src ="/images/2021/02/05.png" style="margin-top:10px" alt="Toss의 Button - 버튼의 터치영역을 58px로 유지 (wow)">
 
 </li>
 </ol>
-<a name="space-example">
+<a name="space-example"/>
 
 <h3 id="Space"><a href="#Space" class="headerlink" title="Space"></a>Space</h3><ol>
-<li>(Material design) Dialog  <img src="/images/2021/02/09.png" style="margin-top:10px" alt="Material design의 Button 컴포넌트들 여백"></li>
-<li>(Material design) Chips  <img src="/images/2021/02/14.png" style="margin-top:10px" alt="Material design의 Chips 컴포넌트들 여백">
+<li>(Material design) Dialog  <img src ="/images/2021/02/09.png" style="margin-top:10px" alt="Material design의 Button 컴포넌트들 여백"></li>
+<li>(Material design) Chips  <img src ="/images/2021/02/14.png" style="margin-top:10px" alt="Material design의 Chips 컴포넌트들 여백">
 
 
 
@@ -623,21 +622,21 @@
 <hr>
 <p><strong>참고자료</strong></p>
 <ol>
-<li><a href="https://web.dev/accessible-tap-targets/" target="_blank" rel="noopener">Accessible tap targets</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/%EB%AF%B8%EB%94%94%EC%96%B4_%EC%BF%BC%EB%A6%AC_%EC%B4%88%EB%B3%B4%EC%9E%90_%EC%95%88%EB%82%B4%EC%84%9C" target="_blank" rel="noopener">미디어 쿼리 초보자 안내서</a></li>
-<li><a href="https://material.io/design/usability/accessibility.html#layout-and-typography" target="_blank" rel="noopener">Material - Layout and typography</a></li>
-<li><a href="https://material.io/develop/web/components/touchtarget" target="_blank" rel="noopener">Material - web - touch target</a></li>
-<li><a href="https://material.io/design/layout/spacing-methods.html" target="_blank" rel="noopener">Material - Spaceing methods</a></li>
-<li><a href="https://material-components.github.io/material-components-web-components/demos/index.html" target="_blank" rel="noopener">Material Web Components Catalog</a></li>
-<li><a href="https://www.google.com/accessibility/for-developers/" target="_blank" rel="noopener">Google - 접근성을 고려한 개발</a></li>
-<li><a href="https://developers.google.com/web/fundamentals/accessibility" target="_blank" rel="noopener">Google Web Fundamentals - Accessibility</a></li>
-<li><a href="https://toss.im/" target="_blank" rel="noopener">toss</a></li>
-<li><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 1</a></li>
-<li><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 2</a></li>
-<li><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php" target="_blank" rel="noopener">Design for Fingers, Touch, and People, Part 3</a></li>
-<li><a href="https://m.blog.naver.com/viviang777/50171045913" target="_blank" rel="noopener">[피츠의 법칙] Fitts’ Law &amp; Paul M. Fitts</a></li>
+<li><a href="https://web.dev/accessible-tap-targets/">Accessible tap targets</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/%EB%AF%B8%EB%94%94%EC%96%B4_%EC%BF%BC%EB%A6%AC_%EC%B4%88%EB%B3%B4%EC%9E%90_%EC%95%88%EB%82%B4%EC%84%9C">미디어 쿼리 초보자 안내서</a></li>
+<li><a href="https://material.io/design/usability/accessibility.html#layout-and-typography">Material - Layout and typography</a></li>
+<li><a href="https://material.io/develop/web/components/touchtarget">Material - web - touch target</a></li>
+<li><a href="https://material.io/design/layout/spacing-methods.html">Material - Spaceing methods</a></li>
+<li><a href="https://material-components.github.io/material-components-web-components/demos/index.html">Material Web Components Catalog</a></li>
+<li><a href="https://www.google.com/accessibility/for-developers/">Google - 접근성을 고려한 개발</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/accessibility">Google Web Fundamentals - Accessibility</a></li>
+<li><a href="https://toss.im/">toss</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/03/design-for-fingers-touch-and-people-part-1.php">Design for Fingers, Touch, and People, Part 1</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/05/design-for-fingers-touch-and-people-part-2.php">Design for Fingers, Touch, and People, Part 2</a></li>
+<li><a href="https://www.uxmatters.com/mt/archives/2017/07/design-for-fingers-touch-and-people-part-3.php">Design for Fingers, Touch, and People, Part 3</a></li>
+<li><a href="https://m.blog.naver.com/viviang777/50171045913">[피츠의 법칙] Fitts’ Law &amp; Paul M. Fitts</a></li>
 </ol>
-</a></a></a></a></a></a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -656,7 +655,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2021/01/24/%E1%84%91%E1%85%B5%E1%84%8E%E1%85%B3%E1%84%8B%E1%85%B4-%E1%84%87%E1%85%A5%E1%86%B8%E1%84%8E%E1%85%B5%E1%86%A8/" data-id="cm3u5tb4t00shnjb2gwq7luf7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2021/01/24/%E1%84%91%E1%85%B5%E1%84%8E%E1%85%B3%E1%84%8B%E1%85%B4-%E1%84%87%E1%85%A5%E1%86%B8%E1%84%8E%E1%85%B5%E1%86%A8/" data-id="cm2pm85e1000eblb22y65gjss" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

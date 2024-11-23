@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2018/08/15/Async_02/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2018/08/15/async_02/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -295,12 +295,12 @@
 <blockquote>
 <p>rxjs의 observable</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;fromEvent&#125; = rxjs;</span><br><span class="line"><span class="keyword">const</span> clikc$ = fromEvent(<span class="built_in">document</span>, <span class="string">'click'</span>);</span><br><span class="line">clikc$.subscribe(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">click$.subscribe(&#123;</span><br><span class="line">  next: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;fromEvent&#125; = rxjs;</span><br><span class="line"><span class="keyword">const</span> clikc$ = <span class="title function_">fromEvent</span>(<span class="variable language_">document</span>, <span class="string">&#x27;click&#x27;</span>);</span><br><span class="line">clikc$.<span class="title function_">subscribe</span>(<span class="keyword">function</span>(<span class="params">v</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(v)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">click$.<span class="title function_">subscribe</span>(&#123;</span><br><span class="line">  <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params">v</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(v)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>observer pattern</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newsPaper = <span class="keyword">new</span> Subject();</span><br><span class="line">newPaper.add(&#123;</span><br><span class="line">  update: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newsPaper = <span class="keyword">new</span> <span class="title class_">Subject</span>();</span><br><span class="line">newPaper.<span class="title function_">add</span>(&#123;</span><br><span class="line">  <span class="attr">update</span>: <span class="keyword">function</span>(<span class="params">v</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(v);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <p><strong>subject와 observer</strong></p>
 <blockquote>
@@ -362,7 +362,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="cm3u5tb1m0006njb2jekji1k8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2018/08/15/Async_02/" data-id="ckzv7cqe00004qobm51qwzcqz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/24/JS_07_1/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/24/js_07_1/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -247,20 +247,20 @@
 <hr>
 <hr>
 <h2 id="1-window-객체"><a href="#1-window-객체" class="headerlink" title=" 1. window 객체"></a><a name="window"></a> 1. window 객체</h2><p>BOM은 웹 페이지 콘텐츠와 무관하게 <code>브라우저 기능을 노출하는 객체</code>이다.</p>
-<img src="/images/post_img/56/BOM-01.png">
+<img src ="/images/post_img/56/BOM-01.png">
 
-<p>브라우저의 인스턴스 =&gt; window 객체<br>웹페이지에서 정의한 모든 객체, 변수, 함수에서는<br><strong>window가 Global 객체(= 표준내장객체) 구실을 하고,</strong><br>window에 정의된 parseInt()등의 메서드를 이용한다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects" target="_blank" rel="noopener">+</a></p>
+<p>브라우저의 인스턴스 =&gt; window 객체<br>웹페이지에서 정의한 모든 객체, 변수, 함수에서는<br><strong>window가 Global 객체(= 표준내장객체) 구실을 하고,</strong><br>window에 정의된 parseInt()등의 메서드를 이용한다. <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects">+</a></p>
 <blockquote>
 <p>global objects와 global object는 다르다.<br>global objects는 표중내장객체, global object는 전역객체이다.(실행 컨택스트에서 GO)</p>
 </blockquote>
 <hr>
 <h3 id="1-1-전역-스코프"><a href="#1-1-전역-스코프" class="headerlink" title=" 1.1 전역 스코프"></a><a name="global"></a> 1.1 전역 스코프</h3><p>전역에서 선언한 <code>변수</code>와 <code>함수</code>는 모두<br><strong>window 객체의 프로퍼티 및 메서드</strong>가 된다. </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">const</span> sayAge = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.age); <span class="comment">// 전역을 가리키는 this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.age);  <span class="comment">// 29</span></span><br><span class="line">sayAge();           <span class="comment">// 29</span></span><br><span class="line"><span class="built_in">window</span>.sayAge();    <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sayAge</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="variable language_">this</span>.<span class="property">age</span>); <span class="comment">// 전역을 가리키는 this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(<span class="variable language_">window</span>.<span class="property">age</span>);  <span class="comment">// 29</span></span><br><span class="line"><span class="title function_">sayAge</span>();           <span class="comment">// 29</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">sayAge</span>();    <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="전역변수와-window-프로퍼티로-직접-정의하는-것의-차이"><a href="#전역변수와-window-프로퍼티로-직접-정의하는-것의-차이" class="headerlink" title="전역변수와 window 프로퍼티로 직접 정의하는 것의 차이."></a>전역변수와 window 프로퍼티로 직접 정의하는 것의 차이.</h4><ul>
 <li>전역 변수는 <code>delete</code>연산자로 제거할 수 없고, window 프로퍼티는 가능하다.</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.age;    <span class="comment">// 제거 안됨</span></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.color;  <span class="comment">// 제거 됨</span></span><br><span class="line"></span><br><span class="line">alert(<span class="built_in">window</span>.color)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">29</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">color</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="variable language_">window</span>.<span class="property">age</span>;    <span class="comment">// 제거 안됨</span></span><br><span class="line"><span class="keyword">delete</span> <span class="variable language_">window</span>.<span class="property">color</span>;  <span class="comment">// 제거 됨</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(<span class="variable language_">window</span>.<span class="property">color</span>)</span><br></pre></td></tr></table></figure>
 
 <h4 id="선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능"><a href="#선언하지-않았을-가능성이-있는-변수의-존재-여부는-window-객체를-통해-확인-가능" class="headerlink" title="선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능"></a>선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능</h4><img src="/images/post_img/56/BOM-02.png">
 
@@ -288,15 +288,13 @@
 <h3 id="1-5-내비게이션과-열기"><a href="#1-5-내비게이션과-열기" class="headerlink" title=" 1.5 내비게이션과 열기"></a><a name="navigation&open"></a> 1.5 내비게이션과 열기</h3><p><code>window.open()</code> : URL로 이동한 후 브라우저 창을 새로 연다.</p>
 <ul>
 <li>이동할 URL, 대상 창, 기능을 나타내는 <code>string</code></li>
-<li>마지막으로 새 페이지가 브라우저 히스토리에서 현재 페이지를 대체할지 나타내는 <code>boolean</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>)</span><br><span class="line"><span class="comment">// 두번째 인자는 a태그에서 target과 같다.</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<li>마지막으로 새 페이지가 브라우저 히스토리에서 현재 페이지를 대체할지 나타내는 <code>boolean</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&quot;http://feel5ny.github.io&quot;</span>, <span class="string">&quot;topFrame&quot;</span>)</span><br><span class="line"><span class="comment">// 두번째 인자는 a태그에서 target과 같다.</span></span><br></pre></td></tr></table></figure>
+두번째 인자에는 <code>_self</code>,<code>_parent</code>,<code>_top</code>,<code>_blank</code>사용가능</li>
 </ul>
-<p>두번째 인자에는 <code>_self</code>,<code>_parent</code>,<code>_top</code>,<code>_blank</code>사용가능</p>
 <h4 id="팝업창"><a href="#팝업창" class="headerlink" title="팝업창"></a>팝업창</h4><blockquote>
 <p>소셜 인증시 팝업창이 open되고, close될 때 사용된다.</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&quot;http://feel5ny.github.io&quot;</span>, <span class="string">&quot;topFrame&quot;</span>, </span><br><span class="line"><span class="string">&quot;height=400, width=400, top=10, left=10, resizable=yes&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
@@ -363,10 +361,10 @@
 </tr>
 </tbody></table>
 <h5 id="window-open"><a href="#window-open" class="headerlink" title="window.open()"></a><code>window.open()</code></h5><p>메서드는 새로 생성한 창에 대한 참조를 반환한다.<br>기본적으로 주요 브라우저 창의 위치나 크기를 스크립트에서 바꿀 수 없게 금지되지만, .open으로 생성한 창은 가능하다. (크롬은 CORS에 걸림)<br><code>window.close()</code>는 <code>window.open()</code>으로 생성된 창에서만 적용가능하다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br><span class="line"></span><br><span class="line">wroxWin.resizeTo(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">wroxWin.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&quot;http://feel5ny.github.io&quot;</span>, <span class="string">&quot;topFrame&quot;</span>, </span><br><span class="line"><span class="string">&quot;height=400, width=400, top=10, left=10, resizable=yes&quot;</span>)</span><br><span class="line"></span><br><span class="line">wroxWin.<span class="title function_">resizeTo</span>(<span class="number">500</span>, <span class="number">500</span>);</span><br><span class="line">wroxWin.<span class="title function_">moveTo</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
 
 <p><code>wroxWin</code>은 <code>opener</code>프로퍼티를 갖고 있는데, window.open()을 호출한 창이나 프레임을 가리키는 포인터이다.<br>그 역은 존재하지 않는다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="built_in">window</span>.open(<span class="string">"http://feel5ny.github.io"</span>, <span class="string">"topFrame"</span>, </span><br><span class="line"><span class="string">"height=400, width=400, top=10, left=10, resizable=yes"</span>)</span><br><span class="line"></span><br><span class="line">alert(wroxWin.opener === <span class="built_in">window</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wroxWin = <span class="variable language_">window</span>.<span class="title function_">open</span>(<span class="string">&quot;http://feel5ny.github.io&quot;</span>, <span class="string">&quot;topFrame&quot;</span>, </span><br><span class="line"><span class="string">&quot;height=400, width=400, top=10, left=10, resizable=yes&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(wroxWin.<span class="property">opener</span> === <span class="variable language_">window</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="1-6-인터벌과-타임아웃"><a href="#1-6-인터벌과-타임아웃" class="headerlink" title=" 1.6 인터벌과 타임아웃"></a><a name="interval&timeout"></a> 1.6 인터벌과 타임아웃</h3><p>window에는 코드가 특정 시간에 실행되게끔 해주는 메서드가 있다.<br><code>setTimeout(실해코드, 시간(밀리초))</code> : 일정 시간 뒤에 코드를 실행<br><code>setInterval()</code> : 일정 시간마다 코드를 반복 실행</p>
@@ -376,7 +374,7 @@
 </blockquote>
 <p><code>clearTimeout(setTimeout이 할당된 변수이름. 혹은 id값)</code> : 타임아웃을 취소할 때 사용한다.</p>
 <h4 id="128171-setInterval"><a href="#128171-setInterval" class="headerlink" title="&#128171; setInterval()"></a>&#128171; <code>setInterval()</code></h4><p>페이지가 종료되거나 인터벌을 취소하기 전에는 일정 시간마다 코드를 반복 실행한다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">'test'</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>clearInterval()</code> : 인터벌을 취소한다.<br>인터벌을 취소하지 않으면 페이지가 떠 있는 동안은 계속 실행되므로 <strong>인터벌 취소는 timeout 취소보다 중요</strong></p>
 <hr>
@@ -389,7 +387,7 @@
 <hr>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://meetup.toast.com/posts/89" target="_blank" rel="noopener">http://meetup.toast.com/posts/89</a></li>
+<li><a href="http://meetup.toast.com/posts/89">http://meetup.toast.com/posts/89</a></li>
 </ol>
 
         </div>
@@ -410,7 +408,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="cm3u5tb2e0054njb267h8ef93" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/24/JS_07_1/" data-id="ckzv7cqhe0055qobmbvdj3ufy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

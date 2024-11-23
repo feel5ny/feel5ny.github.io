@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/25/JS_07_2/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/25/js_07_2/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -255,7 +255,7 @@
 </ul>
 <p>location의 프로퍼티들을 살펴보자.</p>
 <ul>
-<li><code>hash</code> (예: “#/0/1” <a href="http://slides.com/nayoung/deck-8#/0/1" target="_blank" rel="noopener">http://slides.com/nayoung/deck-8#/0/1</a>)<ul>
+<li><code>hash</code> (예: “#/0/1” <a href="http://slides.com/nayoung/deck-8#/0/1">http://slides.com/nayoung/deck-8#/0/1</a>)<ul>
 <li>#기호 다음에 문자가 오는 형태의 URL 해시. URL에 해시가 없다면 빈 문자열</li>
 </ul>
 </li>
@@ -267,7 +267,7 @@
 <li>포트 번호를 제외한 서버 이름</li>
 </ul>
 </li>
-<li><code>href</code> (예: “<a href="http://localhost:4000/2017/12/28/JS_07/&quot;" target="_blank" rel="noopener">http://localhost:4000/2017/12/28/JS_07/&quot;</a>)<ul>
+<li><code>href</code> (예: “<a href="http://localhost:4000/2017/12/28/JS_07/&quot;">http://localhost:4000/2017/12/28/JS_07/&quot;</a>)<ul>
 <li>현재 페이지의 완전한 URL</li>
 <li>location의 <code>toString()</code>메서드는 이 값을 반환</li>
 </ul>
@@ -291,7 +291,7 @@
 </ul>
 <hr>
 <h3 id="2-1-쿼리스트링-확장"><a href="#2-1-쿼리스트링-확장" class="headerlink" title="2.1 쿼리스트링 확장"></a>2.1 쿼리스트링 확장</h3><p>URL 정보 중 쿼리스트링은 다루기 쉬운 형태로 제공되지 않는다.<br>즉, 하나씩 분리해서 제공하지 않는다는 말.<br>아래 함수를 이용하면 쿼리스트링을 파싱해서 각 매개변수를 프로퍼티로 갖는 객체를 반환한다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryStringArgs</span>(<span class="params">teset</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> qs = &#123;location.search.length &gt; <span class="number">0</span> &gt; location.search.substring(<span class="number">1</span>) : <span class="string">""</span>&#125;, <span class="comment">// 쿼리스트링이 존재하면 물음표를 제외하고 qs에 할당한다.</span></span><br><span class="line">  args = &#123;&#125;,</span><br><span class="line"></span><br><span class="line">  items = qs.length ? qs.split(<span class="string">"&amp;"</span>) : [],</span><br><span class="line">  item = <span class="literal">null</span>,</span><br><span class="line">  name = <span class="literal">null</span>,</span><br><span class="line">  value = <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// for 루프에서 사용할 변수</span></span><br><span class="line">  i = <span class="number">0</span>,</span><br><span class="line">  len = items.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 각각 매개변수를 args 객체에 할당</span></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">    item = item[i].split(<span class="string">"="</span>);</span><br><span class="line">    name = <span class="built_in">decodeURIComponent</span>(item[<span class="number">0</span>]);</span><br><span class="line">    value = <span class="built_in">decodeURIComponent</span>(item[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(name.length) &#123;</span><br><span class="line">      args[name] = value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getQueryStringArgs</span>(<span class="params">teset</span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> qs = &#123;location.<span class="property">search</span>.<span class="property">length</span> &gt; <span class="number">0</span> &gt; location.<span class="property">search</span>.<span class="title function_">substring</span>(<span class="number">1</span>) : <span class="string">&quot;&quot;</span>&#125;, <span class="comment">// 쿼리스트링이 존재하면 물음표를 제외하고 qs에 할당한다.</span></span><br><span class="line">  args = &#123;&#125;,</span><br><span class="line"></span><br><span class="line">  items = qs.<span class="property">length</span> ? qs.<span class="title function_">split</span>(<span class="string">&quot;&amp;&quot;</span>) : [],</span><br><span class="line">  item = <span class="literal">null</span>,</span><br><span class="line">  name = <span class="literal">null</span>,</span><br><span class="line">  value = <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// for 루프에서 사용할 변수</span></span><br><span class="line">  i = <span class="number">0</span>,</span><br><span class="line">  len = items.<span class="property">length</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 각각 매개변수를 args 객체에 할당</span></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">    item = item[i].<span class="title function_">split</span>(<span class="string">&quot;=&quot;</span>);</span><br><span class="line">    name = <span class="built_in">decodeURIComponent</span>(item[<span class="number">0</span>]);</span><br><span class="line">    value = <span class="built_in">decodeURIComponent</span>(item[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(name.<span class="property">length</span>) &#123;</span><br><span class="line">      args[name] = value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol>
 <li>물음표 제거.</li>
@@ -299,7 +299,7 @@
 <li>args의 객체에 split으로 분리된 배열의 첫번째 인자가 name, 두번째 인자가 value에 들어간다.</li>
 </ol>
 <p><strong>결과</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.google.co.kr/search?newwindow=1&amp;tbm=isch&amp;q=그리드+다단&amp;cad=h</span><br><span class="line">args = &#123;newwindow: &quot;1&quot;, tbm: &quot;isch&quot;, q: &quot;그리드+다단&quot;, cad: &quot;h&quot;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.google.co.kr/search?newwindow=1&amp;tbm=isch&amp;q=그리드+다단&amp;cad=h</span><br><span class="line">args = &#123;newwindow: &quot;1&quot;, tbm: &quot;isch&quot;, q: &quot;그리드+다단&quot;, cad: &quot;h&quot;&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="* decodeURIComponent"></a>* <code>decodeURIComponent</code></h4><p>HTML에서 한글이 섞인 주소는 오작동할 수 있기 때문에 이스케이프 시켜야한다.<br>예 : “나영” =&gt; “%EB%82%98%EC%98%81”<br>이를 <code>인코딩</code>이라고 하며, 반대로 다시 언어화를 시켜주는 <code>디코딩</code>이 있습니다.<br><code>decodeURIComponent</code>는 <code>http://</code> 부터 모두 디코딩을 해줍니다.</p>
 <hr>
@@ -322,12 +322,12 @@
 <li>현재 주소값에 search가 있는 경우, <code>q=</code> 뒤에 검색 단어를 추가한다.</li>
 </ul>
 </li>
-<li>location.hostname = “<a href="http://www.naver.com&quot;" target="_blank" rel="noopener">www.naver.com&quot;</a><ul>
+<li>location.hostname = “<a href="http://www.naver.com&quot;">www.naver.com&quot;</a><ul>
 <li>현재 주소에서 앞부분 main 주소값이 바뀐다.</li>
 </ul>
 </li>
 <li>location.pathname<ul>
-<li>첫번째 path가 바뀐다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://developer.mozilla.org/ko/?q=nayn</span></span><br><span class="line">location.pathname = <span class="string">"en-Us"</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/en-US/?q=nayn</span></span><br></pre></td></tr></table></figure>
+<li>첫번째 path가 바뀐다.<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://developer.mozilla.org/ko/?q=nayn</span></span><br><span class="line">location.<span class="property">pathname</span> = <span class="string">&quot;en-Us&quot;</span></span><br><span class="line"><span class="comment">// https://developer.mozilla.org/en-US/?q=nayn</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -335,7 +335,7 @@
 </ul>
 <p>위의 프로퍼티들은 브라우저 히스토리 스택에 쌓이기 때문에 뒤로가기 버튼이 적용된다.<br><strong>replace는 그렇지 않다.</strong></p>
 <ul>
-<li>location.replace(“<a href="http://www.naver.com&quot;" target="_blank" rel="noopener">www.naver.com&quot;</a>)<ul>
+<li>location.replace(“<a href="http://www.naver.com&quot;">www.naver.com&quot;</a>)<ul>
 <li>히스토리 스택에 쌓이지 않는다.</li>
 </ul>
 </li>
@@ -435,7 +435,7 @@
 </tr>
 <tr>
 <td align="left">*<code>mimeTypes</code></td>
-<td align="left">브라우저에 등록된 <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types" target="_blank" rel="noopener">마임 타입</a>을 나열한 배열이다.</td>
+<td align="left">브라우저에 등록된 <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types">마임 타입</a>을 나열한 배열이다.</td>
 <td align="left">4.0+</td>
 <td align="center">1.0+</td>
 <td align="center">1.0+</td>
@@ -491,7 +491,7 @@
 </tr>
 <tr>
 <td align="left">*<code>product</code></td>
-<td align="left">브라우저 이름. 일반적으로 <a href="https://ko.wikipedia.org/wiki/%EA%B2%8C%EC%BD%94_(%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83_%EC%97%94%EC%A7%84)" target="_blank" rel="noopener">“Gecko”</a>이다.</td>
+<td align="left">브라우저 이름. 일반적으로 <a href="https://ko.wikipedia.org/wiki/%EA%B2%8C%EC%BD%94_(%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83_%EC%97%94%EC%A7%84)">“Gecko”</a>이다.</td>
 <td align="left">-</td>
 <td align="center">1.0+</td>
 <td align="center">1.0+</td>
@@ -588,7 +588,7 @@
 </tbody></table>
 <hr>
 <h3 id="3-1-플러그인-감지"><a href="#3-1-플러그인-감지" class="headerlink" title="3.1 플러그인 감지"></a>3.1 플러그인 감지</h3><p>현재 크롬의 plugins</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="number">0</span>: MimeType, </span><br><span class="line">    application/x-google-chrome-pdf: MimeType, </span><br><span class="line">    name: <span class="string">"Chrome PDF Plugin"</span>,  <span class="comment">// 플러그인 이름</span></span><br><span class="line">    filename: <span class="string">"internal-pdf-viewer"</span>,  <span class="comment">// 플러그인의 파일 이름</span></span><br><span class="line">    description: <span class="string">"Portable Document Format"</span>, <span class="comment">// 플러그인 설명</span></span><br><span class="line">    length: <span class="number">1</span> <span class="comment">// 플러그인이 처리하는 마임 타입 숫자</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: MimeType, application/pdf: MimeType, <span class="attr">name</span>: <span class="string">"Chrome PDF Viewer"</span>, <span class="attr">filename</span>: <span class="string">"mhjfbmdgcfjbbpaeojofohoefgiehjai"</span>, <span class="attr">description</span>: <span class="string">""</span>, <span class="attr">length</span>: <span class="number">1</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: MimeType, <span class="number">1</span>: MimeType, application/x-nacl: MimeType, application/x-pnacl: MimeType, <span class="attr">name</span>: <span class="string">"Native Client"</span>, <span class="attr">filename</span>: <span class="string">"internal-nacl-plugin"</span>, <span class="attr">description</span>: <span class="string">""</span>, …&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: MimeType, <span class="number">1</span>: MimeType, application/x-shockwave-flash: MimeType, application/futuresplash: MimeType, <span class="attr">name</span>: <span class="string">"Shockwave Flash"</span>, <span class="attr">filename</span>: <span class="string">"PepperFlashPlayer.plugin"</span>, <span class="attr">description</span>: <span class="string">"Shockwave Flash 28.0 r0"</span>, …&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: MimeType, application/x-ppapi-widevine-cdm: MimeType, <span class="attr">name</span>: <span class="string">"Widevine Content Decryption Module"</span>, <span class="attr">filename</span>: <span class="string">"widevinecdmadapter.plugin"</span>, <span class="attr">description</span>: <span class="string">"Enables Widevine licenses for playback of HTML audio/video content. (version: 1.4.8.1030)"</span>, <span class="attr">length</span>: <span class="number">1</span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="title class_">MimeType</span>, </span><br><span class="line">    application/x-google-chrome-<span class="attr">pdf</span>: <span class="title class_">MimeType</span>, </span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;Chrome PDF Plugin&quot;</span>,  <span class="comment">// 플러그인 이름</span></span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&quot;internal-pdf-viewer&quot;</span>,  <span class="comment">// 플러그인의 파일 이름</span></span><br><span class="line">    <span class="attr">description</span>: <span class="string">&quot;Portable Document Format&quot;</span>, <span class="comment">// 플러그인 설명</span></span><br><span class="line">    <span class="attr">length</span>: <span class="number">1</span> <span class="comment">// 플러그인이 처리하는 마임 타입 숫자</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: <span class="title class_">MimeType</span>, application/<span class="attr">pdf</span>: <span class="title class_">MimeType</span>, <span class="attr">name</span>: <span class="string">&quot;Chrome PDF Viewer&quot;</span>, <span class="attr">filename</span>: <span class="string">&quot;mhjfbmdgcfjbbpaeojofohoefgiehjai&quot;</span>, <span class="attr">description</span>: <span class="string">&quot;&quot;</span>, <span class="attr">length</span>: <span class="number">1</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: <span class="title class_">MimeType</span>, <span class="number">1</span>: <span class="title class_">MimeType</span>, application/x-<span class="attr">nacl</span>: <span class="title class_">MimeType</span>, application/x-<span class="attr">pnacl</span>: <span class="title class_">MimeType</span>, <span class="attr">name</span>: <span class="string">&quot;Native Client&quot;</span>, <span class="attr">filename</span>: <span class="string">&quot;internal-nacl-plugin&quot;</span>, <span class="attr">description</span>: <span class="string">&quot;&quot;</span>, …&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: <span class="title class_">MimeType</span>, <span class="number">1</span>: <span class="title class_">MimeType</span>, application/x-shockwave-<span class="attr">flash</span>: <span class="title class_">MimeType</span>, application/<span class="attr">futuresplash</span>: <span class="title class_">MimeType</span>, <span class="attr">name</span>: <span class="string">&quot;Shockwave Flash&quot;</span>, <span class="attr">filename</span>: <span class="string">&quot;PepperFlashPlayer.plugin&quot;</span>, <span class="attr">description</span>: <span class="string">&quot;Shockwave Flash 28.0 r0&quot;</span>, …&#125;,</span><br><span class="line">  &#123;<span class="number">0</span>: <span class="title class_">MimeType</span>, application/x-ppapi-widevine-<span class="attr">cdm</span>: <span class="title class_">MimeType</span>, <span class="attr">name</span>: <span class="string">&quot;Widevine Content Decryption Module&quot;</span>, <span class="attr">filename</span>: <span class="string">&quot;widevinecdmadapter.plugin&quot;</span>, <span class="attr">description</span>: <span class="string">&quot;Enables Widevine licenses for playback of HTML audio/video content. (version: 1.4.8.1030)&quot;</span>, <span class="attr">length</span>: <span class="number">1</span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="3-2-처리기-등록"><a href="#3-2-처리기-등록" class="headerlink" title="3.2 처리기 등록"></a>3.2 처리기 등록</h3><hr>
@@ -752,7 +752,7 @@
 <li>window의 프로퍼티.</li>
 <li>창을 첫 번째 연 이후 사용자의 내비게이션 히스토리를 보관한다.</li>
 <li>브라우저 창, 탭, 프레임은 각각 자신의 window 객체에 속한 history객체를 가진다.</li>
-<li>보안을 이유로 사용자가 방문했던 URL은 알 수 없다. <img src="/images/post_img/57/01.png">
+<li>보안을 이유로 사용자가 방문했던 URL은 알 수 없다. <img src ="/images/post_img/57/01.png">
 > 알 수 없는 url
 
 </li>
@@ -763,7 +763,7 @@
 <h3 id="프로퍼티"><a href="#프로퍼티" class="headerlink" title="프로퍼티"></a>프로퍼티</h3><p><code>length</code> : history 스택에 기록이 얼마나 많이 있는지 나타낸다. 0일경우 사용자가 페이지를 처음 열었을 때인 것이다.</p>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://meetup.toast.com/posts/89" target="_blank" rel="noopener">http://meetup.toast.com/posts/89</a></li>
+<li><a href="http://meetup.toast.com/posts/89">http://meetup.toast.com/posts/89</a></li>
 </ol>
 <h3 id="생소했던-단어"><a href="#생소했던-단어" class="headerlink" title="생소했던 단어"></a>생소했던 단어</h3><ol>
 <li>MIME타입</li>
@@ -788,7 +788,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/25/JS_07_2/" data-id="cm3u5tb2f005enjb2vufibimx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/25/JS_07_2/" data-id="ckzv7cqhg0059qobmkpax1l3i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

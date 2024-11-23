@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/08/26/HTTP_004_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/08/26/http_004_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -352,14 +352,13 @@
 <li>병렬 커넥션, keep-alive 커넥션, 커넥션 파이프라인을 활용한 HTTP의 최적화</li>
 <li>커넥션 관리를 위해 따라야 할 규칙들</li>
 </ol>
-<a name="1">
+<a name="1"/>
 
 <h1 id="1-TCP-커넥션"><a href="#1-TCP-커넥션" class="headerlink" title="1. TCP 커넥션"></a>1. TCP 커넥션</h1><ul>
 <li>전 세계 모든 HTTP 통신은, 지구상의 컴퓨터와 네트워크 장비에서 널리 쓰이고 있는, 패킷 교환 네트워크 프로토콜들이 계층화된 집합인 TCP/IP를 통해 이루어진다.</li>
 </ul>
 <p>웹 브라우저가 TCP 커넥션을 통해서 웹 서버에 요청을 보낸다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io/index.html</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://feel5ny.github.io/index.html</span><br></pre></td></tr></table></figure>
 <ol>
 <li>브라우저가 <code>feel5ny.github.io</code> 라는 호스트 명을 추출한다.</li>
 <li>브라우저가 이 호스트 명에 대한 IP 주소를 찾는다.</li>
@@ -410,8 +409,8 @@
 <li>TCP 세그먼트 헤더 (20byte)</li>
 <li>TCP 데이터 조각</li>
 </ol>
-<p><strong>패킷 구조</strong>는 아래와 같다.<br><img src="/images/2019/24/3.jpg" style="width:100%"><br><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments" target="_blank" rel="noopener">그림출처</a></p>
-<p><strong>IP 헤더</strong>와 <strong>TCP 헤더</strong>는 아래와 같다.<br><img src="/images/2019/24/4.jpg" style="width:100%"><br><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments" target="_blank" rel="noopener">그림출처</a></p>
+<p><strong>패킷 구조</strong>는 아래와 같다.<br><img src="/images/2019/24/3.jpg" style="width:100%"><br><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments">그림출처</a></p>
+<p><strong>IP 헤더</strong>와 <strong>TCP 헤더</strong>는 아래와 같다.<br><img src="/images/2019/24/4.jpg" style="width:100%"><br><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments">그림출처</a></p>
 <h2 id="1-3-TCP-커넥션-유지하기"><a href="#1-3-TCP-커넥션-유지하기" class="headerlink" title="1.3 TCP 커넥션 유지하기"></a>1.3 TCP 커넥션 유지하기</h2><ul>
 <li>컴퓨터는 항상 TCP 커넥션을 여러 개 가지고 있다.</li>
 <li>TCP는 <strong>포트 번호</strong>를 통해서 이런 여러 개의 커넥션을 유지한다.</li>
@@ -425,7 +424,7 @@
 </ol>
 <p>4가지 값으로 유일한 커넥션을 생성한다.<br>4가지 커넥션 구성요소를 똑같이 가리키고 있는 커넥션은 있을 수 없다.</p>
 <hr>
-<a name="2">
+<a name="2"/>
 
 <h1 id="2-TCP의-성능에-대한-고려"><a href="#2-TCP의-성능에-대한-고려" class="headerlink" title="2. TCP의 성능에 대한 고려"></a>2. TCP의 성능에 대한 고려</h1><ul>
 <li><ol start="2">
@@ -548,9 +547,9 @@
 <img src="/images/2019/24/7.png" style="width:100%">
 
 <blockquote>
-<p><a href="https://maj3sty.tistory.com/518" target="_blank" rel="noopener">그림 출처</a></p>
+<p><a href="https://maj3sty.tistory.com/518">그림 출처</a></p>
 </blockquote>
-<p><a href="http://egloos.zum.com/depiness/v/772710" target="_blank" rel="noopener">TCP_NODELAY 참고글</a></p>
+<p><a href="http://egloos.zum.com/depiness/v/772710">TCP_NODELAY 참고글</a></p>
 <h3 id="2-2-5-TIME-WAIT의-누적과-포트-고갈"><a href="#2-2-5-TIME-WAIT의-누적과-포트-고갈" class="headerlink" title="2.2.5 TIME_WAIT의 누적과 포트 고갈"></a>2.2.5 <code>TIME_WAIT</code>의 누적과 포트 고갈</h3><ul>
 <li>TCP 커넥션의 endpoint에서 TCP 커넥션을 끊으면,<br>endpoint에서는 커넥션의 <strong>IP 주소와 포트 번호</strong>를 메모리의 작은 제어영역에 <strong>기록</strong>해 놓는다.</li>
 <li>이 정보는 같은 주소와 포트 번호를 사용하는<br>새로운 TCP 커넥션이 일정 시간 동안에는 생성되지 않게 하기 위한 것이다.</li>
@@ -561,9 +560,9 @@
 </li>
 <li>현대의 빠른 라우터들 덕분에 커넥션이 닫힌 후에 중복되는 패킷이 생기는 경우는 거의 없어졌다.</li>
 </ul>
-<p><a href="http://devbv.com/2017/04/01/timewait/" target="_blank" rel="noopener">Time wait에 대한 글</a><br><a href="https://tech.kakao.com/2016/04/21/closewait-timewait/" target="_blank" rel="noopener">카카오 블로그</a><br><a href="https://meetup.toast.com/posts/55" target="_blank" rel="noopener">toast 블로그</a></p>
+<p><a href="http://devbv.com/2017/04/01/timewait/">Time wait에 대한 글</a><br><a href="https://tech.kakao.com/2016/04/21/closewait-timewait/">카카오 블로그</a><br><a href="https://meetup.toast.com/posts/55">toast 블로그</a></p>
 <hr>
-<a name="3">
+<a name="3"/>
 
 <h1 id="3-HTTP-커넥션-관리"><a href="#3-HTTP-커넥션-관리" class="headerlink" title="3. HTTP 커넥션 관리"></a>3. HTTP 커넥션 관리</h1><p>커넥션을 생성하고 최적화하는 HTTP 기술을 설명할 것이다.</p>
 <h2 id="3-1-흔히-잘못-이해하는-Connection-헤더"><a href="#3-1-흔히-잘못-이해하는-Connection-헤더" class="headerlink" title="3.1 흔히 잘못 이해하는 Connection 헤더"></a>3.1 흔히 잘못 이해하는 Connection 헤더</h2><ul>
@@ -594,7 +593,7 @@
 <li><code>close</code>: 커넥션이 작업이 완료되면 종료되어야 함을 의미.</li>
 <li><code>keep-alive</code></li>
 </ol>
-<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Connection" target="_blank" rel="noopener">mdn</a></p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Connection">mdn</a></p>
 <h2 id="3-2-순차적인-트랜젝션-처리에-의한-지연"><a href="#3-2-순차적인-트랜젝션-처리에-의한-지연" class="headerlink" title="3.2 순차적인 트랜젝션 처리에 의한 지연"></a>3.2 순차적인 트랜젝션 처리에 의한 지연</h2><ul>
 <li>커넥션 관리가 제대로 이루어지지 않으면 TCP 성능이 매우 안 좋아질 수 있다.</li>
 <li>만약 3개의 이미지가 있는 웹페이지에 접근한다면?<ul>
@@ -630,18 +629,18 @@
 <hr>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments" target="_blank" rel="noopener">패킷 그림</a></li>
-<li><a href="http://egloos.zum.com/depiness/v/772710" target="_blank" rel="noopener">nagle 알고리즘</a></li>
-<li><a href="http://devbv.com/2017/04/01/timewait/" target="_blank" rel="noopener">time wait</a></li>
-<li><a href="https://tech.kakao.com/2016/04/21/closewait-timewait/" target="_blank" rel="noopener">time wait-카카오</a></li>
-<li><a href="https://meetup.toast.com/posts/55" target="_blank" rel="noopener">time wait-toast밋업</a></li>
+<li><a href="https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments">패킷 그림</a></li>
+<li><a href="http://egloos.zum.com/depiness/v/772710">nagle 알고리즘</a></li>
+<li><a href="http://devbv.com/2017/04/01/timewait/">time wait</a></li>
+<li><a href="https://tech.kakao.com/2016/04/21/closewait-timewait/">time wait-카카오</a></li>
+<li><a href="https://meetup.toast.com/posts/55">time wait-toast밋업</a></li>
 </ul>
-</a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -660,7 +659,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/26/HTTP_004_01/" data-id="cm3u5tb23002tnjb24fqp45wp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/26/HTTP_004_01/" data-id="ckzv7cqfh002mqobmqm4t5n32" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

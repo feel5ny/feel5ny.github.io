@@ -31,7 +31,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/11/23/HTTP_012_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/11/23/http_012_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -314,12 +314,12 @@
   </div>
 
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><img src="/images/2019/41/01.png" style="width:100%">
+            <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><img src="/images/2019/41/01.png" style="width:100%"/>
 
 
 <hr>
 <hr>
-<a name="auth">
+<a name="auth"/>
 
 <h1 id="인증-🔐"><a href="#인증-🔐" class="headerlink" title="인증 🔐"></a>인증 🔐</h1><ul>
 <li>완벽한 인증이란 없다. 비밀번호는 유출될수있고, 신분증은 위조될 수 있다.</li>
@@ -348,7 +348,7 @@
 </li>
 <li><p>미래에는, 사람들이 HTTP 인증요구/응답 프레임워크를 사용해 새로운 프로토콜을 고안해 낼 수 있을 것이다.</p>
 <blockquote>
-<p>현대에 HTTP의 인증요구/응답 프로토콜을 사용하는 인증 프로토콜로는 <strong>OAuth</strong>가 있다.<br>OAuth는 모바일 기기같은 다양한 어플리케이션에서 API 인증을 위해 사용하는 최신 인증 프로토콜이다. (<a href="https://tools.ietf.org/html/rfc6749" target="_blank" rel="noopener">RFC6749</a>)</p>
+<p>현대에 HTTP의 인증요구/응답 프로토콜을 사용하는 인증 프로토콜로는 <strong>OAuth</strong>가 있다.<br>OAuth는 모바일 기기같은 다양한 어플리케이션에서 API 인증을 위해 사용하는 최신 인증 프로토콜이다. (<a href="https://tools.ietf.org/html/rfc6749">RFC6749</a>)</p>
 </blockquote>
 </li>
 </ul>
@@ -358,7 +358,7 @@
 <li><strong>인증</strong> 단게 - <code>Authorization</code> 헤더를 함께 보냄</li>
 <li><strong>성공</strong> 단계 - 성공</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Basic realm=&quot;Access to the staging site&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Basic realm=&quot;Access to the staging site&quot;</span><br></pre></td></tr></table></figure>
 
 <h2 id="1-3-보안영역"><a href="#1-3-보안영역" class="headerlink" title="1.3 보안영역"></a>1.3 보안영역</h2><ul>
 <li><ol start="2">
@@ -376,7 +376,7 @@
 <li>기본인증에서, 웹 서버는 클라의 요청을 거부하고 유효한 사용자 이름과 비밀번호를 요구할 수 있다.</li>
 <li>서버는 401 상태코드와, 클라가 접근하려고 했던 보안 영역을 WWW-Authenticate에 기술해서 응답하여, 인증요구를 시작한다.</li>
 </ul>
-<a name="encoding">
+<a name="encoding"/>
 
 <h2 id="1-1-Base-64-사용자-이름-비밀번호-인코딩-🧞‍♂️"><a href="#1-1-Base-64-사용자-이름-비밀번호-인코딩-🧞‍♂️" class="headerlink" title="1.1 Base-64 사용자 이름/비밀번호 인코딩 🧞‍♂️"></a>1.1 Base-64 사용자 이름/비밀번호 인코딩 🧞‍♂️</h2><ul>
 <li><ol start="2">
@@ -391,7 +391,7 @@
 </ul>
 <hr>
 <hr>
-<a name="proxy">
+<a name="proxy"/>
 
 <h2 id="1-2-프락시-인증-🐝"><a href="#1-2-프락시-인증-🐝" class="headerlink" title="1.2 프락시 인증 🐝"></a>1.2 프락시 인증 🐝</h2><ul>
 <li><p>중개 프락시 서버를 통해 인증할 수도 있다.</p>
@@ -407,7 +407,7 @@
 </ul>
 <hr>
 <hr>
-<a name="defection">
+<a name="defection"/>
 
 <h2 id="1-3-기본-인증의-보안-결함-🤦‍♀️"><a href="#1-3-기본-인증의-보안-결함-🤦‍♀️" class="headerlink" title="1.3 기본 인증의 보안 결함 🤦‍♀️"></a>1.3 기본 인증의 보안 결함 🤦‍♀️</h2><ul>
 <li>기본 인증은 악의적이지 않은 누군가가 의도치 않게 리소스에 접근하는 것을 막는데 사용하거나,<br>SSL 같은 암호 기술과 혼용한다.</li>
@@ -438,17 +438,17 @@
 <p>기본인증은 다른 사람들이 보지 않기를 원하긴 하지만,<br>보더라도 치명적이지 않은 경우에는 여전히 유용하다.<br>기본 인증보다 더 복잡하고 강력한 보안 관련 속성인 <strong>다이제스트 인증</strong>을 다음 포스팅에서 알아보자.</p>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://d2.naver.com/helloworld/24942" target="_blank" rel="noopener">Oauth와 춤을</a></li>
-<li><a href="https://minwan1.github.io/2018/02/24/2018-02-24-OAuth/" target="_blank" rel="noopener">Oauth1 관련 글</a></li>
-<li><a href="https://tools.ietf.org/html/rfc6749" target="_blank" rel="noopener">RFC6749</a></li>
-<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication" target="_blank" rel="noopener">HTTP 인증</a></li>
+<li><a href="https://d2.naver.com/helloworld/24942">Oauth와 춤을</a></li>
+<li><a href="https://minwan1.github.io/2018/02/24/2018-02-24-OAuth/">Oauth1 관련 글</a></li>
+<li><a href="https://tools.ietf.org/html/rfc6749">RFC6749</a></li>
+<li><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Authentication">HTTP 인증</a></li>
 </ul>
-</a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -467,7 +467,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/11/23/HTTP_012_01/" data-id="cm3u5tb28003unjb2ygg31n2k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/11/23/HTTP_012_01/" data-id="ckzv7cqg0003iqobmmmj29hth" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

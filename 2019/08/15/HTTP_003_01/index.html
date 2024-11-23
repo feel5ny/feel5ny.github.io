@@ -30,7 +30,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/08/15/HTTP_003_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/08/15/http_003_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -372,7 +372,7 @@
         <div class="article-entry" itemprop="articleBody">
             <p><strong>HTTP 메서지</strong>에 대해서 알아본다. 메세지는 세 덩어리로 나눌 수 있다 <strong>시작줄, 헤더, 본문.</strong> 시작줄은 요청과 응답에 따라 다르다. 요청의 시작줄에는 서버에 요구할 동작을 명시하는 <strong>메서드</strong>, 리소스의 위치를 알려줄 <strong>URL</strong>, <strong>프로토콜 버전</strong>을 명시한다. 응답의 시작줄에는 버전과 처리 결과에 대한 <strong>상태코드</strong>, <strong>사유구절</strong>이 명시되어있다. 다음 줄에는 <strong>헤더</strong>가 존재한다. 헤더는 <strong>일반헤더, 요청헤더, 응답헤더, 확장헤더, entity헤더</strong>로 구분할 수 있다. RFC 7231에서는 요청 헤더와 응답 헤더로 나눠서 설명한다. 헤더와 본문 사이에는 꼭 <strong>한 줄</strong>을 비워두어야한다.(CRLF) <strong>본문은 옵셔널</strong>하다. 있을 때도 있고 없을 때도 있다. 메세지의 흐름을 설명하는 용어가 존재하는데, 상대적으로 표현된다. 서버를 기준으로 외부 클라에서 서버로(안으로) 흐르는 메세지를 <strong>인바운드</strong>, 서버에서 클라로(밖으로) 나가는 메세지를 <strong>아웃바운드</strong>라고 하며, 발신자를 기준으로 발신자에서 수신자의 방향을 <strong>다운스트림</strong>, 그 반대를 <strong>업스트림</strong>이라고 한다.</p>
 <hr>
-<a name="stream">
+<a name="stream"/>
 
 <h1 id="1-메세지의-흐름"><a href="#1-메세지의-흐름" class="headerlink" title="1. 메세지의 흐름"></a>1. 메세지의 흐름</h1><p>HTTP 메세지는 HTTP 메세지 간에 주고받은 데이터의 블록들이다</p>
 <ul>
@@ -399,7 +399,7 @@
 <li>요청/응답 이라는 성격과 상관없이<br>발신자와 수신자의 개념에서 <strong>발신자를 기준</strong>으로<br>발신자에서 ⇒ 수신자 방향을 <strong>다운스트림</strong><br>수신자에서 ⇒ 발신자 방향을 <strong>업스트림</strong> 이라고 한다.</li>
 </ul>
 <hr>
-<a name="syntax">
+<a name="syntax"/>
 
 <h1 id="2-메세지의-문법"><a href="#2-메세지의-문법" class="headerlink" title="2. 메세지의 문법"></a>2. 메세지의 문법</h1><ul>
 <li><ol start="2">
@@ -411,10 +411,10 @@
 </ul>
 <ol>
 <li><p>요청<br>버전은 프로토콜 버전</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;메서드&gt; &lt;요청 URL&gt; &lt;버전&gt;</span><br><span class="line">&lt;헤더&gt;</span><br><span class="line"></span><br><span class="line">&lt;엔터티 본문&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;메서드&gt; &lt;요청 URL&gt; &lt;버전&gt;</span><br><span class="line">&lt;헤더&gt;</span><br><span class="line"></span><br><span class="line">&lt;엔터티 본문&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>응답</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;버전&gt; &lt;상태 코드&gt; &lt;사유 구절&gt;</span><br><span class="line">&lt;헤더&gt;</span><br><span class="line"></span><br><span class="line">&lt;엔터티 본문&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;버전&gt; &lt;상태 코드&gt; &lt;사유 구절&gt;</span><br><span class="line">&lt;헤더&gt;</span><br><span class="line"></span><br><span class="line">&lt;엔터티 본문&gt;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -428,7 +428,7 @@
 </li>
 <li>시작줄 / 헤더블록 / 본문</li>
 </ul>
-<a name="1">
+<a name="1"/>
 
 <h2 id="3-1-시작줄과-헤더"><a href="#3-1-시작줄과-헤더" class="headerlink" title="3.1 시작줄과 헤더"></a>3.1 시작줄과 헤더</h2><ul>
 <li>줄 단위로 분리된 아스키 문자열</li>
@@ -455,7 +455,7 @@
 <li>요청 메세지의 시작줄은 <strong>무엇을 해야하는지</strong> 말해준다.</li>
 <li>응답 메세지의 시작줄은 <strong>무슨 일이 일어났는지</strong> 말해준다.</li>
 </ul>
-<a name="1-1">
+<a name="1-1"/>
 
 <h3 id="3-1-1-요청줄"><a href="#3-1-1-요청줄" class="headerlink" title="3.1.1 요청줄"></a>3.1.1 요청줄</h3><img src="/images/2019/20/04.jpg" style="width:100%">
 
@@ -472,7 +472,7 @@
 </li>
 </ul>
 <p>모든 필드는 <strong>공백</strong>으로 구분된다.<br><img src="/images/2019/20/08.png" style="width:100%"></p>
-<a name="1-1-1">
+<a name="1-1-1"/>
 
 <h4 id="3-1-1-1-메서드"><a href="#3-1-1-1-메서드" class="headerlink" title="3.1.1.1 메서드"></a>3.1.1.1 메서드</h4><ul>
 <li>요청의 시작줄은 메서드로 시작한다.</li>
@@ -495,7 +495,7 @@
 <li>모든 서버가 위 메서드를 모두 구현한 것은 아니다.</li>
 <li><strong>확장메서드</strong> - 하지만 쉽게 확장할 수 (커스텀) 있도록 HTTP가 설계했기 때문에<br>그들만의 메서드를 추가로 구현했을 수도 있다.</li>
 </ul>
-<a name="1-1-2">
+<a name="1-1-2"/>
 
 <h4 id="3-1-1-2-버전"><a href="#3-1-1-2-버전" class="headerlink" title="3.1.1.2 버전"></a>3.1.1.2 버전</h4><p>버전 번호는 HTTP로 대화하는 어플리케이션들에게<br><strong>대화 상대의 능력과 메세지의 형식에 대한 단서</strong>를 제공하기 위한 것이다.</p>
 <ul>
@@ -505,7 +505,7 @@
 </ol>
 </li>
 </ul>
-<a name="1-2">
+<a name="1-2"/>
 
 <h3 id="3-1-2-응답줄"><a href="#3-1-2-응답줄" class="headerlink" title="3.1.2 응답줄"></a>3.1.2 응답줄</h3><img src="/images/2019/20/05.jpg" style="width:100%">
 
@@ -527,7 +527,7 @@
 </li>
 </ul>
 <p>모든 필드는 <strong>공백</strong>으로 구분된다.<br><img src="/images/2019/20/09.png" style="width:100%"></p>
-<a name="1-2-1">
+<a name="1-2-1"/>
 
 <h4 id="3-1-2-1-상태코드"><a href="#3-1-2-1-상태코드" class="headerlink" title="3.1.2.1 상태코드"></a>3.1.2.1 상태코드</h4><ul>
 <li>클라이언트에게 무엇이 일어났는지 말해준다.</li>
@@ -537,7 +537,7 @@
 <li>프로토콜이 진화하면서, 더 많은 상태 코드가 HTTP 명세에 공식적으로 정의될 것이다. </li>
 <li>만약 인식할 수 없는 상태 코드라면 <strong>확장코드</strong>이다.</li>
 </ul>
-<a name="1-2-2">
+<a name="1-2-2"/>
 
 <h4 id="3-1-2-2-사유구절"><a href="#3-1-2-2-사유구절" class="headerlink" title="3.1.2.2 사유구절"></a>3.1.2.2 사유구절</h4><ul>
 <li>응답 시작줄의 마지막 구성요소.</li>
@@ -545,7 +545,7 @@
 <li>상태코드의 사람이 이해하기 쉬운 버전이다.</li>
 <li>엄격한 규칙은 제공하지 않는다.</li>
 </ul>
-<a name="2">
+<a name="2"/>
 
 <h2 id="3-2-헤더"><a href="#3-2-헤더" class="headerlink" title="3.2 헤더"></a>3.2 헤더</h2><img src="/images/2019/20/06.jpg" style="width:100%">
 
@@ -556,7 +556,7 @@
 <h3 id="3-2-1-헤더-분류"><a href="#3-2-1-헤더-분류" class="headerlink" title="3.2.1 헤더 분류"></a>3.2.1 헤더 분류</h3><ul>
 <li>헤더필드를 정의하다.</li>
 <li>자유롭게 자신만의 헤더를 만들어낼 수 있다.</li>
-<li>아래 분류 기준은 헤더를 이해하기 쉽게 카테고리화 한 것이며,<br><a href="https://tools.ietf.org/html/rfc7231#section-5" target="_blank" rel="noopener">RFC7231 기준</a>으로는 <code>Controls</code>, <code>Conditionals</code>, <code>Content Negotiation</code>, <code>Authentication Credentials</code>, <code>Request Context</code> 로만 분류되어있다.<ul>
+<li>아래 분류 기준은 헤더를 이해하기 쉽게 카테고리화 한 것이며,<br><a href="https://tools.ietf.org/html/rfc7231#section-5">RFC7231 기준</a>으로는 <code>Controls</code>, <code>Conditionals</code>, <code>Content Negotiation</code>, <code>Authentication Credentials</code>, <code>Request Context</code> 로만 분류되어있다.<ul>
 <li><code>Controls</code>: 요청의 특정 처리를 지시하는 헤더들</li>
 <li><code>Conditionals</code>: 조건부 헤더</li>
 <li><code>Content Negotiation</code>: 협상 헤더</li>
@@ -596,7 +596,7 @@
 </li>
 </ul>
 <hr>
-<a name="3">
+<a name="3"/>
 
 <h2 id="3-엔터티-본문"><a href="#3-엔터티-본문" class="headerlink" title="3. 엔터티 본문"></a>3. 엔터티 본문</h2><img src="/images/2019/20/07.jpg" style="width:100%">
 
@@ -607,10 +607,10 @@
 </ul>
 <hr>
 <ul>
-<li><a href="https://github.com/bookcrush?type=source" target="_blank" rel="noopener">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행 중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
+<li><a href="https://github.com/bookcrush?type=source">책뽀개기 모임</a> 중 <strong>http 완벽가이드</strong> 1장 뽀개기 진행 중입니다. (~8월말) (다음 모임은 2장)<br>(모임 참여를 원하신다면 댓글로 문의 바랍니다.)</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 <strong>저만의 순서</strong>로 정리 한 글입니다.</li>
 </ul>
-</a></a></a></a></a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -629,7 +629,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/08/15/HTTP_003_01/" data-id="cm3u5tb21002dnjb2w1s9tzzc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/08/15/HTTP_003_01/" data-id="ckzv7cqfd002bqobmswe32a16" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

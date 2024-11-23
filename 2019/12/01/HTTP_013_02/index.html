@@ -32,7 +32,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/12/01/HTTP_013_02/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/12/01/http_013_02/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -278,7 +278,7 @@
 <p>점점 번역이 이해하기 더 어려워질 정도로 직역형태다..</p>
 </blockquote>
 <hr>
-<a name="real">
+<a name="real"/>
 
 <h1 id="1-실제-상황에-대한-고려"><a href="#1-실제-상황에-대한-고려" class="headerlink" title="1. 실제 상황에 대한 고려"></a>1. 실제 상황에 대한 고려</h1><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ol>
 <li>다이제스트 인증 요구 <code>qop</code>: 가장 강력한 인증 매커니즘 선택하기</li>
@@ -287,7 +287,7 @@
 <li>URI 다시 쓰기: 프락시는 구문만 고쳐서 URI를 다시 쓰기도 한다</li>
 <li>캐시: <code>must-revalidate</code>나 <code>public</code></li>
 </ol>
-<h2 id="1-1-다중-인증-요구-qop"><a href="#1-1-다중-인증-요구-qop" class="headerlink" title="1.1 다중 인증 요구 qop"></a>1.1 다중 인증 요구 <code>qop</code></h2><img src="/images/2019/43/01.png" style="width:100%">
+<h2 id="1-1-다중-인증-요구-qop"><a href="#1-1-다중-인증-요구-qop" class="headerlink" title="1.1 다중 인증 요구 qop"></a>1.1 다중 인증 요구 <code>qop</code></h2><img src="/images/2019/43/01.png" style="width:100%"/>
 
 <ul>
 <li>서버는 한 리소스에 대해 여러 인증을 요구할 수 있다.</li>
@@ -299,14 +299,14 @@
 <li>다이제스트 인증에서,<br>지시자나 그 값이 적절하지 않거나,<br>요구된 지시자가 빠져있는 경우<br><code>400 Bad Request</code></li>
 <li><strong>로그를 남기자</strong><br>비밀번호가 반복적으로 실패할 경우,<br>공격자의 비밀번호 추측의 시도가 있을 수 있으므로 로그를 남기는게 좋다.</li>
 <li>URI 지시자가 가리키는 리소스가 요청줄에 명시된 리소스와 같음을 확인해야한다.    (중간 프락시가 변조할 수도 있음)<ul>
-<li>요청줄에 명시된 리소스는 domain필드에 같이 명시해준다.<img src="/images/2019/43/02.png" style="width:100%">
+<li>요청줄에 명시된 리소스는 domain필드에 같이 명시해준다.<img src="/images/2019/43/02.png" style="width:100%"/>
 
 
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="1-3-보호-공간-realm"><a href="#1-3-보호-공간-realm" class="headerlink" title="1.3 보호 공간 realm"></a>1.3 보호 공간 realm</h2><img src="/images/2019/43/03.png" style="width:100%">
+<h2 id="1-3-보호-공간-realm"><a href="#1-3-보호-공간-realm" class="headerlink" title="1.3 보호 공간 realm"></a>1.3 보호 공간 realm</h2><img src="/images/2019/43/03.png" style="width:100%"/>
 
 <ul>
 <li><p>영역 값은, 접근한 서버의 루트 URL과 결합하여, 보호 공간을 정의한다.</p>
@@ -332,8 +332,7 @@
 </li>
 <li><strong>다이제스트 인증</strong><ul>
 <li><code>WWW-Authenticate: domain</code> 필드는<br>보호 공간을 보다 엄밀하게 정의한다.</li>
-<li>domain 필드는 작은 따옴표로 묶인 URI의 공백으로 분리된 목록이다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domain = &quot;&apos;/cart&apos; &apos;/main&apos;&quot;</span><br></pre></td></tr></table></figure>
-</li>
+<li>domain 필드는 작은 따옴표로 묶인 URI의 공백으로 분리된 목록이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domain = &quot;&#x27;/cart&#x27; &#x27;/main&#x27;&quot;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ol>
@@ -364,7 +363,7 @@
 </ul>
 <hr>
 <hr>
-<a name="guard">
+<a name="guard"/>
 
 <h1 id="2-보안에-대한-고려사항"><a href="#2-보안에-대한-고려사항" class="headerlink" title="2. 보안에 대한 고려사항"></a>2. 보안에 대한 고려사항</h1><h2 id="TL-DR-1"><a href="#TL-DR-1" class="headerlink" title="TL;DR"></a>TL;DR</h2><ol>
 <li>헤더 부당 변경: <strong>양종단 암호화 / 디지털 서명</strong></li>
@@ -473,14 +472,14 @@
 </ol>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://tools.ietf.org/html/rfc7235#section-2.2" target="_blank" rel="noopener">RFC7235-realm</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7235#section-2.2">RFC7235-realm</a></li>
 </ul>
-</a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -499,7 +498,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_013_02/" data-id="cm3u5tb290040njb2zfndpa5s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_013_02/" data-id="ckzv7cqg2003mqobmbv154bsl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

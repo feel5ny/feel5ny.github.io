@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#26d0ce">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="docker,docker_volume,docker_network,docker_log" />
+        <meta name="keywords" content="docker_volume,docker_network,docker_log,docker" />
     
     
     <meta name="description" content="왜 우린 도커를 써야하나요?   지속가능한 데이터를 활용하기 위해 볼륨을 사용할 수 있으며, 호스트볼륨을 공유하거나, 볼륨컨테이터를 만들어 활용하거나, 도커 볼륨을 활용할 수 있다.  도커는 컨테이너 내부IP를 순차적으로 할당하며,(컨테이너 별로 내부망이 생성) veth 인터페이스로 접근가능하다. 도커가 자체적으로 제공하는 5가지 네트워크 드라이버가 존재한">
@@ -22,10 +22,10 @@
 <meta property="article:published_time" content="2022-02-20T13:00:00.000Z">
 <meta property="article:modified_time" content="2024-11-23T12:25:51.932Z">
 <meta property="article:author" content="Joy Kim">
-<meta property="article:tag" content="docker">
 <meta property="article:tag" content="docker_volume">
 <meta property="article:tag" content="docker_network">
 <meta property="article:tag" content="docker_log">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://feel5ny.github.io/images/2022/02/thumb_default.jpg">
 <meta property="fb:admins" content="166480990612572">
@@ -277,7 +277,7 @@
   </div>
 
         <div class="article-entry" itemprop="articleBody">
-            <p><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container" target="_blank" rel="noopener">왜 우린 도커를 써야하나요?</a></p>
+            <p><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container">왜 우린 도커를 써야하나요?</a></p>
 <blockquote>
 <ol>
 <li>지속가능한 데이터를 활용하기 위해 볼륨을 사용할 수 있으며, 호스트볼륨을 공유하거나, 볼륨컨테이터를 만들어 활용하거나, 도커 볼륨을 활용할 수 있다. </li>
@@ -285,7 +285,7 @@
 <li>도커는 컨테이너의 표준출력과 에러출력을 별도로 메타데이터 파일로 저장하며, 이를 확인가능하도록 한다. 로깅을 도와주는 써드파티 드라이버들도 존재한다.</li>
 </ol>
 </blockquote>
-<a name="volumn">
+<a name="volumn" />
 
 <h2 id="도커-볼륨"><a href="#도커-볼륨" class="headerlink" title="도커 볼륨?"></a>도커 볼륨?</h2><ul>
 <li>도커 이미지로 컨테이너 생성시 이미지는 read only<ul>
@@ -315,8 +315,7 @@
 <li>워드프레스 웹 서버 container</li>
 </ol>
 <hr>
-<h4 id="1-mysql-DB-container"><a href="#1-mysql-DB-container" class="headerlink" title="1. mysql DB container"></a>1. mysql DB container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -d \</span><br><span class="line">--name wordpressdb_hostvolume \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=password \</span><br><span class="line">-e MYSQL_DATABASE=wordpress \</span><br><span class="line">-v /home/wordpress_db:/var/lib/mysql \</span><br><span class="line">mysql:5.7</span><br></pre></td></tr></table></figure>
-
+<h4 id="1-mysql-DB-container"><a href="#1-mysql-DB-container" class="headerlink" title="1. mysql DB container"></a>1. mysql DB container</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -d \</span><br><span class="line">--name wordpressdb_hostvolume \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=password \</span><br><span class="line">-e MYSQL_DATABASE=wordpress \</span><br><span class="line">-v /home/wordpress_db:/var/lib/mysql \</span><br><span class="line">mysql:5.7</span><br></pre></td></tr></table></figure>
 <ul>
 <li>이름: <strong>wordpressdb</strong>_hostvolume</li>
 <li><strong>컨테이너</strong> directory(<code>/home/wordpress_db</code>)를 <strong>Host</strong> directory(<code>/var/lib/mysql</code>)에 마운트<ul>
@@ -325,8 +324,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-워드프레스-웹-서버-container"><a href="#2-워드프레스-웹-서버-container" class="headerlink" title="2. 워드프레스 웹 서버 container"></a>2. 워드프레스 웹 서버 container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -d \</span><br><span class="line">-e WORDPRESS_DB_PASSWORD=password \</span><br><span class="line">--name wordpress_hostvolume \</span><br><span class="line">--link wordpressdb_hostvolume:mysql \</span><br><span class="line">-p 80 \</span><br><span class="line">wordpress</span><br></pre></td></tr></table></figure>
-
+<h4 id="2-워드프레스-웹-서버-container"><a href="#2-워드프레스-웹-서버-container" class="headerlink" title="2. 워드프레스 웹 서버 container"></a>2. 워드프레스 웹 서버 container</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -d \</span><br><span class="line">-e WORDPRESS_DB_PASSWORD=password \</span><br><span class="line">--name wordpress_hostvolume \</span><br><span class="line">--link wordpressdb_hostvolume:mysql \</span><br><span class="line">-p 80 \</span><br><span class="line">wordpress</span><br></pre></td></tr></table></figure>
 <ul>
 <li>이름: <strong>wordpress</strong>_hostvolume</li>
 <li><code>wordpressdb_hostvolume:mysql</code></li>
@@ -341,20 +339,16 @@
 <a name="volume-container">
 
 <h3 id="2-볼륨-컨테이너를-활용하는-방법-volumes-from"><a href="#2-볼륨-컨테이너를-활용하는-방법-volumes-from" class="headerlink" title="2. 볼륨 컨테이너를 활용하는 방법 (-volumes-from)"></a>2. 볼륨 컨테이너를 활용하는 방법 (<code>-volumes-from</code>)</h3><ul>
-<li><p><code>-v</code>옵션으로 볼륨을 사용하는 컨테이너를, <strong>다른 컨테이너와 공유하는 것</strong></p>
-</li>
-<li><p>A 컨테이너 생성시 <code>—volumes-from</code> 옵션 설정하면<br><code>-v</code> 옵션 적용한 컨테이너(B)의 볼륨 디렉터리를 공유할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t \</span><br><span class="line">&gt; --name volumes_from_container \ </span><br><span class="line">&gt; --volumes-from volume_overide \ <span class="comment">#volume_overide가 공유하는 것</span></span><br><span class="line">&gt; ubuntu:14.04</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>여러개의 컨테이너가 동일한 컨테이너에 —volumes-from 사용하여 볼륨을 공유해 사용할수도 있다.</p>
-</li>
+<li><code>-v</code>옵션으로 볼륨을 사용하는 컨테이너를, <strong>다른 컨테이너와 공유하는 것</strong></li>
+<li>A 컨테이너 생성시 <code>—volumes-from</code> 옵션 설정하면<br><code>-v</code> 옵션 적용한 컨테이너(B)의 볼륨 디렉터리를 공유할 수 있다.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t \</span><br><span class="line">&gt; --name volumes_from_container \ </span><br><span class="line">&gt; --volumes-from volume_overide \ <span class="comment">#volume_overide가 공유하는 것</span></span><br><span class="line">&gt; ubuntu:14.04</span><br></pre></td></tr></table></figure></li>
+<li>여러개의 컨테이너가 동일한 컨테이너에 —volumes-from 사용하여 볼륨을 공유해 사용할수도 있다.</li>
 </ul>
 <h4 id="볼륨-컨테이너"><a href="#볼륨-컨테이너" class="headerlink" title="볼륨 컨테이너"></a>볼륨 컨테이너</h4><ul>
 <li>host에서 볼륨만 공유.</li>
 <li>별도의 역할을 담당하지 않는 볼륨컨테이너로써 활용하는 것도 가능.</li>
 <li>직접 호스트에서 공유가 아닌, 볼륨컨테이너를 통해서 간접적으로 공유 받는식</li>
 </ul>
-<img src="/images/2022/02/01.jpeg">
+<img src="/images/2022/02/01.jpeg" />
 
 <a name="volume-docker">
 
@@ -364,7 +358,6 @@
 <li>도커 볼륨은 호스트에 저장하여 데이터 보존 (어디에 보관되어있는지는 알필요없음 우선순위낮)</li>
 </ul>
 <h4 id="1-볼륨-생성"><a href="#1-볼륨-생성" class="headerlink" title="1. 볼륨 생성"></a>1. 볼륨 생성</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create --name myvolume</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>볼륨 생성시, 플러그인 드라이버를 설정하여, 여러종류의 storage 백엔드 사용가능</li>
 <li>활하며 동시 생성 가능<ul>
@@ -373,8 +366,7 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t \</span><br><span class="line">&gt; --name myvolume_auto \</span><br><span class="line">&gt; -v /root/ \</span><br><span class="line">&gt; ubuntu:14.04</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[볼륨의 이름]:[컨테이너의 공유 디렉토리]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[볼륨의 이름]:[컨테이너의 공유 디렉토리]</span><br></pre></td></tr></table></figure>
 
 <h4 id="2-볼륨-삭제"><a href="#2-볼륨-삭제" class="headerlink" title="2. 볼륨 삭제"></a>2. 볼륨 삭제</h4><ul>
 <li><code>docker volumn prune</code></li>
@@ -386,7 +378,7 @@
 <li>== 컨테이너가 삭제돼도, 데이터는 보존되므로,<br>stateless한 컨테이너 설계는 도커사용시 바람직한 설계</li>
 <li>stateful한 컨테이너는 지양해야함.</li>
 </ul>
-<a name="networking">
+<a name="networking" />
 
 <h2 id="도커-네트워크-구조"><a href="#도커-네트워크-구조" class="headerlink" title="도커 네트워크 구조"></a>도커 네트워크 구조</h2><ul>
 <li>도커는 컨테이너 내부IP를 순차적으로 할당</li>
@@ -397,9 +389,8 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@75308a74b2c2:/<span class="comment"># ifconfig</span></span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02</span><br><span class="line">          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:18 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:1532 (1.5 KB)  TX bytes:0 (0.0 B)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback</span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:65536  Metric:1</span><br><span class="line">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)</span><br></pre></td></tr></table></figure>
-
-<img src="/images/2022/02/02.jpeg">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@75308a74b2c2:/# ifconfig</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02</span><br><span class="line">          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:18 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:1532 (1.5 KB)  TX bytes:0 (0.0 B)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback</span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:65536  Metric:1</span><br><span class="line">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)</span><br></pre></td></tr></table></figure>
+<img src="/images/2022/02/02.jpeg" />
 
 <h3 id="도커-네트워크-기능"><a href="#도커-네트워크-기능" class="headerlink" title="도커 네트워크 기능"></a>도커 네트워크 기능</h3><p>컨테이너 생성시</p>
 <ul>
@@ -414,40 +405,29 @@
 <li><a href="#network-overlay">오버레이 overlay</a></li>
 </ul>
 <h4 id="써드파티-플러그인-솔루션"><a href="#써드파티-플러그인-솔루션" class="headerlink" title="써드파티 플러그인 솔루션"></a>써드파티 플러그인 솔루션</h4><ul>
-<li><a href="https://www.weave.works/docs/net/latest/install/plugin/plugin-how-it-works/" target="_blank" rel="noopener">weave</a></li>
-<li><a href="https://github.com/flannel-io/flannel" target="_blank" rel="noopener">flannel</a></li>
+<li><a href="https://www.weave.works/docs/net/latest/install/plugin/plugin-how-it-works/">weave</a></li>
+<li><a href="https://github.com/flannel-io/flannel">flannel</a></li>
 <li>openvswitch</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">❯ docker network ls</span><br><span class="line">NETWORK ID     NAME      DRIVER    SCOPE</span><br><span class="line">2013d2e38a9f   bridge    bridge    <span class="built_in">local</span></span><br><span class="line">9ce30268dbf6   host      host      <span class="built_in">local</span></span><br><span class="line">c325e2a4437b   none      null      <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">❯ docker network <span class="built_in">ls</span></span><br><span class="line">NETWORK ID     NAME      DRIVER    SCOPE</span><br><span class="line">2013d2e38a9f   bridge    bridge    <span class="built_in">local</span></span><br><span class="line">9ce30268dbf6   host      host      <span class="built_in">local</span></span><br><span class="line">c325e2a4437b   none      null      <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
 
-<a name="bridge">
+<a name="bridge"/>
 
 <h3 id="브릿지-bridge"><a href="#브릿지-bridge" class="headerlink" title="브릿지 bridge"></a>브릿지 bridge</h3><ul>
-<li><p>사용자 정의 브릿지를 새로 생성해, 각 컨테이너에 연결하는 네트워크 구조.</p>
-</li>
-<li><p>컨테이너는 연결된 브릿지를 통해 외부와 통신 가능</p>
-</li>
-<li><p>브릿지 생성하기</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver bridge mybridge</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>--net</code> 옵션으로 컨테이너가 네트워크 사용가능</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_container \</span><br><span class="line">--net mybridge \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>네트워크 연결: <code>docker network connect</code></p>
-</li>
-<li><p>네트워크 분리: <code>docker network disconnect</code></p>
-</li>
+<li>사용자 정의 브릿지를 새로 생성해, 각 컨테이너에 연결하는 네트워크 구조.</li>
+<li>컨테이너는 연결된 브릿지를 통해 외부와 통신 가능</li>
+<li>브릿지 생성하기<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver bridge mybridge</span><br></pre></td></tr></table></figure></li>
+<li><code>--net</code> 옵션으로 컨테이너가 네트워크 사용가능<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_container \</span><br><span class="line">--net mybridge \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure></li>
+<li>네트워크 연결: <code>docker network connect</code></li>
+<li>네트워크 분리: <code>docker network disconnect</code></li>
 </ul>
 <h4 id="net-alias"><a href="#net-alias" class="headerlink" title="--net-alias"></a><code>--net-alias</code></h4><ul>
-<li>특정 호스트 이름으로, 컨테이너 여러개에 접근 가능 <code>--net-alias</code><ul>
-<li>순차적으로 할당된다. (<code>172.18.0.3</code> ~ <code>5</code>)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -i -t -d --name network_alias_container1 \</span><br><span class="line">&gt; --net mybridge \</span><br><span class="line">&gt; --net-alias alicek106 ubuntu:14.04</span><br><span class="line">616982dd067988f1e76a04709ad74287dceb73410f886f1630b8364634fe4565</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">❯ docker run -i -t -d --name network_alias_container2 \</span><br><span class="line">--net mybridge \</span><br><span class="line">--net-alias alicek106 ubuntu:14.04</span><br><span class="line">4d56a82ace82cc8118e9ef8d5502db76497fce0f7499960f5dcb624c8a006eaf</span><br><span class="line">^[[A</span><br><span class="line">~</span><br><span class="line">❯ docker run -i -t -d --name network_alias_container3 \</span><br><span class="line">--net mybridge \</span><br><span class="line">--net-alias alicek106 ubuntu:14.04</span><br><span class="line">d90963f31e42595264165839fbff2d78f8075640f5a4cea6e6782481636edbf9</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>Docker DNS, Round-Robin 방식</p>
+<li><p>특정 호스트 이름으로, 컨테이너 여러개에 접근 가능 <code>--net-alias</code></p>
 <ul>
+<li>순차적으로 할당된다. (<code>172.18.0.3</code> ~ <code>5</code>)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">❯ docker run -i -t -d --name network_alias_container1 \</span><br><span class="line">&gt; --net mybridge \</span><br><span class="line">&gt; --net-alias alicek106 ubuntu:14.04</span><br><span class="line">616982dd067988f1e76a04709ad74287dceb73410f886f1630b8364634fe4565</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">❯ docker run -i -t -d --name network_alias_container2 \</span><br><span class="line">--net mybridge \</span><br><span class="line">--net-alias alicek106 ubuntu:14.04</span><br><span class="line">4d56a82ace82cc8118e9ef8d5502db76497fce0f7499960f5dcb624c8a006eaf</span><br><span class="line">^[[A</span><br><span class="line">~</span><br><span class="line">❯ docker run -i -t -d --name network_alias_container3 \</span><br><span class="line">--net mybridge \</span><br><span class="line">--net-alias alicek106 ubuntu:14.04</span><br><span class="line">d90963f31e42595264165839fbff2d78f8075640f5a4cea6e6782481636edbf9</span><br></pre></td></tr></table></figure>
+Docker DNS, Round-Robin 방식</li>
+</ul>
+</li>
 <li><p><strong>Round-Robin</strong></p>
 <ul>
 <li>매번 달라지는 IP를 결정하는 것은 별도의 알고리즘이 아닌, round-robin 방식</li>
@@ -469,7 +449,7 @@
 </ul>
 </li>
 </ul>
-<a name="network-host">
+<a name="network-host"/>
 
 <h3 id="호스트-네트워크"><a href="#호스트-네트워크" class="headerlink" title="호스트 네트워크"></a>호스트 네트워크</h3><ul>
 <li>컨테이너의 네트워크를 → 호스트 모드로 설정하면,<ul>
@@ -480,7 +460,7 @@
 </ul>
 </li>
 </ul>
-<a name="network-none">
+<a name="network-none"/>
 
 <h3 id="none-네트워크"><a href="#none-네트워크" class="headerlink" title="none 네트워크"></a>none 네트워크</h3><p>말그대로 아무런 네트워크를 쓰지 않는 것.</p>
 <ul>
@@ -489,30 +469,27 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_none \</span><br><span class="line">--net none \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure>
 
-<a name="network-container">
+<a name="network-container"/>
 
 <h3 id="container-네트워크"><a href="#container-네트워크" class="headerlink" title="container 네트워크"></a>container 네트워크</h3><ul>
 <li>다른 컨테이너의 네트워크 네임스페이스 환경을 공유할 수 있다.</li>
 <li>공유되는 속성 : 내부 IP, 네트워크 인터페이스의 mac주소 등..<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name mynetwork_none \</span><br><span class="line">--net container:network_container_1 \</span><br><span class="line">ubuntu:14.04</span><br></pre></td></tr></table></figure>
+<img src="/images/2022/02/03.jpeg">
 
 </li>
 </ul>
-<img src="/images/2022/02/03.jpeg">
-
-<a name="logging">
+<a name="logging"/>
 
 <h2 id="Container-Logging"><a href="#Container-Logging" class="headerlink" title="Container Logging"></a>Container Logging</h2><h3 id="json-file-로그-사용하기"><a href="#json-file-로그-사용하기" class="headerlink" title="json-file 로그 사용하기"></a>json-file 로그 사용하기</h3><ul>
 <li>도커는 컨테이너의 표준 출력 <code>StdOut</code>과 에러 <code>StdErr</code> 로그를 별도의 메타데이터 파일로 저장하며, 이를 확인하는 명령어를 제공한다.</li>
 <li><code>docker logs</code></li>
 <li><code>--since</code> 옵션에 유닉스 시간을 입력함. 특정시간 이후의 로그를 확인할 수 있다.</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker logs --tail 2 mysql</span><br><span class="line"></span><br><span class="line">2022-02-20T11:18:41.976679Z 0 [Note] mysqld: ready <span class="keyword">for</span> connections.</span><br><span class="line">Version: <span class="string">'5.7.36'</span>  socket: <span class="string">'/var/run/mysqld/mysqld.sock'</span>  port: 3306  MySQL Community Server (GPL)</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker logs --<span class="built_in">tail</span> 2 mysql</span><br><span class="line"></span><br><span class="line">2022-02-20T11:18:41.976679Z 0 [Note] mysqld: ready <span class="keyword">for</span> connections.</span><br><span class="line">Version: <span class="string">&#x27;5.7.36&#x27;</span>  socket: <span class="string">&#x27;/var/run/mysqld/mysqld.sock&#x27;</span>  port: 3306  MySQL Community Server (GPL)</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f -t mysql <span class="comment"># 전체 출력</span></span><br></pre></td></tr></table></figure>
 
 <p>위와같은 컨테이너 로그는 JSON형태로 도커 내부저장</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/lib/docker/container/<span class="variable">$&#123;CONTAINER_ID&#125;</span>/<span class="variable">$&#123;CONTAINER_ID&#125;</span>-json.log</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /var/lib/docker/container/<span class="variable">$&#123;CONTAINER_ID&#125;</span>/<span class="variable">$&#123;CONTAINER_ID&#125;</span>-json.log</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>json 파일 크기가 계속 커질 수 있어서, 호스트의 남은 공간도 전부 사용할수도 있음.</p>
 <ul>
@@ -548,7 +525,7 @@
 <p>도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.</p>
 </blockquote>
 <hr>
-<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3></a></a></a></a></a></a></a></a></a></a>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3>
         </div>
         <footer class="article-footer">
             
@@ -567,7 +544,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" data-id="cm3u5tb3400bnnjb2d5f3hl0p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2022/02/20/docker_02_%E1%84%87%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B2%E1%86%B7_%E1%84%82%E1%85%A6%E1%84%90%E1%85%B3%E1%84%8B%E1%85%AF%E1%84%8F%E1%85%B5%E1%86%BC_%E1%84%85%E1%85%A9%E1%84%80%E1%85%B5%E1%86%BC/" data-id="cm2pm85e0000bblb2stlxacqy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

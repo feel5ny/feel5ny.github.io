@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/11/29/JS_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/11/29/js_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -314,7 +314,7 @@
 
         <div class="article-entry" itemprop="articleBody">
             <blockquote>
-<p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966260768&orderClick=LAG&Kc=" target="_blank" rel="noopener">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
+<p><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966260768&orderClick=LAG&Kc=">프론트엔드 개발자를 위한 자바스크립트 프로그래밍</a> 책을 참고하여 정리합니다. <strong>오류</strong>가 있다면 언제든지 댓글 남겨주세요.</p>
 </blockquote>
 <p>까묵지말자<br>Call-by-value, Call-by-reference</p>
 <hr>
@@ -334,7 +334,7 @@
 <h3 id="참조로-접근한다"><a href="#참조로-접근한다" class="headerlink" title="참조로 접근한다"></a><code>참조로 접근한다</code></h3><p>객체를 조작할 때는 객체 자체가 아니라 해당 객체에 대한 <strong>참조를 조작</strong>하는 것이다. 이런 이유로 객체를 가리키는 값은 ‘참조로 접근한다’고 한다.</p>
 <hr>
 <h2 id="3-동적-프로퍼티"><a href="#3-동적-프로퍼티" class="headerlink" title=" 3. 동적 프로퍼티"></a><a name="3"></a> 3. 동적 프로퍼티</h2><p>참조 값을 다룰 때는 언제든 프로퍼티와 메서드를 추가하거나 바꾸고 삭제 할 수 있다.<br>원시 값에는 프로퍼티가 없지만 추가하려 해도 에러가 생기진 않는다.<br>동적으로 프로퍼티를 추가할 수 있는 값은 참조 값 뿐이다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person.name = <span class="string">'Clara'</span></span><br><span class="line">alert(person.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'Clara'</span></span><br><span class="line">name.age = <span class="number">27</span></span><br><span class="line">alert(name.age) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="title class_">Object</span>()</span><br><span class="line">person.<span class="property">name</span> = <span class="string">&#x27;Clara&#x27;</span></span><br><span class="line"><span class="title function_">alert</span>(person.<span class="property">name</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;Clara&#x27;</span></span><br><span class="line">name.<span class="property">age</span> = <span class="number">27</span></span><br><span class="line"><span class="title function_">alert</span>(name.<span class="property">age</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="4-값-복사"><a href="#4-값-복사" class="headerlink" title=" 4. 값 복사"></a><a name="4"></a> 4. 값 복사</h2><h3 id="원시-값"><a href="#원시-값" class="headerlink" title="원시 값"></a>원시 값</h3><p>원시 값은 다른 변수로 복사할 때는 현재 저장된 값을 새로 생성한 다음 새로운 변수에 복사한다. 복사된 값과 원래 값은 완전히 분리되어 있다.</p>
@@ -360,11 +360,10 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> 변수명</span><br></pre></td></tr></table></figure>
 
 <p><code>instanceof</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">변수명 <span class="keyword">instanceof</span> <span class="built_in">Object</span> </span><br><span class="line"><span class="comment">// 이 변수는 Object의 인스턴스인가? </span></span><br><span class="line"><span class="comment">// 결과값은 boolean</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">변수명 <span class="keyword">instanceof</span> <span class="title class_">Object</span> </span><br><span class="line"><span class="comment">// 이 변수는 Object의 인스턴스인가? </span></span><br><span class="line"><span class="comment">// 결과값은 boolean</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://poiemaweb.com/js-data-type-variable" target="_blank" rel="noopener">http://poiemaweb.com/js-data-type-variable</a></li>
+<li><a href="http://poiemaweb.com/js-data-type-variable">http://poiemaweb.com/js-data-type-variable</a></li>
 </ol>
 
         </div>
@@ -385,7 +384,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/11/29/JS_01/" data-id="cm3u5tb2b004knjb29ki74yw7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/11/29/JS_01/" data-id="ckzv7cqgv004pqobm8xan713e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

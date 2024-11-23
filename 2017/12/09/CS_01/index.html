@@ -28,7 +28,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2017/12/09/CS_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2017/12/09/cs_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -253,7 +253,7 @@
 <li>시간복잡도를 배우고, 연산횟수를 줄이는 방법을 생각해보자.</li>
 </ul>
 <hr>
-<h2 id="2-시간복잡도"><a href="#2-시간복잡도" class="headerlink" title="2. 시간복잡도 +"></a>2. 시간복잡도 <a href="https://en.wikipedia.org/wiki/Time_complexity" target="_blank" rel="noopener">+</a></h2><p>시간복잡도란 알고리즘이 문제를 해결하기 위한 <strong><code>시간(연산)의 횟수</code></strong>를 말한다.<br>computational complexity that measures or estimates the time<br>taken for running an algorism.<br>Time complexity is commonly estimated by counting the number of <code>elementary operations</code> performed by the algorism, supposing that an elementary operation takes a fixed amount of time to perform. </p>
+<h2 id="2-시간복잡도"><a href="#2-시간복잡도" class="headerlink" title="2. 시간복잡도 +"></a>2. 시간복잡도 <a href="https://en.wikipedia.org/wiki/Time_complexity">+</a></h2><p>시간복잡도란 알고리즘이 문제를 해결하기 위한 <strong><code>시간(연산)의 횟수</code></strong>를 말한다.<br>computational complexity that measures or estimates the time<br>taken for running an algorism.<br>Time complexity is commonly estimated by counting the number of <code>elementary operations</code> performed by the algorism, supposing that an elementary operation takes a fixed amount of time to perform. </p>
 <p>알고리즘을 평가하는데 있어 수행시간과 메모리 사용량을 평가기준으로 두는데<br>수행시간에 해당하는 것이 <code>시간 복잡도</code> Time Complexity,<br>메모리 사용량에 해당하는 것이 <code>공간 복잡도</code> Space Complexity이다.</p>
 <p>연산 횟수를 카운팅 할때 3가지 경우가 있다.</p>
 <ol>
@@ -276,7 +276,7 @@
 <li>전역변수를 이용하여 Elementary Operation을 카운팅한다.</li>
 <li>각 실행문 별로 Step수와 실행 횟수를 분석한다.</li>
 </ol>
-<h3 id="2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅"><a href="#2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅" class="headerlink" title="2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅"></a>2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">list, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> tempSum = <span class="number">0</span>; <span class="comment">// 대입연산</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    count++;   <span class="comment">// loop 한번 돌 때마다</span></span><br><span class="line">    tempSum += list[i];</span><br><span class="line">    count++;  <span class="comment">// 대입연산</span></span><br><span class="line">  &#125;</span><br><span class="line">  count++;  <span class="comment">// for loop 끝날 때 한번</span></span><br><span class="line">  count++;  <span class="comment">// return 수행</span></span><br><span class="line">  <span class="keyword">return</span> tempSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅"><a href="#2-2-1-전역변수를-이용하여-Elementary-Operation을-카운팅" class="headerlink" title="2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅"></a>2-2-1. 전역변수를 이용하여 Elementary Operation을 카운팅</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params">list, n</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> tempSum = <span class="number">0</span>; <span class="comment">// 대입연산</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    count++;   <span class="comment">// loop 한번 돌 때마다</span></span><br><span class="line">    tempSum += list[i];</span><br><span class="line">    count++;  <span class="comment">// 대입연산</span></span><br><span class="line">  &#125;</span><br><span class="line">  count++;  <span class="comment">// for loop 끝날 때 한번</span></span><br><span class="line">  count++;  <span class="comment">// return 수행</span></span><br><span class="line">  <span class="keyword">return</span> tempSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="2-2-2-각-실행문-별로-Step수와-실행-횟수를-분석한다"><a href="#2-2-2-각-실행문-별로-Step수와-실행-횟수를-분석한다" class="headerlink" title="2-2-2. 각 실행문 별로 Step수와 실행 횟수를 분석한다."></a>2-2-2. 각 실행문 별로 Step수와 실행 횟수를 분석한다.</h3><img src="/images/post_img/48/01.png">
@@ -336,15 +336,15 @@ n0를 기준으로 n0보다 오른쪽에 있는 모든 n 값에 대해 함수 f(
 </li>
 </ul>
 <hr>
-<h4 id="cf-의사코드란-pseudo-code"><a href="#cf-의사코드란-pseudo-code" class="headerlink" title="cf. 의사코드란? pseudo-code +"></a>cf. 의사코드란? pseudo-code <a href="https://medium.com/djangogirlsseoul-codecamp/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C-pseudo-code-%EB%9E%80-d892a3479b1d" target="_blank" rel="noopener">+</a></h4><p>의사(疑似: 비교할 의, 비슷할 사 | Pseudo: 가짜의- ) 코드는 컴퓨터 프로그램이나 알고리즘이 수행해야할 내용을 우리가 사용하는 언어 (한국어 또는 영어 등)로 간략히 서술해 놓은 것을 말합니다. 왜 의사코드를 사용해야 하나요?</p>
+<h4 id="cf-의사코드란-pseudo-code"><a href="#cf-의사코드란-pseudo-code" class="headerlink" title="cf. 의사코드란? pseudo-code +"></a>cf. 의사코드란? pseudo-code <a href="https://medium.com/djangogirlsseoul-codecamp/%EC%9D%98%EC%82%AC%EC%BD%94%EB%93%9C-pseudo-code-%EB%9E%80-d892a3479b1d">+</a></h4><p>의사(疑似: 비교할 의, 비슷할 사 | Pseudo: 가짜의- ) 코드는 컴퓨터 프로그램이나 알고리즘이 수행해야할 내용을 우리가 사용하는 언어 (한국어 또는 영어 등)로 간략히 서술해 놓은 것을 말합니다. 왜 의사코드를 사용해야 하나요?</p>
 <p>의사코드는 코딩 입력을 시작하기 전, <code>사고를 좀더 명확히 정립하게 만들어주어</code> 프로그램을 설계하는데 도움이 됩니다. 실제 코드 입력을 처음 시작할 때가 제일 힘듭니다! 단순히 소스코드를 입력하는 것보다 함수(function) 프로그램을 만들 때 많은 시간을 낭비할 수 있습니다. 약 10분 정도 각 풀이법의 장점과 단점을 주도면밀하게 살펴보면서 의사코드 작성한다면, 이후 디버그를 수정하고 코드를 재분해 하는데 걸리는 시간을 단축할 수 있습니다.</p>
 <blockquote>
 <p>모델링이라고 생각해보자.</p>
 </blockquote>
 <hr>
 <h3 id="참고링크"><a href="#참고링크" class="headerlink" title="참고링크"></a>참고링크</h3><ol>
-<li><a href="http://ledgku.tistory.com/33" target="_blank" rel="noopener">http://ledgku.tistory.com/33</a></li>
-<li><a href="http://bigocheatsheet.com/" target="_blank" rel="noopener">http://bigocheatsheet.com/</a></li>
+<li><a href="http://ledgku.tistory.com/33">http://ledgku.tistory.com/33</a></li>
+<li><a href="http://bigocheatsheet.com/">http://bigocheatsheet.com/</a></li>
 </ol>
 
         </div>
@@ -365,7 +365,7 @@ n0를 기준으로 n0보다 오른쪽에 있는 모든 n 값에 대해 함수 f(
 
 
 
-    <a data-url="http://feel5ny.github.io/2017/12/09/CS_01/" data-id="cm3u5tb1r000mnjb2kn7siw35" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2017/12/09/CS_01/" data-id="ckzv7cqen000sqobmh238wp1k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

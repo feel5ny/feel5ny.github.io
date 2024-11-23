@@ -32,7 +32,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/12/01/HTTP_014_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/12/01/http_014_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -371,9 +371,9 @@
 <p>최근 인증서 관련 이슈를 만난적이 있었는데,<br>이번 장을 통해서 조금이나마 이해가 될 수 있게 되었다 :) </p>
 </blockquote>
 <hr>
-<a name="secure">
+<a name="secure"/>
 
-<h1 id="HTTP를-안전하게-만들기"><a href="#HTTP를-안전하게-만들기" class="headerlink" title="HTTP를 안전하게 만들기"></a>HTTP를 안전하게 만들기</h1><img src="/images/2019/44/01.png">
+<h1 id="HTTP를-안전하게-만들기"><a href="#HTTP를-안전하게-만들기" class="headerlink" title="HTTP를 안전하게 만들기"></a>HTTP를 안전하게 만들기</h1><img src="/images/2019/44/01.png"/>
 
 <ul>
 <li>사람들은 웹 트랜잭션을 중요한 일에 사용한다. </li>
@@ -442,7 +442,7 @@
 <li><strong>디지털 인증서</strong>: 신뢰할 만한 조직에 의해 서명되고 검증된 신원 확인 정보</li>
 </ol>
 <hr>
-<a name="cryptography">
+<a name="cryptography"/>
 
 <h2 id="1-비밀코드의-기술과-과학"><a href="#1-비밀코드의-기술과-과학" class="headerlink" title="1. 비밀코드의 기술과 과학"></a>1. 비밀코드의 기술과 과학</h2><p>암호법 cryptography는 메세지 인코딩과 디코딩에 대한 과학이자 기술이다.</p>
 <h3 id="비밀-메세지-도청-변조-방지-저자-증명"><a href="#비밀-메세지-도청-변조-방지-저자-증명" class="headerlink" title="비밀 메세지 / 도청, 변조 방지 / 저자 증명"></a>비밀 메세지 / 도청, 변조 방지 / 저자 증명</h3><ul>
@@ -451,7 +451,7 @@
 <li>암호법은 누군가가 정말로 어떤 메세지나 트랜잭션의 저자임을 <strong>증명</strong>하는 데도 사용될 수 있다.</li>
 </ul>
 <hr>
-<a name="cipher">
+<a name="cipher"/>
 
 <h2 id="2-암호-cipher"><a href="#2-암호-cipher" class="headerlink" title="2. 암호 cipher"></a>2. 암호 cipher</h2><ul>
 <li>암호법은 암호라 불리는 비밀코드에 기반한다.</li>
@@ -482,12 +482,12 @@
 </ol>
 </li>
 <li>평문메세지 <code>P</code>, 인코딩 함수 <code>E</code>, 디지털 인코딩 키 <code>e</code>가 주어지면 부호화된 암호문 <code>C</code>를 생성할 수 있다.</li>
-<li>암호문 <code>C</code>를 디코더 함수 <code>D</code>와 디코딩 키 <code>d</code>를 사용해서 원래의 평문 <code>P</code>로 도로 디코딩할 수 있다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = E(P,e)</span><br><span class="line">P = D(C,d)</span><br></pre></td></tr></table></figure>
+<li>암호문 <code>C</code>를 디코더 함수 <code>D</code>와 디코딩 키 <code>d</code>를 사용해서 원래의 평문 <code>P</code>로 도로 디코딩할 수 있다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = E(P,e)</span><br><span class="line">P = D(C,d)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <hr>
-<a name="symmetry">
+<a name="symmetry"/>
 
 <h2 id="3-대칭키-암호법"><a href="#3-대칭키-암호법" class="headerlink" title="3. 대칭키 암호법"></a>3. 대칭키 암호법</h2><ul>
 <li>많은 디지털 암호 알고리즘은 대칭키 암호라고 불림</li>
@@ -500,7 +500,7 @@
 <li>잘 알려진 대칭키 암호 알고리즘<ul>
 <li>DES(Data Encryption Standard), Triple-DES, RC2, RC4</li>
 <li>DES는 취약하다는 결론 =&gt; 요즘은 AES를 사용한다.</li>
-<li><strong><a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80" target="_blank" rel="noopener">AES</a></strong>, Advanced Encryption Standard: 고급 암호화 표준</li>
+<li><strong><a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80">AES</a></strong>, Advanced Encryption Standard: 고급 암호화 표준</li>
 </ul>
 </li>
 </ul>
@@ -520,25 +520,23 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-3-대칭키-만들어보기"><a href="#3-3-대칭키-만들어보기" class="headerlink" title="3.3. 대칭키 만들어보기"></a>3.3. 대칭키 만들어보기</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;this is the plain text&apos; &gt; plaintext.txt;</span><br><span class="line">openssl enc -e -des3 -salt -in plaintext.txt -out ciphertext.bin</span><br></pre></td></tr></table></figure>
-
+<h3 id="3-3-대칭키-만들어보기"><a href="#3-3-대칭키-만들어보기" class="headerlink" title="3.3. 대칭키 만들어보기"></a>3.3. 대칭키 만들어보기</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;this is the plain text&#x27; &gt; plaintext.txt;</span><br><span class="line">openssl enc -e -des3 -salt -in plaintext.txt -out ciphertext.bin</span><br></pre></td></tr></table></figure>
 <ol>
 <li>‘this is the plain text’ 문자열이 들어간 plaintext.txt가 만들어진다</li>
 <li>plaintext.txt 안의(<code>-in</code>) 내용들을 des3방식으로 암호화를 하고, ciphertext.bin이라는 파일로 산출할(<code>-out</code>) 것이다 라는 뜻.</li>
 <li>비밀번호를 요구하는 input이 나온다. =&gt; 요게 <strong><code>대칭키</code>!</strong></li>
 </ol>
-<img src="/images/2019/44/04.png">
+<img src="/images/2019/44/04.png"/>
 
 <blockquote>
 <p>이런식으로 암호화된다.</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl enc -d -des3 -in ciphertext.bin -out plaintext2.txt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl enc -d -des3 -in ciphertext.bin -out plaintext2.txt;</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>ciphertext.bin 안의 내용을 des3 방식으로 복호화(디코딩)(<code>-d</code>) 하여서 plaintext2.txt 파일에 산출할 것이다 라는 뜻.</li>
 </ol>
 <hr>
-<a name="public">
+<a name="public"/>
 
 <h2 id="4-공개키-암호법"><a href="#4-공개키-암호법" class="headerlink" title="4. 공개키 암호법"></a>4. 공개키 암호법</h2><ul>
 <li>공개키 암호 방식은 2개의 비대칭 키를 사용한다.</li>
@@ -573,7 +571,7 @@
 </li>
 </ul>
 <hr>
-<a name="signing">
+<a name="signing"/>
 
 <h2 id="5-디지털-서명"><a href="#5-디지털-서명" class="headerlink" title="5. 디지털 서명"></a>5. 디지털 서명</h2><ul>
 <li>암호 체계는<br>누가 메세지를 썻는지 알려주고<br>그 메세지가 위조되지 않았음을 증명하기 위해<br><strong>메세지에 서명</strong>을 하도록 하는 데에 이용될 수 있다.</li>
@@ -613,7 +611,7 @@
 </li>
 </ol>
 <hr>
-<a name="certs">
+<a name="certs"/>
 
 <h2 id="6-디지털-인증서"><a href="#6-디지털-인증서" class="headerlink" title="6. 디지털 인증서"></a>6. 디지털 인증서</h2><ul>
 <li>디지털 인증서는 신뢰할 수 있는 기관으로부터 보증 받은 사용자나 회사에 대한 정보를 담고 있다. (디지털 인증서는 흔히 certs라고 불린다.)</li>
@@ -638,7 +636,7 @@
 <li>디지털 인증서는<br>대상과 사용된 서명 알고리즘에 대한 서술적인 정보, 대상의 공개키도 담고 있다.</li>
 <li>누구나 디지털 인증서를 만들 수 있지만,<br>(모두가 인증서의 정보를 보증하고<br>인증서의 개인 키로 서명할 수 있는,)<br><strong>널리 인정받는 서명 권한을 얻을 수 있는 것은 아니다.</strong></li>
 </ul>
-<img src="/images/2019/44/02.png">
+<img src="/images/2019/44/02.png"/>
 
 <h3 id="6-2-X-509-v3-인증서"><a href="#6-2-X-509-v3-인증서" class="headerlink" title="6.2 X.509 v3 인증서"></a>6.2 <code>X.509</code> v3 인증서</h3><ul>
 <li>디지털 인증서에 대한 전 세계적인 단일 표준은 없다.</li>
@@ -649,7 +647,7 @@
 <li><code>X.509</code> v3 인증서는<br>인증 정보를 파싱 가능한 필드에 넣어 구조화하는 표준화된 방법을 제공한다.</li>
 </ul>
 <hr>
-<p><a href="https://ko.wikipedia.org/wiki/X.509" target="_blank" rel="noopener">X.509 위키피디아 설명</a></p>
+<p><a href="https://ko.wikipedia.org/wiki/X.509">X.509 위키피디아 설명</a></p>
 <ul>
 <li><strong>버전</strong>: 이 인증서가 따르는 <code>X.509</code> 인증서 버전의 번호 (보통은 v3)</li>
 <li><strong>일련번호</strong>: 인증기관에 의해 생성된 고유한 정수</li>
@@ -677,10 +675,10 @@
 <li>서명 기관의 이름</li>
 <li>서명 기관의 서명</li>
 </ol>
-<img src="https://i.imgur.com/KYgfDFo.png">
+<img src="https://i.imgur.com/KYgfDFo.png"/>
 
 <blockquote>
-<p>출처 <a href="https://minwan1.github.io/2019/01/09/2019-01-14-https/" target="_blank" rel="noopener">Network-3:HTTPS란?</a></p>
+<p>출처 <a href="https://minwan1.github.io/2019/01/09/2019-01-14-https/">Network-3:HTTPS란?</a></p>
 </blockquote>
 <ul>
 <li>브라우저가 인증서를 받으면, 서명 기관을 검사한다.</li>
@@ -688,24 +686,24 @@
 브라우저는 그 서명을 검증할 수 있다.</li>
 <li>만약 서명 기관이 모르는 곳이라면,<br>브라우저는 그 서명 기관을 신뢰해야 할지 확신할 수 없으므로,<br>대개 사용자가 서명 기관을 신뢰하는지 확인하기 위한<br>대화상자를 보여준다.</li>
 </ul>
-<img src="/images/2019/44/03.jpg">
+<img src="/images/2019/44/03.jpg"/>
 
 
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80" target="_blank" rel="noopener">AES</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EA%B3%B5%EA%B0%9C_%ED%82%A4_%EA%B8%B0%EB%B0%98_%EA%B5%AC%EC%A1%B0" target="_blank" rel="noopener">PKI</a></li>
-<li><a href="https://blogger.pe.kr/583" target="_blank" rel="noopener">RSA</a></li>
-<li><a href="https://minwan1.github.io/2019/01/09/2019-01-14-https/" target="_blank" rel="noopener">Network-3:HTTPS란?</a></li>
-<li><a href="https://opentutorials.org/course/228/4894" target="_blank" rel="noopener">생활코딩 - 02. HTTPS와 SSL 인증서</a></li>
-<li><a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%95%99#%EB%8C%80%EC%B9%AD%ED%82%A4_%EC%95%94%ED%98%B8_%EC%8B%9C%EC%8A%A4%ED%85%9C" target="_blank" rel="noopener">암호학</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80">AES</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B3%B5%EA%B0%9C_%ED%82%A4_%EA%B8%B0%EB%B0%98_%EA%B5%AC%EC%A1%B0">PKI</a></li>
+<li><a href="https://blogger.pe.kr/583">RSA</a></li>
+<li><a href="https://minwan1.github.io/2019/01/09/2019-01-14-https/">Network-3:HTTPS란?</a></li>
+<li><a href="https://opentutorials.org/course/228/4894">생활코딩 - 02. HTTPS와 SSL 인증서</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EC%95%94%ED%98%B8%ED%95%99#%EB%8C%80%EC%B9%AD%ED%82%A4_%EC%95%94%ED%98%B8_%EC%8B%9C%EC%8A%A4%ED%85%9C">암호학</a></li>
 </ul>
-</a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -724,7 +722,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_014_01/" data-id="cm3u5tb28003ynjb2yyxnjk3z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/12/01/HTTP_014_01/" data-id="ckzv7cqg8003uqobminsl5osq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

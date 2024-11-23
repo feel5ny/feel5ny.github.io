@@ -11,12 +11,12 @@
         <meta name="keywords" content="http,internationalization" />
     
     
-    <meta name="description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원  HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.   서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라">
+    <meta name="description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원  HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.   서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다. 클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우">
 <meta property="og:type" content="article">
 <meta property="og:title" content="국제화">
 <meta property="og:url" content="http://feel5ny.github.io/2020/01/13/HTTP_016/index.html">
 <meta property="og:site_name" content="필오의 개발일지">
-<meta property="og:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원  HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.   서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다.  클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라">
+<meta property="og:description" content="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원  HTTP에서 엔터티 본문이란 그저 비트들로 가득 찬 상자에 불과하다.   서버는 클라에게 문서의 문자와 언어를Content-Type charset 매개변수와Content-Language 헤더를 통해 알려준다. 클라는 서버에게사용자가 어떤 언어를 이해할 수 있고,어떤 알파벳의 코딩 알고리즘이 브라우">
 <meta property="og:locale">
 <meta property="og:image" content="http://feel5ny.github.io/images/2020/03/thumb_default.jpg">
 <meta property="article:published_time" content="2020-01-13T00:10:10.000Z">
@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2020/01/13/HTTP_016/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2020/01/13/http_016/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -348,33 +348,27 @@
         <div class="article-entry" itemprop="articleBody">
             <hr>
 <hr>
-<a name="http">
+<a name="http"/>
 
 <h1 id="국제적인-콘텐츠를-다루기-위해-필요한-HTTP-지원"><a href="#국제적인-콘텐츠를-다루기-위해-필요한-HTTP-지원" class="headerlink" title="국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원"></a>국제적인 콘텐츠를 다루기 위해 필요한 HTTP 지원</h1><ul>
 <li><ol start="2">
 <li>HTTP에서 엔터티 본문이란 그저 <strong>비트들로 가득 찬</strong> 상자에 불과하다.</li>
 </ol>
 </li>
-<li><p>서버는 클라에게 문서의 문자와 언어를<br><strong><code>Content-Type charset</code></strong> 매개변수와<br><strong><code>Content-Language</code></strong> 헤더를 통해 알려준다.</p>
-</li>
-<li><p>클라는 서버에게<br>사용자가 어떤 언어를 이해할 수 있고,<br>어떤 알파벳의 코딩 알고리즘이 브라우저에 설치되어 있는지 말해줄 필요가 있다.<br><strong><code>Accept-Charset</code></strong>과
-<strong><code>Accept-Language</code></strong> 헤더를 보낸다</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: fr, en;q=0.8</span><br><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>모국어를 선호하지만, 피치 못할 경우 영어도 사용하는 프랑스어 사용자가 보낸 케이스</p>
-</li>
-<li><p><strong>iso-8859-1</strong> =&gt; 서유럽 차셋 인코딩과<br><strong>utf-8</strong> 유니코드 차셋 인코딩을<br>지원할 것이다.</p>
-</li>
-<li><p>q는 품질 인자로 프랑스어보다 영어에 낮은순위를 주었다. (기본은 1.0)</p>
-</li>
+<li>서버는 클라에게 문서의 문자와 언어를<br><strong><code>Content-Type charset</code></strong> 매개변수와<br><strong><code>Content-Language</code></strong> 헤더를 통해 알려준다.</li>
+<li>클라는 서버에게<br>사용자가 어떤 언어를 이해할 수 있고,<br>어떤 알파벳의 코딩 알고리즘이 브라우저에 설치되어 있는지 말해줄 필요가 있다.<br><strong><code>Accept-Charset</code></strong>과
+<strong><code>Accept-Language</code></strong> 헤더를 보낸다<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: fr, en;q=0.8</span><br><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure></li>
+<li>모국어를 선호하지만, 피치 못할 경우 영어도 사용하는 프랑스어 사용자가 보낸 케이스</li>
+<li><strong>iso-8859-1</strong> =&gt; 서유럽 차셋 인코딩과<br><strong>utf-8</strong> 유니코드 차셋 인코딩을<br>지원할 것이다.</li>
+<li>q는 품질 인자로 프랑스어보다 영어에 낮은순위를 주었다. (기본은 1.0)</li>
 </ul>
 <hr>
-<a name="charset">
+<a name="charset"/>
 
 <h1 id="1-문자-집합과-HTTP"><a href="#1-문자-집합과-HTTP" class="headerlink" title="1. 문자 집합과 HTTP"></a>1. 문자 집합과 HTTP</h1><h2 id="1-1-Charset은-글자를-비트로-변환하는-인코딩이다"><a href="#1-1-Charset은-글자를-비트로-변환하는-인코딩이다" class="headerlink" title="1.1 Charset은 글자를 비트로 변환하는 인코딩이다."></a>1.1 Charset은 글자를 비트로 변환하는 인코딩이다.</h2><ul>
 <li><ol start="2">
 <li>HTTP Charset 태그는<br>비트들을 글자로 변환하거나 (디코딩)<br>글자를 비트들로 변환하는 (인코딩)<br>알고리즘을 명명한다.<blockquote>
-<p><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_blank" rel="noopener">IANA 문자집합</a></p>
+<p><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA 문자집합</a></p>
 </blockquote>
 </li>
 </ol>
@@ -421,21 +415,14 @@
 <li><strong>windows-1252</strong> : 마소는 자신의 코딩됭 문자집합을 코드 페이지라고 부른다. 윈도우 코드페이지 1252는 iso-8859-1의 확장이다</li>
 </ul>
 <blockquote>
-<p><strong>euc-kr과 utf-8</strong> <a href="https://ofcourse.kr/html-course/%EC%9D%B8%EC%BD%94%EB%94%A9" target="_blank" rel="noopener">참고</a><br>euc-kr 방식은 원래 영어만을 고려한 1byte 길이의 ASCII 라는 인코딩 방식을 확장하여 한글을 사용할 수 있도록 만든 2byte 길이의 국가 언어 코드입니다.<br>국가 언어코드. <strong>즉 우리나라에서만 쓸 수 있도록 만든 코드</strong>이며 세계 어디에서나 공통으로 사용되는 인코딩 방식이 아니기 때문에, 다른 언어를 사용하는 환경(외국 등)에서는 <strong>한글 페이지를 제대로 볼 수 없는 문제가 발생합니다.</strong><br>이를 해결하기 위해 새로운 인코딩 방식이 개발되었는데, 그중 가장 보편화된 인코딩이 <strong>UTF-8</strong>입니다. (3byte)<br>예전에는 용량이 작은 euc-kr 방식을 선호하는 곳들도 많았으나, 현재는 용량 문제보다 표준화 및 글로벌 환경을 고려해야 하므로 UTF-8 인코딩 방식을 강력하게 권고하는 바입니다.</p>
+<p><strong>euc-kr과 utf-8</strong> <a href="https://ofcourse.kr/html-course/%EC%9D%B8%EC%BD%94%EB%94%A9">참고</a><br>euc-kr 방식은 원래 영어만을 고려한 1byte 길이의 ASCII 라는 인코딩 방식을 확장하여 한글을 사용할 수 있도록 만든 2byte 길이의 국가 언어 코드입니다.<br>국가 언어코드. <strong>즉 우리나라에서만 쓸 수 있도록 만든 코드</strong>이며 세계 어디에서나 공통으로 사용되는 인코딩 방식이 아니기 때문에, 다른 언어를 사용하는 환경(외국 등)에서는 <strong>한글 페이지를 제대로 볼 수 없는 문제가 발생합니다.</strong><br>이를 해결하기 위해 새로운 인코딩 방식이 개발되었는데, 그중 가장 보편화된 인코딩이 <strong>UTF-8</strong>입니다. (3byte)<br>예전에는 용량이 작은 euc-kr 방식을 선호하는 곳들도 많았으나, 현재는 용량 문제보다 표준화 및 글로벌 환경을 고려해야 하므로 UTF-8 인코딩 방식을 강력하게 권고하는 바입니다.</p>
 </blockquote>
 <h2 id="1-5-Content-Type-charset-헤더와-메타태그"><a href="#1-5-Content-Type-charset-헤더와-메타태그" class="headerlink" title="1.5 Content-Type charset 헤더와 메타태그"></a>1.5 Content-Type charset 헤더와 메타태그</h2><ol>
-<li><p>웹 서버는 클라에게 MIME charset 태그를 charset 매개변수와 함께 Content-Type 헤더에 담아 보낸다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>만약 나열되지 않았다면, 수신자는 문서의 콘텐츠로부터 문자집합을 추측하려고 시도한다.</p>
-<ol>
-<li><p>받은 HTML 파일에서 <code>meto</code>태그중 <code>HTTP-EQUIV</code>라는 속성을 갖고 있는 태그를 찾는다.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>만약 문서가 html이 아니라면, 혹은<br>meta Content-Type 태그가 없다면,<br>소프트웨어는 언어와 인코딩에 대한 일반적인 패턴을 찾기 위해 <strong>실제 텍스트를 스케닝하여 문자 인코딩을 추측한다.</strong></p>
-</li>
-<li><p>클라가 문자 인코딩을 추측하지 못했다면 <code>iso-8859-1</code>인것으로 가정한다.</p>
-</li>
+<li>웹 서버는 클라에게 MIME charset 태그를 charset 매개변수와 함께 Content-Type 헤더에 담아 보낸다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure></li>
+<li>만약 나열되지 않았다면, 수신자는 문서의 콘텐츠로부터 문자집합을 추측하려고 시도한다.<ol>
+<li>받은 HTML 파일에서 <code>meto</code>태그중 <code>HTTP-EQUIV</code>라는 속성을 갖고 있는 태그를 찾는다.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>만약 문서가 html이 아니라면, 혹은<br>meta Content-Type 태그가 없다면,<br>소프트웨어는 언어와 인코딩에 대한 일반적인 패턴을 찾기 위해 <strong>실제 텍스트를 스케닝하여 문자 인코딩을 추측한다.</strong></li>
+<li>클라가 문자 인코딩을 추측하지 못했다면 <code>iso-8859-1</code>인것으로 가정한다.</li>
 </ol>
 </li>
 </ol>
@@ -448,10 +435,10 @@
 <li>Accept-Charset 헤더의 값은 클라가 지원하는 문자 인코딩 목록을 제공해준다.</li>
 <li>이 문자 인코딩 구조 중 어떤 것으로 콘텐츠를 반환할지는 서버의 자유다.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Charset: iso-8859-1, utf-8</span><br></pre></td></tr></table></figure>
 
 <hr>
-<a name="glyph">
+<a name="glyph"/>
 
 <h1 id="2-다중언어-문자-인코딩에-대한-지침"><a href="#2-다중언어-문자-인코딩에-대한-지침" class="headerlink" title="2. 다중언어 문자 인코딩에 대한 지침"></a>2. 다중언어 문자 인코딩에 대한 지침</h1><h2 id="문자집합-용어"><a href="#문자집합-용어" class="headerlink" title="문자집합 용어"></a>문자집합 용어</h2><ol>
 <li>문자 : 글쓰기의 최소단위. </li>
@@ -462,7 +449,7 @@
 </li>
 <li><strong>코딩된 문자</strong> coded character<ul>
 <li>각 글자에 할당된 유일한 숫자</li>
-<li><a href="https://ko.wikipedia.org/wiki/%EA%B5%AD%EC%A0%9C_%EB%AC%B8%EC%9E%90_%EC%84%B8%ED%8A%B8" target="_blank" rel="noopener">국제 문자 셋트</a></li>
+<li><a href="https://ko.wikipedia.org/wiki/%EA%B5%AD%EC%A0%9C_%EB%AC%B8%EC%9E%90_%EC%84%B8%ED%8A%B8">국제 문자 셋트</a></li>
 </ul>
 </li>
 <li><strong>코드 공간</strong> coding space<ul>
@@ -625,7 +612,7 @@
 <li>MIME charset 값은 데이터 비트를 고유한 문자의 코드로 매핑하는 알고리즘의 이름이다.<br>= 문자 인코딩 구조 + 코딩된 문자집합</li>
 </ul>
 <hr>
-<a name="tag">
+<a name="tag"/>
 
 <h1 id="언어태그와-HTTP"><a href="#언어태그와-HTTP" class="headerlink" title="언어태그와 HTTP"></a>언어태그와 HTTP</h1><ul>
 <li>영어 en / 독일어 de / 한국어 ko<br>많은 다른 언어에 대한 언어 태그가 존재한다.</li>
@@ -708,7 +695,7 @@
 </li>
 </ol>
 <hr>
-<a name="uri">
+<a name="uri"/>
 
 <h1 id="국제화된-URI"><a href="#국제화된-URI" class="headerlink" title="국제화된 URI"></a>국제화된 URI</h1><ul>
 <li>오늘날 URI는 US-ASCII의 부분집합으로 구성되어 있다.</li>
@@ -780,7 +767,7 @@
 </li>
 </ol>
 <hr>
-<a name="etc">
+<a name="etc"/>
 
 <h1 id="기타-고려사항"><a href="#기타-고려사항" class="headerlink" title="기타 고려사항"></a>기타 고려사항</h1><ol>
 <li><strong>헤더와 명세에 맞지 않는 데이터</strong><ul>
@@ -811,14 +798,14 @@
 </ol>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ul>
-<li><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_blank" rel="noopener">IANA 문자집합</a></li>
+<li><a href="https://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA 문자집합</a></li>
 </ul>
-</a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -837,7 +824,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="cm3u5tb2a004cnjb2xl7v595f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/13/HTTP_016/" data-id="ckzv7cqgh004gqobmfwzq6mzs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

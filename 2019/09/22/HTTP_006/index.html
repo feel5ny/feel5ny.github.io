@@ -30,7 +30,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/09/22/HTTP_006/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/09/22/http_006/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -342,7 +342,7 @@
 
         <div class="article-entry" itemprop="articleBody">
             <hr>
-<a name="proxy">
+<a name="proxy"/>
 
 <h1 id="1-프록시란"><a href="#1-프록시란" class="headerlink" title="1. 프록시란?"></a>1. 프록시란?</h1><ul>
 <li>웹 프록시 서버는 클라의 입장에서 트랜젝션을 수행하는 중개인이다.</li>
@@ -370,7 +370,7 @@
 </li>
 </ul>
 <hr>
-<a name="why">
+<a name="why"/>
 
 <h1 id="2-왜-사용할까"><a href="#2-왜-사용할까" class="headerlink" title="2. 왜 사용할까?"></a>2. 왜 사용할까?</h1><ul>
 <li>보안을 개선하고</li>
@@ -420,7 +420,7 @@
 </li>
 </ol>
 <hr>
-<a name="where">
+<a name="where"/>
 
 <h1 id="3-어디에-둘까"><a href="#3-어디에-둘까" class="headerlink" title="3. 어디에 둘까?"></a>3. 어디에 둘까?</h1><ul>
 <li>어떻게 프락시가 네트워크에 배치되는가</li>
@@ -485,7 +485,7 @@
 </li>
 </ol>
 <hr>
-<a name="how">
+<a name="how"/>
 
 <h1 id="4-클라에서-프록시-설정-방법"><a href="#4-클라에서-프록시-설정-방법" class="headerlink" title="4. 클라에서 프록시 설정 방법"></a>4. 클라에서 프록시 설정 방법</h1><h2 id="4-1-수동"><a href="#4-1-수동" class="headerlink" title="4.1 수동"></a>4.1 수동</h2><ul>
 <li>단 하나의 프록시 서버만 지정가능하다.</li>
@@ -501,13 +501,12 @@
 <li>브라우저는 URI로부터 PAC파일을 가져와서 매 접근마다 적절한 프록시 서버를 계산하기 위해 실행한다.</li>
 <li>확장자: <code>.pac</code></li>
 <li>MIME타입: <code>application/x-ns-proxy-autoconfig</code></li>
-<li><code>FindProxyForURL(url, host)</code> 함수를 정의해야 한다.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FindProxyForURL(url, host): <span class="string">"DIRECT"</span> | <span class="string">`PROXY <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span> | <span class="string">`SOCKS <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+<li><code>FindProxyForURL(url, host)</code> 함수를 정의해야 한다.<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">FindProxyForURL</span>(url, host): <span class="string">&quot;DIRECT&quot;</span> | <span class="string">`PROXY <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span> | <span class="string">`SOCKS <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FindProxyForURL</span>(<span class="params">url, host</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">5</span>) == <span class="string">&#x27;http:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY http-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>,<span class="number">4</span>) == <span class="string">&#x27;ftp:&#x27;</span>) <span class="keyword">return</span> <span class="string">&quot;PROXY ftp-proxy.mydomain.com:8080&quot;</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">&quot;DIRECT&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindProxyForURL</span>(<span class="params">url, host</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(url.substring(<span class="number">0</span>,<span class="number">5</span>) == <span class="string">'http:'</span>) <span class="keyword">return</span> <span class="string">"PROXY http-proxy.mydomain.com:8080"</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(url.substring(<span class="number">0</span>,<span class="number">4</span>) == <span class="string">'ftp:'</span>) <span class="keyword">return</span> <span class="string">"PROXY ftp-proxy.mydomain.com:8080"</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="string">"DIRECT"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file" target="_blank" rel="noopener">MDN <strong>PAC 파일</strong> 참고자료</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file">MDN <strong>PAC 파일</strong> 참고자료</a></p>
 <h3 id="WPAD-파일"><a href="#WPAD-파일" class="headerlink" title="WPAD 파일"></a>WPAD 파일</h3><p>웹 프록시 자동 발견 프로토콜 Web Proxy Auto-Discovery Protocol<br><img src="/images/2019/28/01.png" style="width:100%"></p>
 <ul>
 <li>브라우저에게 알맞은 PAC 파일을 자동으로 찾아주는 알고리즘이다.</li>
@@ -519,7 +518,7 @@
 </ol>
 </li>
 <li>WPAD는 성공할 때까지 각 기법을 하나씩 시도해본다. (20장에서 자세히..)<ol>
-<li>동적 호스트 발견 규약 <a href="https://jwprogramming.tistory.com/35" target="_blank" rel="noopener">DHCP</a> (Dynamic Host Configuration Protocol)</li>
+<li>동적 호스트 발견 규약 <a href="https://jwprogramming.tistory.com/35">DHCP</a> (Dynamic Host Configuration Protocol)</li>
 <li>서비스 위치 규약 [SLP]</li>
 <li>DNS 잘 알려진 호스트 명</li>
 <li>DNS SRV 레코드</li>
@@ -528,7 +527,7 @@
 </li>
 </ul>
 <hr>
-<a name="attributes">
+<a name="attributes"/>
 
 <h1 id="5-프록시-요청의-특이사항-6가지"><a href="#5-프록시-요청의-특이사항-6가지" class="headerlink" title="5. 프록시 요청의 특이사항 6가지"></a>5. 프록시 요청의 특이사항 6가지</h1><ol>
 <li>프록시 URI는 서버 URI와 다르다.</li>
@@ -539,15 +538,10 @@
 <li>인터셉트 프록시를 이용한 URI 분석</li>
 </ol>
 <h2 id="5-1-프록시-URI는-서버-URI와-다르다"><a href="#5-1-프록시-URI는-서버-URI와-다르다" class="headerlink" title="5.1 프록시 URI는 서버 URI와 다르다."></a>5.1 프록시 URI는 서버 URI와 다르다.</h2><ul>
-<li><p>웹 서버와 웹 프록시 메세지의 문법은 간다.</p>
-</li>
-<li><p>요청 URI가 달라진다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">클라 =&gt; 서버</span><br><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br><span class="line"></span><br><span class="line">클라 =&gt; 프록시</span><br><span class="line">GET http://www.mary.com/index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>애초에 단일 서버 기준으로 메세지 설계가 되었었다. </p>
-</li>
-<li><p>프록시가 부상하면서 부분 URI는 문제가 되었고, 프록시 기반 게이트웨이는 URI 스킴을 알 필요가 있었기 때문에 부분URI가 아닌 전체 URI를 보낸다. </p>
-</li>
+<li>웹 서버와 웹 프록시 메세지의 문법은 간다.</li>
+<li>요청 URI가 달라진다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">클라 =&gt; 서버</span><br><span class="line">GET /index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br><span class="line"></span><br><span class="line">클라 =&gt; 프록시</span><br><span class="line">GET http://www.mary.com/index.html HTTP/1.0</span><br><span class="line">User-Agent: SuperBrowserv1.3</span><br></pre></td></tr></table></figure></li>
+<li>애초에 단일 서버 기준으로 메세지 설계가 되었었다. </li>
+<li>프록시가 부상하면서 부분 URI는 문제가 되었고, 프록시 기반 게이트웨이는 URI 스킴을 알 필요가 있었기 때문에 부분URI가 아닌 전체 URI를 보낸다. </li>
 </ul>
 <h2 id="5-2-가상-호스팅에서-일어나는-같은-문제"><a href="#5-2-가상-호스팅에서-일어나는-같은-문제" class="headerlink" title="5.2 가상 호스팅에서 일어나는 같은 문제"></a>5.2 가상 호스팅에서 일어나는 같은 문제</h2><ul>
 <li>명시적인 프록시는 요청 메세지가 완전한 URI를 갖도록 함</li>
@@ -564,7 +558,7 @@
 </ul>
 <h2 id="5-5-전송-중-URI-변경"><a href="#5-5-전송-중-URI-변경" class="headerlink" title="5.5 전송 중 URI 변경"></a>5.5 전송 중 URI 변경</h2><p>프록시 서버는 요청 URI의 변경에 엄격해서는 안된다.<br>사이드 이펙트를 일으킬 수 있다.</p>
 <hr>
-<a name="track">
+<a name="track"/>
 
 <h1 id="6-메세지-추적"><a href="#6-메세지-추적" class="headerlink" title="6. 메세지 추적"></a>6. 메세지 추적</h1><ul>
 <li>오늘날 웹 요청의 상당수가 프락시를 지나간다.<br>= 동시에 성능상의 이유로 세계 곳곳에 흩어져 있는 대리 캐시 저장고에 콘텐츠를 복제해두는 방식이 흔해지고있다.</li>
@@ -579,8 +573,7 @@
 <li>노드를 지날때마다, 중간노드는 Via 목록의 끝에 반드시 추가되어야 한다.</li>
 <li>Via헤더 필드는 메세지의 전달을 추적하고, 메세지 루프를 진단하고, 요청을 보내고, 그에 대한 응답을 돌려주는 과정에 관여하는 모든 메세지 발송자들의 프로토콜을 다루는 능력을 알아보기 위해 사용된다.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.1 proxy-62.irenes-isp.net, 1.0 cache.joes-hardware.com</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.1 proxy-62.irenes-isp.net, 1.0 cache.joes-hardware.com</span><br></pre></td></tr></table></figure>
 <ol>
 <li>HTTP 1.1 프로토콜로 구현, proxy-62.irenes-isp.net로 불림</li>
 <li>HTTP 1.0 프로토콜로 구현, cache.joes-hardware.com로 불림</li>
@@ -595,9 +588,8 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: ([ protocol-name &quot;/ ] protocol-version ( host [ &quot;:&quot; port] ) [ comment ]), (...)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.1 62e18ccb7bd6.cloudfront.net (CloudFront)</span><br><span class="line"></span><br><span class="line">protocol-name: HTTP</span><br><span class="line">protocol-version: 1.1</span><br><span class="line">host: 62e18ccb7bd6.cloudfront.net</span><br><span class="line">comment: (CloudFront)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: ([ protocol-name &quot;/ ] protocol-version ( host [ &quot;:&quot; port] ) [ comment ]), (...)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.1 62e18ccb7bd6.cloudfront.net (CloudFront)</span><br><span class="line"></span><br><span class="line">protocol-name: HTTP</span><br><span class="line">protocol-version: 1.1</span><br><span class="line">host: 62e18ccb7bd6.cloudfront.net</span><br><span class="line">comment: (CloudFront)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>프로토콜 이름</strong>: 중개자가 받은 프로토콜 / 프로토콜이 HTTP라면 이름이 없어도 된다.</li>
@@ -618,7 +610,7 @@
 <li>응답 메세지가 프락시를 통과할 때, 프락시는 Server 헤더를 수정해서는 안된다.</li>
 <li>Server 헤더는 원 서버를 위해 존재한다.<br>대신 프락시는 Via 항목을 추가해야 한다.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server: nginx/1.10.3 (Ubuntu)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server: nginx/1.10.3 (Ubuntu)</span><br></pre></td></tr></table></figure>
 
 <h3 id="Via가-개인정보-보호와-보안에-미치는-영향"><a href="#Via가-개인정보-보호와-보안에-미치는-영향" class="headerlink" title="Via가 개인정보 보호와 보안에 미치는 영향"></a>Via가 개인정보 보호와 보안에 미치는 영향</h3><ul>
 <li>보안을 위한다면, Via 노드 이름을 가명으로 교체해야한다.</li>
@@ -628,7 +620,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Via 1.0 foo, 1.1 devirus.company.com, 1.1 access-logger.company.com</span><br><span class="line"></span><br><span class="line">아래처럼 합칠 수 있다.</span><br><span class="line"></span><br><span class="line">Via: 1.0 foo, 1.1 concealed-stuff</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Via 1.0 foo, 1.1 devirus.company.com, 1.1 access-logger.company.com</span><br><span class="line"></span><br><span class="line">아래처럼 합칠 수 있다.</span><br><span class="line"></span><br><span class="line">Via: 1.0 foo, 1.1 concealed-stuff</span><br></pre></td></tr></table></figure>
 
 <h2 id="6-2-TRACE-메서드"><a href="#6-2-TRACE-메서드" class="headerlink" title="6.2 TRACE 메서드"></a>6.2 <code>TRACE</code> 메서드</h2><ul>
 <li>프락시가 점점 복잡해지고, 더 많은 벤더가 프락시 제품을 배치하면서, <strong>상호운용성</strong> 문제가 증가한다.</li>
@@ -650,7 +642,7 @@
 <li>0보다 크다면, 다음으로 전달될때 1을 감소하고 갱신해야한다.</li>
 </ul>
 <hr>
-<a name="authentication">
+<a name="authentication"/>
 
 <h1 id="7-프락시-인증"><a href="#7-프락시-인증" class="headerlink" title="7. 프락시 인증"></a>7. 프락시 인증</h1><ul>
 <li>접근 제어장치로써 제공될 수 있다.</li>
@@ -669,7 +661,7 @@
 <li>프락시 인증은 인증해야하는 프락시가 연쇄상 있을 경우 잘 동작하지 않는다.</li>
 </ul>
 <hr>
-<a name="mutual">
+<a name="mutual"/>
 
 <h1 id="8-프락시-상호운용성"><a href="#8-프락시-상호운용성" class="headerlink" title="8. 프락시 상호운용성"></a>8. 프락시 상호운용성</h1><ul>
 <li>클라, 서버, 프락시는 여러 벤더에 의해 만들어진다.</li>
@@ -689,27 +681,22 @@
 </li>
 </ul>
 <h2 id="8-3-Allow-헤더"><a href="#8-3-Allow-헤더" class="headerlink" title="8.3 Allow 헤더"></a>8.3 Allow 헤더</h2><ul>
-<li><p>요청 URI에 의해 식별되는 자원에 대해 지원되는 메서드들이나 서버가 지원하는 모든 메서드를 열거한다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Allow: GET, HEAD, PUT</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>서버는 클라가 원하는 모든 메서드를 지원해야할 의무는 없다.</p>
-</li>
-<li><p>요청에 대한 응답에는 실제로 지원하는 메서드들을 열거하는 Allow 헤더를 포함시켜야한다.</p>
-</li>
-<li><p>프락시는 Allow 필드를 수정할 수 없다.</p>
-</li>
+<li>요청 URI에 의해 식별되는 자원에 대해 지원되는 메서드들이나 서버가 지원하는 모든 메서드를 열거한다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Allow: GET, HEAD, PUT</span><br></pre></td></tr></table></figure></li>
+<li>서버는 클라가 원하는 모든 메서드를 지원해야할 의무는 없다.</li>
+<li>요청에 대한 응답에는 실제로 지원하는 메서드들을 열거하는 Allow 헤더를 포함시켜야한다.</li>
+<li>프락시는 Allow 필드를 수정할 수 없다.</li>
 </ul>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
 <ol>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file" target="_blank" rel="noopener">MDN <strong>PAC 파일</strong> 참고자료</a></li>
-<li><a href="https://jwprogramming.tistory.com/35" target="_blank" rel="noopener">DHCP (Dynamic Host Configuration Protocol)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_%28PAC%29_file">MDN <strong>PAC 파일</strong> 참고자료</a></li>
+<li><a href="https://jwprogramming.tistory.com/35">DHCP (Dynamic Host Configuration Protocol)</a></li>
 </ol>
-</a></a></a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -728,7 +715,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/09/22/HTTP_006/" data-id="cm3u5tb240031njb2zunjo0uz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/09/22/HTTP_006/" data-id="ckzv7cqft0032qobmn2l7qbw9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

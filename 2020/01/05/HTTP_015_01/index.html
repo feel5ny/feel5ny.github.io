@@ -30,7 +30,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2020/01/05/HTTP_015_01/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2020/01/05/http_015_01/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -371,7 +371,7 @@
 </ul>
 <h1 id="엔터티에-대하여"><a href="#엔터티에-대하여" class="headerlink" title="엔터티에 대하여"></a>엔터티에 대하여</h1><a name="entity">
 
-<h2 id="1-메세지는-컨테이너-엔터티는-화물"><a href="#1-메세지는-컨테이너-엔터티는-화물" class="headerlink" title="1. 메세지는 컨테이너, 엔터티는 화물"></a>1. 메세지는 컨테이너, 엔터티는 화물</h2><img src="/images/2020/01/01.png" style="width:200px">
+<h2 id="1-메세지는-컨테이너-엔터티는-화물"><a href="#1-메세지는-컨테이너-엔터티는-화물" class="headerlink" title="1. 메세지는 컨테이너, 엔터티는 화물"></a>1. 메세지는 컨테이너, 엔터티는 화물</h2><img src="/images/2020/01/01.png" style="width:200px"/>
 
 <ul>
 <li>엔터티는 엔터티헤더 + 엔터티 본문의 조합</li>
@@ -490,7 +490,7 @@
 <a name="type">
 
 <h2 id="3-미디어-타입과-Charset"><a href="#3-미디어-타입과-Charset" class="headerlink" title="3. 미디어 타입과 Charset"></a>3. 미디어 타입과 Charset</h2><ul>
-<li>Content-Type은 엔터티 본문의 MIME 타입을 기술한다. <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" rel="noopener">IANA에 정리되어있는 MIME타입</a><blockquote>
+<li>Content-Type은 엔터티 본문의 MIME 타입을 기술한다. <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA에 정리되어있는 MIME타입</a><blockquote>
 <p>IANA: 인터넷 할당 번호 관리기관 <strong>I</strong>nternet <strong>A</strong>ssigned <strong>N</strong>umbers <strong>A</strong>uthority</p>
 </blockquote>
 </li>
@@ -510,15 +510,14 @@
 </ol>
 </li>
 </ul>
-<h4 id="1-멀티파트-폼-제출-multipart-form-data"><a href="#1-멀티파트-폼-제출-multipart-form-data" class="headerlink" title="1. 멀티파트 폼 제출 multipart/form-data"></a>1. 멀티파트 폼 제출 <code>multipart/form-data</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=[abcdefghijklmnopqrstuvwzyz]</span><br></pre></td></tr></table></figure>
-
+<h4 id="1-멀티파트-폼-제출-multipart-form-data"><a href="#1-멀티파트-폼-제출-multipart-form-data" class="headerlink" title="1. 멀티파트 폼 제출 multipart/form-data"></a>1. 멀티파트 폼 제출 <code>multipart/form-data</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: multipart/form-data; boundary=[abcdefghijklmnopqrstuvwzyz]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>boundary는 본문의 서로 다른 부분을 구분하기 위한 구분자로 쓰인다.</li>
 </ul>
-<img src="/images/2020/01/02.png">
+<img src="/images/2020/01/02.png"/>
 
 <hr>
-<img src="/images/2020/01/03.png">
+<img src="/images/2020/01/03.png"/>
 
 <h4 id="2-멀티파트-범위-응답-multipart-byteranges"><a href="#2-멀티파트-범위-응답-multipart-byteranges" class="headerlink" title="2. 멀티파트 범위 응답 multipart/byteranges"></a>2. 멀티파트 범위 응답 <code>multipart/byteranges</code></h4><ul>
 <li><strong>범위 요청</strong>에 대한 HTTP 응답 또한 멀티파트가 될 수도 있다.</li>
@@ -527,7 +526,7 @@
 <li><strong>206 Partial Content</strong> 상태 코드가 전송된 경우,<br>MIME 타입은 문서가 각각의 요청된 범위들 중 하나인 몇 가지 파트들로 구성되어 있음을 알려주기 위해 사용된다.</li>
 <li>다른 멀티파트 타입처럼, Content-Type은 경계선 문자열을 정의하기 위해 boundary 디렉티브를 사용한다.<br>각각의 다른 파트들은 문서의 실제 타입을 가진 Content-Type 헤더와 그들이 나타내는 범위를 가진 Content-Range를 지니고 있다.</li>
 </ul>
-<img src="/images/2020/01/04.png">
+<img src="/images/2020/01/04.png"/>
 
 <h1 id="전송-전-전송-후"><a href="#전송-전-전송-후" class="headerlink" title="전송 전 ~ 전송 후"></a>전송 전 ~ 전송 후</h1><a name="checksum">
 
@@ -573,14 +572,14 @@
 <li>수신자는 인코딩된 메세지를 디코딩하고 원본을 얻는다.</li>
 </ol>
 <blockquote>
-<p>모던 <strong>브라우저</strong>에는 <strong>gzip 압축해제</strong>를 자동으로 해준다. <a href="https://stackoverflow.com/questions/32172704/is-gzip-automatically-decompressed-by-browser/32172835#32172835" target="_blank" rel="noopener">참고</a></p>
+<p>모던 <strong>브라우저</strong>에는 <strong>gzip 압축해제</strong>를 자동으로 해준다. <a href="https://stackoverflow.com/questions/32172704/is-gzip-automatically-decompressed-by-browser/32172835#32172835">참고</a></p>
 </blockquote>
 <h3 id="2-유형"><a href="#2-유형" class="headerlink" title="2. 유형"></a>2. 유형</h3><ul>
 <li>표준 콘텐츠 인코딩 유형이 정의되어있음. (IANA를 통해 표준화됨)</li>
 <li>커스텀으로 확장 인코딩을 추가하는걸 허용해놓음</li>
 <li>gzip, compress, deflate 인코딩은 전송되는 메세지의 크기를 정보으 손실 없이 줄이기 위한 <strong>무손실 압축 알고리즘</strong>이다.</li>
 </ul>
-<p><code>Content-Encoding: {유형}</code></p>
+<p><code>Content-Encoding: &#123;유형&#125;</code></p>
 <ol>
 <li>gzip : GNU zip 인코딩이 적용되었음을 의미</li>
 <li>compress: 유닉스 파일 압축 프로그램인 compress가 실행되었음을 의미</li>
@@ -590,7 +589,7 @@
 <h3 id="3-Accept-Encoding-헤더"><a href="#3-Accept-Encoding-헤더" class="headerlink" title="3. Accept-Encoding 헤더"></a>3. Accept-Encoding 헤더</h3><ul>
 <li>서버에서 클라가 지원하지 않는 인코딩을 사용하는 것을 막기 위해,<br>클라가 자신이 지원하는 인코딩의 목록을 Accept-Encoding 헤더에 포함한다.</li>
 <li>인코딩에 Q(quality)값을 매개변수로 더해<br><strong>선호도</strong>를 나타낼 수 있다.<ul>
-<li>Q의 범위는 원치않음 0.0 ~ 가장선호 1.0 사이이다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip</span><br><span class="line">Accept-Encoding:</span><br><span class="line">Accept-Encoding: *</span><br><span class="line">Accept-Encoding: compress; q=0.5, gzip; q=1.0</span><br><span class="line">Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0</span><br></pre></td></tr></table></figure>
+<li>Q의 범위는 원치않음 0.0 ~ 가장선호 1.0 사이이다.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip</span><br><span class="line">Accept-Encoding:</span><br><span class="line">Accept-Encoding: *</span><br><span class="line">Accept-Encoding: compress; q=0.5, gzip; q=1.0</span><br><span class="line">Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -615,9 +614,8 @@
 <li>최신 HTTP 명세는 오직 하나의 전송 인코딩, 청크 인코딩만을 정의했다.</li>
 <li><strong>어떤 형태의 전송 인코딩을 선호하는지</strong> 표현하는 <code>Q</code>값을 가질 수 있다.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /new_products.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">User-Agent: Mozilla/4.61 [en] (WinNT; I)</span><br><span class="line">TE: trailers, chunked</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Server: Apache/3.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /new_products.html HTTP/1.1</span><br><span class="line">Host: feel5ny.github.io</span><br><span class="line">User-Agent: Mozilla/4.61 [en] (WinNT; I)</span><br><span class="line">TE: trailers, chunked</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Server: Apache/3.0</span><br></pre></td></tr></table></figure>
 
 <ol>
 <li><strong><code>Transfer-encoding</code></strong><br>: 안전한 전송을 위해, 어떤 인코딩이 메세지에 적용되었는지 수신자에게 알려준다.<img src="https://media.geeksforgeeks.org/wp-content/uploads/20191029112629/1091.png"></li>
@@ -654,10 +652,8 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">27&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">블라블라블라 ~</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0&lt;CR&gt;&lt;LF&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">27&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">블라블라블라 ~</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0&lt;CR&gt;&lt;LF&gt;</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>클라 또한</strong> 청크 인코딩된 데이터를 서버로 전송한다.</p>
 </li>
 </ul>
@@ -682,14 +678,14 @@
 <li>청크 전송 인코딩이 사용되었다면, 메세지 본문에 적용된 마지막 전송 인코딩이 존재해야 한다.</li>
 <li>청크 전송 인코딩은 반드시 메세지 본문에 한 번 이상 적용되어야 한다.</li>
 </ul>
-<p><a href="https://www.httpwatch.com/httpgallery/chunked/" target="_blank" rel="noopener">이미지 청크 인코딩 예시</a></p>
+<p><a href="https://www.httpwatch.com/httpgallery/chunked/">이미지 청크 인코딩 예시</a></p>
 <hr>
 <ul>
-<li><a href http: www.kyobobook.co.kr product detailviewkor.laf?ejkgb="KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=" "">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
+<li><a href=""http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc="">HTTP 완벽가이드</a> 책을 보고 이해한 내용을 정리 한 글입니다.</li>
 </ul>
 <hr>
 <p><strong>참고자료</strong></p>
-</a></a></a></a></a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -708,7 +704,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="cm3u5tb290048njb2axrfff6f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2020/01/05/HTTP_015_01/" data-id="ckzv7cqge0045qobmxv3a0thr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

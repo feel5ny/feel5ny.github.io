@@ -29,7 +29,7 @@
 <meta property="fb:admins" content="166480990612572">
     
     
-    <link rel="canonical" href="http://feel5ny.github.io/2019/01/22/JS_17/"/>
+    <link rel="canonical" href="http://feel5ny.github.io/2019/01/22/js_17/"/>
     
         <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
     
@@ -400,7 +400,7 @@
 <blockquote>
 <p>명령 하나당, 2번과 3번의 반복 </p>
 </blockquote>
-<p>메모리에 적재된 프로그램을 cpu가 소개한다. (<a href="https://www.slideshare.net/sunnykwak90/ss-43131241" target="_blank" rel="noopener">노이만 머신의 구조</a>)</p>
+<p>메모리에 적재된 프로그램을 cpu가 소개한다. (<a href="https://www.slideshare.net/sunnykwak90/ss-43131241">노이만 머신의 구조</a>)</p>
 <hr>
 <ul>
 <li>컴파일 타임에는 실제 메모리를 갖고 있지 않는다.<br>메모리는 런타임때 올려짐.<ul>
@@ -477,8 +477,7 @@
 <p>double dispatch를 통해 해결할 수 있다.</p>
 </blockquote>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B = &#123; value: &amp;A, V: 3 &#125;</span><br><span class="line">C = B, D = B, ...</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B = &#123; value: &amp;A, V: 3 &#125;</span><br><span class="line">C = B, D = B, ...</span><br></pre></td></tr></table></figure>
 <p>B가 직접참조하지않고, 간접적으로 참조하게 만들었다.<br>Dispatch: 주소로부터 값을 얻는 행위</p>
 <ul>
 <li><strong>Double Dispatch</strong></li>
@@ -529,7 +528,7 @@
 </ul>
 </li>
 <li><code>if (true) a=3; else if (a &gt; 2) b = 3; else b =5;</code><ul>
-<li><code>if (true) a=3; else {if (a &gt; 2) b = 3; else b =5;}</code></li>
+<li><code>if (true) a=3; else &#123;if (a &gt; 2) b = 3; else b =5;&#125;</code></li>
 <li>암묵적으로 위처럼 줄괄호가 있다고 생각하는 것. else if절이 있는 것이 아니라,<br>앞부분의 if else절의 else가 갖고 있는 if else절이라고 생각하자.</li>
 </ul>
 </li>
@@ -580,7 +579,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2019/01/22/JS_17/" data-id="cm3u5tb2k0064njb2zx9agj15" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2019/01/22/JS_17/" data-id="ckzv7cqi40064qobmxt9gtt7v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

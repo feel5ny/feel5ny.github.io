@@ -264,8 +264,8 @@
             <blockquote>
 <p>도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다. 스터디는 “시작하세요 도커/쿠버네티스” 책으로 진행합니다.</p>
 </blockquote>
-<p><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container" target="_blank" rel="noopener">왜 우린 도커를 써야하나요?</a></p>
-<a name="basic">
+<p><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container">왜 우린 도커를 써야하나요?</a></p>
+<a name="basic" />
 
 <h2 id="도커-🐋"><a href="#도커-🐋" class="headerlink" title="도커? 🐋"></a>도커? 🐋</h2><p><strong>리눅스 컨테이너</strong>에 여러 기능을 추가하여<br>→ <strong>어플리케이션을 컨테이너</strong>로서 좀더 쉽게 사용할 수 있게 만들어진 오픈소스 프로젝트</p>
 <ul>
@@ -288,21 +288,21 @@
 <li>기존의 가상화 기술 : <strong>하이퍼 바이저</strong>를 이용해, 여러개의 운영체제를 하나의 호스트에서 생성해, 사용하는 방식</li>
 </ul>
 <h3 id="가상머신-Hypervisor"><a href="#가상머신-Hypervisor" class="headerlink" title="가상머신 Hypervisor"></a>가상머신 Hypervisor</h3><ul>
-<li>하이퍼바이저: <a href="https://www.redhat.com/ko/topics/virtualization/what-is-a-virtual-machine" target="_blank" rel="noopener">가상 머신(Virtual Machine, VM)</a>을 생성하고 구동하는 소프트웨어</li>
+<li>하이퍼바이저: <a href="https://www.redhat.com/ko/topics/virtualization/what-is-a-virtual-machine">가상 머신(Virtual Machine, VM)</a>을 생성하고 구동하는 소프트웨어</li>
 <li>서로 다른 복수 개의 OS(== <strong>가상머신</strong>이라는 단위)를 단일 물리 머신 위에서 스케줄링 할 수 있는 소프트웨어</li>
 <li>각 가상머신에는 우분투 Ubuntu, CentOS 등의 운영체제가 설치되어 사용된다.</li>
 </ul>
-<img src="/images/2022/01/01.png" alt="hypervisor">
+<img src="/images/2022/01/01.png" alt="hypervisor"/>
 
 <blockquote>
-<p>참고<br><a href="https://medium.com/naver-cloud-platform/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EA%B8%B0%EC%88%A0-%EA%B2%BD%ED%97%98-%EA%B0%80%EC%83%81%ED%99%94-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-qemu-vs-kvm-962113641799" target="_blank" rel="noopener">[네이버클라우드 기술&amp;경험] 가상화 개념 이해하기#1, QEMU vs KVM</a></p>
+<p>참고<br><a href="https://medium.com/naver-cloud-platform/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EA%B8%B0%EC%88%A0-%EA%B2%BD%ED%97%98-%EA%B0%80%EC%83%81%ED%99%94-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-qemu-vs-kvm-962113641799">[네이버클라우드 기술&amp;경험] 가상화 개념 이해하기#1, QEMU vs KVM</a></p>
 </blockquote>
 <ul>
 <li>Guest OS: 하이퍼바이저에 의해 생성되고 관리되는 운영체제<ul>
 <li>다른 게스트 운영체제와는 완전히 독립된 시스템 자원을 할당 받아 사용한다.</li>
 </ul>
 </li>
-<li>가상화 방식을 사용할 수 있는 가상화 툴: <a href="https://www.virtualbox.org/" target="_blank" rel="noopener">VirtualBox</a>, <a href="https://www.vmware.com/kr.html" target="_blank" rel="noopener">VMware</a></li>
+<li>가상화 방식을 사용할 수 있는 가상화 툴: <a href="https://www.virtualbox.org/">VirtualBox</a>, <a href="https://www.vmware.com/kr.html">VMware</a></li>
 </ul>
 <h3 id="Hypervisor의-단점-👎"><a href="#Hypervisor의-단점-👎" class="headerlink" title="Hypervisor의 단점 👎"></a>Hypervisor의 단점 👎</h3><ul>
 <li><strong>일반 호스트에 비해 성능의 손실이 발생</strong>: 각종 시스템 자원을 가상화하고, 독립된 공간을 생성하는 작업은 ⇒ 하이퍼바이저를 반드시 거침</li>
@@ -315,7 +315,7 @@
 <li>장점 👍: 완벽한 운영체제를 생성할 수 있다.</li>
 <li>단점 👎: 일반 호스트에 비해 성능 손실 / 가상머신을 배포하기 위한 이미지로 만들었을때, 이미지 크기 또한, 커진다.</li>
 </ul>
-<img src="/images/2022/01/02.png" alt="VM vs Docker">
+<img src="/images/2022/01/02.png" alt="VM vs Docker"/>
 
 <h2 id="도커-컨테이너-특징"><a href="#도커-컨테이너-특징" class="headerlink" title="도커 컨테이너 특징"></a>도커 컨테이너 특징</h2><ol>
 <li>성능 손실이 없다.<ul>
@@ -397,7 +397,7 @@
 <li>도커 명령어로 내려받을 수 있다.</li>
 <li>리툭스 운영체제, 어플리케이션, 빅데이터 분석도구, .. 갖가지 종류가 있음</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 저장소 &#125;&#125;/&#123;&#123; 이미지 이름 &#125;&#125;:&#123;&#123; 태그 &#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 저장소 &#125;&#125;/&#123;&#123; 이미지 이름 &#125;&#125;:&#123;&#123; 태그 &#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>저장소</strong>: 이미지가 저장된 저장소를 의미</li>
@@ -418,10 +418,10 @@
 </ul>
 </li>
 </ul>
-<a name="container">
+<a name="container" />
 
 <h2 id="도커-컨테이너-다루기"><a href="#도커-컨테이너-다루기" class="headerlink" title="도커 컨테이너 다루기"></a>도커 컨테이너 다루기</h2><blockquote>
-<p><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener">도커 GUI 클라이언트</a> 사용하며 익히면 굳</p>
+<p><a href="https://www.docker.com/products/docker-desktop">도커 GUI 클라이언트</a> 사용하며 익히면 굳</p>
 </blockquote>
 <ol>
 <li>컨테이너 생성: <code>docker run -i -t ubuntu:14.04</code> (1. ubuntu:14.04 이미지 기준으로 <code>pull</code>, 2. 컨테이너 생성 <code>create</code>, 3. 내부 진입 <code>attach</code>)</li>
@@ -442,32 +442,32 @@
 </ul>
 </li>
 </ol>
-<h3 id="기타-cli"><a href="#기타-cli" class="headerlink" title="기타 cli"></a>기타 cli</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name joy ubuntu:14.04</span><br></pre></td></tr></table></figure>
+<h3 id="기타-cli"><a href="#기타-cli" class="headerlink" title="기타 cli"></a>기타 cli</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t --name joy ubuntu:14.04</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>-i</code> : 상호 입출력</li>
 <li><code>-t</code> : tty를 활성화 (bash shell 사용하도록 설정)</li>
 <li><code>--name</code>: 컨테이너 네이밍</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name detach_test ubuntu:14.04</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name detach_test ubuntu:14.04</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>detached 모드 (foreground): detached 모드로 컨테이너를 실행한다.</li>
 <li>detached 모드: 컨테이너를 백그라운드에서 동작하는 어플리케이션으로써 실행하도록 설정</li>
 <li>입출력이 없는 상태로 컨테이너를 실행</li>
 <li>detached 모드는 반드시 컨테이너에서 <strong>프로그램이 실행되야 하며</strong>, 포그라운드 프로그램이 실행되지 않으면 컨테이너는 종료됨</li>
-<li>detached 모드여도, 컨테이너 내부 shell 사용가능:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &#123;&#123; 컨테이너 이름 &#125;&#125; /bin/sh</span><br></pre></td></tr></table></figure>
+<li>detached 모드여도, 컨테이너 내부 shell 사용가능:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &#123;&#123; 컨테이너 이름 &#125;&#125; /bin/sh</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull     // 원격에 있는 이미지 풀받기</span><br><span class="line">docker images   // 로컬에 다운받은 이미지 확인</span><br><span class="line">docker create   // 컨테이너 생성시 사용 (반환값: 컨테이너 고유 ID)</span><br><span class="line">dokcer start    // 컨테이너 띄우기</span><br><span class="line">docker attach   // 컨테이너 내부 들어가기</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker pull     // 원격에 있는 이미지 풀받기</span><br><span class="line">docker images   // 로컬에 다운받은 이미지 확인</span><br><span class="line">docker create   // 컨테이너 생성시 사용 (반환값: 컨테이너 고유 ID)</span><br><span class="line">dokcer start    // 컨테이너 띄우기</span><br><span class="line">docker attach   // 컨테이너 내부 들어가기</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><ul>
-<li><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container" target="_blank" rel="noopener">왜 우린 도커를 써야하나요?</a></li>
-<li><a href="https://medium.com/naver-cloud-platform/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EA%B8%B0%EC%88%A0-%EA%B2%BD%ED%97%98-%EA%B0%80%EC%83%81%ED%99%94-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-qemu-vs-kvm-962113641799" target="_blank" rel="noopener">[네이버클라우드 기술&amp;경험] 가상화 개념 이해하기#1, QEMU vs KVM</a></li>
+<li><a href="https://www.44bits.io/ko/post/why-should-i-use-docker-container">왜 우린 도커를 써야하나요?</a></li>
+<li><a href="https://medium.com/naver-cloud-platform/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EA%B8%B0%EC%88%A0-%EA%B2%BD%ED%97%98-%EA%B0%80%EC%83%81%ED%99%94-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1-qemu-vs-kvm-962113641799">[네이버클라우드 기술&amp;경험] 가상화 개념 이해하기#1, QEMU vs KVM</a></li>
 </ul>
-</a></a>
+
         </div>
         <footer class="article-footer">
             
@@ -486,7 +486,7 @@
 
 
 
-    <a data-url="http://feel5ny.github.io/2022/02/13/docker_01_%E1%84%80%E1%85%A2%E1%84%82%E1%85%A7%E1%86%B7/" data-id="cm3u5tb3300bjnjb2vxyarnw1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://feel5ny.github.io/2022/02/13/docker_01_%E1%84%80%E1%85%A2%E1%84%82%E1%85%A7%E1%86%B7/" data-id="cm2pm85dz0008blb2fxbqko80" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
