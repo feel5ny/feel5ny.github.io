@@ -420,6 +420,14 @@ code {
 #main .main-body-content:after {
   clear: both;
 }
+#main .category-description {
+  font-weight: 200;
+  padding: 10px 0px 20px 0px;
+  white-space: pre-line;
+  font-size: 15px;
+  word-break: keep-all;
+  opacity: 0.9;
+}
 #header {
   background: #303337;
   padding-bottom: 60px;
