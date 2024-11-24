@@ -382,6 +382,9 @@ span.menu_label {
 span.menu_label > img {
   width: 100%;
 }
+iframe[title="Disqus"] {
+  width: unset;
+}
 #header {
   background: #fcfafc;
   padding-bottom: 60px;

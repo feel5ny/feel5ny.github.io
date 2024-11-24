@@ -428,6 +428,9 @@ code {
   word-break: keep-all;
   opacity: 0.9;
 }
+#disqus_thread > iframe[title="Disqus"]:nth-child(1) {
+  display: none !important;
+}
 #header {
   background: #303337;
   padding-bottom: 60px;
