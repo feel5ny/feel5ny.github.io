@@ -1,0 +1,5 @@
+;/*FB_PKG_DELIM*/
+
+__d("PolarisGAMEEnforcementNoticeRootQuery_instagramRelayOperation",[],(function(a,b,c,d,e,f){e.exports="25973585042285844"}),null);
+__d("PolarisHashtagHeaderActionButtonsQuery$Parameters",["PolarisHashtagHeaderActionButtonsQuery_instagramRelayOperation"],(function(a,b,c,d,e,f){"use strict";a={kind:"PreloadableConcreteRequest",params:{id:b("PolarisHashtagHeaderActionButtonsQuery_instagramRelayOperation"),metadata:{is_distillery:!0},name:"PolarisHashtagHeaderActionButtonsQuery",operationKind:"query",text:null}};e.exports=a}),null);
+__d("PolarisKeywordSearchExploreRoot.entrypoint",["JSResourceForInteraction","PolarisHashtagHeaderActionButtonsQuery$Parameters"],(function(a,b,c,d,e,f,g){"use strict";a={getPreloadProps:function(a){var b=a.routeParams;a=a.routeProps;a=(a=a.q_override)!=null?a:b.q;b=(a==null?void 0:a.startsWith("#"))?a.substring(1):"";return{queries:{hashtagHeaderButtonsQueryReference:{parameters:c("PolarisHashtagHeaderActionButtonsQuery$Parameters"),variables:{tag_name:b}}}}},root:c("JSResourceForInteraction")("PolarisKeywordSearchExploreRoot.react").__setRef("PolarisKeywordSearchExploreRoot.entrypoint")};g["default"]=a}),98);
