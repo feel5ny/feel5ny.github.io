@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>사용자 중심의 프론트엔드 개발 | 필오의 개발일지</title>
+    
+    <meta name="theme-color" content="#26d0ce">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="UX,Frontend" />
+    
+    
+    <meta name="description" content="이력서를 보다 보면, “UX&#x2F;UI의 중요성을 높게 생각하는 개발자” 또는 “UX&#x2F;UI에 관심이 많은 개발자”라는 표현을 종종 접하곤 한다. 사실 나 역시 이와 유사한 문구를 이력서에 써왔는데, 이런 생각이 들었다. 프론트엔드 개발자는 UX&#x2F;UI를 어디까지 깊게 고민해야 할까? 그리고 그 경험을 현실적으로 어떻게 진행할 수 있을까?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="사용자 중심의 프론트엔드 개발">
+<meta property="og:url" content="http://feel5ny.github.io/2025/01/19/ux-centered-improvement/index.html">
+<meta property="og:site_name" content="필오의 개발일지">
+<meta property="og:description" content="이력서를 보다 보면, “UX&#x2F;UI의 중요성을 높게 생각하는 개발자” 또는 “UX&#x2F;UI에 관심이 많은 개발자”라는 표현을 종종 접하곤 한다. 사실 나 역시 이와 유사한 문구를 이력서에 써왔는데, 이런 생각이 들었다. 프론트엔드 개발자는 UX&#x2F;UI를 어디까지 깊게 고민해야 할까? 그리고 그 경험을 현실적으로 어떻게 진행할 수 있을까?">
+<meta property="og:locale">
+<meta property="og:image" content="http://feel5ny.github.io/images/2025/01/thumb_default.jpg">
+<meta property="article:published_time" content="2025-01-19T14:10:00.000Z">
+<meta property="article:modified_time" content="2025-01-19T14:03:39.364Z">
+<meta property="article:author" content="Joy Kim">
+<meta property="article:tag" content="UX">
+<meta property="article:tag" content="Frontend">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://feel5ny.github.io/images/2025/01/thumb_default.jpg">
+<meta property="fb:admins" content="166480990612572">
+    
+    
+    <link rel="canonical" href="http://feel5ny.github.io/2025/01/19/ux-centered-improvement/"/>
+    
+        <link rel="alternate" href="/feed.xml" title="필오의 개발일지" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    
+    
+<link rel="stylesheet" href="/css/style_night.css">
+
+    
+<script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- 
+<script src="/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+ -->
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-65963601-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-65963601-5');
+  gtag('config', 'G-LBPKPXPZJ6');
+</script>
+    
+    
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-4635625843749103",
+        enable_page_level_ads: true
+    });
+    </script>
+    <meta name="google-signin-client_id" content="657683199292-cume7g4tomld10jkgpv1p7cm5buttboa.apps.googleusercontent.com">
+        <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,400,500&display=swap">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> -->
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <div style="padding: 38px 0px; font-size: 14px; letter-spacing: 0.3px;"> 필오의 개발 docs &#10024;&#9994;</div> 
+                        <div class="logo-wrap__box">
+                            <a href="/" class="logo"></a>
+                            <div class="sub-logo"></div>
+                        </div>
+                    </h1>
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                              
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/">00_Clean_Code</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/Principle/">Principle</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/00-Clean-Code/Refactoring/">Refactoring</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/">01_Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/00-UX-%F0%9F%92%85/">00. UX 💅</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/01-Browser/">01. Browser</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/02-HTTP/">02. HTTP</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/02-Network/">02. Network</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-CSS/">03. CSS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Html/">03. Html</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-JavaScript/">03. JavaScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Library/">03. Library</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-Motion/">03. Motion</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/03-TypeScript/">03. TypeScript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/zz-Algorithm/">zz. Algorithm</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/01-Web/zz-Workshop/">zz. Workshop</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-Web/">02_!Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/02-Web/DB/">DB</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/">03_DevOps</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/02-Code/">02. Code</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/04-Test/">04. Test</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/05-Release/">05. Release</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/03-DevOps/06-Deploy/">06. Deploy</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/">04_AARRR</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/00-Analyze/">00. Analyze</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/04-AARRR/Acquisition/">Acquisition</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/">Personal 🙆</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/Reflection/">Reflection</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Personal-%F0%9F%99%86/Retrospective/">Retrospective</a></li></ul></li></ul>
+                                      
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://www.linkedin.com/in/feel5ny/">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header ">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/01-Web/00-UX-%F0%9F%92%85/">00. UX 💅</a>
+    </h1>
+    
+    
+</div>
+                        <div class="main-body-content">
+                            
+
+    <div>
+        <img src="/images/2025/01/thumb_default.jpg" alt="사용자 중심의 프론트엔드 개발" style="width:100%">
+    </div>
+
+<article id="post-ux-centered-improvement" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        사용자 중심의 프론트엔드 개발
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2025/01/19/ux-centered-improvement/" class="article-date">
+            <time datetime="2025-01-19T14:10:00.000Z" itemprop="datePublished">2025-01-19</time>
+        </a>
+    </div>
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Frontend/" rel="tag">Frontend</a>, <a class="tag-link-link" href="/tags/UX/" rel="tag">UX</a>
+    </div>
+
+            </div>
+        
+        
+        
+        
+        
+        
+        
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#user-centered">사용자 중심적 개발</a>
+               
+                <div class="first_depth--sub">몰입해야 나오는 배우들의 애드립</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#action">Action</a>
+               
+                <div class="first_depth--sub">실제 실행에 옮기기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+        <div class="article-entry" itemprop="articleBody">
+            <p>이력서를 보다 보면, “UX&#x2F;UI의 중요성을 높게 생각하는 개발자” 또는 “UX&#x2F;UI에 관심이 많은 개발자”라는 표현을 종종 접하곤 한다. 사실 나 역시 이와 유사한 문구를 이력서에 써왔는데, 이런 생각이 들었다. 프론트엔드 개발자는 UX&#x2F;UI를 어디까지 깊게 고민해야 할까? 그리고 그 경험을 현실적으로 어떻게 진행할 수 있을까? 이러한 질문에서 시작된 고민을 글로 풀어보고자 한다. <del>반성의 의미도 조금 담아보면서.</del></p>
+<p><strong>TL;DR</strong> 유저 중심적으로 생각해야 하며, 그 깊이는 PM이나 디자이너와 맞먹어야 한다.</p>
+<p>프론트엔드 개발에서 자주 마주치는 과제들, 예를 들어 성능 최적화, 캐싱 전략, 유연한 상태 관리 같은 작업은 왜 필요한 걸까?<br>“기능 개발만으로도 충분히 바쁜데, 이런 작업들을 할 여유가 있을까?”라는 의문이 들 수도 있다.<br>하지만 이 질문 자체에서 관점을 바꿔 단순히 요구사항만 구현하는 개발자가 아닌, 유저 중심적 사고로 개발에 접근해야 더 높은 만족을 줄 수 있는 서비스를 만들 수 있다.</p>
+<a name="user-centered"/>
+
+<h2 id="사용자-중심적-개발"><a href="#사용자-중심적-개발" class="headerlink" title="사용자 중심적 개발"></a>사용자 중심적 개발</h2><p>서비스 개발에서 프론트엔드 개발자가 다뤄야 할 작업은 크게 세 가지로 나뉜다.</p>
+<p><strong>1️⃣ 기획 의존적인 기능 개발</strong><br>서비스의 기본적인 뼈대와 콘텐츠를 구현하는 작업이다. 이 과정에서는 빠르게 시장 검증을 돕거나, 비즈니스 목표를 실현하는 데 중점을 둔다.</p>
+<p><strong>2️⃣ 기능 외 작업</strong><br>리팩토링, POC(개념 증명), 테스트 코드 작성 등 기술적 안정성을 높이는 작업이 포함된다. 이 과정은 프로젝트의 지속가능성과 확장성을 보장한다.</p>
+<p><strong>3️⃣ 유저 중심적 개선 작업</strong><br>서비스를 이용하는 유저 경험을 개선하는 작업이다. 예를 들어, 성능 최적화, 사용자 접근성 개선, 로딩 속도 최적화 등이 이에 해당한다.</p>
+<p><strong>개발자는 유저가 웹 서비스를 이용하는 전체적인 흐름을 이해하고, 이 흐름을 방해하는 요소들을 식별하고 개선해야 한다.</strong><br>이러한 노력은 결국 <strong>유저의 락인(lock-in)</strong> 을 강화하고, 이탈률을 줄이며, 서비스 충성도를 높이는 결과로 이어진다. 이는 서비스 차원에서 매우 큰 임팩트를 남기는 작업이다.</p>
+<p>조직의 방향성과 성숙도에 따라 작업 우선순위는 달라질 수 있다.<br>초기 스타트업의 경우 빠른 시장 검증과 MVP 출시가 중요하기 때문에 기능 개발(1번)만으로도 충분히 바쁜 경우가 많다.<br>성장 단계의 조직에서는 2번, 3번 작업이 점차 강조되며, 기술적 토대를 튼튼히 다지기 시작한다.<br>개발자는 조직의 현재 단계와 방향성에 맞춰 적응하면서도, <strong>스스로 2번과 3번 작업을 챙기는 역량을 길러야 한다.</strong></p>
+<a name="action"/>
+
+<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><p>TDD책에서 이런말이 나온다. </p>
+<blockquote>
+<p>테스트를 언제 작성하는 것이 좋을까?<br>테스트 대상이 되는 코드를 작성하기 직전에 작성하는 것이 좋다.<br>코드를 작성한 후에는 테스트를 만들지 않을 것이다. (…)<br>[테스트 주도 개발] 중 일부…</p>
+</blockquote>
+<p>사용자 경험을 ‘좋게’만드는 작업들을 기능개발을 하면서 진행하게 된다면 나중에 진행하는 것보다 비용측면에서도 효율적일 것이다. (진행비용, 설득비용, …)</p>
+<p>개발을 시작하기 이전에 간단하게 계획해보고 추적해보면된다.</p>
+<ol>
+<li>타겟 유저의 이해도를 올린다.</li>
+<li>어떻게 구현할지 계획하며 사용자 경험을 올릴 수 있는 point를 되짚어보고 나열해본다.</li>
+<li>나열된 task를 impact와 리소스를 고려하여 우선순위를 지정한다.</li>
+</ol>
+<p>기본적인 원칙은 유저는 특정 액션 이후에는 <strong>예상가능한 다음 단계를 빠르게 제공해줘야한다.</strong> 이미 학습되어있는 액션을 무의식적으로 했을 때, 동작할 수 있도록 해야하며, 다양한 환경에서 접근 하는 유저를 커버해야한다.</p>
+<h3 id="1-타겟-유저-이해하기"><a href="#1-타겟-유저-이해하기" class="headerlink" title="1. 타겟 유저 이해하기"></a>1. 타겟 유저 이해하기</h3><p>개발자가 자신이 구현해야할 기능을 사용할 유저가 아닐지라도 목표 유저의 특성을 이해하려고 노력하면 좋다.<br>유저 테스팅, UX 리뷰, 행동 분석 등을 통해 이해도를 올릴 수 있다. (옵저버라도 적극적으로 참여해보자.)<br>유저의 이해도를 올리면 기술적 해결책을 사용자의 관점에서 접근할 수 있게된다.</p>
+<h3 id="2-계획해보기"><a href="#2-계획해보기" class="headerlink" title="2. 계획해보기"></a>2. 계획해보기</h3><ol>
+<li>내가 개발하는 기능의 유저 시나리오를 나열합니다.<ul>
+<li>유저는 어떤 문제를 해결하기 위해 이 기능을 사용하는가?</li>
+<li>이 기능의 어느 단계에서 불편을 겪을 가능성이 있는가?</li>
+</ul>
+</li>
+<li>개선 가능한 영역을 정의한다.<ul>
+<li>기술적으로 해결할 수 있는 부분은 무엇인가?</li>
+<li>디자이너와 협업이 필요한 부분은 무엇인가?</li>
+</ul>
+</li>
+<li>우선순위를 설정한다.<ul>
+<li>이탈률, 사용자 비중, 개선 효과 등을 기준으로 순위를 매깁니다.</li>
+<li>구현에 필요한 리소스도 고려해봅니다.</li>
+</ul>
+</li>
+</ol>
+<p>기능별로 현재의 상태와 입력하는 데이터, 액션 이후의 예상하는 반응을 고려하면서 위 질문에 답해보면 된다.</p>
+<h3 id="3-간단한-예시"><a href="#3-간단한-예시" class="headerlink" title="3. 간단한 예시"></a>3. 간단한 예시</h3><p>유저는 가계부를 관리할 수 있다.</p>
+<ul>
+<li><p>목적: 유저는 돈관리를 위해서 매일매일 가계부를 작성하여 소비내역을 추적한다.</p>
+</li>
+<li><p><strong>기능1</strong>: 유저는 소비한 내역을 등록할 수 있다.</p>
+<ul>
+<li>소비한 금액을 작성할 수 있다.</li>
+<li>날짜를 입력할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<ol start="0">
+<li>화면 목표: 소비내역을 작성하고 제출하고 싶다.</li>
+<li>환경: 키보드 입력, 모바일, 오른손잡이, …</li>
+<li>불편요소: 이 기능의 어느 단계에서 불편을 겪을 가능성이 있는가?<ul>
+<li>입력: 금액을 입력할 때 금액 단위를 바로 파악하기 힘들 수 있다.</li>
+<li>이동: 금액 입력 후 날짜 입력으로 이동할 때 번거로울 수 있다. (focus out, focus in, …)</li>
+</ul>
+</li>
+<li>개선가능<ul>
+<li>입력: 금액을 입력할 때 쉼표표기가 보이도록 한다.</li>
+<li>이동: enter를 누르면 다음 input이 포커스되도록 한다.</li>
+</ul>
+</li>
+</ol>
+<p>구체적인 예시는 다음 포스팅 때 상세하게 나열해보려고한다.</p>
+<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p>작은 부분이라도 사용자의 여정을 개선하는 데 집중한다면, 그것이 곧 더 나은 사용자 경험과 성공적인 서비스로 이어질 것이다.<br>지금 구현하는 기능의 유저를 생각하며, 그들이 어떤 행동을 하고 어떤 기대를 가질지를 고려해봐야한다. 그리고 현실적으로 이 부분을 실제 구현해보며 습관화를 들여야한다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+            <div class="article-author">
+    <img class="article-author-profile" src="https://avatars.githubusercontent.com/u/30822283" alt="profile">
+    <div class="article-author-info">
+        <p class="header">author.</p>
+        <p>
+            <a href="https://www.github.com/feel5ny" target="_blank" class="author-name">Joy Kim</a>
+            <span class="author-id">@feel5ny</span>
+        </p>
+        <p class="author-description">웹 프론트엔드 개발자입니다. 글쓰기와 정리를 좋아합니다.</p>
+    </div>
+</div>
+            <!-- 
+
+
+
+    <a data-url="http://feel5ny.github.io/2025/01/19/ux-centered-improvement/" data-id="cm62a06zt0000utb24y7bdytz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+ -->
+        </footer>
+        <div class="article-list-popup" href="javaScript:;">
+            <div class="article-list-popup__box" style="display: none;">
+                    
+<div class="article-index">
+  <div class="article-index__title">목차</div>
+    <ul class="article-index__list">
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">1</span>
+            
+            <div>
+              <a href="#user-centered">사용자 중심적 개발</a>
+               
+                <div class="first_depth--sub">몰입해야 나오는 배우들의 애드립</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+        
+          <li class="first_depth has_sub">
+            
+              <span class="first_depth--index">2</span>
+            
+            <div>
+              <a href="#action">Action</a>
+               
+                <div class="first_depth--sub">실제 실행에 옮기기</div>  
+              
+            </div>
+              <ul>
+              
+            </ul>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+                </div>
+                
+                    <span id="article-list-popup__btn">📚</span>
+                    
+                </div>
+            </div>
+        </article>
+        
+    <section id="comments">
+    
+        <script src="https://utteranc.es/client.js"
+        repo="feel5ny/feel5ny.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="https://wwww.facebook.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/feel5ny" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/feed.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+            <li>
+                <a class="social-tooltip" title="brunch" href="https://brunch.co.kr/@feel5ny" target="_blank">
+                    <img src="/images/brunch_logo.png" alt="브런치 로고" width="15px">
+                </a>
+            </li>
+            <li>
+                <a class="social-tooltip" title="speaker_deck" href="https://speakerdeck.com/feel5ny" target="_blank">
+                    <img src="/images/speakerDeck_logo.png" alt="스피커덱 로고" width="24px">
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2024/12/30/reflection-2024/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">2024 회고 🤰🏻👶🏻</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2025/01/19/ux-centered-improvement/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2025/01/thumb_default.jpg)" alt="사용자 중심의 프론트엔드 개발" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/01-Web/">01_Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/01-Web/00-UX-%F0%9F%92%85/">00. UX 💅</a></p>
+                            <p class="item-title"><a href="/2025/01/19/ux-centered-improvement/" class="title">사용자 중심의 프론트엔드 개발</a></p>
+                            <p class="item-date"><time datetime="2025-01-19T14:10:00.000Z" itemprop="datePublished">2025-01-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/12/30/reflection-2024/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2024/02/thumb_default.jpg)" alt="2024 회고 🤰🏻👶🏻" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/">Personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/Reflection/">Reflection</a></p>
+                            <p class="item-title"><a href="/2024/12/30/reflection-2024/" class="title">2024 회고 🤰🏻👶🏻</a></p>
+                            <p class="item-date"><time datetime="2024-12-30T14:57:00.000Z" itemprop="datePublished">2024-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2024/11/24/%EC%A7%91%EC%A4%91%EB%A0%A5_%EC%B0%BE%EA%B8%B0/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2024/01/thumb_default.jpg)" alt="소셜미디어 도파민에서 빠져나오기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/">Personal 🙆</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Personal-%F0%9F%99%86/Reflection/">Reflection</a></p>
+                            <p class="item-title"><a href="/2024/11/24/%EC%A7%91%EC%A4%91%EB%A0%A5_%EC%B0%BE%EA%B8%B0/" class="title">소셜미디어 도파민에서 빠져나오기</a></p>
+                            <p class="item-date"><time datetime="2024-11-24T13:00:00.000Z" itemprop="datePublished">2024-11-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/05/15/Communication_005/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2022/06/thumb_default.jpg)" alt="레거시를 잘 만들기, 해석하기 (feat. 프로그래머의 뇌 🧠)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/00-Clean-Code/">00_Clean_Code</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/00-Clean-Code/Refactoring/">Refactoring</a></p>
+                            <p class="item-title"><a href="/2022/05/15/Communication_005/" class="title">레거시를 잘 만들기, 해석하기 (feat. 프로그래머의 뇌 🧠)</a></p>
+                            <p class="item-date"><time datetime="2022-05-15T14:23:55.000Z" itemprop="datePublished">2022-05-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/20/docker_02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2022/02/thumb_default.jpg)" alt="도커 볼륨, 네트워킹, 로깅" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/03-DevOps/">03_DevOps</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/03-DevOps/06-Deploy/">06. Deploy</a></p>
+                            <p class="item-title"><a href="/2022/02/20/docker_02/" class="title">도커 볼륨, 네트워킹, 로깅</a></p>
+                            <p class="item-date"><time datetime="2022-02-20T13:00:00.000Z" itemprop="datePublished">2022-02-20</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Accept-header/" style="font-size: 10px;">Accept header</a> <a href="/tags/Accessibility/" style="font-size: 10px;">Accessibility</a> <a href="/tags/CHANGLOG/" style="font-size: 10px;">CHANGLOG</a> <a href="/tags/CS/" style="font-size: 14.55px;">CS</a> <a href="/tags/DADA/" style="font-size: 10px;">DADA</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EXIF/" style="font-size: 10px;">EXIF</a> <a href="/tags/File-API/" style="font-size: 10.91px;">File API</a> <a href="/tags/Fitts-Law/" style="font-size: 10px;">Fitts Law</a> <a href="/tags/Frontend/" style="font-size: 11.82px;">Frontend</a> <a href="/tags/Identification/" style="font-size: 10px;">Identification</a> <a href="/tags/Joy/" style="font-size: 14.55px;">Joy</a> <a href="/tags/LTV/" style="font-size: 10.91px;">LTV</a> <a href="/tags/OOP/" style="font-size: 16.36px;">OOP</a> <a href="/tags/Parallelism/" style="font-size: 10px;">Parallelism</a> <a href="/tags/Range/" style="font-size: 10px;">Range</a> <a href="/tags/Reflection/" style="font-size: 10.91px;">Reflection</a> <a href="/tags/SemVr/" style="font-size: 10px;">SemVr</a> <a href="/tags/TCP-IP/" style="font-size: 10.91px;">TCP/IP</a> <a href="/tags/TDD/" style="font-size: 10.91px;">TDD</a> <a href="/tags/Touch-Target/" style="font-size: 10px;">Touch Target</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/UX/" style="font-size: 11.82px;">UX</a> <a href="/tags/UX-Law/" style="font-size: 10px;">UX Law</a> <a href="/tags/Web/" style="font-size: 11.82px;">Web</a> <a href="/tags/X-509/" style="font-size: 10px;">X.509</a> <a href="/tags/algorism/" style="font-size: 10.91px;">algorism</a> <a href="/tags/angular/" style="font-size: 11.82px;">angular</a> <a href="/tags/animation/" style="font-size: 10px;">animation</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/async/" style="font-size: 14.55px;">async</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/authorization/" style="font-size: 10.91px;">authorization</a> <a href="/tags/blog/" style="font-size: 14.55px;">blog</a> <a href="/tags/bodymovin/" style="font-size: 10px;">bodymovin</a> <a href="/tags/book-review/" style="font-size: 10px;">book review</a> <a href="/tags/browser/" style="font-size: 11.82px;">browser</a> <a href="/tags/ca/" style="font-size: 10px;">ca</a> <a href="/tags/cache/" style="font-size: 10.91px;">cache</a> <a href="/tags/canvas/" style="font-size: 10px;">canvas</a> <a href="/tags/cleanCode/" style="font-size: 11.82px;">cleanCode</a> <a href="/tags/closure/" style="font-size: 10px;">closure</a> <a href="/tags/codeSpitz/" style="font-size: 12.73px;">codeSpitz</a> <a href="/tags/cognitive/" style="font-size: 10px;">cognitive</a> <a href="/tags/commitlint/" style="font-size: 10px;">commitlint</a> <a href="/tags/concurrency/" style="font-size: 10px;">concurrency</a> <a href="/tags/connection/" style="font-size: 10.91px;">connection</a> <a href="/tags/conventional-commit/" style="font-size: 10px;">conventional-commit</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cryptography/" style="font-size: 10px;">cryptography</a> <a href="/tags/css/" style="font-size: 10.91px;">css</a> <a href="/tags/customer/" style="font-size: 10px;">customer</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/deep-work/" style="font-size: 10px;">deep work</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/digest/" style="font-size: 10.91px;">digest</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/docker-log/" style="font-size: 10px;">docker_log</a> <a href="/tags/docker-network/" style="font-size: 10px;">docker_network</a> <a href="/tags/docker-volume/" style="font-size: 10px;">docker_volume</a> <a href="/tags/encoding/" style="font-size: 10.91px;">encoding</a> <a href="/tags/entity/" style="font-size: 10px;">entity</a> <a href="/tags/flow-control/" style="font-size: 10.91px;">flow control</a> <a href="/tags/font/" style="font-size: 10px;">font</a> <a href="/tags/formatter/" style="font-size: 10.91px;">formatter</a> <a href="/tags/generator/" style="font-size: 10.91px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/header/" style="font-size: 10px;">header</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hosting/" style="font-size: 10px;">hosting</a> <a href="/tags/http/" style="font-size: 19.09px;">http</a> <a href="/tags/https/" style="font-size: 10.91px;">https</a> <a href="/tags/instance/" style="font-size: 10px;">instance</a> <a href="/tags/internationalization/" style="font-size: 10px;">internationalization</a> <a href="/tags/iterator/" style="font-size: 10px;">iterator</a> <a href="/tags/javaScript/" style="font-size: 20px;">javaScript</a> <a href="/tags/link/" style="font-size: 10px;">link</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/loop/" style="font-size: 10px;">loop</a> <a href="/tags/lottie/" style="font-size: 10px;">lottie</a> <a href="/tags/maketing/" style="font-size: 12.73px;">maketing</a> <a href="/tags/media-query/" style="font-size: 10px;">media-query</a> <a href="/tags/message/" style="font-size: 12.73px;">message</a> <a href="/tags/method/" style="font-size: 10px;">method</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mocha/" style="font-size: 10px;">mocha</a> <a href="/tags/network/" style="font-size: 12.73px;">network</a> <a href="/tags/node-js/" style="font-size: 10px;">node.js</a> <a href="/tags/observable/" style="font-size: 10px;">observable</a> <a href="/tags/openSSL/" style="font-size: 10px;">openSSL</a> <a href="/tags/plan/" style="font-size: 10px;">plan</a> <a href="/tags/prettier/" style="font-size: 10.91px;">prettier</a> <a href="/tags/principle/" style="font-size: 10.91px;">principle</a> <a href="/tags/programmer/" style="font-size: 10px;">programmer</a> <a href="/tags/programming/" style="font-size: 11.82px;">programming</a> <a href="/tags/progress-bar/" style="font-size: 10px;">progress bar</a> <a href="/tags/prototype/" style="font-size: 10px;">prototype</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/publishing/" style="font-size: 10px;">publishing</a> <a href="/tags/react/" style="font-size: 12.73px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/refactoring/" style="font-size: 13.64px;">refactoring</a> <a href="/tags/release/" style="font-size: 10px;">release</a> <a href="/tags/robot/" style="font-size: 10px;">robot</a> <a href="/tags/rounded-rect/" style="font-size: 10px;">rounded rect</a> <a href="/tags/rxjs/" style="font-size: 13.64px;">rxjs</a> <a href="/tags/sslHandShake/" style="font-size: 10px;">sslHandShake</a> <a href="/tags/standard-version/" style="font-size: 10px;">standard-version</a> <a href="/tags/status-code/" style="font-size: 10px;">status code</a> <a href="/tags/study/" style="font-size: 18.18px;">study</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a> <a href="/tags/symbol/" style="font-size: 10px;">symbol</a> <a href="/tags/transcoding/" style="font-size: 10px;">transcoding</a> <a href="/tags/typeScript/" style="font-size: 17.27px;">typeScript</a> <a href="/tags/unicode/" style="font-size: 10px;">unicode</a> <a href="/tags/url/" style="font-size: 10px;">url</a> <a href="/tags/variant/" style="font-size: 10px;">variant</a> <a href="/tags/vary/" style="font-size: 10px;">vary</a> <a href="/tags/version/" style="font-size: 10px;">version</a> <a href="/tags/web/" style="font-size: 15.45px;">web</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/%EA%B8%80%EC%93%B0%EA%B8%B0/" style="font-size: 10px;">글쓰기</a> <a href="/tags/%EC%9B%B9%EC%84%9C%EB%B2%84/" style="font-size: 10px;">웹서버</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javaScript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                
+                <p>&copy; 2025 Joy Kim</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+<!-- 
+<script src="/js/lottie.js"></script>
+
+
+<script src="/js/lottie_index.js"></script>
+ -->
+
+    </div>
+</body>
+</html>
