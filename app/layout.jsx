@@ -36,7 +36,7 @@ export default async function RootLayout({ children }) {
             >
               CC BY-NC 4.0
             </abbr>{' '}
-            {new Date().getFullYear()} © Dimitri POSTOLOV.
+            {new Date().getFullYear()} © PHUCBM.
             <a href="/feed.xml" style={{ float: 'right' }}>
               RSS
             </a>
