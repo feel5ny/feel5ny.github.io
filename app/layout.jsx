@@ -2,6 +2,7 @@ import {Footer, Layout, Navbar, ThemeSwitch} from 'nextra-theme-blog'
 import {Banner, Head, Search} from 'nextra/components'
 import {getPageMap} from 'nextra/page-map'
 import 'nextra-theme-blog/style.css'
+import '../styles/globals.css'
 
 export const metadata = {
     title: 'Blog Example'
@@ -22,15 +23,16 @@ export default async function RootLayout({children}){
         <Head backgroundColor={{dark: '#0f172a', light: '#fefce8'}}/>
         <body>
         <Layout banner={banner}>
-            <div className="x:flex">
+            <div className="flex items-center justify-between">
                 <div>
                     LOGO
                 </div>
 
-                <Navbar pageMap={await getPageMap()}/>
-
-                <Search/>
-                <ThemeSwitch/>
+                <div className="flex items-center">
+                    <Navbar pageMap={await getPageMap()}/>
+                    <Search/>
+                    <ThemeSwitch/>
+                </div>
             </div>
 
             {children}
