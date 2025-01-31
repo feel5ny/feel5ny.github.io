@@ -2,7 +2,7 @@ import {Footer, Layout, Navbar, ThemeSwitch} from 'nextra-theme-blog'
 import {Banner, Head, Search} from 'nextra/components'
 import {getPageMap} from 'nextra/page-map'
 import 'nextra-theme-blog/style.css'
-import '../styles/globals.scss'
+import '../styles/globals.css'
 
 export const metadata = {
     title: 'Blog Example'
