@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { PostCard } from 'nextra-theme-blog'
-import { getPosts, getTags } from './get-posts'
+import {PostCard} from 'nextra-theme-blog'
+import {getPosts, getTags} from './get-posts'
 
 export const metadata = {
     title: 'Posts'
@@ -20,16 +20,16 @@ export default async function PostsPage() {
             <h1>{metadata.title}</h1>
             <div
                 className="not-prose"
-                style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}
+                style={{display: 'flex', flexWrap: 'wrap', gap: '.5rem'}}
             >
-                {Object.entries(allTags).map(([tag, count]) => (
+                {Object.entries(allTags).map(([tag, count]: [string, number]) => (
                     <Link key={tag} href={`/tags/${tag}`} className="nextra-tag">
                         {tag} ({count})
                     </Link>
                 ))}
             </div>
             {posts.map(post => (
-                <PostCard key={post.route} post={post} />
+                <PostCard key={post.route} post={post}/>
             ))}
         </div>
     )

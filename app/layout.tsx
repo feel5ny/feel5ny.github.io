@@ -8,7 +8,7 @@ export const metadata = {
     title: 'Blog Example'
 }
 
-export default async function RootLayout({children}){
+export default async function RootLayout({children}) {
     const banner = (
         <Banner storageKey="4.0-release">
             🎉 Nextra 4.0 is released.{' '}
