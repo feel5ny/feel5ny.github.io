@@ -14,6 +14,7 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 - Ready-to-use blog post files with
   Search ([Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)), and Tags.
 - Commenting system with [Giscus](https://giscus.app/)
+- Use [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) in Next.js App Router with [next-view-transitions](https://github.com/shuding/next-view-transitions)
 
 ## 🛠 Getting Started
 
