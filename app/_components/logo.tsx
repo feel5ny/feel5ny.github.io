@@ -1,6 +1,21 @@
 import React from 'react';
+import Link from "next/link";
 
-const Logo = ({width = '50px', height = '50px', hasLink = true}) => {
+const Logo = ({width = '50px', height = '50px', hasLink = true, title = "Go to home"}) => {
+    return (
+        <>
+            {hasLink &&
+                <Link href="/" title={title}>
+                    <LogoSvg width={width} height={height}/>
+                </Link>}
+
+            {!hasLink && <LogoSvg width={width} height={height}/>}
+        </>
+    );
+};
+
+
+const LogoSvg = ({width = '50px', height = '50px'}) => {
     return (
         <svg
             width={width}
@@ -47,6 +62,6 @@ const Logo = ({width = '50px', height = '50px', hasLink = true}) => {
             />
         </svg>
     );
-};
+}
 
 export default Logo;
