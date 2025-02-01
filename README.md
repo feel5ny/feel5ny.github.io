@@ -9,12 +9,11 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 
 ## Features
 
-- [Nextra v4](https://nextra.site/docs) runs on Next.js v15 and React v19
-- Tailwind CSS and TypeScript support
-- Ready-to-use blog post files with
-  Search ([Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)), and Tags.
-- Commenting system with [Giscus](https://giscus.app/)
-- Use [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) in Next.js App Router with [next-view-transitions](https://github.com/shuding/next-view-transitions)
+- [Nextra 4](https://nextra.site/docs) with Next.js 15 + React 19 + TypeScript
+- [shadcn/ui](https://ui.shadcn.com/) and Tailwind CSS
+- [Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind) for search engine
+- [Giscus](https://giscus.app/) for commenting system
+- [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) in Next.js App Router with [next-view-transitions](https://github.com/shuding/next-view-transitions)
 
 ## 🛠 Getting Started
 
