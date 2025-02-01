@@ -6,15 +6,15 @@ import CustomFooter from "./_components/custom-footer";
 import CustomHeader from "./_components/custom-header";
 
 export const metadata = {
-    title: 'Blog Example'
+    title: 'Nextra Blog'
 }
 
 export default async function RootLayout({children}) {
     const banner = (
-        <Banner storageKey="4.0-release">
-            🎉 Nextra 4.0 is released.{' '}
-            <a href="#" className="x:text-primary-600">
-                Read more →
+        <Banner storageKey="go-to-github">
+            This blog was customized from Nextra v4.{' '}
+            <a href="https://github.com/phucbm/nextra-blog-starter" className="x:text-primary-600" target="_blank">
+                Check this template →
             </a>
         </Banner>
     )
