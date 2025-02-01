@@ -10,10 +10,10 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 ## Features
 
 - [Nextra v4](https://nextra.site/docs) runs on Next.js v15 and React v19
-- Tailwind CSS v4
-- TypeScript support
+- Tailwind CSS and TypeScript support
 - Ready-to-use blog post files with
   Search ([Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)), and Tags.
+- Commenting system with [Giscus](https://giscus.app/)
 
 ## 🛠 Getting Started
 

@@ -1,10 +1,10 @@
-import {Comments} from 'nextra-theme-blog'
+import GiscusComments from "../../_components/giscus-comments";
 
 export default function CommentsLayout({children}) {
     return (
         <>
             {children}
-            <Comments appId="a2d11511-7012-4254-9483-cb49c8f4dfe8"/>
+            <GiscusComments/>
         </>
     )
 }
