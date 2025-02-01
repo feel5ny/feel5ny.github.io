@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from "next/link";
+import {Link} from 'next-view-transitions';
 
 const Logo = ({width = '50px', height = '50px', hasLink = true, title = "Go to home"}) => {
     return (

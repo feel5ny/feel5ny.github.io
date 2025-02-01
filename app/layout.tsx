@@ -1,6 +1,5 @@
-import {Footer, Layout, Navbar, ThemeSwitch} from 'nextra-theme-blog'
-import {Banner, Head, Search} from 'nextra/components'
-import {getPageMap} from 'nextra/page-map'
+import {Layout} from 'nextra-theme-blog'
+import {Banner, Head} from 'nextra/components'
 import 'nextra-theme-blog/style.css'
 import '../styles/globals.css'
 import CustomFooter from "./_components/custom-footer";
