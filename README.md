@@ -1,4 +1,4 @@
-# Nextra Blog v4 Template
+# Nextra Blog v4 Starter
 
 A modern, feature-rich blog template built with [Nextra v4](https://nextra.site).
 
@@ -6,6 +6,14 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 
 - [Official Nextra Documentation](https://nextra.site)
 - [Live Demo of This Template](https://nextra-blog-v4.vercel.app/)
+
+## Features
+
+- [Nextra v4](https://nextra.site/docs) runs on Next.js v15 and React v19
+- Tailwind CSS v4
+- TypeScript support
+- Ready-to-use blog post files with
+  Search ([Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)), and Tags.
 
 ## 🛠 Getting Started
 
@@ -19,8 +27,8 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 1. Clone this template:
 
 ```bash
-git clone https://github.com/yourusername/nextra-v4-blog-template.git
-cd nextra-v4-blog-template
+git clone https://github.com/phucbm/nextra-blog-v4-starter.git
+cd nextra-blog-v4
 ```
 
 2. Install dependencies:
@@ -41,7 +49,7 @@ pnpm dev
 
 ### Adding New Posts
 
-1. Create a new `.mdx` file in the `pages/posts` directory
+1. Create a new `.mdx` file in the `content` directory
 2. Add your front matter at the top of the file:
 
 ```yaml
