@@ -3,6 +3,8 @@ import {Banner, Head, Search} from 'nextra/components'
 import {getPageMap} from 'nextra/page-map'
 import 'nextra-theme-blog/style.css'
 import '../styles/globals.css'
+import CustomFooter from "./_components/custom-footer";
+import CustomHeader from "./_components/custom-header";
 
 export const metadata = {
     title: 'Blog Example'
@@ -23,32 +25,11 @@ export default async function RootLayout({children}) {
         <Head backgroundColor={{dark: '#0f172a', light: '#fefce8'}}/>
         <body>
         <Layout banner={banner}>
-            <div className="flex items-center justify-between">
-                <div>
-                    LOGO
-                </div>
-
-                <div className="flex items-center">
-                    <Navbar pageMap={await getPageMap()}/>
-                    <Search/>
-                    <ThemeSwitch/>
-                </div>
-            </div>
+            <CustomHeader/>
 
             {children}
 
-            <Footer>
-                <abbr
-                    title="This site and all its content are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-                    style={{cursor: 'help'}}
-                >
-                    CC BY-NC 4.0
-                </abbr>{' '}
-                {new Date().getFullYear()} © PHUCBM.
-                <a href="/feed.xml" style={{float: 'right'}}>
-                    RSS
-                </a>
-            </Footer>
+            <CustomFooter/>
         </Layout>
         </body>
         </html>
