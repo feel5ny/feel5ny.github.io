@@ -283,7 +283,7 @@ body,
 }
 body {
   background: #303337;
-  font: 14px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 code {
@@ -669,7 +669,7 @@ code {
   -moz-transition: 0.2s ease-in;
   -ms-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
-  font: 16px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 16px "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   color: rgba(255,255,255,0.7);
 }
 .search-form-input:focus,
@@ -843,7 +843,6 @@ code {
   display: block;
   font-size: 12px;
   color: #aaa;
-  letter-spacing: 0.5px;
   line-height: 24px;
   font-weight: normal;
   text-transform: uppercase;
@@ -1235,7 +1234,6 @@ span.pink:hover {
 .article-title {
   text-decoration: none;
   font-size: 38px;
-  letter-spacing: -1px;
   color: #f5f5f5;
   line-height: 1.3em;
   -webkit-transition: color 0.2s;
@@ -1328,7 +1326,7 @@ a.article-title:hover {
 .article-entry h5,
 .article-entry h6 {
   line-height: 1.3em;
-  margin: 1.3em 0;
+  margin: 0.8em 0;
 }
 .article-entry a {
   color: #f5f5f5;
@@ -1421,7 +1419,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -1586,7 +1584,7 @@ a.article-title:hover {
 .article-tldr blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 .article-tldr blockquote footer cite:before {
   content: "—";
@@ -1741,7 +1739,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "Noto Sans KR", "NanumSquare", "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", sans-serif;
+  font: 14px "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   padding: 0 15px;
   color: #f5f5f5;
   outline: none;
