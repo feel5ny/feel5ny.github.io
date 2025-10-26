@@ -1,5 +1,7 @@
 import {useMDXComponents as getBlogMDXComponents} from 'nextra-theme-blog'
 import {useMDXComponents as getNextraComponents} from 'nextra/mdx-components'
+import {Posts} from "@/components/posts";
+import {Tags} from "@/components/tags";
 
 const blogComponents = getBlogMDXComponents({
     h1: ({children}) => (
@@ -31,6 +33,8 @@ const defaultComponents = getNextraComponents({
 export function useMDXComponents() {
     return {
         ...blogComponents,
-        ...defaultComponents
+        ...defaultComponents,
+        Posts: Posts,
+        Tags: Tags,
     }
 }
