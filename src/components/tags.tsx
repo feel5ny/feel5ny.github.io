@@ -7,18 +7,13 @@ type Props = {};
 
 export async function Tags(props: Props) {
     const tags = await getTags()
-    const allTags = Object.create(null)
 
-    for (const tag of tags) {
-        allTags[tag] ??= 0
-        allTags[tag] += 1
-    }
     return (
         <div className="not-prose flex flex-wrap gap-1">
-            {Object.entries(allTags).map(([tag, count]: [string, number]) => (
-                <Badge key={tag} variant="outline" asChild>
-                    <Link key={tag} href={`/tags/${tag}`}>
-                        {tag} <span className="opacity-50">({count})</span>
+            {tags.map(tag => (
+                <Badge key={tag.name} variant="outline" asChild>
+                    <Link href={`/tags/${tag.name}`}>
+                        {tag.name} <span className="opacity-50">({tag.count})</span>
                     </Link>
                 </Badge>
             ))}

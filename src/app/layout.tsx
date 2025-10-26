@@ -5,13 +5,13 @@ import CustomFooter from "@/components/custom-footer";
 import CustomHeader from "@/components/custom-header";
 import {Metadata} from "next";
 import {Layout} from "nextra-theme-blog";
-import {Inconsolata} from 'next/font/google';
+import {Gelasio} from 'next/font/google';
 
 export const metadata: Metadata = {
     title: 'Nextra Blog'
 }
 
-const inconsolata = Inconsolata({
+const gelasio = Gelasio({
     subsets: ['latin', 'vietnamese'],
 })
 
@@ -25,7 +25,7 @@ export default async function RootLayout({children}) {
             // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
             suppressHydrationWarning
 
-            className={inconsolata.className}
+            className={gelasio.className}
         >
         <Head backgroundColor={{dark: '#15120d', light: '#faf5e9'}}/>
         <body>

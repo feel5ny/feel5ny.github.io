@@ -7,9 +7,9 @@ export default {
     posts: {
         type: 'page',
         items: {
-            draft: {
-                display: 'hidden'
-            }
+            // draft: {
+            //     display: 'hidden'
+            // }
         }
     }
 }

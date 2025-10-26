@@ -12,17 +12,11 @@ type Props = {
 export async function Posts({posts, tags}: Props) {
     const displayPosts = posts ?? await getPosts({tags});
     return (
-        <div className="space-y-4 not-prose">
+        <div className="space-y-6 not-prose">
             {displayPosts.map(post => {
                 return (
                     <div key={post.route} className="flex flex-wrap">
-                        <div className="w-[100px]">
-                            <div className="text-sm text-muted-foreground pt-1">
-                                <div>
-                                    {formatDate(post.frontMatter.date)}
-                                </div>
-                            </div>
-                        </div>
+
                         <div className="w-[calc(100%-100px)]">
                             <div className="font-bold text-black">
                                 <Link href={post.route} className="hover:underline">
@@ -42,6 +36,15 @@ export async function Posts({posts, tags}: Props) {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="w-[100px]">
+                            <div className="text-sm text-muted-foreground pt-1">
+                                <div>
+                                    {formatDate(post.frontMatter.date)}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 )
             })}
