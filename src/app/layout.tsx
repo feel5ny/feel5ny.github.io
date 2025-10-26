@@ -28,7 +28,7 @@ export default async function RootLayout({children}) {
             className={inconsolata.className}
         >
         <Head backgroundColor={{dark: '#15120d', light: '#faf5e9'}}/>
-        <body className="bg-polka">
+        <body>
         <Layout>
             <CustomHeader/>
 

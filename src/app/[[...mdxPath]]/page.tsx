@@ -1,8 +1,8 @@
 import {generateStaticParamsFor, importPage} from 'nextra/pages'
 import {useMDXComponents as getMDXComponents} from '../../../mdx-components'
-import GiscusComments from "@/components/giscus-comments"
 import type {Metadata} from 'next'
 import React from "react";
+import {PostDetail} from "@/components/post-detail";
 
 // Define types for params and metadata
 type PageParams = {
@@ -13,8 +13,10 @@ type PageProps = {
     params: Promise<PageParams>
 }
 
-type CustomMetadata = Metadata & {
+export type CustomMetadata = Metadata & {
+    date?: string
     enableComment?: boolean
+    tags?: string[]
 }
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath')
@@ -36,16 +38,25 @@ export default async function Page(props: PageProps) {
         metadata: CustomMetadata
     }
 
+    const isPostPage = params.mdxPath.length > 1 && params.mdxPath.includes('posts');
+
     return (
         // @ts-ignore
         <Wrapper toc={toc} metadata={metadata}>
-            <MDXContent {...props} params={params}/>
-
-            {metadata.enableComment === true &&
-                <div className="pt-10">
-                    <GiscusComments/>
-                </div>
+            {
+                isPostPage &&
+                <PostDetail metadata={metadata}>
+                    <MDXContent {...props} params={params}/>
+                </PostDetail>
             }
+
+            {
+                !isPostPage &&
+                <>
+                    <MDXContent {...props} params={params}/>
+                </>
+            }
+
         </Wrapper>
     )
 }

@@ -2,19 +2,28 @@ import * as React from 'react';
 import {getPosts} from "@/lib/get-posts";
 import {Link} from "next-view-transitions";
 import {IconTags} from "@tabler/icons-react";
+import {formatDate} from "@/lib/format-date";
 
 type Props = {
     first?: number;
-    tag?: string;
+    tags?: string[];
+    excludeByTitle?: string;
 };
 
-export async function Posts({first, tag}: Props) {
+export async function Posts({first, tags, excludeByTitle}: Props) {
     const posts = await getPosts()
 
-    // Filter by tag if provided
-    const filteredPosts = tag
-        ? posts.filter(post => post.frontMatter.tags?.includes(tag))
+    // Filter by tags if provided
+    let filteredPosts = tags && tags.length > 0
+        ? posts.filter(post =>
+            tags.some(tag => post.frontMatter.tags?.includes(tag))
+        )
         : posts;
+
+    // Exclude by title if provided
+    if (excludeByTitle) {
+        filteredPosts = filteredPosts.filter(post => post.title !== excludeByTitle);
+    }
 
     // Apply first limit if provided
     const displayPosts = first ? filteredPosts.slice(0, first) : filteredPosts;
@@ -26,7 +35,11 @@ export async function Posts({first, tag}: Props) {
                 return (
                     <div key={post.route} className="flex flex-wrap">
                         <div className="w-[100px]">
-                            <div className="text-sm text-muted-foreground pt-1">{post.frontMatter.date}</div>
+                            <div className="text-sm text-muted-foreground pt-1">
+                                <div>
+                                    {formatDate(post.frontMatter.date)}
+                                </div>
+                            </div>
                         </div>
                         <div className="w-[calc(100%-100px)]">
                             <div className="font-bold text-black">
