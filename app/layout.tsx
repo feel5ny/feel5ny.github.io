@@ -20,7 +20,14 @@ export default async function RootLayout({children}) {
     )
 
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html
+            // Not required, but good for SEO
+            lang="en"
+            // Required to be set
+            dir="ltr"
+            // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+            suppressHydrationWarning
+        >
         <Head backgroundColor={{dark: '#0f172a', light: '#f5f5f5'}}/>
         <body>
         <Layout banner={banner}>
