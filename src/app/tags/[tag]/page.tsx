@@ -30,7 +30,7 @@ export default async function TagPage(props: TagPageProps) {
     return (
         <>
             <h1>Posts Tagged with &quot;{decodedTag}&quot;</h1>
-            <Posts tag={decodedTag}/>
+            <Posts tags={[decodedTag]}/>
 
             <h2>More tags</h2>
             <Tags/>

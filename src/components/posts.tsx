@@ -5,30 +5,12 @@ import {IconTags} from "@tabler/icons-react";
 import {formatDate} from "@/lib/format-date";
 
 type Props = {
-    first?: number;
+    posts?: any[]; // Replace 'any' with your post type if you have one defined
     tags?: string[];
-    excludeByTitle?: string;
 };
 
-export async function Posts({first, tags, excludeByTitle}: Props) {
-    const posts = await getPosts()
-
-    // Filter by tags if provided
-    let filteredPosts = tags && tags.length > 0
-        ? posts.filter(post =>
-            tags.some(tag => post.frontMatter.tags?.includes(tag))
-        )
-        : posts;
-
-    // Exclude by title if provided
-    if (excludeByTitle) {
-        filteredPosts = filteredPosts.filter(post => post.title !== excludeByTitle);
-    }
-
-    // Apply first limit if provided
-    const displayPosts = first ? filteredPosts.slice(0, first) : filteredPosts;
-    const hasMore = first && filteredPosts.length > first;
-
+export async function Posts({posts, tags}: Props) {
+    const displayPosts = posts ?? await getPosts({tags});
     return (
         <div className="space-y-4 not-prose">
             {displayPosts.map(post => {
@@ -63,13 +45,6 @@ export async function Posts({first, tags, excludeByTitle}: Props) {
                     </div>
                 )
             })}
-            {hasMore && (
-                <div className="pt-2">
-                    <Link href="/posts" className="text-sm hover:underline">
-                        View all →
-                    </Link>
-                </div>
-            )}
         </div>
     );
 }

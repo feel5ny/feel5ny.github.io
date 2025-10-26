@@ -38,7 +38,7 @@ export default async function Page(props: PageProps) {
         metadata: CustomMetadata
     }
 
-    const isPostPage = params.mdxPath.length > 1 && params.mdxPath.includes('posts');
+    const isPostPage = params.mdxPath && params.mdxPath.length > 1 && params.mdxPath.includes('posts');
 
     return (
         // @ts-ignore
