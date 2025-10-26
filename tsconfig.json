@@ -22,7 +22,12 @@
         "name": "next"
       }
     ],
-    "module": "esnext"
+    "module": "esnext",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -1,10 +1,10 @@
 import {generateStaticParamsFor, importPage} from 'nextra/pages'
-import {useMDXComponents as getMDXComponents} from '../../mdx-components'
-import GiscusComments from "../_components/giscus-comments";
+import {useMDXComponents as getMDXComponents} from '../../../mdx-components'
+import GiscusComments from "@/components/giscus-comments";
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
-export async function generateMetadata(props){
+export async function generateMetadata(props: { params: any; }){
     const params = await props.params
     const {metadata} = await importPage(params.mdxPath)
     return metadata
