@@ -1,25 +1,16 @@
-import {Layout} from 'nextra-theme-blog'
-import {Banner, Head} from 'nextra/components'
+import {Head} from 'nextra/components'
 import 'nextra-theme-blog/style.css'
 import '@/styles/globals.css'
 import CustomFooter from "@/components/custom-footer";
 import CustomHeader from "@/components/custom-header";
 import {Metadata} from "next";
+import {Layout} from "nextra-theme-blog";
 
 export const metadata: Metadata = {
     title: 'Nextra Blog'
 }
 
 export default async function RootLayout({children}) {
-    const banner = (
-        <Banner storageKey="go-to-github">
-            This blog was customized from Nextra v4.{' '}
-            <a href="https://github.com/phucbm/nextra-blog-starter" className="x:text-primary-600" target="_blank">
-                Check this template →
-            </a>
-        </Banner>
-    )
-
     return (
         <html
             // Not required, but good for SEO
@@ -29,9 +20,9 @@ export default async function RootLayout({children}) {
             // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
             suppressHydrationWarning
         >
-        <Head backgroundColor={{dark: '#0f172a', light: '#f5f5f5'}}/>
-        <body>
-        <Layout banner={banner}>
+        <Head backgroundColor={{dark: '#15120d', light: '#faf5e9'}}/>
+        <body className="bg-polka">
+        <Layout>
             <CustomHeader/>
 
             {children}

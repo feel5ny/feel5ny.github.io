@@ -1,21 +1,24 @@
-import {Footer} from "nextra-theme-blog";
+import {Footer, ThemeSwitch} from "nextra-theme-blog";
+import {getPageMap} from "nextra/page-map";
+import {Navbar} from "@/components/navbar";
 
-const CustomFooter = () => {
+const CustomFooter = async () => {
     return (
-        <>
-            <Footer>
-                <abbr
-                    title="This site and all its content are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
-                    style={{cursor: 'help'}}
-                >
-                    CC BY-NC 4.0
-                </abbr>{' '}
-                {new Date().getFullYear()} © PHUCBM.
-                <a href="/feed.xml" style={{float: 'right'}}>
-                    RSS
-                </a>
-            </Footer>
-        </>
+        <Footer>
+            <div className="flex justify-between items-center">
+
+                {/*left*/}
+                <div className="flex justify-between items-center gap-2">
+                    <ThemeSwitch/>
+                    <Navbar pageMap={await getPageMap()}/>
+                </div>
+
+                {/*right*/}
+                <div>
+                    © {new Date().getFullYear()} Felix
+                </div>
+            </div>
+        </Footer>
     );
 };
 

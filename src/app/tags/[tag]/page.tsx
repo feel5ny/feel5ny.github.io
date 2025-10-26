@@ -1,6 +1,7 @@
 import {PostCard} from 'nextra-theme-blog'
-import {getPosts, getTags} from '../../posts/get-posts'
 import type {Metadata} from 'next'
+import {getPosts} from "@/lib/get-posts";
+import {getTags} from "@/lib/get-tags";
 
 type TagPageParams = {
     tag: string

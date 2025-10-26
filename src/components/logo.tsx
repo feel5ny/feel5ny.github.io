@@ -1,25 +1,24 @@
 import React from 'react';
 import {Link} from 'next-view-transitions';
 
-const Logo = ({width = '50px', height = '50px', hasLink = true, title = "Go to home"}) => {
+const Logo = ({hasLink = true, title = "Go to home"}) => {
     return (
         <>
             {hasLink &&
                 <Link href="/" title={title}>
-                    <LogoSvg width={width} height={height}/>
+                    <LogoSvg/>
                 </Link>}
 
-            {!hasLink && <LogoSvg width={width} height={height}/>}
+            {!hasLink && <LogoSvg/>}
         </>
     );
 };
 
 
-const LogoSvg = ({width = '50px', height = '50px'}) => {
+const LogoSvg = ({}) => {
     return (
         <svg
-            width={width}
-            height={height}
+            className="w-[40px]"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@layer utilities {
+    .bg-polka {
+        --dot-color:rgba(0, 0, 0, 0.05);
+        --dot-space:30px;
+        --dot-size:1px;
+        background-image:radial-gradient(var(--dot-color) var(--dot-size), transparent var(--dot-size)),
+        radial-gradient(var(--dot-color) var(--dot-size), transparent var(--dot-size));
+        background-size:var(--dot-space) var(--dot-space);
+        background-position:0 0, calc(var(--dot-space) / 2) calc(var(--dot-space) / 2);
+    }
+}

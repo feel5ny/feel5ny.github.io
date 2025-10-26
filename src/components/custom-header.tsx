@@ -1,23 +1,20 @@
 import React from 'react';
-import {ThemeSwitch} from "nextra-theme-blog";
-import {getPageMap} from "nextra/page-map";
+import Logo from "@/components/logo";
 import {Search} from "nextra/components";
-import Logo from "./logo";
-import {Navbar} from "./navbar";
 
 const CustomHeader = async () => {
     return (
-        <>
-            <div className="custom-header flex items-center justify-between mb-10">
+        <div className="custom-header flex items-center justify-between mb-10">
+            <div className="flex items-center gap-2">
                 <Logo/>
-
-                <div className="flex items-center gap-5">
-                    <Navbar pageMap={await getPageMap()}/>
-                    <Search/>
-                    <ThemeSwitch/>
-                </div>
+                <span className="font-bold">Felix</span>
             </div>
-        </>
+
+
+            <div>
+                <Search placeholder="Search posts..."/>
+            </div>
+        </div>
     );
 };
 

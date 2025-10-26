@@ -2,14 +2,23 @@
 
 import {Link} from 'next-view-transitions'
 import {useFSRoute} from 'nextra/hooks'
-import type {ComponentProps, FC} from 'react'
+import * as React from 'react';
 
-export const NavbarLink: FC<ComponentProps<typeof Link>> = props => {
-    const pathname = useFSRoute()
+type Props = {
+    href: string;
+    target?: string;
+    children: React.ReactNode;
+};
+
+export function NavbarLink(props: Props) {
+    const pathname = useFSRoute();
+    const {href, target = ""} = props;
     return (
         <Link
+            href={href}
             className="no-underline hover:underline focus:underline aria-[current]:font-bold"
-            aria-current={props.href === pathname || undefined}
+            aria-current={href === pathname || undefined}
+            target={target}
             {...props}
         />
     )
