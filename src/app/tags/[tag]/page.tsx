@@ -1,7 +1,7 @@
-import {PostCard} from 'nextra-theme-blog'
 import type {Metadata} from 'next'
-import {getPosts} from "@/lib/get-posts";
 import {getTags} from "@/lib/get-tags";
+import {Posts} from "@/components/posts";
+import {Tags} from "@/components/tags";
 
 type TagPageParams = {
     tag: string
@@ -25,19 +25,15 @@ export async function generateStaticParams(): Promise<TagPageParams[]> {
 
 export default async function TagPage(props: TagPageProps) {
     const params = await props.params
-    const posts = await getPosts()
     const decodedTag = decodeURIComponent(params.tag)
 
     return (
         <>
             <h1>Posts Tagged with &quot;{decodedTag}&quot;</h1>
-            {posts
-                .filter(post =>
-                    post.frontMatter.tags?.includes(decodedTag)
-                )
-                .map(post => (
-                    <PostCard key={post.route} post={post} />
-                ))}
+            <Posts tag={decodedTag}/>
+
+            <h2>More tags</h2>
+            <Tags/>
         </>
     )
 }

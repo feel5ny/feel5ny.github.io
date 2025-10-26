@@ -133,4 +133,9 @@
   body {
     @apply bg-background text-foreground;
     }
+
+
+    .x\:container {
+        @apply !max-w-[700px];
+    }
 }

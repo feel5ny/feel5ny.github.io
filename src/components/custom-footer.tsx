@@ -6,7 +6,7 @@ import React from "react";
 
 const CustomFooter = async () => {
     return (
-        <Footer>
+        <div className="pt-32">
             <div className="space-y-6">
                 <Navbar pageMap={await getPageMap()}/>
 
@@ -20,7 +20,7 @@ const CustomFooter = async () => {
                     <Search placeholder="Search posts..."/>
                 </div>
             </div>
-        </Footer>
+        </div>
     );
 };
 

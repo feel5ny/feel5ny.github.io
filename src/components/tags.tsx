@@ -14,7 +14,7 @@ export async function Tags(props: Props) {
         allTags[tag] += 1
     }
     return (
-        <div className="not-prose">
+        <div className="not-prose flex flex-wrap gap-1">
             {Object.entries(allTags).map(([tag, count]: [string, number]) => (
                 <Badge key={tag} variant="outline" asChild>
                     <Link key={tag} href={`/tags/${tag}`}>

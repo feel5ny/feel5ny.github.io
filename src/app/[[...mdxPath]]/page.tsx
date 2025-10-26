@@ -37,10 +37,15 @@ export default async function Page(props: PageProps) {
     }
 
     return (
+        // @ts-ignore
         <Wrapper toc={toc} metadata={metadata}>
             <MDXContent {...props} params={params}/>
 
-            {metadata.enableComment === true && <GiscusComments/>}
+            {metadata.enableComment === true &&
+                <div className="pt-10">
+                    <GiscusComments/>
+                </div>
+            }
         </Wrapper>
     )
 }
