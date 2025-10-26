@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import {PostCard} from 'nextra-theme-blog'
-import {getPosts, getTags} from './get-posts'
+import {getTags} from "@/lib/get-tags";
+import {getPosts} from "@/lib/get-posts";
+import {Metadata} from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Posts'
 }
 
@@ -17,7 +19,7 @@ export default async function PostsPage() {
     }
     return (
         <div data-pagefind-ignore="all">
-            <h1>{metadata.title}</h1>
+            <h1>Posts</h1>
             <div
                 className="not-prose"
                 style={{display: 'flex', flexWrap: 'wrap', gap: '.5rem'}}

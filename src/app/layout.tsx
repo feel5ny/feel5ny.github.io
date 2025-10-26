@@ -1,11 +1,12 @@
 import {Layout} from 'nextra-theme-blog'
 import {Banner, Head} from 'nextra/components'
 import 'nextra-theme-blog/style.css'
-import '../styles/globals.css'
-import CustomFooter from "./_components/custom-footer";
-import CustomHeader from "./_components/custom-header";
+import '@/styles/globals.css'
+import CustomFooter from "@/components/custom-footer";
+import CustomHeader from "@/components/custom-header";
+import {Metadata} from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Nextra Blog'
 }
 
