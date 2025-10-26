@@ -1,16 +1,19 @@
 import * as React from 'react';
-import {getPosts} from "@/lib/get-posts";
+import {getPosts, PostItem} from "@/lib/get-posts";
 import {Link} from "next-view-transitions";
-import {IconTags} from "@tabler/icons-react";
+import {IconArrowNarrowRight, IconTags} from "@tabler/icons-react";
 import {formatDate} from "@/lib/format-date";
 
 type Props = {
-    posts?: any[]; // Replace 'any' with your post type if you have one defined
+    posts?: PostItem[];
     tags?: string[];
+    excludeByTitle?: string;
+    first?: number;
+    showViewAllButton?: boolean;
 };
 
-export async function Posts({posts, tags}: Props) {
-    const displayPosts = posts ?? await getPosts({tags});
+export async function Posts({posts, tags, excludeByTitle, first, showViewAllButton}: Props) {
+    const displayPosts = posts ?? await getPosts({tags, excludeByTitle, first});
     return (
         <div className="space-y-6 not-prose">
             {displayPosts.map(post => {
@@ -26,10 +29,11 @@ export async function Posts({posts, tags}: Props) {
                             <div className="flex gap-1 text-sm">
                                 <IconTags className="w-4 min-w-4 -translate-y-0.5 text-muted-foreground"/>
                                 <div className="flex flex-wrap gap-x-1">
-                                    {post.frontMatter.tags.map((tag: string, index: number) => {
+                                    {post.frontMatter.tags.map((tagName, index: number) => {
                                         return (
-                                            <Link key={tag} href={`/tags/${tag}`} className="text-sm hover:underline">
-                                                <span>{tag}{index < post.frontMatter.tags.length - 1 && ", "}</span>
+                                            <Link key={tagName} href={`/tags/${tagName}`}
+                                                  className="text-sm text-muted-foreground hover:underline hover:text-black">
+                                                <span>{tagName}{index < post.frontMatter.tags.length - 1 && ", "}</span>
                                             </Link>
                                         )
                                     })}
@@ -37,7 +41,7 @@ export async function Posts({posts, tags}: Props) {
                             </div>
                         </div>
 
-                        <div className="w-[100px]">
+                        <div className="w-[100px] text-right">
                             <div className="text-sm text-muted-foreground pt-1">
                                 <div>
                                     {formatDate(post.frontMatter.date)}
@@ -48,6 +52,12 @@ export async function Posts({posts, tags}: Props) {
                     </div>
                 )
             })}
+
+            {showViewAllButton === true &&
+                <Link href="/posts" className="flex gap-1 items-center hover:underline">
+                    View all posts <IconArrowNarrowRight className="w-4"/>
+                </Link>
+            }
         </div>
     );
 }

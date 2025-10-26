@@ -27,7 +27,7 @@ export function PostDetail({metadata, children}: Props) {
             {children}
 
             <h2>Related</h2>
-            <Posts tags={metadata.tags} excludeByTitle={metadata.title as string}/>
+            <Posts tags={metadata.tags} excludeByTitle={metadata.title as string} first={5}/>
 
             {metadata.enableComment === true &&
                 <div className="pt-32">

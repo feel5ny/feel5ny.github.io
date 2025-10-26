@@ -1,6 +1,6 @@
 import {getPosts} from "@/lib/get-posts";
 
-type TagItem = {
+export type TagItem = {
     name: string;
     count: number;
 }

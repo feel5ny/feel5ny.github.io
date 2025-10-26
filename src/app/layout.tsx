@@ -28,7 +28,7 @@ export default async function RootLayout({children}) {
             className={gelasio.className}
         >
         <Head backgroundColor={{dark: '#15120d', light: '#faf5e9'}}/>
-        <body>
+        <body className="min-h-screen">
         <Layout>
             <CustomHeader/>
 

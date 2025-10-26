@@ -6,11 +6,27 @@ type GetPostsOptions = {
     tags?: string[];
     excludeByTitle?: string;
 };
+export type PostItem = {
+    title: string;
+    name: string;
+    route: string;
+    type: string;
+    frontMatter: {
+        title: string;
+        date: string;
+        tags: string[];
+        description: string;
+        enableComment: boolean;
+        filePath: string;
+        timestamp: number;
+    }
+}
 
-export async function getPosts(options: GetPostsOptions = {}) {
+export async function getPosts(options: GetPostsOptions = {}): Promise<PostItem[]> {
     const {first, tags, excludeByTitle} = options;
 
-    const { directories } = normalizePages({
+    // get
+    const {directories} = normalizePages({
         list: await getPageMap('/posts'),
         route: '/posts'
     })
@@ -41,5 +57,5 @@ export async function getPosts(options: GetPostsOptions = {}) {
         posts = posts.slice(0, first);
     }
 
-    return posts;
+    return posts as unknown as PostItem[];
 }
