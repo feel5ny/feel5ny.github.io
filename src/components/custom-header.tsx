@@ -1,6 +1,5 @@
 import React from 'react';
 import Logo from "@/components/logo";
-import {Search} from "nextra/components";
 
 const CustomHeader = async () => {
     return (
@@ -11,9 +10,6 @@ const CustomHeader = async () => {
             </div>
 
 
-            <div>
-                <Search placeholder="Search posts..."/>
-            </div>
         </div>
     );
 };
