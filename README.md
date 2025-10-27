@@ -1,11 +1,17 @@
-# Nextra Blog v4 Starter
+# Nextra Blog Starter
 
-A modern, feature-rich blog template built with [Nextra v4](https://nextra.site).
+A modern, feature-rich blog template built with [Nextra](https://nextra.site).
 
 ## 🚀 Demo
 
 - [Official Nextra Documentation](https://nextra.site)
-- [Live Demo of This Template](https://nextra-blog-v4.vercel.app/)
+- [Live Demo of This Template](https://nextra-blog-template.vercel.app/)
+
+## Quick Start
+
+You can deploy this template on Vercel by clicking the button below
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fphucbm%2Fnextra-blog-starter)
 
 ## Features
 
@@ -15,35 +21,24 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 - [Giscus](https://giscus.app/) for commenting system
 - [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) in Next.js App Router with [next-view-transitions](https://github.com/shuding/next-view-transitions)
 
-## 🛠 Getting Started
+## Local Development
 
-### Prerequisites
+### Clone this repository
 
-- Node.js 18.0 or later
-- pnpm
-
-### Installation
-
-1. Clone this template:
-
+Using the GitHub CLI:
 ```bash
-git clone https://github.com/phucbm/nextra-blog-v4-starter.git
-cd nextra-blog-v4
+gh repo clone phucbm/nextra-blog-starter
 ```
 
-2. Install dependencies:
-
+### Install
 ```bash
-pnpm install
+pnpm i
 ```
 
-3. Run the development server:
-
+### Run the development server
 ```bash
 pnpm dev
 ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## 📝 Usage
 
@@ -64,14 +59,8 @@ author: Your Name
 
 3. Write your content in MDX format below the front matter
 
-### Customization
-
-- Edit `theme.config.tsx` to customize your blog's appearance and behavior
-- Modify styles in `styles/global.css`
-- Update site metadata in `pages/_app.tsx`
-
 ---
 
-Created with ❤️ by [Your Name]
+Created with ❤️ by PHUCBM
 
 Don't forget to ⭐ this repository if you found it helpful!
