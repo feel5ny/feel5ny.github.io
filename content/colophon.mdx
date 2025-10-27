@@ -7,69 +7,37 @@ enableComment: false
 
 # Colophon
 
-## About
-
-This is a personal space where I share my thoughts on web development, design, and technology. I built this site to learn, experiment, and document my journey as a developer. You can expect to find technical articles, experiments, and occasional musings about building for the web.
-
-The design and content evolve as I learn new things—expect frequent updates and tweaks as I continue to refine both the code and the aesthetic.
-
 ## Technology
 
-This website is built with **Next.js**, a React framework that enables server-side rendering and static site generation. It's deployed on **Vercel**, which provides seamless integration with Next.js and excellent performance out of the box.
+This website is built with **Nextra**, a Next.js-based framework designed specifically for documentation and blog sites. I'm using the blog theme with full **TypeScript support**—something I had to configure myself since the official Nextra documentation doesn't provide fully typed examples out of the box.
 
-For styling, I use **Tailwind CSS**, a utility-first framework that makes it easy to create responsive, maintainable designs without writing extensive custom CSS. The component architecture follows modern React patterns with TypeScript for type safety.
+For styling, I use **Tailwind CSS** combined with **shadcn/ui** components, which gives me a solid foundation of accessible, customizable UI primitives while maintaining full control over the design system.
 
-The content is written in **MDX**, allowing me to seamlessly blend Markdown with React components. This gives me the flexibility to create rich, interactive content while keeping the writing experience simple.
+The site is deployed on **Vercel**, which provides seamless integration with Next.js and excellent performance out of the box.
 
-## Design
+## Features
 
-### Typography
+### Content Management
 
-The site uses three carefully selected typefaces:
+All content is written in **MDX** and lives in the `/content` folder. This keeps things organized and makes it easy to manage posts, drafts, and other written material separately from the codebase.
 
-1. **Inter** — For body text and UI elements. Clean, legible, and optimized for screens.
-2. **JetBrains Mono** — For code blocks and technical content. A monospace font designed for developers.
-3. **Herbik** — For headings and special emphasis. Adds character and visual hierarchy.
+### Search
 
-### Colors
+The site uses **Pagefind** for search functionality—a static search library recommended by Nextra that's fast, privacy-friendly, and requires no backend infrastructure.
 
-The color palette was inspired by various design systems and personal preferences. I aimed for a balance between readability and aesthetic appeal, with a focus on accessibility and reduced eye strain.
+### Tags System
 
-### Icons
+I've enhanced the default tags system to make content discovery easier. You can browse posts by topic and find related content through intelligent tagging.
 
-Icons throughout the site are from **Hero Icons**, a beautiful set of hand-crafted SVG icons that integrate perfectly with Tailwind CSS.
+### Comments
 
-## Writing
+Comments are powered by **Giscus**, a comments system backed by GitHub Discussions. It's privacy-respecting, spam-free, and integrates naturally with my developer workflow.
 
-I write in a conversational style with minimal editing. My approach to content:
-
-- Use sentence case for titles and headings
-- Keep paragraphs short and scannable
-- Use em dashes without spaces—like this
-- End list items with periods when they're complete sentences
-- Link text should describe the destination, not use generic terms like "click here"
-- Code examples should be clear and practical
-
-## Inspirations
+## Design Inspirations
 
 These websites and developers have influenced the design and philosophy of this site:
 
-1. [Dead Simple Sites](https://deadsimplesites.com) — Minimalist web design inspiration
-2. [Jason Jun](https://jasonjun.com) — Clean typography and layout
-3. [Rauno](https://rauno.me) — Interactive design and attention to detail
-4. [Ánh](https://anh.ng) — Thoughtful content structure and personal touch
-5. [Diogo](https://diogo.com) — Portfolio presentation
-6. [Tim Olsen](https://timolsen.com) — Visual hierarchy
-7. [Didier Catz](https://didiercatz.com) — Developer aesthetic
-8. [Udara](https://udarax.com) — Technical writing style
-9. [Namchee](https://namchee.dev) — Code-focused design
-
-## Credits
-
-Special thanks to the open-source community and all the developers who share their knowledge freely. This website wouldn't exist without the countless tutorials, documentation, and examples available online.
-
-If you have questions or suggestions about this site, feel free to reach out via [email](mailto:your-email@example.com) or [GitHub](https://github.com/yourusername).
-
----
-
-*Last updated: October 26, 2025*
+1. [Emil Kowalski](https://emilkowal.ski/) — Clean aesthetics and interaction design
+2. [Diogo](https://diogo.xyz/) — Typography and layout structure
+3. [Ánh](https://www.anh.ng/) — Thoughtful content presentation and personal touch
+4. [Matthew Smith](https://matthewsmith.website/) — Minimalist approach and attention to detail
