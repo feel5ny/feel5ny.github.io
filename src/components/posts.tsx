@@ -21,7 +21,7 @@ export async function Posts({posts, tags, excludeByTitle, first, showViewAllButt
                     <div key={post.route} className="flex flex-wrap">
 
                         <div className="w-[calc(100%-100px)]">
-                            <div className="font-bold text-black">
+                            <div className="font-bold">
                                 <Link href={post.route} className="hover:underline">
                                     {post.title}
                                 </Link>
@@ -32,7 +32,7 @@ export async function Posts({posts, tags, excludeByTitle, first, showViewAllButt
                                     {post.frontMatter.tags.map((tagName, index: number) => {
                                         return (
                                             <Link key={tagName} href={`/tags/${tagName}`}
-                                                  className="text-sm text-muted-foreground hover:underline hover:text-black">
+                                                  className="text-sm text-muted-foreground hover:underline">
                                                 <span>{tagName}{index < post.frontMatter.tags.length - 1 && ", "}</span>
                                             </Link>
                                         )
