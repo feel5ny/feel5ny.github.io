@@ -1,11 +1,12 @@
 # Nextra Blog Starter
+<img width="1632" height="1061" alt="screenshot" src="https://github.com/user-attachments/assets/1c2ee6d0-719d-4f56-b39b-99dc3fcbb428" />
 
 A modern, feature-rich blog template built with [Nextra](https://nextra.site).
 
 ## 🚀 Demo
 
 - [Official Nextra Documentation](https://nextra.site)
-- [Live Demo of This Template](https://nextra-blog-template.vercel.app/)
+- [Live Demo of This Template](https://nextra-blog.phucbm.com)
 
 ## Quick Start
 
