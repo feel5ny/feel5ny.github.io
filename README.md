@@ -15,7 +15,7 @@ You can deploy this template on Vercel by clicking the button below
 
 ## Features
 
-- [Nextra 4](https://nextra.site/docs) with Next.js 15 + React 19 + TypeScript
+- [Nextra 4](https://nextra.site/docs) with Next.js 16 + React 19 + TypeScript
 - [shadcn/ui](https://ui.shadcn.com/) and Tailwind CSS
 - [Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind) for search engine
 - [Giscus](https://giscus.app/) for commenting system
