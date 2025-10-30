@@ -1,4 +1,4 @@
-# Nextra Blog v4 Starter
+# Nextra Blog Starter
 
 A modern, feature-rich blog template built with [Nextra v4](https://nextra.site).
 
@@ -9,7 +9,7 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 
 ## Features
 
-- [Nextra 4](https://nextra.site/docs) with Next.js 15 + React 19 + TypeScript
+- [Nextra 4](https://nextra.site/docs) with Next.js 16 + React 19 + TypeScript
 - [shadcn/ui](https://ui.shadcn.com/) and Tailwind CSS
 - [Pagefind](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind) for search engine
 - [Giscus](https://giscus.app/) for commenting system
@@ -27,7 +27,7 @@ A modern, feature-rich blog template built with [Nextra v4](https://nextra.site)
 1. Clone this template:
 
 ```bash
-git clone https://github.com/phucbm/nextra-blog-v4-starter.git
+git clone https://github.com/phucbm/nextra-blog-starter.git
 cd nextra-blog-v4
 ```
 
@@ -64,14 +64,8 @@ author: Your Name
 
 3. Write your content in MDX format below the front matter
 
-### Customization
-
-- Edit `theme.config.tsx` to customize your blog's appearance and behavior
-- Modify styles in `styles/global.css`
-- Update site metadata in `pages/_app.tsx`
-
 ---
 
-Created with ❤️ by [Your Name]
+Created with ❤️ by PHUCBM
 
 Don't forget to ⭐ this repository if you found it helpful!
