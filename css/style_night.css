@@ -692,6 +692,7 @@ code {
   display: none;
 }
 #sidebar {
+  position: relative;
   float: right;
   margin-right: -340px;
   width: 340px;
@@ -2234,6 +2235,117 @@ i.icon:before {
 .ins-section .ins-search-item.active .ins-search-preview {
   color: #fff;
 }
+.bs-banner {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+.bs-banner .wrapper {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.bs-banner .video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+.bs-banner .banner-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: left;
+  padding: 20px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.bs-banner .bs-logo {
+  width: 20%;
+  height: auto;
+  z-index: 1;
+  object-fit: contain;
+}
+.bs-banner-header {
+  width: 340px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 24px;
+  cursor: pointer;
+}
+.bs-banner-header .wrapper {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.bs-banner-header .video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+.bs-banner-header .banner-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: left;
+  padding: 20px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  font-weight: bold;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.bs-banner-header .bs-logo {
+  width: 70px;
+  height: auto;
+  z-index: 1;
+  object-fit: contain;
+}
 .highlight {
   margin: 0px;
   display: block;
@@ -2480,6 +2592,9 @@ i.icon:before {
   }
 }
 @media only screen and (max-width: 479px) {
+  .bs-banner {
+    display: block;
+  }
   .container {
     padding: 0px;
   }
