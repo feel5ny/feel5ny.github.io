@@ -76,6 +76,21 @@
         }
     });
 
+    function hideBsBanner(){
+        const banner = document.querySelector(".bs-banner");
+        const bannerHeader = document.querySelector(".bs-banner-header");
+        if (!banner) return;
+        if (!bannerHeader) return;
+
+        const now = new Date();
+        const endDate = new Date(2026, 0, 1);  // 2026년 1월 1일
+
+        if (now >= endDate) {
+            banner.style.display = "none";
+            bannerHeader.style.display = "none";
+        }
+    }
+    hideBsBanner();
     // Auto hide main nav menus
     function autoHideMenus(){
         var max_width = $('.nav-container-inner').width() - 10;
@@ -143,5 +158,5 @@
             $(this).addClass('top-level-menu');
         }
     });
-
+    
 })(jQuery);
