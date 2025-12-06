@@ -155,6 +155,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
   try {
     const { metadata } = await importPage(actualPath);
+    const customMetadata = metadata as CustomMetadata;
 
     // Canonical URL 생성
     let canonicalUrl = baseUrl;
@@ -165,10 +166,37 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       canonicalUrl = `${baseUrl}/`;
     }
 
+    // Open Graph 이미지 생성 (thumbnail이 있는 경우)
+    const ogImage = customMetadata.thumbnail
+      ? customMetadata.thumbnail.startsWith('http')
+        ? customMetadata.thumbnail
+        : `${baseUrl}${customMetadata.thumbnail}`
+      : undefined;
+
     return {
       ...metadata,
       alternates: {
         canonical: canonicalUrl,
+      },
+      openGraph: {
+        ...(metadata.openGraph || {}),
+        ...(ogImage && {
+          images: [
+            {
+              url: ogImage,
+              width: 1200,
+              height: 630,
+              alt: (customMetadata.title as string) || 'Post thumbnail',
+            },
+          ],
+        }),
+      },
+      twitter: {
+        ...(metadata.twitter || {}),
+        ...(ogImage && {
+          card: 'summary_large_image',
+          images: [ogImage],
+        }),
       },
     };
   } catch (error) {
