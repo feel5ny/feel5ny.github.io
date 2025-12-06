@@ -8,8 +8,13 @@ import { Layout } from 'nextra-theme-blog';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io';
+
 export const metadata: Metadata = {
   title: 'Nextra Blog',
+  alternates: {
+    canonical: `${baseUrl}/`,
+  },
 };
 
 const bodyFont = Inter({

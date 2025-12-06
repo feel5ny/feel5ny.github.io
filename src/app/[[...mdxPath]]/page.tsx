@@ -151,10 +151,26 @@ async function resolvePath(mdxPath: string[]): Promise<string[]> {
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const actualPath = await resolvePath(params.mdxPath);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io';
 
   try {
     const { metadata } = await importPage(actualPath);
-    return metadata;
+
+    // Canonical URL 생성
+    let canonicalUrl = baseUrl;
+    if (params.mdxPath && params.mdxPath.length > 0) {
+      const path = '/' + params.mdxPath.join('/');
+      canonicalUrl = `${baseUrl}${path}${path.endsWith('/') ? '' : '/'}`;
+    } else {
+      canonicalUrl = `${baseUrl}/`;
+    }
+
+    return {
+      ...metadata,
+      alternates: {
+        canonical: canonicalUrl,
+      },
+    };
   } catch (error) {
     console.error(`Failed to import page for path: ${actualPath.join('/')}`, error);
     // Return default metadata if import fails

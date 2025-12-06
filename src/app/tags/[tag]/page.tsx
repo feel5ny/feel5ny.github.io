@@ -13,8 +13,14 @@ type TagPageProps = {
 
 export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
   const params = await props.params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io';
+  const canonicalUrl = `${baseUrl}/tags/${encodeURIComponent(params.tag)}/`;
+
   return {
     title: `Posts Tagged with "${decodeURIComponent(params.tag)}"`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 

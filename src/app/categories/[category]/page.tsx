@@ -15,8 +15,14 @@ type CategoryPageProps = {
 export async function generateMetadata(props: CategoryPageProps): Promise<Metadata> {
   const params = await props.params;
   const decodedCategory = decodeURIComponent(params.category);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io';
+  const canonicalUrl = `${baseUrl}/categories/${params.category}/`;
+
   return {
     title: `${decodedCategory} - Categories`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 

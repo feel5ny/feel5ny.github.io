@@ -16,8 +16,14 @@ export async function generateMetadata(props: SubCategoryPageProps): Promise<Met
   const params = await props.params;
   const decodedCategory = decodeURIComponent(params.category);
   const decodedSubCategory = decodeURIComponent(params.subCategory);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io';
+  const canonicalUrl = `${baseUrl}/categories/${params.category}/${params.subCategory}/`;
+
   return {
     title: `${decodedCategory} > ${decodedSubCategory} - Categories`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 
