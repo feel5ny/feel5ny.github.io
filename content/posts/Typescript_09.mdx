@@ -1,0 +1,296 @@
+---
+title: 8/ Generic
+date: '2017-11-25'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. 요약 제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그
+  함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다. 정적 타입...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. ~any~ => generic",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. basic generic",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. Generic Array",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. Generic Types",
+        "id": "4"
+      }
+    },
+    {
+      "title": {
+        "name": "5. Generic Class",
+        "id": "5"
+      }
+    },
+    {
+      "title": {
+        "name": "6. Generic with extends",
+        "id": "6"
+      }
+    },
+    {
+      "title": {
+        "name": "7. Generic with multiple types",
+        "id": "7"
+      }
+    },
+    {
+      "title": {
+        "name": "8. type lookup system",
+        "id": "8"
+      }
+    }
+  ]
+thumbnail: /images/post_img/22/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-15)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**요약** 제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는
+프로그래밍 기법을 말한다. 정적 타입 언어에서도 이렇게 특정 타입을 위해 만들어진 함수 혹은 클래스를
+보다 범용적으로 재사용하기 위한 요구가 있기 때문에 제네릭이라는 프로그래밍 기법이 생긴 게
+아닐까한다.
+
+---
+
+### <a name="1" ></a> 1. ~any~ => generic
+
+any의 사용을 지양하고자 타입을 인자로 넘긴다.
+
+- 탬플릿을 만드는 개념. 인자값과 출력값의 타입을 같게 탬플릿을 만들어준다.
+- 제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여
+  `하나의 타입만이 아닌 다양한 타입을 사용할 수 있도록 하는 기법이다.` 한번의 선언으로 다양한 타입에
+  재사용이 가능하다는 장점이 있다.
+- `T`는 제네릭을 선언할 때 관용적으로 사용되는 식별자로 타입 파라미터(Type parameter)라 한다. T는
+  Type의 약자로 반드시 T를 사용하여야 하는 것은 아니다.
+- 함수에도 제네릭을 사용할 수 있다. 제네릭을 사용하면 하나의 타입만이 아닌 다양한 타입의 매개변수와
+  리턴값을 사용할 수 있다.
+
+```ts
+function helloGeneric<T>(message: T): T {
+  return message;
+}
+```
+
+```ts
+function helloString(message: string): string {
+  return message;
+}
+
+function helloNumber(message: number): number {
+  return message;
+}
+
+// 더 많은 반복된 함수들 ...
+
+function hello(message: any): any {
+  return message;
+}
+
+function helloGeneric<T>(message: T): T {
+  return message;
+}
+
+console.log(hello('Mark').length);
+console.log(hello(35).length); // hello 의 리턴이 any 이기 때문에 타입 헬퍼가 제대로 되지 않음
+
+console.log(helloGeneric(35).toString()); // console.log(helloGeneric<number>(35).toString());
+// helloGeneric 을 사용하면 정상적으로 사용가능
+```
+
+---
+
+### <a name="2" ></a> 2. basic generic
+
+1. Generic 타입을 쓰지 않으면, T 로 추론
+2. Generic 타입을 쓰면, T 를 확인
+
+```ts
+function helloGeneric<T>(message: T): T {
+  return message;
+}
+
+function hello<T>(message: T): T {
+  return message;
+}
+
+console.log(hello<string>('Hello'));
+let age = hello(35);
+hello<number>('35');
+```
+
+---
+
+### <a name="3" ></a> 3. Generic Array
+
+hello 함수의 제네릭 타입을 [] 를 이용하여 배열로 사용할 수 있음
+
+```ts
+function hello<T>(messages: T[]): T {
+  return messages[0];
+}
+
+console.log(hello<string>(['Hello', 'World']));
+```
+
+---
+
+### <a name="4" ></a> 4. Generic Type
+
+구현체에 return T 를 설정하지 않아도, return false 시 오류가 나지 않는다?
+
+- 때에 따라서 적합하지 않을 수 있다.
+
+```ts
+type HelloGeneric = <T>(message: T) => T;
+
+const hello: HelloGeneric = <T>(message: T): T => {
+  return message;
+};
+
+console.log(hello<string>('Hello').length);
+```
+
+---
+
+### <a name="5" ></a> 5. Generic Class
+
+명시적으로 제네릭 타입을 설정하면 오류
+
+- function에서 generic을 사용할 때의 오류와 같다.
+
+```ts
+class Person<T> {
+  private _name: T;
+  private _age: number;
+
+  constructor(name: T) {
+    this._name = name;
+  }
+}
+
+new Person('Mark');
+// new Person<string>(35);
+```
+
+---
+
+### <a name="6" ></a> 6. Generic with extends
+
+T 가 string 또는 number 를 상속받기 때문에 boolean 은 안된다.
+
+```ts
+class Person<T extends string | number> {
+  // union type
+  private _name: T;
+  private _age: T;
+
+  constructor(name: T) {
+    this._name = name;
+  }
+}
+
+new Person('Mark');
+new Person(35);
+// new Person(true);
+```
+
+---
+
+### <a name="7" ></a> 7. Generic with multiple types
+
+```ts
+class Person<T, K> {
+  private _name: T;
+  private _age: K;
+
+  constructor(name: T, age: K) {
+    this._name = name;
+    this._age = age;
+  }
+}
+
+new Person('Mark', 35);
+```
+
+---
+
+### <a name="8" ></a> 8. type lookup system
+
+keyof 키워드를 알아야한다.
+
+```ts
+type Test = keyof Person;
+// 리터럴 타입의 유니온 타입이 나온다. "name" | "age"
+```
+
+객체와 key값을 인자로 받아서 perperty의 타입값을 알아내는 함수를 만들었다고 치자. 함수에서 컴파일
+타입을 검증할 수 있는 시스템이 필요하다. => type lookup system
+
+- `getProperty`: Generic과 type alias를 결합하여 사용하여 type을 찾아낼 수 있는 시스템을 만든다.
+- `setProperty`: Generic과 type alias를 결합하여 사용하여 type을 찾아내고, 타입을 다시 재정의 하는
+  함수
+
+```ts
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+```
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+const person: Person = {
+  name: 'Mark',
+  age: 35,
+};
+
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+function setProperty<T, K extends keyof T>(obj: T, key: K, value: T[K]): void {
+  obj[key] = value;
+}
+
+console.log(getProperty(person, 'name'));
+// console.log(getProperty(person, fullname));
+setProperty(person, 'name', 'Anna');
+console.log(getProperty(person, 'name'));
+// setProperty(person, 'name', 24);
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/typeScript-generic
+2. https://www.youtube.com/watch?v=3-nJyzJATq8
+3. https://hyunseob.github.io/2017/01/14/typeScript-generic/

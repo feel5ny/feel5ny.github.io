@@ -1,0 +1,238 @@
+---
+title: 5/ 객체 지향 프로그래밍 (1)
+date: '2017-12-04'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. > 이 주제는 조금 더 공부를 해야할 듯 하다. 목차  1. 프로퍼티 타입   -
+  데이터 프로퍼티   - 접근자 프로퍼티 2. 다중 프로퍼티 정의...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/40/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요. 이 주제는 조금 더 공부를 해야할 듯 하다.
+
+목차
+
+1. 프로퍼티 타입
+
+- 데이터 프로퍼티
+- 접근자 프로퍼티
+
+2. 다중 프로퍼티 정의
+3. 프로퍼티 속성 읽기
+
+---
+
+객체지향언어는 일반적으로 클래스를 통해 같은 프로퍼티와 메서드를 가지는 객체르 여러 개 만든다는
+특징이 있다. ECMAScript에는 클래스라는 개념이 없으며 이에 따라 ECMAScript의 객체는 다른 클래스 기반
+언어와 다르다. (ES6에는 class라는 개념이 도입되었다.)
+
+ECMAScript에서 객체는 순서가 없는 값의 배열이다. 각 프로퍼티와 메서드는 이름으로 구별하며 값에
+대응한다. 객체는 이름-값 쌍의 그룹이며 각 값은 데이터나 함수가 될 수 있다.
+
+---
+
+---
+
+## <a name="oop" ></a> 1. 프로퍼티 타입
+
+객체 리터럴 방식으로 객체를 생성할 때 프로퍼티와 메서드를 생성할 수 있다. 이러한 프로퍼티는 모두
+자바스크립트에서 `프로퍼티의 행동을 정의하는 특징`에 따라 생성된다. 이들 속성이 자바스크립트 엔진
+내부에서 구현하는 것으로 정의했고, 이들 송성을 자바스크립트에서 직접적으로 접근할 수 있는 방법은
+없다. 이들 속성은 `[[Enumerable]]`처럼 속성 이름을 대괄호로 감싸서 내부 속성임을 나타낸다.
+
+데이터 프로퍼티와 접근자 프로퍼티 두가지 타입이 있다.
+
+---
+
+### 1-1. 데이터 프로퍼티
+
+데이터 값에 대한 단 하나의 위치를 포함하여 이 위치에서 값을 읽고 쓴다.(무슨말이지?)
+
+1. `[[Configurable]]` 프로퍼티가 delete를 통해 삭제하거나, 속성을 바꾸거나 접근자 프로퍼티로 변활할
+   수 있음을 나타낸다. 객체에서 직접 정의한 모든 프로퍼티에서 이 속성은 기본적으로 true
+
+2. `[[Enumerable]]` `for-in`루프에서 해당 프로퍼티를 반환함을 나타낸다. 기본은 true
+
+3. `[[Writable]]` 프로퍼티 값을 바꿀 수 있음을 나타낸다. 기본은 true
+
+4. `[[Value]]` 프로퍼티의 실제 데이터 값을 포함한다. 프로퍼티의 값을 읽는 위치이고, 새로운 값을 쓰는
+   위치. 기본값은 `undefined`
+   > 프로퍼티를 선언만 하고 값을 할당하지 않으면 `undefined`
+
+```js
+const person = {
+  name: 'Nicholas',
+};
+```
+
+여기서 "Nicholas"가 [[Value]] 데이터 프로퍼티에 저장된다는 말이다.
+
+---
+
+#### 기본 프로퍼티 **속성**을 바꾸기 위해서는?
+
+`Object.defineProperty()`메서드를 사용하면 된다.
+
+- Object.defineProperty() 처럼 강력한 옵션을 사용할 일이 드물겠지만, 자바스크립트 객체를 잘
+  이해하려면 알고 있으면 좋다.
+- 전반적인 자바스크립트의 문법을 변화시키고 코드에 대한 해석을 기존처럼 할 수 없는 컨텍스트를
+  제공한다.
+
+```
+Object.defineProperty(프로퍼티를 추가하거나 수정할 객체, 프로퍼티 이름, 서술자 객체)
+```
+
+#### 서술자 객체가 뭐지? descriptor 객체
+
+해당 속성에 대한 특성을 의미. 내부 속성 이름과 같다. 서술자 객체에는 `configurable`, `enumerable`,
+`writable`, `value` 4가지 프로퍼티가 있다.
+
+```js
+const person = {};
+Object.defineProperyt(person, 'name', {
+  writable: false, // readOnly 형식으로 바꿨다고 생각하자.
+  value: 'Nicholas',
+});
+
+console.log(person.name); // "Nicholas"
+person.name = 'Greg';
+console.log(person.name); // "Nicholas"
+```
+
+---
+
+### 1-2. 접근자 프로퍼티 (accessor 함수)
+
+데이터 값이 들어있지 않고, `getter`함수와 `setter`함수로 구성된다. (옵셔널) 접근자 프로퍼티를 읽을
+때는 getter함수가 호출
+
+- 유효한 값을 반환할 책임은 이 함수에 있다.
+
+접근자 프로퍼티의 4가지 속성
+
+1. `[[Configurable]]` 프로퍼티가 delete를 통해 삭제하거나, 속성을 바꾸거나 접근자 프로퍼티로 변활할
+   수 있음을 나타낸다. 기본은 true
+
+2. `[[Enumerable]]` `for-in`루프에서 해당 프로퍼티를 반환함을 나타낸다. 기본은 true
+
+```js
+var person = {
+  'first-name': 'Joy',
+  'last-name': 'Kim',
+  gender: 'female',
+};
+
+// prop에 객체의 프로퍼티 이름이 반환된다. 단, 순서는 보장되지 않는다.
+for (var prop in person) {
+  console.log(prop + ': ' + person[prop]);
+}
+
+/*
+first-name: Joy
+last-name: Kim
+gender: female
+*/
+```
+
+3. `[[Get]]` 프로퍼티를 **읽을** 때 호출할 함수. 기본은 undefined
+
+4. `[[Set]]` 프로퍼티를 **바꿀** 때 호출할 함수. 기본은 undefined
+
+```js
+const book = {
+  _year: 2004,
+  // 밑줄(_)은 이 프로퍼티는 객체의 메서드를 통해서만 접근할 것이고 객체 외부에서는 접근하지 않겠다는 의도를 나타낼 때 흔히 쓰는 표기법 (private와 같은 개념)
+  edition: 1,
+};
+
+Object.defineProperty(book, 'year', {
+  get: function () {
+    return this._year;
+  },
+  set: function (newValue) {
+    if (newValue > 2004) {
+      this._year = newValue;
+      this.edition += newValue - 2004;
+    }
+  },
+});
+
+book.year = 2005;
+alert(book.edition); //2
+```
+
+setter의 경우는 프로퍼티의 값을 바꿨을 때 해당 프로퍼티만 바뀌는 게 아니라 부수적인 절차가 필요한
+경우에 사용한다.
+
+getter만 셋팅할 경우 읽기전용 setter만 셋팅될 경우 undefined
+
+---
+
+## <a name="oop" ></a> 2. 다중 프로퍼티 정의
+
+여러개의 프로퍼티를 동시에 수정해야할 경우 `Object.defineProperties()` configurable의 기본값은
+true이지만, defineProperties나 defineProperty은 공통적으로 호출만 되면 true로 재지정하지 않는 이상
+false가 된다.
+
+---
+
+## <a name="oop" ></a> 3. 프로퍼티 속성 읽기
+
+```js
+Object.getOwnPropertyDescriptor(읽어올 프로퍼티가 포함된 객체, 서술자를 가져올 프로퍼티 이름)
+```
+
+원하는 프로퍼티의 서술자 프로퍼티를 읽을 수 있다. 모든 객체에서 사용가능하며, DOM이나 BOM 객체에서도
+가능하다.
+
+```js
+const book = {};
+
+Object.defineProperties(book, {
+  _year: {
+    value: 2004,
+  },
+
+  edition: {
+    value: 1,
+  },
+
+  year: {
+    get: function () {
+      return this._year;
+    },
+
+    set: function (newValue) {
+      if (newValue > 2004) {
+        this._year = newValue;
+        this.edition += newValue - 2004;
+      }
+    },
+  },
+});
+
+var descriptor = Object.getOwnPropertyDescriptor(book, '_year');
+console.log(descriptor.value); // 2004
+console.log(descriptor.configurable); // false
+console.log(typeof descriptor.get); // undefined
+
+var descriptor = Object.getOwnPropertyDescriptor(book, 'year');
+console.log(descriptor.value); // undefined
+console.log(descriptor.configurable); // false
+console.log(typeof descriptor.get); // "function"
+```
+
+---
+
+### 참고링크
+
+1. http://www.bsidesoft.com/?p=1878#%25ec%25a0%2595%25ec%25a0%2581%25ec%258b%259c%25ec%25a0%2590%25ea%25b3%25bc-%25ec%258b%25a4%25ed%2596%2589%25ec%258b%259c%25ec%25a0%2590
+2. http://poiemaweb.com/js-object

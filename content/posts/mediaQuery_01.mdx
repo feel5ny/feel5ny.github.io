@@ -1,0 +1,188 @@
+---
+title: (mobile) device-pixel-ratio계산
+date: '2018-05-14'
+description: >-
+  목차 &#128075;&#128075; 0. 서론 1. @media 대하여.. 2. -webkit-device-pixel-ratio   - 2-1. 픽셀비율
+  계산하기   - 2-2. device width와 height 계산하기 --- 0. 서론  현재 작업 중인 프로...
+author: Joy Kim
+tags:
+  - css
+  - media-query
+  - mobile
+  - log
+categories:
+  - 01_Web
+  - 03. CSS
+enableComment: true
+thumbnail: /images/2018/11/thumb_default.jpg
+---
+
+<div style="padding: 0px 40px 20px 40px;background: #cbd3da22;margin-top:20px">
+  **목차** &#128075;&#128075;
+
+  0. 서론
+  1. @media 대하여..
+  2. -webkit-device-pixel-ratio
+
+  - 2-1. 픽셀비율 계산하기
+  - 2-2. device width와 height 계산하기
+</div>
+
+---
+
+## 0. 서론
+
+현재 작업 중인 프로젝트는 데스크탑 브라우저(여러 브라우저 대응) 뿐만아니라 모바일 기기 대응도
+진행해야한다. 너무도 당연히 대응해야하지만!! 기기의 종류들의 크기가 다양해짐에 따라서 미디어쿼리를
+적절히 사용해야할 필요가 생겼다.(아이폰X나 갤럭시S9같은.. 스크린이 긴 단말기ㅜ) 게다가
+네이티브앱에서 웹뷰를 이용하는 일이 빈번했기 때문에 더더욱..
+
+---
+
+## 1. 특정 모바일 디바이스 대응 `@media`
+
+CSS3의 @media 쿼리를 이용해서 screen의 크기에 따라서 레이아웃 구성을 다르게하는 방법을 구현할 수
+있다. 반응형 웹에서는 다른 특별한 설정 없이 max-width같은 media features를 추가하여 브라우저의
+width값마다 스타일을 조정할 수 있다.
+
+```css
+/*syntax*/
+@media not|only (media type) and (media feature) {
+    CSS-Code;
+}
+```
+
+### media type
+
+- `all` : 모든 디바이스에 적용
+- `print` : printer에 사용
+- `screen` : 컴퓨터 스크린, 태블릿, 스마트폰 등에 쓰임
+- `speech` : 스크린 리더기에 사용, 스크린 내용을 읽어주는 미디어 일때
+
+### media features(조건문)
+
+(정말 많군요! &#128064;)
+
+- `height, width` : 둘 다 해당, 둘 다 미디어에 따라 다른 값들이 검출 됨
+- `width : 320px` : 미디어가 320px일때
+- `max-width : 320px` : 320px 이하의 미디어 일 때
+- `min-width : 320px` : 320px 이상의 미디어 일 때
+- `device` : device의 물리적인 값들을 기준으로(해상도와 너비는 같지 않을 수 있다)
+- `device-width : 320px` : 기기의 너비가 320px일때
+- `max-device-width : 320px` : 320px 이하의 화면일 때
+- `min-device-width : 320px` : 320px 이상의 화면일 때
+- `orientation` : 화면 회전 width, height가 아닌 portrait, landscape값으로 구분한다. 대부분 세로로
+  긴 핸드폰의 형태이기 때문에 기본상태는 portrait, 가로로 돌렸을 때는 landscape. 데스크톱에는 가로
+  세로 개념이 없음. **그렇다고 이 개념이 모바일 개념은 아니다.**
+
+---
+
+- `aspect-ratio`, `min-aspect-ratio`, `max-aspect-ratio`(화면비율) : width/height (가로 나누기 세로)
+- `aspect-ratio:1` : 화면 비율이 1:1인경우
+- `aspect-ratio:16/9` : 일반적인 화면 비율인 16:9를 의미합니다(1920\*1080)
+- `device-aspect-ratio`, `min-device-aspect-ratio`, `max-device-aspect-ratio` : 단말기의 물리적인
+  화면 비율
+
+---
+
+- `color`, `min-color`, `max-color` : 단말기에서 사용하는 최대 색상 비트 수에 대응(단위는 자연수)
+- `color:3` : 2³ = 8개의 색상 사용
+- `color-index`, `min-color-index`, `max-color-index` : 최대 색상 수에 대응
+
+---
+
+- `monochrome`, `min-monochrome`, `max-monochrome` : 흑백만 사용하는 단말기에서의 픽셀당 비트수,
+  얼마나 자유롭게 표현되는지를 확인함
+- `resolution`, `min-resolution`, `max-resolution` : 단말기의 해상도
+
+---
+
+- `grid` : 단말기가 grid방식인지 bitmap방식인지
+- `grid:1` ⇒ 문자로만 표기되는 tty, 주로 터미널, 전화액정
+- `grid:0` ⇒ 대부분의 컴퓨터와 스마트폰 웹 브라우저에 해당
+
+---
+
+- `-webkit-min-device-pixel-ratio` : 단말기의 화소와 실제 화면의 pixel간의 비율
+
+---
+
+---
+
+## 2. -webkit-device-pixel-ratio
+
+사실 단말기에 따른 media query는 인터넷 서핑을 잘 하다보면 구할 수 있다.
+([여긴](http://vizdevices.yesviz.com/) 내가 좋아하는 정리 사이트) 나 또한 정리되어있는 자료에서
+device width와 height, -webkit-min-device-pixel-ratio를 구할 수 있었다. 정리된 수치로 잘 사용하고
+있었지만, 종종 서치하기 힘든 디바이스까지 대응해야할 경우도 생기곤 한다. 그리고 나에게도 그런 상황이
+다가왔다!
+
+### 1. 픽셀 비율을 계산해보자.
+
+내가 대응해야할 폰은 LG X400이라는 디바이스였다. 최근에 나온 기종이고, 내가 알 수 있는 정보는 아래
+표밖에 없었다.
+
+<img src="/images/2018/11/image.png" />
+
+<img style="border-radius: 6px;" src="/images/2018/11/image02.png" />
+
+### <u style="background: #222222;color: white;padding: 10px 20px;">**5.3인치 1280\*720, 294ppi**</u>
+
+@media only screen and (`device-width: ?px`) and (`device-height: ?px`) and
+(`-webkit-device-pixel-ratio: ?`) {}
+
+위의 값들이 필요하다. 먼저 픽셀 비율부터 구해보자. 디바이스 픽셀 비율을 계산하는 데는 세 단계가
+필요하다.
+
+#### 1-1. 들고있는 디바이스로부터 시야까지의 실제 거리와 레퍼런스 픽셀의 거리를 비교.
+
+스펙에 따르면 28인치에서 이상적인 것은 **인치 당 96 픽셀**이다.(표준밀도는 96ppi) 그러나 스마트
+폰이기때문에 사람들은 노트북을 들고 다니는 것보다 디바이스를 얼굴에 가깝게 들고있는다. 그 거리를 18
+인치로 추정 해본다.
+
+<img src="/images/2018/11/image01.png" />
+
+#### 1-2. 주어진 거리에 대해 이상적인 픽셀 밀도를 얻으려면 거리 비에 표준 밀도 (96ppi)를 곱한다.
+
+idealPixelDensity = (28/18) \* 96 = 150 픽셀/인치 (대략)
+
+#### 1-3. 물리적 픽셀 밀도와 이상적인 픽셀 밀도의 비율을 사용하여 장치 픽셀 비율을 얻는다.
+
+devicePixelRatio = 294/150 = 1.96 => 반올림 => **2**
+
+---
+
+### 2. device-width와 height
+
+현재 알 수 있었던 해상도는 표에서 1280\*720 라고 알 수 있었다. device의 너비와 height는 픽셀 비율을
+해상도에서 나누면 된다.
+
+- **device-width** = 720/2 = 360
+- **device-height** = 1280/2 = 640
+
+---
+
+```css
+@media only screen and
+(device-width: 360px) and
+(device-height: 640px) and
+(-webkit-device-pixel-ratio: 2) {
+  💅💅💅💅
+}
+```
+
+---
+
+### 요약
+
+- 해당기기의 ppi와 해상도를 알고 있다면, devicePixelRatio = 해당 기기의 ppi / 150 (왜 150인지는 위에
+  설명) deviceWidth = 해당기기의 해상도 / devicePixelRatio
+- 특정 기기 이외에는 min이나 max를 이용하여 정의하면 비슷한 해상도와 픽셀비율을 가진 디바이스에
+  적용가능하다.
+
+---
+
+### 참고
+
+https://medium.com/@junghan_61455/css-media-query-5969b004bd7
+https://www.html5rocks.com/en/mobile/high-dpi/

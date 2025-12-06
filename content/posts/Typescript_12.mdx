@@ -1,0 +1,150 @@
+---
+title: 11/ Type Inference
+date: '2017-11-27'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. ---  1. 타입추론 - 기본적으로 타입을 명시적으로 쓰지 않을 때
+  추론하는 방법에 대한 규칙   - 명시적으로 쓰는 것은 타입 추...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. 타입추론",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. 배열 타입 추론",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. 리턴 타입 추론",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. 유니온 타입과 타입 가드",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/post_img/25/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-15)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+---
+
+### <a name="1" ></a> 1. 타입추론
+
+- 기본적으로 타입을 명시적으로 쓰지 않을 때 추론하는 방법에 대한 규칙
+  - 명시적으로 쓰는 것은 타입 추론이 아니라 `코드를 읽기 좋게 하는 지름길`
+- let 은 기본적으로 우리가 아는 기본 자료형으로 추론
+- const 는 `리터럴 타입`으로 추론
+  - 오브젝트 타입을 타입을 쓰지 않으면, 프로퍼티는 let 처럼 추론
+    - const person = {'{'}name : 'Mark', age: 35{'}'}; 면
+    - person => {'{'}name : string; age: number;{'}'} 로 추론
+- 대부분은 추론이 쉽다.
+  - 단순 변수
+  - structuring, destructuring
+- array, 함수의 리턴에서는 원하는데로 얻기가 힘들다.
+
+---
+
+### <a name="2" ></a> 2. 배열 타입 추론
+
+```ts
+const array1 = [];
+const array2 = ['a', 'b', 'c'];
+const array3 = ['a', 1, false]; // 타입이 다를 경우 union타입으로 추론된다.
+
+class Animal {
+  name: string;
+}
+
+class Dog extends Animal {
+  dog: string;
+}
+
+class Cat extends Animal {
+  cat: string;
+}
+
+const array4 = [new Dog(), new Cat()];
+```
+
+---
+
+### <a name="3" ></a> 3. 리턴 타입 추론
+
+```ts
+function hello(message: string | number) {
+  if (message === 'world') {
+    return 'world';
+  } else {
+    return 0;
+  }
+}
+```
+
+리터럴타입의 'world'이거나 0이 나온다.
+
+---
+
+### <a name="4" ></a> 4. 유니온 타입과 타입 가드
+
+#### `타입가드` Type guard
+
+어떤 Scope에서 타입을 보증하는 런타임 체크를 수행하는 몇 가지 표현식이다. 타입 가드를 정의하기
+위해서, 리턴 타입이 `Type predicate`인 함수를 정의 할 필요가 있다.
+
+#### `Type predicate`
+
+```ts
+parameterName is Type
+```
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Car {
+  brand: string;
+  wheel: number;
+}
+
+function isPerson(arg: any): arg is Person {
+  return arg.name !== undefined;
+}
+
+function hello(arg: Person | Car) {
+  if (isPerson(arg)) {
+    console.log(arg.name);
+    // console.log(arg.brand);
+  } else {
+    // console.log(arg.name);
+    console.log(arg.brand);
+  }
+}
+```
+
+---
+
+### 참고링크
+
+1. https://infoscis.github.io/2017/06/19/TypeScript-handbook-advanced-types/

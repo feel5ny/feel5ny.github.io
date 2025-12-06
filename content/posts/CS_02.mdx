@@ -1,0 +1,167 @@
+---
+title: 소팅 알고리즘
+date: '2017-12-11'
+description: >-
+  > 아직 정리 덜 됨. 정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장
+  좋지만, 정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다. --------
+  목차  1. 버블 정렬 bubble sort 2. 선택 정...
+author: Joy Kim
+tags:
+  - CS
+categories:
+  - 01_Web
+  - zz. Algorithm
+enableComment: true
+thumbnail: /images/post_img/50/thumb_default.jpg
+---
+
+> 아직 정리 덜 됨.
+
+정렬할 데이터가 특수한 형태가 아니라면 standard 정렬 알고리즘을 쓰는것이 가장 좋지만,
+정렬알고리즘에도 여러가지가 있고 각각의 정렬방법마다 빅오 노테이션이 다르다.
+
+---
+
+목차
+
+1. 버블 정렬 bubble sort
+2. 선택 정렬 Selection sort
+3. 삽입 정렬 Insertion sort
+4. 병합 정렬 Merge sort
+5. 퀵 정렬 Quick sort
+
+---
+
+## 1. 버블정렬(Bubble sort)
+
+버블정렬은 가장 쉬운 정렬 알고리즘이지만 시간복잡도가 좋은 퍼포먼스를 내지 못해서 실제로는 잘
+사용되지 않는다. 시간복잡도는 O(n²)이며 공간복잡도는 하나의 배열만 사용하여 정렬을 진행하기 때문에
+O(n)이다. 자신과 다음의 요소를 비교하여 인덱스를 정한다.
+
+<img src="/images/post_img/50/bubble.gif" />
+
+---
+
+## 2. 선택정렬(Selection sort)
+
+선택정렬은 시간복잡도가 O(n²)으로 버블정렬과 정렬하는 알고리즘이 버블정렬과 유사하다. **한번 순회를
+하면서 가장 큰 수를 찾아서 배열의 마지막 위치와 교환한다.**
+
+<img src="/images/post_img/50/selection.gif" />
+
+---
+
+## 3. 삽입정렬(Insertion Sort)
+
+삽입정렬은 1부터 n까지 Index를 설정하여 현재위치보다 아래쪽을 순회하며 현재위치의 값을 현재위치보다
+아래쪽으로 순회하며 알맞은 위치에 넣어주는 정렬알고리즘이다. 삽입정렬은 이미 정렬이 되어있다면
+O(n)의 시간복잡도를 가지게된다. 정렬이 되어있는 경우라면 한번 순회하며 체크만 하기 때문이며 Big-O
+시간복잡도는 O(n²)이다.
+
+<img src="/images/post_img/50/insertion.gif" />
+
+---
+
+## 4.병합정렬 (Merge sort)
+
+- 재귀의 이해가 있어야한다.
+
+병합정렬은 정렬할 리스트를 반으로 쪼개나가며 좌측과 우측 리스트를 계속하여 분할해 나간 후 각
+리스트내에서 정렬 후 병합(merge) 정렬 후 병합하는 과정을 통해 정렬하는 알고리즘이다. 병합정렬은 가장
+많이 쓰이는 정렬 알고리즘 중 하나 이며 시간복잡도는 최소 O(nlogn)을 보장하게 된다.
+
+1. Divide
+2. Conquer
+3. Combine
+
+<img src="/images/post_img/50/merge.gif" />
+```js // 4. 합병정렬 // 퀵정렬과 마찬가지로 분할 정복 알고리즘중 하나이다. /*
+console.log(MergeSort([234, 45634, 23, 41, 2345, 34, 23, 1, 4, 3, 6, 234, 4536, 55, 234, 23, 456,
+45, 234, 1, 856, 9, 67, 56, 7])) */
+
+function MergeSort(arr) { const len = arr.length; if (len == 1) { return arr; }
+
+const middle = Math.floor(len / 2); const left = arr.slice(0, middle); const right =
+arr.slice(middle, len);
+
+function merge(left, right) { const result = [];
+
+    while (left.length && right.length) {
+      if (left[0] <= right[0]) {
+        result.push(left.shift());
+      } else {
+        result.push(right.shift());
+      }
+    }
+
+    while (left.length) {
+      result.push(left.shift());
+    }
+
+    while (right.length) {
+      result.push(right.shift());
+    }
+
+    return result;
+
+} return merge(MergeSort(left), MergeSort(right)); }
+
+```
+### Divide & Conquer
+전략
+- 주어진 문제를 작은 문제들로 분할하고
+- 작은 문제에서 해를 구한 후
+- 구한 해를 이용해서 주어진 문제의 해를 구하는 방법
+
+특징
+- 주어진 문제를 동일한 종류의 작은 문제로 분할
+- 문제 분할 과정이 **`재귀적`**으로 처리됨
+
+> Fractal같은 문제라고 생각하면 된다.
+
+구성
+1. Divide
+문제를 크기가 작은 동일한 종류의 sub problems로 분할
+
+2. Conquer
+재귀적으로 subproblems
+
+3.
+
+시간복잡도 구성요소
+1. 문제를 분할하는 시간
+2. 분할된 문제 수 * 분할된 문제의 시간 복잡도
+3. 분할된 문제의 결과를 combine하는 시간
+
+sequence : 연속된 데이터의 집단
+
+<img src="/images/post_img/50/merge.png" />
+MERGE-SORT는 combine하는 함수이다.
+
+### 배열 요소가 홀수일 경우 어떻게 반을 나눌까.?
+크게 고려하지 않아도 되지만, 타입캐스팅 방법처럼 계산 후 앞부분이 하나를 더 가져갈지를 판단한다.
+
+  ### 타입캐스팅
+  타입을 바꿔주는.
+
+---
+## 5. 퀵정렬(Quick sort)
+퀵정렬은 real-world 데이터에서 빠르다고 알려져 있어 `가장 많이 쓰는` 정렬알고리즘이다.
+퀵정렬은 pivot을 선정하여 pivot을 기준으로 좌측과 우측으로 pivot보다 작은값은 왼쪽 pivot보다 큰값은 오른쪽으로 재배치를 하고 계속하여 분할하여 정렬하는 알고리즘이다.
+최악의 경우에는 O(n²)의 비교를 수행하지만 일반적으로 O(nlogn)의 시간복잡도를 가진다.
+
+<img src="/images/post_img/50/quick.gif" />
+
+---
+
+읽어볼 글
+1. quick sort는 항상 빠를까? [+](http://asfirstalways.tistory.com/338)
+2. quick sort에서 nlogn은 어떤 원리에서 나온 걸까? [+](http://egloos.zum.com/wrice/v/3097929)
+
+---
+
+### 참고링크
+
+1. https://medium.com/@fiv3star/%EC%A0%95%EB%A0%AC%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-sorting-algorism-%EC%A0%95%EB%A6%AC-8ca307269dc7
+2. http://asfirstalways.tistory.com/338
+```

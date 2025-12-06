@@ -1,0 +1,286 @@
+---
+title: Typescript의 Generic을 사용해보자.
+date: '2018-12-10'
+description: >-
+  TL;DR 제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을
+  사용할 수 있도록 하는 기법이다. 한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.
+  --------------- 리액트 + 타입스크립트로 프로젝트를...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - 03. TypeScript
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. 제네릭이란",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. 제네릭 사용방법",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. 제네릭은 이런 상황에서는 무의미하다.",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. ajax콜 이후의 응답타입을 명시할 때",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/2018/44/thumb_default.jpg
+---
+
+**TL;DR** **제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한
+타입을 사용할 수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이
+있다.
+
+---
+
+리액트 + 타입스크립트로 프로젝트를 진행하면서 재밌는 이슈에 많이 부딪하고 있다. 그래도 재밌다고 느낀
+이유는 부딪힐 때마다 해결 방법을 타입스크립트에서 제공해줬기 때문.. 이슈 중에 하나는, 비동기 처리를
+`promise`와 `async` `await`를 사용하여 작업하고 있는데, 리턴값의 타입을 명시하기가 시점에 따라
+달랐기 때문에 실행 시점에 타입을 명시하고 싶었다. 처음에는 예상되는 타입을 await를 받는 변수에
+타입을 명시했는데 제네릭은 이를 해결할 수 있는 방법이었다.
+
+---
+
+<a name="1" />
+
+## 1. 제네릭이란.
+
+**제네릭은 선언 시점이 아니라 생성 시점에 타입을 명시하여 하나의 타입만이 아닌 다양한 타입을 사용할
+수 있도록 하는 기법이다. **한 번의 선언으로 다양한 타입에 재사용이 가능하다는 장점이 있다.
+
+즉, 선언 시점에서는 제네릭으로 타입을 받을 부분을 뚫어놓고(?) (템플릿화 `<T>`) 실행 시점에
+제네릭으로 타입을 명시하는 것이다. 실행 시점에 제네릭으로 타입을 명시하게 되면, `<T>`로 뚫어놓은(?)
+템플릿에 타입이 명시되면서, 실행 시점에 맞는 타입을 정의할 수 있다. **마치 함수에서 인자를 받는
+형태와 비슷하다.**
+
+너무 나만의 언어로 설명한 거 같으니.. 코드를 봅시다!
+
+> `T`는 제네릭을 선언할 때 관용적으로 사용되는 식별자로 타입 파라미터(Type parameter)라 한다. T는
+> Type의 약자로 반드시 T를 사용하여야 하는 것은 아니다.
+
+---
+
+<a name="2" />
+
+## 2. 제네릭 사용방법
+
+> 2번은 [공식문서](https://www.typescriptlang.org/docs/handbook/generics.html)에 있는 내용이니
+> 넘어가도 된다.
+
+제네릭 없이 간단한 identity function을 만들어보자.
+
+```ts
+function identity(arg: number): number {
+  return arg;
+}
+```
+
+any 타입을 사용할 수도 있다.
+
+```ts
+function identity(arg: any): any {
+  return arg;
+}
+```
+
+any를 사용할 때는 arg가 모든 타입을 받을 수 있기 때문에 공용적으로 사용 가능하지만, 어떤 값을 반환
+할지에 대한 정보는 알 수가 없다. 만약 인자와 반환자의 타입을 같게 하고, 이를 공용적으로 사용하고
+싶을 경우 제네릭을 사용하면 된다.
+
+```ts
+function identity<T>(arg: T): T {
+  return arg;
+}
+// 제네릭으로 넣은 타입을 인자와 반환 타입으로 공용적으로 사용하고 있다.
+```
+
+호출 시 아래처럼 제네릭으로 명시하면 된다. 두 번째 줄은 제네릭으로 명시하지 않았는데, 이는 인자로
+넣어지는 'myString'타입으로 인해 컴파일러가 자동으로 T의 타입을 정의하기 때문이다.
+
+```ts
+let output = identity<string>('myString');
+let output = identity('myString');
+```
+
+identity 함수의 타입을 명시할 때도 제네릭을 명시할 수 있다. `<T>(arg: T) => T`
+
+- 알파벳은 표현을 위한 수단이기 때문에 알파벳이 달라져도 상관없다.
+- object 리터럴 타입으로도 명시 가능하다.
+
+```ts
+let myIdentity: <T>(arg: T) => T = identity;
+let myIdentity: { <T>(arg: T): T } = identity;
+```
+
+위의 코드를 인터페이스로 표현한다면?
+
+```ts
+interface GenericIdentityFn {
+  <T>(arg: T): T;
+}
+
+let myIdentity: GenericIdentityFn = identity;
+```
+
+재밌게도!! 인터페이스에서 제네릭을 명시하게 할 수도 있다.
+
+```ts
+interface GenericIdentityFn<T> {
+  (arg: T): T;
+}
+
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let myIdentity: GenericIdentityFn<number> = identity;
+myIdentity('1');
+// [ts] '"1"' 형식의 인수는 'number' 형식의 매개 변수에 할당될 수 없습니다. [2345]
+
+let myIdentity2: { <T>(arg: T): T } = identity;
+myIdentity2<number>('1');
+// [ts] '"1"' 형식의 인수는 'number' 형식의 매개 변수에 할당될 수 없습니다. [2345]
+```
+
+클래스에서도 제네릭을 명시할 수 있다.
+
+```ts
+class GenericNumber<T> {
+  zeroValue: T;
+  add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+```
+
+타입스크립트를 리액트와 함께 사용할 때 자주 볼 수 있는 패턴이다.
+
+```ts
+class Component extends React.Component<Props, State>{
+...
+}
+```
+
+제네릭은 인터페이스를 상속받을 수도 있는데, 제네릭을 명시한 함수에서 특정 타입이 들어올 것을
+예상하고 로직을 작성해야 할 경우에 인터페이스를 상속받아 사용 가능하다.
+
+```ts
+interface Lengthwise {
+  length: number;
+}
+
+function loggingIdentity<T extends Lengthwise>(arg: T): T {
+  console.log(arg.length);
+  // Now we know it has a .length property, so no more error
+  return arg;
+}
+```
+
+---
+
+<a name="3" />
+
+## 3. 제네릭은 이런 상황에서는 무의미한 사용이다.
+
+[typeScript deep dive](https://basarat.gitbooks.io/typeScript/docs/types/generics.html) 문서를 보면,
+사람들은 제네릭을 heck스러운 방법으로 사용할 때가 있다고 한다. 개발자가 제네릭을 사용할 때! **어떤
+부분을 강제할 것인지에 대해 제대로 설명하지 못한다면 제네릭을 사용할 필요가 없다고 한다.**
+
+### 🙅 #1
+
+아래 코드를 보면, 제네릭을 명시했지만, 인자 하나에서만 사용되고 있다. 이렇게 하나의 인자를 위해서
+제네릭으로 받는 상황에서는 제네릭은 쓸모없는 무의미한 명시다.
+
+```ts
+declare function foo<T>(arg: T): void;
+
+declare function foo(arg: any): void;
+```
+
+### 🙅 #2
+
+아래의 상황에서는 제네릭의 T가 리턴 값으로 한 번만 사용되었다. type assertion 방법과 딱히 다르지
+않다. 오직 리턴 값 한 번만 사용하기 위한 제네릭은 타입 안정성 측면에서 어셜션보다 나은 방법은
+아니다.
+
+```ts
+declare function parse<T>(name: string): T;
+
+declare function parse(name: string): any;
+
+const something = parse('something') as TypeOfSomething;
+```
+
+그렇다면 어떤 상황에 사용해야 제네릭을 적합하게 사용하는 것일까. api로 응답 값을 받을 때 제네릭을
+사용하면 굉장히 편리하게 사용할 수 있다.
+
+---
+
+<a name="4" />
+
+## 4. ajax콜 이후의 응답 타입을 명시할 때
+
+fetch로 github 정보를 받아오는 함수가 있다고 가정하자. (async, await 사용)
+
+```ts
+const githubUser = await fetchGithubInfo()
+const fetchGithubInfo = async () => {
+  const rep = await fetch('https://api.github.com/users/feel5ny',{
+      method: "GET",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',\
+    })
+  return rep.status >= 500 ? null: rep.jsoin()
+}
+```
+
+제네릭을 몰랐을 때는 아래처럼 써주었다...
+
+```ts
+const githubUser: GithubRep | undefined | null = await fetchGithubInfo();
+```
+
+이런 말도 안 되는 8ㅅ8 githubUser에는 await 함수가 할당되어있는 상황이기 때문에 Promise 타입을
+명시해야 맞는 상황.
+
+때문에 아예 fetchGithubInfo에서 제네릭으로 타입을 받게 변경하였다.
+
+```ts
+const fetchGithubInfo = async <T>(): Promise<T | null> => {
+const rep = await fetch('https://api.github.com/users/feel5ny',{
+      method: "GET",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',\
+    })
+  return rep.status >= 500 ? null: rep.json()
+}
+```
+
+```ts
+const githubUser = await (<GithubRep>fetchGithubInfo());
+```
+
+깔끔! 추후에는 아예 ajax 콜 모듈화한 함수에서 제네릭을 자주 사용하게 되었다.
+
+---
+
+참고
+
+1. https://poiemaweb.com/typeScript-generic
+2. https://basarat.gitbooks.io/typeScript/docs/types/generics.html
+3. https://www.typescriptlang.org/docs/handbook/generics.html

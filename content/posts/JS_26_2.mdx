@@ -1,0 +1,387 @@
+---
+title: 코드스피츠85 2회-(2) 동시성 모델을 직접 구현하며 이해하기.
+date: '2019-11-12'
+description:
+  "코드스피츠 85에서는 none blocking에 대한 이야기와 자바스크립트를 짜는 근본적인 방법에 대한 고찰을
+  이야기해본다. --- \U0001F315\U0001F311\U0001F311 TL;DR setTimer에서부터 promise까지 동시성 모델을
+  기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다...."
+author: Joy Kim
+tags:
+  - javaScript
+  - codeSpitz
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "setTimer",
+        "sub": "setTimer를 구현하여 동시성모델 이해",
+        "id": "setTimer",
+        "style": {
+          "type": "number",
+          "index": "1"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "Non Blocking For",
+        "sub": "Non Blocking처럼 For 구현해보기",
+        "id": "nbFor",
+        "style": {
+          "type": "number",
+          "index": "2"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "Generator",
+        "sub": "Non Blocking처럼 For 구현해보기",
+        "id": "generator",
+        "style": {
+          "type": "number",
+          "index": "3"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "Promise",
+        "sub": "비동기 반제어",
+        "id": "promise",
+        "style": {
+          "type": "number",
+          "index": "4"
+        }
+      }
+    }
+  ]
+thumbnail: /images/2019/37/thumb_default.jpg
+---
+
+코드스피츠 85에서는 `none blocking`에 대한 이야기와 자바스크립트를 짜는 근본적인 방법에 대한 고찰을
+이야기해본다.
+
+---
+
+🌕🌑🌑
+
+## TL;DR
+
+setTimer에서부터 promise까지 동시성 모델을 기반으로 구현하며, 루프 제어권의 통제에 대하여 알아본다.
+
+---
+
+<a name="setTimer" />
+
+## 1. setTimer를 구현해보기
+
+### entity
+
+1. Item
+
+- 실행될 시간과 실행할 시간을 갖고 있는 객체
+
+2. queue
+
+- callback queue 역할을 하는 큐
+- 객체 리스트 형태인 Set으로 생성
+
+```ts
+const Item = class {
+  time: number; // 몇초 후에 실행할지
+  block: Function; // 몇초 후에 실행할 함수
+  constructor(block, time) {
+    this.block = block;
+    this.time = time + performance.now();
+  }
+};
+
+const queue = new Set();
+```
+
+<details>
+  <summary>cf__1. performace, Set, value</summary>
+  <ul>
+    <li>
+      <code>performance.now()</code>
+      <ul>
+        <li>브라우저가 실행되 이후에 지난 시간</li>
+        <li>date.now()보다 좋은 점은 나노초까지 볼 수 있다.</li>
+      </ul>
+    </li>
+    <li>
+      <code>Set</code>
+      <ul>
+        <li>배열에 담을 수 있는건 값만 담을 수 있다.</li>
+        <li>같은 객체가 중복으로 들어가지 않는다.</li>
+        <li>객체를 담는 리스트</li>
+      </ul>
+    </li>
+    <li>
+      <code>value</code>
+      <ul>
+        <li>불변</li>
+        <li>자체의 값으로 판단한다.</li>
+        <li>값으로 식별된다.</li>
+      </ul>
+    </li>
+  </ul>
+</details>
+
+---
+
+### Core Action
+
+1. callback 큐를 지속적으로 체크한다.
+
+- 큐에 호출시간보다 작으면 실행하지 않는다.
+- 큐에 호출시간보다 크면
+  1. 실행하고
+  2. 삭제한다.
+
+```ts
+@params time 현재시간
+const checkQueue = (time: number) => {
+  queue.forEach((item: {time: number, block: Function}) => {
+    if(item.time > time) return; // 현재시간이 호출시간보다 작다면 실행하지 않음.
+    else { // 현재시간이 호출시간보다 작다면 실행.
+      queue.delete(item); // 실행할 예정이기때문에 삭제
+      item.block(); // 실행
+    }
+  });
+  requestAnimationFrame(checkQueue);
+}
+requestAnimationFrame(checkQueue);
+```
+
+> **cf\_\_2 `requestAnimationFrame`**
+
+- 브라우저에게 수행하기를 원하는 애니메이션을 알리고, 다음 리페인트가 진행되기 전에 해당
+  애니메이션을 업데이트하는 함수를 호출하게 한다.
+- 리페인트 이전에 실행할 콜백을 인자로 받는다.
+- 엔진이 렌더링이 끝나면 직접 발생시키는 함수
+
+---
+
+#### 트리거
+
+```ts
+const timeout = (block: Funtion, time: number) => queue.add(new Item(block, time));
+```
+
+---
+
+#### 확인해보자.
+
+```ts
+timeout(_ => console.log('hello'), 1000);
+```
+
+### 정리
+
+**방금 구현한 setTimer를 동시성 모델로 구현해보면?**
+
+<img src="/images/2019/37/01.jpg" style="width: 100%" />
+
+**좀더 큰 그림에서 보면?**
+
+<img src="/images/2019/37/02.jpg" style="width: 100%" />
+
+- 동시성을 만들어내는 이벤트 루프 안에 작은 이벤트 루프를 만들어낸 것.
+
+---
+
+---
+
+<a name="nbFor" />
+
+## 2. Non Blocking For 구현해보기
+
+```ts
+const working = _ => {};
+for(let i=0; i < 100000; i++) working();
+
+@params max 최대 루프수
+@params load 한번에 로드할 카운트
+@params block 실행할 함수
+const nbFor = (max:number, load: number, block: Function) => {
+  let i = 0;
+
+
+  const f = (time:number) => {
+    let curr = load;
+    // 한번에 로드할 카운트를 상태로 받기 위해 변수에 할당
+    while(curr-- && i < max) {
+      // 1. 1회돌때마다 현재 상태를 하나씩 뺀다.
+      block();
+      // 2. 실행
+      i++;
+    }
+    console.log(i);
+    if(i < max-1) requestAnimationFrame(f)
+  }
+
+
+  requestAnimationFrame(f); // --- (1)
+}
+```
+
+1. `requestAnimationFrame`으로 내부함수 `f`가 실행
+2. load기준으로 반복 카운트가 chunk된다.
+3. while문이 한 셋트가(load 카운트가 종료) 끝나면, `requestAnimationFrame`으로 `f`함수를 다시
+   실행시킨다.
+
+- 하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.
+
+4. 다시
+5. max까지 루프가 끝나면 더이상 f를 실행하지 않음.
+
+- 하나의 프레임이 끝나면 제어권을 다시 엔진에게 돌려준다.
+- 클로저 패턴이 존재, i가 상태를 물고 있음
+
+---
+
+---
+
+<a name="generator" />
+
+## 3. Generator 구현해보기
+
+- [제너레이터 글참고](https://feel5ny.github.io/2019/02/03/JS_19/)
+
+```ts
+const infinity: Iterator = (function* () {
+  let i = 0;
+  while (true) yield i++;
+})();
+console.log(infinity.next());
+```
+
+```ts
+// lib.es2015.iterable.d.ts
+interface IteratorResult<T> {
+  done: boolean;
+  value: T;
+}
+
+interface Iterator<T> {
+  next(value?: any): IteratorResult<T>;
+  return?(value?: any): IteratorResult<T>;
+  throw?(e?: any): IteratorResult<T>;
+}
+```
+
+- 제너레이터는 **유사 iterable**이다.
+  - 제너레이터 자체는 iterable이 아니다.
+  - iterable은 iterator라는 함수(`[Symbol.iterator]()`)를 호출하면 iterator 객체를 주는데,
+    generator를 호출하면 iterator가 반환된다.
+  - generator는 `for...of`를 사용하지 못한다. for...of는 iterable이 와야하기 때문에
+- `yield`가 일어날 때마다 `next`로 다음 턴을 줄 수 있다.
+
+---
+
+### `function*`
+
+- 내부적으로 **suspend** 구간을 생성한다.
+  - 동기명령은 절대로 멈출 수 없다.
+    - generator는 멈출 수 있다.
+    - generator는 중간에 끊을 수 있다.
+- **yield를 호출하면 suspend가 일어난다.**
+  - 멈춘다.
+  - 다음번 next 호출시 내부적으로 다시 재개되어서 루프돈다.
+    - next 호출할때마다 `suspend`가 일어난 곳에서 `resume`이 일어난다.
+    - 멈추는 것: `suspend`
+    - 다시 재개: `resume`
+
+```ts
+const gene = function* (max: number, load: number, block: Function) {
+  let i = 0,
+    curr = load;
+  while (i < max) {
+    if (curr--) {
+      block();
+      i++;
+    } else {
+      curr = load; // curr을 초기화하고
+      console.log(i);
+      yield; // 제어권을 밖에 둔다.
+    }
+  }
+};
+```
+
+- suspend로 멈춰서 제어권을 외부에 위임할 수 있다.
+- `gene.next()`
+
+```ts
+const nbFor = (max, load, block) => {
+  const iterator: Iterator = gene(max, load, block);
+  const f = _ => iterator.next().done || timeout(f);
+  timeout(f); // timeout을 쓰는 위치를 밖으로 옮겼다.
+};
+```
+
+**제어 시스템의 반제어권을 외부에 줌으로써** 내부에서 제어와 관련된 로직을 분리시킬수 있게 된다는게
+제너레이터의 장점
+
+---
+
+---
+
+<a name="promise" />
+
+## 4. Promise 구현해보기
+
+- 비동기 반제어
+
+1. 트리거를 걸었음
+2. 서버가 3초만에 데이터를 줬음
+3. 3초 안에는 제어할 권한이 없음
+4. 3초 이후에는 제어할 권한이 있음
+
+- Promise에 바로 `then`을 사용하는 것은 반제어권이 이점을 활용하지 않고 **콜백처럼 쓰는 형태**
+- 내가 원할때 then을 호출할 수 있다.
+
+```ts
+const gene2 = function* (max, load, block) {
+  let i = 0;
+  while (i < max) {
+    yield new Promise(res => {
+      let curr = load;
+      while (curr-- && i < max) {
+        block();
+        i++;
+      }
+      console.log(i);
+      timeout(res, 0);
+    });
+  }
+};
+```
+
+- yield를 보낼때 Promise로 감싸서 보내고 있다.
+- 제어권을 완전 양도했었지만 위 코드는 capsulizing해서 Promise안의 작업이 끝나면 then을 호출할 수
+  있게끔 반제어권을 주었음.
+
+```ts
+const nbFor = (max, load, block) => {
+  const iterator: Iterator<Promise> = gene2(max, load, block);
+  const next = ({ value, done }) => dome || value.then(v => next(iterator.next()));
+  next(iterator.next());
+};
+```
+
+- nbFor에서는 트리거 역할만하는 것이고,
+- 제어는 Promise가 한다.
+- co함수, redux-saga, ...
+
+---
+
+## 참고자료
+
+- [requestAnimationFrame](https://developers.google.com/web/fundamentals/performance/rendering/optimize-javascript-execution?hl=ko)

@@ -1,0 +1,297 @@
+---
+title: 7/ BOM (브라우저 객체 모델)
+date: '2017-12-26'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. --- --- 목차 1. window 객체 ---- 1편 &#128070; 2. location 객체   2.1
+  쿼리스트링 확장   2.2 loc...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/57/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요.
+
+---
+
+---
+
+**목차**
+
+1. window 객체 ---- 1편 &#128070;
+2. [location 객체](#location) 2.1 쿼리스트링 확장 2.2 location 조작
+3. [navigator 객체](#navigator) 3.1 플러그인 감지 3.2 처리기 등록
+4. [screen 객체](#screen)
+5. [history 객체](#history)
+
+---
+
+---
+
+## <a name="location" ></a> 2. location 객체
+
+- BOM에서 가장 유용한 객체중 하나.
+- 문서 정보와 함께 내비게이션 기능을 제공하다.
+- location객체는 window의 프로퍼티인 동시에 document의 프로퍼티이다.
+- `window.location`과 `document.location`은 같은 객체를 가리킨다.
+- location은 **현재 문서에 대한 정보**를 갖고 있으며 URL을 파싱해서 몇 가지 조각으로 분리해 각각을
+  프로퍼티에 저장한다.
+
+location의 프로퍼티들을 살펴보자.
+
+- `hash` (예: "#/0/1" http://slides.com/nayoung/deck-8#/0/1)
+  - #기호 다음에 문자가 오는 형태의 URL 해시. URL에 해시가 없다면 빈 문자열
+- `host` (예: "localhost:4000")
+  - 서버 이름과 포트번호 (있다면)
+- `hostname` (예: "localhost")
+  - 포트 번호를 제외한 서버 이름
+- `href` (예: "http://localhost:4000/2017/12/28/JS_07/")
+  - 현재 페이지의 완전한 URL
+  - location의 `toString()`메서드는 이 값을 반환
+- `pathname` (예: "/2017/12/28/JS_07/")
+  - URL에 포함된 디렉터리 및 파일 이름
+- `port` (예: "4000")
+  - URL의 요청 포트(존재한다면)이다. URL에 포트가 없으면 이 프로퍼티는 빈 문자열 반환
+- `protocol` (예: "http:")
+  - 페이지에서 사용하는 프로토콜. 일반적으로 "http:"나 "https:"중 하나이다. 프로토콜을 `스키마`라고
+    부르기도 한다.
+- `search` (예: "?q=window")
+  - URL의 쿼리스트링 부분. 물음표 기호로 시작하는 문자열을 반환
+
+---
+
+### 2.1 쿼리스트링 확장
+
+URL 정보 중 쿼리스트링은 다루기 쉬운 형태로 제공되지 않는다. 즉, 하나씩 분리해서 제공하지 않는다는
+말. 아래 함수를 이용하면 쿼리스트링을 파싱해서 각 매개변수를 프로퍼티로 갖는 객체를 반환한다.
+
+```js
+function getQueryStringArgs(teset){
+  const qs = {location.search.length > 0 > location.search.substring(1) : ""}, // 쿼리스트링이 존재하면 물음표를 제외하고 qs에 할당한다.
+  args = {},
+
+  items = qs.length ? qs.split("&") : [],
+  item = null,
+  name = null,
+  value = null,
+
+  // for 루프에서 사용할 변수
+  i = 0,
+  len = items.length;
+
+  // 각각 매개변수를 args 객체에 할당
+  for (i = 0; i < len; i++){
+    item = item[i].split("=");
+    name = decodeURIComponent(item[0]);
+    value = decodeURIComponent(item[1]);
+
+    if(name.length) {
+      args[name] = value;
+    }
+  }
+
+  return args;
+}
+```
+
+1. 물음표 제거.
+2. args를 객체 리터럴 형식으로 생성
+3. args의 객체에 split으로 분리된 배열의 첫번째 인자가 name, 두번째 인자가 value에 들어간다.
+
+**결과**
+
+```
+https://www.google.co.kr/search?newwindow=1&tbm=isch&q=그리드+다단&cad=h
+args = {newwindow: "1", tbm: "isch", q: "그리드+다단", cad: "h"}
+```
+
+#### \* `decodeURIComponent`
+
+HTML에서 한글이 섞인 주소는 오작동할 수 있기 때문에 이스케이프 시켜야한다. 예 : "나영" =>
+"%EB%82%98%EC%98%81" 이를 `인코딩`이라고 하며, 반대로 다시 언어화를 시켜주는 `디코딩`이 있습니다.
+`decodeURIComponent`는 `http://` 부터 모두 디코딩을 해줍니다.
+
+---
+
+### 2.2 location 조작
+
+- location.assign("https://feel5ny.github.io/")
+  - 메서드
+  - 해당 URL로 이동한다.
+- location.href = ""
+  - 현재 위치해있는 URL 뒤에 추가된다.
+- location.hash = ""
+  - `#`와 함께 인자가 URL 뒤에 추가된다.
+  - hash 프로퍼티를 바꿀 때는 새 URL로 페이지를 다시 읽지 않는다.
+- location.search = "q=test"
+  - 현재 주소값에 search가 있는 경우, `q=` 뒤에 검색 단어를 추가한다.
+- location.hostname = "www.naver.com"
+  - 현재 주소에서 앞부분 main 주소값이 바뀐다.
+- location.pathname
+  - 첫번째 path가 바뀐다.
+  ```js
+  // https://developer.mozilla.org/ko/?q=nayn
+  location.pathname = 'en-Us';
+  // https://developer.mozilla.org/en-US/?q=nayn
+  ```
+
+위의 프로퍼티들은 브라우저 히스토리 스택에 쌓이기 때문에 뒤로가기 버튼이 적용된다. **replace는
+그렇지 않다.**
+
+- location.replace("www.naver.com")
+  - 히스토리 스택에 쌓이지 않는다.
+- location.reload(true)
+  - 현재 페이지를 다시 불러온다.
+  - `매개변수 없이 호출하면` 페이지를 가능한 한 가장 효과적인 방법으로 다시 읽는다. 즉, 페이지가
+    바뀌지 않았다면 **브라우저 캐시**에서 읽어온다.
+  - `매개변수로 true를 넘기면` 서버에서 읽어오도록 강제하게된다.
+  - reload() 호출 이후의 코드는 네트워크 지연이나 시스템 자원같은 요인에 따라 실행될 수도 있고 아닐
+    수도 있기 때문에 **코드 마지막에 둔다.**
+
+---
+
+---
+
+## <a name="navigator" ></a> 3. navigator 객체
+
+클라이언트에서 브라우저를 구별하는 방법의 표준으로 쓰였다. navigator 객체의 프로퍼티는 일반적으로 웹
+페이지를 실행 중인 브라우저 타입을 판단하는 데 사용한다. ( \*은 크롬 )
+
+| 프로퍼티/메서드             | 설명                                                                                                                                                   | IE   | 파이어폭스 | 사파리/크롬 | 오페라 |
+| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--- | :--------: | :---------: | :----: |
+| \*`appCodeName`             | 브라우저 이름이다. 모질라 브라우저가 아니어도 일반적으로 "Mozila"                                                                                      | 3.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `appMinorVersion`           | 추가적인 버전 정보이다.                                                                                                                                | 4.0+ |     -      |      -      |  9.5+  |
+| \*`appName`                 | 완전한 브라우저 이름이다.                                                                                                                              | 3.0+ |    1.0+    |    1.0+     |  7.0+  |
+| \*`appVersion`              | 브라우저 버전입니다. 일반적으로 브라우저 실제 버전과는 다르다.                                                                                         | 3.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `buildID`                   | 브라우저의 빌드 번호이다.                                                                                                                              | -    |    2.0+    |      -      |   -    |
+| \*`cookieEnabled`           | 쿠키가 활성화되어 있는지 나타낸다.                                                                                                                     | 4.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `cpuClass`                  | 클라이언트 컴퓨터의 CPU 타입이다. "x86", "68K", "Alpha", "PPC", "Ohter"가 있습니다.                                                                    | 4.0+ |     -      |      -      |   -    |
+| \*`javaEnabled`             | 브라우저에 자바가 활성화되어 있는지 나타낸다.                                                                                                          | 4.0+ |    1.0+    |    1.0+     |  7.0+  |
+| \*`language`                | 브라우저의 우선적 언어(한국어, 영어..)를 나타낸다.                                                                                                     | -    |    1.0+    |    1.0+     |  7.0+  |
+| \*`mimeTypes`               | 브라우저에 등록된 [마임 타입](https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types)을 나열한 배열이다.                             | 4.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `onLine`                    | 브라우저가 인터넷에 연결되어 있는지 나타낸다.                                                                                                          | 4.0+ |    1.0+    |      -      |  9.5+  |
+| `opsProfile`                | 브라우저가 인터넷에 연결되어 있는지 나타낸다.                                                                                                          | 4.0+ |     -      |      -      |   -    |
+| `oscpu`                     | 거의 사용하지 않으며 문서도 없다.                                                                                                                      | -    |    1.0+    |      -      |   -    |
+| \*`platform`                | 브라우저가 실행중인 운영체제와 CPU를 타나낸다.                                                                                                         | 4.0+ |    1.0+    |    1.0+     |  7.0+  |
+| \*`plugins`                 | 브라우저에 설치된 플러그인을 나열한 배열이다. IE에서는 페이지의 `<embed>`요소를 나열한 배열이다.                                                       | 4.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `preference()`              | 사용자 선호사항을 설정한다. 특권모드에서만 접근가능                                                                                                    | -    |    1.5+    |      -      |   -    |
+| \*`product`                 | 브라우저 이름. 일반적으로 ["Gecko"](<https://ko.wikipedia.org/wiki/%EA%B2%8C%EC%BD%94_(%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83_%EC%97%94%EC%A7%84)>)이다. | -    |    1.0+    |    1.0+     |   -    |
+| \*`productSub`              | 브라우저에 대한 추가정보. 일반적으로 게코 버전 정보.                                                                                                   | -    |    1.0+    |    1.0+     |   -    |
+| `registerContentHandler()`  | 웹사이트를 특정 마임 타입 처리기로 등록한다.                                                                                                           | -    |    2.0+    |      -      |   -    |
+| `registerProtocolHandler()` | 웹사이트를 특정 프로토콜 처리기로 등록한다.                                                                                                            | -    |    2.0+    |      -      |   -    |
+| `securityPolicy`            | 보안 정책 이름이지만 폐기되었다.                                                                                                                       | -    |    1.0+    |      -      |   -    |
+| `systemLanguage`            | 운영체제의 언어이다.                                                                                                                                   | 4.0+ |     -      |      -      |   -    |
+| `taintEnabled()`            | 변수 테인트가 활성화 되어 잇는지 나타내지만 폐기된 기능.                                                                                               | 4.0+ |    1.0+    |      -      |  7.0+  |
+| \*`userAgent`               | 브라우저 문자열이다.                                                                                                                                   | 3.0+ |    1.0+    |    1.0+     |  7.0+  |
+| `userLanguage`              | 운영체제의 기본 언어이다.                                                                                                                              | 4.0+ |     -      |      -      |  7.0+  |
+| `userProfile`               | 사용자 프로필 정보에 접근할 때 사용하는 객체                                                                                                           | 4.0+ |     -      |      -      |   -    |
+| \*`vendor`                  | 브라우저 제조사 이름이다.                                                                                                                              | -    |    1.0+    |    1.0+     |   -    |
+| \*`vendorSub`               | 제조사에 대한 추가 정보이다.                                                                                                                           | -    |    1.0+    |    1.0+     |   -    |
+
+---
+
+### 3.1 플러그인 감지
+
+현재 크롬의 plugins
+
+```js
+[
+  {
+    0: MimeType,
+    application/x-google-chrome-pdf: MimeType,
+    name: "Chrome PDF Plugin",  // 플러그인 이름
+    filename: "internal-pdf-viewer",  // 플러그인의 파일 이름
+    description: "Portable Document Format", // 플러그인 설명
+    length: 1 // 플러그인이 처리하는 마임 타입 숫자
+  },
+  {0: MimeType, application/pdf: MimeType, name: "Chrome PDF Viewer", filename: "mhjfbmdgcfjbbpaeojofohoefgiehjai", description: "", length: 1},
+  {0: MimeType, 1: MimeType, application/x-nacl: MimeType, application/x-pnacl: MimeType, name: "Native Client", filename: "internal-nacl-plugin", description: "", …},
+  {0: MimeType, 1: MimeType, application/x-shockwave-flash: MimeType, application/futuresplash: MimeType, name: "Shockwave Flash", filename: "PepperFlashPlayer.plugin", description: "Shockwave Flash 28.0 r0", …},
+  {0: MimeType, application/x-ppapi-widevine-cdm: MimeType, name: "Widevine Content Decryption Module", filename: "widevinecdmadapter.plugin", description: "Enables Widevine licenses for playback of HTML audio/video content. (version: 1.4.8.1030)", length: 1}
+]
+```
+
+---
+
+### 3.2 처리기 등록
+
+---
+
+---
+
+## <a name="screen" ></a> 4. screen 객체
+
+window의 프로퍼티이다. 픽셀 너비와 높이 등 클라이언트 화면에 대한 정보가 들어있다.
+
+- 개인적인 생각 : UI나 인터렉션부분에서 많이 적용될 듯 하다.
+
+(\*은 크롬)
+
+| 프로퍼티/메서드        | 설명                                                                  | IE  | 파이어폭스 | 사파리/크롬 | 오페라 |
+| :--------------------- | :-------------------------------------------------------------------- | :-- | :--------: | :---------: | :----: |
+| \*`availHeight`        | 시스템 요소를 제외한 화면의 픽셀 높이이다.                            | ○   |     ○      |      ○      |   ○    |
+| \*`availLeft`          | 시스템 요소가 아닌 영역 중 왼쪽에서 첫 번째 픽셀이다. (읽기전용)      |     |     ○      |      ○      |        |
+| \*`availTop`           | 시스템 요소가 아닌 영역 중 위에서 첫 번째 픽셀이다. (읽기전용)        |     |     ○      |      ○      |        |
+| \*`availWidth`         | 시스템 요소를 제외한 화면의 픽셀 너비이다. (읽기전용)                 | ○   |     ○      |      ○      |   ○    |
+| `bufferDepth`          | 시스템 요소를 제외한 화면의 픽셀 너비이다. (읽기전용)                 | ○   |            |             |        |
+| \*`colorDepth`         | 색깔 비트 숫자이며 대부분 32이다. (읽기전용)                          | ○   |     ○      |      ○      |   ○    |
+| `deviceXDPI`           | 화면의 실제 가로 DPI이다. (읽기전용)                                  | ○   |            |             |        |
+| `deviceYDPI`           | 화면의 실제 세로 DPI이다. (읽기전용)                                  | ○   |            |             |        |
+| `fontSmoothingEnabled` | 폰트를 부드럽게 처리하는 기술이 활성화되어있는지 나타낸다. (읽기전용) | ○   |            |             |        |
+| \*`height`             | 화면의 픽셀 높이이다.                                                 | ○   |     ○      |      ○      |   ○    |
+| `left`                 | 현재 화면의 왼쪽 모서리로부터의 픽셀 거리이다.                        |     |     ○      |             |        |
+| `logicalXDPI`          | 화면의 논리적 가로 DPI이다. (읽기전용)                                | ○   |            |             |        |
+| `logicalYDPI`          | 화면의 논리적 세로 DPI이다. (읽기전용)                                | ○   |            |             |        |
+| \*`pixelDepth`         | 화면의 픽셀당 비트 숫자이다. (읽기전용)                               |     |     ○      |      ○      |   ○    |
+| `top`                  | 현재 화면의 위쪽 모서리로부터의 픽셀 거리이다.                        |     |     ○      |             |        |
+| `updateInterval`       | 화면을 몇 밀리초마다 업데이트하는지 나타낸다.                         | ○   |            |             |        |
+| \*`width`              | 화면의 픽셀너비이다.                                                  | ○   |     ○      |      ○      |   ○    |
+
+---
+
+---
+
+## <a name="history" ></a> 5. history 객체
+
+- window의 프로퍼티.
+- 창을 첫 번째 연 이후 사용자의 내비게이션 히스토리를 보관한다.
+- 브라우저 창, 탭, 프레임은 각각 자신의 window 객체에 속한 history객체를 가진다.
+- 보안을 이유로 사용자가 방문했던 URL은 알 수 없다.
+  <img src ="/images/post_img/57/01.png" />
+> 알 수 없는 url
+
+### 메서드
+
+#### 1. go()
+
+`history.go(-1)` : 한페이지 뒤로 `history.go(1)` : 한페이지 앞으로 `history.go(2)` : 두페이지 앞으로
+
+#### 2. back()
+
+한페이지 뒤로
+
+#### 3. forward()
+
+한페이지 앞으로
+
+### 프로퍼티
+
+`length` : history 스택에 기록이 얼마나 많이 있는지 나타낸다. 0일경우 사용자가 페이지를 처음 열었을
+때인 것이다.
+
+---
+
+### 참고링크
+
+1. http://meetup.toast.com/posts/89
+
+### 생소했던 단어
+
+1. MIME타입
+2. Gecko

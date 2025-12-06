@@ -1,0 +1,485 @@
+---
+title: CodeSpitz78 5/ OOAD와 테트리스 (2)
+date: '2018-10-10'
+description:
+  "\U0001F315\U0001F311\U0001F311 > \U0001F525 코드스피츠 수업을 수강하면서 복습한 내용을
+  정리했습니다. > 아직 정리중.. --- 1. Stage Stage 클래스는 뭘 필요로 할까?  1. 판   마지막 판이 몇
+  판일까? = 몇 판까지 있을까? 2. 속도   판마다 속도가 증가한다.   -..."
+author: Joy Kim
+tags:
+  - javaScript
+  - OOP
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. Stage",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. Score",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. Block",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. Renderer",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/2018/37/thumb_default.jpg
+---
+
+🌕🌑🌑
+
+> 🔥 코드스피츠 수업을 수강하면서 복습한 내용을 정리했습니다. 아직 정리중..
+
+---
+
+<a name="1"></a>
+## 1. Stage ### Stage 클래스는 뭘 필요로 할까? 1. 판 마지막 판이 몇 판일까? = 몇 판까지 있을까? 2.
+속도 ** 판마다 속도가 증가한다.** - 최소 속도 - 최대 속도 ** 속도는 어떤 객체가 가져가야할까?** -
+Game보다는 Stage가 적합. - 캡슐화와 은닉화의 속성을 이용하여, 속도의 처리는 stage내에서만 처리하게
+한 후, 외부에서는 최종 속도만 받을 수 있도록 한다. (getter) - 초기 속도 - 자기의 변화를 listener한테
+통보하는 것으로 처리만 하고 - listner의 형태를 직접 알 필요는 없게 한다.
+
+```js
+// Object.assign 쓰기 번거로워서 함수 만들긔
+const prop = (target, v) => Object.assign(target, v);
+```
+
+```js
+const Stage = class {
+  constructor(last, min, max, listener) {
+    // last는 마지막 판
+    // min,max는 속도
+    // listener: 다른 객체와 관계를 맺지 않게 해주는 역할
+    // 게임 패널들의 스테이지 그래픽이 갱신을 위해서 listener를 달아줌.
+    prop(this, { last, min, max, listener });
+  }
+  clear() {
+    //초기화
+    this.curr = 0; // 현재 스테이지 넘버
+    this.next();
+  }
+  next() {
+    // 속도 비율 = 현재판 - 1 / 마지막 판 - 1
+    // 블럭 내려올 때 딜레이 속도 = (this.max - this.min) * (1 - rate);
+    // => 점점 작아진다. => 최종 속도는 빨라짐
+    if (this.curr++ < Stage.last) {
+      const rate = (this.curr - 1) / (this.last - 1);
+      this.speed = this.min + (this.max - this.min) * (1 - rate);
+      this.listener();
+    }
+  }
+};
+```
+
+---
+
+<a name="2"></a>
+## 2. Score
+
+```js
+const Score = class {
+  constructor(listener){
+    prop(this, {listener});
+    // 스코어의 그래픽을 갱신시키기 위해서 통보용으로 listener 추가
+  }
+  clear(){
+    this.curr = 0;
+    this.total = 0;
+  }
+  add(line, stage){
+    // line이 지워지는 갯수를 포인트 증가율
+    // stage 마다 line하나 지울때마다 점수가 다름
+    const score = ???;
+    this.curr += score; // 현재 점수값에도 반영
+    this.total += score; // 전체 점수값에도 반영
+    this.listener();
+  }
+}
+```
+
+---
+
+---
+
+### cf\_\_1 역할, 책임, 협력
+
+프로그래밍의 실체는 **수행해야하는 job이 누구의 역할과 책임으로 넘어가야하는지를 의사결정하는
+행위.**
+
+#### 🍡 객체지향
+
+객체지향에서는 **컨텍스트**라는 방법이 있다. 인스턴스별로 컨텍스트라는 유지한다. (컨텍스트:
+인스턴스마다 고유하게 부여되어 있는 메모리).
+
+**함수에서 값을 가져오는 방법 2가지. **
+
+1. 내가 인자로 값을 가져올지,
+2. 컨텍스트로 가져올지.
+
+---
+
+#### 🍢 함수형 프로그래밍과 객체지향 프로그래밍의 차이점.
+
+- 함수형 프로그래밍에서는 **자유변수를 통해서 함수를 유지한다.**
+- 자유변수를 유지하기 위해서는 새로운 함수 생성이 필요하다. (클로저)
+- why? 함수가 태어날때 마다 자유변수로 인지하기 때문에.
+
+---
+
+#### 🍭 객체지향을 통해서 클래스의 인스턴스를 만드는 행위를 함수형으로 바꾸면?
+
+- 필요한 자유변수를 함수를 만들어서 리턴하는 행위와 같다.
+- 그 함수가 컨텍스트 대신 **자유변수로 해당 상태를 기억하고 있을테니까.**
+- <span class="mint">**객체지향**</span>에서 인스턴스의 수만큼 =>  함수를 생성하는 걸로 <span class="orange">**함수지향**</span>으로 바꿀 수 있다.
+
+```js
+const Score = class {
+  constructor(listener){
+    prop(this, {listener});
+    // 스코어의 그래픽을 갱신시키기 위해서 통보용으로 listener 추가
+  }
+  clear(){
+    this.curr = 0;
+    this.total = 0;
+  }
+  add(line, stage){
+    // score 계산을 위해서는 stage만 알 수 있는 값을 이용해야하기 때문에
+    // stage 내부에 score를 계산하는 책임을 주고,(위임)
+    // Score의 add함수에서는 score를 호출, 점수만 더하는 책임만 준다.(협력)
+    const score = stage.score(line);
+    this.curr += score; // 현재 점수값에도 반영
+    this.total += score; // 전체 점수값에도 반영
+    this.listener();
+  }
+}
+const Stage = class {
+  ...
+  score(line) {
+    return parseInt((this.curr * 5) * (2 ** line))
+  }
+}
+
+
+```
+
+---
+
+#### 스코어와 스테이지 간의 coupling 관계
+
+현재는 **약한 바인딩.** add 함수 호출시에만 임시적으로 외부 인자로 들어오기때문에
+
+But, 하나의 게임 안에서는 스테이지와 스코어를 동시에 소유하고 바뀌지 않는다.
+
+- **게임에서의 스테이지 관리자와 스코어 관리자는 관계가 항구적.** 즉, 게임이 진행되는 동안. 즉 매번
+  인자로 보내면 안된다.
+- 맥락상 맞지 않다는 말. stage를 add함수의 인자로 보낸다는 것은 스코어를 더 할때마다 임시적으로
+  바인딩한다는 것인데 이는 위의 항구적인 관계와 맞지 않음. (코드의 의미가 맞지 않음.)
+- 때문에 add의 인자가 아니라 컨텍스트 변수로 옮겨줘야한다.
+
+**도메인을 바라보고 어디 쪽의 역할이 맞는지 항상 의사결정을 해야한다.**
+
+```js
+const Score = class {
+  constructor(👉stage, listener){
+    prop(this, {stage, listener});
+  }
+  clear(){
+    this.curr = 0;
+    this.total = 0;
+  }
+  add(line){
+    const score = 👉this.stage.score(line);
+    this.curr += score; // 현재 점수값에도 반영
+    this.total += score; // 전체 점수값에도 반영
+    this.listener();
+  }
+}
+const Stage = class {
+  ...
+  score(line) {
+    return parseInt((this.curr * 5) * (2 ** line))
+  }
+}
+```
+
+<img src="/images/2018/38/01.png" style="width:100%" />
+score와 stage간의 의존성이 생김
+
+> 코드는 여러분들이 모국어로 쓰지 않기 때문에 동작만 하면 다 똑같은 코드로 보인다. 코드도 언어이기
+> 때문에 한국어의 미묘한 늬앙스를 다양한 형사와 동사로 표현하는 것처럼, **코드도 동작해도 표현방법에
+> 따라서 늬앙스를 다 표현할 수 있다.**
+
+---
+
+<a name="3" ></a>
+## 3. Block
+#### 클래스일까 인스턴스일까.
+- 찍어낼 수 있어야 한다. => 클래스 
+- 부모클래스 >> 자식클래스
+
+#### 블럭 정의
+
+- 테트리스 블럭은 회전을 할 수 있다. **회전축, 회전점**을 정의하자.
+  <img src="/images/2018/38/02.png" style="width: 120px; margin: 0" />
+  세로와 가로의 모습을 보면 **2차원 배열**로 구현할 수 있다는 것이 보인다. (행과 열)
+
+cf\_\_2 연산은 데이터로 바꿀 수 있다. `데이터 하나로 연산화 시킴` or `데이터 2개로 연산비용을 낮춤.`
+
+- 예전에는 머신이 낮고 메모리가 낮았기 때문에 연산을 중심으로 움직이고 메모리 비용을 낮추는 방향으로
+  갔음.
+- cpu 비용을 아끼고(연산비용을 줄이고) 메모리 비용을 사용하는 방향이 요즘 추세
+
+```js
+// Block 클래스 : 카테고라이제이션 하는 중..
+// => 모든 자식 블럭들이 공통으로 가져야하는 속성들
+const Block = class {
+  constructor(color) {
+    prop(this, {color, rotate:0};)
+  }
+  // rotate: CW, CCW (시계방향, 시계반대방향 개념)
+  left() {
+    if(--this.rotate < 0) this.rotate = 3;
+  }
+  right() {
+    if(++this.rotate > 3) this.rotate = 0;
+  }
+  getBlock(){throw 'override!';}
+}
+const blocks = [class extends Block, ...]
+```
+
+<img src="/images/2018/38/02.png" style="width: 120px; margin: 0" />
+```js
+class extends Block {
+  constructor(){
+    super('#f8cbad');
+  }
+  getBlock(){
+    return this.rotate % 2 ?
+      [[1], [1], [1], [1]] : 
+      [[1,1,1,1]]
+      // [[1], [1], [1], [1]] 컬럼이 하나만 있는 row가 4개인 배열 : |
+      // [[1,1,1,1]] row가 하나만 있는 컬럼이 4개인 배열: ----
+  }
+}
+```
+
+<img src="/images/2018/38/03.png" style="width: 150px; margin: 0" />
+```js
+class extends Block {
+  constructor(){
+    super('#f8cbad');
+  }
+  getBlock(){
+    switch(this.rotate){
+      case 0: return [[0,1,0], [1,1,1]]
+      case 1: return [[1,0], [1,1], [1,0]]
+      case 2: return [[1,1,1], [0,1,0]]
+      case 3: return [[0,1], [1,1], [0,1]]
+    }
+  }
+}
+```
+
+### 충분히 추상화가 되었을까?
+
+rotation은 부모클래스인 Block에서 관리 자식이 부모의 속성을 갖는 것은 **은닉을 깨고 있는 것**
+
+- 부모 자식간에도 캡슐화와 은닉화가 성립해야한다.
+- `this.rotate`로 접근하고 있다.
+- `this.rotate % 2` 부모의 rotate 정의에 자식이 맞추고 있다.
+  > 코드의 책임, 역할을 의인화 시켜서 생각하는 것이 좋다.
+
+getBlcok()을 호출할 때마다 **배열을 매번 생성하고 있다.**
+
+- 컨텍스트 데이터가 되어야한다.
+
+다시 개선
+
+```js
+const Block = class {
+  constructor(color, ✨✨...blocks) {
+    prop(this, {
+      color,
+      rotate:0,
+      ✨✨blocks,
+      ✨✨count: blocks.length - 1 // 회전 카운트
+    };)
+  }
+  left() {
+    if(--this.rotate < 0) this.rotate = 3;
+  }
+  right() {
+    if(++this.rotate > ✨✨count) this.rotate = 0;
+  }
+  getBlock(){ ✨✨
+    // 클래스를 반환
+    return this.blocks[this.rotate];
+  }
+}
+const blocks = [
+  class extends Block {
+    constructor(){
+      super('#f8cbad',
+        [[1], [1], [1], [1]],
+        [[1,1,1,1]]
+      );
+    }
+  }
+]
+```
+
+<a name="4"></a>
+## 4. Renderer 렌더러는 stage, score, block을 몰라도, data만 알아도 되는 구조
+<img src="/images/2018/38/04.png" />
+
+```js
+const Renderer = class {
+  constructor(col, row) {
+    prop(this, { col, row, blocks: [] });
+    while (row--) this.blocks.push([]);
+  }
+  clear() {
+    throw 'override';
+  }
+  // 자식이 클리어 해야한다.
+  // 대체가능성(상속성)과 내적동질성(다형성).
+  // 자식을 다 부모로 보게 하고 싶다.
+  // 어떤 자식이 와도 clear를 호출할 수 있다.
+  // 부모의 clear를 호출해도 내적동질성때문에 자식의 clear가 호출된다.
+  // 명시적으로 clear라는 method를 부모에 할당해주지만, 자식들이 렌더링 하는 방식이 다르기 때문에 실제 clear는 다형성에 의해서 자식들의 clear 메서드가 호출된다. == 무의미한 코드가 아니다.
+  render(data) {
+    if (!(data instanceof Data)) throw 'invalid data';
+    // 프로토콜 확인만 해준다.
+    this._render(data);
+    // 내적동질성(다형성)에 의해서 자식의 _render가 호출된다.
+    // 디자인 패턴 중: 템플릿 메서드 패턴 (객체지향 언어가 내적동질성을 보장해주어야한다)
+    // 템플릿 메서드를 사옹하는 이유
+    // 부모쪽에 있는 메서드가 많은 서비스를 제공하고 실제 할 일을 후킹하고 있는 자식클래스에게 위임하기 위해
+  }
+  _render(data) {
+    throw 'override!';
+  }
+};
+```
+
+> **Template Method Pattern** 어떤 작업 알고리즘의 골격을 정의한다. 일부 단계는 서브 클래스에서
+> 구현하도록 할 수 있다. 템플릿 메서드를 이용하면 알고리즘의 구조는 그대로 유지하면서 특정 단계만
+> 서브 클래스에서 새로 정의하도록 할 수 있다.
+
+<a name="4-0"></a>
+## 4-0. Data(protocol)
+
+```js
+// Array를 상속 받는 이유는 형을 확인하기 위해 강제로 만듦.
+// 마크업 클래스
+// Array객체를 베이스로 하는 객체가 만들어진다.
+const Data = class extends Array {
+  constructor(row, col) {
+    prop(this, { row, col });
+  }
+};
+```
+
+> es6는 클래스 내부에서 this를 바꿔 줄 수 있다.
+
+<a name="4-1"></a>
+## 4-1. Table Renderer
+
+```js
+// utility
+const el = el => document.createElement(el);
+const back = (s: pixel, v: color) => s.backgroundColor = v;
+// 배경 색 변경으로 움직임을 표현한다.
+```
+
+```js
+const TableRenderer = class extends Renderer {
+  // base: 테이블 element
+  // back: background 칼라
+  constructor(base, back, col, row){
+    super(col, row);
+    this.back = back;
+    white(row--){
+      const tr = base.appendChild(el('tr')), curr = []; // row만큼 tr을 만들어서 넣기.
+      this.blocks.push(curr); // 빈 블럭 배열을 blocks에 넣어준다. this.blocks는 Renderer의 blocks
+      let i = col;
+      while(i--) curr.push(tr.appendChild('td').style);
+      // 스타일 객체만 넣는다.
+    }
+    this.clear();
+  }
+  clear(){
+    this.blocks.forEach(
+      curr => curr.forEach(s => back(s, this.back))
+    )
+    // back함수는 utility의 back
+    // back함수에 현재 back 칼라를 전부 할당한다.
+  }
+  _render(v: Data){
+    this.blocks.forEach(
+      (curr, row) => curr.forEach((s, col) => back(s, v[row][col]))
+    )
+  }
+}
+```
+
+> **변수 사용시 한 번 밖에 사용되지 않는데 변수로 잡는 것은 사실은 중복**
+
+---
+
+> <span class="mint">**for와 forEach 중 어떤걸 사용할까?**</span>
+> 언어스팩에서 정의되어있는 메서드를 사용하자. **forEach** 성능문제는 우선 고려하지 말자.
+
+<a name="4-2"></a>
+## 4-2. Canvas Renderer
+
+```js
+const CanvasRenderer = class extends Renderer {
+  constructor(base, back, col, row) {
+    suepr(col, row);
+    prop(this, {
+      width: (base.width = parseInt(base.style.width)),
+      height: (base.height = parseInt(base.style.height)),
+      cellSize: [base.width / col, base.height / row],
+      ctx: base.getContext('2d'),
+    });
+  }
+  _render(v) {
+    const {
+      ctx,
+      cellSize: [w, h],
+    } = this;
+    ctx.clearRect(0, 0, this.width, this.height);
+    let i = this.row;
+    while (i--) {
+      let j = this.col;
+      while (j--) {
+        ctx.fillStyle = v[i][j];
+        ctx.fillRect(j * w, j * h, w, h);
+      }
+    }
+  }
+};
+```
+
+---
+
+**참고자료** https://www.bsidesoft.com/?p=2827 https://github.com/abhbtbb/tetris1

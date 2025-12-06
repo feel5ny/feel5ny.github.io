@@ -1,0 +1,291 @@
+---
+title: 리팩토링2판) 1. 예시로 알아보기
+date: '2020-04-05'
+description: >-
+  TL;DR ⭐️⭐️⭐️ 1. 리팩토링하기 전에 제대로 된 테스트부터 마련한다. 테스트는 반드시 자가진단하도록
+  만든다. 2. 프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 기능을 추가하기 쉬운
+  형태로 리팩터링하고 나서 원하는 기능을 추가한다. 3. 리팩...
+author: Joy Kim
+categories:
+  - 00_Clean_Code
+  - Refactoring
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "테스트환경 준비",
+        "sub": "test code",
+        "id": "test",
+        "style": {
+          "type": "number",
+          "index": "1"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "골격 다시 잡기",
+        "sub": "함수 추출하기, 변수명 변경, 변수 인라인으로 변경, 반복문 쪼개기",
+        "id": "architect",
+        "style": {
+          "type": "number",
+          "index": "2"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "작은 단계로 리팩토링하기",
+        "sub": "-",
+        "id": "short",
+        "style": {
+          "type": "number",
+          "index": "3"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "사람이 이해하도록 작성하기",
+        "sub": "임시변수를 질의함수로 바꾸기, 변수 인라인하기, 함수명 바꾸기, 반복문 쪼개기, 문장 슬라이드하기",
+        "id": "easy",
+        "style": {
+          "type": "number",
+          "index": "4"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "작업 시작 전보다 건강한 코드로 유지하기",
+        "sub": "단계 쪼개기, 함수 옮기기, 반복문을 파이프라인으로 바꾸기",
+        "id": "healthy",
+        "style": {
+          "type": "number",
+          "index": "5"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "수정하기 쉽도록 작성하기",
+        "sub": "조건부 로직을 다형성으로 바꾸기, 타입코드를 서브클래스로 바꾸기, 생성자 팩터리 함수로 바꾸기",
+        "id": "Polymorphism",
+        "style": {
+          "type": "number",
+          "index": "6"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "지속적으로 리팩토링하기",
+        "sub": "-",
+        "id": "ideal",
+        "style": {
+          "type": "number",
+          "index": "7"
+        }
+      }
+    }
+  ]
+thumbnail: /images/2020/07/thumb_default.jpg
+---
+
+## TL;DR
+
+⭐️⭐️⭐️
+
+1. 리팩토링하기 전에 제대로 된 **테스트**부터 마련한다. 테스트는 반드시 **자가진단**하도록 만든다.
+2. 프로그램이 새로운 기능을 추가하기에 편한 구조가 아니라면, 먼저 **기능을 추가하기 쉬운 형태로
+   리팩터링**하고 나서 원하는 기능을 추가한다.
+3. 리팩터링은 프로그램 수정을 **작은 단계**로 나눠 진행한다. 그래서 **중간에 실수하더라도 버그를
+   쉽게 찾을 수 있다.**
+4. 컴퓨터가 이해하는 코드는 바보도 작성할 수 있다. **사람이 이해하도록 작성하는 프로그래머**가
+   진정한 실력자다.
+5. 캠핑자들에게는 도착했을 때보다 깔끔하게 정돈하고 떠난다는 규칙이 있다. 프로그래밍도 마찬가지다.
+   항시 코드베이스를 **작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.**
+6. 좋은코드를 가늠하는 확실한 방법은 **얼마나 수정하기 쉬운가다**. (다형성을 활용해 계산 코드
+   재구성하기)
+7. 코드를 건강하게 관리하려면 프로그래밍 팀의 **현재와 이상의 차이에 항상 신경 쓰면서**, 이상에
+   가까워지도록 리팩토링해야한다.
+
+---
+
+---
+
+### 예시로 접근해보기
+
+- 다양한 연극을 외주로 받아서 공연하는 극단에서 공연 요청이 들어오면, 연극의 장르와 관객 규모를
+  기초로 비용을 책정하는데, 이때 발생했던 공연료와 포인트를 확인하는 프로그램이다.
+
+# 최초 코드
+
+<iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Finit%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+발견부분
+
+1. 청구내역을 HTML로 출력하는 기능이 필요.
+2. 예측 가능한 기획 변경 대응
+
+- 비슷한 함수를 복사할 경우 중복되는 부분의 수정이 **일관되게 반영되도록 보장해야한다.**
+- 리팩터링이 필요한 이유는 **변경**때문이다.
+
+## 리팩토링하기 전에 제대로 된 `테스트부터 마련`한다.<br/>테스트는 반드시 `자가진단`하도록 만든다.
+
+- 테스트코드들부터 마련해야한다.
+- 리팩터링에서 테스트의 역할은 굉장히 중요하다.
+- 리팩터링 기법들이 버그 발생 여지를 최소화하도록 구성됐다고는 하나, 실제 작업은 사람이 수행하기
+  때문에 언제든지 실수할 수 있다.
+
+---
+
+- 리팩터링 시 테스트에 상당히 의지할 필요가 있다.
+- 테스트를 작성하는 데 시간이 좀 걸리지만, 신경 써서 만들어두면 디버깅시간이 줄어서 전체 작업시간은
+  오히려 단축된다.
+- 리펙터링 후에는 반드시 테스트하는 습관을 가져야한다.
+
+## 프로그램이 새로운 기능을 추가하기에 `편한 구조가 아니라면`,<br/>먼저 `기능을 추가하기 쉬운 형태로 리팩터링`하고 나서<br/>원하는 기능을 추가한다.
+
+- 프로그램이 잘 작동하는 상황에서 그저 코드가 '**지저분하다**'는 이유료 불평하는 것은 프로그램의
+  구조를 너무 미적인 기준으로만 판단하는 건 아닐까
+  - 코드를 수정하려면 **사람이 개입되고**, 사람은 미적 상태에 민감하다.
+  - 설계가 나쁜 시스템은 수정하기 어렵다.
+  - 무엇을 수정할지 찾기 어렵다면 실수를 저질러서 버그가 생길 가능성도 높아진다.
+
+- 수백줄짜리 코드를 수정할 때면, 먼저 프로그램의 작동방식을 더 쉽게 파악할 수 있도록 코드를 여러
+  함수와 프로그램 요소로 재구성한다.
+
+## 리팩터링은 프로그램 수정을 `작은 단계`로 나눠 진행한다. <br/>그래서 중간에 실수하더라도 `버그`를 쉽게 찾을 수 있다.
+
+<iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F02%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+- 함수 추출하기
+- 변수명 변경
+- 변수 인라인으로 변경
+- 반복문 쪼개기
+
+---
+
+함수 추출 이후에는 **명확하게** 표현할 수 있는 간단한 방법을 찾아보자.
+
+- 변수명
+  - 접두어로 타입을 표현한다.
+  - 매개변수의 타입이 뚜렷하지 않으면 부정관사를 붙인다. (a/an)
+  - 캔트백 [Smalltalk Best Practice Patterns]를 참고했다고함
+- 좋은 코드라면 하는 일이 명확히 드러나야하며, 변수 이름은 커다란 역할을 한다.
+- 추출한 함수에는 그 코드가 하는 일을 설명하는 이름을 지어준다.
+  - 다음번에 코드를 볼때 다시 분석하지 않아도 코드 스스로가 자신이 하는 일이 무엇인지 이야기해줄
+    것이다.
+
+---
+
+## 컴퓨터가 이해하는 코드는 바보도 작성할 수 있다.<br/>`사람이 이해하도록 작성하는 프로그래머`가 진정한 실력자다.
+
+- **임시변수를 질의함수로 바꾸기**(7장): 긴 함수를 쪼갤때마다 변수를 최대한 제거한다.
+  - 지역변수를 제거해서 얻는 가장 큰 장점은 추출 작업이 훨씬 쉬워진다는 것이다.
+  - 유효범위를 신경써야 할 대상이 줄어들기 때문이다.
+- **변수 인라인하기**(6장): 변수를 제거하고 바로 함수를 적용한다.
+  > 개인적으로 이건 잘 모르겠다. 함수 안에서 해당변수가 여러번 필요한 경우가 있는데 그때마다
+  > 호출하는거가 더 나은건지, 변수로 해서 레퍼런스만 호출하는게 좋은건지.
+  ***
+  > 라고 했지만, 책 마지막에는 "특별한 경우가 아니라면 **성능이슈는 일단 무시**하라는 것,
+  > 리팩토링때문에 성능이 떨어진다면, 리팩터링을 마무리하고 나서 성능을 개선하자"
+- **함수명 바꾸기**(6장)
+  - 이름짓기는 중요하면서도 쉽지 않은 작업이다.
+  - 이름이 좋으면 함수 본문을 읽지 않고도 무슨일을 하는지 알 수 있다.
+- **반복문 쪼개기**(8장): 반복문안에서 여러 역할을 하는 것들을 반복분을 따로 만들어서 각각
+  수행하도록..
+  - 논리적인 요소를 파악하기 쉽도록 코드의 구조를 보강하는데 주안점을 두고 리팩터링. == 복잡하기
+    얽힌 덩어리를 잘게 쪼개는 작업
+- **문장 슬라이드하기**(8장): 문장 위치를 바꾸는것..?
+
+---
+
+## 캠핑자들에게는 `도착했을 때보다 깔끔하게 정돈하고 떠난다`는 규칙이 있다.<br/>프로그래밍도 마찬가지다.<br/>항시 코드베이스를 `작업 시작 전보다 건강하게(healthy) 만들어놓고 떠나야 한다.`
+
+<iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F03%2Findex.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+- **단계 쪼개기**(6장): 1. 필요한 데이터를 처리하고 => 2. 그 다음 단계 => ...
+- **함수 옮기기**(8장)
+- **반복문을 파이프라인으로 바꾸기**(8장)
+- 간결함이 지혜의 정수일지 몰라도, 프로그래밍에서만큼은 명료함이 진화할 수 있는 소프트웨어의 정수다.
+
+---
+
+## 좋은코드를 가늠하는 확실한 방법은 `얼마나 수정하기 쉬운가`다.<br/>`다형성`을 활용해 계산 코드 재구성하기
+
+```js
+function amountFor(aPerformance) {
+  let result = 0;
+
+  switch (aPerformance.play.type) {
+    case 'tragedy': //비극
+      result = 40000;
+      if (aPerformance.audience > 30) result += 1000 * (aPerformance.audience - 30);
+      break;
+    case 'comedy': //희극
+      result = 30000;
+      if (aPerformance.audience > 20) result += 1000 + 500 * (aPerformance.audience - 20);
+      result += 300 * aPerformance.audience;
+      break;
+    default:
+      throw new Error(`알 수 없는 장르: ${aPerformance.play.type}`);
+  }
+  return result;
+}
+```
+
+- 위 코드는 타입이 추가될수록 **복잡도가 올라간다.**
+  - 다형성을 활용하는 것이 자연스럽다.
+- **조건부 로직을 다형성으로 바꾸기**(10장)
+  - class로 함수옮기기를 하는 것은 다른 컨텍스트로 옮기는 큰 작업
+- **타입코드를 서브클래스로 바꾸기**(12장)
+- **생성자 팩터리 함수로 바꾸기**(11장)
+
+<iframe
+  src="https://codesandbox.io/embed/ripaegtoring2panyesi5-xw7qt?fontsize=14&hidenavigation=1&module=%2Fsrc%2Frefactor%2F04%2FcreateStatementData.js&theme=dark&view=editor"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="[리팩토링2판]_예시"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+1. 원본함수를 중첩 함수 여러개로 나눴다.
+2. 계산코드와 출력코드를 분리했다. (단계 쪼개기)
+3. 계산로직을 다형성으로 표현했다.
+
+- 코드는 명확해야한다.
+- 코드를 수정해야 할 상황이 되면 고쳐야 할 곳을 쉽게 찾을 수 있고, 오류 없이 빠르게 수정할 수 있어야
+  한다.
+- 건강한 코드베이스는 **생산성을 극대화**하고, 고객에게 필요한 기능을 **더 빠르고 저렴한 비용으로
+  제공**하도록 해준다.
+
+---
+
+## 코드를 건강하게 관리하려면<br/>프로그래밍 팀의 현재와 이상의 차이에 항상 신경 쓰면서,<br/>`이상에 가까워지도록 리팩토링`해야한다.
+
+리팩토링을 효과적으로 하는 핵심은
+
+- 단계를 잘게 나눠야 더 빠르게 처리할 수 있고
+- 코드는 절대 깨지지 않으며
+- 작은 단계들이 모여서 상당히 큰 변화를 이룰 수 있다는 사실을 깨닫는 것이다.

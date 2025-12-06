@@ -1,0 +1,175 @@
+---
+title: 1/ Typescript_환경 셋팅
+date: '2017-11-10'
+description: >-
+  개발환경 구축 및 컴파일러 셋팅 앞선 글에서 컴파일러와 트랜스파일러 인터프리터의 차이점을
+  알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는 했지만, 앞으로의 글에서는 컴파일러라고
+  통일해서 쓰려고 한다 . 타입스크립트는 컴파일드 언어라고 했지만 , 실제적으로 어떻게...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+thumbnail: /images/post_img/12/thumb_default.jpg
+---
+
+## 개발환경 구축 및 컴파일러 셋팅
+
+[앞선 글](https://feel5ny.github.io/2017/11/08/TS_01/)에서 컴파일러와 트랜스파일러 인터프리터의
+차이점을 알아보았다. 트랜스파일러와 컴파일러의 차이가 있다고는 했지만, 앞으로의 글에서는
+컴파일러라고 통일해서 쓰려고 한다 . 타입스크립트는 컴파일드 언어라고 했지만 , 실제적으로 어떻게
+환경을 셋팅하고 작업해야하는지 알아보자 .
+
+<img src="/images/post_img/12/index.jpg" />
+
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8#)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+1. 실행환경
+2. 컴파일러 셋팅, 에디터
+3. 간단하게 실습
+4. 컴파일러 옵션
+
+**목표** 타입스크립트를 사용하기 위해서 첫번째 실행환경을 셋팅하고 , 컴파일러 셋팅(npm으로 설치),
+에디터에서 환경셋팅(tslint, 등등) 을 하고 , 간단하게 실습으로 컴파일 테스팅해본다. 기본 테스트가
+완료되면 컴파일러 옵션을 어떻게 추가해야하는지 알아본다 .
+
+---
+
+## 1. 실행환경
+
+런타임 환경
+
+### 1-1. node.js
+
+- 자바스크립트 런타임 환경으로 node.js를 사용한다.
+- 컴파일러를 설치하기 위해서 필요하다.
+- 타입스크립트에서 컴파일러 프로그램을 제공하는 것이 npm 모듈로 있기 때문에 ..
+- node.js없이 VScode에서도 셋팅이 가능하긴하다 . (2번에서 확인!)
+- 버전을 바꾸고 싶을 때는 nvm (node.js version manager) 사용 ~
+
+### 1-2. browser
+
+- 결과를 보는 곳.. 그냥 있는거 쓰자 .
+
+---
+
+## 2. (타입스크립트) 컴파일러 셋팅 , 에디터
+
+타입스크립트를 셋팅해 보자. 셋팅 방법에는 npm 과 VScode plugin으로 설치하는 방법이 있는데 , npm으로
+설치해보았다 .
+
+### 2-1. npm으로 설치하기
+
+```bash
+npm i typeScript -g
+```
+
+설치 후 node_modules 폴더의 bin파일에 tsc 파일이 생성되는 것을 볼 수 있다 . `.bin` 내부에 있는
+파일들은 스크립트에서 경로 없이 파일 이름으로만 바로 실행시킬수 있다.
+
+```bash
+node_modules/.bin/tsc 파일이름
+// 원래는 이렇게
+
+tsc source.ts
+// 경로 생략 가능, 뒷부분은 컴파일 할 파일 이름
+```
+
+### 2-2. Visual Studio Code 내장 플러그인 사용하기
+
+타입스크립트로 만들어졌기 때문에 타입스크립트에 대한 지원이 강력 !
+
+<img src="/images/post_img/12/vs_01.jpg" />
+ts파일을 선택 후 하단 bar를 보면 Typescript라는 단어와 버전이 보인다. 버전을 누르면 옵션창이 보이게
+되는데, 이는 VS Code에 내장되어있는 컴파일러 리스트 중 선택하라는 옵션창이다. 내장된 컴파일러 버전은
+VS Code 가 업데이트 되면서 자동으로 올라가며, 컴파일러 버전과 VS Code 의 버전은 상관 관계가 있다.
+내장된 컴파일러를 선택할수 있고, 직접 설치한 컴파일러를 선택할 수도 있다.
+
+### 2-3. tslint 설치
+
+eslint와 같이 코딩 컨벤션을 맞추기 위한 프로그램이다 .
+
+```bash
+npm i typeScript tslint (로컬)
+tslint --init
+```
+
+tslint.json파일이 생성되고, 프로젝트에 맞게 코딩 컨벤션을 셋팅할 수 있다 .
+https://palantir.github.io/tslint/
+
+- 에디터에서 tslint 플러그인 설치
+  1. cmd + p > 옵션창
+  2. ext install tslint 그냥 확장프로그램에 가서 tslint 검색 후 다운로드 받아도 된다.
+
+  VScode : https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+
+---
+
+## 3. 간단하게 실습
+
+### 3-1. 특정 프로젝트 폴더에서 타입스크립트 컴파일러 설정에 맞춰 컴파일
+
+tsconfig.json 파일에서 옵션을 추가하여 컴파일시 여러 조건을 걸 수 있다.
+
+- tsconfig 파일 초기셋팅
+
+```bash
+tsc --init
+```
+
+tsconfig.json 파일이 생성이 된다. 처음 생성시 디폴트로 되어있는 tsconfig.json파일
+
+```json
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */,
+    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+    "strict": true /* Enable all strict type-checking options. */
+  }
+}
+```
+
+- target : 컴파일된 결과물을 es5 버전으로 맞추겠다는 것
+- module : 컴파일된 결과물이 어떤 모듈로 사용할 것인지?
+
+옵션에 대한 자세한 설명은 4번에서 설명!
+
+### 3-2. watch 모드
+
+```bash
+tsc -w
+```
+
+- 변경되면 감지해서 새로 컴파일 해주는 것 .
+- 보통은 gulp 를 사용한다 .
+
+### 3-3. 프로젝트 파일 내에서만 설치할 경우 ( 로컬)
+
+셋팅 방법
+
+```bash
+npm init -y
+npm i typeScript // 프로젝트 이름(폴더이름)이 동일하면 안된다.
+package.json > "scripts"에 "transpile" : "tsc" 추가.
+// tsc파일이 .bin폴더 내부에 있는데, npm에서는 .bin내부의 파일들은 전체 상대 경로를 적지 않아도 접근가능하다.
+npm run transpile
+```
+
+- typescirpt 를 글로벌로 설치할 경우 `tsc 파일이름.ts` 명령어만으로 컴파일이 가능하다.
+- 로컬로만 설치할 경우 , 위의 방법처럼 따로 스크립트에 추가 후에 명령어를 사용하면된다.
+
+> cli 명령어로 명렁어를 다 걸어둘 수 있지만 json 파일을 만들어서 설정을 정리하며서 쓴다 .
+
+---
+
+### 참고링크
+
+1. https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+2. https://palantir.github.io/tslint/

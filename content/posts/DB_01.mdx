@@ -1,0 +1,242 @@
+---
+title: Database basic
+date: '2017-12-20'
+description: >-
+  목차  1. RDBMS 2. DDL, DML 3. Aggregate, Group Function 4. SQL 5. ERD 6. Table 생성 ---  1.
+  RDBMS  Relational Database Management System - F.커드씨가 도입한 관계형...
+author: Joy Kim
+tags:
+  - database
+categories:
+  - 02_!Web
+  - DB
+enableComment: true
+thumbnail: /images/post_img/47/thumb_default.jpg
+---
+
+목차
+
+1. [RDBMS](#rdbms)
+2. [DDL, DML](#ddl)
+3. [Aggregate, Group Function](#aggregate)
+4. [SQL](#sql)
+5. [ERD](#erd)
+6. [Table 생성](#table)
+
+---
+
+# <a name="rdbms" ></a> 1. RDBMS
+
+`Relational Database Management System`
+
+- F.커드씨가 도입한 관계형 모델을 기반으로 데이터베이스를 관리하는 방식이다.
+- RDBMS의 종류로는 Oracle, Mysql 등이 널리 사용되고있다.
+- Relational을 표현하기 위하여 [ERD](#erd)(Entity-Relationship Diagram)으로 테이블을 표현한다.
+
+---
+
+---
+
+# <a name="ddl" ></a> 2. DDL, DML
+
+## DDL (Data Definition Language)
+
+Table 자체를 구성하는대 사용한다.
+
+---
+
+### 1. `Create` : db 스키마 객체를 생성
+
+```sql
+CREATE TABLE book (
+  bookno NUMBER(5), /* 데이터타입을 설정해 주는 것이다. 숫자 5자리까지 */
+  title VARCHAR2(50), /* 문자열 50자까지 설정 */
+  author VARCHAR2(10), /* 문자열 10자리까지 설정 */
+  pubdate DATE /* 날짜 데이터타입 */
+)
+```
+
+---
+
+### 2. `Data Type`
+
+- `VARCHAR2(size)` : 가변길이 문자열 (최대 4000byte)
+- `CHAR(size)` : 고정길이 문자열 (최대 2000byte)
+- `NUMBER(p,s)` : 가변길이 숫자. 전체 p자리 중 소수점 이하 s자리
+  - `p` : 38
+  - `s` : -84 ~ 127
+  - 21 byte
+- `DATE` : 고정길이 날짜 + 시간 (7byte)
+
+---
+
+### 3. `Alter` : 변경
+
+- 테이블 칼럼 추가 `ALTER Table Student ADD (name VARCHAR(50));`
+- 테이블 칼럼 수정 `ALTER Table Student MODIFY (name VARCHAR(50));`
+- 테이블 칼럼 삭제 `ALTER Table Student DROP name;`
+
+---
+
+### 4. `Drop` : db 스키마 제거
+
+- db가 날라갈 수 있는 위험한 명령어!
+- `DROP Table Student`
+
+---
+
+### 5. `Truncate`: 스키마는 유지하면서 자료만 버림
+
+- `TRUNCATE Table Student`
+
+---
+
+### 6. `Rename` : 이름 변경
+
+- `RENAME Student TO employee`
+
+---
+
+### 7. `Comment` : 테이블에 설명 추가
+
+---
+
+### 8. `Constraint` : 테이블에 제약조건 생성
+
+Table의 특정규약을 설정한다 즉 제약조건이다.
+
+- NOT NULL
+- UNIQUE
+- CHECK
+
+#### PRIMARY KEY => PRIMARY KEY는 NOT NULL + UNIQUE하다.
+
+- PK는 한테이블당 한개만 존재
+- 인덱스 자동생성
+- 여러 컬럼을 하나의 PK로 설정 가능
+
+```SQL
+CREATE TABLE book (
+  ssn1 NUMBER(6),
+  ssn2 NUMBER(7),
+  PRIMARY KEY (ssn1, ssn2)
+)
+```
+
+#### FOREIGN KEY => 주의 PRIMARY KEY에게만 FOREIGN KEY 가능
+
+- ON DELETE SET NULL : 해당하는 FK를 NULL로 바꾼다.
+- ON DELETE CASCADE : 해당하는 FK를 가진 참조행도 삭제
+
+---
+
+---
+
+## DML (Data Manipulation Language)
+
+`Insert`, `Delete`, `Select`,`Update Table` 내부의 data를 바꿀때 사용한다.
+
+---
+
+### 1. `Insert`
+
+테이블 Data 추가 `INSERT INTO 테이블이름 (col1, col2) VALUES(“val1”, “val2”);`
+
+---
+
+### 2. `Delete`
+
+테이블 Data 추가 `DELETE FROM 테이블이름 Where id = 1;`
+
+---
+
+### 3. `Update`
+
+테이블 Data 추가 `UPDATE 테이블이름 SET 변경내용 Where id = 1;`
+
+---
+
+# <a name="aggregate" ></a> 3. Aggregate, Group Function
+
+## Aggregate Function
+
+### 1. AVG
+
+평균 구하기 `SELECT AVG(salary) FROM Student;`
+
+- Group By `SELECT 부서명, AVG(salary) FROM 직장; => 오류 발생` =>
+  `SELECT 부서명, AVG(salary) FROM 직장 GROUP BY 부서명`
+- Having
+
+### 2. SUM
+
+```sql
+SELECT SUM(col_name) FROM table_name;
+SELECT SUM(salary) FROM Student;
+```
+
+- COUNT
+- MAX
+- MIN
+
+---
+
+# <a name="sql" ></a> 4. SQL
+
+## SQL(Structured Query Language)
+
+: 구조화된 질의 언어
+
+- 가장 기본적인 문법
+- `Select`(Table의 원하는 col을 선택하다)
+- `From` (어떠한 Table에서)
+- `Where` (특정 조건)
+
+- Student 테이블을 전부다 가져오고싶다. `Select*From Student; => *`는 전부를 나타낸다.
+- Student 테이블중에서 name(col)을 가져오고싶다. `Select name From Student;`
+- Student 테이블중에서 name(col)이 Joy 가져오고싶다. `Select name From Student Where name=Joy;`
+
+### Join
+
+둘 이상의 테이블을 합쳐서 하나의 테이블로 만든다.
+
+- `Cross Join` (Cartasian Product) 모든 가능한 쌍이 나타난다.
+
+#### `Inner Join` 조건을 만족하는 tuple만 나타난다.
+
+```sql
+SELECT name, jobname FROM Student Inner Join Job
+ON Student.id = Job.student_id;
+```
+
+- `Outer Join` 조건을 만족하지 않는 tuple도 나타난다. => null로 표기 Left Outer Join => join table의
+  왼쪽 table 값중 null인 것도 가져온다. Right Outer Join => join table의 오른쪽 table 값중 null인
+  것도 가져온다. Full Outer Join => 양쪽 table 값중 null인 것도 가져온다.
+
+```sql
+SELECT name, jobname FROM Student Left Outer Join Job
+ON Student.id = Job.student_id;
+```
+
+```sql
+SELECT name, jobname FROM Student Right Outer Join Job
+ON Student.id = Job.student_id;
+```
+
+```sql
+SELECT name, jobname FROM Student Full Outer Join Job
+ON Student.id = Job.student_id;
+```
+
+- `Natural Join` 조건을 만족하는 tuple들의 동일한 col이 합쳐져서 나타난다.
+- `Self Join` 자기 자신과 Join
+
+---
+
+# <a name="erd" ></a> 5. ERD
+
+Entity-Relationship Diagram mySql에서 자동으로 그려준다.
+
+<img src="/images/post_img/47/01.png" />
+
+## auto increment

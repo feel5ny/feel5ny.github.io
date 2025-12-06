@@ -1,0 +1,447 @@
+---
+title: HTTP 메세지 - 헤더
+date: '2019-08-19'
+description:
+  "해당 링크를 기준으로 standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선
+  처리하였다. ---- 메세지 헤더  헤더에는  \U0001F446 특정 종류의 메세지에만 사용할 수 있는
+  헤더와,  \U0001F91A 더 일반 목적으로 사용할 수 있는 헤더,  \U0001F450 그리고 응답..."
+author: Joy Kim
+tags:
+  - http
+  - study
+  - message
+  - header
+categories:
+  - 01_Web
+  - 02. HTTP
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "메세지 헤더",
+        "id": "header"
+      }
+    },
+    {
+      "hr": {
+        "type": "start",
+        "name": "Header (HTTP/1.1 기준)"
+      }
+    },
+    {
+      "title": {
+        "name": "일반 헤더",
+        "sub": "일반 정보헤더, 일반 캐시 헤더",
+        "id": "1",
+        "style": {
+          "type": "number",
+          "index": "1"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "요청 헤더",
+        "sub": "요청 정보 헤더, Accept 관련 헤더, 조건부 요청 헤더, 요청 보안 헤더, 프락시 요청 헤더",
+        "id": "2",
+        "style": {
+          "type": "number",
+          "index": "2"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "응답 헤더",
+        "sub": "협상 헤더, 응답 보안 헤더",
+        "id": "3",
+        "style": {
+          "type": "number",
+          "index": "3"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "엔터티 헤더",
+        "sub": "엔터티 정보헤더, 콘텐츠 헤더, 엔터티 캐싱 헤더",
+        "id": "4",
+        "style": {
+          "type": "number",
+          "index": "4"
+        }
+      }
+    },
+    {
+      "hr": {
+        "type": "end"
+      }
+    }
+  ]
+thumbnail: /images/2019/23/thumb_default.jpg
+---
+
+[해당 링크](https://www.iana.org/assignments/message-headers/message-headers.xhtml)를 기준으로
+standard 중 일부만 정리하였다. 책에서 더 이상 쓰지 않는 헤더는 취소선 처리하였다.
+
+---
+
+<a name="header" />
+
+# 메세지 헤더
+
+헤더에는 👆 **특정 종류의 메세지**에만 사용할 수 있는 헤더와, 🤚 **더 일반 목적**으로 사용할 수 있는
+헤더, 👐 그리고 응답과 요청 메세지 **양쪽 모두에서 정보를 제공하는** 헤더가 있다.
+
+1. 일반 헤더
+
+- 일반 **정보** 헤더
+- 일반 **캐시** 헤더
+
+2. 요청 헤더
+
+- 요청 **정보** 헤더
+- **Accept** 관련 헤더
+- **조건부** 요청 헤더
+- 요청 **보안** 헤더
+- **프락시** 요청 헤더
+
+3. 응답 헤더
+
+- **협상** 헤더
+- 응답 **보안** 헤더
+
+4. 엔터티 헤더
+
+- 엔터티 **정보** 헤더
+- **콘텐츠** 헤더
+- 엔터티 **캐싱** 헤더
+
+---
+
+---
+
+# Header (HTTP/1.1 기준)
+
+<a name="1" />
+
+## 1. 일반 헤더 General headers
+
+- 클라와 서버 양쪽 모두가 사용한다.
+- 아주 기본적인 정보를 제공한다.
+
+### 일반 정보헤더
+
+```
+Connection: keep-alive
+Date: Wed, 21 Oct 2015 07:28:00 GMT
+Transfer-Encoding: gzip, chunked
+Via: HTTP/1.1 GWA
+```
+
+- `Connection`: 클라와 서버가 요청/응답 연결에 대한 옵션을 정할 수 있게 해준다.
+  - 전송된 값이 keep-alive일 경우, 연결은 지속적이며 닫히지 않으므로 동일한 서버에 대한 후속 요청이
+    수행될 수 있다.
+  - **close**, **keep-alive**
+- `Date`: 메세지가 언제 만들어졌는지에 대한 날짜와 시간을 제공한다.
+- ~`MIME-Version`: 발송자가 사용한 MIME의 버전을 알려준다.~
+- ~`Trailer chunked transfer`: 인코딩된 메세지의 끝 부분에 위치한 헤더들의 목록을 나열한다.~
+- `Transfer-Encoding`: 수신자에게 안전한 전송을 위해 메세지에 어떤 인코딩이 적용되었는지 말해준다.
+  - **chunked**, **compress**, **deflate**, **gzip**, **identity**
+- ~`Upgrade`: 발송자가 업그레이드하길 원하는 새 버전이나 프로토콜을 알려준다.~
+- `Via`: 이 메세지가 어떤 중개자를 거쳐 왔는지 보여준다.
+  - 관련) TRACE 메서드
+
+### 일반 캐시 헤더
+
+```
+Cache-Control: public, max-age=31536000
+Pragma: no-cache
+```
+
+최신 버전의 HTTP는 매우 풍부한 캐시 매개변수의 집합을 가지고 있다.
+
+- `Cache-Control`: 메세지와 함께 캐시 지시자를 전달하기 위해 사용한다.
+  - **max-age={seconds}**, **max-stale[={seconds}]**, **min-fresh={seconds}**, **no-cache**,
+    **no-store**, **no-transform**, **only-if-cached**, **must-revalidate**, **no-cache**,
+    **no-store**, **no-transform**, **public**, **private**, **proxy-revalidate**,
+    **s-maxage={seconds}**, **immutable**, **stale-while-revalidate={seconds}**,
+    **stale-if-error={seconds}**,
+- `Pragma`: 메세지와 함께 지시자를 전달하는 또 다른 방법. 캐시에 국한되지 않는다. (HTTP/1.0)
+  - **no-cache**
+    <a name="2" />
+
+## 2. 요청 헤더
+
+요청 메세지에서만 의미를 갖는 헤더다.
+
+### 요청 정보 헤더
+
+```
+From: webmaster@example.org
+Host: developer.cdn.mozilla.net
+Referer: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0
+```
+
+- ~`Client-IP`: 클라가 실행된 컴퓨터의 IP를 제공한다.~
+- `From`: 클라 사용자의 메일주소를 제공한다.
+  - **{email}**
+- `Host`: 요청의 대상이 되는 서버의 호스트 명과 포트를 준다.
+  - **{host}:{port}**
+- `Referer`: 현재의 요청 URI가 들어있었던 문서의 URL을 제공한다.
+  - **{url}**
+- `User-Agent`: 요청을 보낸 어플리케이션의 이름을 서버에게 말해준다.
+  - **{product} / {product-version} {comment}**
+- ~`UA-Color`: 클라 기기 디스플레이의 색상 능력에 대한 정보를 제공한다.~
+- ~`UA-CPU`: 클라 CPU의 종류와 제조사를 알려준다.~
+- ~`UA-Disp`: 클라 디스플레이 능력에 대한 정보를 제공한다.~
+- ~`UA-OS`: 클라 기기에서 동작 중인 운영체제의 이름과 버전을 알려준다.~
+- ~`UA-Pixels`: 클라 기기 디스플레이에 대한 픽셀 정보를 제공한다.~
+
+### Accept 관련 헤더
+
+```
+Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8
+Accept-Charset: utf-8, iso-8859-1;q=0.5, *;q=0.1
+Accept-Encoding: gzip, compress, br
+Accept-Language: de-CH
+TE: gzip
+```
+
+클라는 Accept 헤더들을 이용해 서버에게 자신의 선호와 능력을 알려줄 수 있다. 서버는 클라가 사용할
+수도 없는 것을 전송하는데 시간과 대역폭을 낭비하지 않을 수 있다.
+
+- `Accept`: 서버에게 서버가 보내도 되는 **콘텐츠 타입을 MIME 타입**를 말해준다.
+- `Accept-Charset`: 서버에게 서버가 보내도 되는 **문자집합**을 말해준다.
+- `Accept-Encoding`: 서버에게 서버가 보내도 되는 **인코딩**을 말해준다.
+  - **gzip**, **compress**, **deflate**, **br**, **identity**
+- `Accept-Language`: 서버에게 서버가 보내도 되는 **언어**를 말해준다.
+- `TE`: 서버에게 서버가 보내도 되는 확장전송 코딩을 말해준다. (Transfer-Encoding)
+  - **compress**, **deflate**, **gzip**, **trailers**
+
+### 조건부 요청 헤더
+
+```
+Expect: 100-continue
+If-Match: "bfc13a64729c4290ef5b2c2730249c88ca92d82d"
+If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
+If-None-Match: "bfc13a64729c4290ef5b2c2730249c88ca92d82d"
+If-Range: Wed, 21 Oct 2015 07:28:00 GMT
+If-Unmodified-Since: Wed, 21 Oct 2015 07:28:00 GMT
+Range: bytes=0-499, -500
+```
+
+클라는 요청에 몇몇 제약을 넣기도 한다. 클라는 서버에게 요청에 응답하기 전에 먼저 조건이 참인지
+확인하게 하는 제약을 포함시킬 수 있다.
+
+- `Expect`: 클라가 요청에 필요한 서버의 행동을 열거할 수 있게 해준다.
+- `If-Match`: 문서의 엔터티 태그가 주어진 엔터티 태그와 일치하는 경우에만 문서를 가져온다.
+  - **{etag_value}**
+- `If-Modified-Since`: 주어진 날짜 이후에 리소스가 변경되지 않는다면 요청을 제한한다.
+- `If-None-Match`: 문서의 **엔터티 태그가 주어진 엔터티 태그와 일치하지 않는 경우에만** 문서를
+  가져온다.
+- `If-Range`: 문서의 특정 범위에 대한 요청을 할 수 있게 해준다.
+  - **{date}**, **{etag}**
+- `If-Unmodified-Since`: **주어진 날짜 이후에 리소스가 변경되었다면** 요청을 제한한다.
+- `Range`: 서버가 범위 요청을 지원한다면, 리소스에 대한 특정 범위를 요청한다.
+  - **{unit}={range-start}-{range-end}, {range-start}-{range-end}**
+  - ex. `bytes=200-1000`
+
+### 요청 보안 헤더
+
+```
+Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l
+Cookie: PHPSESSID=298zf09hf012fh2; csrftoken=u32t4o3tb3gg43; _gat=1;
+
+```
+
+HTTP는 자체적으로 요청을 위한 간단한 인증요구/응답 체계를 갖고 있다. 요청하는 클라가 어느 정도의
+리소스에 접근하기 전에 자신을 인증하게 함으로써, 트랜잭션을 약간 더 안전하게 만들고자 한다.
+
+- `Authorization`: 클라가 서버에게 제공하는 인증 그 자체에 대한 정보를 담고 있다.
+  - **{type} {credentials}**
+  - 예시) Basic YWxhZGRpbjpvcGVuc2VzYW1l
+- `Cookie`: 클라가 서버에게 토큰을 전달할 때 사용한다. 진짜 보안헤더는 아니지만, 보안에 영향을 줄 수
+  있다는 것은 확실하다.
+  - **{name}={value}; {name2}={value2};**
+- ~`Cookie2`: 요청자가 지원하는 쿠키의 버전을 알려줄 때 사용한다.~
+
+### 프락시 요청 헤더
+
+```
+Proxy-Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l
+```
+
+- `Max-Forwards`: 요청이 원서버로 향하는 과정에서 다른 프락시나 게이트웨이로 전달될 수 있는 최대
+  횟수.
+  - 관련) TRACE 메서드와 함께 사용된다.
+- `Proxy-Authorization`: Authorization과 같으나 프락시에서 인증을 할 때 쓰인다.
+  - **{type} {credentials}**
+- ~`Proxy-Connection`: Connection과 같으나 프락시에서 연결을 맺을 때 쓰인다.~
+
+<a name="3" />
+
+## 3. 응답 헤더
+
+응답 메세지는 그들만의 응답 헤더를 갖는다. 응답 헤더는 클라에게 부가 정보를 제공한다.
+
+### 응답 정보 헤더
+
+```
+Age: 24
+Retry-After: Wed, 21 Oct 2015 07:28:00 GMT
+Server: Apache/2.4.1 (Unix)
+Warning: 112 - "cache down" "Wed, 21 Oct 2015 07:28:00 GMT"
+```
+
+- `Age`: 응답이 얼마나 오래되었는지
+  - **{delta-seconds}**
+- ~`Public`: 서버가 특정 리소스에 대해 지원하는 요청 메서드의 목록~
+- `Retry-After`: 현재 리소스가 사용 불가능한 상태일 때, 언제 가능해지는지 날짜 혹은 시간
+  - **{http-date}**, **{delay-seconds}**
+- `Server`: 서버 어플리케이션의 이름과 버전
+  - **{product}**
+- ~`Title`: HTML 문서에서 주어진 것과 같은 제목~
+- `Warning`: 사유 구절에 있는 것보다 더 자세한 경고 메세지
+  - **[`{warn-code}`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning#Warning_codes)
+    {warn-agent} {warn-text} [{warn-date}]**
+  - 예시) Warning: 110 anderson/1.3.37 "Response is stale"
+
+### 협상 헤더
+
+```
+Accept-Ranges: bytes
+Vary: User-Agent
+```
+
+서버에 프랑스어나 독일어로 번역된 HTML 문서가 있는 경우와 같이 여러 가지 표현이 가능한 상황이라면,
+HTTP/1.1은 서버와 클라가 어떤 표현을 택할 것인가에 대한 협상을 할 수 있도록 지원한다.
+
+- `Accept-Ranges`: 서버에게 서버가 보내도 되는 **언어**를 말해준다.
+- `Vary`: 서버가 확인해 보아야 하고, 그렇기 때문에 응답에 영향을 줄 수 있는 헤더들의 목록
+
+### 응답 보안 헤더
+
+```
+Proxy-Authenticate: Basic realm="Access to the internal site"
+Set-Cookie: sessionid=38afes7a8; HttpOnly; Path=/
+WWW-Authenticate: Basic
+```
+
+기본적인 인증 요구 헤더들이다.
+
+- `Proxy-Authenticate`: 프락시에서 클라로 보낸 인증요구의 목록
+- `Set-Cookie`: 진짜 보안 헤더는 아니지만, 보안에 영향은 줄 수 있다. 서버가 클라를 인증할 수 있도록
+  클라 측에 토큰을 설정하기 위해 사용한다.
+  - **{cookie-name}={cookie-value}**
+  - **{cookie-name}={cookie-value}; Expires={date}**
+  - **{cookie-name}={cookie-value}; Max-Age={non-zero-digit}**
+  - **{cookie-name}={cookie-value}; Domain={domain-value}**
+  - **{cookie-name}={cookie-value}; Path={path-value}**
+  - **{cookie-name}={cookie-value}; Secure**
+  - **{cookie-name}={cookie-value}; HttpOnly**
+  - **{cookie-name}={cookie-value}; SameSite=Strict**
+  - **{cookie-name}={cookie-value}; SameSite=Lax**
+  - **{cookie-name}={cookie-value}; SameSite=None**
+- ~`Set-Cookie2`: Set-Cookie와 비슷하게 RFC 2965로 정의된 쿠키.~
+- `WWW-Authenticate`: 서버에서 클라로 보낸 인증요구의 목록
+  - **{type} realm={realm}**
+  - 예시) Basic realm="Access to the staging site"
+
+<a name="4" />
+
+## 4. 엔터티 헤더
+
+엔터티에 대해 설명하는 헤더들은 많다. 요청과 응답 양쪽 모두 엔터티를 포함할 수 있기 때문에, 이
+헤더들은 양 타입의 메세지에 모두 나타날 수 있다.
+
+### 엔터티 정보헤더
+
+```
+Allow: GET, POST, HEAD
+Location: /index.html
+```
+
+- `Allow`: 이 엔터티에 대해 수행될 수 있는 요청 메서드들을 나열한다.
+  - 예시) Allow: GET, POST, HEAD
+- `Location`: 클라에게 엔터티가 실제로 어디에 위치하고 있는지 말해준다. 수신자에게 리소스에 대한
+  (아마도 새로운) 위치 URL을 알려줄 때 사용한다.
+  - 관련) 리다이렉션 상태코드 (300번대)
+
+> **Location**과 **Content-Location**는 다릅니다: Location가 리다이렉션의 대상(혹은 새롭게 만들어진
+> 문서의 URL)을 가르키는데 반해, Content-Location은 더 이상의 컨텐츠 협상없이, 리소스 접근에 필요한
+> **직접적인 URL**을 가르킵니다. Location은 응답과 연관된 헤더인데 반해, Content-Location 은 반환된
+> 개체와 연관이 있습니다.
+> [출처 mdn](https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Content-Location)
+
+### 콘텐츠 헤더
+
+```
+Content-Encoding: gzip
+Content-Language: de-DE
+Content-Location: /my-first-blog-post
+Content-Range: bytes 200-1000/67589
+Content-Type: text/html; charset=utf-8
+Content-Disposition: form-data; name="myFile"; filename="foo.txt"
+```
+
+엔터티의 콘텐츠에 대한 구체적인 정보를 제공한다. 콘텐츠의 종류, 크기, 기타 콘텐츠를 처리할 때
+유용하게 활용될 수 있는 것들이다. 웹브라우저는 내용 유형을 기술한 Content-Type 헤더를 보고 그 객체를
+어떻게 보여줄지 결정할 수 있다.
+
+- ~`Content-Base`: 본문에서 사용된 상대 URL을 계산하기 위한 기저 URL~
+- `Content-Encoding`: 본문에 적용된 어떤 인코딩
+  - **gzip**, **compress**, **deflate**, **identity**, **br**
+- `Content-Language`: 본문을 이해하는데 가장 적절한 자연어
+  - 예시) de-DE, en-CA
+- `Content-Length`: 본문의 길이나 크기
+- `Content-Location`: 리소스가 실제로 어디에 위치하는지
+- ~`Content-MD5`: 본문의 MD5 체크섬~
+- `Content-Range`: 전체 리소스에서 이 엔터티가 해당하는 범위를 바이트 단위로 표현
+  - **{unit} {range-start}-{range-end}/{size}**
+  - 예시) bytes 200-1000/67589
+- `Content-Type`: 이 본문이 어떤 종류의 객체인지
+  - **{media-type};charset={value}; boundary={something}**
+  - 예시) text/html; charset=utf-8
+  - 예시) multipart/form-data; boundary=something
+- `Content-Disposition`: 콘텐츠가 브라우저에 인라인으로 표시될 것으로 예상되는지, 즉 웹 페이지 또는
+  웹 페이지의 일부로서 또는 첨부 파일로 로컬로 다운로드 및 저장될 것으로 예상되는지를 나타내는
+  헤더다.
+  - **Content-Disposition: inline**
+  - **Content-Disposition: attachment**
+  - **Content-Disposition: form-data**
+  - **; name="fieldName"**이 덧붙여서 올 수 있다.
+
+### 엔터티 캐싱 헤더
+
+```
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+Expires: Wed, 21 Oct 2015 07:28:00 GMT
+Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT
+
+```
+
+일반 캐싱 헤더는 언제 어떻게 캐시가 되어야 하는지에 대한 지시자를 제공한다. 엔터티 캐싱 헤더는
+엔터티 캐싱에 대한 정보를 제공한다.
+
+- `ETag`: 이 엔터티에 대한 엔터티 태그
+- `Expires`: 이 엔터티가 더 이상 유효하지 않아 원본을 다시 받아와야 하는 일시
+- `Last-Modified`: 가장 최근 이 엔터티가 변경된 일시
+
+---
+
+---
+
+- [책뽀개기 모임](https://github.com/bookcrush?type=source) 중 **http 완벽가이드** 1장 뽀개기
+  진행중입니다. (~8월말) (다음 모임은 2장) (모임 참여를 원하신다면 댓글로 문의 바랍니다.)
+- [HTTP 완벽가이드]("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=")
+  책을 보고 이해한 내용을 **저만의 순서**로 정리 한 글입니다.
+
+---
+
+참고자료
+
+1. [IANA registry](https://www.iana.org/assignments/message-headers/message-headers.xhtml)
+2. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)

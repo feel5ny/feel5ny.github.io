@@ -1,0 +1,365 @@
+---
+title: 8/ DOM 확장
+date: '2017-12-29'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. --- --- 목차 1. 선택자 API   1. querySelector() 메서드   2.
+  querySelectorAll() 메서드   3. m...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/61/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요.
+
+---
+
+---
+
+**목차**
+
+1. 선택자 API
+1. querySelector() 메서드
+1. querySelectorAll() 메서드
+1. matchesSelector() 메서드
+1. 요소 간 이동
+1. HTML5
+1. 클래스 관련 추가사항
+
+
+    - getElementsByClassName() 메서드
+    - classList 프로퍼티
+
+2. 포커스 관리
+3. HTMLDocument의 변화
+
+
+    - readyState 프로퍼티
+    - 호환성 모드
+
+4. 문자셋 프로퍼티
+5. 커스텀 데이터 속성
+6. 마크업 삽입
+
+
+    - innerHTML
+    - outerHTML
+    - insertAdjacentHTML() 메서드
+    - 메모리와 성능 문제
+
+7. scrollIntoView() 메서드
+8. 전용 확장
+9. 문서모드
+10. children 프로퍼티
+11. contains() 메서드
+12. 마크업 삽입
+
+
+    - innerText 프로퍼티
+    - outerText 프로퍼티
+
+5. 스크롤
+
+---
+
+---
+
+DOM은 그 자체로도 매우 잘 정의된 API이긴 하지만, 특정 브라우저 전용 방법으로 확장하여 기능을 추가할
+때도 많다.
+
+## <a name="location" ></a> 1. 선택자 API
+
+- 자바스크립트 라이브러리 중에 가장 인기 있는 기능은 CSS 선택자로 패턴을 만들고 그에 맞는 DOM 요소를
+  선택하는 능력이다.
+- 선택자 API는 CSS 쿼리에 대한 브라우저의 네이티브 지원으로 W3C에서 명세화를 시작햇다.
+- 이 기능을 구현한 자바스크립트 라이브러리들은 모두 기초적인 CSS 파서를 직접 만들고, 기존의 DOM
+  메서드를 이용해 문서 노드를 이동하며 **패턴에 일치하는 노드를 골라내는 방식**을 사용했다.
+- `querySelector()`
+- `querySelectorAll()`
+- Document 타입과 Element타입에서 사용가능하다.
+
+### 1-1. querySelector() 메서드
+
+- 매개변수로 CSS 쿼리를 받는다.
+- 패턴에 일치하는 첫번째 자손 요소를 반환한다. 없으면 null
+
+```js
+// body 요소를 가져온다.
+const body = document.querySelector('body');
+
+// ID가 "myDiv"인 요소를 가져온다.
+const myDiv = document.querySelector('#myDiv');
+
+// 클래스가 "selected"인 요소 중 첫 번째를 가져온다.
+const selected = document.querySelector('.selected');
+
+// 클래스가 "button"인 이미지 중 첫 번째를 가져온다.
+const img = document.querySelector('img.button');
+```
+
+### 1-2. querySelectorAll() 메서드
+
+- querySelector()와 유사한데, 일치하는 노드 전체를 반환한다.
+- 즉, HTMLCollection(live)이 아닌 NodeList(non-live), 정적 인스턴스를 반환한다. (유사배열 형태)
+- 매개변수에는 여러 CSS 쿼리를 넣어도 된다. `"h1, h2, h3"`
+
+### 1-3. matchesSelector() 메서드 ( matches()로 변경됨 ) [+](https://developer.mozilla.org/ko/docs/Web/API/Element/matches)
+
+- 선택자 API 레벨2 명세
+- 매개변수로 CSS 선택자를 받고 요소가 그에 일치하면 true, 일치하지 않으면 false
+
+---
+
+---
+
+## <a name="location" ></a> 2. 요소 간 이동
+
+- 버전 9 미만의 IE는 타 브라우저와 달리 요소 사이의 공백을 텍스트 노드로 반환하지 않는다.
+- 이 때문에 childNodes나 firstChild 같은 프로퍼티를 사용할 때 차이가 발생한다.
+- DOM 명세를 유지하면서 브라우저 사이의 차이를 극복하려는 노력으로 요소간 이동 명세에서는 새
+  프로퍼티 그룹을 정의햇다.
+
+요소간 이동 API에서 추가된 새 프로퍼티들
+
+- `childElementCount` : **자식 요소 숫자**를 반환하되 텍스트 노드와 주석은 제외한다.
+- `firstElementChild` : 첫번째 자식 요소를 가리킨다.
+- `lastElementChild` : 마지막 자식 요소를 가리킨다.
+- `previousElementSibling` : 이전 형제 요소를 가리킨다.
+- `nextElementSibling` : 다음 형제 요소를 가리킨다.
+
+---
+
+---
+
+## <a name="location" ></a> 3. HTML5
+
+- 이전의 HTML 명세는 자바스크립트 인터페이스에 대해서는 간단히만 설명하고 마크업 언어에만 집중했으며
+  자바스크립트와의 연결은 DOM으로 미뤘다.
+- HTML5 명세는 마크업 언어와 함께 사용하도록 디자인된 자바스크립트 API를 상세히 설명하고 정의한다.
+
+### 3-1. 클래스 관련 추가사항
+
+#### `getElementsByClassName()` 메서드
+
+- 클래스 이름 문자열을 매개변수로 받는다.
+- 반환값 : HTMLCollection (live)
+- 호출한 요소의 자손만 쿼리하여 반환한다.
+
+#### 반환값이 살아있는 객체라서 생기는 이슈
+
+```js
+// HTMLCollection을 반환한다.
+var elems = document.getElementsByClassName('red');
+
+for (var i = 0; i < elems.length; i++) {
+  // 클래스 어트리뷰트의 값을 변경한다.
+  elems[i].className = 'white';
+}
+// white red white
+```
+
+HTMLCollection은 실시간으로 Node의 상태 변경을 반영한다. (live HTMLCollection) 실시간으로 Node의
+상태 변경을 반영하기 때문에 loop가 필요한 경우 주의가 필요하다. 아래와 같은 방법으로 회피할 수 있다.
+
+방법1 > 역방향으로 돌리기
+
+```js
+var elems = document.getElementsByClassName('red');
+for (var i = elems.length - 1; i >= 0; i--) {
+  elems[i].className = 'white';
+}
+```
+
+방법2 > none-live NodeList를 반환하는 querySelectorAll을 사용한다.
+
+```js
+// querySelectorAll는 Nodelist(non-live)를 반환한다. IE8+
+var elems = document.querySelectorAll('.red');
+for (var i = 0; i < elems.length; i++) {
+  elems[i].className = 'white';
+}
+```
+
+---
+
+#### classList 프로퍼티
+
+- 클래스 이름을 조작할 때는 `className` 프로퍼티를 이용해 클래스 이름을 추가하거나 제거, 교체했다.
+  - 한 요소에 클래스가 3가지가 적용되어 있을 경우 이름 변경에 불편함이 있다.
+- classList 프로퍼티는 [DOMTokenList](https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList)란
+  새 컬렉션 타입의 인스턴스이다.
+  - 다른 DOM 컬렉션과 마찬가지로 length존재 item() 메서드나 대괄호 표기법을 통해 데이터를 갖고올 수
+    있다.
+- 크롬과 파폭3.6이상 가능
+
+<img src="/images/post_img/61/01.png" />
+
+[DOMTokenList](https://developer.mozilla.org/ko/docs/Web/API/DOMTokenList)의 메서드
+
+- add(value) : 주어진 문자열 값을 목록에 추가한다.
+- contains(value) : 주어진 값이 목록에 존재하면 true, 그렇지 않으면 false
+- remove(value) : 주어진 문자열 값을 목록에서 제거
+- toggle(value) : 값이 목록에 존재하면 제거하고 그렇지 않으면 추가
+
+---
+
+### 3-2. 포커스 관리
+
+- 어느 요소에 포커스가 있는지, 현재 문서에 포커스가 있는지 판단하는 능력은 웹 접근성에 대단히 중요.
+
+#### `document.activeElement`
+
+- 항상 현재 포커스를 가진 DOM 요소를 가리키는 포인터를 포함한다.
+- 키보드 탭 키를 통한 포커스, focus() 메서드로 자동 포커스를 받는다.
+
+#### `document.hasFocus()`
+
+- 문서에 포커스가 있는지 나타내는 불리언 값을 반환한다.
+
+---
+
+### 3-3. HTMLDocument의 변화
+
+#### readyState 프로퍼티
+
+- readyState 프로퍼티에 가능한 값은 2가지 이다.
+  - loading
+  - complete
+- 문서를 불러왔는지 확인하는 것
+- 보통은 onload 이벤트 핸들러를 사용했다.
+
+#### `<head>` 프로퍼티
+
+- `document.head`로도 `<head>`요소 참조가 가능하다.
+- 크롬과 사파리 5 가능
+
+---
+
+### 3-4. 문자셋 프로퍼티
+
+- 문서의 문자셋을 다루는 프로퍼티
+
+#### `document.charset`
+
+- 문서의 문자셋을 나타내며, 새 문자셋 지정도 가능
+- 파폭, 사파리, 오페라, 크롬
+
+#### `document.defaultCharset`
+
+- 브라우저 및 시스템의 기본 설정에 따라 문서에 기본적으로 적용해야 할 문자셋을 나타낸다.
+- IE, 사파리, 크롬
+
+---
+
+### 3-5. 커스텀 데이터 속성 `data-`
+
+- HTML5 요소에서는 요소의 렌더링에 필요한 정보나 시맨틱 값이 아닌 데이터를 접두사 **data-**가 붙은
+  비표준 속성에 제공하도록 한다.
+- data- 뒤에는 자유롭게 네이밍
+- 요소의 **dataset**프로퍼티를 통해 접근할 수 있다.
+- 이름-값 쌍으로 이루어진 `DOMStringMap` 인스턴스이다.
+- 커스텀 데이터 속성은 요소에 데이터를 연결해야 하지만 사용자에게는 보이고 싶지 않을 때 유용하다.
+- 이 테크닉은 링크 추적, 매시업에서 페이지 각 부분의 식별자로 흔히 쓰인다.
+
+<img src="/images/post_img/61/03.png" />
+<img src="/images/post_img/61/02.png" />
+
+---
+
+### 3-6. 마크업 삽입
+
+마크업이 포함된 콘텐츠를 추가하는 것은 [크로스 스크립팅 공격](https://namu.wiki/w/XSS)(XSS:
+Cross-Site Scripting Attacks)에 취약하다.
+
+---
+
+#### innerHTML
+
+1. 읽기모드 : 요소와 주석, 텍스트 노드 등의 자식 노드를 모두 나타내는 HTML 표현을 반환한다.
+
+- innerHTML이 어떤 텍스트를 반활할지는 브라우저마다 다르다.
+
+2. 쓰기모드 : 주어진 값을 바탕으로 새 DOM 서브트리를 만들어서 요소의 잣기 노드를 완전히 교체한다.
+
+- 주어진 문자열을 DOM 서브트리로 파싱해 이미 존재하는 자식 노드를 모두 교체한다.
+
+- 모든 요소가 innerHTML을 지원하지 않는다.
+  - col, colgroup, framset, head, html, style, table, tbody, thead, tfoot, tr, title도 지원하지
+    않는다.
+
+---
+
+#### outerHTML
+
+1. 읽기모드 : 호출한 HTML 요소를 자식 노드와 **함께** 반환
+2. 쓰기모드 : 주어진 HTML 문자열을 파싱하여 DOM 서브트리를 생성하고 호출한 노드 전체를 교환하다.
+
+- 나머지 특징은 innerHTML과 동일
+
+---
+
+#### insertAdjacentHTML() 메서드
+
+- 삽입할 위치와 HTML 텍스트 두 가지를 매개변수로 받는다.
+
+삽입할 위치 매개변수
+
+- `beforebegin` : 호출한 요소 바로 앞에 삽입
+- `afterbegin` : 호출한 요소 첫번째 자식 요소 바로 앞에 삽입
+- `beforeend` : 호출한 요소 마지막 자식 요소 바로 다음에 삽입
+- `afterend` : 호출한 요소 바로 다음에 삽입
+
+<img src="/images/post_img/61/04.png" />
+
+---
+
+#### 메모리와 성능 문제
+
+- 위의 메서드들로 자식 노드를 교체하면 메모리에 문제가 생길 수 있는데 IE가 특히 심하다. 문제가
+  발생하는 지점
+- 제거한 서브트리 요소에 이벤트 핸들러나 기타 자바스크립트 객체가 할당되어 있을 때
+- 위의 상태에서 해당 핸들러나 프로퍼티를 사용하여 요소를 문서트리에서 제거한다면, 요소와 이벤트
+  핸들러 사이의 연결이 메모리에 남는다.
+  - 이른 작업이 계속되면 메모리 사용량이 점점 늘어난다.
+  - innerHTML, insertAdjacentHTML() 사용할 때는 제거할 요소의 이벤트 핸들러나 자바스크립트 객체
+    프로퍼티를 모두 제거하길 권한다.
+
+---
+
+### 3-7. scrollIntoView() 메서드
+
+모든 HTML요소에 존재하며 브라우저 창이나 컨테이너 요소를 스크롤해서 해당 요소가 뷰포트에 보이게
+한다.
+
+- 매개변수로 true나 생략하면 창 전체를 스크롤하여 요소 상단과 뷰포트 상단을 맞춘다.
+
+---
+
+---
+
+## <a name="location" ></a> 4. 전용 확장
+
+1. 문서모드
+2. children 프로퍼티
+3. contains() 메서드
+4. 마크업 삽입
+
+
+    - innerText 프로퍼티
+    - outerText 프로퍼티
+
+5. 스크롤
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/js-dom
+
+### 생소했던 단어

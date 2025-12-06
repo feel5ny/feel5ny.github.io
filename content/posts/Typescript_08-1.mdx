@@ -1,0 +1,117 @@
+---
+title: 7-1/ class 연습
+date: '2017-11-23'
+description: >-
+  연습문제 1 아래 자바스크립트를 타입스크립트로 바꾸시오 ``ts function Car(name) {     this.name =
+  name;     this.speed = 0;       this.honk = function() {        
+  console.log(...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+thumbnail: /images/post_img/26/thumb_default.jpg
+---
+
+### 연습문제 1
+
+아래 자바스크립트를 타입스크립트로 바꾸시오
+
+```ts
+function Car(name) {
+  this.name = name;
+  this.speed = 0;
+
+  this.honk = function () {
+    console.log('부우우웅');
+  };
+
+  this.accelerate = function (speed) {
+    this.speed = this.speed + speed;
+  };
+}
+
+var car = new Car('BENZ');
+car.honk();
+console.log(car.speed);
+car.accelerate(10);
+console.log(car.speed);
+```
+
+1차
+
+```ts
+class Car {
+  constructor(public name: string) {}
+  public speed: number = 0;
+  public honk(): void {
+    console.log('부우우웅');
+  }
+  public accelerate(speed) {
+    this.speed = this.speed + speed;
+  }
+}
+
+const car = new Car('BENZ');
+car.honk();
+console.log(car.speed);
+car.accelerate(10);
+console.log(car.speed);
+```
+
+2차
+
+```ts
+class Car {
+  constructor(private name: string) {}
+  private _speed: number = 0;
+  public honk(): void {
+    console.log('부우우웅');
+  }
+  public accelerate(speed) {
+    this._speed = this.speed + speed;
+  }
+
+  get speed(): number {
+    return this._speed;
+  }
+}
+
+const car = new Car('BENZ');
+car.honk();
+console.log(car.speed);
+car.accelerate(10);
+console.log(car.speed);
+```
+
+3차
+
+```ts
+interface ICar {
+  honk(): void;
+  accelerate(speed: number): void;
+}
+class Car {
+  constructor(private name: string) {}
+  private _speed: number = 0;
+
+  public honk(): void {
+    console.log('부우우웅');
+  }
+
+  public accelerate(speed) {
+    this._speed = this._speed + speed;
+  }
+  get speed(): number {
+    return this._speed;
+  }
+}
+
+const car = new Car('BENZ');
+car.honk();
+console.log(car.speed);
+car.accelerate(10);
+console.log(car.speed);
+```

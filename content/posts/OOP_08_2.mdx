@@ -1,0 +1,920 @@
+---
+title: 코드스피츠80_OOP design with game (1)- 2. OOAD & 프로시저 P
+date: '2019-02-23'
+description: >-
+  > 코드스피츠 강의 정리록 생소한 도메인으로 배우는게 좋다.  익숙한 도메인들은 익숙한 처리방법으로
+  처리하기때문에 객체지향을 배우기 어렵다.  때문에 80기는 게임을 통해서 진행할 예정. --- 객체지향
+  프로그래밍을 배우기 전, 프로시저 프로그래밍 형태의 코드를 알아본...
+author: Joy Kim
+tags:
+  - javaScript
+  - OOP
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList:
+  "[\n  {\n    \"title\": {\n      \"name\": \"2. 게임 개요 및 규칙\",\n      \"id\":
+  \"2\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"2.1 엔티티 파악\",\n        \"id\":
+  \"2-1\"\n      },\n      {\n        \"name\": \"2.2 규칙\",\n        \"id\":
+  \"2-2\",\n        \"depth2\": [\n          {\n            \"name\":
+  \"Entity\",\n            \"id\": \"2-2-1\"\n          },\n          {\n            \"name\":
+  \"Core Action\",\n            \"id\":
+  \"2-2-2\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"title\": {\n      \"name\":
+  \"3. 어디부터 시작할까?\",\n      \"id\": \"3\"\n    },\n    \"depth1\":
+  [\n      {\n        \"name\": \"3.1 [객체] Block\",\n        \"id\":
+  \"3-1\"\n      },\n      {\n        \"name\": \"3.2 [객체] Game\",\n        \"id\":
+  \"3-2\"\n      }\n    ]\n  },\n  {\n    \"title\": {\n      \"name\": \"4 Game
+  시나리오\",\n      \"id\": \"4\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"1,2,3
+  테이블 데이터 정의\",\n        \"id\": \"4-1\"\n      },\n      {\n        \"name\": \"4. 테이블
+  데이터 정의\",\n        \"id\": \"4-4\"\n      },\n      {\n        \"name\": \"5. 테이블 이벤트
+  걸기\",\n        \"id\": \"4-5\",\n        \"depth2\": [\n          {\n            \"name\": \"5.1
+  이벤트 > 블럭을 누르는 순간: down\",\n            \"id\":
+  \"4-5-1\"\n          },\n          {\n            \"name\": \"5.2 이벤트 > 블럭을 떼는 순간:
+  up\",\n            \"id\": \"4-5-2\",\n            \"depth3\":
+  [\n              {\n                \"name\": \"5.2.1 remove
+  \U0001F62B\",\n                \"id\":
+  \"4-5-2-1\"\n              }\n            ]\n          },\n          {\n            \"name\":
+  \"5.3 이벤트 > 블럭을 down하면서 움직이는 상태: move\",\n            \"id\":
+  \"4-5-3\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+thumbnail: /images/2019/12/thumb_default.jpg
+---
+
+> 코드스피츠 강의 정리록
+
+생소한 도메인으로 배우는게 좋다. 익숙한 도메인들은 익숙한 처리방법으로 처리하기때문에 객체지향을
+배우기 어렵다. 때문에 80기는 게임을 통해서 진행할 예정.
+
+---
+
+객체지향 프로그래밍을 배우기 전, **프로시저 프로그래밍** 형태의 코드를 알아본다.
+
+<a name="2"></a>
+# 2. 게임 개요 및 규칙
+<img src="/images/2019/12/01.png" />
+
+<a name="2-1" ></a>
+## 2.1 앤티티 파악
+아키텍트나 디자인패턴을 만드는 설계자들은 
+현상을 보고, 현상으로부터 프로그램 엔티티를 도출해서 설계를 들어간다.
+- 블럭에는 타입이 있구나.
+- 블럭 connect의 최저 갯수 제한이 있겠구나.
+- 스테이지의 가로 세로 갯수
+- 선택했던 블럭들을 돌아갈 수 있다.
+- 새로운 블록이 떨어진다.
+  
+  > 인지과학
+    가상세계임에도 불구하고 물리력가 중력을 기대한다 ㅋ
+
+<a name="2-2"></a>
+## 2.2 규칙
+
+<a name="2-2-1"></a>
+### Entity - 블럭타입: 5가지 (0,1,2,3,4) - cell size: 8*8
+<a name="2-2-2"></a>
+### Core Action
+
+<img src="/images/2019/12/02.png" />
+
+1. 한번에 3개 이상 같은 색으로 인접한 블록이 선택되면
+2. 삭제됨
+3. 삭제되면 위의 블록이 내려옴.
+4. 내려온 뒤
+5. 공간의 블록이 생성되어 채워짐
+
+> cf\_\_1 **게임이야기** ~ 모바일시대에서는 복잡한 core action이 많이 들어간 게임은 상품성이 없다.
+> (안좋은 예: 와우) core action이 단순한 게임이 상품성이 좋다. 최근 rpg게임들은 단순하게 변했다.
+> 한붓그리기도 이미 오래전에 누가 찾아낸 코어액션중에 하나이다. 재밌는 반복거리를 찾아내면
+> 벗어나려고 하지 않는다.
+
+---
+
+---
+
+<a name="3"></a># 3. 어디서부터 시작할까? ## 프로그램의 핵심은 데이터 사람은 표면적인 것만
+파악하려고 한다. - 표면적인 것과 시각적인 것 - 경험에 의존에 의해서 파악하기 때문에 경험한 것만
+보인다.
+
+프로그램의 핵심은 데이터이다.
+
+- 거의 대부분의 프로그램들은 다 예쁜 데이터 view.
+- 개발자의 눈으로 보면 프로그램의 핵심은 데이터이다.
+
+## entity의 종류를 미리 파악하자. 👀
+
+```js
+column = 8;
+row = 8;
+blockTypes = [0, 1, 2, 3, 4];
+Block = class {
+  constructor() {}
+  isNext() {}
+  isValid() {}
+};
+```
+
+### 현실세계 entity에는 이 3가지 이외에는 발견하기 힘들다.
+
+1. 스칼라 값
+
+- 설정에 따라 자유롭게 크기를 변경할 수 있음.
+- 단일 값
+- 가변적
+- (한번에 하나의 값만 보유할 수 있는 원자량
+  [from wiki](https://ko.wikipedia.org/wiki/%EC%8A%A4%EC%B9%BC%EB%9D%BC))
+
+2. 정의값
+
+- 미리 정해진 타입이 존재한다.
+- bolckTypes는 콜렉션 개념이 아니다. 집합을 정의한 개념이다. 하나의 값인것처럼.
+
+3. 객체값
+
+- 생성되거나 삭제되고, 연결되거나 조건을 파악한다.
+- 블록을 객체로 보는 이유는 **블록이 자신만의 책임을 위임할 수 있기 때문**이다.
+  - 다음번에 올 수 있는 블록이니?
+  - 올바른 위치인 상태이니?
+  - 자신의 상태를 은닉하고 캡슐화
+- 블록에는 자신만의 책임을 가질 수 있기 때문에 객체로 평가하게 된다.
+
+> UML을 깊이 공부하면 5가지 종류의 여러가지 entity과 관계가 나온다.
+
+---
+
+### cf\_\_2. 클래스이냐? 싱글톤 객체이냐?를 항상 고민한다.
+
+> 싱글톤 객체 애플리케이션이 시작될 때 어떤 클래스가 최초 한번만 메모리를 할당하고(Static) 그
+> 메모리에 인스턴스를 만들어 사용하는 디자인패턴. 생성자가 여러 차례 호출되더라도 실제로 생성되는
+> 객체는 하나고 최초 생성 이후에 호출된 생성자는 최초에 생성한 객체를 반환한다. 싱글톤 패턴은 단
+> 하나의 인스턴스를 생성해 사용하는 디자인 패턴이다.
+
+- 객체는 하나만 있거나 여러개 있다. 하나만 있는 것인지 여러개 있는 것인지 파악해야한다.
+- 하나만 있는데 클래스로 정의하거나 여러개 있는 것인데 객체로 만들면 반드시 고우투헬..
+  - 여러개 있는 것을 개별적으로 만들면, 여러개 있는 애들은 보통 변화를 한꺼번에 일으켜야하는데
+    개별적으로 만들었기 때문에 한꺼번에 수정할 수 없게 된다.
+  - 하나만 있어야 하는데 클래스로 만들면 인스턴스가 여러개 생길 수 있다.
+
+---
+
+---
+
+<a name="3-1"></a>
+## 3.1 [객체] Block 1. 클래스? 혹은 싱글톤 객체? - 블록은 여러개 생성되므로 **클래스** 2. 책임
+
+```js
+const Block = class {
+  constructor(type) {
+    this._type = type;
+  }
+  get image() {
+    return `url('img/${this._type}.png')`;
+  }
+  get type() {
+    return this._type;
+  }
+};
+Block.GET = (type = parseInt(Math.random() * 5)) => new Block(type);
+```
+
+1. 자신만의 **타입**을 갖는다.
+
+- `parseInt(Math.random()*5)`: 0 ~ 4 사이의 타입을 얻게됨
+- **인자에 초기화 코드를 명시해주면 선언과 코드의 내용을 분리할 수 있어서 가독성이 좋아진다.**
+
+2. 타입에 따른 **이미지 경로**를 반환한다. (타입에 따른 블록 이미지가 다르니까.. )
+
+### 왜 factory 함수로? (`Block.GET`)
+
+- Block 클래스는 **받아온 type을 자기 타입으로 기억하는데**만 관심 있다.
+- 타입을 전달하지 않았을 때 어떻게 만드는지는 **엄밀하게 따지면 블럭의 지식은 아니다.**
+  - 블럭을 만드는 쪽이 관심 있다.
+    - 만드는 쪽이 관심있는 것과 만들어 지는 쪽이 관심있는 것이 다르다.
+  - 랜덤함수는 팩토리 함수가 가져야할 지식이다.
+
+### 팩토리 함수는 클래스 내부로 가면 안된다.
+
+- **변화율**때문에!
+- 타입은 stage마다 바뀔꺼고, 아이템 추가되면 더 바뀔 것이다.
+- 타입은 변화율이 높은 개념이므로 클래스와 분리하여 명확한 의도를 작성하게 한다.
+
+> **변화율을 평가하는 가장 쉬운 방법** 변화율을 잘 디자인 했으면 책임이 없다고 생각됬던 객체는
+> 수정되지 않아야한다. 우리의 목표는 보다 더 많은 파일을 안건드리고 **일부파일만 건드려야한다.**
+
+---
+
+#### cf\_\_3. Factory 함수
+
+객체지향할 때 클래스를 사용하는 경우 생성자를 봉인하자. **factory함수로 클래스를 얻어가게 하자.**
+
+- `static` 키워드 써서 불러오게 해도됨.
+- factory 함수의 명칭은 일관되게 모든 클래스에 생성자를 대신하는 스태틱 함수를 만들자. (예제에서는
+  `GET`)
+  > 팩토리 함수 : 객체를 반환하는 함수
+
+---
+
+#### cf\_\_4. **단일 책임원칙 훈련하기**
+
+단일 책임원칙은 엄밀하게 지키려면 굉장히 어렵고, 섬세하게 바라보는 눈으로 언제나 의심해서 관리하지
+않으면 실력..키워지지 않는다. (빠르면 3년 늦으면 5년..ㅎ)
+
+---
+
+<a name="3-2"></a>
+## 3.2 [객체] Game 게임이라는 객체는 블록들을 소유하는 마스터 객체
+
+1. 클래스이냐? 싱글톤 객체이냐? 게임은 하나의 객체만 있으면 된다. (바둑판 하나.) 구지 클래스로
+   선언하지 않고, 싱글톤 객체로 만든다. => 싱글톤 객체
+2. 책임 2번과 3번은 내부에서만 알면된다.
+3. 초기화 필요한 정보를 바탕으로 게임 본체를 생성
+4. 렌더링 그림 갱신
+5. 이벤트 걸기 각 블록에서 이벤트를 처리
+
+6. 외부에서 게임의 어떤 상태만 알면 될까?
+
+- 게임 초기화 함수만 하나 노출하면 됨
+
+```js
+// 게임은 초기화된 게임이 바로 생성되어야 하므로, 즉시실행함수로.
+const Game = (_ => {
+  const init = ...
+  ...
+  return init;
+})()
+```
+
+---
+
+<a name="4"></a># 4. Game 시나리오 1. 테이블 형태 정의 2. 테이블 생성 3. 테이블 내에 블록 데이터
+채우기 (data) 2차원배열을 만들어야하기때문에 row와 column을 돌면서 생성한다. 4. 렌더링 - data는
+inMemory 객체 - render를 따로 호출하는 것은 네이티브 객체이기때문에(dom의 세상..) 5. 렌더링 전
+table에 이벤트 걸기.
+
+---
+
+<a name="4-1"></a>
+### 1. + 2. + 3. [객체, 스칼라값, 정의값] 테이블 데이터 정의 1. 테이블 형태 정의 2. 테이블 생성 3.
+테이블 내에 블록 데이터 채우기 (data)
+
+```js
+const Game = (_ => {
+  const column = 8, row = 8, blockSize = 80;
+  const data = [];
+  let table;
+
+  const init = tid => {
+    table = document.querySelector(tid);
+    for (let i = 0; i < row; i++){
+      const r = [];
+      data.push(r);
+      for(let j = 0; j < column; j++) r[j] = Block.GET();
+    }
+    render();
+  };
+
+  const render = _ => {...}
+})
+```
+
+---
+
+<a name="4-4"></a>
+### 4. 렌더링 데이터를 소비해서 표를 다시 그려주는 로직.
+
+```js
+const Game = (_ => {
+  const column = 8, row = 8, blockSize = 80;
+  const data = [];
+  let table;
+  const init = tid => {
+    ...
+    render();
+  };
+  ///
+  👇👇👇
+  const el = tag => document.createElement(tag);
+  const render = _ => {
+    table.innerHTML = '';
+    data.forEach(row => table.appendChild(
+      row.reduce((tr, block) => {
+        tr.appendChild(el('td')).style.cssText = `
+          ${block? `background: ${block.image};` : ''}
+          width: ${blockSize}px;
+          height: ${blockSize}px
+          cursor: pointer`;
+        return tr;
+      }, el('tr'))
+    ));
+  };
+  👆👆👆
+})
+```
+
+배열을 루프돌아서 각각의 줄을 td를 갖는 tr로 바꿔서 table에 넣고 싶음.
+
+- td를 갖는 tr로
+  <img src="/images/2019/12/04.png" style="width:20rem;" />
+- 각각의 줄을 (td를 갖는) tr로 바꿔서
+  <img src="/images/2019/12/03.png" style="width:20rem;" />
+
+---
+
+##### cf\_\_5. 배열의 고차함수
+
+배열의 고차함수를 쓰는 원리는 간단하다.
+
+- 루프돌고 싶으면 `forEach`
+- 배열의 원소를 바꾼 배열을 얻고 싶으면 `map`
+- 하나의 값으로 뭉치고 싶으면 `reduce`
+  > 여러개의 집합을 하나의 스칼라값으로 바꾸는 것
+
+---
+
+<a name="4-5"></a>
+### 5. table에 이벤트 걸기.
+
+```js
+
+const Game = (_ => {
+  const column = 8, row = 8, blockSize = 80;
+  const data = [];
+  let table;
+  const init = tid => {
+    table = document.querySelector(tid);
+    for (let i = 0; i < row; i++){
+      const r = [];
+      data.push(r);
+      for(let j = 0; j < column; j++) r[j] = Block.GET();
+    }
+    👇👇👇
+    table.addEventListener('mousedown', down);
+    table.addEventListener('mouseup', up);
+    table.addEventListener('mouseleave', up);
+    table.addEventListener('mousemove', move);
+    👆👆👆
+    render();
+  };
+  const el = tag => document.createElement(tag);
+  const render = _ => {...}
+})
+```
+
+- mousedown
+  - 마우스를 누르는 그 순간. (click과 다르게 press하는 순간)
+- mouseup
+  - 손가락을 떼는 그 순간.
+- mouseleave
+  - 바인딩된 요소에만 이벤트가 발생하며, 해당 엘리먼트의 영역에서 마우스가 벗어날 때 발생한다.
+- mousemove
+  - 마우스가 엘리먼트에서 움직일 때
+
+---
+
+<a name="4-5-1" ></a>
+### 5.1 이벤트 > 블럭을 누르는 순간: down
+1. move는 mousedown인 상태여야 의미가 있다.
+  **down의 상태값** 필요
+
+2. 현재 눌러진 블록의 위치값 알아야함. event로부터 x,y값 전체좌표를 받아와서 x, y좌표를 이용해서
+   테이블 내에서 몇번째 블록인지, 데이터로 치환하게 된다.
+
+현재 눌러진 블록이 첫 시작? 아니면 중간? 1. 시작 블록 - 지금 선택이 시작되는 블록 - 라이언타입이면
+계속 라이언 타입 - 시작값은 왜 알아야하지? - 돌아가기도 해야함. 2. 현재 블록 - move할때마다 변함
+(cursor와 같은)
+
+```js
+const down = e => {
+  // down된 상태를 활성
+  // x, y로부터 block 데이터를 얻음
+  // 위에서 얻은 블록을 시작블록 및 현재 블록으로 설정하고 선택목록에 포함시킴.
+};
+```
+
+1. down의 상태값
+
+- down이 아닐때만 down.
+
+2. 어떤 블록이 선택되어있는지.
+3. x,y값을 넣으면 몇번째인지 알아낼 수 있는 함수
+
+```js
+const column = 8, row = 8, blockSize = 80;
+const data = [];
+let table;
+👇👇👇
+let startBlock, currBlock, isDown;
+const selected = [], getBlock = (x, y) => {...}
+
+const down = ({pageX: x, pageY: y}) => {
+  if(isDown) return;
+  const curr = getBlock(x,y);
+  if(!curr) return;
+  isDown = true;
+  selected.length = 0;
+  selected[0] = startBlock = currBlock = curr;
+  render();
+}
+👆👆👆
+```
+
+getBlock이외의 밑에나오는 로직은 전부 인메모리 로직. 네이티브 레이어를 다루는 방법은 즉시 인메모리
+객체로 변환한다.
+
+---
+
+##### cf\_\_6. 네이티브 객체를 다룰때 가장 중요한 요령
+
+- **네이티브 레이어를 최대한 줄이는 것.**
+- 네이티브의 정보 중에 필요한 핵심정보만 이용해서 즉시 인메모리 객체로 바꿈.
+- 네이티브의 코드가 많이 퍼져있으면 퍼져있을수록 더욱더 다루기 어렵고 더욱더 컨버팅하기 어렵게 된다.
+- 네이티브 코드중에 필요한 부분만 추출해서 => 즉시 인메모리 객체로 바꾸고
+- 나머지 로직은 인메모리에서 수용하도록 함.
+
+> 좋은 개발자 말하면 코드로 옮기는 것이 리얼타임이 될때까지.. 훈련하자. 좋은 개발자는 제어문을
+> 잘쓰거나, 코드를 한국어로 번역하거나 한국어를 코드로 번역하는 능력에 달려있다. 숙련을 많이 해서
+> 실시간으로.
+
+---
+
+#### 5.cf 네이티브 코드 => 인메모리 객체로 변환
+
+```ts
+// 네이티브 객체의 값을 => 인메모리 객체로 변환해주는 변환기 !
+// 많이 나옴.
+const getBlock = (x: number, y: number): Block => {
+  const { top: T, left: L } = table.getBoundingClientRect();
+  if (x < L || x > L + blockSize * row || y < T || y > T + blockSize * column) return null;
+  // 바둑판 범위를 넘는 경우 제외(왼쪽넘어, 오른쪽넘어, 위쪽넘어, 아래쪽 넘어)
+  return data[parseInt(y - T) / blockSize][parseInt(x - L) / blockSize];
+};
+```
+
+- `getBoundingClientRect` Element.getBoundingClientRect() 메서드는 요소의 크기와 요소의
+  viewport에서의 상대적인 위치를 반환합니다.
+  ```bash
+    DOMRect
+    { x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0
+    }
+  ```
+
+---
+
+---
+
+<a name="4-5-2" ></a>
+### 5.2 이벤트 > 블럭을 떼는 순간: up
+코어액션이 여기서 다 일어난다.
+1. down을 해제
+2. 선택목록이 3이상이면 삭제 실시
+3. 2이하면 리셋
+
+```js
+const up = e => {
+  // down을 해제
+  // 선택목록이 3이상이면 삭제 실시
+  // 2이하면 리셋
+};
+```
+
+#### 5.2.0 reset
+
+선택항목이 2이하면 모두 초기화시킨다.
+
+```js
+const up = _ => (selected.length > 2 ? remove() : reset());
+
+const reset = _ => {
+  startBlock = currBlock = null;
+  selected.length = 0;
+  isDown = false;
+  render();
+};
+```
+
+---
+
+##### cf\_\_7. 쉬운것부터 짜자!
+
+쉬운 것은 의존성이 없다. 고칠 일이 적다. 복잡한 것부터 짜면 의존성이 많은 것부터 짜게 되고, 나중에
+깨달은게 많을수록 더 많이 고치게 된다.
+
+---
+
+1. 선택된 블록들을 지워주고 => remove
+2. 떨어뜨린 다음에 => drop
+3. 새로 생성하고 => readyToFill
+4. 다시 내려와주면서, 합쳐줘야함. => fill
+
+<a name="4-5-2-1"></a>
+#### 5.2.1 remove 😫😫
+
+```js
+const remove = () => {
+  /* 데이터 내부의 row를 돌면서
+    해당 row에 선택된 요소가 존재하면 null로 만드는 함수.
+  */
+  data.forEach(r => {
+    selected.forEach(v => {
+      let i;
+      if ((i = r.indexOf(v)) !== -1) r[i] = null;
+    });
+  });
+  render();
+  setTimeout(drop, 300);
+};
+```
+
+> forEach는 for문보다 대화가됨.
+
+column을 돌면서 row를 계산해서 떨어뜨리는 일을 한다. 한턴에는 한칸씩 떨어진다. 중력에 의해 떨어지는
+방향은 column기준이기때문에 column을 먼저 loop돌린다. row는 맨 아랫줄부터 떨어지는 작업을
+해야하므로.. (전체row -1) 부터 시작
+
+- isNext: 윗줄에도 block이 있는 상황이라 다음 row도 검사해야하는지.
+- isEmpty: 떨어질 블럭이 하나의 column row들에 있는지 없는지.
+
+```js
+const drop = _ => {
+  let isNext = false; // drop을 더 해야하는지 말아야하는지.
+  for (let j = 0; j < column; j++) {
+    for (let i = row - 1; i > -1; i--) {
+      if (!data[i][j] && i) {
+        // 해당 구멍에 블럭이 없고, row의 인덱스가 0이 아닌(꼭대기가 아닌)
+        let k = i, // 해당 줄의 index를 복사한다.
+          isEmpty = true; // data[i][j] 위에 떨어질 블럭이 비었는지 아닌지.
+        while (k--)
+          // index를 하나씩 확인하면서
+          if (data[k][j]) {
+            // 위에 블럭이 있으면
+            isEmpty = false; // 위에 떨어질 블럭이 하나라도 있다는 뜻
+            break; // 반복분을 끝낸다.
+          }
+        if (isEmpty) break; // 위에 떨어질 블럭이 하나도 없으면 row loop 종료 다음 column loop 시작
+
+        // 위에 블럭이 하나라도 있는 상황이고,
+        // 다음 row도 검새햐아함을 flag
+        isNext = true;
+
+        // 떨어뜨리기.
+        while (i--) {
+          // 해당 줄 위에
+          data[i + 1][j] = data[i][j]; // 현재 검사한 블럭에 위의 블럭을 넣어주고,
+          data[i][j] = null; // 위의 블럭은 null로 초기화
+        }
+        break; // row loop를 종료 다음 column loop 시작
+      }
+    }
+  }
+  render();
+  isNext ? setTmeout(drop, 300) : readyToFill();
+};
+```
+
+> ㅋㅋㅋ ㅠㅠ 대댜냐댜.. 머리가 좋아지는수밖에 없다. 잘짜고, 쉽게 짤때까지 머리로 훈련하는 수밖에
+> 없다. 알고리즘, 코딩인터뷰, 자료구조, 트리구조 보다 도메인 해석 능력을 키우자. 어떠한 도메인에
+> 대해서 알고리즘을 짜는 능력은 훈련밖에 없다. 복잡한 일이 일어나는 것을 눈으로 관찰해서 어떤 일인지
+> 파악한 다음에 코드로 차근차근 푸는건 훈련밖에 없다. 이거 안되면 아키텍처고 디자인패턴이고
+> 필요없다..
+
+---
+
+채울준비를 하는 것은 밖에부터 채워야하는 애들이 예쁘게 내려오게 하기 위해서.
+
+1. 지워진 모양 그대로의 형태가 위에 형성되고 => readyToFill
+2. 해당 형태가 떨어지는 상황 => fill
+
+```js
+const fills = [];
+// fill 배열 초기화
+// column은 똑같고, row만 계산해서 생성하면 됨.
+// 실제 fills의 길이와 채워진 카운팅이 같게되면 다 채워졌다고 볼 예정
+let fillCnt = 0;
+
+const readyToFill = _ => {
+  fills.length = 0;
+
+  // data를 돌면서 구멍난 부분을 찾는다.
+  data.some(row => {
+    if (row.indexOf(null) === -1) return ture; // 구멍없는 row면 끝냄.
+
+    const r = [...row].fill(null); // 새로운 row를 만들어서 우선 null로 채움
+    fills.push(r);
+    row.forEach((v, i) => !v && (r[i] = Block.GET()));
+    // v가 없으면 해당 구멍에 block으로 채움
+  });
+  fillCnt = 0; // ?
+  setTimeout(fill, 300);
+};
+
+const fill = _ => {
+  if (fillCnt > fills.length) {
+    // fillCnt가 증가하다가 fills의 length와 일치하면 그만둘 때
+    isDown = false;
+    return;
+  }
+  for (let i = 0; i < fillCnt; i++) {
+    // 채워야하는 fill 배열의 row에서 해당 요소가 null이 아니라 채워져있으면(v),
+    // data의 해당 요소에 v를 넣는다.
+
+    // fills에 있는 마지막줄부터 윗줄을 채워가면 된다..
+    fills[fills.length - i - 1].forEach((v, j) => {
+      if (v) data[fillCnt - i - 1][j] = v;
+    });
+  }
+  fillCnt++;
+  render();
+  setTimeout(fill, 300);
+};
+```
+
+---
+
+---
+
+<a name="4-5-3" ></a>
+### 5.3 이벤트 > 블럭을 down하면서 움직이는 상태: move
+누른상태에서 다음(혹은 이전) 블럭으로 움직이는 상태
+
+```js
+const move = e => {
+  // down이 아니라면 이탈
+  // x,y 위치의 블록을 얻음
+  // 위에서 얻은 블록이 이전 블록의 타입이 같고 인접되어있는지 검사
+  // 위에서 얻은 블록이 선택목록에 없으면 추가
+  // 위에서 얻은 블록이 선택목록에 있다면 전전 블록일 경우 하나 삭제
+};
+```
+
+```js
+const move = ({ pageX: x, pageY: y }) => {
+  if (!isDown) return;
+  const curr = getBlock(x, y);
+  if (!crr || curr.type !== startBlock.type || !isNext(curr)) return;
+  if (selected.indexOf(curr) == -1) selected.push(curr);
+  else if (selected[selected.length - 1] == curr) selected.pop();
+  currBlock = curr;
+  render();
+};
+```
+
+```js
+// 받아오는 curr 블럭과 cache해놓은 curr 블럭을 비교하여 인접해있는지 검사.
+// 나와 위치가 한개 차이 난다는 것. x로 하나 차이 혹은 y로 하나 차이
+const isNext = curr => {
+  let r0,
+    c0,
+    r1,
+    c1,
+    cnt = 0;
+
+  /* data에서 들어온 
+    curr의 x인덱스, y인덱스와 
+    currBlock의 x인덱스와 y인덱스를 구하는 방법. 
+  */
+  data.some((row, i) => {
+    let j;
+    if ((j = row.indexOf(currBlock)) !== -1) ((r0 = i), (c0 = j), cnt++);
+    if ((j = row.indexOf(curr)) !== -1) ((r1 = i), (c1 = j), cnt++);
+    return cnt === 2;
+  });
+
+  return curr !== currBlock && (Math.abs(r0 - r1) === 1 || Math.abs(c0 - c1) === 1);
+};
+```
+
+자바스크립트에서 배열의 고차함수로 여러 제어문을 제거할 수 있다.
+
+## 최종 코드 및 정리
+
+프로시저 함수: 반환값이 없는 함수 sideEffect가 엄청 많다. 현재 로직들은 모두 프로시저 함수. 앞으로
+객체지향으로 리팩토링 예정.
+
+<details>
+<summary>최종코드 (TS ver.)</summary>
+
+```ts
+// Game에서 사용한 interface
+interface IGame {
+  // 게임판 정보
+  column: number;
+  row: number;
+  blockSize: number;
+  data: (Block | null)[][];
+
+  // 네이티브 객체 정보
+  table: HTMLElement;
+
+  // 상태 정보
+  startBlock: Block;
+  currBlock: Block;
+  isDown: boolean;
+  selected: Block[];
+  isNext: (curr: Block) => boolean;
+  getBlock: (x: number, y: number) => Block;
+
+  // 이벤트 관련
+  down: ({ pageX: x, pageY: y }: { pageX: number; pageY: number }) => void;
+  move: ({ pageX: x, pageY: y }: { pageX: number; pageY: number }) => void;
+  up: () => void;
+  reset: () => void;
+  remove: () => void;
+  drop: () => void;
+  fills: (Block | null)[][];
+  fillCnt: number;
+  readyToFill: () => void;
+  fill: () => void;
+
+  // util
+  el: (tag: HTMLElementTagNameMap) => HTMLElement;
+
+  render: () => void;
+}
+```
+
+```ts
+// 도저히 머리가 따라가기 힘들어서 TS로 우선 변환..
+const Game = (() => {
+  class Block {
+    static GET(type = Math.random() * 5) {
+      return new Block(type);
+    }
+    _type: number;
+    constructor(type) {
+      this._type = type;
+    }
+    get image() {
+      return `url('img/block${this._type}.png')`;
+    }
+    get type() {
+      return this._type;
+    }
+  }
+
+  const column = 8,
+    row = 8,
+    blockSize = 80;
+  const data: (Block | null)[][] = [];
+
+  let table: HTMLElement;
+  let startBlock: Block, currBlock: Block, isDown: boolean;
+  const selected: Block[] = [];
+
+  const getBlock = (x: number, y: number): Block => {
+    const { top: T, left: L } = table.getBoundingClientRect();
+    if (x < L || x > L + blockSize * row || y < T || y > T + blockSize * column) return null;
+    return data[(y - T) / blockSize][(x - L) / blockSize];
+  };
+
+  const isNext = (curr: Block): boolean => {
+    let r0: number,
+      c0: number,
+      r1: number,
+      c1: number,
+      cnt = 0;
+    data.some((row: (Block | null)[], i: number) => {
+      let j: number;
+      if ((j = row.indexOf(currBlock)) != -1) ((r0 = i), (c0 = j), cnt++);
+      if ((j = row.indexOf(curr)) != -1) ((r1 = i), (c1 = j), cnt++);
+      return cnt == 2;
+    });
+    return (curr != currBlock && Math.abs(r0 - r1) == 1) || Math.abs(c0 - c1) == 1;
+  };
+
+  const reset = () => {
+    startBlock = currBlock = null;
+    selected.length = 0;
+    isDown = false;
+    render();
+  };
+
+  const remove = () => {
+    data.forEach((r: (Block | null)[]) => {
+      //데이터삭제
+      selected.forEach((v: Block) => {
+        let i: number;
+        if ((i = r.indexOf(v)) != -1) r[i] = null;
+      });
+    });
+    render();
+    setTimeout(drop, 300);
+  };
+
+  const drop = () => {
+    let isNext = false;
+    for (let j = 0; j < column; j++) {
+      for (let i = row - 1; i > -1; i--) {
+        if (!data[i][j] && i) {
+          let k = i,
+            isEmpty = true;
+          while (k--)
+            if (data[k][j]) {
+              isEmpty = false;
+              break;
+            }
+          if (isEmpty) break;
+          isNext = true;
+          while (i--) {
+            data[i + 1][j] = data[i][j];
+            data[i][j] = null;
+          }
+          break;
+        }
+      }
+    }
+    render();
+    isNext ? setTimeout(drop, 300) : readyToFill();
+  };
+
+  const fills: (Block | null)[][] = [];
+  let fillCnt = 0;
+
+  const readyToFill = () => {
+    fills.length = 0;
+    data.some((row: (Block | null)[]) => {
+      if (row.indexOf(null) == -1) return true;
+      const r: (Block | null)[] = [...row].fill(null);
+      fills.push(r);
+      row.forEach((v: Block | null, i) => !v && (r[i] = Block.GET()));
+    });
+    fillCnt = 0;
+    setTimeout(fill, 300);
+  };
+
+  const fill = () => {
+    if (fillCnt > fills.length) {
+      isDown = false;
+      return;
+    }
+    for (let i = 0; i < fillCnt; i++) {
+      fills[fills.length - i - 1].forEach((v, j) => {
+        if (v) data[fillCnt - i - 1][j] = v;
+      });
+    }
+    fillCnt++;
+    render();
+    setTimeout(fill, 300);
+  };
+
+  const down = ({ pageX: x, pageY: y }: { pageX: number; pageY: number }) => {
+    if (isDown) return;
+    const curr = getBlock(x, y);
+    if (!curr) return;
+    isDown = true;
+    selected.length = 0;
+    selected[0] = startBlock = currBlock = curr;
+    render();
+  };
+
+  const move = ({ pageX: x, pageY: y }) => {
+    if (!isDown) return;
+    const curr = getBlock(x, y);
+    if (!curr || curr.type != startBlock.type || !isNext(curr)) return;
+    if (selected.indexOf(curr) == -1) selected.push(curr);
+    else if (selected[selected.length - 2] == curr) selected.pop();
+    currBlock = curr;
+    render();
+  };
+
+  const up = () => (selected.length > 2 ? remove() : reset());
+
+  const el = (tag: keyof HTMLElementTagNameMap) => document.createElement(tag);
+  const render = () => {
+    table.innerHTML = '';
+    data.forEach(row =>
+      table.appendChild(
+        row.reduce((tr, block) => {
+          tr.appendChild(el('td')).style.cssText = `
+        ${block ? `background:${block.image};` : ''}
+        width:${blockSize}px;
+        height:${blockSize}px;
+        cursor:pointer`;
+          return tr;
+        }, el('tr'))
+      )
+    );
+  };
+  return (tid: string) => {
+    table = document.querySelector(tid);
+    for (let i = 0; i < row; i++) {
+      const r = [];
+      data.push(r);
+      for (let j = 0; j < column; j++) r[j] = Block.GET();
+    }
+    table.addEventListener('mousedown', down);
+    table.addEventListener('mouseup', up);
+    table.addEventListener('mouseleave', up);
+    table.addEventListener('mousemove', move);
+    render();
+  };
+})();
+Game('#stage');
+```
+
+</details>

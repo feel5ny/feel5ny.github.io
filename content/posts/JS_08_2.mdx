@@ -1,0 +1,137 @@
+---
+title: 8/ DOM(1) - 노드의 계층 구조(2)
+date: '2017-12-28'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. --- --- 목차 1. Node 타입 2. Document 타입 3. Element 타입 4. Text
+  타입   - 텍스트 노드 생성   - 텍...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/59/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요.
+
+---
+
+---
+
+**목차**
+
+1. Node 타입
+2. Document 타입
+3. Element 타입
+4. [Text 타입](#text)
+
+- 텍스트 노드 생성
+- 텍스트 노드 통일
+- 텍스트 노드 분할
+
+5. [Comment 타입](#Comment)
+6. [CDATASection 타입](#CDATASection)
+7. [DocumentType 타입](#DocumentType)
+8. [DocumentFragment 타입](#DocumentFragment)
+9. [Attr 타입](#Attr)
+
+---
+
+---
+
+## <a name="text" ></a> 4. Text 타입
+
+- 이 노드에는 평범한 텍스트가 포함되고 글자 그대로 사용된다.
+- 이스케이프된 HTML 문자는 포함할 수 있지만 HTML 코드는 포함할 수 없다.
+
+#### Text 노드의 특징
+
+- nodeType은 **3**
+- nodeType은 **"#text"**
+- parentNode는 **Element**
+- **자식 노드를 가질 수 없다.**
+
+<img src="/images/post_img/59/textNode.jpg" />
+
+- Text 노드에 포함된 텍스트는 nodeValue 프로퍼티나 data 프로퍼티로 가져올 수 있다.
+- 둘중에 하나를 바꾸면 노드에 반영된다.
+- 공백도 length값에 포함된다.
+- 텍스트 노드의 값을 바꿀때 알아둬야 할 점은 문자열이 문서 타입에 따라 HTML 또는 XML에 맞게 인코드
+  된다.
+
+#### 텍스트를 조작하는 메서드
+
+- appendData(text) : 노드 마지막에 text 추가.
+- deleteData(offset, count) : offset부터 count만큼 삭제
+- insertData(offset, count, text) : offset 위치에 text 삽입
+- replaceData(offset, count, text) : offset부터 (offset + count) 까지의 텍스트를 text로 교체
+- splitText(offset) : offset 위치를 기준으로 텍스트 노드를 둘로 나눈다.
+- substringData(offset, count) : offset위치부터 (offset + count)까지의 텍스트를 꺼낸다.
+
+### 텍스트 노드 생성 `document.createTextNode()`
+
+- 매개변수로 삽입할 텍스트를 받는다.
+- 새 텍스트 노드를 생성하면 ownerDocument 프로퍼티가 설정되지만 문서 트리에 삽입하기 전에는 브라우저
+  창에 표시되지 않는다.
+- 일반적으로 요소는 단 하나의 자식 텍스트 토드만 가진다.
+  - 여러 개를 가질 때도 있다.
+  - 이때 `normalize()`를 사용하면 두 가지 텍스트가 공백없이 합쳐진다.
+
+```js
+const element = document.createElement('div');
+element.className = 'message';
+
+const textNode = document.createTextNode('Hello world!');
+element.appendChild(textNode);
+
+document.body.appendChild(element);
+```
+
+### 텍스트 노드 통일 `normalize()`
+
+### 텍스트 노드 분할 `splitText()`
+
+---
+
+---
+
+## <a name="Comment" ></a> 5. Comment 타입
+
+---
+
+---
+
+## <a name="CDATASection" ></a> 6. CDATASection 타입
+
+---
+
+---
+
+## <a name="DocumentType" ></a> 7. DocumentType 타입
+
+---
+
+---
+
+## <a name="DocumentFragment" ></a> 8. DocumentFragment 타입
+
+---
+
+---
+
+## <a name="Attr" ></a> 9. Attr 타입
+
+---
+
+### 참고링크
+
+1. http://meetup.toast.com/posts/89
+
+### 생소했던 단어
+
+1. MIME타입
+2. Gecko

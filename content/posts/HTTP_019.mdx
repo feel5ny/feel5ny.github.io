@@ -1,0 +1,180 @@
+---
+title: WebDAV와 공동작업
+date: '2020-02-03'
+description: >-
+  ------ ------ - 웹 분산 저작과 버저닝 Web Distributed Authoring and Versioning, WebDAV - WebDAV는
+  웹 배포 공동 작업에 대한 또 다른 영역을 개척했다.   - 현재 공동작업으로 svn, git이 널리 쓰이고
+  있...
+author: Joy Kim
+tags:
+  - http
+  - release
+categories:
+  - 01_Web
+  - 02. HTTP
+enableComment: true
+customList: |-
+  [
+    {
+      "hr": {
+        "type": "start",
+        "name": "WebDAV"
+      }
+    },
+    {
+      "title": {
+        "name": "WebDAV와 XML",
+        "sub": "-",
+        "id": "xml",
+        "style": {
+          "type": "number",
+          "index": "1"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "WebDAV 헤더",
+        "sub": "DAV, Depth, Destination, If, Lock-Token, Overwrite, Timeout",
+        "id": "header",
+        "style": {
+          "type": "number",
+          "index": "2"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "WebDAV 메서드",
+        "sub": "propFind, propPatch, mkcol, copy, move, lock, unlock, delete, put, options",
+        "id": "method",
+        "style": {
+          "type": "number",
+          "index": "3"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "WebDAV의 버전관리",
+        "sub": "-",
+        "id": "version",
+        "style": {
+          "type": "number",
+          "index": "4"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "WebDAV의 미래",
+        "sub": "-",
+        "id": "future",
+        "style": {
+          "type": "number",
+          "index": "5"
+        }
+      }
+    }
+  ]
+thumbnail: /images/2020/06/thumb_default.jpg
+---
+
+---
+
+{/* {/\* <!-- 1. WebDAV와 XML
+
+1. WebDAV 헤더
+1. WebDAV 메서드
+1. WebDAV 잠금과 덮어쓰기 방지
+1. LOCK 메서드
+1. UNLOCK 메서드
+1. 속성과 meta 데이터
+1. propfind 메서드
+1. proppatch 메서드
+1. 콜랙션과 이름공간 관리
+1. MKCOL 메서드
+1. DELETE 메서드
+1. COPY와 MOVE 메서드
+1. 향상된 HTTP/1.1 메서드
+1. WebDAV의 버전관리
+1. WebDAV의 미래 --> \*/} 
+
+---
+
+- 웹 분산 저작과 버저닝 Web Distributed Authoring and Versioning, WebDAV
+- WebDAV는 웹 배포 공동 작업에 대한 또 다른 영역을 개척했다.
+  - 현재 공동작업으로 **svn, git**이 널리 쓰이고 있다
+- WebDAV은 공동 저작에 적합한 플랫폼을 제공하려고 HTTP를 확장하는 데 집중하였다.
+
+<a name="xml" />
+
+# 1. WebDAV와 XML
+
+- WebDAV의 메서드는 요청과 응답 관련 정보를 모두 잘 다루어야 한다.
+- 2.  HTTP는 보통 이 정보를 메세지 헤더에 담아 전달한다.
+  - 헤더에만 정보를 담아 전송하는 것은 한계가 있다.
+  - WebDAV는 이를 해결하기 위해 XML을 지원한다.
+- XML은 구조화된 데이터를 표현할 때 사용하는 포맷. **메타 마크업 언어**다.
+- 다음과 같은 용도로 사용한다.
+  1. 데이터를 어떻게 처리할 것인지 설명하는 **명령 포맷**
+  1. 서버의 **복잡한 응답을 표현**하는 데 사용하는 포맷
+  1. 콜렉션과 리소스를 처리하는 데 사용하는 **커스텀 정보 포맷**
+  1. **데이터 자체를 표현**할 수 있는 유연한 포맷
+  1. 대부분의 **국제화** 관련 문제에 대한 훌륭한 해결책
+- WebDAV는 `DAV.`라는 별도의 XML namespace를 정의한다.
+  - 요소나 속성 이름의 집합
+  - 이미 정의된 스키마는, 구문 분석 소프트웨어가 DTD 파일을 읽고 그것들을 정확히 해석할 필요 없이,
+    XML 스키마에서 데이터를 추정할 수 있게 한다.
+
+<a name="header" />
+
+# 2. WebDAV 헤더
+
+- **DAV**
+  - WebDAV를 제공하는 서버와 통신할 때 사용.
+  - WebDAV에서 지원하는 모든 리소스는 OPTIONS 요청에 대한 응답에 이 헤더를 포함해야 한다.
+- **Depth**
+- **Destination** : COPY나 MOVE 메서드가 목적지 URI를 식별하는데 쓰인다.
+- **If**: 조건집합을 정의한다. 조건들에 모두 많지 않으면 요청은 실패.
+- **Lock-Token**: UNLOCK 메서드에서 사용한다.
+- **Overwrite**: 대상을 덮어쓸 것인지 아닌지 기술한다.
+- **Timeout**
+
+<a name="method" />
+
+# 3. WebDAV 메서드
+
+## 3.1 WebDAV 잠금과 덮어쓰기 방지
+
+- 공동 작업과 관련한 문제들
+
+- WebDAV는 이 문제를 개선하기 위해 **잠금**이라는 개념을 지원한다.
+- 잠금이 완벽한 해결책은 아니다.
+  - 완벽한 해결을 위해서는 버저닝와 메세징을 지원해야 한다.
+- WebDAV는 2가지 형식의 잠금을 지원한다.
+  1. 리소스나 콜렉션에 대한 배타적 쓰기 잠금
+  2. 리소스나 콜렉션에 대한 공유된 쓰기 잠금
+
+### 1. 리소스나 콜렉션에 대한 배타적 쓰기 잠금
+
+- 잠금 소유자만 쓸 수 있게 보장한다.
+  - 이 잠금 형식은 잠재적인 충돌을 완벽히 제거한다.
+  - 공유된 쓰기 잠금은 여러 사람으로 이루어져 있는 그룹이 하나의 문서에 작업할 수 있게 한다.
+  - 이 잠금 형식은 모든 저자가 각각 서로의 활동을 인식하고 있는 상황에서는 잘 동작한다.
+- WebDAV는 잠금과 관련한 메서드로 `LOCK`, `UNLOCK`을 제공한다.
+  1. 잠금을 수행하려면, *저자를 식별하는 메커니즘*이 필요한다. => WebDAV는 **다이제스트 인증**을
+     요구한다.
+  2. 잠금이 승인되면, 서버는 도메인 전체에서 유일한 토큰을 클라에 반환한다. : **opaquelocktoken**
+     잠금 토큰 URI 스킴
+  3. 그 이후에 클라가 서버에 쓰기를 보내고자 할때, 서버에 연결하고 다이제스트 인증을 수행한다.
+  - 인증이 완료되면 WebDAV 클라는 PUT 요청을 통해 잠금 토큰을 보낸다.
+
+---
+
+- [HTTP 완벽가이드]("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=")
+  책을 보고 이해한 내용을 정리 한 글입니다.
+
+---
+
+**참고자료** [RFC 4918](https://tools.ietf.org/html/rfc4918)

@@ -1,0 +1,347 @@
+---
+title: CodeSpitz77 2회_Flow control statement (2)
+date: '2019-02-04'
+description:
+  "\U0001F315\U0001F311\U0001F311 TL;DR optional flow control에서는 if문에 대해서 다룬다. if문에서
+  가장 중요한 것은 모든 상황에 대한 예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는
+  mandatory 상태의 문이 와야한다. 후방결합이라는 특징때..."
+author: Joy Kim
+tags:
+  - javaScript
+  - flow control
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "2. Optional Flow Control",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 If, If else",
+          "id": "2-1",
+          "depth2": [
+            {
+              "name": "2.1.1 Truthy, Falsy",
+              "id": "2-1-1"
+            },
+            {
+              "name": "2.1.2 Optional, Mandatory",
+              "id": "2-1-2"
+            },
+            {
+              "name": "2.1.3 RL Parsing",
+              "id": "2-1-3"
+            },
+            {
+              "name": "2.1.4 Nested, Parallel",
+              "id": "2-1-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. Iterate Flow Control",
+        "id": "3"
+      },
+      "depth1": [
+        {
+          "name": "3.1 For",
+          "id": "3-1",
+          "depth2": [
+            {
+              "name": "3.1.1 Limited Statement",
+              "id": "3-1-1"
+            },
+            {
+              "name": "3.1.2 Empty Truthy",
+              "id": "3-1-2"
+            },
+            {
+              "name": "3.1.3 Last Execution",
+              "id": "3-1-3"
+            }
+          ]
+        },
+        {
+          "name": "3.2 While, do while",
+          "id": "3-2",
+          "depth2": [
+            {
+              "name": "3.2.1 Infinite Loop",
+              "id": "3-2-1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+thumbnail: /images/2019/06/thumb_default.jpg
+---
+
+🌕🌑🌑
+
+### TL;DR
+
+**optional flow control**에서는 `if문`에 대해서 다룬다. if문에서 가장 중요한 것은 모든 상황에 대한
+예외처리이며, 특히 if..else을 사용할 경우 else문 뒤에는 **mandatory** 상태의 문이 와야한다.
+**후방결합**이라는 특징때문에 else if 사용을 조심해야한다. 병행조건일때는 switch문을 쓰고
+부분집합에서의 조건문이 필요할 경우에는 if..else를 사용한다. if문의 여러 중첩을 else if문으로
+쓰곤했는데, 많은 상황을 예외처리 한것인가에 대해 항상 의문이 들곤했었다. 이번 시간을 통해서 else
+if문은 지양하기로 하고, else문 뒤에 조건문을 추가하고 싶을 경우 중괄호 이후에 if else문을 써서,
+else뒤에는 mandatory한 상황을 만들게끔 습관을 들이기로 했다. **Iterate Flow Control**에서는
+`For문`과 `While, do..while`문을 다룬다. For문은 3가지 식을 넣을 수 있는데 첫번째는 **식**과 문
+중에는 **선언문**만 올 수 있고, 두번째는 boolean을 반환하는 조건식이 오며, **빈값일 경우 무조건
+truthy**라는 특징이 있으므로 무한루프에 빠지지 않게 조심해야한다. 세번째는 식이 오는데, statement의
+마지막에 처리되므로 statement 마지막에 두어도된다. w**hile문**은 조건식이 필수이며, 조건식과 관련된
+코드가 body에 안나올 경우 무한루프에 빠지게된다. do..while문은 while 조건문 뒤에 `;`을 붙여야한다.
+
+> 코드스피츠 강의 정리록 77 동영상 음원문제로 77교안을 토대로 73강의를 들으며 작성
+
+---
+
+<a name="2"></a>
+## 2. Optional flow control
+
+conditional Statement: 조건문
+
+<a name="2-1"></a>
+### 2.1 if, if else `if (condition) statement1 [else statement2]`
+
+```js
+if (c > 5) {
+} else
+  switch (c) {
+  }
+```
+
+```js
+if (c > 5) {
+} else for (;;) {}
+```
+
+<a name="2-1-1"></a>
+#### 2.1.1 Truthy, Falsy [mdn](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) - falsy는
+`0, false, null, undefined,"", NaN`이 있다. - 나머지는 truthy이다.
+
+---
+
+<a name="2-1-2"></a>
+#### 2.1.2 Optional, Mandatory 특정 상황에 따라 optional한지 mandatoy한지 다르다. - if절은 optional,
+- if else절은 mandatory하다. - if else절은 모든 구문이 mandatory여야한다. - optional 상태의 경우는
+예외처리가 안되어있다고 생각하면 된다.
+
+```js
+if (expression) //optional
+if (expression) statement1 else statement2 // Mandatory
+```
+
+**암묵적인 오류(context error)** 예1)
+
+```js
+if (a) // mandatory
+else if (b && a)
+else
+```
+
+위의 코든에서 첫번째 else뒤에는 mandatory되어야하지만, optional하다.
+
+- a와 b의 상태에 따라 `b && a`의 값이 다르기 때문
+
+```js
+if (a)
+else {
+  if (b && a)
+  else {
+    if (!b && a)
+    else {
+      if(b && !a)
+      else {
+        if(!b &&!a)
+      }
+    }
+  }
+}
+```
+
+---
+
+에2)
+
+```js
+if (c === 1) {
+} else {
+  if (c === 2) {
+  }
+}
+```
+
+else 다음에 옵셔널한 if만 놓여있다. else 안에는 mandatory해야한다.
+
+```js
+if (c === 1) {
+} else {
+  if (c === 2) {
+  } else {
+  }
+}
+```
+
+- if..else문에서 else if문을 사용할 경우 육안으로는 많은 경우를 대비하는 처리하기 헷갈린다.
+- 이는 후방 결합때문이다.
+
+---
+
+<a name="2-1-3"></a>
+#### 2.1.3 RL Parsing - `arrow function`과 if else 구문만 오른쪽에서 왼쪽으로 `후방 결합`한다. -
+**`대부분의 버그는 후방 결합에서 일어난다.`** - **else if문 쓰는 습관을 버리자.** - **else 다음에
+조건문이 필요할 경우, 중괄호 이후에 if-else문 사용하기** - 후방결합의 실수를 피하기 위해 중괄호와
+괄호를 붙여주는 것이 좋다.
+
+```js
+if (c === 1) {
+} else {
+  if (c === 2) {
+  } else {
+  }
+}
+```
+
+병렬조건을 선택할 때 절대로 `else if`를 쓰면 안되는 이유이다.
+
+- `else if`는 원래부터 위험한 코드고,
+- 남들이 해석할때 난감해 지는 코드일 뿐만아니라,
+- **else 후방조건이 제대로 붙어있는지 검사하기 굉장히 까다롭다.**
+- 컴파일 에러도 안나고 런타임 다 통과하기 때문..
+- 런타임때 다 통과하지만 로직이 잘못된 경우가 너무 많다.
+
+---
+
+<a name="2-1-4"></a>
+#### 2.1.4 Nested, Parallel 이렇게 if else를 봤더니.. - 1차 조건이 분기한 이후에 `부분집합`에서만
+쓰인다. - 병행조건일 때 쓰는 것이 아니라 `부분집합을 다시 분기할때`.. - **nested되어있는 sub집합에
+대한 조건일때 사용한다.** - else if는 병행조건일 때 쓰면 원래 안되는 것.
+
+##### 병행조건(Parallel)일때는 무조건! => switch
+
+- switch를 쓴다.
+
+- 내가 평가해야할 식들이 동등할 경우 !!! switch문으로 간다.
+- 내가 평가해야할 식이 nested되어야 할 경우 if중첩.
+- 병행조건에는 반드시 예외가 생길 수 있는 가능성이 있기 때문에 **switch에는 default가 필수이다!!**
+
+##### if else 안에 switch문은 괜찮을까?
+
+- else 에는 mandatory가 되어야 하는데 switch문에서 default 문을 썼다면 mandatory가 보장되기 때문에
+  사용해도된다.
+  - 병행조건으로 빠졌지만, dafault가 붙어있는 이상 빠져 나올 구멍이 없다.
+- 조건문을 중첩해서 사용할 때는 mandatory로 빠지는 건지 optional로 빠지는지 확인하면 된다.
+
+mandatory로 시작했으면 mandatory로 끝내야하고 optional로 시작했으면 optional로 끝내야하고 optional과
+mandatory를 섞어 써야한다면
+
+- 로직분리를 잘하던지
+- 완전히 분리해서 함수로 빼던지(격리).
+
+> 자기 코드의 의도를 명확하게 해서 변화가 일어날 때 어디까지만 수정하고 나머지는 여파가 없게끔 하는
+> 방법에 대해서 익힐 필요가 있다. 코드를 짤때 어떻게 섬세하게 짤 것인가.
+
+---
+
+---
+
+<a name="3" ></a>
+## 3. Iterate Flow Control
+반복문
+- for
+- while, do..while
+- for ( of ); => for iteration
+- for ( in ); => forEach와 유사
+
+<a name="3-1"></a>
+### 3.1 For for문의 3개의 선택식에 어떤 코드를 넣어야할지 반드시 이해해야한다.
+
+`for ([initialization]; [condition]; [final-expression])`
+
+1. Initialization `Limited Statement`
+
+- 원래 식만 와야하는데 선언문 한정으로 문이 올 수 있다. (문중에 선언문만 올 수 있다.)
+
+선언문 또는 식이 올 수 있다. 혹은 **공문**도 올 수 있다. 식 또는 변수 선언. 주로 카운터 변수를
+초기화할 때 사용한다. 2. condition (:조건) 매 반복마다 평가할 식. 평가 결과가 참이라면 statement를
+실행한다. **이 식을 넣지 않을 때(공문) 결과는 언제나 참이다.** (`Empty Truthy`) - 무한루프
+
+결과가 거짓이라면 for문의 바로 다음 식으로 건너 뛴다. 3. final-expression 매 반복 후 평가할 식.
+다음번 condition 평가 이전에 발생한다. statement 끝에 있는것과 같는 상황이다. **즉, statement
+마지막에 실행된다.** (`Last Execution`) 반복해서 쓰지 않기 위해서 3번째 항목에 넣는것.
+
+```js
+var a = 3; // declare statement. 문이다.
+for (var i = 0; turthy; ex) {}
+```
+
+<a name="3-2"></a>
+### 3.2 While, do while `while (condition) statement` - condition이 공문일 경우 syntax error를
+반환한다. - while문은 중문이 오는 것이 정상. 2줄이 오는 것이 정상이다.
+
+```js
+while (truthy) {}
+
+// while문 보다 1번은 먼저 더 실행하는 꼴
+do {} while (truthy);
+```
+
+`do    statement while (condition);`
+
+- do while문은 마지막에 `;` 붙이는게 공식문서에 명시되어있는 규칙
+- do 다음의 statement가 단문일 경우 `;`붙이면 됨 `do a++; while(a);`
+
+<a name="3-2-1"></a>
+#### 3.2.1 Infinite Loop while문과 do..while문은 평가식에 관여되어있는 상태값을 바꾸지 않으면
+무한루프에 빠질 위험이 높다.
+
+**`식별자와 관련된 코드가 안나온다면 무한루프`**
+
+```js
+var a = -1;
+while (a > 2) {
+  a++;
+}
+```
+
+- 조건식(condition)에 나오는 상태가 body에 나오는지 안나오는지부터 봐야한다.
+
+---
+
+> 현실코드
+
+```js
+while (act.method().c) {
+  author.action();
+}
+```
+
+??? 뭔지 모름.
+
+- 이런 코드는 무조건 배재해야한다..
+
+```js
+var a = act.method().c;
+
+while (a) {
+  author.action();
+  a = act.method().c;
+}
+```
+
+- 적어도 body안에 조건식에 나오는 상태가 되었다..
+
+---
+
+참고자료 https://mkki.github.io/code-spitz/2018/07/12/code-spitz-2.html

@@ -1,0 +1,216 @@
+---
+title: Angular 프로젝트에 prettier 코드포매터 세팅하기
+date: '2018-03-12'
+description: >-
+  > 개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :) --- 목차 1.  모듈
+  세팅      프리티어 설치하기        에디터에만 세팅하기        프로젝트에 세팅하기      프리티어
+  옵션 값 2.  precommit, 커밋 전 옵...
+author: Joy Kim
+tags:
+  - angular
+  - prettier
+  - formatter
+categories:
+  - 03_DevOps
+  - 02. Code
+enableComment: true
+thumbnail: /images/2018/08/thumb_default.gif
+---
+
+> 개인의 경험을 바탕으로 적은 글이기에 피드백은 언제나 댓글로 환영합니다. :)
+
+---
+
+**목차**
+
+1.  모듈 세팅
+    - 프리티어 설치하기
+      - 에디터에만 세팅하기
+      - 프로젝트에 세팅하기
+    - 프리티어 옵션 값
+
+2.  precommit, 커밋 전 옵션에 맞춰 재포맷 하는 hook 추가.
+    - lint stage
+    - husky
+
+---
+
+한 프로젝트에 프론트엔드 개발자가 여러 명일 경우 각자의 코드 스타일이 다르기 때문에 **통일성**을
+위해 코드 포메터를 사용하면 코드를 깔끔하게 공유할 수 있다. 현재 진행 중인 angular 프로젝트에 react
+프로젝트에서 사용했었던 **Prettier**라는 포매터를 사용하기로 결정했다. 초반에 어떻게 세팅할지만
+논의하면 된다.
+
+프리티어를 엥귤러 프로젝트에 적용하면서 겪었던 부분을 글로 공유하고자 한다. 참고로 에디터는
+`vscode`를 사용하고 있다.
+
+<img src="/images/2018/08/prettier.gif" />
+
+---
+
+## 1. 모듈 세팅
+
+angular cli 로 프로젝트를 생성하면 기본 구조가 세팅이 되는데, 엥귤러는 타입스크립트가 주력
+언어이므로 타입스크립트를 위한 tslint.json 파일과 tsconfig.json 파일이 함께 세팅된다. `tslint.json`
+파일은 tslint 가 사용하는 linting(구문 체크) 설정 파일이다. tslint 란 An extensible linter for the
+TypeScript language. 즉 타입스크립트 린터이다!
+
+<img src="/images/2018/08/05.png" align="right" width="250px" style="margin-left: 10px;" />
+vscode 에서는 tslint 확장 프로그램을 설치하면 구문과 다른 곳을 빨간 줄로 표시해준다.
+`tsconfig.json`파일은 타입스크립트 컴파일 옵션 설정 파일이다.
+
+#### 우리는 **tslint**의 옵션 포맷에 + **Prettier**의 커스텀 옵션을 추가하기로 결정하였다.
+
+---
+
+### 1-1. 프리티어 설치하기
+
+<img src="/images/2018/08/03.png" />
+
+**\* 에디터에만 적용하기** 프리티어 `패키지`를 설치하는 방법과 `플러그인`으로 세팅하는 방법이 있다.
+개인적으로만 사용하거나 다른 개발자들이 모두 vscode 를 사용한다면 프리티어 플러그인을 설치하고
+workspace settings 에만 설정해도 프리티어 세팅은 완료된다.
+`Code > Preference > Settings > Workspace Settings`
+
+<img src="/images/2018/08/01.png" width="250px" align="left" style="margin-bottom:10px" />
+<img src="/images/2018/08/02.png" />
+위처럼 폴더가 생성된다. 폴더를 팀원들과 공유해도 괜찮고, 혹은 아래 옵션 객체만 팀 내의 docs에
+공유해도 괜찮다. (나중에 들어올 팀원이 vscode를 쓴다는 전제가 있어야..ㅎ)
+
+---
+
+**\* 프로젝트에 적용하기** 패키지 매니저로 프리티어를 설치한다.
+
+```bash
+npm install prettier -D
+```
+
+```
+{
+  "prettier.printWidth": 80,
+  "prettier.useTabs": false,
+  "prettier.tabWidth": 2,
+  "prettier.bracketSpacing": true
+}
+```
+
+프리티어 옵션은 여러 가지 방식으로 세팅이 가능하다. rc 파일을 따로 만들어서 관리할 수도 있고, json
+파일로 만들어서 관리를 할 수 있다. 우리 프로젝트에서는 package.json 파일에 포함시키기로 했다.
+
+```json
+    ...
+    "typeScript": "~2.4.2"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "useTabs": false,
+    "tabWidth": 2,
+    "bracketSpacing": true
+  }
+}
+```
+
+vscode 세팅에서 `"editor.formatOnSave": true`를 설정하면 저장하는 것과 동시에 프리티어가 적용된다.
+
+---
+
+### 1-2. 프리티어 옵션 값
+
+프리티어에는 여러 가지 기본 옵션 값들이 있다. [Prettier](https://prettier.io/docs/en/options.html)
+자세한 내용은 홈페이지에서 확인 가능하다.
+
+1.  Print Width
+    - 한 줄에서 wrap 이 되는 기준의 글자 수를 정한다.
+    - default `80`
+2.  Tab Width
+    - 탭의 스페이스 사이즈
+    - default `2`
+3.  Tabs
+    - 탭을 쓸 건지 안 쓸 건지
+    - boolean
+4.  Semicolons
+    - 문장 마지막에 세미콜론을 붙일지 안 붙일지
+    - boolean
+5.  Quotes
+    - true 이면 single quate
+6.  Trailing Commas
+    - 마지막에 콤마 붙이기
+    - none / es5 / all
+7.  Bracket Spacing
+8.  JSX Brackets
+9.  Arrow Function Parentheses
+10. Range
+11. Parser
+12. FilePath
+13. Require pragma
+14. Insert Pragma
+15. Prose Wrap
+
+우리의 프로젝트에서는 아래의 옵션을 세팅했다.
+
+```json
+{
+  "printWidth": 80,
+  "useTabs": false,
+  "tabWidth": 2,
+  "bracketSpacing": true
+}
+```
+
+printWidth 를 120 으로 하기도 하던데, 그건 취향껏! (에어비엔비는 80)
+
+---
+
+## 2. precommit, 커밋 전 재포맷 하는 hook 추가.
+
+개발자마다 쓰는 에디터가 다르고, 각자가 각자 에디터에 세팅하는 부분에서 나올 수 있는 에러들을
+방지하기 위해 프로젝트 자체에 세팅한 후 커밋 할 때마다 세팅하는 방법이 있다. pre-commit 툴과 함께
+사용하면 되는데 많이들 사용하는 `husky`와 `lint-staged` 모듈을 사용하면 된다.
+
+프리커밋 툴을 사용하면 git add 을 입력할 때 (`husky` : hook) 린트 옵션에 맞춰서
+재포맷을(`lint-staged` : 재포맷) 시켜준다. 이때 옵션에 tslint 옵션도 재포맷 설정에 넣어줄 수
+있으므로 git add 명령어 만으로 tslint 와 prettier 의 옵션들을 적용시킬 수 있다.
+
+<img src="/images/2018/08/04.png" />
+
+---
+
+**모듈 설치**
+
+```bash
+npm install --save-dev lint-staged husky
+```
+
+1.  package.json 에 precommit 스크립트를 추가하고
+2.  lint-staged 옵션을 추가하면 된다. 이때 prettier 를 읽는 스크립트와 tslint 를 검사하고 fix 하는
+    스크립트를 추가한다.
+
+`tslint --fix -c tslint.json -p tsconfig.json` c 는 config 의 약어. tslint.json 파일의 옵션들을
+확인하고 규칙에 맞춰서 fix 한다. p 는 project 의 약어. tsconfig.json 파일에 적힌 파일 경로에서
+린트될 파일을 찾는다.
+
+---
+
+**package.json**
+
+```json
+{
+    "scripts": {
+    ...,
+    "precommit": "lint-staged"
+    ...
+  },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+        "prettier --write",
+        "tslint --fix -c tslint.json -p tsconfig.json",
+        "git add"
+        ]
+  },
+}
+```
+
+---
+
+Reference
+
+- [Setting up Prettier in an Angular CLI Project](https://medium.com/@victormejia/setting-up-prettier-in-an-angular-cli-project-2f50c3b9a537)

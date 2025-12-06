@@ -1,0 +1,297 @@
+---
+title: 2부/ chap01. RxJs란 무엇인가?
+date: '2018-11-19'
+description:
+  "> [\U0001F4D5 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다. -----------   1. RxJS란? RxJS is
+  a library for composing asynchronous and event-based programs by using observable..."
+author: Joy Kim
+tags:
+  - async
+  - rxjs
+categories:
+  - 01_Web
+  - 03. Library
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. RxJS란?",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. RxJS 시작하기",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 RxJS 첫번째 예제",
+          "id": "2-1"
+        },
+        {
+          "name": "2.2 RxJS 첫번째 예제 개선하기",
+          "id": "2-2"
+        },
+        {
+          "name": "2.3 RxJS 두번째 예제",
+          "id": "2-3"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. RxJS 4대 천왕",
+        "id": "3"
+      },
+      "depth1": [
+        {
+          "name": "3.1 Observable",
+          "id": "3-1"
+        },
+        {
+          "name": "3.2 오퍼레이터",
+          "id": "3-2"
+        },
+        {
+          "name": "3.3 Observer",
+          "id": "3-3"
+        },
+        {
+          "name": "3.4 Subscription",
+          "id": "3-4"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "4. RxJS 개발 방법",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/2018/29/thumb_default.jpg
+---
+
+> **[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.
+
+---
+
+<a name="1" />
+
+## 1. RxJS란?
+
+RxJS is a library for composing asynchronous and event-based programs by using observable sequences.
+RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라이브러리이다.
+(범용적인 데이터 플로우 솔류션을 지향하는 라이브러리라고 책 저자가 정의함)
+
+<a name="2" />
+
+## 2. RxJS 시작하기
+
+<a name="2-1" />
+
+### 2.1 RxJS 첫번째 예제
+
+목표: 페이지를 클릭했을 경우 `event.currentTarget`정보를 콘솔로 출력해보자.
+
+```js
+const { fromEvent } = rxjs;
+const click$ = fromEvent(document, 'click');
+// 1. fromEvent : 타겟의 이벤트를 옵저버블로 변환한다.
+const observer = event => {
+  console.log(event.currentTarget);
+};
+click$.subscribe(observer);
+```
+
+`fromEvent(target: EventTargetLike, eventName: string, selector: function): Observable` click
+옵저버블을 구독하고, 옵저버블에서 데이터가 전달되면 옵저버함수가 받는다. 이는 addEventListener를
+통한 이벤트 핸들러 등록과 유사하다. 둘의 차이점은 브라우저를 통해 전달되는 이벤트 정보를
+Observable로 변환하는 작업을 추가로 한다는 점
+
+<a name="2-2" />
+
+### 2.2 RxJS 첫번째 예제 개선하기
+
+실제 우리가 필요한 정보는 click이 아니라 click이후의 `currentTarget`정보
+
+pluck 오퍼레이터를 이용하자. `pluck(properties: ...string): Observable` pluck은 사전적으로 '~을
+뽑다'라는 의미이다. 추출할 속성들을 '문자열'로 지정할 수 있다.
+
+pipe 오퍼레이터를 사용하여 파라미터로 전달된 오퍼레이터들이 적용된 새로운 Observable 인스턴스를
+반환한다.
+
+```js
+const { fromEvnet } = rxjs;
+const { pluck } = rxjs.operators;
+const currentTarget$ = fromEvent(document, 'click').pipe(pluck('currentTarget'));
+const observer = currentTarget => {
+  console.log(currentTarget);
+};
+currentTarget$.subscribe(observer);
+```
+
+cf\_\_1. RxJS에서 pipe 오퍼레이터를 적용하여서 도트 체이닝없이 오퍼레이터를 받는다. pipe는
+처리되어야할 작업들을 순차적으로 받아서 처리한다. `pipe(operations: ...): Observable`
+
+```js
+// 도트체이닝
+ajax$
+  .switchMap(data=>...)
+  .filter(user => ...)
+  .map(user => ...)
+
+// pipe 오프레이터
+ajax$
+  .pipe(
+    switchMap(data => ...),
+    filter(user => ...),
+    map(user => ...)
+  )
+```
+
+- 도트 체이닝을 구성하기 위해서는 옵저버블 객체가 모든 오퍼레이터를 가지고 있어야한다.
+- `Observable.prototype`에 사용하는 모든 오퍼레이터가 추가된다.
+  - rxjs사용시 불필요한 오퍼레이터를 모두 가지고 있어야 하기 때문에 파일 사이즈를 증가시킨다.
+- pipe오퍼레이터를 사용하면 트리세이킹(tree shaking: 사용하지 않는 모듈을 번들링할 때 제거하는
+  기능)을 자유롭게 할 수 있다.
+- pipe 오퍼레이터는 함수형태로만 오퍼레이터가 만들어지기 때문에 **Observable과의 결합도를 떨어뜨려**
+  더더욱 쉽게 오퍼레이터를 작성할 수 있다.
+
+---
+
+<a name="2-3" />
+
+### 2.3 RxJS 두번째 예제
+
+```js
+const a = [
+  { name: '유비', nationality: '촉' },
+  { name: '손권', nationality: '오' },
+  { name: '관우', nationality: '촉' },
+].filter(user => user.nationality === '촉');
+const log = user => console.log(user);
+a.forEach(log);
+```
+
+`from(ish: ObservableInput, mapFn: function, thisArg: any, scheduler: Scheduler): Observable`
+
+```js
+const { from } = rxjs;
+const { filter } = rxjs.operators;
+const a$ = from([
+  { name: '유비', nationality: '촉' },
+  { name: '손권', nationality: '오' },
+  { name: '관우', nationality: '촉' },
+]).pipe(filter(user => user.nationality === '촉'));
+const oberver = user => console.log(user);
+a$.subscribe(observer);
+```
+
+## <a name="3" />
+
+## 3. RxJS 4대 천왕
+
+1. Observable
+2. 오퍼레이터
+3. Observer
+4. Subscription
+
+---
+
+5. Subject
+6. Scheduler
+   > 다른장에서 설명
+
+---
+
+<a name="3-1" />
+
+### 3.1 Observable
+
+**시간을 축**으로 연속적인 데이터를 저장하는 컬렉션을 표현한 객체이다. Observable은 데이터를
+제공하는 소스를 Observer에게 전달한다. 이를 **스트림(stream)**이라고 부른다.
+
+<a name="3-2" />
+
+### 3.2 오퍼레이터
+
+**Observable을 생성 및 조작하는 함수**를 오퍼레이터(operator)라고 한다. 오퍼레이터는 Observable을
+생성하기도 하고, 각각의 Observable을 연결하기도 한다. Observable을 분리하거나 합치기도 한다.
+
+오퍼레이터는 현재의 Observable 인스턴스를 기반으로 항상 새로운 Observable 인스턴스를 반환한다.
+
+<a name="3-4" />
+
+### 3.3 Observer
+
+Observable에 의해 전달된 데이터를 소비하는 주체이다. Observers는 next, error, complete함수를 가진
+객체를 가리킨다.
+
+Observable에 의해 데이터가 전달될 때는next함수가 호출되고 에러가 발생했을 때는 error함수, 데이터
+전달이 완료되었을 때는 complete함수가 호출된다.
+
+Observer과 Observable은 subscribe 메소드를 통해 연겨로딘다.
+
+#### Observable.prototype.subscribe 함수
+
+subscrie는 Observer를 파라미터로 받는다.
+
+1. Observer객체를 전달하는 subscribe 사용 예
+
+```js
+const observer = {
+  next: x => console.log('Observer가 Observable로부터 받은 데이터: ' + x),
+  error: err => console.error('Observer가 Observable로부터 받은 에러 데이터: ' + err),
+  complete: () => console.log('Observer가 Observable로부터 종료되었다는 알림을 받을 경우'),
+};
+click$.subscribe(observer); // observer객체를 파라미터로 받는다.
+```
+
+2. <span class="mint">next 콜백함수를 전달하는</span> subscribe 사용 예
+
+```js
+click$.subscribe(x => console.log('Observer가 Observable로 부터 받은 데이터: ' + x));
+```
+
+3. next, error, complete 콜백 함수를 전달하는 subscribe 사용 예
+
+```js
+click$.subscribe(
+  x => console.log('Observer가 Observable로 부터 받은 데이터: ' + err),
+  err => console.error('Observer가 Observable로부터 받은 에러 데이터: ' + err),
+  () => console.log('Observer가 Observable로부터 종료되었다는 알림을 받을 경우')
+);
+```
+
+---
+
+<a name="3-4" />
+
+### 3.4 Subscription
+
+Observable.prototype.subscribe의 반환값 Subscription은 자원의 해제를 담당 unsubscribe 메소드를
+호출하여 자원해제 가능
+
+```js
+...
+const subscription = currentTarget$.subscribe(observer);
+
+// subscription으로 자원 해제 가능
+subscription.unsubscribe();
+```
+
+<a name="4" />
+
+## 4. RxJS 개발 방법
+
+RxJS를 사용하여 개발할 경우 프로세스는 대부분 다음과 같은 과정
+
+1. 첫째, 데이터 소스를 Observable로 변경한다.
+2. 둘째, 오퍼레이터를 통해 데이터를 변경하거나 추출한다. 또는 여러개의 Observable을 하나의
+   Observable로 합치거나 하나의 Observable로 만든다.
+3. 셋째, 원하는 데이터를 받아 처리하는 Observer를 만든다.
+4. 넷째, Observable의 subscribe를 통해 Observer를 등록한다.
+5. 다섯째, Observable 구독을 정지하고 자원을 해지한다.

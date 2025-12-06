@@ -1,0 +1,328 @@
+---
+title: 코드스피츠85 1회-(2) Runtime때 일어나는 일들
+date: '2019-11-02'
+description:
+  "코드스피츠 85에서는 none blocking에 대한 이야기와 자바스크립트를 짜는 근본적인 방법에 대한 고찰을
+  이야기해본다. --- \U0001F315\U0001F311\U0001F311 TL;DR - 작년 글 --- Program Program & Timing 1.
+  Language code 2. Machine..."
+author: Joy Kim
+tags:
+  - javaScript
+  - codeSpitz
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "Program",
+        "id": "program"
+      }
+    },
+    {
+      "hr": {
+        "type": "start",
+        "name": " Runtime 동안.."
+      }
+    },
+    {
+      "title": {
+        "name": "Runtime",
+        "sub": "런타임에 대해 (Von Neumann machine, JavaScript runtime)",
+        "id": "runtime",
+        "style": {
+          "type": "number",
+          "index": "1"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "State Control",
+        "sub": "[상태관리] 직접참조와 간접참조",
+        "id": "stateControl",
+        "style": {
+          "type": "number",
+          "index": "2"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "Flow Control",
+        "sub": "[명령관리] Sync flow Control, blocking, none-blocking",
+        "id": "stateControl",
+        "style": {
+          "type": "number",
+          "index": "3"
+        }
+      }
+    },
+    {
+      "title": {
+        "name": "Async",
+        "sub": "Continuation, CPS, Sync & Async",
+        "id": "async",
+        "style": {
+          "type": "number",
+          "index": "4"
+        }
+      }
+    }
+  ]
+thumbnail: /images/2019/35/thumb_default.jpg
+---
+
+코드스피츠 85에서는 `none blocking`에 대한 이야기와 자바스크립트를 짜는 근본적인 방법에 대한 고찰을
+이야기해본다.
+
+---
+
+🌕🌑🌑
+
+## TL;DR
+
+<img src="/images/2019/35/02.jpg" />
+
+- [작년 글](https://feel5ny.github.io/2019/01/22/JS_17/)
+
+---
+
+<a name="program" />
+
+# Program
+
+## Program & Timing
+
+<img src="/images/2019/35/01.png" style="width:100%" />
+
+1. Language code
+2. Machine language로 트랜스파일한다.
+
+- 여기서 machine이란.. 자기 언어가 실행되는 환경
+
+3. File로 내린다. (Load)
+4. 메모리에 적재되어 있는 File을 실행한다. (Run)
+5. 실행이 끝나고나면 종료된다. (Terminate)
+
+<a name="runtime" />
+
+# 1. Runtime
+
+## 1.1 Runtime Execution
+
+1. `Loading`: 적재되는 중
+
+- 파일을 실행하면 메모리에 적재된다.
+- 파일은 **명령**과 **값**으로 분리되어서 메모리에 적재된다.
+
+2. `instruction` - fetching & decoding
+
+- 여기서부터는 OS가 하는 일
+- `instruction`: CPU에서 해석할 수 있는 명령체계로 우리의 코드를 바꿔놓는 것
+
+메모리의 첫번째 명령을 실행한다.
+
+- instruction을 로딩할 때 fetching이라는 과정을 통해 실제로는 제어유닛의 디코더로 로드하고, 디코딩을
+  통해서 cpu가 원하는 명령어로 바꾼다.
+- 연산유닛에서 값이 필요한 연산일 경우 메모리에 있는 값을 로드해야하는데, 이때 데이터 유닛에 값을
+  로드해온다.
+- 데이터 유닛에서 받은 값을 연산유닛으로 다시 보내준다.
+
+3. `execution`
+
+- 명령을 처리한다.
+- 결과를 정리하여 반환해야한다는 명령이 있을 경우 다시 메모리의 값에 결과값을 보내준다
+
+### 폰 노이만 머신
+
+- 첫번째 명령이 끝나면 두번째 명령이 실행되고 이렇게 메모리에 적재된 명령이 순차적으로 처리되어
+  없어지게된다. 모든 명령이 끝나면 `terminate`가 일어난다.
+- 폰 노이만 머신은 내장 메모리 순차처리 방식으로서, 데이터 메모리와 프로그램 메모리가 구분되어 있지
+  않고 하나의 버스를 가지고 있는 구조를 말한다.
+- [위키](https://ko.wikipedia.org/wiki/%ED%8F%B0_%EB%85%B8%EC%9D%B4%EB%A7%8C_%EA%B5%AC%EC%A1%B0),
+  [참고](https://www.slideshare.net/sunnykwak90/ss-43131241)
+
+### 결국 런타임이란!
+
+- 이 과정이 반복되고 모든 명령어를 소비하면 실행이 끝난다.
+- **런타임**이란 로딩 이후에 instruction fetching - instruction decoding - execution 계속반복되어서
+  terminate가 일어나는 그 사이
+- **동기명령** `sync flow` 순차적으로 실행되는 동안 아무것도 못하고 구경하는 행위
+- 메모리에 sync flow를 태워서 flow대로 흐르는 것
+
+## 1.2 Runtime Details
+
+1. essential definition loading
+
+- 우리의 코드가 실행되기 위해서는 우리가 정의한 클래스, 함수 인터페이스가 다 떠있어야함
+- 실행코드에 앞서, 핵심적인 정의사항들이 올라감.
+
+2. vtable mapping (**v**ariables table)
+
+- 현대의 있는 컴파일러들은 우리가 정의한 메모리공간을 사용할때 가상 메모리 공간을 사용한다.
+- 컴파일러가 나의 변수를 가상으로 매핑해서 컴파일 했음 진짜 메모리와 컴파일러가 만든 가상의 변수와
+  매핑을 해줘야한다.
+- 내가 정의한 모든 변수를 실제 메모리에 매핑해주는 과정이 필요하다.
+
+3. run
+4. runtime definition loading
+5. run
+
+4번과 5번은 반복
+
+---
+
+### 자바스크립트의 런타임
+
+자바스크립트의 런타임은 브라우저 로드에서부터 런타임으로 친다.
+
+1. browser load
+2. browser parsing
+3. run
+
+- 기초적인 정의를 로딩한다.
+- 우리가 정의한 확장된 정의를 로딩한다. (상대적으로 여기까지를 declare time)
+- 실행한다. (상대적으로 여기서부터를 runtime으로 )
+
+---
+
+---
+
+# 2. State Control
+
+- 메모리 관리의 어려운 점을 이야기하는 것도 있다.
+- 값이라는 것은 계속 변하기 때문에 **상태**라고 부른다.
+
+## Directive Reference 직접참조
+
+```
+a = 'TEST'
+a주소 = 00, a크기 = 4
+b = &a // b에 a의 주소값을 할당
+c = &b // c에 b의 주소값(a의 주소값)을 할당.
+a = b & b =c (a=c) // 결국 a와 c도 같은 상황
+d = 'ABC'
+b = &d // b에 d의 주소를 재할당
+b = d & b != c (a=c)
+```
+
+- 마지막은 b와 d는 같고 b는 d의 주소값을 갖고 있기때문에 b는 c와 같은 상태가 아니다. 하지만 a와 c는
+  아직 같은 상태
+- b와 d는 같다는것이 바로 인지되지만, b에 다른 값을 넣었을 때 변하는 b와 c가 같지 않다 라는 사실을
+  바로 이해하고 인지할 수 있을까?
+  - **추적을 못한다. 🙅**
+  - c를 사용하는 동네는 다 망가짐
+- 전파, 여파..
+  - **직접 참조를 쓸때는 내 참조변수가 외부에 공유됐으면 변수의 값을 바꾸면 안된다.**
+  - 협소하게 움직일 수 밖에 없고, 개발에 제약이 생긴다.
+  - 이를 해결하기 위해 간점참조를 사용한다.
+
+## Indirective Reference 간접참조
+
+- **중간에 쿠션**을 두는 개념
+
+```
+a = "TEST"
+a주소 = 00, a크기 = 4
+b = { target: &a }
+c = &b
+d = 'ABC'
+b.target = &d // b를 직접 바꾸지 않기 때문에 더이상 싱크가 깨지는 문제가 일어나지 않는다.
+```
+
+- `.`: 쿠션을 친다.
+  - 런타임에 계산된다.
+  - 비용이 든다.
+    - **연산**비용과 **안정성**을 바꿨다고 보면 된다.
+    - 사람이 인지하고 있는 멘탈모델과 컨텍스트가 깨지지 않는다.
+- 이 원리를 사용하여 linked list, 디자인패턴, 객체지향의 추상클래스도 만든다.
+
+### 사실 자료구조는 아래 2가지 원리에서 시작된다
+
+1. 메모리를 통으로 쓰는 배열과
+2. linked list형식을 빌린..
+
+- 참조포인터를 이용하여 쿠션을 치는
+
+---
+
+---
+
+# 3. Flow Control
+
+- 명령 관리의 어려운 점을 이야기하는 것도 있다.
+- state 관리 + 명령진행에 대한 어려움
+  - 2가지 모두 챙겨야하기때문에 상태관리보다 더 어렵다.
+
+## Sync flow Control
+
+[자세한건 여기!](https://feel5ny.github.io/2019/02/03/JS_18_1/)
+
+- **sync flow**: 메모리에 적재된 명령이 순차적으로 실행됨
+- **sync flow control**: goto를 통해 명령의 위치를 이동함
+  - `goto`라는 명령어를 통해서 sync flow의 작동을 제어할 수 있다.
+  - 메모리의 state에 따라서 분기를 한다.
+    - sync flow control 핵심은 해당 시점의 메모리의 값 (분기칠때의 상태에 의존된다)
+    - condition control => 여기서 condition은 메모리의 상태값
+      > cf\_\_1 **의존성 역전 / 제어 역전**
+      >
+      > - 의존성 역전: 추상적인 것에 의존하겠어.
+      > - 제어 역전: 추상적인 행동을 할 것이라고 전제하여 제어문을 짜는 것.
+- **sub flow** (== **sub routine**: 반복적으로 사용할 수 있는 sync flow) : 함수 등을 통해 별도의
+  명령set을 여러번 실행함
+
+## Blocking
+
+- Sync flow가 실행되는 동안 다른 일을 할 수 없는 현상
+- 우리가 짠 모든 코드가 blocking 코드.
+- 때문에 우리가 할 수 있는건 blocking 줄이기
+
+#### Blocking 줄이기
+
+- sync flow를 짧게 하기
+- 다른 thread에 sync flow를 떠넘기기
+  - 현대브라우저는 병행적 프로그래밍을 요구한다.
+- **이벤트 루프**: 동기화 명령 사이사이에 이벤트 루프가 작동해서, 다른 thread 작업을 기다리게된다.
+
+#### 그럼 Non Blocking이란?
+
+Sync Flow가 납득할 만한 **시간** 내에 종료되는 것
+
+- 우리의 코드는 보다 더 none blocking으로 향하는 길
+- **빠른 thread로 빼내어서 main thread를 얼만큰 줄이느냐가 none blocking의 주제**
+
+---
+
+---
+
+# 4. Async
+
+## Sync & Async
+
+- 앞에서 말한 sync flow와는 다른 개념이다.
+- **Sync**: 서브루틴이 즉시 값을 반환하는 것
+- **Async**: **서브루틴이 `다른 수단`으로 값을 반환하는 것**
+  - 우리가 원하는 값을 즉시 리턴하지 않는 모든 함수가 async 함수
+  - 다른수단이란?
+    - `Promise`
+    - `callback function`
+    - `iterations`
+
+## Async 단점
+
+- 호출결과가 즉시 반환되지 않으므로, 현재의 sync flow가 종료됨 그 결과 현재의 어휘공간(컨텍스트)
+  내의 상태를 결과시점에 사용할 수 없음
+- 요청 시의 상태를 별도로 결과시점에 전달할 **부가장치** 필요
+
+sync 라는 순차적으로만 짤 수 있다는 식으로 처음부터 배웠기 때문에 우리는 async가 어색한 것이다.
+
+## Sync의 장점 + Async의 장점
+
+- sync 로직으로 async를 사용할 수 있게 함
+- 하지만 sync flow가 어긋나므로, 이전 sync flow의 상태를 기억하여 이어줄 장치 필요
+  - 상태를 기억하고 이어주는 장치: `Continuation` (컨텍스트라고 생각해되 된다.)
+  - 이를 활용하는 프로그래밍 스타일: **C**ontinuation **P**assing **S**tyle
+  - Generator, Async, Asynchrous Iterators

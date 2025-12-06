@@ -1,0 +1,251 @@
+---
+title: 10/ Decorator
+date: '2017-11-27'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. 요약 아직 잘 이해가 안간다. &#128565; ---  1. Decorator 종류 -
+  Class Decorator - Method...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. Decorator 종류",
+        "id": "1"
+      },
+      "depth1": [
+        {
+          "name": "1.1 Decorator 코드 작성 준비",
+          "id": "1-1"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "2. Decorator",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 Class Decorator",
+          "id": "2-1"
+        },
+        {
+          "name": "2.2 Method Decorator",
+          "id": "2-2"
+        },
+        {
+          "name": "2.3 Property Decorator",
+          "id": "2-3"
+        },
+        {
+          "name": "2.4 Prameter Decorator",
+          "id": "2-4"
+        }
+      ]
+    }
+  ]
+thumbnail: /images/post_img/24/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-15)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**요약** 아직 잘 이해가 안간다. &#128565;
+
+---
+
+### <a name="1" ></a> 1. Decorator 종류
+
+- Class Decorator
+- Method Decorator
+- Property Decorator
+- Parameter Decorator
+  > 각자 Decorator의 시그니처가 다르다.
+
+Decorator?
+
+- 함수 표현식에 해당한다.
+- `@`와 같이 써서 표현식 뒤에 오는 대상에 더욱 기능적으로 추가하거나 하는 일들을 할 수 있다.
+- 함수를 선언한 뒤 `@`키워드를 이용해 선언된 함수를 Decorator로 사용할 수 있다.
+
+---
+
+#### <a name="1-1" ></a> 1-1. Decorator 코드 작성 준비
+
+`yarn add typeScript -D`여기서 `D`는 `dev`와 같은 명령어다.
+
+---
+
+### <a name="2" ></a>2. Decorator
+
+#### <a name="2-1" ></a>2-1. Class Decorator
+
+##### <a name="basic" ></a> 2-1-1. Class Decorator Basic
+
+여기서 helloFactory 는 팩토리 패턴
+
+```ts
+function hello(constructorFn: Function) {
+  console.log(constructorFn);
+}
+
+function helloFactory(show: boolean) {
+  if (show) {
+    return hello;
+  } else {
+    return null;
+  }
+}
+
+// @hello
+@helloFactory(true)
+class Person {
+  constructor() {
+    console.log('new Person()');
+  }
+}
+
+new Person();
+```
+
+---
+
+##### <a name="advanced" ></a> 2-1-2. Class Decorator Advanced
+
+```ts
+function addHello(constructorFn: Function) {
+  constructorFn.prototype.hello = function () {
+    console.log('hello');
+  };
+}
+
+@addHello
+class Person {
+  constructor() {
+    console.log('new Person()');
+  }
+}
+
+const person = new Person();
+(<any>person).hello();
+```
+
+---
+
+### <a name="2-2" ></a> 2-2. Method Decorator
+
+```ts
+function editable(canBeEdit: boolean) {
+  return function (target: any, propName: string, description: PropertyDescriptor) {
+    console.log(canBeEdit);
+    console.log(target);
+    console.log(propName);
+    console.log(description);
+    description.writable = canBeEdit;
+  };
+}
+
+class Person {
+  constructor() {
+    console.log('new Person()');
+  }
+
+  @editable(true)
+  hello() {
+    console.log('hello');
+  }
+}
+
+const person = new Person();
+person.hello();
+person.hello = function () {
+  console.log('world');
+};
+person.hello();
+```
+
+---
+
+### <a name="2-3" ></a> 2-3. Property Decorator
+
+```ts
+function writable(canBeWrite: boolean) {
+  return function (target: any, propName: string): any {
+    console.log(canBeWrite);
+    console.log(target);
+    console.log(propName);
+    return {
+      writable: canBeWrite,
+    };
+  };
+}
+
+class Person {
+  @writable(false)
+  name: string = 'Mark';
+
+  constructor() {
+    console.log('new Person()');
+  }
+}
+
+const person = new Person();
+console.log(person.name);
+
+/*
+
+undefined
+
+*/
+```
+
+---
+
+### <a name="2-4" ></a> 2-4. Prameter Decorator
+
+```ts
+function printInfo(target: any, methodName: string, paramIndex: number) {
+    console.log(target);
+    console.log(methodName);
+    console.log(paramIndex);
+}
+
+class Person {
+    private _name: string;
+    private _age: number;
+
+    constructor(name: string, @printInfo age: number) {
+        this._name = name;
+        this._age = age;
+    }
+
+    hello(@printInfo message: string) {
+        console.log(message);
+    }
+}
+
+/*
+
+Person { hello: [Function] }
+hello
+0
+[Function: Person]
+undefined
+1
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/es6-class
+2. https://javarouka.github.io/blog/2016/09/30/decorator-exploring/
+3. http://blog-kr.zoyi.co/channel-frontend-decorator/

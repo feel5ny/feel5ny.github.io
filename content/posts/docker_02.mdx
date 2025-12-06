@@ -1,0 +1,422 @@
+---
+title: '도커 볼륨, 네트워킹, 로깅'
+date: '2022-02-21'
+description: >-
+  왜 우린 도커를 써야하나요? > 1. 지속가능한 데이터를 활용하기 위해 볼륨을 사용할 수 있으며,
+  호스트볼륨을 공유하거나, 볼륨컨테이터를 만들어 활용하거나, 도커 볼륨을 활용할 수 있다.  > 2.
+  도커는 컨테이너 내부IP를 순차적으로 할당하며,(컨테이너 별로 내부망이...
+author: Joy Kim
+tags:
+  - docker
+  - docker_volume
+  - docker_network
+  - docker_log
+categories:
+  - 03_DevOps
+  - 06. Deploy
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "도커 볼륨",
+        "id": "volumn"
+      }
+    },
+    {
+      "title": {
+        "name": "도커 네트워킹",
+        "id": "networking"
+      }
+    },
+    {
+      "title": {
+        "name": "도커 로깅",
+        "id": "logging"
+      }
+    }
+  ]
+thumbnail: /images/2022/02/thumb_default.jpg
+---
+
+[왜 우린 도커를 써야하나요?](https://www.44bits.io/ko/post/why-should-i-use-docker-container)
+
+> 1. 지속가능한 데이터를 활용하기 위해 볼륨을 사용할 수 있으며, 호스트볼륨을 공유하거나,
+>    볼륨컨테이터를 만들어 활용하거나, 도커 볼륨을 활용할 수 있다.
+> 2. 도커는 컨테이너 내부IP를 순차적으로 할당하며,(컨테이너 별로 내부망이 생성) veth 인터페이스로
+>    접근가능하다. 도커가 자체적으로 제공하는 5가지 네트워크 드라이버가 존재한다.
+> 3. 도커는 컨테이너의 표준출력과 에러출력을 별도로 메타데이터 파일로 저장하며, 이를 확인가능하도록
+>    한다. 로깅을 도와주는 써드파티 드라이버들도 존재한다.
+
+<a name="volumn" />
+
+## 도커 볼륨?
+
+- 도커 이미지로 컨테이너 생성시 이미지는 read only
+  - 컨테이너 변경사항만 별도로 저장하여 보존한다.
+- 컨테이너 계층에는 DB를 운용하면서 쌓이는 데이터가 저장됨
+- 이미지에 mysql을 실행하는데 필요한 어플리케이션 파일이 존재
+
+---
+
+- **컨테이너는 생성,삭제가 쉬우므로** 위험 발생 가능성 높음.
+- 이를 방지하기위해 데이터를 **Persistent데이터로 활용할 수 있는 방법이 몇가지 있다.**
+- 볼륨을 활용한다.
+  1. [호스트 볼륨을 공유하는 방법](#volume-host)
+  2. [볼륨 컨테이너를 활용하는 방법](#volume-container)
+  3. [도커가 관리하는 볼륨](#volume-docker)을 생성할 수 있다.
+
+<a name="volume-host" />
+
+### 1. 호스트 볼륨을 공유하는 방법
+
+**복사개념**으로 컨테이너 directory를 host directory에 마운트한다.
+
+**예시** 컨테이너 2가지 생성
+
+1. mysql DB container
+2. 워드프레스 웹 서버 container
+
+---
+
+#### 1. mysql DB container
+
+```
+❯ docker run -d \
+--name wordpressdb_hostvolume \
+-e MYSQL_ROOT_PASSWORD=password \
+-e MYSQL_DATABASE=wordpress \
+-v /home/wordpress_db:/var/lib/mysql \
+mysql:5.7
+```
+
+- 이름: **wordpressdb**\_hostvolume
+- **컨테이너** directory(`/home/wordpress_db`)를 **Host** directory(`/var/lib/mysql`)에 마운트
+  - `-v`: [호스트 공유 디렉토리]:[컨테이너의 공유 디렉터리]
+  - `-v /home/wordpress_db:/var/lib/mysql`
+
+#### 2. 워드프레스 웹 서버 container
+
+```
+❯ docker run -d \
+-e WORDPRESS_DB_PASSWORD=password \
+--name wordpress_hostvolume \
+--link wordpressdb_hostvolume:mysql \
+-p 80 \
+wordpress
+```
+
+- 이름: **wordpress**\_hostvolume
+- `wordpressdb_hostvolume:mysql`
+
+#### fyi; `-v` [호스트 공유 디렉토리]:[컨테이너의 공유 디렉터리]
+
+- 호스트의 디렉토리와 컨테이너의 디렉토리를 공유한다는 뜻.
+- 디렉토리말고 파일단위로 공유 가능
+- -v 옵션은 한번에 여러번 쓸 수 있다.
+- 동기화 아니고, **복사개념**
+- 오버라이딩: 호스트 공유할 디렉토리가 신규생성이 아닌경우(해당 경로에 무언가 파일이 있던경우)
+  오버라이딩 됨.
+
+<a name="volume-container" />
+
+### 2. 볼륨 컨테이너를 활용하는 방법 (`-volumes-from`)
+
+- `-v`옵션으로 볼륨을 사용하는 컨테이너를, **다른 컨테이너와 공유하는 것**
+- A 컨테이너 생성시 `—volumes-from` 옵션 설정하면 `-v` 옵션 적용한 컨테이너(B)의 볼륨 디렉터리를
+  공유할 수 있다.
+
+```bash
+docker run -i -t \
+> --name volumes_from_container \
+> --volumes-from volume_overide \ #volume_overide가 공유하는 것
+> ubuntu:14.04
+```
+
+- 여러개의 컨테이너가 동일한 컨테이너에 —volumes-from 사용하여 볼륨을 공유해 사용할수도 있다.
+
+#### 볼륨 컨테이너
+
+- host에서 볼륨만 공유.
+- 별도의 역할을 담당하지 않는 볼륨컨테이너로써 활용하는 것도 가능.
+- 직접 호스트에서 공유가 아닌, 볼륨컨테이너를 통해서 간접적으로 공유 받는식
+
+<img src="/images/2022/02/01.jpeg" />
+
+<a name="volume-docker" />
+
+### 3. 도커가 관리하는 볼륨을 생성할 수 있다.
+
+**도커 자체에서 제공하는 볼륨기능**을 활용해, 데이터를 보존할 수도 있다.
+
+- 도커 볼륨은 디렉토리 하나에 상응하는 단위. 도커엔진에서 관리한다.
+- 도커 볼륨은 호스트에 저장하여 데이터 보존 (어디에 보관되어있는지는 알필요없음 우선순위낮)
+
+#### 1. 볼륨 생성
+
+```bash
+docker volume create --name myvolume
+```
+
+- 볼륨 생성시, 플러그인 드라이버를 설정하여, 여러종류의 storage 백엔드 사용가능
+- 활하며 동시 생성 가능
+  - 똑같이 `-v`사용. 컨테이너 디렉토리만 넣어두면, 도커볼륨 자동 생성
+
+```bash
+docker run -i -t \
+> --name myvolume_auto \
+> -v /root/ \
+> ubuntu:14.04
+```
+
+```palin
+[볼륨의 이름]:[컨테이너의 공유 디렉토리]
+```
+
+#### 2. 볼륨 삭제
+
+- `docker volumn prune`
+- 도커볼륨을 사용하고 있는 컨테이너를 삭제해도, 볼륨이 자동으로 삭제되지 않는다.
+
+#### fy; Stateless 설계
+
+- 컨테이너가 아닌, 외부에서 데이터를 저장하고 **컨테이너는 외부에서의 데이터로 동작하도록** 설계하는
+  것
+- == 컨테이너 자체는 상태가 없고, 상태를 결정하는 데이터는 외부로부터 제공받는다.
+- == 컨테이너가 삭제돼도, 데이터는 보존되므로, stateless한 컨테이너 설계는 도커사용시 바람직한 설계
+- stateful한 컨테이너는 지양해야함.
+
+<a name="networking" />
+
+## 도커 네트워크 구조
+
+- 도커는 컨테이너 내부IP를 순차적으로 할당
+- 내부IP는 내부망(도커가 설치된 host)에서 쓸 수 있는 IP.
+- 컨테이너를 시작할때마다, 호스트에 `veth..`라는 네트워크 인터페이스를 생성함으로써 이루어진다.
+  - fyi; `veth`: virtual eth
+  - 도커는 각 컨테이너에 외부와의 네트워크를 제공하기 위해, 컨테이너마다 **가상 네트워크
+    인터페이스를 호스트에 자동 생성** → veth로 이름이 시작
+
+```bash
+root@75308a74b2c2:/# ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:ac:11:00:02
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:18 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:1532 (1.5 KB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+
+<img src="/images/2022/02/02.jpeg" />
+
+### 도커 네트워크 기능
+
+컨테이너 생성시
+
+- 기본적으로: `docker0` 브릿지를 통해, 외부와 통신할 수 있는 환경을 사용할 수 있다.
+- custom 가능: 사용자의 선택에 따라 여러 네트워크 드라이버 사용가능
+
+#### 도커가 자체적 제공하는 네트워크 드라이버
+
+- [브릿지 bridge](#network-bridge)
+- [호스트 host](#network-host)
+- [논 none](#network-none)
+- [컨테이너 container](#network-container)
+- [오버레이 overlay](#network-overlay)
+
+#### 써드파티 플러그인 솔루션
+
+- [weave](https://www.weave.works/docs/net/latest/install/plugin/plugin-how-it-works/)
+- [flannel](https://github.com/flannel-io/flannel)
+- openvswitch
+
+```bash
+❯ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+2013d2e38a9f   bridge    bridge    local
+9ce30268dbf6   host      host      local
+c325e2a4437b   none      null      local
+```
+
+<a name="bridge" />
+
+### 브릿지 bridge
+
+- 사용자 정의 브릿지를 새로 생성해, 각 컨테이너에 연결하는 네트워크 구조.
+- 컨테이너는 연결된 브릿지를 통해 외부와 통신 가능
+- 브릿지 생성하기
+
+```bash
+docker network create --driver bridge mybridge
+```
+
+- `--net` 옵션으로 컨테이너가 네트워크 사용가능
+
+```bash
+docker run -i -t --name mynetwork_container \
+--net mybridge \
+ubuntu:14.04
+```
+
+- 네트워크 연결: `docker network connect`
+- 네트워크 분리: `docker network disconnect`
+
+#### `--net-alias`
+
+- 특정 호스트 이름으로, 컨테이너 여러개에 접근 가능 `--net-alias`
+  - 순차적으로 할당된다. (`172.18.0.3` ~ `5`)
+
+```bash
+❯ docker run -i -t -d --name network_alias_container1 \
+> --net mybridge \
+> --net-alias alicek106 ubuntu:14.04
+616982dd067988f1e76a04709ad74287dceb73410f886f1630b8364634fe4565
+
+~
+❯ docker run -i -t -d --name network_alias_container2 \
+--net mybridge \
+--net-alias alicek106 ubuntu:14.04
+4d56a82ace82cc8118e9ef8d5502db76497fce0f7499960f5dcb624c8a006eaf
+^[[A
+~
+❯ docker run -i -t -d --name network_alias_container3 \
+--net mybridge \
+--net-alias alicek106 ubuntu:14.04
+d90963f31e42595264165839fbff2d78f8075640f5a4cea6e6782481636edbf9
+```
+
+Docker DNS, Round-Robin 방식
+
+- **Round-Robin**
+  - 매번 달라지는 IP를 결정하는 것은 별도의 알고리즘이 아닌, round-robin 방식
+  - 하나의 중앙처리장치를 여러 프로세스들이 우선순위 없이 돌아가며 할당받아 실행되는 방식
+  - 도커에 내장된 DNS가 alicek106 호스트 이름을 alicek106 을 설정한 컨테이너로 변환 resolve 하기
+    때문이다.
+  - `dig`라는 명령어로 확인가능.
+    <img src="/images/2022/02/04.jpg" />
+
+- **Docker DNS**
+  - 호스트이름으로 유동적인 컨테이너를 찾을 때 주로 사용됨.
+  - `—-link` : 컨테이너의 IP가 변경돼도, 별명으로 컨테이너를 찾을 수 있게 DNS에 의해 자동관리
+  - `--not-alias`: 도커는 사용자가 정의한 브릿지 네트워크에 사용되는 내장 DNS 서버를 갖는다.
+    - DNS의 IP는 127.0.0.11
+    - 위 예시에서는 컨티에너의 IP는 DNS 서버에 `alicek106` 이라는 호스트 이름으로 등록됨
+
+<a name="network-host" />
+
+### 호스트 네트워크
+
+- 컨테이너의 네트워크를 → 호스트 모드로 설정하면,
+  - 컨테이너 내부의 어플리케이션을 별도의 port forwarding없이 바로 서비스할 수 있다.
+  - 실제 호스트에서 어플리케이션을 외부에 노출하는 것과 같다.
+
+```bash
+docker run -i -t --name mynetwork_host \
+--net host \
+ubuntu:14.04
+```
+
+<a name="network-none" />
+
+### none 네트워크
+
+말그대로 아무런 네트워크를 쓰지 않는 것.
+
+- 외부와 연결이 단절됨
+- `lo` 외에는 존재하지 않는다.
+
+```bash
+docker run -i -t --name mynetwork_none \
+--net none \
+ubuntu:14.04
+```
+
+<a name="network-container" />
+
+### container 네트워크
+
+- 다른 컨테이너의 네트워크 네임스페이스 환경을 공유할 수 있다.
+- 공유되는 속성 : 내부 IP, 네트워크 인터페이스의 mac주소 등..
+
+```bash
+docker run -i -t --name mynetwork_none \
+--net container:network_container_1 \
+ubuntu:14.04
+```
+
+<img src="/images/2022/02/03.jpeg" />
+
+<a name="logging" />
+
+## Container Logging
+
+### json-file 로그 사용하기
+
+- 도커는 컨테이너의 표준 출력 `StdOut`과 에러 `StdErr` 로그를 별도의 메타데이터 파일로 저장하며,
+  이를 확인하는 명령어를 제공한다.
+- `docker logs`
+- `--since` 옵션에 유닉스 시간을 입력함. 특정시간 이후의 로그를 확인할 수 있다.
+
+```bash
+docker logs --tail 2 mysql
+
+2022-02-20T11:18:41.976679Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.36'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+```
+
+```bash
+docker logs -f -t mysql # 전체 출력
+```
+
+위와같은 컨테이너 로그는 JSON형태로 도커 내부저장
+
+```bash
+cat /var/lib/docker/container/${CONTAINER_ID}/${CONTAINER_ID}-json.log
+```
+
+- json 파일 크기가 계속 커질 수 있어서, 호스트의 남은 공간도 전부 사용할수도 있음.
+  - 이를 방지하기 위해서 json 로그파일의 최대크기 지정할 수 있음.
+  - 로그 파일 최대 갯수도 지정가능
+
+- 도커의 기본적인 로그뿐만아니라, 드라이버로도 로그 가능
+
+1. syslog
+2. jornald
+3. fluentd
+4. awslogs
+
+### 1. syslog 로그
+
+- 컨테이너 로그는 JSON뿐만아니라, syslog로 보내 저장하도록 설정가능
+- syslog: 유닉스 계역 운영체제에서 로그를 수집하는 오래된 표준 중 하나.
+  - 커널, 보안 등 **시스템과 관련된 로그**, **어플리케이션의 로그** 등 다양한 종류의 로그를 수집해
+    저장.
+
+### 2. fluentd 로그
+
+- 오픈소스 도구
+- 컨테이너 로그를 fluentd를 통해 저장할 수 있도록 플러그인 공식제공
+- 수집된 데이터를 aws s3, hdfs(hadoop distributed file system), mongoDB등 다양한 저장소에 저장할 수
+  있다.
+
+### 3. 아마존 클라우드워치 로그
+
+- 도커를 aws ec3에서 사용하고 있다면, 다른 도구 별도 설치없이 컨테이너에서 드라이버 옵션을 설정하여,
+  클라우드워치 로깅 드라이버 사용가능
+
+> 도커 환경으로 구성된 인프라들을 최근들어 자주 접하게 되고, 프론트 리소스도 도커, 쿠버네티스
+> 환경에서 운영됨에 따라, 프론트 개발자도 이에 대한 지식이 필요하다고 느껴 스터디를 진행합니다.
+> 스터디는 "시작하세요 도커/쿠버네티스" 책으로 진행합니다.
+
+---
+
+### 참고

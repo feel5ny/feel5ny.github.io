@@ -1,0 +1,635 @@
+---
+title: 6/ OOP (ES5 기준)
+date: '2018-10-21'
+description:
+  "> \U0001F4D2 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다. --- 0. 클래스 기반의 언어 -
+  프로토타입기반의 언어 클래스 기반의 언어   - 클래스로 객체의 기본적인 형태와 기능을 정의하고,
+  생성자로 인스턴스를 만들어서 사용할 수 있다.   - 런타임에 바꿀 수..."
+author: Joy Kim
+tags:
+  - javaScript
+  - OOP
+  - closure
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "0. 개요",
+        "id": "0"
+      }
+    },
+    {
+      "title": {
+        "name": "1. 클래스, 생성자, 메서드",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. 상속",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 프로토타입을 이용한 상속",
+          "id": "2-1"
+        },
+        {
+          "name": "2.2 클래스 기반의 상속",
+          "id": "2-2"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. 캡슐화 (feat. 클로저)",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. 객체지향 프로그래밍 응용 예제",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/2018/39/thumb_default.jpg
+---
+
+> 📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.
+
+---
+
+<a name="0"></a>
+## 0. 클래스 기반의 언어 - 프로토타입기반의 언어 #### 클래스 기반의 언어 - 클래스로 객체의 기본적인
+형태와 기능을 정의하고, 생성자로 인스턴스를 만들어서 사용할 수 있다. - 런타임에 바꿀 수 없다. -
+정확성, 안전성, 예측성등의 관점에서는 프로토타입기반의 언어보다 좀더 나은 결과를 보장. - JAVA, C++
+
+#### 프로토타입 기반의 언어
+
+- 객체의 자료구조, 메서드 등을 동적으로 바꿀 수 있다.
+- 자바스크립트
+
+---
+
+<a name="1"></a>
+## 1. 클래스, 생성자, 메서드
+
+```ts
+function Person(arg) {
+  // 클래스이자, 생성자의 역할을 함.
+  this.name = arg;
+  this.getName = function () {
+    return this.name;
+  };
+  this.setName = function (value): void {
+    this.name = value;
+  };
+}
+const me = new Person('Kim');
+console.log(me.getName()); // Kim
+me.setName('Joy');
+console.log(me.getName()); // Joy
+```
+
+```js
+const you = new Person('Gray');
+const him = new Person('Lee');
+```
+
+- 공통적으로 사용될 수 있는 setName과 getName 메서드가 중복으로 메모리에 올려놓게 된다.
+- setName과 getName을 재사용하쟈!
+
+```js
+function Person(arg) {
+  this.name = arg;
+}
+
+Person.prototype.getName = function () {
+  return this.name;
+};
+
+Person.prototype.setName = function (value) {
+  this.name = value;
+};
+
+const you = new Person('Gray');
+const him = new Person('Lee');
+console.log(you.getName()); // this는 자신을 호출한 객체에 바인딩된다.
+console.log(him.getName()); // 프로토타입 체인으로 접근할 수 있다.
+```
+
+**프로토타입 메서드를 만드는 루틴을 함수체인의 더 상위인 Function 프로토타입에 method라는 이름으로
+만들어놓고 재사용하는 방법도 있다.**
+
+```js
+Function.prototype.method = function(name, function) {
+  if(!this.prototpye[name]) {
+    this.prototype[name] = function;
+  }// 프로토타입에 같은 이름의 메서드가 없다면
+}
+
+function Person(arg) {
+  this.name = arg;
+}
+Person.method('setName', function(value){
+  this.name = value;
+})
+Person.method('getName', function() {
+  return this.name;
+})
+
+const me = new Person("me");
+const you = new Person("you");
+console.log(me.getName());
+console.log(you.getName());
+```
+
+---
+
+---
+
+<a name="2"></a>
+## 2. 상속 - 자바스크립트는 클래스를 기반으로 하는 전통적인 상속을 지원하지 않는다. - 자바스크립트
+특성 중 **객체 프로토타입 체인**을 이용하여 상속을 구현해낼 수 있다.
+
+#### 상속 구현방법
+
+1. 클래스 기반 전통적인 상속 방식을 흉내냄 (컨텍스트 자체를 상속받음)
+2. 클래스 개념 없이 객체의 프로토타입으로 상속을 구현하는 방식 => **Prototypeal inheritance**
+
+---
+
+<a name="2-1" ></a>
+### 2-1. 프로토타입을 이용한 상속
+```js
+function create_object(o) {
+  function F() {}
+  F.prototype = o;
+  return new F();
+} // Object.create() 함수로 제공된다.
+```
+인자로 들어온 객체(o)를 부모로 하는 
+자식 객체(F)를 생성하여
+반환한다.
+=> 프로토타입의 특성을 활용하여 상속을 구현하는것 = 프로토타입 기반의 상속
+
+예시
+
+```js
+function create_object(o) {
+  function F() {}
+  F.prototype = o;
+  return new F();
+}
+
+var person = {
+  name: "Joy"
+  getName: function() { // ES6의 getter 개념
+    return this.name;
+  }
+  setName: function(arg){ // ES6의 setter 개념
+    this.name = arg;
+  }
+}
+
+var me = create_object(person)
+me.name // Joy
+me.getName() // Joy
+me.setName("Kim")
+me.name // Kim
+me.getName() // Kim
+```
+
+- 클래스에 해당하는 생성자 함수를 만들지도 않았고,
+- 그 클래스의 인스턴스를 따로 생성하지도 않았다.
+- person 객체와 이 객체를 프로토타입 체인으로 참조할 수 있는 자식 객체 me를 만들어서 사용함.
+
+```js
+me.setAge = function(age) {...}
+me.getAge = function() {...}
+```
+
+위의 방식으로 확장할 수 있지만, 코드가 지저분해질 수 있다.
+**<span class="mint">extend()</span>**라는 이름의 함수로 객체에 자신이 원하는 객체 혹은 함수를
+추가시킨다.
+
+\_\_jQuery의 extend 함수
+
+```ts
+jQuery.extend = jQuery.fn.extend = function (obj: 자식, prop: 부모) {
+  if (!prop) {
+    prop = obj; // 부모가 없으면 자식이 부모
+    obj = this; // this를 자식에게 할당
+  }
+  for (var i in prop) {
+    // deep copy
+    ob[i] = prop[i];
+  }
+  return obj;
+};
+```
+
+- `jQuery.fn`은 jQuery의 프로토타입
+- $.extend()나 `var elem = new jQuery(...); elem.extend()`형태로 호출가능
+- `ob[i] = prop[i];`은 얕은 복사 (shallow copy) => 참조값을 복사하는 경우 영향이 생긴다. 이를
+  방지하기 위해 깊은 복사를 해야함.
+- 깊은 복사를 위해서 **빈 객체를 만들어서 extend 함수를 재귀적으로 호출**
+
+```js
+// jQuery extend 함수 중 일부
+...
+for (; i < length; i++){
+  if( (options = arguments[i]) != null) {
+    /* 인자로 넘어온 객체의 프로퍼티를 options로 참조시키고,
+      그 프로퍼티가 null이 아닌 경우 블록 안으로 진입한다. */
+    for (name in options){ // options를 deep 카피한다.
+      src = target[name]; // src는 반활될 복사본 target을 가리킴
+      copy = options[name]; // copy는 복사할 원본 프로퍼티를 가리킴
+
+      if (target === copy){ // 무한루프 방지
+        continue; // continue는 루프의 실행을 완전히 종료하지 않고 for 루프에서는 업데이트 표현식으로 점프함.
+      }
+      if (deep && copy && (jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy))) ){
+        // deep 플래그:boolean: extend에서 인자로 받음 : 깊은 복사를 할 것인지 선택 할 수 있게 한다.
+        // copy: 참조형식인 경우 (객체나 배열인 경우) 무조건 deep copy 시작
+        )
+        if ( copyIsArray ) {
+          copyIsArray = false;
+          clone = src && jQuery.isArray(src) ? src : [];
+          // 배열 복사일 경우 빈 배열 생성
+        } else {
+          clone = src && jQuery.isPlainObject(src) ? src : {};
+          // 객체 복사일 경우 빈 객체 생성
+        }
+        target[name] = jQuery.extend(deep, clone, copy); // 재귀..
+      } else if (copy !== undefined) {
+        target[name] = copy;
+      }
+    }
+  }
+  return target;
+}
+```
+
+```js
+const person = {
+  name: 'joy',
+  getName: function(){ return this.name; },
+  setName: function(arg){this.name = arg;}
+}
+
+function create_object(o) {
+  function F() {};
+  F.prototype = o;
+  return new F();
+}
+
+function extend(obj, prop) {
+  if(!prop) {prop = obj; obj = this;}
+  /* 인자가 하나만 들어오는 경우,
+    prop 인자에 obj를 할당하고,
+    현재객체(this)에 객체의 프로퍼티를 복사한다.... */
+  for (let i in prop) obj[i] = prop[i]; // 얕은 복사임.
+  return obj;
+}
+
+const student = create_object(person);
+const added = {
+  setAge: function(age){ this.age = age; }
+  getAge: function() {return this.age;}
+}
+
+extend(student, added); // 1
+student.setAge(25);
+console.log(student.getAge());
+```
+
+1. person객체를 갖고있는 프로토타입을 갖고있는 student 인스턴스(컨텍스트)가 added를 상속받는다.
+   (deep copy함)
+2. student 인스턴스에는 added 객체가 복사된다.
+
+---
+
+<a name="2-2" ></a>
+### 2-2. 클래스 기반의 상속
+1번은 객체의 상속이었고, 지금은 클래스의 역할을 하는 함수를 상속하는 것을 설명한다. (컨텍스트 상속)
+```js
+function Person(arg) { this.name = arg;}
+Person.prototype.setName = function(value) { this.name = value; };
+Person.prototype.getName = function() { return this.name; }
+
+function Student(arg) {}
+
+const you = new Person('JoyKim'); Student.prototype = you;
+
+const me = new Student('NaYoung'); me.setName('Kim'); console.log(me.getName());
+
+````
+1. you는 Person의 인스턴스 (name: JoyKim)
+2. Student의 프로토타입은 you를 가리킨다.
+3. me는 Student의 인스턴스
+  - Student에는 인자를 받을 name이 없으므로 'NaYoung'을 넣어줘도 아무런 적용 안됨
+  - 이를 위해서 인스턴스가 생성될때 부모함수가 바로 실행될 수 있도록 Student에 실행코드를 넣는다.
+    ```js
+    function Student(arg){
+      Person.apply(this, arg) // 부모함수 Pseron을 실행하고 this는 arg에 바인딩!
+    }
+    ```
+4. me객체에서 setName을 호출하면 프로토타입체이닝에 의해서 Person까지올라간다.
+
+이 로직의 단점은 me의 prototype이 Student.prototype이고, 이는 곳 you를 가리킨다는 것인데,
+이렇게 되면 me가 you의 자식 개념이 되면서 잘못된 설계가 된다.
+
+me와 you의 독립성을 위해서 중간 역할을 해주는 프로토콜 빈 함수 F()를 추가한다.
+```js
+function Person(arg) { this.name = arg;}
+Function.prototype.method = function(name, func) { this.prototype[name] = func };
+Person.method('setName', function(value) { this.name = value; };)
+Person.method('getName', function() { return this.name; })
+
+function Student(arg) {}
+function F(){};
+F.prototype = Person.prototype;
+Student.prototype = new F();
+Student.prototype.constructor = Student;
+Student.super = Person.prototype;
+
+const me = new Student('NaYoung');
+const you = new Person('YoungRan');
+me.setName('Kim');
+````
+
+1. Function 프로토타입에 프로토타입 함수를 만들어주는, 재사용할 수 있는 method라는 메서드를
+   추가한다. (아오 네이밍 예시 헷갈)
+2. F의 프로토타입을 Person의 프로토타입을 참조하게 함으로써 중간역할을 하게함
+3. 그 중간역할을 하는 F의 인스턴스를 Student의 프로토타입이 참조하도록 함. (현재 Student => F =>
+   Person)
+
+- 프로토타입 체인을 위해서 Student 프로토타입의 생성자를 Student로 할당.
+
+4. Student가 Person.prototype에도 접근하기 위해서 super라는 메서드 생성
+
+me는 Person을 상속받은 Student의 인스턴스이고 you는 Person의 인스턴스.
+
+위 로직을 모듈화 시키면..(by.스토얀 스테파노프[JavaScript Pattersn])
+
+```js
+const inherit = function (Parent, Child) {
+  const F = function () {};
+  return function (Paretn, Child) {
+    F.prototype = Parent.prototype;
+    Child.prototype = new F();
+    Child.prototype.constructor = Child;
+    Child.super = Parent.prototype;
+  };
+};
+```
+
+클로저는 F()함수를 지속적으로 참조한다. F()는 가비지 컬렉션의 대상이 되지 않고 계속 남아 있다. 이를
+이용해 함수 F()의 생성은 단 한 번 이루어지고 inherit함수가 계속해서 호출되어도 함수 F()의 생성을
+새로 할 필요가 없다.
+
+---
+
+---
+
+<a name="3"></a>
+## 3. 캡슐화 (feat. 클로저) - 정보 공개의 여부. 정보 은닉 개념 (Typescript에서는 `public`,
+`private`, `protected` 멤버를 선언함으로써 해당 정보를 외부로 노출시킬지 여부를 결정) - 자바스크립트
+es6에서는 get, set 키워드로 외부에서 해당 클래스 혹은 함수 내부에 접근 할 수 있다. (get은 readonly)
+
+```js
+const Person = function (arg) {
+  let name = arg ? arg : 'joy';
+  this.getName = function () {
+    return name;
+  };
+  this.setName = function (arg) {
+    name = arg;
+  };
+};
+
+const me = new Person();
+console.log(me.getName());
+me.setName('NaYoung');
+console.log(me.getName());
+console.log(me.name);
+```
+
+- Person의 내부 public 함수들은
+  **[클로저]('https://feel5ny.github.io//2017/12/07/JS_06/#closure')**역할을 하면서 name에 접근하고
+  있다.
+
+```js
+// 모듈패턴
+const Person = function(arg){
+  const name = arg? arg: 'joy';
+  // name은 private 멤버
+  return {
+    getName: function() { return name;},
+    setName: fucntion(arg){ name = arg;}
+  }
+}
+const me = Person()
+console.log(me.getName())
+```
+
+- 접근하는 private 멤버가 **객체나 배열**이면(레퍼런스) **얕은 복사로 참조만을 반환**하므로 사용자가
+  이후 이를 쉽게 변경할 수 있다. (Deep copy, Shallow copy)
+- 객체만을 반환하기 때문에 Person 함수의 프로토타입에 접근할 수 없다.
+  ```js
+  const Person3 = (function (arg) {
+    const name = arg ? arg : 'joy';
+    var Func = function () {};
+    Func.prototype = {
+      getName: function () {
+        return name;
+      },
+      setName: function (arg) {
+        name = arg;
+      },
+    };
+    return Func;
+  })();
+  ```
+
+---
+
+---
+
+<a name="4" ></a>
+## 4. 객체지향 프로그래밍 응용 예제
+> 함수의 프로토타입 체인
+> extend 함수
+> 인스턴스를 생성할 때 생성자 호출을 이용해서 자바스크립트로 클래스 기능을 하는 함수 만들기
+
+### 4-1-1. subClass 함수 구조
+
+subClass함수는 변수 및 메서드가 담긴 객체를 인자로 받은 부모 함수를 상속받는 자식 클래스를 만든다.
+
+부모함수는 subClass() 함수를 호출할 때 this 객체를 의미한다.
+
+```js
+const SuperClass = subClass(obj); // 상속받을 클래스
+const SubClass = SuperClass.subClass(obj); // SubClass는 SuperClass를 상속받는다.
+```
+
+이처럼 SuperClass를 상속받는 subClass를 만들고자 할 때, SuperClass.subClass()의 형식으로 호출하게
+구현한다. 참고로 최상위 클래스인 SuperClass는 자바스크립트의 Fucntion을 상속받게 한다.
+
+```js
+function subClass(obj) {
+  /*
+    1. 자식 클래스 (함수객체) 생성
+    2. 생성자 호출 (클래스 함수를 생성하기 위해서)
+    3. 프로토타입 체인을 활용한 상속 구현
+    4. obj를 통해 들어온 변수 및 메서드를 자식 클래스에 추가
+    5. 자식 함수 객체 반환
+  */
+}
+```
+
+---
+
+### 4-1-2. 자식 클래스 생성 및 상속
+
+```js
+function subClass(obj) {
+  ...
+  const parent = this; // 부모클래스를 가리키는 parent는 this를 그대로 참조
+  const F = function(){}; // 중간역할
+  const child = function(){}; // 자식객체
+  F.prototype = parent.prototype;
+  child.prototype = new F(); // 부모의 프로토타입을 참조하는 프로토타입을 갖고있는 F로부터 만들어진 생성자 함수를 child 프로토타입이 참조하도록한다.ㅇ
+  child.prototype.constructor = child;
+  child.parent = parent.prototype;
+  child.parent_constructor = parent;
+  ...
+  return child;
+
+}
+```
+
+자식 클래스는 child 라는 이름의 함수 객체를 생성함으로써 만들어졌다.
+
+<img src="/images/2018/39/01.jpeg" />
+
+---
+
+### 4-1-3. 자식 클래스 확장
+
+```js
+for (let i in obj) {
+  if (obj.hasOwnProperty(i)) {
+    child.prototype[i] = obj[i];
+  }
+}
+```
+
+`hasOwnProperty` 인자로 넘기는 이름에 해당하는 프로퍼티가 객체 내에 있는지를 판다.
+
+> 프로토타입 체인을 타고 올라가지 않고 해당객체 내에서만 찾는다는 것에 유의
+
+```js
+o = new Object();
+o.prop = 'exists';
+o.hasOwnProperty('prop'); // true
+o.hasOwnProperty('toString'); // false
+o.hasOwnProperty('hasOwnProperty'); // false
+```
+
+---
+
+### 4-1-4. 생성자 호출
+
+클래스의 인스턴스가 생성될 때, 클래스 내에 정의된 생성자가 호출돼야하다. 부모 클래스의 생성자 역시
+호출되어야한다. (초기화를 위해서)
+
+```js
+const child = function () {
+  if (parent.hasOwnProperty('_init')) {
+    parent._init.apply(this, arguments);
+  }
+  if (child.prototype.hasOwnProperty('_init')) {
+    child.prototype._init.apply(this, arguments);
+  }
+};
+```
+
+```js
+const SuperClass = subClass();
+const SubClass = SuperClass.subClass();
+const Sub_SubClass = SubClass.subClass();
+
+const instance = new Sub_SubClass();
+```
+
+instance 생성시 SuperClass 생성자가 호출되지 않는다. => 부모클래스의 생성자를 호출하는 코드를
+재귀적으로 구현하여 해결한다.
+
+```js
+const child = function () {
+  const _parent = child.parent_constructor;
+  if (_parent && _parent !== Function) {
+    _parent.apply(this, arguments);
+  }
+  if (child.prototype.hasOwnProperty('_init')) {
+    child.prototype._init.apply(this, arguments);
+  }
+};
+```
+
+- 현재 클래스의 부모 생성자가 있으면, 그 함수를 호출하다. 다만 부모가 Function이 경우는 최상위
+  클래스에 도달했으므로 실행하지 않는다.
+
+**최종**
+
+```js
+function subClass(obj){
+  /*
+    1. 자식 클래스 (함수객체) 생성
+    2. 생성자 호출 (클래스 함수를 생성하기 위해서)
+    3. 프로토타입 체인을 활용한 상속 구현
+    4. obj를 통해 들어온 변수 및 메서드를 자식 클래스에 추가
+    5. 자식 함수 객체 반환
+  */
+  const parent = this === window ? Function : this;
+  const F = function(){}
+  const child = function() {
+    const _parent = child.parent;
+    if(_parent && _parent !== Function){
+      parent.apply(this, arguments);
+    }
+    if(child.prototype._init)){
+        child.prototype._init.apply(this, arguments);
+    }
+  }
+  F.prototype = parent.prototype;
+  child.prototype = new F();
+  child.prototype.constructor = child;
+  child.parent = parent;
+  child.subClass = arguments.callee;
+
+  for (let i in obj){
+    if (obj.hasOwnProperty(i)){
+      child.prototype[i] = obj[i];
+    }
+  }
+  return child
+}
+```
+
+---
+
+By Joy.
+
+- 내부함수를 선언할때와 this로 바인딩된 함수를 선언하는 것의 차이점? 기준?
+- 프로토타입 체이닝을 만든 이유 객체지향 프로그래밍을 지원하기 위해 부모객체를 가리키는 참조링크
+  형태로 숨겨진 프로퍼티.
+- (Naming) 복사시 복사할 대상을 copy, 복사의 결과물을 clone
+- shallow copy와 다르게 deep copy는 재귀적으로 호출해야함. **(다시 정리)**

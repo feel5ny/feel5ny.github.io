@@ -1,0 +1,312 @@
+---
+title: 11/ 정규표현식
+date: '2018-01-21'
+description: >-
+  --- 목차 1. 정규표현식   1. 플래그   2. 패턴   3. 자주사용하는 정규표현식 2. JS Regular
+  Expression  
+  1. RegExp Constructor   2. RegExp Method     1. RegExp.prototype.exec()...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/2018/06/thumb_default.jpg
+---
+
+---
+
+**목차**
+
+1. 정규표현식
+1. 플래그
+1. 패턴
+1. 자주사용하는 정규표현식
+1. JS Regular Expression
+1. RegExp Constructor
+1. RegExp Method
+1. RegExp.prototype.exec()
+1. RegExp.prototype.test()
+
+---
+
+---
+
+## <a name="RegExp" ></a> 1. 정규표현식
+
+<img src="/images/2018/06/regular_expression.png" width="400px" />
+`RegExp.prototype.exec(text)` : `RegExp.prototype.test(text)` : boolean값이 반환된다.
+`String.prototype.match(rxgexr)` : 매치되는 문자열들을 반환한다. `String.prototype.replace(rxgexr,
+'')` : 첫번째 인자로 찾아진 문자열을 두번째 인자로 교체한다. `String.prototype.search(rxgexr)` :
+배열의 길이 `String.prototype.split(rxgexr)` : 인자값을 제외하고, 인자값을 기준으로 split된 배열이
+반환됨.
+
+```js
+var targetStr = 'This is a pen.';
+var regexr = /is/gi;
+
+// RegExp 객체의 메소드
+console.log(regexr.exec(targetStr)); // [ 'is', index: 2, input: 'This is a pen.' ]
+console.log(regexr.test(targetStr)); // true
+
+// String 객체의 메소드
+console.log(targetStr.match(regexr)); // [ 'is', 'is' ]
+console.log(targetStr.replace(regexr, 'IS')); // ThIS IS a pen.
+console.log(targetStr.search(regexr)); // 2
+console.log(targetStr.split(regexr)); // [ 'Th', ' ', ' a pen.' ]
+```
+
+### 1.1 플래그
+
+플래그는 옵션이므로 선택적으로 사용한다. 플래그를 사용하지 않은 경우 문자열 내 검색 매칭 대상이 1개
+이상이더라도 **첫번째 매칭한 대상만**을 검색하고 종료한다.
+
+- `i` : ignore Case : **대소문자를 구별하지 않고 검색한다.**
+- `g` : Global : **문자열 내의 모든 패턴을 검색한다.**
+- `m` : Multi Line : **문자열의 행이 바뀌더라도 검색을 계속한다.**
+
+---
+
+---
+
+### 1.2 패턴
+
+패턴에는 찾고자 하는 대상을 문자열로 지정한다. 또한 패턴은 특별한 의미를 가지는
+메타문자(Metacharacter) 또는 기호로 표현할 수 있다.
+
+---
+
+#### 1.2.1 `/.../`
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 임의의 문자 3개
+var regexr = /.../;
+console.log(targetStr.match(regexr)); // [ 'AA ', index: 0, input: 'AA BB Aa Bb' ]
+```
+
+`.`은 임의의 문자 한 개를 의미한다. 문자의 내용은 무엇이든지 상관없다. 위의 경우 `.`를 3개 연속하여
+패턴을 생성하였으므로 패턴과 일치하는 3자리 문자를 추출한다. 플래그가 없으므로 추출을 반복하지
+않는다. 문자열 내의 모든 패턴을 검색하기 위해 `g`사용
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 임의의 문자 3개를 반복하여 검색
+var regexr = /.../g;
+console.log(targetStr.match(regexr)); // [ 'AA ', 'BB ', 'Aa ' ]
+```
+
+---
+
+#### 1.2.2 일치하는 문자 또는 문자열 추출 `+` `|` `[]`
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 'A'를 검색
+var regexr1 = /A/;
+console.log(targetStr.match(regexr1)); // 'A'
+
+var regexr2 = /A/gi;
+console.log(targetStr.match(regexr2)); // [ 'A', 'A', 'A', 'a' ]
+```
+
+앞선 패턴을 최소 한번 반복하려면 앞선 패턴 뒤에 `+`를 붙인다. 아래의 경우 앞선 패턴는 A이므로 A+는
+AA 또는 A를 의미한다.
+
+```js
+var targetStr = 'AA AAA BB Aa Bb';
+// 'A'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /A+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'AAA', 'A' ]
+```
+
+`|`를 사용하면 or의 의미를 가지게 된다.
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 'A' 또는 'B'를 반복 검색
+var regexr = /A|B/g;
+console.log(targetStr.match(regexr)); // [ 'A', 'A', 'B', 'B', 'A', 'B' ]
+```
+
+분해되지 않은 단어 레벨로 추출하기 위해서는 +를 같이 사용하면 된다.
+
+```js
+var targetStr = 'AA AAA BB Aa Bb';
+// 'A' 또는 'B'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /A+|B+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'AAA', 'BB', 'A', 'B' ]
+```
+
+위 예제는 패턴을 or로 한번 이상 반복하는 것인데 간단히 표현하면 아래와 같다. `[]`내의 문자는 or로
+동작한다. 그 뒤에 `+`를 사용하여 앞선 패턴을 한번 이상 반복하게 한다.
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 'A' 또는 'B'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[AB]+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'BB', 'A', 'B' ]
+```
+
+---
+
+#### 1.2.3 범위지정
+
+##### 대문자 알파벳
+
+```js
+var targetStr = 'AA BB ZZ Aa Bb';
+// 'A' ~ 'Z'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[A-Z]+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'BB', 'ZZ', 'A', 'B' ]
+```
+
+---
+
+##### 대소문자 구별없는 알파벳 `\w`
+
+```js
+var targetStr = 'AA BB Aa Bb';
+// 'A' ~ 'Z' 또는 'a' ~ 'z'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[A-Za-z]+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'BB', 'Aa', 'Bb' ]
+```
+
+`\w`는 알파벳과 숫자를 의미한다. `\W`는 `\w`와 반대로 동작한다.
+
+```js
+var targetStr = 'AA BB Aa Bb 24,000';
+// 알파벳과 숫자 또는 ','가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[\w,]+/g;
+console.log(targetStr.match(regexr)); // [ 'AA', 'BB', 'Aa', 'Bb', '24,000' ]
+
+// 알파벳과 숫자가 아닌 문자 또는 ','가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[\W,]+/g;
+console.log(targetStr.match(regexr)); // [ ' ', ' ', ' ', ' ', ',' ]
+```
+
+---
+
+##### 숫자 추출하기
+
+```js
+var targetStr = 'AA BB Aa Bb 24,000';
+// '0' ~ '9'가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[0-9]+/g;
+console.log(targetStr.match(regexr)); // [ '24', '000' ]
+```
+
+`,`때문에 분리되는 것을 막기 위해 `,`를 범위 안에 포함시킨다.
+
+```js
+var targetStr = 'AA BB Aa Bb 24,000';
+// '0' ~ '9' 또는 ','가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[0-9,]+/g;
+console.log(targetStr.match(regexr)); // [ '24,000' ]
+```
+
+숫자 추출하기를 간단하게 표현하면 아래와 같다. `\d`는 숫자를 의미한다. `\D`는 `\d`와 반대로
+동작한다.
+
+```js
+var targetStr = 'AA BB Aa Bb 24,000';
+// '0' ~ '9' 또는 ','가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[\d,]+/g;
+console.log(targetStr.match(regexr)); // [ '24,000' ]
+
+// '0' ~ '9'가 아닌 문자(숫자가 아닌 문자) 또는 ','가 한번이상 반복되는 문자열을 반복 검색
+var regexr = /[\D,]+/g;
+console.log(targetStr.match(regexr)); // [ 'AA BB Aa Bb ', ',' ]
+```
+
+---
+
+---
+
+### 1.3 자주 사용하는 정규표현식
+
+#### 1.3.1 특정단어로 시작? `^`
+
+```js
+var targetStr = 'abcdef';
+// 'abc'로 시작하지 검사
+var regexr = /^abc/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.2 특정단어로 끝나나? `$`
+
+```js
+var targetStr = 'abcdef';
+// 'ef'로 끝나는지 검사
+var regexr = /ef$/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.3 숫자인가?
+
+```js
+var targetStr = '12345';
+// 모두 숫자인지 검사
+var regexr = /^\d+$/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.4 공백인가? `\s`
+
+`\s`는 공백을 의미한다.
+
+```js
+var targetStr = ' Hi!';
+// 1개 이상의 공백으로 시작하는지 검사
+var regexr = /^[\s]+/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.5 아이디로 사용 가능한가? `{}`
+
+`{}` : 자리수를 의미한다.
+
+```js
+var targetStr = 'abc123';
+// 알파벳 대소문자 또는 숫자로 시작하고 끝나며 4 ~10자리인지 검사
+var regexr = /^[A-Za-z0-9]{4,10}$/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.6 메일주소 형식인가?
+
+```js
+var targetStr = 'ungmo2@gmail.com';
+var regexr = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.7 현드폰 번호 형식인가?
+
+```js
+var targetStr = '010-1234-5678';
+var regexr = /^\d{3}-\d{3,4}-\d{4}$/;
+console.log(regexr.test(targetStr)); // true
+```
+
+#### 1.3.8 특수문자 포함인가?
+
+```js
+var targetStr = 'abc#123';
+var regexr = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+console.log(regexr.test(targetStr)); // true
+```
+
+---
+
+---
+
+## <a name="RegExp" ></a> 2. JS Regular Expression
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/js-regexp

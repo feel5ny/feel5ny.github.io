@@ -1,0 +1,464 @@
+---
+title: 앵귤러 미리 예습해보기_ToDoList
+date: '2018-02-16'
+description: >-
+  출처 1. inflearn : Angular 기본과 간단한 To-Do 어플리케이션 만들기 2. http://poiemaweb.com/ :
+  angular 파트 요약 목차  1. Angular CLI 2. Angular Hello world 3. Module 4. Comp...
+author: Joy Kim
+tags:
+  - angular
+categories:
+  - 01_Web
+  - 03. Library
+enableComment: true
+thumbnail: /images/post_img/35/thumb_default.jpg
+---
+
+**출처**
+
+1. inflearn : Angular 기본과 간단한 To-Do 어플리케이션 만들기
+2. http://poiemaweb.com/ : angular 파트
+
+**요약**
+
+**목차**
+
+1. Angular CLI
+2. Angular Hello world
+3. Module
+4. Component 알아보기
+5. Templete 알아보기
+6. 컴포넌트 커뮤니케이션
+7. 컴포넌트 스타일 처리
+8. Pipe
+
+---
+
+## 1. Angular CLI
+
+Angular CLI는 Node.js의 프로젝트이기때문에 노드의 설치가 필요하다. 노드버전은 6.9.0 이상이어야한다.
+
+### 0. 셋팅하기
+
+1. 노드 설치 후
+2. `npm i -g @angular/cli`
+3. `ng new 프로젝트 이름`
+
+### 1. Angular CLI
+
+`tree src`라고 명령어를 입력하면 src 하위 파일 디렉토리 tree가 출력된다. `tree -L 1` 해당 디렉토리의
+첫번째 레벨 트리만 출력된다.
+
+```
+src/
+├── app
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   └── app.module.ts
+├── assets
+├── environments
+│   ├── environment.prod.ts
+│   └── environment.ts
+├── favicon.ico
+├── index.html
+├── main.ts
+├── polyfills.ts
+├── styles.css
+├── test.ts
+├── tsconfig.app.json
+├── tsconfig.spec.json
+└── typings.d.ts
+```
+
+#### `app` 폴더
+
+어플리케이션 관련된 파일들이 들어가게 된다. `app/app.component.{ts, html, css, spec.ts}` : 루트
+컴포넌트를 구성하는 컴포넌트 클래스, HTML 템플릿. CSS, 유닛테스트 파일
+
+app/app.module.ts : Angular 구성요소를 등록하는 루트 모듈.
+
+#### `environments`
+
+`.prod` 프로젝트를 빌드할 때 프러덕션 모드로 빌드하게 되면 environment.prod.ts 내용들이
+environment.ts 여기에 덮여쓰여지게된다. 앱에서 쓴 환경변수(서버 url...)를 프러덕션용 환경변수로 쓸
+수 있게 된다.
+
+```bash
+ng serve
+```
+
+서버를 실행시키면 로컬호스트에서 확인이 가능하다.
+
+### CLI를 살펴보자.
+
+`ng help`를 입력하면 ng cli 리스트들이 쭉 나온다. 아래는 자주 사용하는 명령어만 적어둠.
+
+1. `ng build <options...>` Build커맨드는 소스코드를 빌드해서 dist/ 에 빌드해주는 명령어이다.
+
+- 주로 사용하는 CLI
+  - `--aot (Boolean) Build using Ahead of Time compilation.`
+  - `--watch (Boolean) (Default: false) Run build when files change.`
+
+2. `ng completion <options...>` CLI 명령어를 자동 완성시켜주는 것을 설정하겠다 라는 커맨드이다.
+
+3. `ng doc <keyword> <options...>` 앵귤러 공식 docs를 열어줍니다.
+
+4. `ng e2e <options...>` end to end 테스트를 하겠다는 것이다. 브라우저를 띄어서 테스트 하는 것.
+
+5. `ng eject <options...>` 우리가 만든 앵귤러 CLI 프로젝트는 웹팩기반인데, webpack configuration를
+   밖으로 빼내어서 webpack configuration를 수정해서 프로젝트에 맞게 바꾸고 싶을 때 사용한다.
+
+6. ★★ `ng generate <blueprint> <options...>` 사용 빈도수가 높다. 우리가 새로운 컴포넌트나 라우트나
+   모듈, 클래스 등을 agular CLI를 통해서 만들어지는데, 각각의 만들어지는 방법이 다르다. (옵션이
+   다르다.)
+
+7. `ng get <options...>` configuration를 한번 읽어오는 것
+
+8. `ng lint <options...>` 프로젝트의 코드의 스타일 가이드에 맞춰서 작성이 잘 되고 있는지 체킹해준다.
+
+9. `ng new <options...>`
+
+10. `ng serve <options...>` 어플리케이션을 서버로 띄어준다. (빌드 후에)
+
+11. `ng set <options...>` 앵귤러 CLI는 configuration(설정파일들)들이 있는데 그것들을 셋팅해준다.
+
+12. `ng test <options...>` 유닛테스트 관련한 CLI, 컴포넌트나 서비스등 각각의 컴포넌트를 테스트 할때
+
+13. `ng version <options...>`
+
+14. `ng xi18n <options...>` 다국어 처리하는 시간에 자세히 살펴보도록 한다.
+
+---
+
+## 2. Angular Hello world
+
+`.angular-cli.json` 파일은 description이라고 생각하면된다.
+
+### 2-1. main.ts
+
+```ts
+// main.ts
+
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+`platformBrowserDynamic`메서드 : 엥귤러가 우리가 만든 코드를 컴파일을 해서 실제 실행될 수 있는
+자바스크립트 코드로 만들어내는데 브라우저에서 다이나믹하게 동적으로 하겠다는 메서드이다.
+(just-in-time으로) `bootstrapModule(루트모듈)` : 우리가 사용할 어플리케이션의 루트모듈을 설정하고
+앵귤러 어플리케이션을 실행시키는 것이다. 루트모듈을 부트스트랩한다 라고도 한다.
+
+### 2-2. app.module.ts
+
+@NgModule 데코레이터의 인자로 전달되는 메타데이터에 애플리케이션 전체의 설정 정보를 기술한 루트
+모듈이다.
+
+```ts
+// app.module.ts
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent],
+  // 부트스트랩은 배열이라는 값을 갖고 있는데 이는 AppComponent에 index.html에 넣어주겠다는 말이다.
+  // AppComponent에는 app-root라는 셀력터에 연결되어있다.
+})
+export class AppModule {}
+// @NgModule은 데코레이터
+// 앵귤러 모듈이라는 것(NgModule)을 정의한 클래스가 되는 것이다.
+// 앵귤러의 루트모드를 설정하는 클래스이다.
+```
+
+- 앵귤러의 루트모듈(AppModule)를 설정하는 클래스이다.
+
+### 2-3. app.component.ts
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  title = 'app';
+}
+```
+
+- 모든 컴포넌트의 부모 역할을 담당하는 루트 컴포넌트이다.
+
+<img src="/images/post_img/35/angular-process.png" />
+> Anuglar 어플리케이션의 흐름 [+](http://poiemaweb.com/angular-architecture)
+
+### 3. index.html
+
+`/dist/index.html`는 빌드(ng build)의 결과물로 실제 배포 시에는 서버로 이관된다. ng serve 명령어에
+의해 **내장 개발 서버**를 사용하여 로컬 환경에서 프로젝트를 실행(preview)하는 경우, Angular CLI
+내부적으로 `빌드를 자동 수행`하므로 빌드(ng build)를 별도 실행하여 /my-app/dist/index.html를 생성할
+필요는 없다. 자동으로 빌드되어 가상 드라이브에 저장되어 있는 index.html를 내장개발 서버가 로드한다고
+이해하면 된다.
+
+`inline.bundle.js` : 웹팩 유틸리티가 포함된 Webpack loader `polifills.bundle.js` : polyfil 의존성
+모듈(core-js, zone.js)를 번들링한 파일 `styles.bundle.js` : 스타일 전의를 번들링한 파일
+`vendor.bundle.js` : 의존성 모듈(@angular/\*, RxJS 등)을 번들링한 파일 `main.bundle.js` : 개발자가
+작성한 컴포넌트, 디렉티브, 서비스 등 소스코드를 번들링한 파일
+
+## 3. Module
+
+#### 3-1. ES6 모듈
+
+모듈이란
+
+- 세부 구현이 숨겨지고 공개 API를 이용해 다른 코드에서 재사용 가능한 코드
+- 각각의 파일들이 모듈이 된다. 변수 스코프가 모듈로 제한이 된다.
+- 2016년 08월 1.0.0-beta.11부터 Angular의 빌드 시스템은 SystemJS에서 `Webpack`으로 변경되었다. We
+  moved the build system from SystemJS to Webpack.
+
+#### 3-2. 엥귤러 모듈
+
+컴포넌트, 파이프, 서비스 등과 같은 앵귤러 어플리케이션의 주요 부분을 기능단위로 그룹핑하게 해준다.
+
+- 모든 앵귤러 어플리케이션은 하나의 Root Module을 가진다.
+- 여러 Feature Module을 가질 수 있다.
+- 재사용할 수 있는 기능을 외부에 배포하기 위해 사용되기도 한다.
+
+```
+ng g m todo
+```
+
+app 하위에 todo라는 폴더가 생성되고 todo.module.ts라는 모듈파일이 만들어진다.
+
+```
+ng g c todo/todos --module todo/todo.module.ts --export
+```
+
+g는 generate, c는 component, m은 module, todo 밑에 todos라는 폴더를 둔다. todos에서 만들어진
+component를 관리하는 모듈을 지정해주기 위해서 `--module`이라는 플래그를 사용, 관리하는 모듈 이름을
+붙여준다.`todo/todo.module.ts` 해당 모듈파일이 다른 곳에서 사용할 수 있다는 의미의 --export라는
+플래그를 추가한다. --export플래그를 추가하면 NgModule 데코레이터의 메타데이터 내부에 export 옵션이
+추가되며 todoComponent가 자동으로 추가된다.
+
+```js
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TodosComponent } from './todos/todos.component';
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [TodosComponent],
+  exports: [TodosComponent],
+})
+export class TodoModule {}
+```
+
+- declarations는 탬플릿에서 사용하는 컴포넌트를 의미한다.
+
+**모듈 정리**
+
+- 외부컴포넌트를 export하고싶을 때나 import하고 싶을 때는 module파일의 데코레이터에 옵션값을
+  추가한다.
+- cli에서 컴포넌트를 생성하면서 자동으로 export 옵션에 추가하는 방법은 `--export` 플래그를 사용하는
+  것이다.
+
+## 4. Component
+
+- 빌딩 블록 LEGO
+- HTML 요소들의 그룹
+- 뷰와 로직으로 구성
+
+```js
+import { Component, OnInit } from '@angular/core'
+
+// 함수라고 생각하면 된다. 함수를 호출하는 것처럼 사용하고 있다.
+// 데코레이터 내부의 메타데이터를 정의하고 있다.
+@Component({
+  selector: 'app-todos',
+  templateUrl: './todos.component.html',
+  styleUrls: ['./todos.component.css'],
+})
+export class TodosComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
+}
+```
+
+- `selector` `.`이나 `#`을 앞에 붙여서 css에서의 선택자와 유사하게 사용도 가능하다. 현재는 `.`이나
+  `#`이 없기 때문에 태그명으로 정의된 것이다.
+- `templateUrl` view에 대한 정의를 template에서 정의한다.
+- `styleUrls` style이 작성된 url을 정의한다.
+
+```bash
+ng g c todo/todos/todo –inline-template –inline-style
+```
+
+- template이 따로 html파일로 생성되지 않고, todo내부에 생성된 component의 컴포넌트 데코레이터의
+  메타데이터에 `template`이 생성된다.
+- template에는 리터럴로 html을 넣을 수 있다.
+- 이를 inline방식으로 넣어지는 template스타일인데 위의 명령어로 자동으로 해당 방식의 컴포넌트를
+  생성할 수 있다.
+
+## 5. Agular Template
+
+- HTML 코드로서 템플릿을 표현
+- Tempate 표현식과 Template 문장이 있음
+- 바인딩
+  - 바인딩의 대상 : 속성, 이벤트 ngModel, class, style
+
+<img src ="/images/post_img/35/01.png" />
+<img src ="/images/post_img/35/binding.jpg" />
+```html
+<div class="title">
+  <h1>나의 하루</h1>
+  <h2>2월 15일</h2>
+</div>
+<div>
+  <div *ngFor="let todo of todos">
+    <input type="checkbox" [checked]="todo.done"> {{todo.text}}
+  </div>
+</div>
+<div>
+  <input type="text" placeholder="할 일 추가하기">
+</div>
+```
+`*ngFor="let todo of todos"`
+todos라는 객체의 todo요소들을 referencing한다고 생각하면 된다.
+
+**ngFor** Angular의 ngFor "repeater" 지시자(directive)
+
+### 5-1. 내장 directive
+
+- 디렉티브(Directive / 지시자)는 `DOM의 모든 것(모양이나 동작 등)을 관리하기 위한 지시(명령)`이다.
+  HTML 요소 또는 어트리뷰트의 형태로 사용하여 디렉티브가 사용된 요소에게 무언가를 하라는
+  지시(directive)를 전달한다.
+- 디렉티브는 애플리케이션 전역에서 사용할 수 있는 공통 관심사를 컴포넌트에서 분리하여 구현한 것으로
+  컴포넌트의 복잡도를 낮추고 가독성을 향상시킨다. 컴포넌트도 뷰를 생성하고 이벤트를 처리하는 등
+  DOM을 관리하기 때문에 큰 의미에서 디렉티브로 볼 수 있다.
+
+#### 5-1-1. 컴포넌트 디렉티브
+
+- 컴포넌트의 템플릿을 표시하기 위한 디렉티브
+- `@Component`데코레이터의 메타데이터 객체의 selector 프로퍼티에 임의의 디렉티브의 이름을 정의한다.
+
+#### 5-1-2. 어트리뷰트 디렉티브
+
+- 어트리뷰트 디렉티브는 HTML요소의 어트리뷰트와 같이 사용하여 해당 요소의 모양이나 동작을 제어한다.
+- `ngClass`, `ngStyle`와 같은 빌트인 어트리뷰트 디렉티브가 있다.
+- 클래스 바인딩은 표현식 또는 클래스 리스트를 나타내는 문자열을 바인딩한다.
+- ngClass 디렉티브는 문자열, 배열, 객체를 바인딩할 수 있다.
+
+#### 5-1-3. 구조 디렉티브
+
+- DOM 요소를 반복생성(ngFor)
+- 조건에 의한 추가 또는 제거 (ngIf, ngSwitch)를 통해 돔 레이아웃을 변경한다.
+- `*`를 접두사로 추가하며 `[]`를 사용하지 않는다.
+
+**ngIf** ngIf 디렉티브는 우변 표현식의 연산 결과가 참이면 해당 요소(호스트 요소)를 DOM에 추가하고
+거짓이면 해당 요소(호스트 요소)를 DOM에서 제거한다. 우변의 표현식은 true 또는 false로 평가될 수
+있어야한다.
+
+```js
+<element *ngIf="expression">...</element>
+```
+
+ngIf 디렉티브 앞에 붙은 \*(asterisk)는 아래 구문의 문법적 설탕(syntactic sugar)이다. 즉 위 코드는
+아래의 코드로 변환된다.
+
+```js
+<ng-template [ngIf]="expression">
+  <element>...</element>
+</ng-template>
+```
+
+Angular는 *ngIf를 만나면 호스트 요소를 `ng-template` 디렉티브로 래핑하고 *ngIf를 **프로퍼티
+바인딩으로 변환한다.**(`[ngIf]="expression"`) ngFor와 ngSwitch 디렉티브도 동일한 패턴을 따른다.
+
+- ng-template 디렉티브는 페이지에서 렌더링 될 요소를 div 또는 span 등의 요소와 함께 사용할 필요가
+  없는 요소들을 그룹화할 때 사용한다.
+
+**ngIf else**
+
+```js
+<!-- if else -->
+<element *ngIf="expression; else elseBlock">Truthy condition</element>
+<ng-template #elseBlock>Falsy condition</ng-template>
+
+<!-- if else -->
+<element *ngIf="expression; then thenBlock else elseBlock"></element>
+<ng-template #thenBlock>Truthy condition</ng-template>
+<ng-template #elseBlock>Falsy condition</ng-template>
+
+<!-- if -->
+<element *ngIf="expression; then thenBlock"></element>
+<ng-template #thenBlock>Truthy condition</ng-template>
+```
+
+**ngFor** ngFor 디렉티브는 컴포넌트 클래스의 컬렉션을 반복하여 호스트 요소(ngFor 디렉티브가 선언된
+요소) 및 하위 요소를 DOM에 추가한다. 컬렉션은 일반적으로 배열을 사용한다.
+
+```js
+<element *ngFor="let item of items">...</element>
+
+<element *ngFor="let item of items; let i=index; let odd=odd; trackBy: trackById">...</element>
+```
+
+인덱스를 취득할 필요가 있는 경우, 인덱스를 의미하는 index를 사용하여 변수에 인덱스를 할당받을 수
+있다. index 이외에도 first, last, even, odd와 같은 로컬 변수가 제공된다. 자세한 내용은 ngFor API
+reference를 참조하기 바란다.
+
+ngFor 디렉티브 앞에 붙은 \*(asterisk)는 아래 구문의 문법적 설탕(syntactic sugar)이다. 즉 위 코드는
+아래의 코드로 변환된다.
+
+```js
+<ng-template ngFor let-item [ngForOf]="items">
+  <element>...</element>
+</ng-template>
+
+<ng-template ngFor let-item [ngForOf]="items" let-i="index" let-odd="odd" [ngForTrackBy]="trackById">
+  <element>...</element>
+</ng-template>
+```
+
+**ngSwitch**
+
+```js
+<element [ngSwitch]="expression">
+  <!-- switch 조건이 'case1'인 경우 DOM에 추가 -->
+  <element *ngSwitchCase="'case1'">...<element>
+  <!-- switch 조건이 'case2'인 경우 DOM에 추가 -->
+  <element *ngSwitchCase="'case2'">...<element>
+  <!-- switch 조건과 일치하는 ngSwitchCase가 없는 경우 DOM에 추가 -->
+  <element *ngSwitchDefault>...<element>
+</element>
+```
+
+ngSwitch 디렉티브 앞에 붙은 \*(asterisk)는 아래 구문의 문법적 설탕(syntactic sugar)이다. 즉 위
+코드는 아래의 코드로 변환된다.
+
+```js
+<element [ngSwitch]="expression">
+  <ng-template [ngSwitchCase]="'case1'">
+    <element>...</element>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'case2'">
+    <element>...</element>
+  </ng-template>
+  <ng-template ngSwitchDefault>
+    <element>...</element>
+  </ng-template>
+</element>
+```
+
+---

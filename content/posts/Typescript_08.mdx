@@ -1,0 +1,329 @@
+---
+title: 7/ class(2)
+date: '2017-11-22'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. 요약 class에서 선언된 멤버변수와 멤버함수를 외부에서 접근이
+  가능하게 하는 방법, 재선언할 수 있도록 컨트롤하는 방법을 배웁니다....
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. class getter, setter",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. class 멤버변수",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. class 멤버함수",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. class private static property or method",
+        "id": "4"
+      }
+    },
+    {
+      "title": {
+        "name": "5. Abstract Class",
+        "id": "5"
+      }
+    },
+    {
+      "title": {
+        "name": "6. private constructor",
+        "id": "6"
+      }
+    },
+    {
+      "title": {
+        "name": "7. singleTon",
+        "id": "7"
+      }
+    },
+    {
+      "title": {
+        "name": "8. readonly",
+        "id": "8"
+      }
+    }
+  ]
+thumbnail: /images/post_img/21/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-14)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**요약** class에서 선언된 멤버변수와 멤버함수를 외부에서 접근이 가능하게 하는 방법, 재선언할 수
+있도록 컨트롤하는 방법을 배웁니다. 생성자에도 private화하여 class 내부에서만 선언이 가능하도록 하며,
+이는 singleTon 패턴을 정확하게 배치 가능할 수 있게 합니다. readonly 키워드를 붙여서 getter의 역할만
+가능하도록 할 수 있습니다.
+
+---
+
+### <a name="1" ></a> 1. class getter, setter
+
+get, set을 하는 중에 무언가를 해주기 위해서 사용한다. get과 set 사이에 추가적인 작업이 있을 때
+사용한다.
+
+1. \_ 를 변수명 앞에 붙이고, 내부에서만 사용한다.
+2. getter를 함수처럼 설정하면, 프로퍼티처럼 꺼내쓸수있다.
+3. 마찬가지로 setter 를 함수처럼 설정하면, 추가 작업을 하고 셋팅할 수 있다.
+
+> 강사님은 getter setter가 혼란을 줄 수 있는 경우가 있어서 사용하지 않고, 대신 메서드를 같은 역할을
+> 하는 메서드를 만드는데 메서드의 이름을 getName, setName으로 짓는다고 하셨따.
+
+```ts
+class Person {
+  private _name: string;
+  private _age: number;
+
+  constructor(name: string, age: number) {
+    this._name = name;
+    this._age = age;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(name: string) {
+    // 작업
+    this._name = `${name} Lee`;
+  }
+}
+
+const person: Person = new Person('Mark', 35);
+
+console.log(person.name);
+person.name = 'Woongjae';
+console.log(person.name);
+```
+
+#### `getter`
+
+getter는 어떤 멤버 변수에 접근할 때마다 멤버 변수의 값을 조작하는 행위가 필요할 때 사용한다. 사용
+방법은 아래와 같다.
+
+#### `setter`
+
+setter는 어떤 멤버 변수에 값을 할당할 때마다 멤버 변수의 값을 조작하는 행위가 필요할 때 사용한다.
+사용 방법은 아래와 같다.
+
+---
+
+### <a name="2" ></a> 2. class 멤버변수
+
+객체지향의 class와 거의 유사하다. static property와 static method가 있다.
+
+1. static 키워드를 붙힌 프로퍼티는 클래스.프로퍼티로 사용한다.
+2. static 프로퍼티에 private, protected 를 붙히면 똑같이 동작한다.
+
+- public static은 외부에서 변경이 가능하다.
+- default는 public이다.
+
+```ts
+class Person {
+  public static CITY = '';
+  private static lastName: string = 'Lee';
+  private _name: string;
+  private _age: number;
+
+  constructor(name: string, age: number) {
+    this._name = name;
+    this._age = age;
+  }
+
+  public print() {
+    console.log(`${this._name} ${Person.lastName} in ${Person.CITY}.`);
+  }
+}
+
+const person: Person = new Person('Mark', 35);
+Person.CITY = 'Seoul';
+person.print(); // Mark Lee in Seoul.
+```
+
+---
+
+### <a name="3" ></a> 3. class 멤버함수
+
+```ts
+class Person {
+  public static Talk(): void {
+    console.log('안녕하세요.');
+  }
+}
+
+Person.Talk(); // 안녕하세요.
+```
+
+public static은 의미가 있다. private static 메소드와 프로퍼티는 무슨 의미가 있나? 대부분 한 ts파일에
+한 class를 사용하고, 모듈을 다른곳에서 쓰기위해서 export import를 쓴다.
+
+#### `private static`?
+
+- 사용시 class의 private static과 ts파일 안의 제일 상단에 있는 const 변수와 어떤 차이가 있나? 라고
+  할때 애매하다.
+- private이라 애매한 것.
+
+---
+
+### <a name="4" ></a> 4. class private static property or method
+
+```ts
+class Person {
+  private static PROPERTY = '프라이빗 프로퍼티';
+  private static METHOD() {
+    console.log('프라이빗 메서드');
+  }
+
+  constructor() {
+    console.log(Person.PROPERTY);
+    Person.METHOD();
+  }
+}
+
+//////////////////////////////////////////////
+
+const PROPERTY = '모듈 내 변수';
+function METHOD() {
+  console.log('모듈 내 함수');
+}
+
+export class Person {
+  constructor() {
+    console.log(PROPERTY);
+    METHOD();
+  }
+}
+```
+
+---
+
+### <a name="5" ></a> 5. Abstract Class &#128566;
+
+1. abstract 키워드가 사용된 클래스는 new 로 생성할 수 없다.
+2. abstract 키워드가 사용된 클래스를 상속하면 abstract 키워드가 붙은 함수를 구현해야 한다.
+
+```ts
+abstract class APerson {
+  protected _name: string = 'Mark';
+  abstract setName(name: string): void;
+}
+
+class Person extends APerson {
+  setName(name: string): void {
+    this._name = name;
+  }
+}
+
+// const person = new APerson(); // (X)
+const person = new Person();
+```
+
+---
+
+### <a name="6" ></a> 6. private constructor
+
+1. 생성자 함수 앞에 접근제어자인 private 을 붙일 수 있다.
+2. 외부에서 생성이 불가능하다.
+
+> 내부에서 생성하는 방법을 써야하고, 그러다보니 싱글톤 패턴을 정확하게 배치해서 사용할 수 있게
+> 되었다.
+
+```ts
+class Preference {
+  private constructor() {}
+}
+
+// const p: Preference = new Preference(); (X)
+```
+
+---
+
+### <a name="7" ></a> 7. singleTon &#128580;
+
+자바스크립트의 함수는 new로 생성자를 사용할 때마다 새로이 생성된 객체를 리턴합니다. 하지만 특수한
+상황에서는 하나의 함수에서 생성되는 객체가 오직 한개만을 가져야 할 때가 있다. 그럴 경우 사용되는
+디자인 패턴이 `Singleton Pattern`
+
+- 싱글턴 패턴 : 객체리터럴이 싱글턴 패턴의 대표적.
+  - 모듈패턴을 변형한 디자인 패턴
+    - 처음 namespace를 만들 때 사용한다.
+    - 게임을 실행할 때 게임은 한번만 켜져야 하기 때문에 싱글턴이 적절.
+
+1. private 생성자를 이용해서 내부에서만 인스턴스 생성이 가능하도록 함.
+2. pubilc static 메서드를 통해 private static 인스턴스 레퍼런스를 획득한다.
+3. Lazy Loading (Initialization) : 최초 실행시가 아니라, 사용시에 할당을 함
+
+```ts
+class Preference {
+  public static getInstance() {
+    // 유일 객체가 정의되지 않았다면 객체를 생성.
+    if (Preference.instance === null) {
+      Preference.instance = new Preference();
+    }
+
+    return Preference.instance;
+  }
+  private static instance: Preference = null;
+  private constructor() {}
+}
+
+const p: Preference = Preference.getInstance();
+```
+
+---
+
+### <a name="8" ></a> 8. readonly
+
+private인데 get, set중 get만 있는 상황과 같다.
+
+1. `private readonly` 로 선언된 경우, 생성자에서는 할당이 가능하다.
+2. `private readonly` 로 선언된 경우, 생성자 이외에서는 할당이 불가능하다.
+3. `public readonly` 로 선언된 경우, 클래스 외부에서는 다른값을 할당할 수 없다.
+4. 마치 getter 만 있는 경우와 같다.
+
+```ts
+class Person {
+  private readonly _name: string = null;
+  public readonly age: number = 35;
+
+  constructor(name: string) {
+    this._name = name;
+  }
+
+  public setName(name: string) {
+    // this._name = name; (X)
+  }
+}
+
+const p: Person = new Person('Mark');
+console.log(p.age);
+// p.age = 36; // (X)
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/es6-class
+2. http://blog.javarouka.me/2012/02/javascripts-pattern-1-singeton-patterrn.html
+3. http://karl27.tistory.com/10

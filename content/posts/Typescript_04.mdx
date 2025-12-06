@@ -1,0 +1,393 @@
+---
+title: 3/ Typescript_기본 데이터 타입
+date: '2017-11-17'
+description:
+  "기본 데이터 타입 \U0001F331 타입스크립트에서 기본 자료형을 잘! 숙지해야 한다. 타입스크립트는
+  타입을 새로 만들면서 짜는 방식인데, 특정한 골격을 갖출 때 결국 남는건 기본 자료형들이 남는다. 이때
+  기본 자료형이 정확히 어떤 것들이 있는지 인지하고 있어야, 그 기본 자료형들..."
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList:
+  "[\n  {\n    \"title\": {\n      \"name\": \"0. literal\",\n      \"id\":
+  \"0\"\n    }\n  },\n  {\n    \"title\": {\n      \"name\": \"1. 기본 자료형 Primitive Type
+  (javaScript) \U0001F331\",\n      \"id\": \"1\"\n    },\n    \"depth1\":
+  [\n      {\n        \"name\": \"1.1 boolean\",\n        \"id\":
+  \"1-1\"\n      },\n      {\n        \"name\": \"1.2 number\",\n        \"id\":
+  \"1-2\"\n      },\n      {\n        \"name\": \"1.3 string\",\n        \"id\":
+  \"1-3\"\n      },\n      {\n        \"name\": \"1.4 Template String\",\n        \"id\":
+  \"1-4\"\n      },\n      {\n        \"name\": \"1.5 Undefined & null\",\n        \"id\":
+  \"1-5\"\n      }\n    ]\n  },\n  {\n    \"title\": {\n      \"name\": \"2.  참조타입 (javaScript)
+  \U0001F3AF\",\n      \"id\": \"2\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"2.1
+  Array\",\n        \"id\": \"2-1\"\n      },\n      {\n        \"name\": \"2.2
+  Symbol\",\n        \"id\": \"2-2\"\n      }\n    ]\n  },\n  {\n    \"title\": {\n      \"name\":
+  \"3. 타입스크립트에서 추가로 제공하는 타입 \U0001F425\",\n      \"id\":
+  \"3\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"3.1 Void\",\n        \"id\":
+  \"3-1\"\n      },\n      {\n        \"name\": \"3.2 Any\",\n        \"id\":
+  \"3-2\"\n      },\n      {\n        \"name\": \"3.3 Never\",\n        \"id\":
+  \"3-3\"\n      },\n      {\n        \"name\": \"3.4 Tuple\",\n        \"id\":
+  \"3-4\"\n      },\n      {\n        \"name\": \"3.5 Enum\",\n        \"id\":
+  \"3-5\"\n      }\n    ]\n  }\n]"
+thumbnail: /images/post_img/14/thumb_default.jpg
+---
+
+## 기본 데이터 타입 🌱
+
+타입스크립트에서 기본 자료형을 `잘!` 숙지해야 한다. 타입스크립트는 타입을 새로 만들면서 짜는
+방식인데, 특정한 골격을 갖출 때 결국 남는건 기본 자료형들이 남는다. 이때 기본 자료형이 정확히 어떤
+것들이 있는지 인지하고 있어야, 그 기본 자료형들을 잘 조합해서 내가 사용할 인터페이스를 만들어 낼 수
+있고, 타입을 만들 수 있다. 자바스크립트의 기본자료형을 모두 포함한다.
+
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8#)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다 .
+
+<a name="0"></a>
+### 0. literal
+
+- `값 자체가 변하지 않는 값을 의미합니다 .`
+- 상수와 다른 것은 상수는 가리키는 포인터가 고정이라는 것이고, 리터럴은 그 자체가 **값이자
+  그릇**입니다 .
+- "`리터럴 상수`는 5, 1.23 과 같은 숫자나, 'This is a string' 혹은 "It’s a string!" 과 같은 문자열
+  등을 말합니다. 이것들이 리터럴 상수라고 불리우는 이유는 이것들이 프로그램 내에 직접 `문자 형태`로
+  (literally) 지정되는 값들 이기 때문입니다. `이러한 값들은 한번 지정되면 변하지 않습니다 .`
+- 예를 들면 숫자 `2`는 언제나 자기 자신이 2 라는 숫자임을 나타내며 어떤 다른 의미도 갖지 않습니다 .
+- 이들은 한번 지정되면 그 값을 변경할 수 없기 때문에 *상수*입니다 . 그 중에서도 특별히 이러한 값들을
+  리터럴 상수라고 부릅니다. @kangpual
+
+---
+
+<a name="1"></a>
+## 1. 기본 자료형 Primitive Type
+
+- object 와 reference 형태가 아닌 실제 값을 저장하는 자료형입니다 .
+- 프리미티브 형의 내장 함수를 사용 가능한것은 자바스크립트 처리 방식 덕분
+  - 동작 자체는 마치 객체인 것처럼 처리된다 .
+  - 메모리를 아끼기 위해서
+
+```js
+let name = 'Nayoung';
+
+name.toString();
+```
+
+<a name="1-1"></a>
+### 1-1. boolean
+
+- 가장 기본적인 데이터 타입
+- 단순한 true 혹은 false값 입니다 .
+- JavaScript / TypeScript 에서 **'boolean'** 이라고 부른다 .
+
+**소문자 boolean 과 대문자 Boolean**
+
+- 소문자 boolean 은 프리미티브 타입의 불린 , 대문자 Boolean 은 레퍼 오브젝트의 생성자 class 인데 ,
+  자바스크립트에서는 두 가지의 차이가 크게 없지만, 타입스크립트에서는 차이가 있다 .
+  타입스크립트에서는 소문자를 권장한다.
+  - `Type 'boolean' is assignable to type 'Boolean'.`
+  - Type 'Boolean' is not assignable to type 'boolean'.
+  - 'boolean' is a primitive, but 'Boolean' is a wrapper object.
+  - Prefer using 'boolean' when possible.
+
+```js
+let isDone: boolean = false
+
+typeof isDone === 'boolean' // true
+
+// Type 'boolean' is assignable to type 'Boolean'.
+let isOk: Boolean = true
+
+// Type 'Boolean' is not assignable to type 'boolean'.
+// 'boolean' is a primitive, but 'Boolean' is a wrapper object.
+// Prefer using 'boolean' when possible.
+let isNotOk: boolean = new Boolean(true)
+```
+
+<a name="1-2"></a>
+### 1-2. number
+
+- JavaScript 와 같이, TypeScript 의 모든 숫자는 부동 소수점 값 입니다.
+- TypeScript 는 16진수 및 10진수 리터럴 외에도, ECMAScript 2015에 도입된 2진수및 8진수를 지원합니다.
+
+```js
+let decimal: number = 6 // 10진수 리터럴
+let hex: number = 0xf00d // 16진수 리터럴
+let binary: number = 0b1010 // 2진수 리터럴
+let octal: number = 0o744 // 8진수 리터럴
+```
+
+<a name="1-3"></a>
+### 1-3. string
+
+- Template String을 자주 쓴다 .
+- 다른 언어에서와 마찬가지로 텍스트 형식을 참조하기 위해 `string`형식을 사용한다.
+- 자바스크립트와 마찬가지로, 타입스크립트는 문자열 데이터를 둘러싸기 위해 큰 따옴표나 작은따옴표를
+  사용한다.
+
+```js
+let name: string = 'mark'
+name = 'anna'
+```
+
+<a name="1-4"></a>
+### 1-4. Template String
+
+- 주로 사용한다.
+- 행에 걸쳐 있거나, 표현식을 넣을 수 있는 문자열
+- 이 문자열은 backtick (= backquote ```) 기호에 둘러쌓여 있습니다.
+- 포함된 표현식은 `${ expr }`와 같은 형태로 사용합니다.
+
+```js
+let fullName: string = `Bob Bobbington`
+let age: number = 37
+
+let sentence: string = `Hello, my name is ${fullName}.
+
+I'll be ${age + 1} years old next month.`
+
+// template string 을 사용하지 않을 경우
+let sentence: string =
+  'Hello, my name is ' +
+  fullName +
+  '.\n\n' +
+  "I'll be " +
+  (age + 1) +
+  ' years old next month.'
+```
+
+<a name="1-5"></a>
+### 1-5. Undefined & null
+
+- TypeScript에서 'undefined'와 'null'은 실제로 각각 'undefined'와 'null'이라는 고유한 타입을
+  가집니다.
+- 'void' 와 마찬가지로, undefined 와 null 은 그 자체로는 쓸모가 없습니다.
+- 둘다 소문자만 존재합니다.
+
+```js
+// 이 변수들에 할당할 수 있는 것들은 거의 없다.
+
+let u: undefined = undefined
+let n: null = null
+```
+
+- 위 처럼 사용하기 보다는 `return`에서 주로 사용
+
+### 1-5-1. undefined & null are subtypes of all other types
+
+- 기본 설정이 그렇습니다.
+- 대입이 가능하다는 것이다.
+- number에 null 또는 undefined 를 `할당할 수 있다는 의미`입니다.
+- 하지만, 컴파일 옵션에서 `--strictNullChecks`사용하면, null과 undefined 는 void 나 자기
+  자신들에게만 할당할 수 있습니다.
+- 이 경우, null과 undefined를 할당할 수 있게 하려면, union type 을 이용해야합니다. (union type:
+  두개의 타입을 합치는 것.)
+
+```js
+// 대입 가능
+let name: string = null
+let age: number = undefined
+
+// strictNullChecks => true
+// 보통 위의 옵션을 true로 하진 않는다..
+// 위의 옵션이 추가되면 자기 자신이나 void에게만 할당 가능, 다른 타입에는 할당하지 못함.
+// let name: null = null; // (O)
+// Type 'null' is not assignable to type 'string'.
+let name: string = null // (X)
+
+// null => null || void, undefined => undefined || void
+// Type 'null' is not assignable to type 'undefined'.
+let u: undefined = null // (X)
+
+let v: void = undefined // (O)
+
+let union: string | null | undefined = 'str'
+```
+
+### 1-5-2. null in JavaScript
+
+- null 이라는 값으로 할당된 것을 null 이라고 합니다.
+- `무언가가 있는데, 사용할 준비가 덜 된 상태.` (undefined 는 `무언가가 아예 준비가 안된 상태`)
+- null 이라는 타입은 null 이라는 값만 가질 수 있습니다.
+- 런타임에서 typeof 연산자를 이용해서 알아내면 , `object` 입니다.
+
+```js
+let n: null = null
+
+console.log(n) // null
+console.log(typeof n) // object
+```
+
+### 1-5-3. undefined in JavaScript
+
+- 값을 할당하지 않은 변수는 undefined 라는 값을 가집니다.
+- `무언가가 아예 준비가 안된 상태`
+- object 의 property 가 없을 때도 undefined 입니다.
+- 런타임에서 typeof 연산자를 이용해서 알아내면 , `undefined` 입니다.
+
+```js
+let u: undefined = undefined
+
+console.log(u) // undefined
+console.log(typeof u) // undefined
+```
+
+---
+
+<a name="2"></a>
+## 2. 참조타입 (javaScript)
+
+<a name="2-1"></a>
+### 2-1. Array
+
+- 원래 자바스크립트에서 array는 객체입니다.
+- 사용방법 2가지 &#9996;
+  - `Array<타입>` (내부적으로 제네릭을 이용한 것이다.)
+  - 타입 []
+
+```js
+let list: number[] = [1, 2, 3]
+
+let list: Array<number> = [1, 2, 3]
+```
+
+<a name="2-2"></a>
+### 2-2. Symbol 🙄
+
+- ECMAScript 2015의 Symbol 입니다.
+- `프리미티브 타입`의 값을 담아서 사용합니다.
+- 고유하고 수정불가능한 값으로 만들어줍니다.
+- 그래서 주로 접근을 제어하는데 쓰는 경우가 많았습니다.
+
+```js
+let sym = Symbol();
+
+let obj = {
+  [sym]: 'value',
+};
+
+console.log(obj[sym]); // "value"
+```
+
+---
+
+<a name="3"></a>
+## 3. 타입스크립트에서 추가로 제공하는 타입
+
+<a name="3-1"></a>
+### 3-1. Void
+
+- 타입이 없는 상태입니다.
+- `any` 와 반대의 의미를 가집니다.
+- Void 는 대문자가 없습니다. 소문자입니다.
+- 주로 함수의 `리턴이 없을 때` 사용합니다. 그 외에는 `사용할 일이 거의 없습니다.`
+
+```js
+function returnVoid(message): void {
+  console.log(message)
+}
+
+returnVoid('리턴이 없다')
+```
+
+<a name="3-2"></a>
+### 3-2. Any
+
+- 어떤 타입이어도 상관없는 타입입니다.
+- 이걸 최대한 쓰지 않는게 핵심입니다.
+- 왜냐면 컴파일 타임에 타입 체크가 정상적으로 이뤄지지 않기 때문입니다.
+- 그래서 컴파일 옵션 중에는 any 를 쓰면 오류를 뱉도록 하는 옵션도 있습니다.
+  - `noImplicitAny`
+
+```js
+function returnAny(message): any {
+  console.log(message)
+}
+
+returnVoid('리턴은 아무거나')
+```
+
+<a name="3-3"></a>
+### 3-3. Never
+
+- 리턴에 주로 사용된다.
+- 아래의 3 가지 정도가 대부분
+
+```js
+// Function returning never must have unreachable end point
+function error(message: string): never {
+  throw new Error(message)
+}
+
+// Inferred return type is never
+function fail() {
+  return error('Something failed')
+}
+
+// Function returning never must have unreachable end point
+function infiniteLoop(): never {
+  while (true) {}
+}
+```
+
+<a name="3-4"></a>
+### 3-4. Tuple
+
+- **배열인데 타입이 한가지가 아닌 경우**
+- 마찬가지로 **객체**입니다.
+- 꺼내 사용할때 주의가 필요합니다.
+  - 배열을 Destructuting 하면 타입이 제대로 얻어집니다.
+
+```js
+// Declare a tuple type
+let x: [string, number]
+// Initialize it
+x = ['hello', 10] // OK
+// Initialize it incorrectly
+x = [10, 'hello'] // Error
+
+x[3] = 'world' // OK, 'string' can be assigned to 'string | number'
+
+console.log(x[5].toString()) // OK, 'string' and 'number' both have 'toString'
+
+x[6] = true // Error, 'boolean' isn't 'string | number'
+
+const person: [string, number] = ['mark', 35]
+
+const [name, age] = person
+```
+
+<a name="3-5"></a>
+### 3-5. Enum
+
+- C 에서 보던것과 같습니다.
+- 아래 예제만 이해하면 사용 준비 끝
+- Enum 의 결과값은 string 형이다.
+  > Da,Da 할때 아침 / 점심 / 저녁 / 간식을 Enum 타입으로 받았는데 , 이때 문자열 이였기 때문에 `*1`을
+  > 해줬었다 .
+
+```js
+enum Color {Red, Green, Blue}
+let c: Color = Color.Green;
+
+enum Color {Red = 1, Green, Blue}
+let c: Color = Color.Green;
+
+enum Color {Red = 1, Green = 2, Blue = 4}
+let c: Color = Color.Green;
+
+enum Color {Red = 1, Green, Blue}
+let colorName: string = Color[2]; // 결과값은 string으로 해야한다.
+```
+
+---
+
+### 참고링크
+
+1. http://jaroinside.tistory.com/10
+2. http://poiemaweb.com/typeScript-vscode
+3. http://spectrumdig.blogspot.kr/2016/12/chrome-source-map-coffeescripttypescrip.html

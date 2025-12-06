@@ -1,0 +1,153 @@
+---
+title: 1부/ chap0. RxJs를 시작하기 전에
+date: '2018-08-11'
+description: >-
+  > [퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다. 목차 --- 1. 웹 환경의 변화 2. 웹 개발 복잡도
+  증가 3. 웹 애플리케이션은 상태 머신이다. => 4. 웹 애플리케이션 오류가 발생하는 경우 => 5. RxJS는
+  무엇인가? 그리고 웹 어플리케이션과 무...
+author: Joy Kim
+tags:
+  - async
+  - rxjs
+categories:
+  - 01_Web
+  - 03. Library
+enableComment: true
+thumbnail: /images/2018/23/thumb_default.jpg
+---
+
+> **[퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.
+
+## 목차
+
+1. 웹 환경의 변화
+2. 웹 개발 복잡도 증가
+3. 웹 애플리케이션은 상태 머신이다. [=>](#third)
+4. 웹 애플리케이션 오류가 발생하는 경우 [=>](#forth)
+5. RxJS는 무엇인가? 그리고 웹 어플리케이션과 무슨 관련이 있는가?
+
+---
+
+#### 서론
+
+대부분 처음 개발을 시작할 때는 **요구사항**을 어떻게 프로그래밍할 것인지를 고민하게 된다. **즉, 구현
+자체에만 초점을 맞추게 된다.** 물론, 이는 개발에서 무엇보다 중요한 문제이다. 하지만, 시간이 지나
+초급 개발자 딱지를 떼고 경험이 쌓이기 시작하면 구현보다는 <span class="mint">**소프트웨어를 얼마나
+효과적으로 유지보수할 수 있는지?**</span> 또는 얼마나 많은 문제점을 설계나 테스트 코드를 통해 사전에
+해결할 수 있을지를 고민하게 된다. 그래서 우리는 자연스레 기존 문제들을 해결하기 위해 고심했던
+라이브러리나, 디자인 패턴들을 하나둘씩 적용하게 되고, 결국에는 이런 고민들이 녹아들어 간
+프레임워크에 관심을 갖게 된다. ... **결과물(프레임워크)을 잘 사용하는 것도 중요하지만 그 기술의
+결과물이 어떤 고민의 산물인지 아는 것이 더 중요하다.**
+
+---
+
+<a id="third"></a>
+## 3. 웹 어플리케이션은 상태 머신이다. ### 상태머신이란? state machine 주어진 시간의 상태(state)가
+존재하고, 어떤 한 사건(input)에 의해 다른 상태 (state)로 변할 수 있는 수학적 모델을 의미힌다.
+
+<img src="/images/2018/23/01.jpg" width="400px" />
+
+1. 시스템으로 input이 발생한다.
+2. 프로그램 로직은 input과 현재 프로그램 상태에 따라 행위를 결정한다.
+3. 프로그램 로직은 결정에 따라, 프로그램 상태를 변경한다.
+4. 경우에 따라서는 프로그램 로직은 output을 생산하기도 한다.
+
+웹 어플리케이션은 이런 기능들의 집합으로 구성되어있다. 크게 보면 웹 어플리케이션도 하나의 큰 상태
+머신인 셈.
+
+---
+
+<a id="forth"></a>
+## 4. 웹 애플리케이션 오류가 발생하는 경우**
+웹 어플리케이션을 하나의 상태 머신으로 본다면
+정확한 **입력**과 **로직**으로 상태를 관리하는 방법이 중요하다.
+=> 이에 따라 오류의 발생 여부가 결정된다.
+
+∴ **각 구성요소의 상태를 어떻게 관리하느냐**에 따라 안정적인 어플리케이션을 만들 수 있다.
+
+### 4-1. 입력 오류
+
+서버로부터 전달받은 데이터를 입력값으로 사용하는 경우
+
+1. 서버에서 전달받은 응답 결괏값이 정상적으로 왔을 경우에만 입력값을 전달해야 한다.
+
+
+    - 입력값을 별도로 제어해야함.
+
+2. 응답 데이터의 결과가 미처 오기도 전에 데이터를 입력값으로 전달하거나 응답 중에 에러가 발생하여
+   비정상적인 응답 데이터를 입력값으로 전달하면 오류가 발생할 수 있다.
+
+
+    - 오류처리 필요
+
+### 4-2. 상태 오류
+
+상태 오류가 발생하는 이유는 상태 변화를 정확하게 전달하지 못하는 경우이다.
+
+1. **구성요소 간**에 의존도가 있는 경우 구성요소 간 의존도가 있는 경우, 구성요소의 변경 상태는
+   적시에 다른 구성요소에 전달되어야 한다.
+2. 두번째 **호출 순서**에 의존도가 있는 경우 구성요소 간 호출 순서에 의존도가 있는 경우, 구성요소는
+   **순서**에 맞게 호출되어야만 한다.
+
+---
+
+cf\_\_1. redux의 옵저버 패턴
+
+```js
+function createStore(reducer, initialState) {
+  let state = initialState; // 상태 초기화
+  // Setup listners to keep track of when the state is changed
+  // to triger rerenders (observer pattern)
+  const listeners = []; //
+  const subscribe = listener => listeners.push(listener); // 구독함수. listener가 들어오면 listeners에 담는다.
+  const getState = () => state; // get 함수
+  const dispatch = action => {
+    // action을 가져다주는 아이..
+    state = reducer(state, action); // state에 초기값, 액션을 넣고 상태값 담겨있는 객체 반환
+    // call each listener function when the state is changed
+    // its just a notification that state is changed
+    listeners.forEach(l => l()); //
+  };
+  return {
+    subscribe,
+    getState,
+    dispatch,
+  };
+}
+
+function reducer(state, action) {
+  if (action.type === 'ADD_MESSAGE') {
+    return {
+      messages: state.messages.concat(action.message),
+    };
+  }
+  if (action.type === 'DELETE_MESSAGE') {
+    return {
+      messages: [
+        ...state.messages.slice(0, action.index),
+        ...state.messages.slice(action.index + 1, state.messages.length),
+      ],
+    };
+  }
+  return state;
+}
+// set initial state to pass into to store
+const initialState = { messages: [] };
+// initialize the store
+const store = createStore(reducer, initialState);
+
+class Messages extends React.Component {
+  componentDidMount() {
+    store.subscribe(() => this.forceUpdate());
+  }
+  render() {
+    const messages = store.getState().messages;
+    return (
+      <div className="ui segment">
+        <MessageView messages={messages} />
+        <MessageInput />
+      </div>
+    );
+  }
+}
+```

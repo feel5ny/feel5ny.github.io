@@ -1,0 +1,229 @@
+---
+title: 9/ itertor
+date: '2017-11-26'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. 요약 아직 잘 이해가 안간다. &#128565; ---  1. for...of - es3
+  for(var i = 0; i 2. for....
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. for...of",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. for..in",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. Symbol.iterator",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. CustomIterable",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/post_img/23/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-15)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**요약** 아직 잘 이해가 안간다. &#128565;
+
+---
+
+### <a name="1" ></a> 1. for...of
+
+- es3 `for(var i = 0; i<array.length; i++)`
+- es5 `array.forEach` : return으로 순회를 탈출할 수 없다.
+- es6 `for..of` `for(const item of array)` 원칙적으로는 배열에서만 사용이 가능하다.
+
+- for-of 루프는 이터러블 객체를 순회한다. for-of 루프는 이터레이터의 next() 메소드를 호출하고 next()
+  메소드가 반환하는 객체의 done 프로퍼티가 true가 될 때까지 루핑한다.
+
+---
+
+### <a name="2" ></a> 2. for..in
+
+일반적일때는 사용하지 않는 것으로. (엔진에 따라 다르다.)
+
+- 배열을 순회할 때는 사용하지 않을 것
+  - index 가 number 가 아니라 string 으로 나온다.
+  - 배열의 프로퍼티를 순회할 수도 있다.
+  - prototype 체인의 프로퍼티를 순회할 수도 있다.
+  - 루프가 무작위로 순회할 수도 있다.
+  - for..of 를 쓸 것
+- 객체를 순회할 때
+  - `for (const prop of Object.keys(obj))` 도 사용할 수 있다.
+
+```ts
+const array = ['first', 'second'];
+const obj = {
+  name: 'Mark',
+  age: 35,
+};
+
+// 배열에 for..of 이용
+for (const item of array) {
+  console.log(typeof item + ', ' + item);
+}
+
+// 배열에 for..in 이용
+// item 이 string 타입의 숫자
+for (const item in array) {
+  console.log(typeof item + ', ' + item);
+}
+
+// 객체에 for..of 이용 => 오류
+/*
+for (const item of obj) {
+    console.log(typeof item + ', ' + item);
+}
+*/
+
+// 객체에 for..in 이용
+for (const item in obj) {
+  console.log(typeof item + ', ' + item);
+}
+
+// 객체의 keys 들에 for..of 이용
+for (const item of Object.keys(obj)) {
+  console.log(typeof item + ', ' + item);
+}
+```
+
+target 이 es3 인데도 forEach 는 트랜스파일이 되지 않았음.
+https://github.com/Microsoft/TypeScript/issues/2410
+
+```ts
+const array = ['first', 'second'];
+
+// ts
+array.forEach(item => {
+  console.log(item);
+});
+
+// js
+array.forEach(function (item) {
+  console.log(item);
+});
+```
+
+---
+
+### <a name="3" ></a> 3. Symbol.iterator
+
+#### `이터러블(iterable)`
+
+iterate = 반복하다 이터러블은 **순회 가능한 자료 구조**이다. `Symbol.iterator`를 프로퍼티 key로
+사용한 메소드를 구현하는 것에 의해 순회 가능한 자료 구조인 이터러블이 된다.
+
+#### `이터레이터`
+
+`Symbol.iterator`를 프로퍼티 key로 사용한 메소드는 이터레이터로 반환한다. 이터레이터는 순회 가능한
+자료 구조인 이터러블의 요소를 탐색하기 위한 포인터로서 `next()` 메소드를 갖는 객체이다. next()
+메소드는 value, done 프로퍼티를 갖는 객체를 반환하며 이 메소드를 통해 이터러블 객체를 순회할 수
+있다.
+
+ES6에서 제공하는 built-in iterable은 아래와 같다.
+
+- Array `Array.prototype[Symbol.iterator]`
+- String `String.prototype[Symbol.iterator]`
+- Map `Map.prototype[Symbol.iterator]`
+- Set `Set.prototype[Symbol.iterator]`
+- DOM data structures `NodeList.prototype[Symbol.iterator]`
+  `HTMLCollection.prototype[Symbol.iterator]`
+
+- 프로퍼티이며, 함수가 구현되어있으면, iterable 이라고 한다.
+- Array, Map, Set, String, Int32Array, Uint32Array, etc. 에는 내장된 구현체가 있으므로 이터러블
+  하다.
+- 그냥 객체는 이터러블하지 않다.
+- 이터레이터를 통해 이터러블한 객체의 Symbol.iterator 함수를 호출한다.
+- target : es3 or es5
+  - Array 에만 for..of 사용 가능
+  - 일반 객체에 사용하면 오류
+- target : es6
+  - Symbol.iterator 함수를 구현하면 어떤 객체에도 for..of 사용 가능
+
+---
+
+```ts
+// lib.es6.d.ts
+interface IteratorResult<T> {
+  done: boolean;
+  value: T;
+}
+
+interface Iterator<T> {
+  next(value?: any): IteratorResult<T>; // next가 필수로 있어야한다.
+  return?(value?: any): IteratorResult<T>;
+  throw?(e?: any): IteratorResult<T>;
+}
+
+interface Iterable<T> {
+  [Symbol.iterator](): Iterator<T>;
+}
+
+interface IterableIterator<T> extends Iterator<T> {
+  [Symbol.iterator](): IterableIterator<T>;
+}
+```
+
+---
+
+### <a name="4" ></a> 5. CustomIterable
+
+객체는 이터러블이 아니다. 하지만 이터레이션 프로토콜을 준수하여 이터러블 객체를 만들수 있다.
+
+- Symbol.iterator를 key로 사용한 메소드는 next() 함수를 프로퍼티로 가지는 객체를 반환하여야 한다.
+  그리고 next() 함수는 done과 value 프로퍼티를 가지는 객체를 반환한다. for-of는 done 프로퍼티가
+  true가 될 때까지 반복하며 done 프로퍼티가 true가 되면 반복을 중지한다.
+
+```ts
+class CustomIterable implements Iterable<string> {
+  private _array: Array<string> = ['first', 'second'];
+
+  [Symbol.iterator]() {
+    var nextIndex = 0;
+
+    return {
+      next: () => {
+        return {
+          value: this._array[nextIndex++],
+          done: nextIndex > this._array.length,
+        };
+      },
+    };
+  }
+}
+
+const cIterable = new CustomIterable();
+
+for (const item of cIterable) {
+  console.log(item);
+}
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/es6-iteration-for-of

@@ -1,0 +1,414 @@
+---
+title: "쿠키 \U0001F36A"
+date: '2019-11-17'
+description: >-
+  현대의 웹 사이트들은 개인화된 서비스를 제공하고 싶어 한다.  개인화를 하는 방법은 여러 가지가 있다.
+  - 개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보 - 세션 추적: 웹사이트는 각 사용자에게서 오는
+  HTTP 트랜잭션을 식별할 방법이 필요하다. 1. 사용자...
+author: Joy Kim
+tags:
+  - http
+  - study
+  - cookie
+  - web
+categories:
+  - 01_Web
+  - 02. HTTP
+enableComment: true
+customList:
+  "[\n  {\n    \"title\": {\n      \"name\": \"쿠키 \U0001F36A\",\n      \"id\":
+  \"cookie\"\n    }\n  },\n  {\n    \"hr\": {\n      \"type\": \"start\",\n      \"name\": \"쿠키에
+  대하여\"\n    }\n  },\n  {\n    \"title\": {\n      \"name\": \"(종류) 쿠키의 타입
+  \U0001F481‍♀️\",\n      \"sub\": \"세션, 지속, Secure, Http-only, Same-site, Third-party,
+  좀비\",\n      \"id\": \"type\",\n      \"style\": {\n        \"type\":
+  \"number\",\n        \"index\": \"1\"\n      }\n    }\n  },\n  {\n    \"title\":
+  {\n      \"name\": \"(How) 쿠키는 어떻게 동작하는가 \U0001F9D0\",\n      \"sub\": \"Cookie헤더,
+  Set-Cookie헤더\",\n      \"id\": \"how\",\n      \"style\": {\n        \"type\":
+  \"number\",\n        \"index\": \"2\"\n      }\n    }\n  },\n  {\n    \"title\":
+  {\n      \"name\": \"(State) 쿠키 상태 관리 ⏳\",\n      \"sub\": \"HTTP 상태 관리체계, Domain,
+  Path\",\n      \"id\": \"state\",\n      \"style\": {\n        \"type\":
+  \"number\",\n        \"index\": \"3\"\n      }\n    }\n  },\n  {\n    \"title\":
+  {\n      \"name\": \"(Detail) 쿠키 구성요소 \U0001F9E9\",\n      \"sub\": \"Version0/Version1, RFC
+  6265\",\n      \"id\": \"detail\",\n      \"style\": {\n        \"type\":
+  \"number\",\n        \"index\": \"4\"\n      }\n    }\n  },\n  {\n    \"hr\": {\n      \"type\":
+  \"start\",\n      \"name\": \"쿠키 사용 \"\n    }\n  },\n  {\n    \"title\": {\n      \"name\":
+  \"(When) 쿠키 목적별 사용 \U0001F440\",\n      \"sub\": \"Session 추적\",\n      \"id\":
+  \"when\",\n      \"style\": {\n        \"type\": \"number\",\n        \"index\":
+  \"1\"\n      }\n    }\n  },\n  {\n    \"title\": {\n      \"name\": \"(Be Careful) 쿠키 사용시
+  주의사항 \U0001F46E‍\",\n      \"sub\": \"캐시, 보안 및 개인정보\",\n      \"id\":
+  \"careful\",\n      \"style\": {\n        \"type\": \"number\",\n        \"index\":
+  \"2\"\n      }\n    }\n  }\n]"
+thumbnail: /images/2019/39/thumb_default.jpg
+---
+
+현대의 웹 사이트들은 **개인화**된 서비스를 제공하고 싶어 한다. 개인화를 하는 방법은 여러 가지가
+있다.
+
+- 개별 인사 / 사용자 맞춤 추천 / 저장된 사용자 정보
+- 세션 추적: 웹사이트는 각 사용자에게서 오는 HTTP 트랜잭션을 식별할 방법이 필요하다.
+
+1. 사용자 식별 관련 정보를 전달하는 **HTTP 헤더**
+1. **IP 주소**로 사용자를 식별
+1. 사용자 **로그인 인증**을 통한 사용자 식별
+1. URL에 식별자를 포함하는 **뚱뚱한 URL**
+1. **식별 정보를 지속해서 유지하는 쿠키**
+
+<a name="cookie" />
+
+# 쿠키 🍪
+
+- 쿠기는 **사용자를 식별하고 세션을 유지하는 방식** 중 현재까지 가장 널리 사용하는 방식이다.
+- 쿠키는 넷스케이프가 최초로 개발했지만, 지금은 모든 브라우저에서 지원한다.
+- 쿠키는 캐시와 충돌할 수 있어서, 대부분의 캐시나 브라우저는 쿠키에 있는 내용물을 캐싱 하지 않는다.
+
+---
+
+<a name="type" />
+
+# 1. 💁‍♀️ 쿠키의 타입 type
+
+<img src="https://img2.looper.com/img/gallery/the-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel/intro-1529252113.jpg" />
+
+> [출처](https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwifgo7p9vDlAhVQw4sBHZCNBDYQjhx6BAgBEAI&url=https%3A%2F%2Fwww.looper.com%2F126230%2Fthe-incredibles-2-brad-bird-explains-how-jack-jack-inspired-the-sequel%2F&psig=AOvVaw33Pe3U4ZSGg6yF4jZ1HcvQ&ust=1574069087195058)
+
+- 세션 쿠키와 지속 쿠키의 차이점은 파기되는 **시점**뿐이다.
+- 쿠키는 `Discard` 파라미터가 설정되어 있거나, `Expires`, `Max-Age`같은 파기되기까지의 남은 시간을
+  표현하는 파라미터가 없으면 세션 쿠키가 된다.
+
+## 세션 쿠키 session cookie
+
+- 사용자가 사이트를 탐색할 때, 관련한 설정과 선호 사항들을 저장하는 임시 쿠키다.
+- 세션 쿠키는 사용자가 브라우저를 닫으면 삭제된다.
+
+## 지속 쿠키 persistent cookie
+
+- 삭제되지 않고 더 길게 유지될 수 있다.
+- 지속 쿠키는 디스크에 저장되어, 브라우저를 닫거나 컴퓨터를 재시작하더라도 남아있다.
+- 지속 쿠키는 사용자가 주기적으로 방문하는 사이트에 대한 설정 정보나 로그인 이름을 유지하려고
+  사용한다.
+
+## Secure cookie
+
+- 암호화된 연결 HTTPS로만 전송할 수 있다.
+- Secure 플래그를 추가해서 생성하며, HTTPS로 전송하기 때문에 쿠키를 열어보는 걸 방지할 수 있다.
+
+## Http-only cookie
+
+- 자바스크립트 같은 클라이언트 사이드 API를 통해 접속할 수 없는 쿠키이며, XSS 위협을 없애준다.
+- cross-site tracing(XST)와 cross-site request forgery(XSRF) 공격에 공격받기 쉽다.
+- 2.  HTTPOnly 플래그를 쿠키에 추가하여 생성한다.
+
+## Same-site cookie
+
+- 구글 크롬 버전 51에서 새로 소개된 쿠키이다.
+- 쿠키를 생성한 도메인과 같은 출처일 때만 쿠키를 전송한다.
+
+## third-party cookie
+
+- 현재 방문하고 있는 사이트가 아닌 다른 사이트의 쿠키
+- 광고와 같은 외부 웹사이트의 컨텐츠가 있을 때 생성되며 이 쿠키를 이용하여 사용자를 추적하고, 광고를
+  제공하는 데 사용한다.
+
+## 좀비 cookie
+
+- 쿠키에 대한 좀 더 급진적인 해결책은 삭제 이후에 다시 생성되는 좀비 쿠키 혹은 "Evercookies"
+- 의도적으로 영원히 제거하는 것이 어려운 쿠키이다.
+- 그들은 쿠키가 존재 여부와 관계없이 그들 자신을 다시 만들어내기 위해 웹 스토리지 API, Flash 로컬
+  공유 객체 그리고 다른 기술들을 사용하고 있다.
+
+---
+
+<a name="how" />
+
+# 2. 🧐 쿠키는 어떻게 동작하는가 HOW
+
+- 쿠키는 서버가 사용자에게 붙이는 스티커와 같다.
+- 사용자가 웹 사이트에 반문하면, 웹 사이트는 서버가 사용자에게 붙인 모든 스티커를 읽을 수 있다.
+
+1. 처음에 사용자가 웹사이트에 방문하면, 웹 서버는 사용자에 대해서 아무것도 모른다.
+2. 웹 서버는 사용자가 다시 돌아왔을 때, 해당 사용자를 식별하기 위한 유일한 값을 쿠키에 할당한다.
+
+- 쿠키는 임의의 `이름=값` 형태의 리스트를 가지고, 그 리스트는 `Set-Cookie` 혹은 `Set-Cookie2` 같은
+  HTTP응답 헤더에 기술되어 사용자에게 전달한다.
+  [참고](https://feel5ny.github.io/2019/08/18/HTTP_003_04/#3)
+  > `Set-Cookie2`은 더 이상 사용되지 않는다.
+
+3. 쿠키는 어떤 정보든 포함할 수 있지만, **서버가 사용자 추적 용도**로 생성한 유일한 **단순 식별
+   번호**만 포함하기도 한다.
+
+- 서버는 이 쿠키 값으로 DB에서 사용자의 정보를 찾는데 사용할 수 있다.
+- 브라우저는 서버로 온 Set-Cookie 헤더에 있는 쿠키 콘텐츠를 **브라우저 쿠키 DB**에 저장한다.
+- 사용자가 미래에 같은 사이트를 방문하면, 브라우저는 서버가 이 사용자에게 할당했던 쿠키를 Cookie요청
+  헤더에 기술해 전송한다.
+
+<img src="/images/2019/39/03.png" style="width:100%" />
+### 그니까 쿠키는 어떻게 동작? **정리** 1. 유저가 서버에 페이지를 요청한다. 2. 서버에서 응답과 함께
+Set-Cookie 헤더를 전송한다. 3. 브라우저(User Agent)가 Set-Cookie 헤더에서 전달된 값을 갖고 쿠키를
+생성해서 (브라우저에) 저장한다. 4. 이렇게 생성된 쿠키는 클라가 서버에 요청할 때마다 **브라우저가
+같이 전송해준다.**
+
+---
+
+<a name="state" />
+
+# 3. ⏳쿠키 상태 관리
+
+## 3.1 클라이언트 측 상태
+
+- 쿠키의 기본적인 발상은 브라우저가 서버 관련 정보를 저장하고, 사용자가 해당 서버에 접근할 때마다 그
+  정보를 함께 전송하게 하는 것이다.
+- **브라우저는 쿠키 정보를 저장할 책임**이 있다. = 클라이언트 측 상태 = HTTP 상태 관리체계 (HTTP
+  State Management Mechnism)
+- 각 브라우저는 각기 다른 방식으로 쿠키를 저장한다.
+
+## 3.2 Domain 별 쿠키 상태 관리
+
+- 브라우저는 수백수천 개의 쿠키를 가지고 있을 수 있지만, 브라우저가 쿠키 전부를 모든 사이트에
+  보내지는 않는다.
+- 브라우저는 보통 각 사이트에 2개 혹은 3개의 쿠키만 보낸다.
+  1. 🔥 쿠키를 모두 전달하면 **성능이 크게 저하된다.**
+  - 쿠키를 모두 전달하면, 브라우저는 실제 콘텐츠의 바이트보다 더 많은 쿠키 바이트를 전달하게 될
+    것이다.
+  2. 🤷‍♂️ **해당 도메인과 상관없는 쿠키를 보내면 무의미하다.**
+  - 이 쿠키들은 대부분은 서버에 특화된 이름/값 쌍을 포함하고 있기 때문에, 대부분 사이트에서는
+    인식하지 않는 무의미한 값이다.
+  - 모든 사이트에 쿠키 전체를 전달하는 것은, 특정 사이트에서 제공한 정보를 신뢰하지 않는 사이트에서
+    가져갈 수 있어서, 잠재적인 **개인 정보 문제**를 일으킬 것이다.
+- 보통 브라우저는 쿠키를 생성한 서버에게만 쿠키에 담긴 정보를 전달한다.
+- 쿠키는 일종의 **상태 정보**라고 할 수 있으며
+  1. 서버가 생성하여 클라에 전달하고
+  2. 클라는 그 쿠키를 유효한 사이트에만 다시 전달하고 관리한다.
+
+> 많은 **웹 사이트는 광고를 관리하는 협력업체**와 계약을 한다. (third-party 쿠키)
+
+- 이 광고들은 웹사이트 자체의 일부인 것처럼 제작되고, **지속 쿠키**를 만들어낸다.
+- 같은 광고사에서 제공하는 서로 다른 웹사이트에 사용자가 방문하면, 브라우저는 앞서 만든 지속 쿠키를
+  다시 광고사 서버로 전송한다.
+- 광고사는 이 기술에 `Referer`헤더를 접목하여, 사용자의 프로필과 웹사이트를 사용하는 습관에 대한
+  방대한 데이터를 구축할 수 있다.
+
+### 쿠키 Domain 속성
+
+- 서버는 쿠키를 생성할 때 Set-Cookie 응답 헤더에 Domain 속성을 시술해서, 어떤 사이트가 그 쿠키를
+  읽을 수 있는지 제어할 수 있다.
+  - 도메인에 해당하는 사이트를 방문하면 Cookie 헤더가 항상 적용될 것이다.
+
+<img src="/images/2019/39/04.png" style="width:100%" />
+
+> 아래 브라우저에 저장되어 있던 쿠키 내용을 해당 도메인과 같을 경우 요청 헤더의 Cookie에 포함시킨다.
+
+<img src="/images/2019/39/05.png" style="width:100%" />
+
+### 쿠키 Path 속성
+
+- 웹 사이트 일부에만 쿠키를 적용할 수 있다.
+- 2.  HTTPs://www.google.com/ + `/search` `/search` 여기에만 해당하는 쿠키!
+      <img src="/images/2019/39/06.png" style="width:100%" />
+
+---
+
+<a name="detail" />
+
+# 4. 🧩 쿠키 구성요소
+
+- 현재 사용되는 쿠키 명세에는 **Version0** 쿠키 (= 넷스케이프 쿠키) **Version1** 쿠키 (RFC 2965 =>
+  RFC 2965 => RFC 6265)
+- Version1 쿠키는 Version0 쿠키의 확장으로 널리 쓰이지는 않는다.
+- Version0과 Version1 쿠키 명세 모두 HTTP/1.1 명세 일부로 기술되어 있지는 않는다.
+
+## Version 0
+
+### 1. Set-Cookie 헤더
+
+- Set-Cookie 헤더는 쿠키의 이름과 값을 가져야 한다.
+- 이는 쿠키 옵션 속성들에 `;`으로 이어 기술한다.
+
+1. `이름=값`: 필수 값
+2. `Expires`: 선택적인 속성. 쿠키의 생명주기를 가리키는 날짜 문자열
+
+- **요일, DD-MM-YY HH:MM:SS GMT**
+- 사용할 수 있는 타임존은 GMT
+- 쿠키에 Expires를 명시하지 않으면 그 쿠키는 사용자의 세션이 끝날 때 파기될 것이다.
+
+3. `Domain`: 선택적인 속성. 브라우저는 이 속성에 기술된 도메인을 사용하는 서버 호스트명으로만 쿠키를
+   전송한다.
+
+- 이는 서버가 해당 도메인에만 쿠키를 제한적으로 전달하게 한다.
+- 도메인이 명시되어 있지 않으면, Set-Cookie 응답을 생성한 서버의 호스트 명을 기본값으로 사용한다.
+
+4. `Path`: 선택적인 속성. 서버에 있는 특정 문서에만 쿠키를 할당할 수 있다.
+
+- `/foo`경로는 `/foobar`와 `/foo/bar.html`에 들어맞는다.
+- `/`는 모든 것에 들어맞는다.
+- 경로를 명시하지 않으면, Set-Cookie 응답을 전달하는 URL의 경로가 사용된다.
+
+5. `Secure`: 선택적인 속성. 쿠키는 HTTP가 SSL 보안 연결을 사용할 때만 쿠키를 전송한다.
+6. `HttpOnly`: HttpOnly는 쿠키의 범위를 HTTP 요청으로 제한한다. HttpOnly가 설정된 경우 클라이언트
+   사이드 API로는 쿠키에 접근하지 못한다.
+
+<img src="/images/2019/39/07.png" style="width:100%" />
+
+### 2. Cookie 헤더
+
+- 클라가 서버에 요청을 보낼 때는, Domain, Path, Secure 필터들이 현재 요청하려고 하는 사이트에
+  들어맞으면서, 아직 파기되지 않은 쿠키들을 함께 보낸다.
+- Cookie 헤더에 이어 붙여서 보낸다.
+
+## Version 1
+
+- 쿠키 버전 1은 **RFC 2109**를 뜻한다.
+- RFC 2109는 기존 넷스케이프 쿠키의 스펙을 체계적으로 정리하고 수정하려고 시도한 것
+
+- Version0 쿠키 속성은 Name, Value, Expires, Domain, Path, Securer가 있다.
+- Version1 쿠키 속성은 Name, Value, Comment, Domain, Max-Age, Path, Secure, Version이 있다.
+  - Comment: 서버가 쿠키의 용도를 기록해두기 위한 속성
+  - Version: 쿠키가 어떤 명세서를 따르는지 버전을 나타낸다.
+
+### RFC 6265와 RFC 2109 쿠키의 차이
+
+- RFC 6265가 나오면서 RFC 2109, RFC 2965는 폐기
+- 둘디 Set-Cookie 헤더를 사용합니다.
+- RFC 2109는 Name, Value, Comment, Domain, Max-Age, Path, Secure, Version
+- RFC 6265는 Name, Value, Expires, Domain, Max-Age, Path, Secure, HttpOnly
+  - Max-Age를 설정하면 자동으로 Expires가 정해진다.
+  - 2.  HTTPOnly: 비 HTTP 요청을 막는다.
+- 구현 고려 사항
+  - RFC 2109는 유저 에이전트가 최소 300개의 쿠키, 쿠키마다 적어도 4096바이트, 한 호스트나 도메인마다
+    최소 20개를 지원해야 한다.
+  - RFC 6265는 유저 에이전트가 최소 3000개의 쿠키 쿠키마다 적어도 4096바이트, 도메인 당 최소 50개의
+    쿠키를 저장 가능해야 한다고 명시.
+
+### ~Set-Cookie2 헤더~
+
+### ~Cookie2 헤더~
+
+Set-Cookie2와 Cookie2 헤더는 더 이상 사용되지 않으므로 패스
+
+---
+
+<a name="when" />
+
+# 5. 👀 쿠키 목적별 사용
+
+- 쿠키는 웹사이트에 수차례 트랜잭션을 만들어내는 사용자를 추적하는 데 사용한다.
+
+## 5.1 쿠키와 세션 추적
+
+Amazon.com의 예를 통해 살펴보자.
+
+1. 브라우저가 Amazon.com의 루트 페이지를 처음 요청한다
+
+```plain
+GET / HTTP/1.0
+Host: www.amazon.com
+```
+
+2. 서버는 클라를 전자상거래 소프트웨어 URL로 리다이렉트 시킨다.
+
+```plain
+HTTP/1.1 302 Found
+Location: http://www.amazon.com:80/exec/abidos/subst/home/redirect.html
+```
+
+3. 클라는 리다이렉트 URL로 요청 보낸다.
+
+```plain
+GET /exec/abidos/subst/home/redirect.html HTTP/1.0 302 Found
+Host: http://www.amazon.com
+```
+
+4. 서버는 응답에 두 개의 세션 쿠키를 기술하고 (`Set-Cookie` = 요 쿠키 브라우저에 넣어두세요)
+   사용자를 다른 URL로 리다이렉트 시키며 클라는 다시 이 쿠키들을 첨부하여 요청을 보낸다.(`Cookie`)
+   새로운 URL(http://www.amazon.com/exec/abidos/subst/home/redirect.html/002-1135265-8016838)은
+   자체에 상태 정보를 갖고 있으므로 = **뚱뚱한 URL**
+
+```plain
+HTTP/1.1 302 Found
+Date: Sun, 02 Dec 2001 03:20:47 GMT
+Set-Cookie: session-id=002-1135265-8016838; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT
+Set-Cookie: session-id-time=1007884800; path=/; domain=.amazon.com; expires=Suday, 09-Dec-2001 08:00:00 GMT
+```
+
+5. 클라는 새로운 URL을 요청을 요청받았던 두 개의 쿠키와 함께 보낸다.
+
+```plain
+GET /exec/abidos/subst/home/redirect.html/002-1135265-8016838 HTTP/1.0
+Host: http://www.amazon.com
+Cookie: session-id=002-1135265-8016838; session-id-time=1007884800
+```
+
+6. 서버는 home.html 페이지로 리다이렉트 시키고, 쿠키 두 개를 더 첨부한다.
+
+```plain
+HTTP/1.1 302 Found
+Date: Sun, 02 Dec 2001 03:45:40 GMT
+Set-Cookie: ubid-main=430-8248051-6231206; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT
+Set-Cookie: x-main=hQ...Bf; path=/; domain=.amazon.com; expires=Tuesday, 09-Dec-2001 08:00:00 GMT
+Location: http://www.amazon.com/exec/abidos/subst/home/home.html/002-1135265-8016838
+```
+
+7. 클라는 home.html 페이지를 가져오고, 총 4개의 쿠키를 전달한다.
+
+```plain
+GET /exec/abidos/subst/home/home.html/002-1135265-8016838 HTTP/1.0
+Host: http://www.amazon.com
+Cookie: session-id=002-1135265-8016838; session-id-time=1007884800; ubid-main=430-8248051-6231206; x-main=hQ...Bf
+```
+
+8. 서버는 콘텐츠를 보낸다.
+
+> **쿠팡** 첫 화면 진입 시 진행되는 광고 솔루션 **크리테오** 세션 추적 과정 중 일부
+
+<img src="/images/2019/39/08.png" style="width:100%" />
+
+---
+
+<a name="careful" />
+
+# 6. 👮‍ 쿠키 사용 시 주의사항
+
+## 6.1 쿠키와 캐싱
+
+- 이전 사용자의 쿠키가 다른 사용자에게 할당돼버리거나, 누군가의 개인 정보가 다른 이에게 노출되는
+  최악의 상황이 일어날 수도 있다.
+
+1. 캐시 되지 말아야 할 문서가 있다면 표시하라 `Control: no-cache="Set-Cookie"`
+2. Set-Cookie 해더를 캐시 하는 것에 유의하라
+
+- 같은 Set-Cookie 헤더를 여러 사용자에게 보내게 되면 사용자 추적에 실패할 것이기 때문
+- 어떤 캐시는 응답을 저장하기 전에 Set-Cookie 헤더를 제거하기 때문에, 그 캐시 데이터를 받은 클라는
+  Set-Cookie 헤더 정보가 없는 데이터를 받게 되어 문제가 발생할 수 있다.
+  - 캐시가 모든 요청마다 원 서버와 재검사시켜 클라로 가는 응답에 Set-Cookie 헤더 값을 기술하여 이
+    문제를 개선할 수 있다. ([참고](https://feel5ny.github.io/2019/10/05/HTTP_007-2/#control))
+  ```
+  Cache-Control: must-revalidate, max-age=0
+  ```
+
+3. Cookie 헤더를 가지고 있는 요청을 주의하라
+
+- 클라 요청에 Cookie 헤더가 함께 오면, 결과 콘텐츠가 개인 정보를 담고 있을 수도 있다는 힌트다.
+- 개인 정보는 캐시 되지 않도록 표시되어 있어야 하지만, 그 표시를 하지 않는 서버도 있다.
+- 보수적인 캐시는 Cookie 헤더가 포함된 요청에 응답으로 가는 문서는 캐시 하지 않을 것이다.
+
+## 6.2 쿠키, 보안 그리고 개인 정보
+
+- 쿠키를 사용하지 않도록 비활성화 시킬 수 있고, 로그 분석 같은 다른 방법으로 대체하는 것도
+  가능하므로, 그 자체가 보안상으로 엄청나게 위험한 것은 아니다.
+- 원격 DB에 개인 정보를 저장하고, 해당 데이터의 키값을 쿠키에 저장하는 방식을 표준으로 사용하면,
+  클라와 서버 사이에 예민한 데이터가 오가는 것을 줄일 수 있다.
+- 쿠키에 대한 부정적인 여론이 많기는 하지만, 제공하는 개인 정보를 누가 받는지 명확히 알고, 사이트의
+  개인 정보 정책에만 유의한다면, 쿠키에 관련한 위험성보다 세션 조작이나 트랜잭션 상의 편리함이 더
+  크다.
+
+---
+
+- [HTTP 완벽가이드]("http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788966261208&orderClick=LAG&Kc=")
+  책을 보고 이해한 내용을 정리 한 글입니다.
+
+---
+
+**참고자료**
+
+1. [mdn 쿠키글](https://developer.mozilla.org/ko/docs/Web/HTTP/Cookies)
+2. [HTTP 쿠키와 톰캣 버전별 이슈](https://meetup.toast.com/posts/172)
+3. [RFC 6265](https://tools.ietf.org/html/rfc6265)

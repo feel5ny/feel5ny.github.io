@@ -1,0 +1,409 @@
+---
+title: 4/ 함수와 프로토타입 체이닝 (1)
+date: '2018-08-25'
+description:
+  "> \U0001F4D2 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다. --- 1. 함수 정의 함수 선언문
+  ``js // 함수 선언문 function add(x,y){   return x + y; } ` 함수 표현식 `js // 함수 표현식 var add
+  = function..."
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. 함수 정의",
+        "id": "1"
+      },
+      "depth1": [
+        {
+          "name": "1.1 함수선언문",
+          "id": "1-1"
+        },
+        {
+          "name": "1.2 함수표현식",
+          "id": "1-2"
+        },
+        {
+          "name": "1.3 Function() 생성자함수",
+          "id": "1-3"
+        },
+        {
+          "name": "1.4 함수 호이스팅",
+          "id": "1-4"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "2. 함수 객체: 함수도 객체다.",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 자바스크립트에서는 함수도 객체다. ",
+          "id": "2-1"
+        },
+        {
+          "name": "2.2 자바스크립트에서 함수는 값으로 취급된다. (일급객체)",
+          "id": "2-2"
+        },
+        {
+          "name": "2.3 함수 객체의 기본 프로퍼티",
+          "id": "2-3"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. 함수의 다양한 형태",
+        "id": "3"
+      },
+      "depth1": [
+        {
+          "name": "3.1 콜백함수",
+          "id": "3-1"
+        },
+        {
+          "name": "3.2 즉시실행함수",
+          "id": "3-2"
+        },
+        {
+          "name": "3.3 내부함수",
+          "id": "3-3"
+        },
+        {
+          "name": "3.4 함수를 리턴하는 함수",
+          "id": "3-4"
+        }
+      ]
+    }
+  ]
+thumbnail: /images/2018/31/thumb_default.jpg
+---
+
+> 📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다.
+
+---
+
+<a name="1"></a># 1. 함수 정의
+<a name="1-1"></a>
+## 함수 선언문
+
+```js
+// 함수 선언문
+function add(x, y) {
+  return x + y;
+}
+```
+
+<a name="1-2" ></a>
+## 함수 표현식
+```js
+// 함수 표현식
+var add = function (x,y){
+  return x + y;
+}
+```
+- add는 함수 변수
+- add는 함수의 참조값을 가진다.
+- 함수이름이 없는 함수를 **익명함수**라고 부른다. anonymous function
+  - **익명 함수를 이용한 함수 표현식 방법(익명함수 표현식)**
+  - 익명함수의 호출은 호출연산자 `()`를 붙여서 기술한다.
+
+### 기명함수 표현식
+
+- 함수 이름이 포함된 함수 표현식
+
+```js
+// add 변수가 sum 함수를 참조한다.
+// 때문에 외부에서 sum함수에 접근할 수 없고, add변수를 통해 접근가능하다.
+var add = function sum(x, y) {
+  return x + y;
+};
+
+console.log(add(3, 4)); //7
+console.log(sum(3, 4)); //error
+```
+
+- 함수를 재귀적으로 호출하거나, 디버거에서 함수를 구분할 때 사용
+- <span class="mint">
+    함수 선언문은 **자바스크립트 엔진**에 의해서 **함수 표현식** 형태로 변경되기 때문에
+    호출가능하다.
+  </span>
+
+```js
+function add(x, y) {
+  return x + y;
+}
+
+// 위 함수는 자바스크립트 엔진에 의해서 아래와 같은 형태로 변환되다.
+var add = function add(x, y) {
+  return x + y;
+};
+
+// 팩토리얼 함수
+var factorialVar = function factorial(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+};
+
+factorialVar(3); // 6
+factorial(3); // error
+```
+
+- 관습적으로 <span class="mint">함수 표현식 뒤에는 세미콜론을 붙인다.</span>
+  <a name="1-3"></a>
+
+## Function() 생성자 함수
+
+함수도 일반 객체처럼 값으로 취급된다. (일급객체)
+
+```js
+var add = new Function('x', 'y', 'return x + y');
+```
+
+- 자주 사용되지 않는다.
+  <a name="1-4"></a>
+
+## 함수 호이스팅
+
+- 함수 호이스팅은 함수를 사용하기 전에 반드시 선언해야 한다는 규칙을 무시하므로, 코드의 구조를
+  엉성하게 만들 수 있다.
+- 함수 표현식을 권장한다.
+  <span class="mint">이를 자세히 알기 위해서는 **실행컨택스트**를 이해하면 된다.</span>
+- 자바스크립트의 변수 생성과 초기화의 작업이 분리되서 진행되기 때문이다.
+
+---
+
+<a name="2" ></a>
+# 2. 함수 객체: 함수도 객체다. 
+<a name="2-1" ></a>
+## 2.1 자바스크립트에서는 함수도 객체다. 
+함수 자체가 <span class="mint">일반 객체처럼 프로퍼티들을 가질 수 있다.</span>
+```js
+function add(x,y){
+  return x + y;
+}
+
+add.result = add(3,2); add.status = 'OK';
+
+````
+
+<a name="2-2" ></a>
+## 2.2 자바스크립트에서 함수는 값으로 취급된다. (일급객체)
+자바스크립트에서 함수는 <span class="mint">일급객체</span>이다.
+
+- 변수나 배열 요소, 객체의 프로퍼티 등에 할당 가능
+- 함수의 인자로 전달가능
+- 함수의 리턴값으로 리턴 가능
+- 리터럴에 의해 성성
+- 동적으로 프로퍼티를 생성 및 할당 가능
+
+이 특징때문에 함수형 프로그래밍이 가능하다.
+자바스크립트의 함수를 제대로 이해하려면
+함수가 일급 객체이며
+이는 곧 함수가 일반 객체처럼 <span class="mint">값</span>으로 취급된다는 것을 이해해야한다.
+
+### 2.2.1 변수나 프로퍼티의 값으로 할당
+- 변수나 <span class="mint">프로퍼티의 값</span>으로 할당될 수 있다.
+```js
+const foo = 100;
+const bar = function(){return 100;};
+console.log(bar()); // 100
+
+const obj = {};
+obj.baz = function(){return 200;}
+console.log(obj.baz()) // 200;
+
+/*
+  obj = {
+    baz: function(){reutrn 200}
+  }
+*/
+````
+
+### 2.2.2 함수 인자로 전달.
+
+### 2.2.3 리턴값으로 활용.
+
+> 클로저
+
+<a name="2-3"></a>
+## 2.3 함수 객체의 기본 프로퍼티
+<span class="mint">함수 객체만의 표준 프로퍼티</span>가 정의되어 있다.
+<img src="/images/2018/31/add.png" />
+
+### ECMA5 스크립트 명세서에는 <span class="mint">모든 함수가 length와 prototype프로퍼티를 가져야 한다도 기술되어있다.</span>
+
+length, prototype 이외의 프로퍼티는 ECMA 표준이 아니다.
+
+- arguments
+- caller
+- name
+- `__proto__`
+
+1. name
+
+- 함수의 이름
+- 익명함수라면 빈배열
+
+2. caller
+
+- 자신을 호출한 함수를 나타낸다.
+
+3. arguments
+
+- 파라미터값을 모아둔 유사배열객체이다.
+
+4. `__proto__`
+
+### <span class="mint">Function.prototype객체</span>의 프로토타입 객체는?
+
+> 대박 처음에 프로토타입 공부할 때 한참 헷갈렸던 부분
+
+- 모든 함수들의 부모 객체는 **Function Prototype**객체라고 했다.
+- ECMAScript 명세서에서는 Function.prototype은 **함수**라고 정의하고 있다.
+- Function.prototype 함수 객체도 결국 함수이니까, Function.prototype객체, 즉 자기 자신을 부모가 갖는
+  것인가??
+
+ECMAScript 명세서에서는 **예외적으로** Function.prototype 함수 객체의 부모는 Object.prototype
+객체라고 설명하고 있다.
+
+Function.prototype 객체가 표준으로 가지는 프로퍼티나 메서드.
+
+- `constructor` 프로퍼티
+- `toString()` 메서드 (Object.prototype에도 존재한다.)
+- `apply(thisArg, argArray)` 메서드
+- `call(thisArg, [, arg1 [,arg2,]])` 메서드
+- `bind(thisArg, [, arg1 [,arg2,]])` 메서드
+
+### 2.3.1 length
+
+인자의 개수를 나타내고 있다.
+
+### 2.3.2 prototype 프로퍼티
+
+모든 함수는 객체로서 **prototype 프로퍼티**를 갖고 있다.
+
+- 함수 객체만 가지고 있는 프로퍼티이다.
+- 내부 프로퍼티인 `__proto__`와 혼동되면 안된다.
+- `__proto__`는 부모 역할을 하는 프로토타입 객체를 가리킨다.
+- prototype 프로퍼티는 이 함수가 생성자로 사용될 때, 이 함수를 통해 생성된 객체의 부모 역할을 하는
+  프로토타입 객체를 가리킨다.
+
+```js
+function Person(name, gender) {
+  this.name = name;
+  this.gender = gender;
+  this.sayHello = function () {
+    console.log('Hi! my name is ' + this.name);
+  };
+}
+
+var foo = new Person('Lee', 'male');
+
+console.dir(Person);
+console.dir(foo);
+
+console.log(foo.__proto__ === Person.prototype); // ① true
+console.log(Person.prototype.__proto__ === Object.prototype); // ② true
+console.log(Person.prototype.constructor === Person); // ③ true
+console.log(Person.__proto__ === Function.prototype); // ④ true
+console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
+```
+
+<img src="/images/2018/31/01.png" />
+> (이미지출처 : https://poiemaweb.com/js-prototype)
+
+---
+
+<a name="3"></a># 3. 함수의 다양한 형태
+<a name="3-1"></a>
+## 3.1 콜백함수 함수 표현식에서 함수이름은 꼭 붙이지 않아도 되는 선택사항이다. (익명함수)
+<span class="mint">익명함수의 대표적인 용도가 **콜백함수.**</span>
+
+콜백함수는 코드를 통해 명시적으로 호출하는 함수가 아니라, 개발자는 단지 함수를 등록하기만 하고,
+**어떤 이벤트가 발생하거나 <u>특정 시점</u>에 도달했을 때 시스템에서 호출되는 함수를 말한다.**
+
+또한, 특정 함수의 인자로 넘겨서, 코드 내부에서 호출되는 함수 또한 콜백함수가 될 수 있다.
+
+- 대표적인 콜백함수는 이벤트 핸들러 처리.
+  - DOM 이벤트가 발생할 경우, 이벤트 핸들러를 발생시킨다.
+
+<a name="3-2" ></a>
+## 3.2 즉시실행함수
+= 함수를 정의함과 동시에 바로 실행하는 함수
+```js
+(function(name){
+  console.log('test')
+})()
+```
+### 사용하는 곳
+1. 초기화 코드
+  - 같은 함수를 다시 호출할 수 없다.
+  - <span class="mint">최초 **한번**의 실행만을 필요로 하는 **초기화 코드** 부분</span> 등에 사용한다.
+2. 자바스크립트 라이브러리나 프레임워크 소스들 (like Jquery)
+  ```js
+  (fucntion(window, undefined){
+    ...
+  })(window)
+  ```
+  - 변수 스코프를 위해서 사용한다. 함수 코드 내부에서만 유효할 수 있도록
+  - 라이브러리 내의 변수들은 함수 외부에서 접근할 수 없다.
+
+<a name="3-3" ></a>
+## 3.3 내부 함수
+함수 코드 내부에서 함수 정의
+- 공용으로 쓰이지 않고 정말 내부에서만 쓰일때
+> 예_ html을 만드는 함수에서 받은 data에서 특정 추가작업을 해야하고, 공용함수로 쓰이지 않을 경우
+
+- 내부함수에서는 자신을 둘러싼 부모 함수의 변수에 접근이 가능하다.
+- 내부 함수는 일반적으로 자신이 정의된 부모함수내부에서만 호출 가능하다.
+
+```js
+function parent() {
+  const a = 100;
+  const b = 200;
+
+  function child() {
+    const b = 300;
+    console.log(a);
+    console.log(b); // 내부에서 참조가 시작하므로, 내부에서 참조가능했다면 부모스코프까지 가지 않는다.
+  }
+  child();
+}
+parent(); // 100 300
+child(); //error
+```
+
+<img src="/images/2018/31/inner_function.jpeg" width="500" />
+
+- 하지만, 함수 외부에서도 특정 함수 스코프 안에 선언된 내부 함수 호출이 가능하다.
+  <span class="mint">(클로저)</span>
+
+```js
+function parent() {
+  const a = 100;
+
+  function child() {
+    console.log(a);
+  }
+  return child;
+}
+var inner = parent(); // inner에 child 함수변수가 리턴된다.
+inner(); // 클로저
+```
+
+<img src="/images/2018/31/closure.jpeg" width="500" />
+
+---
+
+<a name="3-4"></a>
+## 3.4 함수를 리턴하는 함수

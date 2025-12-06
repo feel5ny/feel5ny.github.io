@@ -1,0 +1,240 @@
+---
+title: 7/ BOM (브라우저 객체 모델)
+date: '2017-12-25'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. --- --- 목차 1. window 객체   1.1 전역 스코프 : window.전역변수명,
+  window.전역함수명   1.2 창 사이의 관계와...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/56/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요.
+
+---
+
+---
+
+**목차**
+
+1. [window 객체](#window) 1.1 [전역 스코프](#global) : window.전역변수명, window.전역함수명 1.2
+   [창 사이의 관계와 프레임](#frame) 1.3 [창의 위치](#screen-position) : screenLeft, screenTop 1.4
+   [창의 크기](#screen-size) : innerWidth, outerWidth 1.5 [내비게이션과 열기](#navigation&open) :
+   window.open, window.close 1.6 [인터벌과 타임아웃](#interval&timeout) : setInterval, setTimeout
+   1.7 [시스템 대화상자](#system-popup) : alert, prompt, confirm, print, find ---- 2편 &#128071;
+2. location 객체
+3. navigator 객체
+4. screen 객체
+5. history 객체
+
+---
+
+---
+
+## <a name="window" ></a> 1. window 객체
+
+BOM은 웹 페이지 콘텐츠와 무관하게 `브라우저 기능을 노출하는 객체`이다.
+
+<img src="/images/post_img/56/BOM-01.png" />
+
+브라우저의 인스턴스 => window 객체 웹페이지에서 정의한 모든 객체, 변수, 함수에서는 **window가 Global
+객체(= 표준내장객체) 구실을 하고,** window에 정의된 parseInt()등의 메서드를 이용한다.
+[+](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects)
+
+> global objects와 global object는 다르다. global objects는 표중내장객체, global object는
+> 전역객체이다.(실행 컨택스트에서 GO)
+
+---
+
+### <a name="global" ></a> 1.1 전역 스코프
+
+전역에서 선언한 `변수`와 `함수`는 모두 **window 객체의 프로퍼티 및 메서드**가 된다.
+
+```js
+const age = 29;
+const sayAge = () => {
+  alert(this.age); // 전역을 가리키는 this
+};
+
+alert(window.age); // 29
+sayAge(); // 29
+window.sayAge(); // 29
+```
+
+#### 전역변수와 window 프로퍼티로 직접 정의하는 것의 차이.
+
+- 전역 변수는 `delete`연산자로 제거할 수 없고, window 프로퍼티는 가능하다.
+
+```js
+const age = 29;
+window.color = 'red';
+
+delete window.age; // 제거 안됨
+delete window.color; // 제거 됨
+
+alert(window.color);
+```
+
+#### 선언하지 않았을 가능성이 있는 변수의 존재 여부는 window 객체를 통해 확인 가능
+
+<img src="/images/post_img/56/BOM-02.png" />
+
+---
+
+### <a name="frame" ></a> 1.2 창 사이의 관계와 프레임
+
+페이지에 프레임이 들어 있으면 각 프레임은 독자적인 window객체를 가지며, frames 컬렉션에 저장된다.
+
+---
+
+### <a name="screen-position" ></a> 1.3 창의 위치
+
+`screenLeft` : 디바이스 화면 왼쪽에서 브라우저 창까지 가로 거리 `screenTop` : 디바이스 화면 위쪽에서
+브라우저 창까지 세로 거리 `moveBy(가로이동 픽셀수, 세로이동 픽셀수)` : (왼->오 / 위-> 아래)
+`moveTo(x좌표, y좌표)`
+
+- `moveBy` `moveTo` 크롬, 오페라, IE7이상은 안됨
+
+---
+
+### <a name="screen-size" ></a> 1.4 창의 크기
+
+크기측정
+
+- `innerWidth` : 브라우저 창 내부의 페이지 뷰포트 크기 (모바일도 가능)
+- `innerHeight` : 브라우저 창 내부의 페이지 뷰포트 크기 (모바일도 가능)
+- `outerWidth` : 브라우저 창의 크기
+- `outerHeight` : 브라우저 창의 크기
+
+크기조절 (IE6이상 크롬 오페라에서는 금지)
+
+- `resizeTo(최종너비, 최종높이)`
+- `resizeBy(너비 얼만큼 바꿀지, 높이 얼만큼 바꿀지)`
+
+---
+
+### <a name="navigation&open" ></a> 1.5 내비게이션과 열기
+
+`window.open()` : URL로 이동한 후 브라우저 창을 새로 연다.
+
+- 이동할 URL, 대상 창, 기능을 나타내는 `string`
+- 마지막으로 새 페이지가 브라우저 히스토리에서 현재 페이지를 대체할지 나타내는 `boolean`
+
+```js
+window.open('http://feel5ny.github.io', 'topFrame');
+// 두번째 인자는 a태그에서 target과 같다.
+```
+
+두번째 인자에는 `_self`,`_parent`,`_top`,`_blank`사용가능
+
+#### 팝업창
+
+> 소셜 인증시 팝업창이 open되고, close될 때 사용된다.
+
+```js
+window.open(
+  'http://feel5ny.github.io',
+  'topFrame',
+  'height=400, width=400, top=10, left=10, resizable=yes'
+);
+```
+
+| 옵션         | 값            | 설명                                                                                                                                    |
+| :----------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| `fullscreen` | "yes" or "no" | 브라우저 창을 최대 크기로 생성할지 나타낸다.                                                                                            |
+| `height`     | 숫자          | 새 창의 높이이다. 최소값은 100                                                                                                          |
+| `left`       | 숫자          | 새 창의 x좌표이다. 음수는 쓸 수 없다.                                                                                                   |
+| `location`   | "yes" or "no" | 주소 표시줄을 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다. "no"로 지정하면 브라우저에 따라 주소 표시줄을 숨기거나 비활성화한다. |
+| `menubar`    | "yes" or "no" | 메뉴 바를 표시할지 나타낸다. 기본값은 "no"                                                                                              |
+| `resizable`  | "yes" or "no" | 새 창의 테두리를 드래그해서 크기를 조절할 수 있는지 나타냅니다. 기본값은 "no"                                                           |
+| `scrollbars` | "yes" or "no" | 새 창 콘텐츠가 뷰표트를 넘칠 때 스크롤을 허용할지 나타낸다. 기본값은 "no"                                                               |
+| `status`     | "yes" or "no" | 상태 바를 표시할지 나타낸다. 기본 값은 브라우저에 따라 다르다.                                                                          |
+| `toolbar`    | "yes" or "no" | 툴바를 표시할지 나타낸다. 기본값은 "no"                                                                                                 |
+| `top`        | 숫자          | 새 창의 y좌표. 음수는 쓸 수 없다.                                                                                                       |
+| `width`      | 숫자          | 새 창의 너비. 최솟값은 100                                                                                                              |
+
+##### `window.open()`
+
+메서드는 새로 생성한 창에 대한 참조를 반환한다. 기본적으로 주요 브라우저 창의 위치나 크기를
+스크립트에서 바꿀 수 없게 금지되지만, .open으로 생성한 창은 가능하다. (크롬은 CORS에 걸림)
+`window.close()`는 `window.open()`으로 생성된 창에서만 적용가능하다.
+
+```js
+var wroxWin = window.open(
+  'http://feel5ny.github.io',
+  'topFrame',
+  'height=400, width=400, top=10, left=10, resizable=yes'
+);
+
+wroxWin.resizeTo(500, 500);
+wroxWin.moveTo(100, 100);
+```
+
+`wroxWin`은 `opener`프로퍼티를 갖고 있는데, window.open()을 호출한 창이나 프레임을 가리키는
+포인터이다. 그 역은 존재하지 않는다.
+
+```js
+var wroxWin = window.open(
+  'http://feel5ny.github.io',
+  'topFrame',
+  'height=400, width=400, top=10, left=10, resizable=yes'
+);
+
+alert(wroxWin.opener === window); // true
+```
+
+---
+
+### <a name="interval&timeout" ></a> 1.6 인터벌과 타임아웃
+
+window에는 코드가 특정 시간에 실행되게끔 해주는 메서드가 있다. `setTimeout(실해코드, 시간(밀리초))`
+: 일정 시간 뒤에 코드를 실행 `setInterval()` : 일정 시간마다 코드를 반복 실행
+
+#### &#128336; `setTimeout()`
+
+자바스크립트는 큐를 이용해 각 코드의 실행을 관리한다.
+
+> 큐? Task 큐와 이벤트 루프이다. Task 큐는 말 그대로 콜백 함수들이 대기하는 큐(FIFO) 형태의 배열이라
+> 할 수 있고, 이벤트 루프는 호출 스택이 비워질 때마다 큐에서 콜백 함수를 꺼내와서 실행하는 역할을 해
+> 준다.
+
+`clearTimeout(setTimeout이 할당된 변수이름. 혹은 id값)` : 타임아웃을 취소할 때 사용한다.
+
+#### &#128171; `setInterval()`
+
+페이지가 종료되거나 인터벌을 취소하기 전에는 일정 시간마다 코드를 반복 실행한다.
+
+```js
+setInterval(function () {
+  alert('test');
+}, 1000);
+```
+
+`clearInterval()` : 인터벌을 취소한다. 인터벌을 취소하지 않으면 페이지가 떠 있는 동안은 계속
+실행되므로 **인터벌 취소는 timeout 취소보다 중요**
+
+---
+
+### <a name="system-popup" ></a> 1.7 시스템 대화상자
+
+`alert()` : Ok `confirm()` : Ok / cancel `prompt()` : input / Ok / cancel
+
+- 대화상자의 외관은 css가 아니라 운영체제/브라우저 설정에 따라 다르다.
+- 동기적이고 modal 성질이 있어서 대화상자가 떠 있을 때는 코드 실행이 중지된다.
+
+`window.print()` : 인쇄 대화상자 표시 `window.find('찾을 단어')` : 찾기 대화상자 표시
+
+---
+
+---
+
+### 참고링크
+
+1. http://meetup.toast.com/posts/89

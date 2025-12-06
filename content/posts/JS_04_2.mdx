@@ -1,0 +1,244 @@
+---
+title: 4/ 참조타입_Function 타입 (2)
+date: '2017-12-04'
+description: >-
+  > '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. 오류가 있다면
+  언제든지 댓글 남겨주세요. 목차  1. 함수의 내부 구조 2. 함수 프로퍼티와 메서드 3. 함수의 다양한
+  형태   3-1. 즉시실행함수   3-2. 내부함수   3-3. 콜...
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/post_img/39/thumb_default.jpg
+---
+
+> '프론트엔드 개발자를 위한 자바스크립트 프로그래밍' 책을 참고하여 정리합니다. **오류**가 있다면
+> 언제든지 댓글 남겨주세요.
+
+목차
+
+1. [함수의 내부 구조](#FunctionProperty)
+2. [함수 프로퍼티와 메서드](#FunctionMethod)
+3. [함수의 다양한 형태](#several_type) 3-1. 즉시실행함수 3-2. 내부함수 3-3. 콜백함수
+
+---
+
+## <a name="FunctionProperty" ></a> 1. 함수의 내부 구조
+
+함수 내부에는 객체들이 있다.
+
+<img src="/images/post_img/39/01.png" width="80%" />
+
+요약
+
+- `arguments` 함수에 전달된 파라미터를 모두 포함하는 유사배열객체
+- `this` 함수의 호출패턴에 따라 값이 달라진다.
+- `caller` 해당 함수를 호출한 함수를 참조하는 값을 갖고있다. 전역함수에서는 null. 재귀함수를 사용할
+  때 사용가능.
+- `length` arguments의 배열 길이. (파라미터의 갯수)
+- `name` 함수의 이름
+- `__proto__` 모든 객체가 갖고 있는 프로퍼티. [[Prototype]] 이며, 브라우저마다 다르게 명시한다. 해당
+  객체의 프로토타입을 가리키는 참조값을 갖고있다.
+- `prototype` 함수 객체가 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 객체를
+  가리킨다.
+- `apply` 함수를 호출하면서 해당함수의 this를 호출한 함수로 넘기는 역할을 한다.
+- `call` apply와 같은 개념이며, apply와 다른 점은 parmeter를 각각 넘기는 스타일이다.
+- `bind` bind() 메소드는 호출될 때 그 this 키워드를 제공된 값으로 설정하고 새로운 함수가 호출될 때
+  제공되는 주어진 순서의 선행 인수가 있는 새로운 함수를 생성한다.
+
+---
+
+### 1-1. `arguments`
+
+순회가능한(iterable) 유사배열객체이며, 함수에 전달된 파라미터를 모두 포함한다. arguments 프로퍼티는
+arguments 객체를 값으로 가지며, 함수 내부에서 지역변수처럼 사용된다. 즉, 외부에서는 호출할 수 없다.
+
+arguments 객체에는 `callee`, `length`, `Symbol` 프로퍼티가 존재한다. `callee` 프로퍼티는 arguments
+객체의 소유자인 함수를/ 가리키는 포인터이다.
+
+<img src="/images/post_img/39/02.png" width="80%" />
+
+```js
+function factorial(num) {
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * factorial(num - 1);
+  }
+}
+```
+
+```js
+// 함수 이름에 의존하는 약점을 callee로 보완
+function factorial(num) {
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * arguments.callee(num - 1);
+  }
+}
+```
+
+### 1-2. `this`
+
+### 1-3. `caller`
+
+caller 프로퍼티에는 해당 함수를 호출한 함수에 대한 **참조**를 저장하며, 전역 스코프에서 호출했다면
+`null`이 저장된다.
+
+---
+
+## <a name="FunctionMethod" ></a> 2. 함수 프로퍼티와 메서드
+
+함수에서 사용된 this는 실행된 객체를 가리키거나 상위 컨텍스트인 window를 가리킨다. **this를 조작해서
+다를 객체를 지정하려면?** apply나 call을 사용하면 된다.
+
+### 2-1. `apply` 메서드
+
+소유자인 **함수를 호출하면서** this를 파라미터로 넘기는데, 결론적으로는 함수 내부에서 this객체의
+값을 바꾸는 것이나 마찬가지이다. 매개변수로는 소유자함수에 넘길 this와 매개변수 배열을 (Array의
+인스턴스 혹은 arguments)를 받는다.
+
+```js
+function sum(num1, num2) {
+  return num1 + num2;
+}
+function callSum1(num1, num2) {
+  return sum.apply(this, arguments); // arguments 객체를 넘김
+}
+function callSum2(num1, num2) {
+  return sum.apply(this, [num1, num2]); // 배열을 넘김
+}
+
+alert(callSum1(10, 10)); //20
+alert(callSum2(10, 10)); //20
+```
+
+### 2-2. `call`
+
+apply와 같은데, 두번째 파라미터를 array형태가 아니라, 각각 나열해야한다.
+
+```js
+function sum(num1, num2) {
+  return num1 + num2;
+}
+function callSum(num1, num2) {
+  return sum.call(this, num1, num2); // arguments 객체를 넘김
+}
+alert(callSum(10, 10)); //20
+```
+
+### 2-3. `bind`
+
+새 함수 인스턴스를 만드는데 그 this는 bind()에 전달된 값이다.
+
+```js
+window.color = 'red';
+var o = { color: 'white' };
+
+function sayColor() {
+  alert(this.color);
+}
+
+var objectSayColor = sayColor.bind(o);
+objectSayColor(); //white
+```
+
+<img src="/images/post_img/39/04" width="400" />
+
+### 2-4. `__proto__` 프로퍼티
+
+ECMAScript spec에서는 **`모든 객체`는 자신의 프로토타입을 가리키는 `[[Prototype]]`이라는 숨겨진
+프로퍼티를 가진다**라고 되어있다. `[[Prototype]]`와 `__proto__`는 같은 개념이다.
+
+### 2-5. `prototype`프로퍼티
+
+**함수 객체만이 갖고 있는 프로퍼티**로, 자바스크립트 객체지향의 근간이다. `__proto__`와 다르다.
+
+- 함수 객체가 생성자로 사용될 때 이 함수를 통해 생성된 객체의 부모 역할을 하는 객체를 가리킨다.
+- 함수가 생성될 때 만들어지며 `constructor` 프로퍼티를 가지는 객체를 가리킨다. 이 constructor
+  프로퍼티는 함수 객체 자신을 가리킨다.
+
+---
+
+## <a name="several_type" ></a> 3. 함수의 다양한 형태
+
+### 3-1. 즉시호출함수표현식 IIFE, (Immediately Invoke Function Expression)
+
+함수의 정의와 동시에 실행되는 함수를 즉시호출함수라고 한다. 최초 한번만 호출되며 다시 호출할 수는
+없다. 이러한 특징을 이용하여 최초 한번만 실행이 필요한 초기화 처리등에 사용할 수 있다.
+
+> react에서 componentwillmount의 개념
+
+즉시실행함수 내에 처리 로직을 모아 두면 혹시 있을 수도 있는 변수명 충돌을 방지할 수 있어 이를 위한
+목적으로 사용되기도 한다.
+
+```js
+// 기명 즉시실행함수(named immediately-invoked function expression)
+(function myFunction() {
+  var a = 3;
+  var b = 5;
+  return a * b;
+})();
+
+// 익명 즉시실행함수(immediately-invoked function expression)
+(function () {
+  var a = 3;
+  var b = 5;
+  return a * b;
+})();
+```
+
+### 3-2. 내부함수
+
+함수 내부에 정의된 함수를 내부함수라 한다. 내부함수는 부모함수의 변수에 접근할 수 있지만, 부모함수는
+자식함수의 변수에 접근할 수 없다.
+
+<img src="/images/post_img/39/03.jpg" width="400" />
+
+### 3-3. 콜백함수
+
+콜백함수는 함수를 명시적으로 호출하는 방식이 아니라 특정 이벤트가 발생했을 때 시스템에 의해 호출되는
+함수를 말한다. 보통 이벤트 핸들러 처리때, 비동기식 처리모델에 사용된다. 옵저버(Observer) 디자인
+패턴에서 나온 개념이다.
+
+```js
+setTimeout(function () {
+  console.log('1초 후 출력된다.');
+}, 1000);
+```
+
+비동기식 처리 모델이란 처리가 종료하면 호출될 함수(콜백함수)를 미리 매개변수에 전달하고 처리가
+종료하면 콜백함수를 호출하는 것이다.
+
+콜백함수는 **콜백 큐**에 들어가 있다가 해당 이벤트가 발생하면 호출된다. 콜백 함수는 **클로저**이므로
+콜백 큐에 단독으로 존재하다가 호출되어도 콜백함수를 전달받은 함수의 변수에 접근할 수 있다.
+([참고](http://meetup.toast.com/posts/89))
+
+**그런데 왜 이름이 callback 일까?** 설명1 - 선언된 함수를 이용하는 것을 호출 (call) 한다고 표현
+한다. 콜백 함수는 운영체제(혹은 웹)에 의해 호출되는 응용 프로그램의 함수라 할 수 있다. 호출되는
+방향이 정상적인 호출과 달리 **반대된다는 의미**에서 콜백이라고 한다. 정상적인 함수 호출 방법과는
+다르게 운영체제 ( 시스템 ) 측에서 이벤트를 발생시켜서 이에 대한 처리를 해달라고 요청해 오는 과정이
+있기 때문에 이와 같은 이름이 붙여졌다고 할 수 있다.
+
+설명2 - 콜백함수란 API 의 반대개념이라고 볼 수 있습니다. 또한 말그대로 콜백! CallBack > 반대로
+부른다고 해석할 수 있지요. 우리는 작성하는 일반 코드내에서 보통 API나 SDK에서 제공해주는
+함수(Function)들을 호출(Call)하여 사용하곤 한다. 이런 방식의 경우, 어떤 이벤트를 제어하기 위해서는
+별도의 쓰레드를 생성하여 무한루프로 실시간 검사하는 꽤나 무겁고 살짝 무식한 프로그램들을
+만들어야한다.
+
+보통 이럴때, 사용하는 것이 콜백(CallBack) 함수. 물론 시스템상 CallBack함수를 만들어 등록하는 방식이
+제공되어야 한다. Windows 프로그램상에서 On??Event()를 통해 등록하는 방식이나, 안드로이드 상에서
+Listener를 등록하는 방식이 이와 같다. 콜백함수라는 말 그대로 일반 Call의 반대 방향을 말한다.
+통상적으로 쓰듯이 우리가 시스템상의 함수를 Call하는 것이 아니라, 시스템에서 우리가 만들고 등록한
+함수를 Call하는 방식.
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/js-function
+2. [shinlucky's Archive](http://shinluckyarchive.tistory.com/479)

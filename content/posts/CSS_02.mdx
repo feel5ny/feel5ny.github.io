@@ -1,0 +1,233 @@
+---
+title: "한글은 노토산스, 영문/숫자는 다른 폰트로 해주세요...\U0001F440 (feat. unicode)"
+date: '2019-09-09'
+description: >-
+  노토 산스를 사용하다보면 영문과 숫자가 너무 날씬하다는 느낌을 받곤 했다.  개인적인 취향으로 1 숫자
+  아랫부분에 있는 serif를 별로 좋아하지 않는다. 그밖에도 숫자에 볼륨감이 없어서 한글의 깔끔함에
+  비해서 영문과 숫자에 아쉬움들이 있곤했다. 글자간 커링도 작고,...
+author: Joy Kim
+tags:
+  - css
+  - unicode
+  - font
+categories:
+  - 01_Web
+  - 03. CSS
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. CSS문(CSS statement)과 @규칙 (At-rule), 그리고 @font-face",
+        "id": "at-rule"
+      }
+    },
+    {
+      "title": {
+        "name": "2. @font-face의 unicode-range 사용하기",
+        "id": "unicode-range"
+      }
+    },
+    {
+      "title": {
+        "name": "3. 실제 @font-face에서 적용하는 방법",
+        "id": "font-face"
+      }
+    }
+  ]
+thumbnail: /images/2019/27/thumb_default.jpg
+---
+
+[노토 산스](https://fonts.google.com/specimen/Noto+Sans+KR)를 사용하다보면 영문과 숫자가 너무
+날씬하다는 느낌을 받곤 했다. 개인적인 취향으로 **1** 숫자 아랫부분에 있는 serif를 별로 좋아하지
+않는다.
+
+<img src="/images/2019/27/01.jpg" />
+
+그밖에도 **숫자에 볼륨감이 없어서** 한글의 깔끔함에 비해서 영문과 숫자에 아쉬움들이 있곤했다. 글자간
+커링도 작고, 카운터(속공간)도 작은 듯하고..
+
+<img src="/images/2019/27/02.jpg" />
+
+그래도 점점 노토산스를 자주 애용하고 보다보니, 그냥 저냥 적응하고 있었는데, 회사 프로젝트에서 요
+노토산스에 대해서 디자인 요청이 왔다.
+
+> 한글은 노토산스로, 영문과 숫자, 특수문자는 오픈산스로 적용해주세요! (여기서 특수문자는 키보드서
+> shift와 함께 사용가능한 특수문자들)
+
+듣던 중에 반가운 소리였다.(😘) 노토산스에 대해 개인적인 취향?을 해소해주는 디자인 요청이었기 때문에.
+그나저나 이걸 어떻게 적용할지는 고민이었다. 일일이 적용하는건 절대 말이 안된다고 생각했고, 다른
+방법이 있을거라고 생각해보며 이리저리 서칭을 해보았다. 이 포스팅에서는 **어떤 원리로 font가
+분리되어서 적용되는지**에 대해서 설명하려고 한다.
+
+---
+
+1. 글자 적용시 필요한 css의 `@font-face`에 대해서 알아보며, 크게는 `@font-face`를 포함하고 있는
+   at-rule의 개념과 css문의 개념을 가볍게 살펴본다. 바로 방법을 알고싶은 분들은 해당 단락은
+   넘어가도된다.
+2. `@font-face`에서 제공해주는 `unicode range`에 대해서 살펴본다.
+3. 실제 `@font-face`에서 적용하는 방법을 알아본다.
+
+---
+
+<a name="at-rule" />
+
+# 1. CSS문(CSS statement)과 @규칙 (At-rule), 그리고 `@font-face`
+
+우리가 보통 사용하는 규칙집합(선택자-선언 블록 쌍)은 큰 규칙집합 목록만으로 구성된 스타일 시트의
+주요 구성 블록이다.
+
+```
+p {
+  font-size: 10px
+}
+```
+
+- 하지만 위 규칙집합들 이외에도 웹 개발자가 스타일 시트에서 전하고 싶은 다른 정보가 있을 수 있다.
+- 문자 집합, import하려는 다른 외부 스타일 시트, font-face 또는 그밖의 다른 정보들과 같은.
+- 위 정보들을 css에 담기 위해서는 특정 종류의 statement을 사용해야 한다.
+
+## 1.1 CSS문 (CSS statement)
+
+**statement**(문)은 비공백 문자로 시작하여 첫 번째 닫는 중괄호 또는 세미콜론 (문자열 외에,
+이스케이프되지 않고 다른 `{}`, `()` 및 `[]` 쌍에 포함되지 않는) 으로 끝나는 구성 블록이다.
+
+<img src="/images/2019/27/03.png" />
+
+다음과 같은 다른 종류의 문이 있다
+
+### 1.1.1 **규칙집합** Rulesets
+
+- 위 그림 것처럼, CSS 선언의 컬렉션과 선택자에 의해 기술된 조건을 연결짓는 규칙집합 (또는 규칙).
+- 우리가 흔히 사용하는.
+
+### 1.1.2 **At-Rule**
+
+`@` (`U+0040 COMMERCIAL AT`)로 시작한 다음 statement의 마지막, 즉 블록 다음에는 세미콜론(`;`)이
+오며, 또는 다음 블록의 끝까지 계속 식별자가 뒤따른다.
+
+1. 식별자에 의해 정의된 각 유형의 **at-rule**은, 자체 내부 구문 및 의미(semantics)가 있을 수 있다.
+
+- **메타 데이터** 정보(`@charset` 또는 `@import` 같은),
+- **조건부** 정보(`@media` 또는 `@document` 같은)
+- 또는 **설명** 정보(`@font-face` 같은)를 전달하는 데 사용된다.
+
+2. 중첩 문(nested statements)
+
+- 이들은 **at-rule**, 조건부 그룹 규칙의 **특정 부분집합**에서 사용될 수 있는 문이다.
+- 이러한 문은 오직 특정 조건이 일치되면 적용한다.
+  - at-rule의 `@media`는 브라우저가 돌아가는 장치가 표현된 조건과 일치하는 경우에만 적용된다.
+    - 미디어 쿼리에 정의된 조건과 연결합니다.
+  - at-rule의 `@document`는 현재 페이지가 일부 조건과 일치하는 경우에만 적용된다. (아직 실험)
+    ```css
+    @document url("https://www.example.com/")
+    {
+      h1 {
+        color: green;
+      }
+    }
+    ```
+
+## 1.2 `@font-face`
+
+- at-rule의 `@font-face` CSS는 텍스트를 표시할 **사용자 정의 글꼴을 지정한다.**
+- 이 글꼴은 원격 서버 또는 사용자 자신의 컴퓨터에 로컬로 설치된 글꼴에서 로드할 수 있다.
+  - 사용자의 컴퓨터에서 찾을 글꼴 이름을 지정하고 사용자 에이전트가 일치 항목을 찾으면 로컬 글꼴이
+    사용된다.
+  - 그렇지 않으면 `url()` 함수를 사용하여 지정한 글꼴 리소스를 다운로드하여 사용한다.
+- `@font-face`는 폰트 제작자들이 자신의 글꼴을 제공할 수 있게 함으로써 "웹 세이프" 글꼴 (즉,
+  보편적화된 흔한 웹 글꼴)에 국한되지 않고 콘텐츠를 디자인할 수 있게 한다.
+- 찾고 사용할 로컬로 설치된 글꼴의 이름을 지정할 수 있기 때문에 인터넷 연결에 의존하지 않고 글꼴을
+  기본 이상의 사용자 지정할 수 있다.
+- `url()`과 `local()`을 함께 사용하는 것이 일반적이어서, 사용자가 설치한 폰트의 사본이 사용 가능한
+  경우 사용되어, 사용자의 기기에서 찾을 수 없는 경우 폰트의 사본을 다운로드하는 것으로 되돌아간다.
+
+<a name="unicode-range" />
+
+# 2. `@font-face`의 속성중 `unicode-range` 사용하기
+
+우리는 **css에 정의된 글꼴정보가 글자에 적용될 시점에, 특정 문자는 필터하면서 적용되길** 바라고
+있다.
+
+- **글자에 글꼴의 정의**하는 부분은 css의 @font-face 블락 내부에서 선언되어야할 것이고,
+- **특정 문자를 필터**하기 위해서는 범위를 지정하는 부분이 필요하 것이다.
+
+## 2.1 `unicode-range` 속성
+
+`@font-face`의 속성 중에는 `unicode-range`라는 속성이 존재한다. 해당 속성은 글꼴에서 사용될 유니
+코드 코드 포인트의 범위를 지정할 수 있다. 우리는 `unicode-range`를 사용하여 숫자와 영문, 특수문자의
+범위를 알아내고, 해당 범위에 폰트를 지정할 것이다.
+
+## 2.2 `unicode`와 범위
+
+### 유니코드
+
+- 유니코드(Unicode)는 전 세계의 모든 문자를 컴퓨터에서 일관되게 표현하고 다룰 수 있도록 설계된 산업
+  표준이며, 유니코드 협회(Unicode Consortium)가 제정한다.
+- 유니코드의 목적은 현존하는 문자 인코딩 방법들을 모두 유니코드로 교체하려는 것이다. 기존의
+  인코딩들은 그 규모나 범위 면에서 한정되어 있고, 다국어 환경에서는 서로 호환되지 않는 문제점이
+  있었다.
+
+### 문자별 범위
+
+- 유니코드에는 30가지 이상의 목차가 있다.
+  [목차](https://en.wikipedia.org/wiki/List_of_Unicode_characters)
+- 우리는 **숫자**와 **영문**, 키보드로 입력가능한 **특수문자**에만 적용할 에정이므로,
+  **[Basic Latin](https://en.wikipedia.org/wiki/List_of_Unicode_characters#Basic_Latin)**만
+  확인하면된다.
+
+```
+1. 특수문자 범위: U+0020-002F, U+003A-0040, U+005B-0060, U+007B-007E
+2. 영문 범위: U+0041-005A(대문자), U+0061-007A(소문자)
+3. 숫자 범위: U+0030-0039
+
+전체 U+0020-007E
+```
+
+---
+
+<a name="font-face" />
+
+# 3. 실제 @font-face에서 적용하는 방법
+
+- 실제 css의 `font-family`에 사용할 때에는 다르게 적용하고 싶은 문자마다 css를 적용하는 것이 아니다.
+- 우리는 **noto-sans**를 전체 적용했지만, 특정 문자만 **open-sans**를 사용하고 싶은 상황이기 때문에,
+  `font-family`에 따로 **Open-sans** 명시 없이 그대로 **Noto-sans**가 명시된 상태에서 내부적으로
+  적용시점에만 따로 적용되게 하면 된다.
+- 이를 위해서는 같은 이름의 `font-family`를 갖는 두개의 `@font-face`가 필요하다.
+  - 하나의 `@font-face`에는 `unicode-range`없이 전체 적용할 **noto-sans**를 연결하고
+  - 다른 `@font-face`에는 `unicode-range`를 정의하고 해당 범위에만 적용할 **open-sans**를 연결한다.
+
+```css
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('../fonts/notoSansKR/NotoSans-Bold.woff') format('woff');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('../fonts/openSans/OpenSans-SemiBold.woff') format('woff');
+  unicode-range: U+0020-007E;
+  font-style: normal;
+}
+```
+
+<iframe
+  src="https://codesandbox.io/embed/cssfont-faceunicode-range-12k1k?fontsize=14"
+  title="css_@font-face_unicode-range"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+---
+
+---
+
+**참고자료**
+
+1. [at-rule mdn](https://developer.mozilla.org/ko/docs/Web/CSS/At-rule)
+1. [font-face mdn](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face)
+1. [css statement mdn](https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax#CSS_statements)
+1. [유니코드 목차](https://en.wikipedia.org/wiki/List_of_Unicode_characters)

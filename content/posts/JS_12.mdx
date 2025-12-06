@@ -1,0 +1,306 @@
+---
+title: 12/ File Api와 이미지 용량 줄이기
+date: '2018-05-28'
+description: >-
+  오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다.
+  로컬에서 이미지 파일을 올리는 것부터 시작하죠. 이를 위해서는 HTML5관련 API 중 하나인 파일 API를
+  이용하고, 이미지 리사이징을 위해서 캔버스를 이용할 것입니다....
+author: Joy Kim
+tags:
+  - javaScript
+  - File API
+  - canvas
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+thumbnail: /images/2018/12/thumb_default.jpg
+---
+
+<img src="/images/2018/12/3.jpg" />
+
+오늘은 이미지 용량을 줄이는, (리사이징이 더 맞는 말이겠죠.) 방법에 대해서 알아보려고 합니다.
+로컬에서 이미지 파일을 올리는 것부터 시작하죠. 이를 위해서는 HTML5관련 API 중 하나인 **파일 API**를
+이용하고, 이미지 리사이징을 위해서 **캔버스**를 이용할 것입니다. 파일API를 다뤄보고 Blob에 대해서도
+알아보죠..(Blob의 더 자세한 내용을 위해 포스팅을 따로 해야 할 것 같습니다.) ( + 제이커리
+사용했습니다.)
+
+<img src="/images/2018/12/04.jpg" />
+
+보통 웹에서 글을 게시할 때 이미지를 첨부해야 하는 기능이 있죠. 이미지 업로드시 용량 축소가
+기본적으로 들어가야 하고, 이는 프론트단에서 작업해주는게 보통입니다! 유저들이 보통 올리는 이미지는
+스마트폰 사진이 일반적일 텐데, 요즘 스마트폰 카메라 성능이 좋아지면서 많게는 개당 8MB까지 나오는
+경우도 있죠. 서버단에서 리사이징할 경우 비용이 아깝게 들기 때문에.. 클라이언트에서 이를 작업합니다.
+전체 플로우는 이렇습니다.
+
+1. File API를 이용하여 이미지 파일 접근 (FileReader)
+2. img 엘리먼트 생성, dataUrl 삽입
+3. canvas 생성, img를 다시 리사이징하여 drawing
+4. canvas의 dataURL를 이용하여 Blob 객체 생성
+5. 전송
+
+---
+
+## 1. File API, FileReader
+
+input의 `type=file`를 이용해서 이미지 파일에 접근, file 객체들을 files 컬렉션에 담습니다. 각 객체가
+파일 하나를 나타냅니다.(Blob) 파일 객체에는 여러가지 읽기 전용 프로퍼티가 존재합니다.
+
+- name: 로컬 시스템의 파일 이름
+- size: 바이트 단위인 파일 크기
+- type: 파일의 망미 타입을 나타내는 문자열 (ex\_ "image/png")
+- lastModifiedDate: 파일이 마지막으로 수정된 시점을 나타내는 문자열입니다. 이 프로퍼티는 크롬에만
+  구현되어있습니다.
+
+<img src="/images/2018/12/01.png" />
+
+파일 API는 FileReader 타입을 통해 파일 데이터를 읽을 수 있습니다.
+
+### 1-1. FileReader 타입
+
+FileReader 타입은 비동기적으로 파일을 읽는 메커니즘입니다. 서버에서 파일을 읽는 것이 아닌, 파일
+시스템에서 파일을 읽는 것이라고 이해하자. FileReader 타입에는 파일 데이터를 읽는 여러 가지 메서드가
+존재합니다.
+
+- readAsText(file, encoding) : 파일을 평범한 텍스트로 읽고 그 텍스트를 result 프로퍼티에 저장한다.
+  두 번째 매개변수는 옵션.
+- readAsDataURL(file) : 파일을 읽은 다음 이를 표현하는 데이터 URI를 result 프로퍼티에 저장.
+- readAsBinaryString(file) : 파일을 읽은 다음 각 문자가 1바이트를 나타내는 문자열을 result
+  프로퍼티에 저장.
+- readAsArrayBuffer(file) : 파일을 읽은 다음 파일 콘텐츠를 포함하는 ArrayBuffer를 result 프로퍼티에
+  저장.
+
+읽는 과정은 **비동기**적이므로 FileReader는 **progress, error, load** 이벤트를 일으킵니다.
+
+- progress : 읽어올 데이터가 더 있을 때
+  - 50밀리 초마다 발생, lengthComputable, loaded, total 같은 정보를 제공한다.
+  - **loaded / total = 버퍼링**
+- error : 에러 생겼을 때
+  - `1` : 파일을 찾을 수 없음
+  - `2` : 보안 에러
+  - `3` : 읽기 거부
+  - `4` : 파일을 읽을 수 없음
+  - `5` : 인코딩 에러
+- load : 파일을 완전히 읽었을 때
+
+**load 이후에는 readAsDataURL 메서드를 통해 result 프로퍼티에 데이터 URI가 저장되도록 해야 합니다.**
+
+```html
+<!-- html 🚀🚀 -->
+
+<div class="upload-wrapper">
+  <label for="upload" class="upload-label">
+    <p>✨UPLOAD IMAGE ✨</p>
+    <img
+      class="upload-imgBtn"
+      src="https://uploads.codesandbox.io/uploads/user/1dcc6c5f-ac13-4c27-b2e3-32ade1d213e9/2Go1-photo.svg"
+    />
+  </label>
+</div>
+<!-- fileReader를 통해 읽은 파일을 넣는 부분 -->
+<div class="image-preview"></div>
+<input
+  type="file"
+  accept="image/*"
+  id="upload"
+  class="image-upload"
+  style="display:none;"
+  multiple
+/>
+```
+
+- input type="file" 태그에 onchange 이벤트를 걸어둡니다.
+
+```js
+const load_image = e => {
+  const files = e.target.files;
+  const filesArr = Array.prototype.slice.call(files);
+  // 여러장의 이미지를 불러올 경우, 배열화
+
+  filesArr.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+        // 뭔가 썸팅 할 것을 넣습니다.
+      };
+    };
+    reader.readAsDataURL(file); ✨✨
+  });
+};
+
+$(".image-upload").on("change", e => load_image(e));
+```
+
+---
+
+## 2. img 엘리먼트 생성, dataUrl 삽입
+
+이미지는 용량에 따라 로드 속도가 다릅니다. 웹은 이미지에 대해서 비동기적으로 동작하는데 완전히
+로드될 때까지 기다리지 않고 웹 페이지를 일단 표시한 후 **이미지는 따로 읽습니다.** 때문에 이미지를
+읽은 직후 바로 출력하면 제대로 동작하지 않습니다. filereader를 통해서 파일을 읽은 이후 이미지
+리사이징을 하려고 했지만, 이미지가 아직 로드되지 않았는데 리사이징하면 당연히 canvas의 이미지는
+존재하지 않겠죠?
+
+image가 읽혀진 후에 리사이징이 이루어지도록 하기 위해서 filereader와 마찬가지로 load 콜백 내부에
+리사이징 함수를 넣어둘 것입니다. load 이벤트를 사용하기 위해 Image 인스턴스를 생성합니다.
+reader.onload의 콜백 내부에 image 인스턴스를 생성하고, image가 읽을 수 있는 형태가 되면
+image.onload가 발생되도록 합니다. (자세한건 코드..!)
+
+```js
+const load_image = e => {
+  const files = e.target.files;
+  const filesArr = Array.prototype.slice.call(files);
+  // 여러장의 이미지를 불러올 경우, 배열화
+
+  filesArr.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+        const image = new Image();
+        image.className = "img-item"; // 스타일 적용을 위해
+        image.src = e.target.result;
+        image.onload = imageEvent => {
+          // 이미지가 로드가 되면! 리사이즈 함수가 실행되도록 합니다.
+          resize_image(image);
+      };
+    };
+    reader.readAsDataURL(file); ✨✨
+  });
+};
+
+$(".image-upload").on("change", e => load_image(e));
+```
+
+---
+
+## 3. canvas 생성, img를 다시 리사이징하여 drawing
+
+resize_image 함수에 인자로 앞서 생성한 image 요소를 넘겨받게 했습니다. 리사이징을 위해서 캔버스
+엘리먼트를 생성한 후, 캔버스에 2d 컨텍스트의 image를 리사이징된 폭과 높이로 그릴 것입니다.
+
+0. 캔버스 엘리먼트를 생성.
+1. 해당 image의 높이와 폭을 측정한 후,
+2. 원하는 최대 사이즈의 크기보다 높이가 클 경우 리사이징할 비율을 폭에 곱하고, 반대의 경우 반대로
+   적용합니다. ( 폭이 클 경우 비율을 높에 곱한다. )
+3. 리사이징된 폭과 높이를 canvas의 높이와 폭이 할당한 후
+4. drawing 합니다. canvas의 drawImage() 사용합니다. 매개변수로는 이미지/ 원본의 x y 좌표 / 너비와
+   높이 / 컨텍스트의 x y 좌표 / 컨텍스트 너비/ 높이
+5. canvas의 dataURL을 toDataURL 메서드를 이용하여 구합니다. toDataURL 메서드에 이미지 마임 타입을
+   매개변수로 전달하여 data URI를 받습니다.
+
+- getContext()는 브라우저 별로 지원 범위가 있습니다.
+
+```js
+const resize_image = image => {
+  let canvas = document.createElement('canvas'),
+    max_size = 1280,
+    // 최대 기준을 1280으로 잡음.
+    width = image.width,
+    height = image.height;
+
+  if (width > height) {
+    // 가로가 길 경우
+    if (width > max_size) {
+      height *= max_size / width;
+      width = max_size;
+    }
+  } else {
+    // 세로가 길 경우
+    if (height > max_size) {
+      width *= max_size / height;
+      height = max_size;
+    }
+  }
+  canvas.width = width;
+  canvas.height = height;
+  canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+  const dataUrl = canvas.toDataURL('image/jpeg');
+  // 미리보기 위해서 마크업 추가.
+  $('.image-preview').append('<img src="' + dataUrl + '" class="img-item">');
+};
+```
+
+---
+
+## 4. canvas의 dataURL를 이용하여 Blob 객체 생성
+
+Data URIs는 네 가지 파트로 구성됩니다 `data:[<mediatype>][;base64],<data>`
+
+1. 접두사(data:)
+2. 데이터의 타입을 가리키는 MIME 타입
+3. 텍스트가 아닌 경우 사용될 부가적인 base64 토큰 그리고 데이터 자체
+
+> **Base64** 바이너리 데이터를 문자 코드에 영향을 받지 않는 공통 ASCII 문자로 표현하기 위해 만들어진
+> 인코딩이다. 네이버 지식iN 등의 URL에서 자주 볼 수 있는 형태의 바로 그것. ASCII 문자 하나가
+> **64진법의 숫자 하나를 의미**하기 때문에 BASE64라는 이름을 가졌다.
+
+---
+
+> **Blob** Blob은 일련의 데이터를 처리하거나 간접 참조하는 객체다. Blob이란 이름은 SQL
+> 데이터베이스에서 유래하였으며 '대형 이진 객체(Binary Large Object)'를 의미한다. 자바스크립트에서
+> Blob은 흔히 이진 데이터를 나타내며 해당 데이터의 크기가 매우 클 수 있지만, 두 가지 특징 모두
+> 강제된 사항은 아니다. 즉, 작은 텍스트 파일의 내용도 Blob으로 나타낼 수 있다. Blob은 대개 바이트의
+> 크기를 알아내거나, 해당 MIME 타입이 무엇인지 요청하며, 데이터를 작은 Blob으로 잘게 나누는 등의
+> 작업에 사용된다. **즉, 데이터 자체라기보다는 데이터를 간접적으로 접근하기 위한 객체인 것이다.**
+
+> **Blob.size** Blob 객체에 포함된 데이터의 **바이트** 단위의 사이즈를 의미한다. **Blob.type**
+> Blob에 포함된 데이터의 MIME 타입을 의미한다. 만약 unknown으로 나올 경우, 이 문자열은 비어있는
+> 것이다.
+
+```js
+const dataURLToBlob = dataURL => {
+  const BASE64_MARKER = ';base64,';
+
+  // base64로 인코딩 되어있지 않을 경우
+  if (dataURL.indexOf(BASE64_MARKER) === -1) {
+    const parts = dataURL.split(',');
+    const contentType = parts[0].split(':')[1];
+    const raw = parts[1];
+    return new Blob([raw], {
+      type: contentType,
+    });
+  }
+  // base64로 인코딩 된 이진데이터일 경우
+  const parts = dataURL.split(BASE64_MARKER);
+  const contentType = parts[0].split(':')[1];
+  const raw = window.atob(parts[1]);
+  // atob()는 Base64를 디코딩하는 메서드
+  const rawLength = raw.length;
+  // 부호 없는 1byte 정수 배열을 생성
+  const uInt8Array = new Uint8Array(rawLength); // 길이만 지정된 배열
+  let i = 0;
+  while (i < rawLength) {
+    uInt8Array[i] = raw.charCodeAt(i);
+    i++;
+  }
+  return new Blob([uInt8Array], {
+    type: contentType,
+  });
+};
+```
+
+<img src="/images/2018/12/02.png" />
+
+---
+
+## 5. 전송
+
+ajax로 보낼 경우 FormData 생성후 최종 생성한 Blob 객체를 추가하면 됩니다.
+
+<iframe
+  src="https://codesandbox.io/embed/9jvp2o30zo"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
+
+---
+
+### 참고링크
+
+1. http://mohwa.github.io/blog/javaScript/2015/08/31/binary-inJS/
+2. http://www.soen.kr/html5/html3/3-1-3.htm
+3. 프론트엔드개발자를 위한 자바스크립트 - File API
+4. https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
+5. https://namu.wiki/w/BASE64
+6. https://developer.mozilla.org/ko/docs/Web/API/Blob
+7. https://firejune.com/1787/HTML5+ArrayBuffer+API+%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0
+   (ArrayBuffer - 추후 더 공부하기)
+8. http://iamawebdeveloper.tistory.com/106 [나는 웹개발자!]

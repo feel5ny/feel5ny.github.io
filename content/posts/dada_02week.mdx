@@ -1,0 +1,207 @@
+---
+title: '08 days/ 협업규칙 정하기, 초기 셋팅, 퍼블리싱'
+date: '2017-11-24'
+description: >-
+  -------- Daily scrum(김나영) +  Github + --------- 목차 (2017.10.01 ~ 2017.10.09) 1. 프로젝트
+  매니징을 위한 셋팅   - 깃헙 셋팅   - 깃헙 프로젝트 탭으로 매니징   - 테스크 관련 규칙 정하기 2.
+  프로젝...
+author: Joy Kim
+tags:
+  - react
+  - publishing
+categories:
+  - "Personal \U0001F646"
+  - Retrospective
+enableComment: true
+thumbnail: /images/post_img/06/thumb_default.jpg
+---
+
+---
+
+Daily scrum(김나영)
+[+](https://docs.google.com/spreadsheets/d/e/2PACX-1vR57PrRMvXjFa1sHCtLX-ifjMt8VEoiPuzKa0ErH-h787p4MqxssYJKt7QaYCReGVIaJEu_HgpMBGRC/pubhtml)
+Github [+](https://github.com/huusz/Da-Da)
+
+---
+
+목차 (2017.10.01 ~ 2017.10.09)
+
+1. [프로젝트 매니징을 위한 셋팅](#managing)
+
+- 깃헙 셋팅
+- 깃헙 프로젝트 탭으로 매니징
+- 테스크 관련 규칙 정하기
+
+2. [프로젝트 초기 셋팅](#init)
+
+- 의존모듈 셋팅
+- 3.  CSS 프레임워크 선택
+- 3.  CSS styling 방법
+
+3. [퍼블리싱 &#128153;](#publishing) (feat.추석)
+
+---
+
+## <a name="managing" ></a> 1. 프로젝트 매니징을 위한 셋팅
+
+### 깃헙 셋팅
+
+- 깃헙 레포에는 백엔드, 프론트엔드 폴더를 초반에 나누어서 진행하였다.
+  - <span style="color:white">**troubleShoot**</span>
+    위험 상황을 피하는 차원에서 백엔드와 프론트엔드는 레포를 따로 생성하는게 좋다고 하셨음.
+- 처음 시작 시에는 master브랜치에서 브랜치를 각자 생성하여 진행, 풀리케스트 없이 바로 바로 merge하며
+  진행. (지금 생각하니 헉;)
+- 퍼블리싱 이후에는 master는 절대적으로 배포용으로만 사용하기로 정함. (브랜치 rock 설정)
+- develop-backend, develop-frontend 브랜치를 main브랜치로 정함.
+- 퍼블리싱 단계에서는 `각자 이름-페이지이름`으로 브랜치를 생성하기로 정하였다.
+
+<img src = "/images/post_img/06/01.png" />
+> 퍼블리싱 끝나고 merge 후
+
+- <span style="color:white">**troubleShoot**</span>
+  위의 이미지는 1주일만에 merge한 상황. merge는 자주자주 하는게 좋다.
+
+---
+
+### 깃헙 프로젝트 탭
+
+<img src="/images/post_img/06/02.png" />
+프로젝트 탭은 총 5가지로 구성하였다. 1. 규칙 2. 할 일 3. 진행 중인 작업 4. 마친 작업
+
+규칙의 경우 예전에 참여했던 프로젝트의 규칙을 light하게 가져왔다.
+
+<img src="/images/post_img/06/03.png" />
+
+규칙은 아래와 같이 가볍게 정했다!
+
+1. 급한 이슈의 경우 라벨 붙이기
+2. 카드당 assign 필수
+3. 작성 규칙
+
+- [페이지명] 작업 설명
+  - EX. [Diary] 식단 추가 작업
+- 페이지가 구분 되지 않는 경우는 [Global]로 한다.
+  - EX. [Global] 페이지 라우팅
+
+4. 카드 하나당 1개의 작업만 등록한다.
+
+- 테스크의 경우 매주 진행했던 오프라인 회의 때 코드리뷰 이후 할일 카드를 같이 생성하기로 정했다.
+
+---
+
+<span style="color:white">**Tip**</span>- 깃헙 프로젝트에서 카드를 이슈로 만들면, 이슈탭에도 자동
+등록 가능하다. - 해당 이슈의 커밋이 진행 될 경우, 커밋 메세지에 이슈 number와 명령어를 추가하면
+이슈가 자동으로 close나 등등의 작업이 자동화되면서, 이슈에도 log가 남는다. - Close: `close`,
+`closes`, `closed`, `fix`, `fixes`, `fixed`, `resolve`, `resolves`, `resolved` - Reopen: `reopen`,
+`reopens`, `reopened`
+
+<span style="color:white">**Issue**</span>- slack notation을 걸어놓지 않아서 이메일로 확인해야했다.
+- 카드를 close로 옮겨야하는 번거로움이 있었다. (지라같은 툴은 옮기지 이슈가 닫히면 자동으로 옮기짐)
+
+---
+
+---
+
+## <a name="init" ></a> 2. 프로젝트 초기 셋팅
+
+### 1. create-react-app
+
+---
+
+### 2. 폴더 구조 셋팅
+
+`components/` global하게 사용되는 container 컴포넌트 `pages/` container component와 presentational
+component를 함께 두었다.
+
+---
+
+### 3. CSS 프레임워크 선택 [+](https://www.vobour.com/book/view/LCETueEN7i3MjvEcz)
+
+**Semantic-UI-React** 서비스 컨셉과 유사한 디자인을 갖고 있고 여러 종류의 컴포넌트들이 있어서 사용.
+
+---
+
+### 4. css styling 방법
+
+#### 4-1. 첫번째 이슈\_디자인 커스텀
+
+- 시맨틱 프레임워크를 사용해도, 디자인 시안이 있었기 때문에 약간의 커스텀이 필요했다.
+- 이미 셋팅되어있는 컴포넌트를 커스텀을 해야했기 때문에 css로는 적용이 불가능했다. 인라인으로
+  적용해야 덮어씌어졌음.
+- `!important`로 되어있는 css를 제외하고는 inline 형식으로 작성하기로 결정
+
+#### 4-2. 두번째 이슈\_스타일드 컴포넌트? 인라인 스타일
+
+핫한 스타일드 컴포넌트를 쓸까 인라인 스타일로 작업을 할까 고민했었다. 지금 생각해보면 과감하게
+쓸껄...이라고 생각이 든다. 러닝커브가 있을 듯 하여 `인라인 스타일`로 작업하게 되었다.
+
+<span style="color:white">**Issue**</span>
+인라인스타일로 작업하다보니 `:hover`, `:before`, `:after`과 같은 셀렉터를 사용하지 못했고, css를
+부분 부분 섞어 쓰게 되었다. 스타일드 컴포넌트는 이를 해결해주는데.. 그냥 쓸껄!
+
+<img src="/images/post_img/06/04.png" width="150px" />
+
+---
+
+### 5. 의존모듈 셋팅
+
+디자인 시안을 보면, 필요한 서드파티는
+
+1. 일기탭의 에디터
+2. 그래프 차트
+
+---
+
+#### 5-1. 일기탭 에디터
+
+- 개인적으로 [summernote](https://summernote.org/)를 좋아하는데, 리액트 친화적이지 않아서 포기
+- 리액트 친화적인 모듈을 찾다가 페이스북에서 만든 [draft.js](https://draftjs.org/)를 사용하기로
+  결정.
+- 나중에 설명하겠지만, 에디터는 post로 보내기 전에 html 형식으로 export했어야 했고, 이 부분에서 많은
+  난관에 봉착했었다.
+  - `draft-js-export-html`로 해결
+
+---
+
+#### 5-2. 그래프 차트
+
+- react d3를 사용하려고 했으나, 디자인 시안과 비슷하지 않다는 점, 커스텀이 어려운 점이 있었다.
+- 두번째 찾은 차트는 Uber에서 나온 [`react-vis`](https://uber.github.io/react-vis/) 리액트 친화적.
+- 세번째 찾은 차트는 [**rechart**](https://github.com/recharts/recharts)
+  - react와 d3로 만들어졌고, UI가 서비스 컨셉과 잘 어울려서 선택하게 됨.
+- 이또한 나중에 설명하겠지만, 그래프에 데이터를 넣는 구조와 서버에서 날라오는 데이터 구조가 많이
+  달랐기 때문에 프론트에서 다시 셋팅하는 작업이 필요했음.
+
+---
+
+---
+
+## <a name="publishing" ></a> 3. 퍼블리싱 &#128153;
+
+프론트엔드는 2명이었다. 각자 하고싶은 페이지를 맡아서 진행했다. 퍼블리싱은 항상 즐겁다! &#128582;
+퍼블리싱하면서 발생한 이슈만 정리하겠다.
+
+### + 간단 라우팅 작업
+
+- `react-router-dom` 의존모듈
+- 주 사용 API
+  - 1.  BrowserRouter
+  - Route
+  - Link
+  - Switch (로그인 이후 바꾸주는 역할, 404페이지 라우팅)
+  - withRouter (중첩 라우팅할 때 사용)
+- `App.js`에 셋팅
+
+- path
+  - `/`
+  - `/diary`
+    - tab용 router파일 따로 셋팅
+    - `/diary/food`
+    - `/diary/fitness`
+    - `/diary/review`
+  - `/report`
+  - `/weight`
+  - `/search/:sc`
+  - `/recipe/:id`
+
+---

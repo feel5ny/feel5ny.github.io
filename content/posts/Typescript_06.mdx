@@ -1,0 +1,357 @@
+---
+title: 5/ interface
+date: '2017-11-21'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. TL;DR inteface에 대해서 배웁니다. interface 내부에서 타입선언
+  후 변수에서 사용하며, 함수에서는 implement...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. interface 기초",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. interface optional property",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "2.1 optional property",
+          "id": "2-1"
+        },
+        {
+          "name": "2.2 indexable type",
+          "id": "2-2"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. function in interface",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. implements interface",
+        "id": "4"
+      }
+    },
+    {
+      "title": {
+        "name": "5. extends interface",
+        "id": "5"
+      }
+    },
+    {
+      "title": {
+        "name": "6. function interface",
+        "id": "6"
+      }
+    }
+  ]
+thumbnail: /images/post_img/18/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-14)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**TL;DR** inteface에 대해서 배웁니다. interface 내부에서 타입선언 후 변수에서 사용하며, 함수에서는
+`implements` 키워드를 사용하여 interface를 상속받아 사용합니다. property를 `?`를 사용하여 옵셔널하게
+사용가능하며(안써도 되는 프로퍼티를 명시할 수 있음) interface 끼리 상속이 가능합니다. interface
+자체를 함수화하여 사용가능하며, 내부에서는 출력값과 입력값의 타입을 명시합니다. indexable type으로도
+옵셔널한 프로퍼티를 만들 수 있습니다.
+
+---
+
+### <a name="1" ></a> 1. interface 기초
+
+```ts
+const person: { name: string; age: number } = {
+  name: 'Mark',
+  age: 32,
+};
+// person이라는 오브젝트를 설명하고 있는 타입은 리터럴 타입인데,매번 리터럴방식으로 타입을 선언할것인가?
+// 아니오..  > interface로 부르자.
+```
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+const person: Person = {
+  name: 'Mark',
+  age: 32,
+};
+// interface는 컴파일 이후에는 나타나지 않는다.
+```
+
+- 타입을 미리 interface에서 명시 한 후에 해당 interface를 넣어서 타입을 명시한다.
+
+```ts
+function hello(입력값:입력값타입): 출력타입 {
+  ~
+}
+
+const hello = (p:Person): void => {
+  console.log(p.name)
+}
+```
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+// 입력과 출력을 정확히 명시하지 않으면,
+// 추론을 하게 되는데 이는 문제가 될 수 있다.
+function hello(p: Person): void {
+  console.log(`안녕하세요. ${p.name} 입니다.`);
+}
+```
+
+---
+
+### <a name="2" ></a> 2. interface optional property
+
+#### 2-1. 있어도 되고 없어도 되는 proerty를 설정 할 수 있다.
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+const person: Person = {
+  name: 'Mark',
+  // age를 정의하지 않았기 때문에 person에 빨간줄이 생긴다.
+};
+```
+
+```ts
+interface Person {
+  age?: number; // <= age 뒤에 ?를 붙이면 된다.
+}
+```
+
+```ts
+interface Person {
+  name: string;
+  age?: number; // 옵셔널한 프로퍼티 주는 방법
+}
+
+const person: Person = {
+  name: 'Mark',
+  // age는 optional한 property이기 때문에 없어도 오류가 나지 않는다.
+};
+```
+
+#### <a name="2-2" ></a> 2-2. indexable type
+
+indexable type으로 optional한 타입을 사용 가능하다.
+
+```ts
+// 1. array같은 타입이고
+// 2. 사전같은 타입이다.
+interface Person {
+  name: string;
+  [index: string]: string;
+  // person의 property명으로 인덱스가 어떤 타입이었는지에 따라서
+  // property.string 형태의 어떤 indexable type이 들어가면 나머지는 다 string으로 표현할 수 있다.
+  // 사전같은 의미이다.
+}
+
+const person: Person = {
+  name: 'Clara',
+};
+
+person.anybody = 'Clara';
+person[1] = 'hi'; // 배열형태로도 넣을 수 있다.
+```
+
+`person.anybody = "Clara"`
+
+- 이렇게 객체에 `.`을 붙인 후 프로퍼티로 타입을 `옵셔널`하게 줄 수 있기 때문에 optional type으로
+  사용이 가능하다는 뜻이다. (없어도 에러가 나지 않는다.)
+- **index는 `string`이거나 `number`만 가능하다.**
+
+```ts
+interface StringArray {
+  [index: number]: string;
+}
+
+const sa: StringArray = {}; // 옵셔널하다, 안써도 에러가 안난다.
+sa[100] = '백';
+
+interface StringDictionary {
+  [index: string]: string;
+}
+
+const sd: StringDictionary = {}; // 옵셔널하다
+sd.hundred = '백';
+
+interface StringArrayDictionary {
+  [index: number]: string;
+  [index: string]: string;
+}
+
+const sad: StringArrayDictionary = {};
+// 당연히 옵셔널하다.
+sad[100] = '백';
+sad.hundred = '백';
+```
+
+```ts
+interface StringDictionary {
+  [index: string]: string;
+  name: string;
+}
+
+const sd: StringDictionary = {
+  name: '이름', // 필수
+};
+
+sd.any = 'any'; // 어떤 프로퍼티도 가능
+
+////////////////////////////////////////////////
+
+interface StringDictionaryNo {
+  [index: string]: string;
+  // name: number;
+  // (X) 인덱서블 타입이 string 값을 가지기 때문에 number 를 필수로 끌어오면 에러
+}
+```
+
+---
+
+### <a name="3" ></a> 3. function in interface
+
+interface 내부에 함수를 넣을 수 있다.
+
+- 출력값의 타입을 명시해야한다.
+
+```ts
+interface Person {
+  name: string;
+  hello(): void;
+  world(): string;
+  nayoung(): string;
+}
+
+const person: Person = {
+  name: 'Mark',
+  hello: function (): void {
+    //void일 경우는 써도 되고 안 써도된다.
+  },
+  world(): string {
+    return 'World';
+  },
+  nayoung: (): number => {
+    // ES6 문법 합수 사용시
+    return 1;
+  },
+};
+```
+
+---
+
+### <a name="4" ></a> 4. implements interface &#128580;
+
+interface를 상속받아서 class에서 사용가능하다.
+
+- class 선언문의 `implements` 뒤에 인터페이스를 선언하면 해당 클래스는 지정된 인터페이스를 반드시
+  구현하여야 한다.
+
+```ts
+interface IPerson {
+  name: string;
+  hello(): void;
+}
+
+// class 만들기. IPeron을 상속받았다.
+class Person implements IPerson {
+  // IPerson을 다 써줘야한다.
+  name: string = null;
+  constructor(name: string) {
+    // IPerson의 name을 this.name으로 받는다.
+    this.name = name;
+  }
+  hello(): void {
+    console.log(`안녕하세요. ${this.name} 입니다.`);
+  }
+  public hi(): void {
+    console.log(`${this.name}`);
+  }
+}
+
+const person: IPerson = new Person('Mark');
+person.hello();
+```
+
+---
+
+### <a name="5" ></a> 5. extends interface
+
+상속받는 인터페이스를 만들 수 있다. interface끼리 상속이 가능하다.
+
+```ts
+interface Person {
+  name: string;
+  age?: number;
+}
+
+interface Korean extends Person {
+  city: string;
+}
+
+const k: Korean = {
+  name: '이웅재',
+  city: '서울',
+};
+```
+
+---
+
+### <a name="6" ></a> 6. function interface
+
+함수형 인터페이스이다.
+
+- 함수의 타입 체크는 할당할 때가 아니라 `사용할 때 한다`는 점을 명심
+- function의 입출력을 바로 명시하지 않는다.
+
+```ts
+interface HelloPerson {
+  // (name: string, age: number): void;
+  (name: string, age?: number): void;
+}
+
+// helloPerson의 타입이 HelloPerson
+let helloPerson: HelloPerson = function (name: string) {
+  // name:string을 넣지 않아도 에러가 안난다. => 호출할 때 에러가 난다.
+  console.log(`안녕하세요! ${name} 입니다.`);
+};
+
+helloPerson('Mark'); // 안녕하세요! Mark 입니다.
+helloPerson(); // 에러가 난다.
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/typeScript-interface

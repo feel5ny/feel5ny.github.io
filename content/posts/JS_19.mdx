@@ -1,0 +1,579 @@
+---
+title: 코드스피츠77 ES6_3회차_Iteration & generator
+date: '2019-02-04'
+description:
+  "\U0001F315\U0001F311\U0001F311 --------- 자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이
+  나오고, 그중에 하나가 interface. 자바에서의 interface는 따로 있지만, 자바스크립트에서의
+  interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.  자바스크립트..."
+author: Joy Kim
+tags:
+  - javaScript
+  - iterator
+  - generator
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. Interface in JS",
+        "id": "1"
+      },
+      "depth1": [
+        {
+          "name": "1.1 Interface",
+          "id": "1-1"
+        },
+        {
+          "name": "1.2 Iterator interface",
+          "id": "1-2"
+        },
+        {
+          "name": "1.3 Iterable interface",
+          "id": "1-3"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "2. Loop to Iterator",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. ES6+ Loop",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. Generator",
+        "id": "4"
+      }
+    }
+  ]
+thumbnail: /images/2019/07/thumb_default.jpg
+---
+
+## 🌕🌑🌑
+
+자바스크립트에서도 일반명사처럼 생긴 고유명사가 많이 나오고, 그중에 하나가 interface. 자바에서의
+interface는 따로 있지만, 자바스크립트에서의 interface는 무슨 의미인지, 뭐에 쓰는 용어인지 알아보자.
+자바스크립트 스펙에 정의되어있는 interface 규격에 맞춰 자바스크립트의 루프가 구현되어있기 때문에
+중요하며, loop를 배우기 전에 알아보자.
+
+<a name="0"></a>
+## 1. Interface in JS ### 1.1 Interface ECMAScript 공식문서에서는 interface에 대한 정의를 명확하게
+내리고 있다.
+
+1. 인터페이스란 사양에 맞는 값과 연결된 속성키의 셋트
+2. 어떤 Object라도 인터페이스의 정의를 충족시킬 수 있다.
+3. 하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다.
+
+- 반환값의 타입까지 정할 수 있다.
+
+#### interface 예제
+
+1. test라는 키를 갖고
+2. 값으로 문자열인지를 1개 받아 boolean 결과를 반환하는 함수가 온다.
+
+```js
+{
+  test(str){ return true; }
+}
+```
+
+cf\_\_1. es6 객체리터럴 test옆에 바로 괄호?
+
+- es6에서 객체 리터럴에 새로 도입된 문법.
+- key에 function을 집어넣는 경우가 생기면, function과 `:`을 생략하고 바로 괄호를 쓸 수 있는 문법이
+  추가되었다.
+
+```js
+{
+  test: function (str){ return true; }
+}
+```
+
+> 자바스크립트 엔진 레벨에서 여러가지 interface를 정의하고 있다.
+
+---
+
+### 1.2 Iterator interface
+
+1. next라는 키를 갖고
+2. 값으로 인자를 받지 않고 `IteratorResultObject`를 반환하는 함수가 온다.
+   - IteratorResultObject는 interface이다. (아래의 IteratorResult interface를 확인)
+3. IteratorResultObject는 `value`와 `done`이라는 키를 갖고 있다.
+4. 이 중 `done`은 계속 반복할 수 있을지 없을지에 따라 불린값을 반환한다.
+
+- done이 `true`일때는 value는 `undefined` 라는것도 정의되어있음
+
+위 조건만 만족하면 Iterator 객체로 본다. 아래는 타입스크립트에서 자바스크립트 내장 객체들을
+정의해놓은 type definition 파일의 일부를 가져왔다.
+
+```ts
+// lib.es2015.iterable.d.ts
+interface IteratorResult<T> {
+  done: boolean;
+  value: T;
+}
+
+interface Iterator<T> {
+  next(value?: any): IteratorResult<T>;
+  return?(value?: any): IteratorResult<T>;
+  throw?(e?: any): IteratorResult<T>;
+}
+```
+
+```js
+{
+  next(){
+    return {value: 1, done: false};
+  }
+}
+```
+
+#### 그니까 iterator란
+
+이터레이터 프로토콜(: 데이터 컬렉션을 순회하기 위한 프로토콜(미리약속된 규칙))은 next메소드를
+호출하면 iterable을 순회하며 value, done 프로퍼티를 갖는 iteratorResultObject를 반환한다.
+
+```js
+{
+  data: [1,2,3,4],
+  next(){
+    return {
+      value: this.data.pop(),
+      done: this.data.length == 0
+    }
+  }
+}
+```
+
+---
+
+### 1.3 Iterable interface
+
+1. Symbol.iterator라는 키를 갖고
+2. 값으로 인자를 받지 않고 **`Iterator Object`를 반환하는 함수가 온다.** Iterator Object
+   인터페이스는 위 1.2의 interface
+
+```ts
+// lib.es2015.iterable.d.ts
+interface Iterable<T> {
+  [Symbol.iterator](): Iterator<T>;
+}
+
+interface IterableIterator<T> extends Iterator<T> {
+  [Symbol.iterator](): IterableIterator<T>;
+}
+```
+
+```js
+{
+  [Symbole.iterator](){
+    return {
+      next(){
+        return {value: 1, done: false}
+      }
+    }
+  }
+}
+```
+
+#### 그니까 iterable란?
+
+iterable은 Symbol.iterator 메소드를 구현하거나, 프로토타입 체인에 의해 상속한 객체를 말한다.
+Symbol.iterator 메소드는 이터레이터를 반환한다.
+
+> [Symbol](https://poiemaweb.com/es6-symbol)?
+
+- ES6 추가된 새로운 primitive type
+- 객체가 아닌 값으로 인식된다는 말.
+- typeof로 보면 Symbole 타입이 나온다.
+- primitive이지만 **객체의 키로 사용할 수 있는 특징**이 있다.
+- Symbol.iterator는 이터레이터 오브젝트를 생성하면서 반환한다.
+- 오브젝트의 `[Symbol.iterator]`를 호출하면 이터레이터 오브젝트를 생성하여 반환한다.
+  - 심볼은 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키(property key)를 만들기 위해
+    사용한다.
+
+iterator만 있으면 되지 않을까? 왜 iterable이 필요하지?
+
+- loop를 돌 수 있는 reset 타이밍을 위해서
+- 즉, loop를 돌리는 객체의 사본을 만들기 위해서 iterable형태가 필요한 것이다.
+  - 위에서 iterable 형태를 보면, Symbole.iterator를 키로 갖는걸 볼 수 있는데, 루프 돌 때마다
+    **루프를 위한 변수**와 **원본데이터 변수**를 구분하면서 iterator를 잘 구축하라고 iterable이 한번
+    개입하는 것이다.
+  - [iterator 패턴](https://jusungpark.tistory.com/25)에서 온 개념 
+
+---
+
+<a name="2"></a>
+## 2. Loop to Iterator 왜 for, while, do..while을 쓰지 않게 하고 이런걸 제공할까 - 문이기 때문에
+한번 실행하고 나면 사라진다.(노이만 머신의 구조) - 메모리에 남지않고, 실행된 후 사라진다. - 두번다시
+반복시킬 수 없다. - 다시 호출을 위해서는 함수로 빼던지, 2번사용하던지 해야한다. - 여러번 다시
+사용하는것은 안전하지 않다.. 어딘가 저장해놓고 재사용해야한다. - **loop를 `식`으로 바꾸고 싶다는
+마음이 생김!!**
+
+---
+
+### 2.1 While문으로 살펴보는 Iterator
+
+현대언어의 기본적인 패러다임은 **문을 제거하고 전부 식(값)으로 바꾸버리는 것.**
+
+모든 문을 함수에 집어 넣어버리면 함수에서는 값이 반환되는 형태이고, 그 함수를 호출하면 문을 원하는
+시점에 실행할 수 있게된다.
+
+- 여러번 문을 반복해서 실행할 수 있다.
+- 문을 메모리에(함수) 담아두면 flow를 타지 않고 원하는 시점에 마음대로 실행할 수 있다.
+- **commend 패턴** : 우리가 원하는 문들을 죄다 값으로 바꿔서 invoke에 저장하고, invoke를
+  호출할때마다 마음대로 문을 실행했다, 멈췄다, 되돌렸다 를 할 수 있게 만들어주는 패턴
+
+for문이나 while문을 **값**으로 바꾸고 싶다. 반복 전용에 해당되는 객체로 바꿔주면 된다.
+
+#### while vs iterator
+
+1. while
+
+```js
+let arr = [1, 2, 3, 4];
+while (arr.length > 0) {
+  console.log(arr.pop());
+}
+```
+
+- 조건문: 계속 반복할지 판단.
+- body: 반복시마다 처리할 것.
+
+2. iterator
+
+```js
+{
+  arr: [1,2,3,4],
+  next(){
+    return {
+      done: this.arr.length == 0,
+      // while의 조건문에 해당 (계속 반복할지 판단.)
+      value: console.log(this.arr.pop())
+      // while의 body에 해당 (반복시 처리할 것.)
+    }
+  }
+}
+```
+
+- 더 반복할지 말지에 대한 조건문을 while에서는 while문 자체가 들고 있었지만, iterator에서는
+  iterator의 next 반환값 자체가 갖고 있다. 즉, next에 의존적이 된다.
+
+#### 정리
+
+<div style="padding:20px; background-color:rgba(0,0,0,0.2)">
+  1. 반복자체를 하지는 않지만 (: iterator 객체와 next객체가 반복하진 않지만.)
+  2. 외부에서 반복을 하려고 할 때
+    3. 반복에 필요한 조건과 실행을 
+    4. 미리 준비해 둔 객체 
+      (self description: 나 자신에 대해서 내부에 설명)
+
+즉, 반복행위와 반복을 위한 준비를 분리
+
+1. 미리 반복에 대한 준비를 해두고
+2. 필요할 때 필요한 만큼 반복 **3. 반복을 재현할 수 있음**
+</div>
+
+반복 자체를 하지 않지만, 외부에서 iterator를 이용해서 반복하려고 하는 상황을 위해서, 반복에 필요한
+조건과 실행을 미리 준비해둔 객체를 갖고 있는 것이다. (iteratorResult객체)
+
+next만 부르면, 몇번이고 반복할 수 있다. 이제는 더이상 복잡한 loop의 상태조건이나 문의 실행을 다
+빼버리고, 외부에서는 반복이라는 행위만 하면된다. => 반복기와 반복조건을 분리
+
+---
+
+<a name="3"></a>
+## 3. ES6+ Loop ### 3.1 사용자 반복 처리기 직접 Iterator 반복처리기를 구현해보자. 커스텀
+
+```ts
+// 1. 반복기
+const loop = (iter: IterableIterator<number[]>, f: Function) => {
+  // iterable 가드
+  if (typeof iter[Symbol.iterator] == 'function') {
+    iter = iter[Symbol.iterator]();
+    // next확인하는 가드도 있어야함.
+  } else return;
+
+  // iterator 가드
+  if (typeof iter.next != 'function') return;
+
+  do {
+    const v = iter.next();
+    if (v.done) return; // undefined면 종료처리
+    f(v.value); // 아니면 f에 value 전달
+  } while (true); // 반복기일뿐!! 재귀함수로 짜도 상관없다.
+};
+
+// 2. 반복되야할 조건이 있는 iterable
+const iter = {
+  arr: [1, 2, 3, 4],
+  [Symbol.iterator]() {
+    return this;
+  },
+  next() {
+    return {
+      done: this.arr.length == 0,
+      value: this.arr.pop(),
+    };
+  },
+};
+
+loop(iter, console.log);
+```
+
+반복되야되는 조건에 해당되는 값들과 반복기를 분리했더니 반복기쪽에서는 그냥 돌리기만 하면되는
+책임으로 확 줄고 (loop함수), 나머지 상태관리나 루프에 대한 모든 책임은 다 iterator객체가 가져갔다.
+
+- iterator객체가 굉장히 안전적으로 몇번이라도 이 loop를 성공할 것이다.
+
+개발자스스로 나름대로의 구조와 이름으로 짤수도 있다. 단지 이제는 자바스크립트 표준이 있다.
+
+이터레이터 패턴을 구현하는데에 있어서 자바스크립트 표준 스펙이 나왔고, 이걸 구현하는 공식적인 방법이
+스펙으로 정의되어있다. 만약 스스로 나름대로의 이터레이터를 구현해 왔다면, 이제는 자바스크립트 표준
+인터페이스에 맞춰서 iterator를 구현하시는 쪽으로 바꿔야한다. 언어의 혜택이 많기 때문
+
+---
+
+### 3.2 내장 반복 처리기
+
+언어의 지원을 받는다는 것은 무슨뜻일가. 언어가 iterator 인터페이스에 대해서 처리해주는 내장 기능이
+있다. 우리가 만든 모든 객체가 iterator 인터페이스를 충족해주면, 언어가 제공하는 문법적인 요소를 다
+사용할 수 있다. **iterable객체가 아닌데 아래의 처리기들을 사용하면 스크립트가 죽는다.**
+
+어떤 객체가 Iterable이라면, 그 객체에 대해서 자바스크립트에서는 아래의 기능들을 사용할 수 있다.
+
+- 분해대입(destructuring assignment)
+- spread 연산자 (...)
+- for...of 루프
+- 기타 iterable을 인수로 받는 함수
+
+1. Array destructuring 배열해체
+
+```js
+// iter는 iterable 객체.
+const iter = {
+  [Symbol.iterator]() {
+    return this;
+  },
+  arr: [1, 2, 3, 4],
+  next() {
+    return {
+      done: this.arr.length == 0,
+      value: this.arr.pop(),
+    };
+  },
+};
+
+const [a, ...b] = iter;
+console.log(a, b); // 4, [3,2,1]
+```
+
+- 해체구분은 보통 변수를 선언하는 쪽에 쓰인다.
+- 배열은 `=`의 왼쪽에 오면 변수이름이 된다.
+- 해당 index에 있는 값을 변수에 담음.
+
+2. Spread 펼치기
+
+```js
+const iter = {
+  [Symbol.iterator]() {
+    return this;
+  },
+  arr: [1, 2, 3, 4],
+  next() {
+    return {
+      done: this.arr.length == 0,
+      value: this.arr.pop(),
+    };
+  },
+};
+
+const a = [...iter];
+console.log(a); // [4,3,2,1]
+```
+
+3. Rest Parameter (나머지 인자)
+
+```js
+const iter = {
+  [Symbol.iterator]() {
+    return this;
+  },
+  arr: [1, 2, 3, 4],
+  next() {
+    return {
+      done: this.arr.length == 0,
+      value: this.arr.pop(),
+    };
+  },
+};
+
+const test = (...arg) => console.log(arg);
+test(...iter);
+```
+
+4. `for ...of` while, for처럼 권한이 있지않고 권한이 전혀 없는 for.
+
+```js
+const iter = {
+  [Symbol.iterator]() {
+    return this;
+  },
+  arr: [1, 2, 3, 4],
+  next() {
+    return {
+      done: this.arr.length == 0,
+      value: this.arr.pop(),
+    };
+  },
+};
+
+for (const v of iter) {
+  console.log(v);
+}
+```
+
+- `for...of` iterator에서 value만 받아서 내려준다.
+
+배열이나 object를 써야지 이 혜택을 받는 것이 아니라, iterator만 만들면 이 혜택을 받을 수 있다. 객체
+만들때는 괴로울지 몰라도, 사용할때는 예쁘게 작업 가능.
+
+> 신규로 출시되는 많은 API가 iterable을 포함하고 태어나기때문에 iterable interface는 es6세계에서
+> 반드시 이해하고 외우고 있어야 하는 내용이다.
+
+#### 정리
+
+자바스크립트 es6이후에는 반복을 위해서 iterable을 만든다.
+
+---
+
+### 3.3 연습
+
+제곱을 요소로 갖는 가상컬렉션 😵😵😵
+
+```js
+const N2 = class {
+  constructor(max) {
+    this.max = max; // 무한배열을 막기위해
+  }
+  [Symbol.iterator]() {
+    let cursor = 0,
+      max = this.max;
+    return {
+      done: false,
+      next() {
+        // 반복기일 뿐
+        if (cursor > max) {
+          this.done = true;
+        } else {
+          this.value = cursor * cursor;
+          cursor++;
+        }
+        return this;
+      },
+    };
+  }
+};
+
+console.log([...new N2(5)]);
+for (const v of new N2(5)) {
+  consoel.log(v);
+}
+```
+
+하나의 Object는 여러 개의 인터페이스를 충족시킬 수 있다. 이 객체는 Iterator객체임과 동시에
+iteratorResultObject이기도 하다.
+
+- 우리가 만든 loop에는 안전장치가 있어야한다.
+- loop조건을 걸때 무조건 max값을 넣는 습관을 들이자.
+- symbol iterator를 호출할 때 마다 제각각 다른 지역변수가 만들어질테고, 그때마다 태어난 함수도
+  제각각 다른 지역변수를 자유변수로 캡쳐해둘 것이다.
+  - 함수호출할때마다 instance가 자기만의 field를 갖고 태어난것과 비슷하네?
+    > 함수형 패러다임에서는 instance를 new 연산자로 생성하는 대신에, 함수를 생성함으로써 그때에 있는
+    > 자유변수를 instance의 field처럼 쓰게 된다. 자바스크립트에서는 instance를 만들면서
+    > field지정할것인지. 함수를 생성하면서 자유변수를 지정할 것인지 선택할 수 있다. 혹은 섞어
+    > 쓰거나.
+    - 이게 자바스크립트가 혼란스러운 이유...
+    - 비단 자바스크립트만 그렇진 않다..
+
+---
+
+#### cf\_\_2. 함수, 함수 스코프, 클로저
+
+함수는 함수가 만들어지는 시점에 바깥쪽에 있는 변수들을 캡쳐해서 마치 지역변수로 쓸 수 있는 권한이
+있다.
+
+- 함수 입장에서는 지역변수, 인자도 아닌데 참조할 수 있는 변수 => 자유변수
+- 자유변수가 생성되는 원리는 언어마다 다르다.
+- 자유변수를 함수는 사용할 수 있다.
+- 자바스크립트 매커니즘에서는 next라는 함수가 탄생할 때, 바깥쪽 함수 둘레에 있는 변수들을 사용할 수
+  있다.
+  > 자유변수가 잡혀서 사용되는 닫혀진 공간을 클로저라고 한다. 함수는 곧 클로저라고 할 수 있다.
+  > 자유변수를 가둬둘 수 있기 때문에
+
+#### cf\_\_3. 자바스크립트를 특정버전으로 열심히 공부해도..계속 바뀐다.
+
+- 자바스크립트 엔진의 구조는 계속 바뀌기 때문에 컴퓨터 사이언스 원론을 이해하는게 훨씬 낫다.
+- 스코프 체이닝.. 변수를 캡쳐해오고.. 이건 자바스크립트 3.1 engine 원리임.. 지금
+- 얼마전 크롬 67에서는 새로운 함수 호출 실행 시스템을 만들었기 때문에 함수 호출이 급격하게 빨라졌다.
+- 요즘 책은 ... 모두 자바스크립트 3.1 엔진이야기다....(헐)
+  - '현재에 이르러 배우게되는 자바스크립트는 대부분 ECMAScript 3 버전에 대한 공부이며, 최근에 출시된
+    ECMAScript 6 버전이 새로운 기능으로 무장되어 있어 이와 관련된 공부가 필요할 것이다.
+    [출처](https://webdir.tistory.com/512)
+  - 지금 엔진은 그렇게 움직이지 않는다.
+  - 그냥 컴퓨터 사이언스 원론을 이해하는게 낫다.
+
+---
+
+자료구조를 iterable로 구축하는 훈련이 되있어야하지만, 문법적인 혜택을 누릴 수 있다. 하지만 생각보다
+iterable 객체를 만드는 것이 리소스가 많이 든다. generator함수로 해결할 수 있다.
+
+---
+
+<a name="4"></a>
+## 4. Generator ### Iterator의 구현을 돕는 Generator (IteratorGenerator) `function*()`
+
+**generator 함수를 생성하는 리터럴.**
+
+- generator함수를 호출할 때마다 iterator가 만들어진다.
+- generator는 iterator이며, 동시에 iterable이기도 하다. 😵😵😵
+  - 반복기와 반복조건부분이 분리되어있지만 함께 갖고 있다.
+
+```js
+const generator = function*(max){
+  let cursor = 0;
+  while(cursor < max){ // iterator에서 next()와 같은 역할
+    yield cursor * cursor;
+    cursor++;
+  }
+}
+
+console.log([...generator(5)]);
+for(const v of generator(5)){
+  console.log(v);
+}
+```
+
+yield라는 키워드
+
+- suspense라는 기능: while문이 돌다가 잠깐 멈춘다!
+- 문은 멈출 수 없지만 yield에서 중지된다.
+- iteratorResultObject를 반환한다.
+  - 루틴이 아니다. **co-routine**
+  - 함수는 루틴 generator는 코루틴이라고 부른다.
+
+<img src="/images/2019/07/01.png" />
+
+---
+
+참고자료 https://helloworldjavascript.net/pages/260-iteration.html
+https://poiemaweb.com/es6-iteration-for-of https://jusungpark.tistory.com/25

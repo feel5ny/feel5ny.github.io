@@ -1,0 +1,230 @@
+---
+title: 1부/ chap02. RxJs가 해결하려고 했던 문제(2)_상태 전파 문제
+date: '2018-08-15'
+description:
+  "> [\U0001F4D5 퀵스타트 Rxjs]를 보고 메모한 부분을 정리했습니다. 목차 --- 1. 웹 어플리케이션의
+  상태 2. 웹 어플리케이션의 상태 변화로 인한 문제점 3. 우리가 이미 알고 있는 솔류션 4. 흔한 예 5.
+  적용하기 6. rxjs는 무엇을 해결하고자 했는가? 7...."
+author: Joy Kim
+tags:
+  - async
+  - rxjs
+categories:
+  - 01_Web
+  - 03. Library
+enableComment: true
+thumbnail: /images/2018/27/thumb_default.jpg
+---
+
+> **[📕 퀵스타트 Rxjs]**를 보고 메모한 부분을 정리했습니다.
+
+## 목차
+
+1. 웹 어플리케이션의 상태
+2. 웹 어플리케이션의 상태 변화로 인한 문제점
+3. 우리가 이미 알고 있는 솔류션
+4. 흔한 예
+5. 적용하기
+6. rxjs는 무엇을 해결하고자 했는가?
+7. rxjs는 어떻게 개선하였나?
+8. observable은 리액티브하다.
+
+---
+
+---
+
+---
+
+# 상태 전파 오류
+
+상태 전파. state propagation
+
+## 1. 웹 어플리케이션의 상태
+
+각각의 상태 머신들은 각자의 상태를 가지고 있고, 상태 머신들은 각자의 역할에 따라 서로 유기적으로
+연결되어 있다. 모듈간의 의존성. 예\_ 사용자정보(상태)를 System 클래스가 check()함수에서 사용하고
+있는 예제
+
+- 변경에 대한 전파가 원활하게 이루어지지 않는다.
+
+---
+
+## 3. 우리가 이미 알고 있는 솔류션
+
+### 3.1 Loosely Coupling
+
+- 옵저버 패턴에서는 상태가 변경될 대상을 Subject라고 한다. 그리고, 그 상태 변화를 관찰하는 대상을
+  Observer라고 한다.
+- subject와 observer는 서로 **느슨하게 연결되어 있다.** (낮은 결합도)
+  - 여기서 **느슨하게(Loosely Coupling)**의 의미는 Subject와 Observer가 서로 상호작용을 하지만
+    **서로 잘 모른다라는 뜻!!**
+  - subject가 observer에 대해서 아는건 **observer가 특정 인터페이스를 구현한다는 것 뿐.**
+  - subject와 observer는 서로 **독립적**으로 사용할 수 있으며, observer가 바뀌더라도 서로에게 영향을
+    미치지 않는다.
+
+### 3.2 자동 상태 전파
+
+**pull 시나리오**
+
+- 기존 방식과 같이 데이터를 얻고자 하는 대상이 데이터를 직접 가져오는 방식은 **매번 요청을 하여
+  변경사항을 확인해야만 한다.**
+
+**push 시나리오**
+
+- 하지만 옵서버 패턴은 이와 다르게 의존 관계의 대상(Subject)으로 부터 **데이터를 제공받는
+  방식**이다.
+
+push 방식으로 구성된 옵서버패턴은 subject의 상태가 변경되었을 경우 관찰하는 observer에게 자동으로
+알려준다.(subscribe)
+
+subject와 observer가 `1:n`의 상황에서는 더욱 효과적이다. **다수의 observer를 subject에 등록하기만
+하면** subject의 변경사항이 등록된 다수의 observer에게 자동으로 전달된다.
+
+### 3.3 인터페이스의 단일화
+
+옵저버 패턴은 Observer.update만 존재하기 때문에 Subject에서는 옵저버 인터페이스에 대한 별도의 비용이
+존재하지 않는다.
+
+---
+
+## 4. <span class="mint">옵저버 패턴</span>의 흔한 예
+
+뉴스를 발행하는 신문사와 이를 구독하는 고객
+
+뉴스를 발행하는 신문사 = subject 고객 = observer
+
+신문사는 고객을 등록하고 신문이 발행될 때 각각의 고객에게 신문이 발행되었다고 알려준다.(notify)
+
+신문이 발행되면 어떤 고객은 뉴스를 스크랩하거나, 어떤 고객은 뉴스를 읽기 시작한다.
+
+---
+
+## 6. RxJS는 무엇을 해결하고자 했는가?
+
+rxjs도 상태 변화에 대한 문제를 옵저버 패턴을 기반으로 해결하려고 하였다.
+
+### 6.1 상태 변화는 언제 종료되는가?
+
+옵저버 패턴에는 종료 flag가 없기 때문에 별도의 규칙을 정해야한다.
+
+> <span class="pink">rxjs</span>에서는 complete
+
+### 6.2 상태 변화에서 에러가 발생하면?
+
+옵저버 패턴은 에러 발생여부를 observer들에게 전달할 방법은 딱히 없다.
+
+> <span class="pink">rxjs</span>에서는 error
+
+### 6.3 observer에 의해 subject의 상태가 변경되는 경우?
+
+코드의 복잡도를 증가시키는 경우가 많다.
+
+> <span class="pink">rxjs</span>에서는 옵저버블은 오직 read-only
+
+---
+
+## 7. rxjs는 어떻게 개선하였나?
+
+rxjs에서 전달되는 데이터는 모두 observable형태로 변환된다. observable은 구독과정(subscribe)후부터
+데이터를 전달받기 시작한다.
+
+> rxjs의 observable
+
+```js
+const { fromEvent } = rxjs;
+const clikc$ = fromEvent(document, 'click');
+clikc$.subscribe(function (v) {
+  console.log(v);
+});
+
+click$.subscribe({
+  next: function (v) {
+    console.log(v);
+  },
+});
+```
+
+> observer pattern
+
+```js
+let newsPaper = new Subject();
+newPaper.add({
+  update: function (v) {
+    console.log(v);
+  },
+});
+```
+
+**subject와 observer**
+
+> 상태가 변경되는 아이 : subject, observable
+
+rxjs의 observable ≒ 옵서버 패턴의 Subject
+
+> 변경된 상태를 알아야 하는 아이 : observer
+
+<span class="mint">옵서버 패턴</span>의 observer는 **add**라는 메소드를 통해 subject에게 전달된다.
+<span class="pink">rxjs</span>의 observer는 함수와 객체 둘 다 가능하며 **subscribe**라는 메소드를
+통해 subject에게 전달된다.
+
+rxjs가 기존 옵저버 패턴의 아쉬웠던 점을 개선하고자 했기 때문이다.
+
+#### cf_Rxjs의 Observable과 Subject
+
+Rxjs에는 observable도 있고 subject도 있다.
+
+rxjs의 subject는 기능적으로 정확히 옵저버패턴의 subject와 일치한다. rxjs의 subject는 다수의
+observer에게 **공통의 데이터**를 전달하고, update와 같은 메소드가 존재하여 데이터 변경도 가능하다.
+
+rxjs의 observable은 기능적으로 옵저버 패턴의 subject와는 엄격히 다르다. observable은 하나의
+observer에게 독립적인 데이터를 전달한다.
+
+### 7.1 인터페이스의 확장
+
+1. <span class="mint">update</span> => <span class="pink">next</span>
+데이터의 연속적인 변화를 observer에서 표현할 수 있도록 기존 update메서드를 next로 바꾸었다.
+> 개인적으로는 update가 더 명시적이다 ..ㅜ
+
+2. 종료시점, 에러시점 옵저버 패턴에는 없던 종료시점, 에러시점을 개선, 종료는 compleate 에러는 error
+
+<img src="/images/2018/24/04.jpeg" width="500px" />
+> rxjs
+
+<img src="/images/2018/24/03.jpeg" width="500px" />
+> 옵저버패턴
+
+#### 왜 객체가 아닌 함수를 사용하는 것인가?
+
+observable.subscribe는 객체, 함수 모든 형태로 전달 받을 수는 있다. subscribe는 특별한 경우를
+제외하고는 가급적 함수 형태를 사용한다.
+
+객체는 상태를 가질 수 없기 때문이다. 객체가 상태를 가진다는 의미 => **또다른 상태 머신**이 될 수
+있다는 의미. 반면 함수는 상태가 존재하지 않는 **기능만을 담당하기 때문에** 상태에 관한 문제에서는
+보다 자유롭다.
+
+### 7.2 옵저버블은 Read-only
+
+observable은 subscribe를 통해 데이터를 전달할 대상에게 데이터를 전달할 수는 있지만, 반대로
+observer에게 데이터를 전달받을 수 없다.
+
+- 데이터 흐름을 단순화함으로 복잡도를 낮추고 오류 발생 빈도를 줄인다.
+
+---
+
+## 8. Observable은 리액티브하다.
+
+데이터가 발생하게 되면 옵저버에게 자동으로 빠르게 변경된 데이터를 전달한다. 이를 보고 리액티브하다고
+이야기한다.
+
+#### 리액티브 프로그래밍이란?
+
+데이터 흐름과 상태 변화 전파에 중점을 둔 프로그램 패러다임이다. 사용되는 프로그래밍 언어에서
+**데이터 흐름**을 쉽게 표현할 수 있어야 하며 기본 실행 모델이 변경 사항을 데이터 흐름을 통해
+**자동으로 전파**한다는 것을 의미한다.
+
+> 예: 엑셀
+
+이런 고민의 해결책이 <span class="mint">옵저버 패턴</span>이고,
+
+<span class="pink">rxjs</span>는 이런 옵저버 패턴을 개선하여 애플리케이션에서 발생하는 모든 데이터를
+리액티브하게 전달할 수 있게 해준다. ### ∴ rxjs는 리액티브 프로그래밍을 지향하는 라이브러리이다

@@ -1,0 +1,308 @@
+---
+title: 6/ class(1)
+date: '2017-11-21'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. TL;DR 타입스크립트에서 주로 사용되는 class의 기초에 대해서
+  배웁니다. es6에 도입된 class와, public, priva...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. class 기초",
+        "id": "1"
+      }
+    },
+    {
+      "title": {
+        "name": "2. class property",
+        "id": "2"
+      }
+    },
+    {
+      "title": {
+        "name": "3. class Access Modifier",
+        "id": "3"
+      }
+    },
+    {
+      "title": {
+        "name": "4. class default constructor",
+        "id": "4"
+      }
+    },
+    {
+      "title": {
+        "name": "5. class & method",
+        "id": "5"
+      }
+    },
+    {
+      "title": {
+        "name": "6. class extends",
+        "id": "6"
+      }
+    }
+  ]
+thumbnail: /images/post_img/20/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-14)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**TL;DR** 타입스크립트에서 주로 사용되는 class의 기초에 대해서 배웁니다. es6에 도입된 `class`와,
+public, private, protected 키워드로 class에 접근제어하는 방법을 배우고, class간의 상속 개념을
+배웁니다.
+
+---
+
+### <a name="1" ></a> 1. class 기초
+
+1. 생성자 함수(`constructor`)가 없으면, 디폴트 생성자가 불린다.
+2. 클래스의 프로퍼티 혹은 멤버 변수가 정의되어 있지만, 값을 대입하지 않으면 undefined 이다. =>
+   오브젝트에 프로퍼티가 아예 존재하지 않는다.
+3. 접근제어자 (Access Modifier)는 `public`이 디폴트이다.
+
+```ts
+class Person {
+  // name과 age는 프로퍼티
+  // class 바디에는 메소드와 프로퍼티만 포함할 수 있다.
+  name: string = null;
+  age: number = null;
+  constructor(name: string) {
+    this.name = name; // constructor 내부에서 선언한 멤버변수는 this에 바인딩되어 있으므로 언제나 public이다.
+  } // 퍼블릭
+}
+// class에서 default가 public이다.
+const person = new Person('Clara');
+// 인스턴스를 생성할 때 new 연산자와 함께 호출한 것이 바로 constructor이며 constructor의 파라미터에 전달한 값은 멤버 변수에 할당한다.
+console.log(person.name);
+console.log(person.age); // undefined
+```
+
+---
+
+### <a name="2" ></a> 2. class property
+
+- constructor이외에 프로퍼티들을 포함시킬 수 있다.
+- 프로퍼티에도 값을 할당할 수 있다. 호출시 프로퍼티에 다시 값을 할당하게 되면, 마지막에 할당된 값이
+  출력된다.
+
+```ts
+class Person {
+  name: string = 'Clara';
+  age: number = 27;
+
+  constructor() {
+    console.log(this.name === null); // false
+    console.log(this.name === undefined); // true
+  }
+}
+
+const person: Person = new Person();
+person.name = 'nayoung';
+person.age = 35;
+console.log(person);
+// Person {name: 'nayoung', age: 35}
+// Person의 프로퍼티가 불린 후에 person.name에 다시 할당된 값이 불리어지므로 결론적으로는 'nayoung'이 출력된다.
+```
+
+---
+
+### <a name="3" ></a> 3. class Access Modifier
+
+#### `private`
+
+- 절대적으로 접근이 불가능하다.
+
+1. `private` 으로 설정된 프로퍼티는 `dot(.)`으로 접근할 수 없다.
+2. 클래스 내부에서는 private 프로퍼티를 사용할 수 있다.
+3. private이 붙은 변수나 함수는 \_ 를 이름앞에 붙이는데, 이는 문법이 아니라 널리 쓰이는 코딩
+   컨벤션이다.
+   > 앞에 밑줄과 변수명을 쓰면 private이라는 코딩컨벤션 중 하나였다.
+
+```ts
+class Person {
+  public name: string;
+  private _age: number;
+
+  constructor(age: number) {
+    this._age = age;
+  }
+}
+
+const person: Person = new Person(35);
+person.name = 'Mark';
+// person._age (X)
+console.log(person); // Person {name: 'Mark', _age: 35}
+```
+
+#### `protected`
+
+부모자식간의 관계에서 상속을 받은 class는(자식) 부모에는 접근 가능하다.
+
+1. 부모에서 private 으로 설정된 프로퍼티는 상속을 받은 자식에서도 접근할 수 없다.
+2. 부모에서 protected 로 설정된 프로퍼티는 상속을 받은 자식에서 접근이 가능하다.
+3. 상속을 받은 자식 클래스에서 부모 클래스에 this 를 통해 접근하려면, 생성자에서 super(); 를 통해
+   초기화 해야한다.
+   > super란? super키워드는 부모 클래스의 프로퍼티를 참조할 때 또는 부모 클래스의 constructor를
+   > 호출할 때 사용한다.
+
+```ts
+class Parent {
+  private privateProp: string;
+  protected protectedProp: string;
+
+  constructor() {}
+}
+
+class Child extends Parent {
+  constructor() {
+    super(); // 아래의 멤버변수와 순서가 바뀌어도 에러가 난다!
+    this.protectedProp = 'protected';
+    // this.privateProp = 'private'; // (X)
+  }
+}
+```
+
+---
+
+### <a name="4" ></a> 4. class default constructor
+
+- 디폴트 생성자는 프로그래머가 만든 생성자가 없을 때 사용할 수 있다.
+  - 사용자가 만든 생성자가 하나라도 있으면, 디폴트 생성자는 사라진다.
+
+```ts
+class Person {
+  public name: string;
+  private _age: number;
+
+  constructor(age: number) {
+    this._age = age;
+  }
+}
+
+const person: Person = new Person();
+```
+
+### <a name="5" ></a> 5. class & method
+
+1. 클래스 내부에 작성된 메서드는 public 이 디폴트
+2. arrow function 으로 작성 가능
+3. private 을 이용하면 클래스 외부에서 접근 불가
+
+```ts
+class Person {
+  constructor(
+    private _name: string,
+    private _age: number
+  ) {}
+
+  print(): void {
+    console.log(`이름은 ${this._name} 이고, 나이는 ${this._age} 살 입니다.`);
+  }
+
+  printName = (): void => {
+    // arrow function
+    console.log(`이름은 ${this._name} 입니다.`);
+  };
+
+  private printAge(): void {
+    console.log(`나이는 ${this._age} 살 입니다.`);
+  }
+}
+
+const person: Person = new Person('Mark', 35);
+person.print(); // 이름은 Mark 이고, 나이는 35 살 입니다.
+person.printName(); // 이름은 Mark 입니다.
+// person.printAge(); // (X)
+```
+
+---
+
+### <a name="6" ></a> 6. class extends
+
+1. 상속은 `extends` 키워드를 이용한다.
+2. 자식 클래스에서 디폴트 생성자는 부모의 생성자와 입력 형태가 같다.
+
+```ts
+class Parent {
+  constructor(
+    protected _name: string,
+    protected _age: number
+  ) {}
+
+  print(): void {
+    console.log(`이름은 ${this._name} 이고, 나이는 ${this._age} 살 입니다.`);
+  }
+
+  printName = (): void => {
+    console.log(`이름은 ${this._name} 입니다.`);
+  };
+
+  private printAge(): void {
+    console.log(`나이는 ${this._age} 살 입니다.`);
+  }
+}
+
+class Child extends Parent {
+  _name = 'Mark Jr.'; // 나중에 할당된 값이 출력된다.
+}
+
+// const p: Child = new Child(); // (X)
+const p: Child = new Child('', 5);
+p.print(); // 이름은 Mark Jr. 이고, 나이는 5 살 입니다.
+```
+
+1. 생성자를 정의하고, this 를 사용하려면, `super` 를 통해 부모의 생성자를 호출해줘야 한다.
+2. super를 호출할때는 부모 생성자의 입력 타입이 같아야 한다.
+3. super를 호출하는 것은 클래스 `외부`에서 호출하는 것과 같다.
+4. `protected` 함수를 호출해서 그 안의 private 을 출력하는 것에 주의한다.
+
+```ts
+class Parent {
+  constructor(
+    protected _name: string,
+    private _age: number
+  ) {}
+
+  print(): void {
+    console.log(`이름은 ${this._name} 이고, 나이는 ${this._age} 살 입니다.`);
+  }
+
+  protected printName = (): void => {
+    console.log(`이름은 ${this._name} 입니다.`);
+  };
+
+  protected printAge(): void {
+    console.log(`나이는 ${this._age} 살 입니다.`);
+  }
+}
+
+class Child extends Parent {
+  constructor(age: number) {
+    super('Mark Jr.', age);
+
+    this.printName();
+    this.printAge();
+  }
+}
+
+const p: Child = new Child(1);
+// 이름은 Son 입니다.
+// 나이는 1 살 입니다.
+```
+
+---
+
+### 참고링크
+
+1. http://poiemaweb.com/es6-class

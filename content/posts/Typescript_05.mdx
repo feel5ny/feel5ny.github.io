@@ -1,0 +1,241 @@
+---
+title: '4/ 타입추론, Type assertions, Type alias'
+date: '2017-11-19'
+description: >-
+  > 타입스크립트 정리 글은 이웅재님의 강의와 강의록을 참고하여 작성하였습니다. (짱짱)  > 오류가
+  있다면 언제든지 댓글 부탁드립니다. 목표 이 포스팅과 interface 포스팅에서는 타입을 명시하는 방법을
+  배웁니다. 타입을 명시하지 않아도 추론이 가능하며, 강제 타입...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+customList: |-
+  [
+    {
+      "title": {
+        "name": "1. let과 const의 타입 추론",
+        "id": "1"
+      },
+      "depth1": [
+        {
+          "name": "변수를 선언할 때 부터 타입을 신경쓰면서 선언할 수 있는데, 타입없이 선언할 경우 할당된 값을 확인 후 타입을 추론한다. let 키워드로 변수 선언시에는 타입추론이 가능하지만 const 키워드로 선언할 경우 추론이 되지 않으며 `리터럴 타입`으로 값이 타입이 된다.",
+          "id": "1"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "2. Type assertions",
+        "id": "2"
+      },
+      "depth1": [
+        {
+          "name": "타입을 강제적으로 명시해줄 수 있다. (as와 <>방법)",
+          "id": "2"
+        }
+      ]
+    },
+    {
+      "title": {
+        "name": "3. Type alias",
+        "id": "3"
+      },
+      "depth1": [
+        {
+          "name": "3.1 Type alias와 Interface와 차이점",
+          "id": "3-1"
+        },
+        {
+          "name": "타입에 다른 이름을 붙여주는 것인데, Interface와 유사하지만 차이점은, 상속과 인터페이스 구현(implements)의 가능 여부가 다르다는 것.",
+          "id": "3-1"
+        }
+      ]
+    }
+  ]
+thumbnail: /images/post_img/17/thumb_default.jpg
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8-14)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다.
+
+**목표** 이 포스팅과 interface 포스팅에서는 타입을 명시하는 방법을 배웁니다. 타입을 명시하지 않아도
+추론이 가능하며, 강제 타입선언, 별명을 붙여가며 타입을 선언하는 방식 등을 배웁니다.
+
+---
+
+### <a name="1" ></a> 1. let과 const의 타입 추론
+
+```ts
+let a: string = '진호';
+let b = '승민';
+
+const c: string = '나영';
+const d = '슬기'; // 리터럴 타입
+```
+
+- const는 프리미티브 타입은 다른 값으로 못 바꾸고, 레퍼런스타입은 다른 레퍼런스타입을 가리키지
+  못하게 하는 것인데, 타입스크립트에서는 `리터럴 타입`이라고 하는 것으로 타입까지 강제해버린다.
+- 즉 const에서 타입없이 선언될 경우 타입 추론에 의해서 할단된 값이 타입으로 된다. (리터럴 타입) ex.
+  위에서 `const d = '슬기'`에서 d는 `const d:'슬기'`라고 뜨고, 슬기라는 리터럴 타입으로 된다.
+
+재할당 redeclare
+
+- let은 재할당(redeclare)이 가능하다.
+- const는
+  - 레퍼런스 타입은 레퍼런스 값이 바뀌는 것을 허용하지 않고, 속안의 프로퍼티 바꾸는 것은 허용된다.
+  - 프리미티브 타입은 재할당이 아예 불가능.
+
+> 보통은 const를 사용하며, let을 쓰면서 명시적으로도 값이 바껴지는 변수라고도 표시한다.
+
+---
+
+### <a name="2" ></a> 2. Type assertions (assertions:'단언')
+
+- 형 변환과는 다르다. 형 변환은 : 실제 데이터 구조를 바꾼다.
+- `'타입이 이것이다'라고 컴파일러에게 알려주는 것`을 의미한다. 예\_`넓은 범위의 타입`이 (union타입)
+  어떤 상황에서 고정이 되어야할 경우, 타입 어셜션으로 타입을 강제해 준다.
+- 방법은 2가지가 있다.
+  1. 변수 as 강제할 타입
+  2. `<강제할타입>`변수
+
+```ts
+let someValue: any = 'this is a string';
+
+let strLength: number = (<string>someValue).length;
+let strLength: number = (someValue as string).length;
+
+/*
+1. 주로 넓은 타입에서 좁은 타입으로 강제하는 경우가 많다.
+2. jsx 에서는 as 를 쓴다.
+*/
+```
+
+---
+
+### <a name="3" ></a> 3. Type alias (alias:'별명')
+
+타입에 별명을 붙인다고 생각하면 된다.
+
+- 타입이 생기는 것이 아니라, 따로 이름을 붙여주는 것이다.
+- interface가 유사하지만 interface처럼 쓸수 없는 경우가 있다.
+- Primitive나 Union Type, Tuple 같은 타입에서 쓴다. 보통 Primitive 타입은 .. 많이 안쓴다. (number나
+  string을 구지..)
+- 만들어진 타입의 refer로 사용하는 것이지 `타입을 만드는 것은 아니다.
+- `type + 별칭`
+
+```ts
+// Aliaing Primitive
+type MyStringType = string;
+const str = 'world';
+let myStr: MyStringType = 'hello';
+myStr = str;
+
+// string에 'world'라는 별명을 주었다.
+// 별 의미가 없다..
+```
+
+```ts
+// Aliaing Union Type
+let person: string | number = 0;
+person = 'Mark';
+
+type StringOrNumber = string | number;
+// StringOrNumber이라는 타입별칭을 붙였다.
+// 별칭 붙일 때는 앞에 type + 별칭
+
+let another: StringOrNumber = 0;
+another = 'Anna';
+
+/*
+1. 유니온 타입은 A 도 가능하고 B 도 가능한 타입
+2. 길게 쓰는걸 짧게
+*/
+```
+
+```ts
+// Aliaing Tuple
+let person: [string, number] = ['Mark', 35];
+type PersonTuple = [string, number];
+let another: PersonTuple = ['Anna', 24];
+
+/*
+1. 튜플 타입에 별칭을 줘서 여러군데서 사용할 수 있게 한다.
+*/
+```
+
+#### <a name="3-1" ></a> 3-1. Type alias와 Interface와 차이점
+
+보통은 interface와 class등을 자주 사용하기 때문에 alias 쓰는 타이밍이 초반에는 많이 없다.
+interface를 사용하다가 굳이 사용할 필요가 없는 순간에 alias를 쓰면 된다.
+
+1. 오류 메세지 타입스크립트가 컴파일을 시도할때 오류가 나올때, Alias라는 이름으로 알려주지 않고 타입
+   자체로 알려준다.
+
+```ts
+type Alias = { num: number };
+
+interface Interface {
+  num: number;
+}
+
+declare function aliased(arg: Alias): Alias;
+declare function interfaced(arg: Interface): Interface;
+
+/*
+1. type alias 는 object literal type 로
+2. interface 는 interface 로
+*/
+```
+
+2. 상속을 받을 수는 있지만 상속을 할 수는 없다.
+
+- 당연한건 type alias 끼리는 extends, implements 불가
+- interface extends type alias 가능
+- class A implements type alias 가능 = A라는 클래스는 type alias 인터페이스를 구현할 수 있다.
+- class A extends type alias 블가 (interface 도 마찬가지) = A라는 클래스는 type alias를 상속받지
+  못한다.
+- 마치 interface 처럼 동작한다.
+- 클래스 선언문의 implements 뒤에 인터페이스를 선언하면 해당 클래스는 지정된 인터페이스를 반드시
+  구현하여야 한다.
+
+```ts
+type PersonAlias = {
+  name: string;
+  age: number;
+}; // type alias
+
+interface IPerson extends PersonAlias {} // 가능
+
+let ip: IPerson = {
+  name: 'Mark',
+  age: 35,
+};
+
+class PersonImpl implements PersonAlias {
+  name: string;
+  age: number;
+
+  hello() {
+    console.log('안녕하세요');
+  }
+} // PersonImpl라는 클래스는 PersonAlias라는 인터페이스를 구현하겠다.
+
+let pi: PersonImpl = new PersonImpl();
+pi.hello();
+
+class PersonChild extends PersonAlias {} // 불가능
+```
+
+- extends와 implements의 차이 `class A extends B` 라고 하면 A는 B라는 클래스를 상속 받아서 +a
+  시키겠다는 뜻. `class A implements C` 라고 하면 A는 C라는 인터페이스를 구현하겠다~ 라는 뜻입니다.
+
+---
+
+### 참고링크
+
+1. http://gdthink.blogspot.kr/2006/06/extends%EC%99%80-implements%EC%9D%98-%EC%B0%A8%EC%9D%B4.html
+2. http://poiemaweb.com/typeScript-interface

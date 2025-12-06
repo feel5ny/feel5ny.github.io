@@ -1,0 +1,121 @@
+---
+title: 0/ TypeScript?
+date: '2017-11-09'
+description: >-
+  자바스크립트 말고 타입스크립트 ? 최근 프로젝트를 진행하면서 나도 모르는 사이에 타입이 자주 바뀌는
+  자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그 순간에 내 머릿속에서만
+  생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발...
+author: Joy Kim
+tags:
+  - typeScript
+categories:
+  - 01_Web
+  - zz. Workshop
+enableComment: true
+thumbnail: /images/post_img/11/thumb_default.jpg
+---
+
+## 자바스크립트 말고 타입스크립트 ?
+
+최근 [프로젝트](https://feel5ny.github.io/2017/11/14/dada_06week/)를 진행하면서 나도 모르는 사이에
+타입이 자주 바뀌는 자바스크립트의 불편함을 느끼곤 했었다. 애초에 값을 할당할 때 타입 체킹은 그
+순간에 내 머릿속에서만 생각만 하지, 그 이후는 케어하지 못하게 되었다. 나중에 에러가 발생하면, `삽질`
+후에 원인이 타입 때문이라는 것을 알게 되고.. 이는 생각보다 빈번하게 일어났다. 콘솔에서 타입 에러를
+잡지않고 렌더링이 될 때가 있기 때문에 타입으로 발생한 버그를 잡을 때는 시간이 더 걸린다.( 왜 에러가
+나는 거여? 물론 리액트는 타입도 종종 잡아준다 . 무튼 시간 아까워! ) 버그 잡는 게 중요하긴 한데 ,
+타입이 원인이라는 것은 뭔가 어처구니없는 실수라는 생각도 들었다 .. 그러다 문득! 예전에 타입 버그가
+날 때마다 `타입스크립트를 배우면 이런 버그는 애초에 만나지 않을 겁니다!` 라고 자주 얘기하셨던
+선생님이 종종 생각났고 .. 게다가 지금 여러 프로젝트에서 타입스크립트을 도입하고도 있고, 얼마 후에
+앵귤러도 시작하고자 해서 .. 겸사겸사 동기부여가 여러 군데에서 생겼기 때문에!! 시작!!
+
+---
+
+> 타입스크립트 정리 글은 이웅재님의 [강의](https://www.youtube.com/user/2woongjae/videos)와
+> [강의록](http://slides.com/woongjae/deck-8#)을 참고하여 작성하였습니다 . (짱짱 ) **오류**가 있다면
+> 언제든지 댓글 부탁드립니다 .
+
+1. 타입스크립트는 무엇인가
+2. 컴파일러? 트랜스파일러? 인터프리터 ?
+3. 정적타입 언어 vs 동적타입 언어
+
+---
+
+## 1. 타입스크립트는 무엇인가.
+
+타입스크립트는 프로그래밍 언어 중 하나이다 . 자바스크립트가 인터프리터 기반의 언어로써, 실행과
+동시에 렌더링이 되는데 , 타입스크립트는 인터프리터 방식이 아닌 컴파일 후에 실행되는
+`Compiled Language`이다 . 별도의 빌드 과정이 필요 ! 전통적인 컴파일 언어와는 다른데 , (C언어 , 자바
+...) 때문에 Compile 말고, `Transpile`이라는 용어를 사용하기도 한다 . 혹은 meta programming이라고
+한다.
+
+## 2. 컴파일러? 트랜스파일러? 인터프리터 ?
+
+간단하게 3가지를 비교해보면 아래 그림과 같다.
+
+<img src="/images/post_img/11/CompileTranspileInterpreter.jpg" />
+
+- **transpiler** 하나의 **언어**를 다른 형태의 **언어**로 변환해 주는 기능을 `부각`시키는 표현으로
+  compiler라는 표현보다 transpiler라는 표현을 쓴다. ( 번역이라는 말과 합쳐진 듯 하다 .) ex.
+  TypeScript, Babel <br />
+- **compiler** 한 번 컴파일 하게 되면, 별도 생성된 목적 파일을 통해 빠르게 실행할 수 있다. 대용량
+  소스에 적합
+  - 컴파일이 필요 O
+  - 컴파일러가 필요 O
+  - 컴파일 하는 시점 O => 컴파일 타임
+  - 컴파일된 결과물을 실행
+  - 컴파일된 결과물을 실행하는 시점 ex. C, Go, C#, JAVA, ... <br />
+
+- **interpreter** 목적 파일 산출 과정이 없이 실행과 동시에 줄 단위로 번역이 된 다. 저용량 소스에
+  적합
+  - 컴파일이 필요 X
+  - 컴파일러가 필요 X
+  - 컴파일하는 시점 X
+  - 코드 자체를 실행
+  - 코드를 실행하는 시점 o = 런타임 ex. javaScript
+
+### \*Tranditional Compiled Language
+
+- 컴파일 언어라고 한다.
+- C, C++, Go, C#, Java, ...
+- 프로그래머가 작성한 `Source Code` 를 기계어로 변환하는 과정을 `Compile`이라고 한다.
+- 기계어로 변환된 결과물을 `Object Code` (목적 코드 )라 한다.
+- `Compile` 하는 프로그램을 `Compiler` 라고 한다 .
+- `Compile` 하는 동안을 `Compile Time` 이라고 한다 .
+- 컴파일된 코드는 프로세서에 따라 다르다.
+- 소스 코드에서는 OS 에 따라 라이브러리가 다르다 .
+- 컴파일된 코드는 작은 크기에 최적화된다.
+- 일반적으로 실행시 기계어로 바꾸는 방식 (인터프리터 언어) 보다 빠르다 .
+- 실행시 기계어로 바꿔주는 연산이 필요없기 때문이다 .
+
+## 3. 정적타입 언어 vs 동적타입 언어
+
+- 정적 타입 언어 : 미리 타입을 지정해놓고 시작
+  - 자바스크립트에서 정적타입언어만 갖고오자라고 한 것이 TypeScript
+  - 동적 타입 언어가 갖고 있는 단점을 커버하자 .하는 목적이다 .
+  - test coverage를 올리면 상관없긴하다 .
+  - ex. TypeScript
+- 동적 타입 언어 : 타입을 정하지 않는다. 타입 자체가 변화하는 것을 막지않는다.
+  - ex. JavaScript
+
+### \*[The End of Dynamic Languages](http://elbenshira.com/blog/the-end-of-dynamic-languages/) vs [Have Static Languages Won?](https://pointersgonewild.com/2015/11/25/have-static-languages-won/?utm_source=Clojure+Gazette&utm_medium=email&utm_campaign=152)
+
+- 최근 나타나는 신생언어들은 대부분 정적 타입을 지원한다. (Typed Racket, Typed Clojure, TypeScript,
+  Typed Lua, Python with type hints)
+- `정적 언어로 작성된 코드의 버그는 해당 코드를 실행하기 전까지는 찾을 수 없다.`
+- 동적 언어의 경우 대부분 대충 디자인되어있다 . JavaScript의 경우에는 2 주만에 개발된 언어이다보니
+  컴파일러와 힌들리- 밀너 타입추론 시스템과 같은 CS 지식으로 무장한 사람들이 디자인한 언어와
+  비교하는건 무리다.
+- Closure 같은 경우에도 이제는 대부분의 언어에서 지원하게 되면서 functional 과 imperative
+  프로그래밍이 융합되듯이, 동적 언어와 정적 언어도 그렇게 되지 않을 까? Crystal Programming Language
+  의 경우 루비를 기반으로 하는 정적/ 동적 언어 가 합쳐진 언어이다.
+
+---
+
+### 참고링크
+
+1. http://www.notforme.kr/archives/1541
+2. http://www.geekhours.com/2017/03/08/difference-compiling-transpiling/
+3. https://ruslanspivak.com/lsbasi-part1/
+4. http://blog.sejongin.kr/44
+5. http://hieroglyph.tistory.com/4
+6. https://okky.kr/article/304342

@@ -1,0 +1,597 @@
+---
+title: "1/ 함수형 프로그래밍 (\U0001F644)"
+date: '2018-11-05'
+description:
+  "> \U0001F4D2 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다. > 함수형 프로그래밍에 대해서
+  더 깊게 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자. TL;DR - Higher-Order Functions
+  (고계 함수, 계산의 효율성) - Purit..."
+author: Joy Kim
+tags:
+  - javaScript
+categories:
+  - 01_Web
+  - 03. JavaScript
+enableComment: true
+customList:
+  "[\n  {\n    \"title\": {\n      \"name\": \"1. 함수형 프로그래밍의 개념\",\n      \"id\":
+  \"1\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"cf__명령형
+  프로그래밍\",\n        \"id\": \"cf__1\"\n      }\n    ]\n  },\n  {\n    \"title\":
+  {\n      \"name\": \"2. 자바스크립트에서 함수형 프로그래밍\",\n      \"id\":
+  \"2\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"2.1 배열의 각 원소 총합
+  구하기(reduce)\",\n        \"id\": \"2-1\"\n      },\n      {\n        \"name\": \"2.2
+  팩토리얼\",\n        \"id\": \"2-2\"\n      },\n      {\n        \"name\": \"2.3 피보나치
+  수열\",\n        \"id\": \"2-3\"\n      }\n    ]\n  },\n  {\n    \"title\": {\n      \"name\":
+  \"3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수\",\n      \"id\":
+  \"3\"\n    },\n    \"depth1\": [\n      {\n        \"name\": \"3.1 함수
+  적용(Function.prototype.apply)\",\n        \"id\": \"3-1\"\n      },\n      {\n        \"name\":
+  \"cf__함수호출(괄호연산자 vs call/apply)\",\n        \"id\":
+  \"cf__3\"\n      },\n      {\n        \"name\": \"3.2 커링\",\n        \"id\":
+  \"3-2\"\n      },\n      {\n        \"name\": \"cf__slice 메서드\",\n        \"id\":
+  \"cf__4\"\n      },\n      {\n        \"name\": \"3.3 bind\",\n        \"id\":
+  \"3-3\"\n      },\n      {\n        \"name\": \"3.4 래퍼 \U0001F644\U0001F644\",\n        \"id\":
+  \"3-4\"\n      },\n      {\n        \"name\": \"3.5 반복 함수\",\n        \"id\":
+  \"3-5\"\n      }\n    ]\n  }\n]"
+thumbnail: /images/2018/40/thumb_default.jpg
+---
+
+> 📒 인사이드 자바스크립트 중 메모해야할 부분만 적었습니다. 함수형 프로그래밍에 대해서 더 깊게
+> 배우길 원한다면 Lisp나 Haskell과 같은 언어를 공부하자.
+
+TL;DR
+
+- Higher-Order Functions (고계 함수, 계산의 효율성)
+- Purity (순수성, 데이터 플로우의 취급)
+  - Immutable Data (불변성)
+  - [Referential Transparency](https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1)
+  - [Lazy Evaluation](https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1)
+- Recursion
+- 커링
+- bind (with call/apply)
+- 래퍼
+- 반복함수
+
+---
+
+<a name="1"></a>
+## 1. 함수형 프로그래밍의 개념 함수의 조합으로 작업을 수행함을 의미한다. **이 작업이 이루어지는 동안
+작업에 필요한 데이터와 상태는 변하지 않는다는 점.** 함수가 바로 연산의 대상이 된다.
+
+**FP의 목적**
+
+1. 함수형 프로그래밍이 수학에서 출발한 문제 해결 방법론이므로 수학문제를 프로그래밍으로 해결하는 데
+   있어서 상당한 이득을 볼 수 있다.
+2. 상태 변경과 가변 데이터를 피하려는.
+
+- FP의 목적은 상태 변경을 피하는 것이다.
+- FP에서는 변수를 모든 오류의 근본적인 원인으로 치부한다.누군가에 의해 변수의 값이 변경되기 때문에
+  이로 인해 오류가 더욱 빈번하게 발생한다고 생각한다. -
+- 따라서 함수형 프로그래밍에서는 이런 변수가 외부에서 명확하게 드러나게 하여 통제 가능하게 만드는
+  것을 지향한다.
+
+```
+f1 = encrypt1;
+f2 = encrypt2;
+f3 = encrypt3;
+
+pure_value = 'zzon';
+encrypted_value = get_encrypted(x);
+
+encrypted_value = get_encrypted(f1);
+encrypted_value = get_encrypted(f2);
+encrypted_value = get_encrypted(f3);
+```
+
+<img src="/images/2018/40/01.jpeg" />
+
+**순수함수 Pure fucntion** 외부에 영향을 미치지 않는 함수
+
+1. 같은 입력이 주어지면, 항상 같은 출력을 반환한다.
+2. 부작용(side effect)를 발생시키지 않는다.
+3. 외부의 가변(mutable) 데이터에 의존하지 않는다.
+
+```js
+function getCurrentValue(value) {
+  return processAt(value, new Date());
+}
+// 사이드 이팩트 없앰
+function getCurrentValue(value, time) {
+  return processAt(value, time);
+}
+```
+
+**부원인과 부작용**
+
+- new Date는 외부변수
+- 함수를 실행하는 시점에 따라 결과를 예측하기 어렵ㄴ다.
+- **함수의 정의만 보고 추측하기 어려운 함수를 <span class="mint">부원인(side cause)과 부작용(side
+  effect)</span>이 존재하는 함수라고 한다.**
+- 함수에 드러나지 않은 입력값 또는 출력값응ㄹ 부원인(side cause)라고 하고
+- 이로인해 발생한 결과를 부작용(side effect)라고 한다.
+  - 부작용은 부정적인 의미는 아니지만 프로그래머가 이를 고려하지 않고 사용했을 경우에는 오류를
+    유발할 수 있다.
+  - 함수형 프로그래밍에서는 이러한 상황이 궁극적으로 복잡성을 초래하기 때문에 복잡성을 표면으로
+    드러내도록 권장한다.
+
+**고계 함수 Higher-order function** 함수를 또 하나의 값으로 간주하여 함수의 인자 혹은 반환값으로
+사용할 수 있는 함수
+
+### 내부 데이터 및 상태는 그대로 둔 채 (pure_value) <span class="mint">제어할 함수를 변경 및 조합</span>함으로써 (encrypt1,2,3) 원하는 결과를 얻어내는 것이 함수형 프로그래밍의 중요한 특성
+
+- 높은 수준의 모듈화가 가능하다.
+
+**주요키워드**
+
+- Higher-Order Functions (고계 함수, 계산의 효율성)
+- Purity (순수성, 데이터 플로우의 취급)
+  - Immutable Data (불변성)
+  - [Referential Transparency](https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1)
+  - [Lazy Evaluation](https://ko.wikipedia.org/wiki/%EC%B0%B8%EC%A1%B0_%ED%88%AC%EB%AA%85%EC%84%B1)
+- Recursion
+
+<a name="cf__1" ></a>
+### cf__명령형 프로그래밍
+순수함수도 있지만, 
+특정 작업을 수행하는 여러가지 명령이 기술되어 있는 함수도 있다.
+=> **프로시저**라고 한다. Procedure
+
+---
+
+---
+
+<a name="2"></a>
+## 2. 자바스크립트에서 함수형 프로그래밍 자바스크립트는 다음을 지원하기때문에 함수형 프로그래밍이
+가능 1. 일급객체로서의 함수 _ 함수의 인자로 함수를 넘길 수 있는 특징 2. 클로저 _은닉화
+
+```js
+const f1 = function(input) {
+  let result;
+  result = 1;
+  return result;
+}
+const f2 = function(input) {
+  let result;
+  result = 2;
+  return result;
+}
+const f3 = function(input) {
+  let result;
+  result = 3;
+  return result;
+}
+const get_encrypted = function(func) {
+  const str  'zzoon';
+  return function() { return func.call(null, str);} // 클로저, 자유변수 str
+}
+const encrypted_value = get_encrypted(f1)();
+console.log(encrypted_value) //1
+const encrypted_value = get_encrypted(f2)();
+console.log(encrypted_value) //2
+const encrypted_value = get_encrypted(f3)();
+console.log(encrypted_value) //3
+```
+
+---
+
+<a name="2-1"></a>
+### 2-1. 배열의 각 원소 총합 구하기(reduce) 명령형 프로그래밍으로 작성된 코드.
+
+```js
+function sum(arr) {
+  const len = arr.length;
+  let i = 0,
+    sum = 0;
+
+  for (; i < len; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+
+const arr = [1, 2, 3, 4];
+console.log(sum(arr));
+```
+
+함수형 프로그래밍
+
+```js
+function reduce(func, arr, memo){
+  // memo: cache 값
+  const len = arr.length;
+  let i = 0, accum = memo;
+  for(; i<len; i++){
+    accum = func(accum, arr[i]);
+  }
+  return accum;
+}
+
+const arr = [1,2,3,4];
+const sum = function(x,y) { return x+y; }
+const multiply = function(x,y) { return x*y; }
+
+console.log(reduce(sum, arr, 0);)
+console.log(reduce(multiply, arr, 1);)
+```
+
+---
+
+<a name="2-2" ></a>
+### 2-2. 팩토리얼
+명령형 프로그래밍
+```js
+function fact(num) {
+  const val = 1;
+  for(let i = 2; i<=num; i++) val = val*i;
+  return val;
+}
+```
+혹은 재귀호출
+```js
+function fact(num) {
+  if(num == 0) return 1;
+  else return num*fact(num-1);
+}
+```
+
+**앞서 연산한 결과를 캐시에 저장하여 사용하여 함수를 작성한다면 성능 향상에 도움이 된다.**
+
+```js
+const fact = (function () {
+  const cache = { 0: 1 };
+  const func = function (n) {
+    // 클로저
+    let result = 0;
+    if (typeof (cache[n] === 'number')) {
+      result = cache[n];
+    } else {
+      result = cache[n] = n * func(n - 1); // 10 * 9 * 8 * ... * 1
+    }
+    return result;
+  };
+  return func;
+})();
+
+console.log(fact(10));
+console.log(fact(20));
+```
+
+---
+
+<a name="cf__2"></a>
+### cf__2 메모이제이션 패턴 memoization 패턴 **memoize** - 계산 결과를 저장해 놓아 이후 다시 계산할
+필요 없이 사용할 수 있게 한다는 컴퓨터 용어
+
+**메모이제이션 패턴**
+
+- 기본적으로 계산된 결과를 함수 프로퍼티값으로 담아 놓고 나중에 사용한다.
+- jQuery에는 data()라는 메모이제이션 패턴을 사용하는 메서드가 있다.
+  > data : 해당 엘리먼트에 JavaScript Type의 value를 저장할 수 있으며, 값으로 저장되어 있는 데이터를
+  > 읽습니다. data-XXX
+- 함수의 성능향상을 위해 `Function.prototype`에 메모이제이션 패턴을 사용할 수 있는 함수를 넣으면
+  사용가능하다. 주의할 점은 한 번 값이 들어간 경우 계속 유지되므로 이를 **초기화**하는 방법 역시
+  제공돼야 한다.
+  > jQuery에서는 cleanData라는 메서드를 제공한다.
+
+```js
+function Calculate(key, input, func) {
+  Calculate.data = Calculate.data || {}; //cache
+  if (!Calculate.data[key]) {
+    let result;
+    result = func(input);
+    Calculate.data[key] = result;
+  }
+  return Calculate.data[key];
+}
+
+let result = Calculate(1, 5, function (input) {
+  return input * input;
+});
+console.log(result);
+result = Calculate(2, 5, function (input) {
+  return (input * input) / 4;
+});
+
+console.log(result);
+console.log(Calculate(1));
+console.log(Calculate(2));
+```
+
+Function 프로토타입에 `memoization()`함수 넣기
+
+```js
+Function.prototype.memoization = function (key) {
+  const arg = Array.prototype.slice.call(arguments, 1);
+  // key에 들어온 인자값의 2번째인자
+  this.data = this.data || {}; // data객체 있으면 그대로, 없으면 초기화
+  return this.data[key] !== undefined ? this.data[key] : (this.data[key] = this.apply(this, arg)); // 해당함수를 인자값을 넘기며 호출, arg는 input으로 들어감
+};
+function myCalculate1(input) {
+  return input * input;
+}
+function myCalculate2(input) {
+  return (input * input) / 4;
+}
+
+myCalculate1.memoization(1, 5);
+myCalculate1.memoization(2, 4);
+myCalculate2.memoization(1, 6);
+myCalculate2.memoization(2, 7);
+
+console.log(myCalculate1.memoization(1));
+console.log(myCalculate1.memoization(2));
+console.log(myCalculate2.memoization(1));
+console.log(myCalculate2.memoization(2));
+```
+
+<img src="/images/2018/40/2.jpg" style="width:100%" />
+
+---
+
+<a name="2-3" ></a>
+### 2-3. 피보나치 수열
+메모이제이션 기법 사용한 함수형 프로그래밍
+```js
+const fibo = function(){
+  const cache = {'0': 0, '1': 1};
+  const func = function(n){
+    let result = 0;
+    if(typeof(cache[n]) === 'number'){
+      result = cache[n];
+    } else {
+      result = cache[n] = func(n-1) + func(n-2);
+    }
+    return result;
+  }
+  return func;
+}();
+console.log(fibo(10));
+```
+팩토리얼 함수와 패턴과 거의 비슷하다.
+`cache의 초기값`과 함수를 재귀 호출할 때 `산술식`만 다르다.
+=> 팩토리얼과 피보나치 수열을 계산하는 함수를 인자로 받는 함수를 모듈화할 수 있다.
+
+```js
+const cacher = function (cache, func) {
+  const calculate = function (n) {
+    if (typeof cache[n] === 'number') {
+      result = cache[n];
+    } else {
+      result = cache[n] = func(calculate, n);
+    }
+    return result;
+  };
+  return cacluate;
+};
+
+const fact = cacher({ 0: 0 }, function (func, n) {
+  return n * func(n - 1);
+});
+const fibo = cacher({ 0: 0, 1: 1 }, function (func, n) {
+  return func(n - 1) + func(n - 2);
+});
+```
+
+---
+
+---
+
+<a name="3"></a>
+## 3. 자바스크립트에서의 함수형 프로그래밍을 활용한 주요 함수
+<a name="3-1"></a>
+### 3-1. 함수 적용 `Function.prototype.apply` **왜 이름이 apply?** - 함수 적용(Applying functions)는
+함수형 프로그래밍에서 사용되는 용어다. - 함수형 프로그래밍에서는 **특정 데이터를 여러가지 함수를
+적용시키는 방식으로 작업을 수행한다.** 여기서 함수는 단순히 입력을 넣고 출력을 받는 기능을
+수행하는것 뿐만 아니라, 인자 혹은 반환값으로 전달된 함수를 **특정 데이터에 적용시키는 개념으로
+이해해야한다.** - `func.apply(Obj, Args)`와 같은 함수 호출을 **'func 함수를 Obj객체와 Args인자
+배열에 적용시킨다'**라고 표현할 수 있다.
+
+<a name="cf__3"></a>
+cf__3. 함수 호출 괄호 연산자 대비 call/apply를 사용할 때의 장점은 **함수가 실행되는 컨텍스트를
+지정할 수 있다는 점**이다(this의 값). 이러한 형태는 고차 함수, 특히 이러한 고차 함수가 나중에
+실행되는 함수를 소비할 때 볼 수 있다. Function 프로토타입에서 bind 메소드의 내부는 call/apply의
+훌륭한 예다.
+
+```js
+// Possible implementation of bind using apply
+function bind(func, context) {
+  return function () {
+    func.apply(context, Array.prototype.slice.apply(arguments));
+  };
+}
+```
+
+---
+
+<a name="3-2"></a>
+### 3-2. 커링 특정 함수에서 정의된 인자의 일부를 넣어 고정시키고, 나머지를 인자로 받는 새로운 함수를
+만드는 것을 의미한다.
+
+```js
+function calculate(a, b, c) {
+  return a * b + c;
+}
+function curry(func) {
+  // 클로저 반환
+  const args = Array.prototype.slice.call(arguments, 1); // 배열의 2번째 인덱스 이후의 값의 배열
+  return function () {
+    return func.apply(
+      null,
+      args.concat(Array.prototype.slice.call(arguments)) // 익명함수의 인자
+    );
+  };
+}
+
+const new_func1 = curry(calculate, 1); // a를 먼저 받음
+console.log(new_func1(2, 3)); // a를 인자와 합치면서(concat)
+// === console.log(curry(calculate,1)(2,3));
+const new_func2 = curry(calculate, 1, 3); // a,b를 먼저 받음
+console.log(new_func2(3));
+```
+
+자바스크립트에서 기본으로 제공하지 않기 때문에 Function.prototype에 정의하여 사용할 수 있다.
+
+```js
+Function.prototype.curry = function () {
+  const fn = this,
+    args = Array.prototype.slice.claa(arguments);
+  return function () {
+    return fn.apply(this, args.concat(Array.prototype.slice.call(arguments)));
+  };
+};
+```
+
+---
+
+<a name="cf__4"></a>
+#### cf__4 slice 메서드 커링에서 함수의 인자를 arguments 객체로 조작할 때 이 메서드를 이용하여
+배열로 만든 후 손쉽게 조작 가능
+
+---
+
+<a name="3-3"></a>
+### 3-3. bind - 커링기법을 활용한 함수이다. - 사용자가 고정시키고자 하는 인자를 bind()함수를 호출할
+때 인자로 넘겨주고 반환받은 함수를 호출하면서 나머지 가변 인자를 넣어줄 수 있다.
+
+```js
+Function.prototype.bind = function (thisArg) {
+  const fn = this,
+    slice = Array.prototype.slice,
+    args = slice.call(arguments, 1);
+  return function () {
+    return fn.apply(thisArg, args.concat(slice.call(arguments)));
+  };
+};
+```
+
+```js
+const print_all = function (arg) {
+  for (let i in this) console.log(i + ':' + this[i]);
+  for (let i in arguments) console.log(i + ':' + arguments[i]);
+};
+const myobj = { name: 'zzoon' };
+const myfunc = print_all.bind(myobj);
+myfunc(); // name: zzoon
+
+const myfunc1 = print_all.bind(myobj, 'iamjoy', 'others');
+myfunc1('insidejs');
+/* name: zzoon
+   0: iamjoy
+   1: others
+   2: insidejs
+*/
+```
+
+- 특정 함수에 원하는 객체를 바인딩시켜 새로운 함수를 사용할 때 bind()함수가 사용된다.
+
+---
+
+<a name="3-4" ></a>
+### 3-4. 래퍼 (클로저를 절묘하게 사용한 함수형 프로그래밍) 🙄
+특정함수를 자신의 함수로 덮어쓰는 것
+> OOP에서 다형성을 위해 오버라이드를 지원하는것과 유사하다.
+
+```ts
+function wrap(object: Object, method: string, wrapper) {
+  const fn = object[method]; // 덮여질 함수
+  return (object[method] = function () {
+    return wrapper.apply(
+      this,
+      [fn.bind(this)].concat(Array.prototype.slice.call(arguments))
+      // fn: original 함수
+    );
+  });
+}
+
+Function.prototype.original = function (value) {
+  this.value = value;
+  console.log('value : ' + this.value);
+};
+
+const mywrap = wrap(Function.prototype, 'original', function (orig_func, value) {
+  this.value = 20;
+  orig_func(value);
+  console.log('wrapper value : ' + this.value);
+});
+const obj = new mywrap('joy');
+```
+
+---
+
+<a name="3-5"></a>
+### 3-5. 반복 함수 #### 3-5-1. each jQuery 1.0의 each()
+
+```js
+function each(obj, fn, args) {
+  if (obj.length === undefined)
+    // 객체로 넘어올 때
+    for (let i in obj) fn.apply(obj[i], args || [i, obj[i]]); // 배열로 넘어올 때
+  else for (let i = 0; i < obj.length; i++) fn.apply(obj[i], args || [i, obj[i]]);
+  return obj;
+}
+
+each([1, 2, 3], function (idx, num) {
+  console.log(idx + ':' + num);
+});
+const joy = {
+  name: 'joy',
+  company: 'goodoc',
+  hasBoyfriend: true,
+};
+each(joy, function (idx, value) {
+  console.log(idx + ':' + value);
+});
+```
+
+#### 3-5-2. map
+
+```js
+Array.prototype.map = function (callback) {
+  // this가 null인지, 배열인지 체크
+  // callback이 함수인지 체크
+  const obj = this;
+  let value, mapped_value;
+  const A = new Array(obj.length); //[undefined, undefined, undefined]
+
+  for (let i = 0; i < obj.length; i++) {
+    value = obj[i];
+    mapped_value = callback.call(null, value);
+    A[i] = mapped_value;
+  }
+  return A;
+};
+
+const arr = [1, 2, 3];
+const new_arr = arr.map(function (value) {
+  return value * value;
+});
+consoel.log(new_arr);
+```
+
+#### 3-5-3. reduce
+
+```js
+Array.prototype.reduce = function (callback, memo) {
+  //this가 null인지, 배열인지 체크
+  // callback이 함수인지 체크
+
+  const obj = this;
+  let value,
+    accumulated_value = 0; //accumulated 뜻* : 축적되다.
+  for (let i = 0; i < obj.length; i++) {
+    value = obj[i];
+    accumulated_value = callback.call(null, accumulated_value, value);
+  }
+  return accumulated_value;
+};
+const arr = [1, 2, 3];
+const accumulated_val = arr.reduce(function (a, b) {
+  return a + b * b;
+});
+consoel.log(accumulated_val);
+```
+
+---
+
+**참고**
+
+1. [프로그래밍 패러다임의 변화](https://dave42blog.wordpress.com/2016/08/13/functional%EB%B6%80%ED%84%B0-reactive%EA%B9%8C%EC%A7%80-3-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%9D%98-%EB%B3%80%ED%99%94-oop%EC%99%80-fp/)
+2. [‘제다이급’ 자바스크립트 고수들이 전하는 6가지 개발팁](http://www.itworld.co.kr/news/84870#csidx096c46214e29fe8990fa281c60f968e)

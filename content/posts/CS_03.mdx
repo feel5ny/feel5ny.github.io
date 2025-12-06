@@ -1,0 +1,150 @@
+---
+title: 네트워크 basic
+date: '2017-12-21'
+description: >-
+  수업 전 미리 알아보기 -------- 목차  1. 네트워크란? 2. 인터넷이란? 3. OSI 7 Layer & TCP/IP Model
+  Layer ---  네트워크란? 두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것 네트워크의
+  종류 1. PAN (...
+author: Joy Kim
+tags:
+  - CS
+  - network
+categories:
+  - 01_Web
+  - 02. Network
+enableComment: true
+thumbnail: /images/post_img/66/thumb_default.jpg
+---
+
+수업 전 미리 알아보기
+
+---
+
+목차
+
+1. [네트워크란?](#network)
+2. [인터넷이란?](#internet)
+3. [OSI 7 Layer & TCP/IP Model Layer](#osi7)
+
+---
+
+## <a name="network" ></a> 네트워크란?
+
+두 대 이상의 컴퓨터 들을 연결하고 서로 통신(이야기) 할수 있는 것
+
+### 네트워크의 종류
+
+1. PAN (Personal Area Network) : 가장 작은 규모의 네트워크
+2. LAN (Local Area Network) : 근거리 영역 네트워크
+3. Man (Metropolitan Area Network) : 대도시 영역 네트워크
+4. Wan (Wide Area Network) : 광대역 네트워크 (지역과 지역, 지방과 지방, 나라와 나라, 대륙과 대륙을
+   연결하는 네트워크)
+
+<img src="/images/post_img/66/network.jpg" />
+<img src="/images/post_img/66/wan.jpg" />
+
+### 1. LAN
+
+Local Area Network : 근거리 통신망 LAN의 토폴로지에 따라 버스형, 링형, 스타형, 계층형, 메쉬형 등으로
+구분할수 있다. \*토폴로지란 (Topologies) : 네트워크를 구성하는 노드와 노드간에 연결 상태에 대한
+배치를 의미한다.
+
+<img src="/images/post_img/66/topology.jpg" />
+
+#### 1-1. Bus Topology (버스형)
+
+신뢰성과 확장성이 좋으며 모든 노드 들이 버스에 `T 자형`으로 연결 되어 상호 `Point - to - Point`
+형태를 가지게 됩니다. 각 노드들의 연결은 `어뎁터(Adapter)`를 사용하며 양 끝 단에 `Terminator`를 두게
+됩니다.  
+각 노드의 고장은 전체 네트워크 부분에 영향을 미치는 점을 가지며 CSMA/CD 방식을 주로 사용, 케이블
+사용량이 적기 때문에 투자 비용이 적게 드는 편입니다.
+
+\*CSMA/CD 방식이란
+
+- 호스트가 채널의 상태를 감지해 충돌을 피하는 매체접근방식
+- CSMA(Carrier Sense Multiple Access)
+- 호스트가 전송하기 전에 매체의 전압을 점검하여 회선이 사용되지 않는 상태임을 확인하고 전송을 시작함
+
+#### 1-2. Ring Topology (링형)
+
+통신제어가 간단하고 신뢰성이 높으며 `장거리 네트워크`에서 사용 가능 합니다. `링(Ring) 형태`를
+이루지만 노드간 통신은 `Point - to - Point` 를 가지며 각 노드에서 신호 재생이 가능 하기 때문에 버스
+형태와 달리 **거리 제약이 적으며 잡음에도 강합니다.**
+
+#### 1-3. Star Topology (스타형/성형)
+
+중앙 제어 방식으로 모든 기기가 `Point - to - Point` 방식으로 연결 되어 있으며 문제 해결이 쉽고
+하나의 기기의 고장은 전체에 영향을 미치지 않지만 중앙 제어 장비가 고장이 나면 모든 시스템에 영향을
+미치게 됩니다. 케이블 사용량이 많으며 비용 또한 큰 편입니다.
+
+#### 1-4. Mash Topology (메쉬형)
+
+네트워크 상의 모든 컴퓨터들이 연결되어진 형태로써 연결 된 기기나 노드가 고장나더라도 다른 경로를
+통해 통신이 가능하며 어떠한 경우에도 네트워크가 동작한다는 장점을 가지게 됩니다. 하지만, 네트워크에
+연결된 기기의 수가 많을 경우 모든 기기와 연결 해야 하기 때문에 `케이블 사용량이 많으며` 구조 또한
+복잡하여 `네트워크 관리가 힘들어 진다`는 단점을 가지고 있습니다.
+
+#### 1-5. Fully Connected
+
+---
+
+## <a name="internet" ></a> 2. 인터넷이란?
+
+International Network 의 합성어 로써 TCP/IP ( Transmission Control Protocol / Internet Protocol ) 을
+기반으로 전세계의 네트워크를 하나로 연결 하여 각각 PC가 가지고 있는 자료나 정보를 주고 받을 수 있는
+광역 네트워크를 인터넷 이라고 합니다.
+
+\*다른 정의
+
+- LAN 과 LAN 을 연결 하는 WAN 이 서로 다른 WAN 들과 연결 되어 하나의 네트워크를 구성한 네크워크를
+  칭함.
+- 전세계의 정보를 쉽게 얻을 수 있는 정보의 바다이며, 다양한 정보 자원을 자유로운 분산과 공유를 통해
+  상업적인 목적 목적이 아닌 무료로 사용 할수 있어야 한다.
+- 모든 국가 들이 네트워크 통해 연결 되어 전세계를 하나의 공동체로 구성한 네트워크를 인터넷이라 한다.
+
+### 2-1. Protocol
+
+사람과 사람이 통신할때 서로 이해할 수 있는 언어, 공용된 언어를 사용해 전세계 모든 사람과 대화 할수
+있다라고 하면, 컴퓨터와 컴퓨터도 서로 이해 할 수 있는 언어, 공용된 언어를 사용 해야 한다는 것인데 이
+것이 바로 프로토콜(Protocol) 입니다. 어떤 시스템이 다른 시스템과 통신을 원활하게 수용하도록 해주는
+통신 규약, 약속
+
+프로토콜의 기능으로써
+
+1. 세분화와 재합성
+2. 캡슐화
+3. 연결제어
+4. 오류제어
+5. 흐름제어
+6. 동기화
+7. 순서 결정
+8. 주소 설정
+9. 다중화
+10. 전송 서비스
+
+순서 결정
+
+<img src="/images/post_img/66/protocol_order.png" />
+세분화와 재합성
+<img src="/images/post_img/66/protocol_segment.png" />
+
+<img src="/images/post_img/66/protocol.gif" />
+
+프로토콜은 특성에 따라 여러가지 형태로 분류할수 있으며 각각 형태를 구분 지어 본다면
+
+1. 직접/간접 프로토콜
+2. 단일체/구조적 프로토콜
+3. 대칭/비대칭 프로토콜
+
+네트워크 용어에서 나오는 P 는 Protocol 의 약자가 대부분이며 대표적으로 인터넷을 할 때 사용되는
+프로토콜은 TCP/IP 가 있습니다. TCP/IP 는 Transmission Control Protocol / Internet Protocol 의
+약자로써 컴퓨터와 컴퓨터가 통신 회선 등으로 연결 하기 위한 통신 규약입니다. 그외 HTTP, ARP, ICMP,
+SNMP, SMTP, POP, FTP, TFTP, DHCP 등이 프로토콜의 종류입니다.
+
+---
+
+### 참고링크
+
+1. http://mindnet.tistory.com/entry/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-1%ED%8E%B8-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%ACNetwork-%EB%9E%80?category=702276
+2. [네트워크 쉽게 이해하기-전편](http://www.jidum.com/)
+3. [프로토콜 기능](http://minhaep.tistory.com/entry/%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9CProtocol%EC%9D%B4%EB%9E%80)

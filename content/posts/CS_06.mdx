@@ -1,0 +1,55 @@
+---
+title: 3 way handshake
+date: '2018-01-01'
+description: >-
+  3 way handshake Client와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이
+  사용한다. TCP 통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다. 쉽게 이야기
+  하면, 서로의 통신을...
+author: Joy Kim
+tags:
+  - CS
+  - network
+categories:
+  - 01_Web
+  - 02. Network
+enableComment: true
+thumbnail: /images/2018/01/thumb_default.jpg
+---
+
+## 3 way handshake
+
+Client와 Server 또는 P2P Socket 통신 등, 네트워크를 사용한 통신시 TCP 통신을 많이 사용한다. TCP
+통신을 위한 네트워크 연결은 3 way handshake 라는 방식으로 연결된다. 쉽게 이야기 하면, 서로의 통신을
+위한 관문(port)을 확인하고 연결하기 위하여 3번의 요청/응답 후에 연결이 되는 것이다.
+
+<img src="/images/2018/01/handshake.jpg" />
+
+먼저 Server에서 열려있는 포트는 LISTEN 상태이고 Client에서는 Closed 상태이다.
+
+1. Client에서 Server에 연결 요청을 하기위해 SYN 데이터를 보낸다. (SYN = synchronize sequence
+   numbers)
+
+2. Server에서 해당 포트는 LISTEN 상태에서 SYN 데이터를 받고 SYN_RCV로 상태가 변경된다. 그리고 요청을
+   정상적으로 받았다는 대답(ACK)와 Client도 포트를 열어달라는 SYN 을 같이 보낸다. (ACK =
+   acknowledgment)
+
+3. Client에서는 SYN+ACK 를 받고 ESTABLISHED로 상태를 변경하고 서버에 요청을 잘 받았다는 ACK 를
+   전송한다. ACK를 받은 서버는 상태가 ESTABLSHED로 변경된다.
+
+위와 같이 3번의 통신이 정상적으로 이루어지면, 서로의 포트가 ESTABLISHED 되면서 연결이 되게 된다.
+
+### Status
+
+- Closed : 닫힌 상태
+- LISTEN : 포트가 열린 상태로 연결 요청 대기 중
+- SYN_RCV : SYNC 요청을 받고 상대방의 응답을 기다리는 중
+- ESTABLISHED : 포트 연결 상태
+
+현재의 포트 상태 확인은 netstat 명령어로 할 수 있다.
+
+---
+
+### 참고링크
+
+1. http://hyeonstorage.tistory.com/286
+2. http://mindnet.tistory.com/entry/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%89%BD%EA%B2%8C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-22%ED%8E%B8-TCP-3-WayHandshake-4-WayHandshake
