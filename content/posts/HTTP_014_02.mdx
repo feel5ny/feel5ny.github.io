@@ -174,7 +174,7 @@ HTTPS에서는 클라는
 5. SSL 닫힘을 통지한다.
 6. TCP 커넥션이 닫힌다.
 
-<img src="/images/2019/45/01.png" style="width:100%" />
+<img src="/images/2019/45/01.png" style={{width: '100%'}} />
 
 <a name="handshake" />
 
@@ -213,11 +213,11 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 10. (서버 => 클) Change Cipher Spec
 11. (서버 => 클) Encrypted Handshake Message
 
-<img src="/images/2019/45/04.png" style="width:100%" />
+<img src="/images/2019/45/04.png" style={{width: '100%'}} />
 
 ---
 
-<img src="/images/2019/45/05.png" style="width:100%" />
+<img src="/images/2019/45/05.png" style={{width: '100%'}} />
 
 ---
 
@@ -230,7 +230,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 - 자신이 지원하는 cipher리스트,
 - 클라이언트가 생성한 난수 정보를 보낸다.
 
-<img src="/images/2019/45/07.png" style="width:100%" />
+<img src="/images/2019/45/07.png" style={{width: '100%'}} />
 
 #### 2. (서버 => 클) Server Hello
 
@@ -238,7 +238,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 - 자신이 만든 임의의 난수와
 - 클라이언트의 cipher 리스트 중 하나의 선택하여 그 정보를 클라이언트에게 보낸다.
 
-<img src="/images/2019/45/08.png" style="width:100%" />
+<img src="/images/2019/45/08.png" style={{width: '100%'}} />
 
 #### 3. (서버 => 클) Certificate
 
@@ -249,14 +249,14 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 
 ---
 
-<img src="/images/2019/45/09.png" style="width:100%" />
+<img src="/images/2019/45/09.png" style={{width: '100%'}} />
 
 #### 4. (서버 => 클) Certificate Status
 
 - 갖고있는 인증서의 유효성 정보를를 전송한다.
 - OCSP는 `온라인 인증서 상태 프로토콜`의 약자로, 인증서 유효성 확인을 제공하는 방법이다.
 
-<img src="/images/2019/45/10.png" style="width:100%" />
+<img src="/images/2019/45/10.png" style={{width: '100%'}} />
 
 #### 5. (서버 => 클) Server Key Exchange
 
@@ -265,7 +265,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
   > **ECDHE** : Elliptic Curve 및 Ephermeral 을 지원하는 디피 헬만 (Diffie Hellman) 방식 (PFS,
   > Perfect Foward Secrecy 지원) [출처](https://rsec.kr/?p=455)
 
-<img src="/images/2019/45/12.png" style="width:100%" />
+<img src="/images/2019/45/12.png" style={{width: '100%'}} />
 
 #### 6. (서버 => 클) Server Hello Done
 
@@ -277,7 +277,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 - 서버의 공개키를 통해 암호화하여 서버로 전송한다. (아까 5번에서 받은 public key)
 - 즉, 해당과정을 통해 실질적으로 암호화에 사용하는 **대칭키**가 생성된다.
 
-<img src="/images/2019/45/13.png" style="width:100%" />
+<img src="/images/2019/45/13.png" style={{width: '100%'}} />
 
 #### 8. (클 => 서버) Change Cipher Spec
 

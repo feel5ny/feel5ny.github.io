@@ -219,7 +219,7 @@ const Stage = class {
 }
 ```
 
-<img src="/images/2018/38/01.png" style="width:100%" />
+<img src="/images/2018/38/01.png" style={{width: '100%'}} />
 score와 stage간의 의존성이 생김
 
 > 코드는 여러분들이 모국어로 쓰지 않기 때문에 동작만 하면 다 똑같은 코드로 보인다. 코드도 언어이기
@@ -237,7 +237,7 @@ score와 stage간의 의존성이 생김
 #### 블럭 정의
 
 - 테트리스 블럭은 회전을 할 수 있다. **회전축, 회전점**을 정의하자.
-  <img src="/images/2018/38/02.png" style="width: 120px; margin: 0" />
+  <img src="/images/2018/38/02.png" style={{width: '120px', margin: '0'}} />
   세로와 가로의 모습을 보면 **2차원 배열**로 구현할 수 있다는 것이 보인다. (행과 열)
 
 cf\_\_2 연산은 데이터로 바꿀 수 있다. `데이터 하나로 연산화 시킴` or `데이터 2개로 연산비용을 낮춤.`
@@ -265,7 +265,7 @@ const Block = class {
 const blocks = [class extends Block, ...]
 ```
 
-<img src="/images/2018/38/02.png" style="width: 120px; margin: 0" />
+<img src="/images/2018/38/02.png" style={{width: '120px', margin: '0'}} />
 ```js
 class extends Block {
   constructor(){
@@ -281,7 +281,7 @@ class extends Block {
 }
 ```
 
-<img src="/images/2018/38/03.png" style="width: 150px; margin: 0" />
+<img src="/images/2018/38/03.png" style={{width: '150px', margin: '0'}} />
 ```js
 class extends Block {
   constructor(){

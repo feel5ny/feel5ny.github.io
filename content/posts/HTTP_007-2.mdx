@@ -138,7 +138,7 @@ HTTP는 캐시가 일정 기간 동안 서버 문서의 사본을 보유할 수 
 
 ## 전체 Flow
 
-<img src="/images/2019/31/flowchart.jpg" style="width:100%" />
+<img src="/images/2019/31/flowchart.jpg" style={{width: '100%'}} />
 
 ---
 
@@ -159,7 +159,7 @@ HTTP는 `Cache-Control`과 `Expires`라는 헤더들을 이용하여 원서버�
 
 - 이 헤더들은 콘텐츠가 얼마나 오랫동안 신선한 상태로 보일 수 있는지 좌우한다.
 
-<img src="/images/2019/31/01.png" style="width:100%" />
+<img src="/images/2019/31/01.png" style={{width: '100%'}} />
 
 - 캐시 문서가 만료되기 전에, 캐시는 필요하다면 서버와의 접촉 없이 사본을 제공할 수 있다.
 - 캐시 된 문서가 만료되면, 캐시는 반드시 서버와 문서에 변경된 것이 있는지 검사해야 하며, (변경이
@@ -223,7 +223,7 @@ HTTP의 조건부 메서드는 재검사를 효율적으로 만들어준다. HTT
   - If-Modified-Since
   - If-None-Match
 
-<img src="/images/2019/31/04.png" style="width:100%" />
+<img src="/images/2019/31/04.png" style={{width: '100%'}} />
 
 #### 1. `If-Modified-Since`: 날짜 재검사
 
@@ -288,7 +288,7 @@ Expires: Fri, 05 Jul 2002, 05:00:00 GMT
 - 만약 서버의 엔터티 태그가 변경되었다면(v3.0) 서버는 200 OK 응답으로 새 콘텐츠를 새 ETag와 함께
   반환했을 것이다.
 
-<img src="/images/2019/31/02.png" style="width:100%" />
+<img src="/images/2019/31/02.png" style={{width: '100%'}} />
 
 ### 약한 검사기와 강한 검사기
 
@@ -309,7 +309,7 @@ ETag: W/"v2.6"
 If-None-Match: W/"v2.6"
 ```
 
-<img src="/images/2019/31/03.png" style="width:100%" />
+<img src="/images/2019/31/03.png" style={{width: '100%'}} />
 
 ### 언제 엔터티 태그를 사용하고 언제 Last-Modified 일시를 사용하는가
 
@@ -526,7 +526,7 @@ $문서가_우리의_캐시에_도착했을_때의_나이 = $보정된_겉보기
 $나이 = $문서가_우리의_캐시에_도착했을_때의_나이 + $사본이_우리의_캐시에_머무른_시간;
 ```
 
-<img src="/images/2019/31/05.jpg" style="width:100%" />
+<img src="/images/2019/31/05.jpg" style={{width: '100%'}} />
 
 ## 10.2 신선도 수명 계산
 

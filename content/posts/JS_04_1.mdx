@@ -22,9 +22,9 @@ thumbnail: /images/post_img/38/thumb_default.jpg
 
 1. [함수 선언 vs 함수 표현식](#declarations_expressions)
 2. [값처럼 쓰는 함수(일급객체)](#First_class_object)
-3. <span style="color:lightgray">함수의 내부 구조</span>
-4. <span style="color:lightgray">함수 프로퍼티와 메서드</span>
-   <span style="color:gray">4,5번은 Function 2편에서</span>
+3. <span style={{color: 'lightgray'}}>함수의 내부 구조</span>
+4. <span style={{color: 'lightgray'}}>함수 프로퍼티와 메서드</span>
+   <span style={{color: 'gray'}}>4,5번은 Function 2편에서</span>
 
 ---
 
@@ -79,9 +79,9 @@ const sum = new Function('num1', 'num2', 'return num1 + num2');
 자바스크립트 엔진이 [실행 컨텍스트](https://feel5ny.github.io/2017/12/01/JS_03/)에 데이터를 불러올
 때 중요한 차이가 하나 있다.
 
-<span style="color: tomato">함수 선언</span>은 어떤 코드도 실행하기 전에 이미 모든 실행 컨텍스트에서
+<span style={{color: 'tomato'}}>함수 선언</span>은 어떤 코드도 실행하기 전에 이미 모든 실행 컨텍스트에서
 접근하고 실행할 수 있지만
-<span style="color: white">함수 표현식</span>은 코드 실행이 해당 줄까지 진행하기 전에는 사용할 수
+<span style={{color: 'white'}}>함수 표현식</span>은 코드 실행이 해당 줄까지 진행하기 전에는 사용할 수
 없다.
 
 실행 컨텍스트와 같이 생각해보자! **자바스크립트 엔진은 코드를 평가할 때 제일 먼저 함수 선언을 찾은
@@ -127,7 +127,7 @@ Crockford)는 이와 같은 문제 때문에 `함수표현식만을 사용할 �
 **프로그래밍 언어의 기본적 조작을 제한없이 사용할 수 있는 대상**을 의미한다. 일급객체일 경우 아래와
 같은 특징을 갖는다.
 
-<div style="background-color: #303337; padding: 21px;">
+<div style={{backgroundColor: '#303337', padding: '21px'}}>
   1. 무명의 [리터럴](https://feel5ny.github.io/2017/11/17/Typescript_04/#literal)로 표현이 가능하다.
   2. 변수나 자료구조 (객체, 배열...)에 저장할 수 있다. 3. 함수의 파라미터로 전달할 수 있다. 4.
   반환값(return value)으로 사용할 수 있다. (내부함수)

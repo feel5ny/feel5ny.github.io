@@ -141,7 +141,7 @@ thumbnail: /images/2019/39/thumb_default.jpg
 - 사용자가 미래에 같은 사이트를 방문하면, 브라우저는 서버가 이 사용자에게 할당했던 쿠키를 Cookie요청
   헤더에 기술해 전송한다.
 
-<img src="/images/2019/39/03.png" style="width:100%" />
+<img src="/images/2019/39/03.png" style={{width: '100%'}} />
 ### 그니까 쿠키는 어떻게 동작? **정리** 1. 유저가 서버에 페이지를 요청한다. 2. 서버에서 응답과 함께
 Set-Cookie 헤더를 전송한다. 3. 브라우저(User Agent)가 Set-Cookie 헤더에서 전달된 값을 갖고 쿠키를
 생성해서 (브라우저에) 저장한다. 4. 이렇게 생성된 쿠키는 클라가 서버에 요청할 때마다 **브라우저가
@@ -193,17 +193,17 @@ Set-Cookie 헤더를 전송한다. 3. 브라우저(User Agent)가 Set-Cookie 헤
   읽을 수 있는지 제어할 수 있다.
   - 도메인에 해당하는 사이트를 방문하면 Cookie 헤더가 항상 적용될 것이다.
 
-<img src="/images/2019/39/04.png" style="width:100%" />
+<img src="/images/2019/39/04.png" style={{width: '100%'}} />
 
 > 아래 브라우저에 저장되어 있던 쿠키 내용을 해당 도메인과 같을 경우 요청 헤더의 Cookie에 포함시킨다.
 
-<img src="/images/2019/39/05.png" style="width:100%" />
+<img src="/images/2019/39/05.png" style={{width: '100%'}} />
 
 ### 쿠키 Path 속성
 
 - 웹 사이트 일부에만 쿠키를 적용할 수 있다.
 - 2.  HTTPs://www.google.com/ + `/search` `/search` 여기에만 해당하는 쿠키!
-      <img src="/images/2019/39/06.png" style="width:100%" />
+      <img src="/images/2019/39/06.png" style={{width: '100%'}} />
 
 ---
 
@@ -246,7 +246,7 @@ Set-Cookie 헤더를 전송한다. 3. 브라우저(User Agent)가 Set-Cookie 헤
 6. `HttpOnly`: HttpOnly는 쿠키의 범위를 HTTP 요청으로 제한한다. HttpOnly가 설정된 경우 클라이언트
    사이드 API로는 쿠키에 접근하지 못한다.
 
-<img src="/images/2019/39/07.png" style="width:100%" />
+<img src="/images/2019/39/07.png" style={{width: '100%'}} />
 
 ### 2. Cookie 헤더
 
@@ -359,7 +359,7 @@ Cookie: session-id=002-1135265-8016838; session-id-time=1007884800; ubid-main=43
 
 > **쿠팡** 첫 화면 진입 시 진행되는 광고 솔루션 **크리테오** 세션 추적 과정 중 일부
 
-<img src="/images/2019/39/08.png" style="width:100%" />
+<img src="/images/2019/39/08.png" style={{width: '100%'}} />
 
 ---
 

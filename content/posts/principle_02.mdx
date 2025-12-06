@@ -42,7 +42,7 @@ thumbnail: /images/2018/26/thumb_default.jpg
 
 ### \*how\_코드에 불필요한 것을 하지 않는다.
 
-<u style="color:white">**단순함**을 프로그래밍의 **나침반**으로 삼자.</u>
+<u style={{color: 'white'}}>**단순함**을 프로그래밍의 **나침반**으로 삼자.</u>
 
 아래 상황을 경계하자.
 
@@ -80,7 +80,7 @@ thumbnail: /images/2018/26/thumb_default.jpg
 
 코드를 추상화함으로써 중복을 제거하자. 코드 로직을 추상화하려면
 
-<u style="color:white">처리하는 코드를 묶고 이름을 붙여 함수화, 모듈화한다.</u>
+<u style={{color: 'white'}}>처리하는 코드를 묶고 이름을 붙여 함수화, 모듈화한다.</u>
 
 #### 추상화의 장점
 
@@ -91,7 +91,7 @@ thumbnail: /images/2018/26/thumb_default.jpg
 
 ### \*DRY의 적용범위
 
-#### 구체적으로 반복되는 작업은 <i class="fa fa-long-arrow-right"/> <span style="color:white">자동화</span>
+#### 구체적으로 반복되는 작업은 <i class="fa fa-long-arrow-right"/> <span style={{color: 'white'}}>자동화</span>
 
 - 자동화의 대표적인 작업 <i class="fa fa-long-arrow-right"/> **테스트, 빌드, 배포** (지속적인 통합)
 - 빌드, 테스트, 배포 등을 정확하고 빈번하게 자동 실행하는 것.
@@ -111,7 +111,7 @@ thumbnail: /images/2018/26/thumb_default.jpg
   중복**이 일어나지 않게 하는 기법이라고도 할 수 있다.
 
 - **일반적으로 기술이나 기법은 특정 목적을 갖고 고안된다.** : 기법을 배울 때는 방식 자체만을
-  모방하지말고 : <span style="color:white">**목적을 파악하는 것이 습득에 이르는 지름길이다.**</span>
+  모방하지말고 : <span style={{color: 'white'}}>**목적을 파악하는 것이 습득에 이르는 지름길이다.**</span>
 
 ### \*WET (Write Every Tiem, Write EveryThing Twice)
 
@@ -173,7 +173,7 @@ DRY가 되어 있지 않은 코드에 대해 비꼬는 표현이다.
 
 이는 단기적으로 손실로 보이지만, 두더지 잡기식 개발이 되지 않으므로
 
-<span style="color:white">장기적으로 반드시 이익을 가져다 준다.</span>
+<span style={{color: 'white'}}>장기적으로 반드시 이익을 가져다 준다.</span>
 
 ### \*주석을 작성한다.
 
@@ -288,13 +288,13 @@ method)
 
 변경내용을 지나치게 예측하지 말아야 한다.
 
-<strong style="color:white">실제 변경이 발생하기를 기다리는 전략.</strong>
+<strong style={{color: 'white'}}>실제 변경이 발생하기를 기다리는 전략.</strong>
 첫번째 변경을 감수하고, 두번째부터 OCP를 적용한다. 기본적으로 예측 가능한 부분에는 확장성 있게
 작업한다.
 
 ### \*OCP의 구현과 설계
 
-**대표적인 기술 : 객체지향의** <strong style="color:white">다향성</strong>
+**대표적인 기술 : 객체지향의** <strong style={{color: 'white'}}>다향성</strong>
 
 - 다향성(polymorphism)은 특정 기능을 **선언(설계)부분**(=인터페이스)과 **구현(동작)부분**으로 분리한
   후 구현부분을 다양한 방법으로 만들어 선택해서 사용할 수 있게 하는 기능.

@@ -170,15 +170,15 @@ URL은 **통합 자원식별자 혹은 URI**라고 불리는 더 일반화된 �
 <스킴>://<사용자이름>:<비밀번호>@<호스트>:<포트>/<경로>;<파라미터>?<질의>#<플래그먼트>
 ```
 
-## <img src="/images/2019/19/03.jpg" style="width:100%" />
+## <img src="/images/2019/19/03.jpg" style={{width: '100%'}} />
 
-<img src="/images/2019/19/01.jpg" style="width:100%" />
+<img src="/images/2019/19/01.jpg" style={{width: '100%'}} />
 
 <a name="1-1" />
 
 ### 1.1 스킴
 
-<img src="/images/2019/19/01_scheme.jpg" style="width:100%" />
+<img src="/images/2019/19/01_scheme.jpg" style={{width: '100%'}} />
 
 - 스킴은 주어진 리소스에 **어떻게 접근하는지** 알려주는 중요한 정보다.
 - URL을 해석하는 어플리케이션이 **어떤 프로토콜을 사용하여 리소스를 요청해야 하는지** 알려준다.
@@ -193,7 +193,7 @@ URL은 **통합 자원식별자 혹은 URI**라고 불리는 더 일반화된 �
 - 사용자 이름 : anonymous
 - 비밀번호 : `IEUser`(익스플로러), `chrome@example.com`(크롬)
 
-<img src="/images/2019/19/01_userInfo.jpeg" style="width:100%" />
+<img src="/images/2019/19/01_userInfo.jpeg" style={{width: '100%'}} />
 
 - 많은 서버가 자신이 가지고 있는 **데이터에 접근을 허용하기 전에** 사용자 이름과 비밀번호를
   요구한다.
@@ -207,7 +207,7 @@ ftp://anonymous:my_passwd@ftp.prep.ai.mit.edu/pub/gnu
 
 ### 1.3 호스트
 
-<img src="/images/2019/19/01_host.jpg" style="width:100%" />
+<img src="/images/2019/19/01_host.jpg" style={{width: '100%'}} />
 
 - 어플리케이션이 인터넷에 있는 리소스를 찾으려면 리소스를 호스팅하고 있는 장비와 장비 내에서
   리소스에 접근할 수 있는 서버가 어디에 있는지 알아야 한다.
@@ -225,7 +225,7 @@ Port
 
 ### 1.4 경로
 
-<img src="/images/2019/19/01_path.jpg" style="width:100%" />
+<img src="/images/2019/19/01_path.jpg" style={{width: '100%'}} />
 
 - 리소스가 서버의 어디에 있는지 알려준다.
 - 계층적 파일 시스템 경로와 유사한 구조이다.
@@ -236,7 +236,7 @@ Port
 
 ### 1.5 파라미터 Matrix parameter
 
-<img src="/images/2019/19/01_parameter.jpg" style="width:100%" />
+<img src="/images/2019/19/01_parameter.jpg" style={{width: '100%'}} />
 
 - 많은 스킴이 객체에 대한 호스트 및 경로 정보만으로는 리소스를 찾지 못한다.
 - URL이 사용하는 어플리케이션이 리소스에 접근하려면 프로토콜 파라미터가 필요하다.
@@ -269,7 +269,7 @@ Port
 
 ### 1.6 쿼리파라미터 (질의 문자열)..
 
-<img src="/images/2019/19/01_quary_parameter.jpg" style="width:100%" />
+<img src="/images/2019/19/01_quary_parameter.jpg" style={{width: '100%'}} />
 
 - 데이터베이스 같은 서비스들은 요청을 받을 리소스 형식의 **범위를 좁히기 위해** 질문이나 질의를 받을
   수 있다.
@@ -284,7 +284,7 @@ Port
 
 ### 1.7 플래그먼트 fragment
 
-<img src="/images/2019/19/01_fragment.jpg" style="width:100%" />
+<img src="/images/2019/19/01_fragment.jpg" style={{width: '100%'}} />
 
 - HTML과 같은 리소스 형식들은 본래의 수준보다 더 작게 나뉠 수 있다.
 - 문단으로 나뉠 수 있는 경우 리소스 안에 있는 특정 문단을 가리킬 수 있다.
@@ -426,7 +426,7 @@ URL은 2가지로 나뉜다.
 상대 URL과 기저을 각각의 컴포넌트 조각으로 나누는 것이다. URL분해하기 = URL 파싱하기 변환을 위해서
 특정 알고리즘을 사용한다. 이 알고리즘은 상대URL을 절대URL 형태로 변환한다.
 
-<img src="/images/2019/19/02.jpg" style="width:100%" />
+<img src="/images/2019/19/02.jpg" style={{width: '100%'}} />
 <a name="3-2" />
 
 ### 3.2 URL 확장

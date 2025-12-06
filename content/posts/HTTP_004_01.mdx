@@ -137,12 +137,12 @@ IP 패킷이 포함하는 것.
 
 **패킷 구조**는 아래와 같다.
 
-<img src="/images/2019/24/3.jpg" style="width:100%" />
+<img src="/images/2019/24/3.jpg" style={{width: '100%'}} />
 [그림출처](https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments)
 
 **IP 헤더**와 **TCP 헤더**는 아래와 같다.
 
-<img src="/images/2019/24/4.jpg" style="width:100%" />
+<img src="/images/2019/24/4.jpg" style={{width: '100%'}} />
 [그림출처](https://karfn84.tistory.com/entry/network-%ED%8C%A8%ED%82%B7-%EA%B5%AC%EC%A1%B0-ether-tcp-ip-header#recentComments)
 
 ## 1.3 TCP 커넥션 유지하기
@@ -171,7 +171,7 @@ IP 패킷이 포함하는 것.
 
 ## 2.1 HTTP 트랜잭션 지연
 
-<img src="/images/2019/24/5.jpg" style="width:100%" />
+<img src="/images/2019/24/5.jpg" style={{width: '100%'}} />
 
 - 트랜잭션을 **처리**하는 시간은 TCP 커넥션을 설정하고, 요청을 전송하고, 응답 메세지를 보내는 것에
   비하면 상당히 **짧다**는 것을 알 수 있다.
@@ -208,7 +208,7 @@ IP 패킷이 포함하는 것.
 맞추기 위해 연속으로 IP 패킷을 교환한다. 다음은 TCP 커넥션이 핸드셰이크를 하는 순서다.
 ([예전에 정리한 글](https://feel5ny.github.io/2018/01/01/CS_06/))
 
-<img src="/images/2019/24/6.jpg" style="width:100%" />
+<img src="/images/2019/24/6.jpg" style={{width: '100%'}} />
 
 1. 클라는 새로운 TCP 커넥션을 생성하기 위해 **작은 TCP 패킷**을 서버에게 보낸다.
 
@@ -284,7 +284,7 @@ IP 패킷이 포함하는 것.
   2. 확인 응답 지연과 함께 쓰일 경우 비효율적이다.
   - 2.  HTTP 스택에 `TCP_NODELAY` 파라미터 값을 설정하여 네이글 알고리즘을 비활성화하기도 한다.
 
-<img src="/images/2019/24/7.png" style="width:100%" />
+<img src="/images/2019/24/7.png" style={{width: '100%'}} />
 
 > [그림 출처](https://maj3sty.tistory.com/518)
 

@@ -76,14 +76,14 @@ thumbnail: /images/2019/25/thumb_default.jpg
 - 2.  HTTP는 클라가 여러 개의 커넥션을 맺음으로써 여러 개의 HTTP 트랜잭션을 병렬로 처리할 수 있게
       한다.
 
-<img src="/images/2019/25/1.png" style="width:100%" />
+<img src="/images/2019/25/1.png" style={{width: '100%'}} />
 
 ## 1.1 병렬 커넥션은 페이지를 더 빠르게 내려받는다.
 
 - 하나의 커넥션으로 객체들을 로드할 때의 대역폭 제한과 대기시간을 줄일 수 있다면 더 빠르게 로드할 수
   있을 것이다.
 
-<img src="/images/2019/25/2.png" style="width:100%" />
+<img src="/images/2019/25/2.png" style={{width: '100%'}} />
 
 - 위 그림은 병렬 커넥션 방식을 개략적으로 보여준다.
 - html을 머저 내려받고, 남은 3개의 트랜잭션이 각각 별도의 커넥션에서 **동시**에 처리된다.
@@ -220,7 +220,7 @@ Keep-Alive: timeout=5, max=1000
 
 ### 2.2.4 Keep-Alive와 dumb(멍충한) 프락시
 
-<img src="/images/2019/25/3.png" style="width:100%" />
+<img src="/images/2019/25/3.png" style={{width: '100%'}} />
 
 **Connection 헤더의 무조건 전달**
 
@@ -300,7 +300,7 @@ Keep-Alive: timeout=5, max=1000
 - 여러 개의 요청은 응답이 도착하기 전까지 큐에 쌓인다.
 - 대기 시간이 긴 네트워크 상황에서 네트워크 상의 왕복으로 인한 시간을 줄여서 성능을 높여준다.
 
-<img src="/images/2019/25/4.png" style="width:100%" />
+<img src="/images/2019/25/4.png" style={{width: '100%'}} />
 
 ## 3.1 파이프라인의 제약사항
 

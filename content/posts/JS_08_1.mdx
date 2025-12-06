@@ -139,7 +139,7 @@ DOM은 HTML, JavaScript에서 정의한 표준이 아닌 별개의 W3C의 공식
 
 ---
 
-## <a name="node" ></a> <span style="color:#1a2980">1. Node 타입</span>
+## <a name="node" ></a> <span style={{color: '#1a2980'}}>1. Node 타입</span>
 
 - DOM 레벨 1에는 Node라는 인터페이스가 있다.
 - DOM에 존재하는 `노드 타입`은 모두 이 인터페이스를 구현한다.
@@ -176,7 +176,7 @@ if (someNode.nodeType == 1) {
 
 ---
 
-### <span style="color:#26d0ce">1-1. nodeName, nodeValue</span>
+### <span style={{color: '#26d0ce'}}>1-1. nodeName, nodeValue</span>
 
 - nodeName과 nodeValue는 해당 노드의 정보를 제공한다.
 - 요소(element)의 nodeName은 요소의 태그명과 일치하고, nodeValue는 `null`이다.
@@ -184,7 +184,7 @@ if (someNode.nodeType == 1) {
 
 ---
 
-### <span style="color:#26d0ce">1-2. 노드 사이의 관계</span>
+### <span style={{color: '#26d0ce'}}>1-2. 노드 사이의 관계</span>
 
 #### 1-2-1. ChildNodes 프로퍼티
 
@@ -242,7 +242,7 @@ someNode.childNodes[someNode.childNodes.length-1]
 
 ---
 
-### <span style="color:#26d0ce">1-3. 노드 조작</span>
+### <span style={{color: '#26d0ce'}}>1-3. 노드 조작</span>
 
 - 노드 사이의 관계 포인터는 모두 읽기 전용
 - 아래 4가지 메서드는 **자식**에서만 동작하므로 **부모 노드를 정확히 알아야한다.**
@@ -275,7 +275,7 @@ someNode.childNodes[someNode.childNodes.length-1]
 
 ---
 
-### <span style="color:#26d0ce">1-4. 기타 메서드</span>
+### <span style={{color: '#26d0ce'}}>1-4. 기타 메서드</span>
 
 #### 1-4-1. `cloneNode(boolean)`
 
@@ -316,7 +316,7 @@ console.log(shallowList.childNodes.length); //0
 
 ---
 
-## <a name="document" ></a> <span style="color:#1a2980">2. Document 타입</span>
+## <a name="document" ></a> <span style={{color: '#1a2980'}}>2. Document 타입</span>
 
 <img src="/images/post_img/58/06.png" />
 
@@ -339,7 +339,7 @@ Document 노드의 특징
 
 ---
 
-### <span style="color:#26d0ce">2-1. Document 자식 노드</span>
+### <span style={{color: '#26d0ce'}}>2-1. Document 자식 노드</span>
 
 Document 자식으로
 
@@ -377,7 +377,7 @@ const doctype = document.doctype;
 
 ---
 
-### <span style="color:#26d0ce">2-2. 문서 정보</span>
+### <span style={{color: '#26d0ce'}}>2-2. 문서 정보</span>
 
 - document 객체는 HTMLDocument의 인스턴스이므로 표준 Document 객체에는 존재하지 않는 프로퍼티를 여럿
   가진다.
@@ -398,7 +398,7 @@ HTTP 헤더에 들어있다.
 
 ---
 
-### <span style="color:#26d0ce">2-3. 요소 위치</span>
+### <span style={{color: '#26d0ce'}}>2-3. 요소 위치</span>
 
 특정 요소나 요소 그룹에 대한 참조를 얻는 일을 자주한다. 대표적인 2가지 메서드. `getElementById()`,
 `getElementByTagName()`
@@ -471,7 +471,7 @@ name 속성 값이 주어진 문자열에 일치하는 요소를 반환한다.
 
 ---
 
-### <span style="color:#26d0ce">2-4. 특별한 컬렉션</span>
+### <span style={{color: '#26d0ce'}}>2-4. 특별한 컬렉션</span>
 
 document객체에는 특별하 컬렉션이 몇가지 있다. 각 컬렉션은 모두 HTML Collection 객체이고, 문서에
 공통된 요소들에 빠르게 접근할 수 있도록 만들어졌다.
@@ -484,13 +484,13 @@ document객체에는 특별하 컬렉션이 몇가지 있다. 각 컬렉션은 �
 
 ---
 
-### <span style="color:#26d0ce">2-5. DOM 준수 탐지</span>
+### <span style={{color: '#26d0ce'}}>2-5. DOM 준수 탐지</span>
 
 `hasFeature()`
 
 ---
 
-### <span style="color:#26d0ce">2-6. 문서에 쓰기</span>
+### <span style={{color: '#26d0ce'}}>2-6. 문서에 쓰기</span>
 
 `write()` : 넘겨 받은 텍스트를 그대로 추가하고 `writeIn()` : 줄바꿈을 문자(`\n`)를 문자열 마지막에
 추가한다. `open()` : 페이지 스트림을 열고 `close()` : 페이지 스트림을 닫습니다.
@@ -499,7 +499,7 @@ document객체에는 특별하 컬렉션이 몇가지 있다. 각 컬렉션은 �
 
 ---
 
-## <a name="element" ></a> <span style="color:#1a2980">3. Element 타입</span>
+## <a name="element" ></a> <span style={{color: '#1a2980'}}>3. Element 타입</span>
 
 Element 요소의 특징
 
@@ -512,7 +512,7 @@ Element 요소의 특징
 
 ---
 
-### <span style="color:#26d0ce">3-1. HTML 요소</span>
+### <span style={{color: '#26d0ce'}}>3-1. HTML 요소</span>
 
 HTMLElement 타입을 통해 표현된다. HTMLElement는 Element를 직접적으로 상속한다.
 
@@ -529,7 +529,7 @@ class가 ECMAScript의 예약어이기 때문에 className이라고 사용한다
 
 ---
 
-### <span style="color:#26d0ce">3-2. 속성 얻기</span> (`getAttribute()`)
+### <span style={{color: '#26d0ce'}}>3-2. 속성 얻기</span> (`getAttribute()`)
 
 `getAttribute(속성이름)` : 공식 속성 이외에 커스텀 속성을 가져오는데도 쓸 수 있다.
 `setAttribute(속성이름, 속성이름의 값)` `removeAttribute(속성이름)`
@@ -564,7 +564,7 @@ console.log(four.hasAttribute('class')); // false
 
 ---
 
-### <span style="color:#26d0ce">3-3. 속성 설정</span> (`setAttribute()`)
+### <span style={{color: '#26d0ce'}}>3-3. 속성 설정</span> (`setAttribute()`)
 
 - 속성 이름과 설정할 값 두가지를 매개변수로 받는다.
 - 해당 속성이 존재하지 않으면 솏어을 새로 생성하고 값을 설정한다.
@@ -572,14 +572,14 @@ console.log(four.hasAttribute('class')); // false
 
 ---
 
-### <span style="color:#26d0ce">3-4. 속성 제거</span> (`removeAttribute()`)
+### <span style={{color: '#26d0ce'}}>3-4. 속성 제거</span> (`removeAttribute()`)
 
 - 속성의 값만 지우는 것이 아니라 요소에서 속성을 완전히 제거한다.
 - 자주 쓰이지는 않는다.
 
 ---
 
-### <span style="color:#26d0ce">3-5. attributes 프로퍼티</span>
+### <span style={{color: '#26d0ce'}}>3-5. attributes 프로퍼티</span>
 
 - Element 타입은 DOM 노드 타입 중에서 attributes 프로퍼티를 갖는 유일한 타입이다.
 - attributes 프로퍼티에는 NodeList처럼 살아있는 컬렉션 `NamedNodeMap`이 저장된다.
@@ -621,7 +621,7 @@ function outputAttributes(element) {
 
 ---
 
-### <span style="color:#26d0ce">3-6. 요소 생성</span> (`document.createElement()`)
+### <span style={{color: '#26d0ce'}}>3-6. 요소 생성</span> (`document.createElement()`)
 
 <img src=" /images/post_img/58/createElement.png" width="400px" />- createElement() 메서드는 새
 요소를 생성하고 ownerDocument 프로퍼티를 설정한다. - 생성 이후에는 문서 트리의 일부가 아니므로
@@ -630,7 +630,7 @@ IE7이전 버전에는 HTML을 통으로 인자로 넘길 수 있다.
 
 ---
 
-### <span style="color:#26d0ce">3-7. 요소의 자식</span>
+### <span style={{color: '#26d0ce'}}>3-7. 요소의 자식</span>
 
 - 요소는 자식 요소나 자손 요소를 가질 수 있고, 그 숫자는 제한이 없다.
 
