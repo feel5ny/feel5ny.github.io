@@ -163,11 +163,11 @@ Pragma: no-cache
 최신 버전의 HTTP는 매우 풍부한 캐시 매개변수의 집합을 가지고 있다.
 
 - `Cache-Control`: 메세지와 함께 캐시 지시자를 전달하기 위해 사용한다.
-  - **max-age={seconds}**, **max-stale[={seconds}]**, **min-fresh={seconds}**, **no-cache**,
+  - **max-age=\{seconds\}**, **max-stale[=\{seconds\}]**, **min-fresh=\{seconds\}**, **no-cache**,
     **no-store**, **no-transform**, **only-if-cached**, **must-revalidate**, **no-cache**,
     **no-store**, **no-transform**, **public**, **private**, **proxy-revalidate**,
-    **s-maxage={seconds}**, **immutable**, **stale-while-revalidate={seconds}**,
-    **stale-if-error={seconds}**,
+    **s-maxage=\{seconds\}**, **immutable**, **stale-while-revalidate=\{seconds\}**,
+    **stale-if-error=\{seconds\}**,
 - `Pragma`: 메세지와 함께 지시자를 전달하는 또 다른 방법. 캐시에 국한되지 않는다. (HTTP/1.0)
   - **no-cache**
     <a name="2" />
@@ -187,13 +187,13 @@ User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 
 
 - ~`Client-IP`: 클라가 실행된 컴퓨터의 IP를 제공한다.~
 - `From`: 클라 사용자의 메일주소를 제공한다.
-  - **{email}**
+  - **`{email}`**
 - `Host`: 요청의 대상이 되는 서버의 호스트 명과 포트를 준다.
-  - **{host}:{port}**
+  - **`{host}:{port}`**
 - `Referer`: 현재의 요청 URI가 들어있었던 문서의 URL을 제공한다.
-  - **{url}**
+  - **`{url}`**
 - `User-Agent`: 요청을 보낸 어플리케이션의 이름을 서버에게 말해준다.
-  - **{product} / {product-version} {comment}**
+  - **`{product} / {product-version} {comment}`**
 - ~`UA-Color`: 클라 기기 디스플레이의 색상 능력에 대한 정보를 제공한다.~
 - ~`UA-CPU`: 클라 CPU의 종류와 제조사를 알려준다.~
 - ~`UA-Disp`: 클라 디스플레이 능력에 대한 정보를 제공한다.~
@@ -238,15 +238,15 @@ Range: bytes=0-499, -500
 
 - `Expect`: 클라가 요청에 필요한 서버의 행동을 열거할 수 있게 해준다.
 - `If-Match`: 문서의 엔터티 태그가 주어진 엔터티 태그와 일치하는 경우에만 문서를 가져온다.
-  - **{etag_value}**
+  - **`{etag_value}`**
 - `If-Modified-Since`: 주어진 날짜 이후에 리소스가 변경되지 않는다면 요청을 제한한다.
 - `If-None-Match`: 문서의 **엔터티 태그가 주어진 엔터티 태그와 일치하지 않는 경우에만** 문서를
   가져온다.
 - `If-Range`: 문서의 특정 범위에 대한 요청을 할 수 있게 해준다.
-  - **{date}**, **{etag}**
+  - **`{date}`, **`{etag}`**
 - `If-Unmodified-Since`: **주어진 날짜 이후에 리소스가 변경되었다면** 요청을 제한한다.
 - `Range`: 서버가 범위 요청을 지원한다면, 리소스에 대한 특정 범위를 요청한다.
-  - **{unit}={range-start}-{range-end}, {range-start}-{range-end}**
+  - **`{unit}={range-start}-{range-end}`, `{range-start}-{range-end}`**
   - ex. `bytes=200-1000`
 
 ### 요청 보안 헤더
@@ -261,11 +261,11 @@ HTTP는 자체적으로 요청을 위한 간단한 인증요구/응답 체계를
 리소스에 접근하기 전에 자신을 인증하게 함으로써, 트랜잭션을 약간 더 안전하게 만들고자 한다.
 
 - `Authorization`: 클라가 서버에게 제공하는 인증 그 자체에 대한 정보를 담고 있다.
-  - **{type} {credentials}**
+  - **`{type} {credentials}`**
   - 예시) Basic YWxhZGRpbjpvcGVuc2VzYW1l
 - `Cookie`: 클라가 서버에게 토큰을 전달할 때 사용한다. 진짜 보안헤더는 아니지만, 보안에 영향을 줄 수
   있다는 것은 확실하다.
-  - **{name}={value}; {name2}={value2};**
+  - **`{name}={value}; {name2}={value2};`**
 - ~`Cookie2`: 요청자가 지원하는 쿠키의 버전을 알려줄 때 사용한다.~
 
 ### 프락시 요청 헤더
@@ -278,7 +278,7 @@ Proxy-Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l
   횟수.
   - 관련) TRACE 메서드와 함께 사용된다.
 - `Proxy-Authorization`: Authorization과 같으나 프락시에서 인증을 할 때 쓰인다.
-  - **{type} {credentials}**
+  - **`{type} {credentials}`**
 - ~`Proxy-Connection`: Connection과 같으나 프락시에서 연결을 맺을 때 쓰인다.~
 
 <a name="3" />
@@ -297,16 +297,16 @@ Warning: 112 - "cache down" "Wed, 21 Oct 2015 07:28:00 GMT"
 ```
 
 - `Age`: 응답이 얼마나 오래되었는지
-  - **{delta-seconds}**
+  - **`{delta-seconds}`**
 - ~`Public`: 서버가 특정 리소스에 대해 지원하는 요청 메서드의 목록~
 - `Retry-After`: 현재 리소스가 사용 불가능한 상태일 때, 언제 가능해지는지 날짜 혹은 시간
-  - **{http-date}**, **{delay-seconds}**
+  - **`{http-date}`, **`{delay-seconds}`**
 - `Server`: 서버 어플리케이션의 이름과 버전
-  - **{product}**
+  - **`{product}`**
 - ~`Title`: HTML 문서에서 주어진 것과 같은 제목~
 - `Warning`: 사유 구절에 있는 것보다 더 자세한 경고 메세지
   - **[`{warn-code}`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning#Warning_codes)
-    {warn-agent} {warn-text} [{warn-date}]**
+    `{warn-agent} {warn-text} [{warn-date}]`**
   - 예시) Warning: 110 anderson/1.3.37 "Response is stale"
 
 ### 협상 헤더
@@ -335,19 +335,19 @@ WWW-Authenticate: Basic
 - `Proxy-Authenticate`: 프락시에서 클라로 보낸 인증요구의 목록
 - `Set-Cookie`: 진짜 보안 헤더는 아니지만, 보안에 영향은 줄 수 있다. 서버가 클라를 인증할 수 있도록
   클라 측에 토큰을 설정하기 위해 사용한다.
-  - **{cookie-name}={cookie-value}**
-  - **{cookie-name}={cookie-value}; Expires={date}**
-  - **{cookie-name}={cookie-value}; Max-Age={non-zero-digit}**
-  - **{cookie-name}={cookie-value}; Domain={domain-value}**
-  - **{cookie-name}={cookie-value}; Path={path-value}**
-  - **{cookie-name}={cookie-value}; Secure**
-  - **{cookie-name}={cookie-value}; HttpOnly**
-  - **{cookie-name}={cookie-value}; SameSite=Strict**
-  - **{cookie-name}={cookie-value}; SameSite=Lax**
-  - **{cookie-name}={cookie-value}; SameSite=None**
+  - **`{cookie-name}={cookie-value}`**
+  - **`{cookie-name}={cookie-value}; Expires={date}`**
+  - **`{cookie-name}={cookie-value}; Max-Age={non-zero-digit}`**
+  - **`{cookie-name}={cookie-value}; Domain={domain-value}`**
+  - **`{cookie-name}={cookie-value}; Path={path-value}`**
+  - **`{cookie-name}={cookie-value}; Secure`**
+  - **`{cookie-name}={cookie-value}; HttpOnly`**
+  - **`{cookie-name}={cookie-value}; SameSite=Strict`**
+  - **`{cookie-name}={cookie-value}; SameSite=Lax`**
+  - **`{cookie-name}={cookie-value}; SameSite=None`**
 - ~`Set-Cookie2`: Set-Cookie와 비슷하게 RFC 2965로 정의된 쿠키.~
 - `WWW-Authenticate`: 서버에서 클라로 보낸 인증요구의 목록
-  - **{type} realm={realm}**
+  - **`{type} realm={realm}`**
   - 예시) Basic realm="Access to the staging site"
 
 <a name="4" />
@@ -400,10 +400,10 @@ Content-Disposition: form-data; name="myFile"; filename="foo.txt"
 - `Content-Location`: 리소스가 실제로 어디에 위치하는지
 - ~`Content-MD5`: 본문의 MD5 체크섬~
 - `Content-Range`: 전체 리소스에서 이 엔터티가 해당하는 범위를 바이트 단위로 표현
-  - **{unit} {range-start}-{range-end}/{size}**
+  - **`{unit} {range-start}-{range-end}/{size}`**
   - 예시) bytes 200-1000/67589
 - `Content-Type`: 이 본문이 어떤 종류의 객체인지
-  - **{media-type};charset={value}; boundary={something}**
+  - **`{media-type};charset={value}; boundary={something}`**
   - 예시) text/html; charset=utf-8
   - 예시) multipart/form-data; boundary=something
 - `Content-Disposition`: 콘텐츠가 브라우저에 인라인으로 표시될 것으로 예상되는지, 즉 웹 페이지 또는

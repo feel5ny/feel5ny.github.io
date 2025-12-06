@@ -51,22 +51,6 @@ export async function generateStaticParams() {
     // URL 매핑에서 날짜 기반 경로 찾기 (우선)
     let mapping = urlMapping.find(m => m.newUrl === post.route);
 
-    // 매핑이 없으면 날짜 정보로 직접 생성
-    if (!mapping && post.frontMatter.date) {
-      const date = new Date(post.frontMatter.date);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-
-      // post.route: /posts/mentoring-01 -> title: mentoring-01
-      const title = post.route.replace('/posts/', '').replace(/^\//, '');
-
-      dateBasedParams.push({
-        mdxPath: [String(year), month, day, title],
-      });
-      return;
-    }
-
     // 매핑이 있으면 매핑 사용
     if (mapping && mapping.date) {
       // oldUrl: /2025/03/02/mentoring-01/
@@ -82,6 +66,19 @@ export async function generateStaticParams() {
           mdxPath: pathParts,
         });
       }
+    } else {
+      // 매핑이 없으면 날짜 정보로 직접 생성
+      const date = new Date(post.frontMatter.date);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+
+      // post.route: /posts/mentoring-01 -> title: mentoring-01
+      const title = post.route.replace('/posts/', '').replace(/^\//, '');
+
+      dateBasedParams.push({
+        mdxPath: [String(year), month, day, title],
+      });
     }
   });
 
