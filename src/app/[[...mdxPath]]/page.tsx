@@ -1,6 +1,7 @@
 import { generateStaticParamsFor, importPage } from 'nextra/pages';
 import { useMDXComponents as getMDXComponents } from '../../../mdx-components';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import React from 'react';
 import { PostDetail } from '@/components/post-detail';
 import { getPosts } from '@/lib/get-posts';
@@ -111,19 +112,37 @@ async function resolvePath(mdxPath: string[]): Promise<string[]> {
     // 매핑이 없으면 title로 직접 찾기
     if (!mapping) {
       const posts = await getPosts();
-      const post = posts.find(p => {
+      // 여러 방법으로 포스트 찾기 시도
+      let post = posts.find(p => {
         const postTitle = p.route.replace('/posts/', '').replace(/^\//, '');
+        // 정확한 매칭
+        if (postTitle === title) return true;
         // URL 디코딩된 title과 비교
-        return postTitle === title || decodeURIComponent(postTitle) === title;
+        try {
+          const decodedTitle = decodeURIComponent(title);
+          if (postTitle === decodedTitle) return true;
+        } catch (e) {
+          // 디코딩 실패 무시
+        }
+        // 인코딩된 postTitle과 비교
+        try {
+          const encodedPostTitle = encodeURIComponent(postTitle);
+          if (encodedPostTitle === title) return true;
+        } catch (e) {
+          // 인코딩 실패 무시
+        }
+        return false;
       });
 
       if (post) {
         // newUrl: /posts/mentoring-01 -> ['posts', 'mentoring-01']
         return post.route.replace(/^\//, '').split('/');
       }
-      // 포스트를 찾지 못하면 원래 경로 반환 (Nextra가 처리하도록)
+
+      // 포스트를 찾지 못하면 빈 배열 반환 (나중에 notFound 호출)
       console.warn(`⚠️  Post not found for date-based path: ${mdxPath.join('/')}`);
-      return mdxPath;
+      // 빈 배열을 반환하여 나중에 notFound 처리
+      return [];
     } else {
       // 매핑이 있으면 매핑 사용
       return mapping.newUrl.replace(/^\//, '').split('/');
@@ -154,17 +173,20 @@ export default async function Page(props: PageProps) {
   const params = await props.params;
   const actualPath = await resolvePath(params.mdxPath);
 
+  // 루트 경로는 허용 (빈 배열이면 루트 페이지)
+  const isRootPath = !params.mdxPath || params.mdxPath.length === 0;
+
+  // 빈 경로가 아닌데 resolvePath에서 빈 배열을 반환한 경우는 포스트를 찾지 못한 경우
+  if (!isRootPath && (!actualPath || actualPath.length === 0)) {
+    notFound();
+  }
+
   let result;
   try {
     result = await importPage(actualPath);
   } catch (error) {
     console.error(`Failed to import page for path: ${actualPath.join('/')}`, error);
-    return (
-      <div>
-        <h1>Page Not Found</h1>
-        <p>The requested page could not be found.</p>
-      </div>
-    );
+    notFound();
   }
 
   const {
