@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/`,
   },
+  metadataBase: new URL(baseUrl),
+  openGraph: {
+    locale: 'ko_KR',
+  },
 };
 
 const bodyFont = Inter({
@@ -28,7 +32,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       // Not required, but good for SEO
-      lang="en"
+      lang="ko"
       // Required to be set
       dir="ltr"
       // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
