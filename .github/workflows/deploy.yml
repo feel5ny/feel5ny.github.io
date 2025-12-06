@@ -34,29 +34,33 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile
+          else
+            pnpm install
+          fi
 
-      - name: Build
+      - name: Build Nextra site
         env:
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
           NEXT_PUBLIC_GA_ID_V4: ${{ secrets.NEXT_PUBLIC_GA_ID_V4 }}
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL || 'https://feel5ny.github.io' }}
+
         run: pnpm build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Setup Pagefind (검색 인덱스 생성)
+        run: pnpm postbuild
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './out'
+          path: ./out
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
