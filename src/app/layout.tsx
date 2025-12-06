@@ -6,6 +6,7 @@ import CustomHeader from '@/components/custom-header';
 import { Metadata } from 'next';
 import { Layout } from 'nextra-theme-blog';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Nextra Blog',
@@ -16,6 +17,9 @@ const bodyFont = Inter({
 });
 
 export default async function RootLayout({ children }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaIdV4 = process.env.NEXT_PUBLIC_GA_ID_V4;
+
   return (
     <html
       // Not required, but good for SEO
@@ -28,6 +32,25 @@ export default async function RootLayout({ children }) {
     >
       <Head backgroundColor={{ dark: '#15120d', light: '#faf5e9' }} />
       <body className="min-h-screen">
+        {/* Google Analytics */}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+                ${gaIdV4 ? `gtag('config', '${gaIdV4}');` : ''}
+              `}
+            </Script>
+          </>
+        )}
+
         <Layout>
           <CustomHeader />
 
