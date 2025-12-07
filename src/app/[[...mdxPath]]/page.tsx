@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { PostDetail } from '@/components/post-detail';
-import { loadUrlMapping } from '@/lib/url-mapping';
 import { isStaticAssetPath, isYearOnlyPath, isPostPage } from '@/lib/path-utils';
 import { generateDateBasedPaths } from '@/lib/date-path-generator';
 import { resolvePath } from '@/lib/path-resolver';
@@ -33,8 +32,6 @@ export type CustomMetadata = Metadata & {
 
 // 날짜 기반 경로를 포함한 정적 경로 생성
 export async function generateStaticParams() {
-  const urlMapping = loadUrlMapping();
-
   // 기본 Nextra 경로 생성
   const defaultParams = await generateStaticParamsFor('mdxPath')();
 
@@ -46,7 +43,7 @@ export async function generateStaticParams() {
   });
 
   // 날짜 기반 경로 생성
-  const dateBasedParams = await generateDateBasedPaths(urlMapping);
+  const dateBasedParams = await generateDateBasedPaths();
 
   // 기본 경로와 날짜 기반 경로 합치기 (빈 경로도 포함)
   return [
@@ -58,8 +55,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
-  const urlMapping = loadUrlMapping();
-  const actualPath = await resolvePath(params.mdxPath, urlMapping);
+  const actualPath = await resolvePath(params.mdxPath);
 
   try {
     const { metadata } = await importPage(actualPath);
@@ -78,7 +74,6 @@ const Wrapper = getMDXComponents().wrapper;
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
-  const urlMapping = loadUrlMapping();
 
   // 정적 파일 경로는 404 반환
   if (params.mdxPath && isStaticAssetPath(params.mdxPath)) {
@@ -90,7 +85,7 @@ export default async function Page(props: PageProps) {
     notFound();
   }
 
-  const actualPath = await resolvePath(params.mdxPath, urlMapping);
+  const actualPath = await resolvePath(params.mdxPath);
 
   // 루트 경로는 허용 (빈 배열이면 루트 페이지)
   const isRootPath = !params.mdxPath || params.mdxPath.length === 0;

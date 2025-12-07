@@ -1,5 +1,4 @@
 import { getPosts, PostItem } from '@/lib/get-posts';
-import type { UrlMapping } from '@/lib/url-mapping';
 import { isDateBasedPath, isYearOnlyPath } from '@/lib/path-utils';
 
 // 포스트 찾기 (여러 방법으로 시도)
@@ -31,20 +30,10 @@ function findPostByTitle(posts: PostItem[], title: string): PostItem | undefined
 }
 
 // 날짜 기반 경로를 실제 파일 경로로 변환
-async function resolveDateBasedPath(
-  mdxPath: string[],
-  urlMapping: UrlMapping[]
-): Promise<string[]> {
+async function resolveDateBasedPath(mdxPath: string[]): Promise<string[]> {
   const title = decodeURIComponent(mdxPath[3]);
-  const oldUrl = '/' + mdxPath.join('/') + '/';
-  const mapping = urlMapping.find(m => m.oldUrl === oldUrl);
 
-  // 매핑이 있으면 매핑 사용
-  if (mapping) {
-    return mapping.newUrl.replace(/^\//, '').split('/');
-  }
-
-  // 매핑이 없으면 title로 직접 찾기
+  // title로 직접 찾기
   const posts = await getPosts();
   const post = findPostByTitle(posts, title);
 
@@ -58,10 +47,7 @@ async function resolveDateBasedPath(
 }
 
 // 경로 해결
-export async function resolvePath(
-  mdxPath: string[],
-  urlMapping: UrlMapping[]
-): Promise<string[]> {
+export async function resolvePath(mdxPath: string[]): Promise<string[]> {
   // 빈 경로나 루트 경로 처리
   if (!mdxPath || mdxPath.length === 0) {
     return [];
@@ -74,7 +60,7 @@ export async function resolvePath(
 
   // 날짜 기반 경로인지 확인
   if (isDateBasedPath(mdxPath)) {
-    return resolveDateBasedPath(mdxPath, urlMapping);
+    return resolveDateBasedPath(mdxPath);
   }
 
   return mdxPath;
