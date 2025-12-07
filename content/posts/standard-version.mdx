@@ -71,7 +71,10 @@ customList: |-
 thumbnail: /images/2021/03/thumb_default.jpg
 ---
 
-<img src="/images/2021/03/06.png" alt="정리 이미지" />
+<figure>
+  <img src="/images/2021/03/06.png" alt="정리 이미지" />
+  <figcaption>정리 이미지</figcaption>
+</figure>
 
 > 셋팅은 여기 [레포](https://github.com/feel5ny/test-spa-version)에서 확인 가능하다.
 
@@ -81,7 +84,10 @@ thumbnail: /images/2021/03/thumb_default.jpg
 이런 상황이 반복되고 누적되다보니 개발 집중력이 떨어지고, 불필요한 커뮤니케이션에 시간을 쏟고 있다는
 생각이 들어, 개선해야겠다는 생각이 들었다.
 
-<img src="/images/2021/03/02.png" alt="유저, CS담당자, 개발자" />
+<figure>
+  <img src="/images/2021/03/02.png" alt="유저, CS담당자, 개발자" />
+  <figcaption>유저, CS담당자, 개발자</figcaption>
+</figure>
 
 
 
@@ -162,10 +168,11 @@ CI툴에 JOB으로 단계별로 생성하여 진행하기로 했다.
 MAJOR.MINOR.PATCH
 ```
 
-<img
-  src="https://bytearcher.com/goodies/semantic-versioning-cheatsheet/wheelbarrel-no-tilde-caret-white-bg-w1000.jpg"
-  alt="출처: bytearcher"
-/>
+<figure>
+  <img src="https://bytearcher.com/goodies/semantic-versioning-cheatsheet/wheelbarrel-no-tilde-caret-white-bg-w1000.jpg"
+  alt="출처: bytearcher" />
+  <figcaption>출처: bytearcher</figcaption>
+</figure>
 
 npm에서는 버전을 관리할 수 있는 cli를 제공한다. 이 명령어를 통해서 package.json의 버전명을 올릴 수
 있다.
@@ -192,10 +199,11 @@ npm version
 - 많은 오픈소스 프로젝트에서는 체인지로그 파일을 가장 상위에 포함해서 배포한다.
   ([위키](https://ko.wikipedia.org/wiki/%EC%B2%B4%EC%9D%B8%EC%A7%80%EB%A1%9C%EA%B7%B8))
 
-<img
-  src="https://d33wubrfki0l68.cloudfront.net/abc69d24631dca030e29dd6c2be5898d8a5ae881/1af65/static/43682732cd75b06795c875eccd0aae1a/b1001/changelog.png"
-  alt="CHANGELOG"
-/>
+<figure>
+  <img src="https://d33wubrfki0l68.cloudfront.net/abc69d24631dca030e29dd6c2be5898d8a5ae881/1af65/static/43682732cd75b06795c875eccd0aae1a/b1001/changelog.png"
+  alt="CHANGELOG" />
+  <figcaption>CHANGELOG</figcaption>
+</figure>
 
 #### 릴리즈 노트와 CHANGLOG
 
@@ -218,7 +226,10 @@ npm version
 }
 ```
 
-<img src="/images/2021/03/04.png" alt="Gatsby.js내의 릴리즈노트 페이지" />
+<figure>
+  <img src="/images/2021/03/04.png" alt="Gatsby.js내의 릴리즈노트 페이지" />
+  <figcaption>Gatsby.js내의 릴리즈노트 페이지</figcaption>
+</figure>
 
 **release note**
 
@@ -313,7 +324,10 @@ commitlint를 사용해 commit시에 컨벤션을 잘 지켰는지 체크한다.
 - standard-version에서 따르는 `conventional-commit`을 따르려면 `@commitlint/config-conventional`를
   상속받아서 사용하면된다.
 
-<img src="/images/2021/03/03.png" alt=".commitlintrc.js파일. 기본 아이콘 이뿜" />
+<figure>
+  <img src="/images/2021/03/03.png" alt=".commitlintrc.js파일. 기본 아이콘 이뿜" />
+  <figcaption>.commitlintrc.js파일. 기본 아이콘 이뿜</figcaption>
+</figure>
 
 ```js
 module.exports = {
@@ -356,7 +370,10 @@ husky를 사용하여 셋팅하였다.
 
 ### 정리
 
-<img src="/images/2021/03/06.png" alt="정리 이미지" />
+<figure>
+  <img src="/images/2021/03/06.png" alt="정리 이미지" />
+  <figcaption>정리 이미지</figcaption>
+</figure>
 
 - 버전관리, 배포내역관리를 자동화하기 위해 standard-version를 사용한다.
   - conventional-commit 규격에 엄격하므로, 해당 컨벤션을 적용하기 힘든 상황이라면
@@ -419,7 +436,10 @@ build:
       ...
 ```
 
-<img src="/images/2021/03/05.png" alt="github action 캡쳐" />
+<figure>
+  <img src="/images/2021/03/05.png" alt="github action 캡쳐" />
+  <figcaption>github action 캡쳐</figcaption>
+</figure>
 
 
 

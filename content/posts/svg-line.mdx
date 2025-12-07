@@ -20,7 +20,10 @@ thumbnail: /images/2021/04/thumb_default.jpg
 Progress bar를 구현해야한다. 웹에서 찾을 수 있는 여러 예제들을 참고하여 사용해도 되지만, 커스텀하기
 어려운 경우 직접 구현을 해야한다. 바로 생각나는 엣지 케이스는 무엇일까 ?
 
-<img src="/images/2021/04/04.jpg" alt="Progress bar" />
+<figure>
+  <img src="/images/2021/04/04.jpg" alt="Progress bar" />
+  <figcaption>Progress bar</figcaption>
+</figure>
 
 ## Rounded progress bar의 코너 부분
 
@@ -31,7 +34,10 @@ Progress bar를 구현해야한다. 웹에서 찾을 수 있는 여러 예제들
 - base bar의 코너가 rounded이면서 + 채워지는 bar가 rouned가 아닐경우, 마지막 채워지는 부분에
   rounded를 대응해야한다.
 
-<img src="/images/2021/04/01.png" alt="채워질 때 마지막 코너 부분" />
+<figure>
+  <img src="/images/2021/04/01.png" alt="채워질 때 마지막 코너 부분" />
+  <figcaption>채워질 때 마지막 코너 부분</figcaption>
+</figure>
 
 생각나는 방법은 3가지가 있다.
 
@@ -68,12 +74,18 @@ svg는 형태를 만들고, 그 안을 fill로 채울 수 있다. prgress bar에
 gradient) fill에 2가지 이상의 색상을 줄 수 있다. 그라데이션은 2가지 이상의 색상을 정의하고, 색상의
 position을 정의하면, 각각의 위치에서 서로의 위치 사이의 색상이 점진적으로 정의된다.
 
-<img src="/images/2021/04/02.png" alt="다른 위치의 그라데이션" />
+<figure>
+  <img src="/images/2021/04/02.png" alt="다른 위치의 그라데이션" />
+  <figcaption>다른 위치의 그라데이션</figcaption>
+</figure>
 
 여기서 각각의 poisition을 동일하게 둘 경우, 둘 사이의 정의할 색상이 존재하지 않기 때문에 색상이
 2가지 단색으로 존재할 수 있다.
 
-<img src="/images/2021/04/03.png" alt="같은 위치의 그라데이션" />
+<figure>
+  <img src="/images/2021/04/03.png" alt="같은 위치의 그라데이션" />
+  <figcaption>같은 위치의 그라데이션</figcaption>
+</figure>
 
 위 그림의 중앙 point를 오른쪽으로 움직이면 왼쪽에서 오른쪽으로 채워지는 형태가 될거라고 기대할 수
 있다.
@@ -84,7 +96,10 @@ position을 정의하면, 각각의 위치에서 서로의 위치 사이의 색�
 대응해야하기 때문에 scale로 늘릴 수는 없다. (정비율로 커지기 때문에) 방법은 shape의 point를 옮기는
 방법이 있다. 아래와 그림과 같이 가장 오른쪽의 point들을 늘리면 된다.
 
-<img src="/images/2021/04/05.gif" alt="폭 늘리기" />
+<figure>
+  <img src="/images/2021/04/05.gif" alt="폭 늘리기" />
+  <figcaption>폭 늘리기</figcaption>
+</figure>
 
 ## 구현
 
