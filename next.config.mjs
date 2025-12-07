@@ -8,7 +8,8 @@ const withNextra = nextra({
 // You can include other Next.js configuration options here, in addition to Nextra settings:
 export default withNextra({
   // 정적 사이트 생성 (GitHub Pages 배포용)
-  output: 'export',
+  // 개발 모드에서는 output: 'export'를 비활성화하여 동적 라우팅 허용
+  ...(process.env.NODE_ENV === 'production' && { output: 'export' }),
   trailingSlash: true, // 모든 경로에 trailing slash 추가 (index.html 생성)
   // basePath는 루트 경로인 경우 제거 (또는 빈 문자열)
   images: {

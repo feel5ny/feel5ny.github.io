@@ -36,38 +36,120 @@ try {
   console.warn('⚠️  URL mapping file not found. Using default paths.');
 }
 
+// 정적 파일 경로인지 확인하는 헬퍼 함수
+function isStaticAssetPath(mdxPath: string[]): boolean {
+  if (!mdxPath || mdxPath.length === 0) return false;
+
+  const firstSegment = mdxPath[0];
+  // 정적 파일 확장자 체크
+  const staticExtensions = [
+    '.ico',
+    '.png',
+    '.jpg',
+    '.jpeg',
+    '.gif',
+    '.svg',
+    '.webp',
+    '.css',
+    '.js',
+    '.json',
+    '.xml',
+    '.txt',
+  ];
+  const lastSegment = mdxPath[mdxPath.length - 1];
+
+  // 마지막 세그먼트가 정적 파일 확장자로 끝나는지 확인
+  if (staticExtensions.some(ext => lastSegment.toLowerCase().endsWith(ext))) {
+    return true;
+  }
+
+  // favicon, robots.txt 등 특정 파일명 체크
+  if (
+    firstSegment === 'favicon.ico' ||
+    firstSegment === 'robots.txt' ||
+    firstSegment === 'sitemap.xml'
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+// output: 'export' 모드에서는 dynamicParams를 사용할 수 없음
+// 모든 경로는 generateStaticParams에서 생성되어야 함
+
 // 날짜 기반 경로를 포함한 정적 경로 생성
 export async function generateStaticParams() {
   // 기본 Nextra 경로 생성
   const defaultParams = await generateStaticParamsFor('mdxPath')();
 
+  // 정적 파일 경로 필터링
+  const filteredDefaultParams = defaultParams.filter(param => {
+    const mdxPath = param.mdxPath || [];
+    const pathArray = Array.isArray(mdxPath) ? mdxPath : [mdxPath];
+    return !isStaticAssetPath(pathArray);
+  });
+
   // 포스트에 대한 날짜 기반 경로 추가
   const posts = await getPosts();
   const dateBasedParams: Array<{ mdxPath: string[] }> = [];
+  const addedPaths = new Set<string>(); // 중복 방지
 
+  // URL 매핑의 모든 날짜 기반 경로 추가
+  urlMapping.forEach(mapping => {
+    if (mapping.date) {
+      // oldUrl이 있으면 사용
+      if (mapping.oldUrl) {
+        const pathParts = mapping.oldUrl.replace(/^\//, '').replace(/\/$/, '').split('/');
+        if (
+          pathParts.length >= 4 &&
+          /^\d{4}$/.test(pathParts[0]) &&
+          /^\d{2}$/.test(pathParts[1]) &&
+          /^\d{2}$/.test(pathParts[2])
+        ) {
+          const pathKey = pathParts.join('/');
+          if (!addedPaths.has(pathKey)) {
+            dateBasedParams.push({
+              mdxPath: pathParts,
+            });
+            addedPaths.add(pathKey);
+          }
+        }
+      } else if (mapping.newUrl) {
+        // oldUrl이 없으면 newUrl과 date를 사용하여 경로 생성
+        // newUrl: /posts/Communication_002 -> title: Communication_002
+        const title = mapping.newUrl.replace('/posts/', '').replace(/^\//, '');
+        if (title) {
+          try {
+            const date = new Date(mapping.date);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+
+            const pathKey = `${year}/${month}/${day}/${title}`;
+            if (!addedPaths.has(pathKey)) {
+              dateBasedParams.push({
+                mdxPath: [String(year), month, day, title],
+              });
+              addedPaths.add(pathKey);
+            }
+          } catch (error) {
+            console.warn(`⚠️  Failed to parse date for mapping: ${mapping.newUrl}`, error);
+          }
+        }
+      }
+    }
+  });
+
+  // 포스트에 대한 날짜 기반 경로 추가 (매핑에 없는 경우)
   posts.forEach(post => {
     if (!post.frontMatter?.date) return;
 
-    // URL 매핑에서 날짜 기반 경로 찾기 (우선)
+    // URL 매핑에서 날짜 기반 경로 찾기
     let mapping = urlMapping.find(m => m.newUrl === post.route);
 
-    // 매핑이 있으면 매핑 사용
-    if (mapping && mapping.date) {
-      // oldUrl: /2025/03/02/mentoring-01/
-      const pathParts = mapping.oldUrl.replace(/^\//, '').replace(/\/$/, '').split('/');
-      if (
-        pathParts.length >= 4 &&
-        /^\d{4}$/.test(pathParts[0]) &&
-        /^\d{2}$/.test(pathParts[1]) &&
-        /^\d{2}$/.test(pathParts[2])
-      ) {
-        // [year, month, day, title] 형태
-        dateBasedParams.push({
-          mdxPath: pathParts,
-        });
-      }
-    } else {
-      // 매핑이 없으면 날짜 정보로 직접 생성
+    // 매핑이 없으면 날짜 정보로 직접 생성
+    if (!mapping || !mapping.date) {
       const date = new Date(post.frontMatter.date);
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -76,22 +158,35 @@ export async function generateStaticParams() {
       // post.route: /posts/mentoring-01 -> title: mentoring-01
       const title = post.route.replace('/posts/', '').replace(/^\//, '');
 
-      dateBasedParams.push({
-        mdxPath: [String(year), month, day, title],
-      });
+      const pathKey = `${year}/${month}/${day}/${title}`;
+      if (!addedPaths.has(pathKey)) {
+        dateBasedParams.push({
+          mdxPath: [String(year), month, day, title],
+        });
+        addedPaths.add(pathKey);
+      }
     }
   });
 
   console.log(`📝 날짜 기반 경로 생성: ${dateBasedParams.length}개`);
 
-  // 기본 경로와 날짜 기반 경로 합치기
-  return [...defaultParams, ...dateBasedParams];
+  // 기본 경로와 날짜 기반 경로 합치기 (빈 경로도 포함)
+  return [
+    { mdxPath: [] }, // 루트 경로
+    ...filteredDefaultParams,
+    ...dateBasedParams,
+  ];
 }
 
 // 날짜 기반 경로를 실제 파일 경로로 변환하는 헬퍼 함수
 async function resolvePath(mdxPath: string[]): Promise<string[]> {
   // 빈 경로나 루트 경로 처리
   if (!mdxPath || mdxPath.length === 0) {
+    return [];
+  }
+
+  // 연도만 있는 경로는 [year] 라우트가 처리하도록 빈 배열 반환
+  if (mdxPath.length === 1 && /^\d{4}$/.test(mdxPath[0])) {
     return [];
   }
 
@@ -212,6 +307,17 @@ const Wrapper = getMDXComponents().wrapper;
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
+
+  // 정적 파일 경로는 404 반환
+  if (params.mdxPath && isStaticAssetPath(params.mdxPath)) {
+    notFound();
+  }
+
+  // 연도만 있는 경로는 [year] 라우트가 처리하도록 404 반환
+  if (params.mdxPath && params.mdxPath.length === 1 && /^\d{4}$/.test(params.mdxPath[0])) {
+    notFound();
+  }
+
   const actualPath = await resolvePath(params.mdxPath);
 
   // 루트 경로는 허용 (빈 배열이면 루트 페이지)
