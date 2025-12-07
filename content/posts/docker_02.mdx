@@ -47,7 +47,7 @@ thumbnail: /images/2022/02/thumb_default.jpg
 > 3. 도커는 컨테이너의 표준출력과 에러출력을 별도로 메타데이터 파일로 저장하며, 이를 확인가능하도록
 >    한다. 로깅을 도와주는 써드파티 드라이버들도 존재한다.
 
-<a name="volumn" />
+
 
 ## 도커 볼륨?
 
@@ -65,7 +65,7 @@ thumbnail: /images/2022/02/thumb_default.jpg
   2. [볼륨 컨테이너를 활용하는 방법](#volume-container)
   3. [도커가 관리하는 볼륨](#volume-docker)을 생성할 수 있다.
 
-<a name="volume-host" />
+
 
 ### 1. 호스트 볼륨을 공유하는 방법
 
@@ -117,7 +117,7 @@ wordpress
 - 오버라이딩: 호스트 공유할 디렉토리가 신규생성이 아닌경우(해당 경로에 무언가 파일이 있던경우)
   오버라이딩 됨.
 
-<a name="volume-container" />
+
 
 ### 2. 볼륨 컨테이너를 활용하는 방법 (`-volumes-from`)
 
@@ -142,7 +142,7 @@ docker run -i -t \
 
 <img src="/images/2022/02/01.jpeg" />
 
-<a name="volume-docker" />
+
 
 ### 3. 도커가 관리하는 볼륨을 생성할 수 있다.
 
@@ -185,7 +185,7 @@ docker run -i -t \
 - == 컨테이너가 삭제돼도, 데이터는 보존되므로, stateless한 컨테이너 설계는 도커사용시 바람직한 설계
 - stateful한 컨테이너는 지양해야함.
 
-<a name="networking" />
+
 
 ## 도커 네트워크 구조
 
@@ -246,7 +246,7 @@ NETWORK ID     NAME      DRIVER    SCOPE
 c325e2a4437b   none      null      local
 ```
 
-<a name="bridge" />
+
 
 ### 브릿지 bridge
 
@@ -310,7 +310,7 @@ Docker DNS, Round-Robin 방식
     - DNS의 IP는 127.0.0.11
     - 위 예시에서는 컨티에너의 IP는 DNS 서버에 `alicek106` 이라는 호스트 이름으로 등록됨
 
-<a name="network-host" />
+
 
 ### 호스트 네트워크
 
@@ -324,7 +324,7 @@ docker run -i -t --name mynetwork_host \
 ubuntu:14.04
 ```
 
-<a name="network-none" />
+
 
 ### none 네트워크
 
@@ -339,7 +339,7 @@ docker run -i -t --name mynetwork_none \
 ubuntu:14.04
 ```
 
-<a name="network-container" />
+
 
 ### container 네트워크
 
@@ -354,7 +354,7 @@ ubuntu:14.04
 
 <img src="/images/2022/02/03.jpeg" />
 
-<a name="logging" />
+
 
 ## Container Logging
 

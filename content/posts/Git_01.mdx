@@ -58,7 +58,7 @@ client만 모아있는 모듈을 따로 분리해서 공용화할 수도 있을 
 
 부모 프로젝트에서 자식프로젝트의 **validation class**를 사용해 볼 것이다.
 
-<a name="1" />
+
 ## 1. 부모 프로젝트 셋팅하기 submodule_parent라는 이름의 react+TS 프로젝트를 셋팅한다. ```bash npx
 create-react-app submodule_parent --scripts-version=react-scripts-ts ```
 
@@ -115,7 +115,7 @@ email validation 로직은 공용 모듈로 분리해보자.
 
 ---
 
-<a name="2" />
+
 ## 2. 자식 프로젝트 셋팅하기 
 부모 프로젝트에서 submodule로 추가하기 위해서는 자식 프로젝트를 remote repository에 올려야한다. 
 > 예시를 위해 submodule_child라는 이름을 사용했지만, 실제 프로젝트에 넣어질 이름으로 짓는게 좋다. 
@@ -162,7 +162,7 @@ git push origin master
 
 ---
 
-<a name="3" />
+
 ## 3. 부모 프로젝트에 자식 프로젝트 submodule로 추가하기 부모 프로젝트의 경로로 가서 아래의 명령어로
 submodule을 추가할 수 있다. - 추가시 따로 submodule을 관리하는 폴더가 있다면 해당 경로로 이동 후
 add하면된다.
@@ -238,7 +238,7 @@ export default App;
 
 ---
 
-<a name="4" />
+
 ## 4. 자식 프로젝트 수정 후 부모 프로젝트에서 update하기 공용 컴포넌트는 자주 바뀔 일을 없겠지만,
 한번 add 된 이후 update가 있을면 기존 프로젝트에서 pull하는 방식과 마찬가지로 update하면된다. 대신
 pull을 이용해 최신 코드를 받길 원한다면 해당 경로로 이동하여 pull을 받아야 한다. - 공식 문서에는

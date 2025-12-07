@@ -64,7 +64,7 @@ public, private, protected 키워드로 class에 접근제어하는 방법을 �
 
 ---
 
-### <a name="1" ></a> 1. class 기초
+###  1. class 기초
 
 1. 생성자 함수(`constructor`)가 없으면, 디폴트 생성자가 불린다.
 2. 클래스의 프로퍼티 혹은 멤버 변수가 정의되어 있지만, 값을 대입하지 않으면 undefined 이다. =>
@@ -90,7 +90,7 @@ console.log(person.age); // undefined
 
 ---
 
-### <a name="2" ></a> 2. class property
+###  2. class property
 
 - constructor이외에 프로퍼티들을 포함시킬 수 있다.
 - 프로퍼티에도 값을 할당할 수 있다. 호출시 프로퍼티에 다시 값을 할당하게 되면, 마지막에 할당된 값이
@@ -117,7 +117,7 @@ console.log(person);
 
 ---
 
-### <a name="3" ></a> 3. class Access Modifier
+###  3. class Access Modifier
 
 #### `private`
 
@@ -175,7 +175,7 @@ class Child extends Parent {
 
 ---
 
-### <a name="4" ></a> 4. class default constructor
+###  4. class default constructor
 
 - 디폴트 생성자는 프로그래머가 만든 생성자가 없을 때 사용할 수 있다.
   - 사용자가 만든 생성자가 하나라도 있으면, 디폴트 생성자는 사라진다.
@@ -193,7 +193,7 @@ class Person {
 const person: Person = new Person();
 ```
 
-### <a name="5" ></a> 5. class & method
+###  5. class & method
 
 1. 클래스 내부에 작성된 메서드는 public 이 디폴트
 2. arrow function 으로 작성 가능
@@ -228,7 +228,7 @@ person.printName(); // 이름은 Mark 입니다.
 
 ---
 
-### <a name="6" ></a> 6. class extends
+###  6. class extends
 
 1. 상속은 `extends` 키워드를 이용한다.
 2. 자식 클래스에서 디폴트 생성자는 부모의 생성자와 입력 형태가 같다.

@@ -106,12 +106,12 @@ thumbnail: /images/post_img/01/thumb_default.jpg
 
 ---
 
-<a name="0" />
+
 ## 0. Github 간단 소개
 
 깃에 대해서 잘 알고 있다면 1번으로 넘어가도 됩니다.
 
-<a name="0-1" />
+
 ### 0-1. 원격저장소
 <img src="/images/post_img/01/post_1-01.svg" width="600px" />
 [Git](https://backlogtool.com/git-tutorial/kr/intro/intro1_1.html)이란 소스코드를 효과적으로
@@ -120,14 +120,14 @@ thumbnail: /images/post_img/01/thumb_default.jpg
 있는 원격저장소를 제공하는 서비스에는 **깃헙, 비트버킷, 깃랩**등이 있습니다다. 헥소를 이용한 블로그
 개설을 위해서는 **깃헙**을 사용해야합니다.
 
-<a name="0-2" />
+
 ### 0-2. 원격저장소 Github이 제공하는 정적웹사이트, Github Pages
 <img src="/images/post_img/01/post_1-02.svg" width="600px" />
 Github에서 제공하는 Static Website, Github Pages가 있다. 깃헙 저장소에 리소스를 `push`만 해도(push란
 저장소에 리소스를 넣을때 사용하는 명령어) 간단하게 웹사이트를 만들 수 있다. 즉, 다른 호스팅 서비스의
 도움없이, 원격저장소에 올리기만해도 호스팅이 가능하다.
 
-<a name="0-3" />
+
 ### 0-3. 호스팅을 편리하게 만들어주는 generator, Jekyll & HEXO
 <img src="/images/post_img/01/post_1-04.svg" width="600px" />
 
@@ -143,13 +143,13 @@ generator에는 jekyll과 HEXO가 있는데, jekyll은 `ruby`기반, HEXO는 `no
 그럼 generator을 셋팅하기 전, 내 컴퓨터에 디렉토리(폴더)를 생성하고, 원격저장소(github)에 연결을
 시켜보자.
 
-<a name="1" />
+
 ## 1. Github Pages로 정적 페이지 호스팅하기 Github Pages를 사용하기 위해 Github의 원격저장소에
 리소스를 올려야한다는 사실을 잊지말자. 아래 그림의 저장소들이 필요하다.
 
 <img src="/images/post_img/01/post_1-05.svg" width="600px" />
 
-<a name="1-1" />
+
 ### 1-1. 로컬에 저장소 생성하기 내 컴퓨터 원하는 장소에 폴더를 생성한다. terminal없이도 생성해도
 된다. 아래는 terminal을 이용한 생성방법
 
@@ -162,7 +162,7 @@ $ mkdir github-blog
 
 바탕화면에 `github-blog`라는 이름의 폴더가 생성이 되었다.
 
-<a name = "1-2"/>
+
 ### 1-2. 원격 저장소 생성하기 (Github Repository)
 <img src="/images/post_img/01/post_1-11.jpg" width="600px" />
 github pages를 통해 손쉽게 `USERNAME.github.io`를 통해 정적 페이지를 호스팅 할 수 있다. 
@@ -177,7 +177,7 @@ github pages를 통해 손쉽게 `USERNAME.github.io`를 통해 정적 페이지
 
 <img src="/images/post_img/01/post_1-12.jpg" width="600px" />
 
-<a name="1-3" />
+
 ### 1-3. 원격 저장소와 로컬 저장소 연결하기
 <img src="/images/post_img/01/post_1-06.svg" width="600px" />내 컴퓨터에 저장소를 만들고, 원격에도
 만들었으니, 연결을 해야한다. 연결하는 방법은 간단하다. 지금은 터미널을 열고 명령어를 입력해야하는
@@ -215,7 +215,7 @@ step 1이 끝났다! 그리고 벌써 호스팅이 완료되었다. **USERNAME.g
 -- 아직 블로그의 형태를 띄지 않았다. 위에서 말했던 generator를 이용하여 블로그의 구조를 짤 예정인데,
 우리는 HEXO를 이용할 것이다.
 
-<a name="2" />
+
 ## 2. Hexo 설치하기 Hexo는 node.js기반이기 때문에 npm을 통해 쉽게 설치가 가능하다. 다양한 plugin과
 테마를 지원하고 있다.
 <img src="/images/post_img/01/post_1-07.svg" width="600px" />
@@ -276,7 +276,7 @@ deploy:
 테마별로 구성을 수정하는 스타일이 다르다. 테마 적용하기 파트에서 anatol 레이아웃 수정방법을
 설명하겠다.
 
-<a name="2-4" />
+
 ### 2-4. 로컬에서 테스트하기 ```bash hexo server ``` blog 디렉토리에 위치되어있는 상태에서 서버를
 구동한다. blog에 위치되어있지 않으면 서버구동이 안된다. 서버 구동이 완료되면 4000번 포트로 접속이
 가능하다. - 02. HTTP://localhost:4000
@@ -286,7 +286,7 @@ deploy:
 
 <hr />
 
-<a name="3" />
+
 ## 3. Github에 배포하기 로컬에서 테스트를 완료하면 USERNAME.github.io 주소로 배포해보자.
 <img src="/images/post_img/01/post_1-08.svg" width="600px" />
 

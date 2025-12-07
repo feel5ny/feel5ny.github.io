@@ -115,7 +115,7 @@ HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다. HTTP는 �
 
 # 엔터티에 대하여
 
-<a name="entity" />
+
 
 ## 1. 메세지는 컨테이너, 엔터티는 화물
 
@@ -157,7 +157,7 @@ HTTP는 매일 수십억 개의 미디어 객체를 실어 나른다. HTTP는 �
 - 다른 정보들은 모두 헤더에 담겨 있다.
 - 엔터티본문은 CRLF (캐리지 리턴 + 개행) 줄 바로 다음부터 시작한다.
 
-<a name="length" />
+
 
 ## 2. `Content-Length` 엔터티의 길이
 
@@ -233,7 +233,7 @@ switch (true)
 - 엔터티는 커넥션이 닫힐 때 끝난다.
 - Content-Length를 요구하고 싶을 경우 411 Length Required 응답을 보냄
 
-<a name="type" />
+
 
 ## 3. 미디어 타입과 Charset
 
@@ -285,7 +285,7 @@ Content-Type: multipart/form-data; boundary=[abcdefghijklmnopqrstuvwzyz]
 
 # 전송 전 ~ 전송 후
 
-<a name="checksum" />
+
 
 ## 1. 엔터티 요약 `Content-MD5`
 
@@ -307,7 +307,7 @@ Content-Type: multipart/form-data; boundary=[abcdefghijklmnopqrstuvwzyz]
   있다.
   > Content-MD5 헤더는 그다지 **자주 전송되지 않는다.**
 
-<a name="encoding" />
+
 
 ## 2. 콘텐츠 인코딩 `Content-Encoding`
 
@@ -363,7 +363,7 @@ Accept-Encoding: compress; q=0.5, gzip; q=1.0
 Accept-Encoding: gzip; q=1.0, identiy; q=0.5, *; q=0
 ```
 
-<a name="transfer" />
+
 
 ## 3. 전송 인코딩과 청크 인코딩 `Transfer-encoding`
 

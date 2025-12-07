@@ -127,7 +127,7 @@ thumbnail: /images/2019/45/thumb_default.jpg
 - 2.  HTTPS는 HTTP 메세지를 TCP로 보내기 전에 먼저 그것들을 **암호화하는 보안계층**으로 보낸다.
 - 오늘날 HTTPS의 보안계층은 **SSL과 TLS**로 구현되었다.
 
-<a name="scheme" />
+
 
 ## 1. HTTPS 스킴
 
@@ -148,7 +148,7 @@ https://feel5ny.github.io
 - SSL 트래픽은 **바이너리 프로토콜**이기 때문에 HTTP와는 완전히 다르다.
   - 그 트래픽은 다른 포트로 전달된다.(SSL은 보통 443포트)
 
-<a name="setup" />
+
 
 ## 2. 보안 전송 셋업
 
@@ -175,7 +175,7 @@ HTTPS에서는 클라는
 
 <img src="/images/2019/45/01.png" style={{width: '100%'}} />
 
-<a name="handshake" />
+
 
 ## 3. SSL 핸드셰이크
 
@@ -303,7 +303,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 
 - 서로 상대방에게 전송할 데이터를 암호화하여 전송한다.
 
-<a name="ca" />
+
 
 ## 4. 서버 인증서
 
@@ -316,7 +316,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 
 <img src="/images/2019/45/16.png" />
 
-<a name="ocsp" />
+
 
 ## 5. 사이트 인증서 검사
 
@@ -394,7 +394,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 - 만약 호스트명이 인증서의 신원과 맞지 않는다면, 사용자를 우선으로 생각하는 클라이언트는 반드시 이
   사실을 사용자에게 알리거나 잘못된 인증서 에러와 함께 커넥션을 끊어야 한다.
 
-<a name="-" />
+
 
 ## 6. 가상 호스팅과 인증서
 
@@ -409,7 +409,7 @@ www.bing.com에 접속할 때 SSL 핸드쉐이크 과정을 와이어 샤크를 
 
 ---
 
-<a name="openssl" />
+
 
 # HTTPS 예시 (feat. `OpenSSL`)
 
@@ -467,7 +467,7 @@ Content-Type: text/html; ...
 
 ---
 
-<a name="httpsSSLtunnelingProtocol" />
+
 
 # 프락시를 통한 보안 트래픽 터널링 (HTTPS SSL 터널링 프로토콜)
 

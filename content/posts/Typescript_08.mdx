@@ -77,7 +77,7 @@ thumbnail: /images/post_img/21/thumb_default.jpg
 
 ---
 
-### <a name="1" ></a> 1. class getter, setter
+###  1. class getter, setter
 
 get, set을 하는 중에 무언가를 해주기 위해서 사용한다. get과 set 사이에 추가적인 작업이 있을 때
 사용한다.
@@ -128,7 +128,7 @@ setter는 어떤 멤버 변수에 값을 할당할 때마다 멤버 변수의 �
 
 ---
 
-### <a name="2" ></a> 2. class 멤버변수
+###  2. class 멤버변수
 
 객체지향의 class와 거의 유사하다. static property와 static method가 있다.
 
@@ -162,7 +162,7 @@ person.print(); // Mark Lee in Seoul.
 
 ---
 
-### <a name="3" ></a> 3. class 멤버함수
+###  3. class 멤버함수
 
 ```ts
 class Person {
@@ -185,7 +185,7 @@ public static은 의미가 있다. private static 메소드와 프로퍼티는 �
 
 ---
 
-### <a name="4" ></a> 4. class private static property or method
+###  4. class private static property or method
 
 ```ts
 class Person {
@@ -217,7 +217,7 @@ export class Person {
 
 ---
 
-### <a name="5" ></a> 5. Abstract Class &#128566;
+###  5. Abstract Class &#128566;
 
 1. abstract 키워드가 사용된 클래스는 new 로 생성할 수 없다.
 2. abstract 키워드가 사용된 클래스를 상속하면 abstract 키워드가 붙은 함수를 구현해야 한다.
@@ -240,7 +240,7 @@ const person = new Person();
 
 ---
 
-### <a name="6" ></a> 6. private constructor
+###  6. private constructor
 
 1. 생성자 함수 앞에 접근제어자인 private 을 붙일 수 있다.
 2. 외부에서 생성이 불가능하다.
@@ -258,7 +258,7 @@ class Preference {
 
 ---
 
-### <a name="7" ></a> 7. singleTon &#128580;
+###  7. singleTon &#128580;
 
 자바스크립트의 함수는 new로 생성자를 사용할 때마다 새로이 생성된 객체를 리턴합니다. 하지만 특수한
 상황에서는 하나의 함수에서 생성되는 객체가 오직 한개만을 가져야 할 때가 있다. 그럴 경우 사용되는
@@ -292,7 +292,7 @@ const p: Preference = Preference.getInstance();
 
 ---
 
-### <a name="8" ></a> 8. readonly
+###  8. readonly
 
 private인데 get, set중 get만 있는 상황과 같다.
 

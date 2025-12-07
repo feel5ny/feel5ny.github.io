@@ -61,7 +61,7 @@ thumbnail: /images/post_img/24/thumb_default.jpg
 
 ---
 
-### <a name="1" ></a> 1. Decorator 종류
+###  1. Decorator 종류
 
 - Class Decorator
 - Method Decorator
@@ -77,17 +77,17 @@ Decorator?
 
 ---
 
-#### <a name="1-1" ></a> 1-1. Decorator 코드 작성 준비
+####  1-1. Decorator 코드 작성 준비
 
 `yarn add typeScript -D`여기서 `D`는 `dev`와 같은 명령어다.
 
 ---
 
-### <a name="2" ></a>2. Decorator
+### 2. Decorator
 
-#### <a name="2-1" ></a>2-1. Class Decorator
+#### 2-1. Class Decorator
 
-##### <a name="basic" ></a> 2-1-1. Class Decorator Basic
+#####  2-1-1. Class Decorator Basic
 
 여기서 helloFactory 는 팩토리 패턴
 
@@ -117,7 +117,7 @@ new Person();
 
 ---
 
-##### <a name="advanced" ></a> 2-1-2. Class Decorator Advanced
+#####  2-1-2. Class Decorator Advanced
 
 ```ts
 function addHello(constructorFn: Function) {
@@ -139,7 +139,7 @@ const person = new Person();
 
 ---
 
-### <a name="2-2" ></a> 2-2. Method Decorator
+###  2-2. Method Decorator
 
 ```ts
 function editable(canBeEdit: boolean) {
@@ -173,7 +173,7 @@ person.hello();
 
 ---
 
-### <a name="2-3" ></a> 2-3. Property Decorator
+###  2-3. Property Decorator
 
 ```ts
 function writable(canBeWrite: boolean) {
@@ -208,7 +208,7 @@ undefined
 
 ---
 
-### <a name="2-4" ></a> 2-4. Prameter Decorator
+###  2-4. Prameter Decorator
 
 ```ts
 function printInfo(target: any, methodName: string, paramIndex: number) {

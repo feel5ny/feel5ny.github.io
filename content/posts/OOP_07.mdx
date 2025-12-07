@@ -46,7 +46,7 @@ thumbnail: /images/2018/37/thumb_default.jpg
 
 ---
 
-<a name="1"></a>
+
 ## 1. Stage ### Stage 클래스는 뭘 필요로 할까? 1. 판 마지막 판이 몇 판일까? = 몇 판까지 있을까? 2.
 속도 ** 판마다 속도가 증가한다.** - 최소 속도 - 최대 속도 ** 속도는 어떤 객체가 가져가야할까?** -
 Game보다는 Stage가 적합. - 캡슐화와 은닉화의 속성을 이용하여, 속도의 처리는 stage내에서만 처리하게
@@ -87,7 +87,7 @@ const Stage = class {
 
 ---
 
-<a name="2"></a>
+
 ## 2. Score
 
 ```js
@@ -225,7 +225,7 @@ score와 stage간의 의존성이 생김
 
 ---
 
-<a name="3" ></a>
+
 ## 3. Block
 #### 클래스일까 인스턴스일까.
 - 찍어낼 수 있어야 한다. => 클래스 
@@ -343,7 +343,7 @@ const blocks = [
 ]
 ```
 
-<a name="4"></a>
+
 ## 4. Renderer 렌더러는 stage, score, block을 몰라도, data만 알아도 되는 구조
 <img src="/images/2018/38/04.png" />
 
@@ -381,7 +381,7 @@ const Renderer = class {
 > 구현하도록 할 수 있다. 템플릿 메서드를 이용하면 알고리즘의 구조는 그대로 유지하면서 특정 단계만
 > 서브 클래스에서 새로 정의하도록 할 수 있다.
 
-<a name="4-0"></a>
+
 ## 4-0. Data(protocol)
 
 ```js
@@ -397,7 +397,7 @@ const Data = class extends Array {
 
 > es6는 클래스 내부에서 this를 바꿔 줄 수 있다.
 
-<a name="4-1"></a>
+
 ## 4-1. Table Renderer
 
 ```js
@@ -445,7 +445,7 @@ const TableRenderer = class extends Renderer {
 > <span class="mint">**for와 forEach 중 어떤걸 사용할까?**</span>
 > 언어스팩에서 정의되어있는 메서드를 사용하자. **forEach** 성능문제는 우선 고려하지 말자.
 
-<a name="4-2"></a>
+
 ## 4-2. Canvas Renderer
 
 ```js

@@ -37,7 +37,7 @@ thumbnail: /images/post_img/56/thumb_default.jpg
 
 ---
 
-## <a name="window" ></a> 1. window 객체
+##  1. window 객체
 
 BOM은 웹 페이지 콘텐츠와 무관하게 `브라우저 기능을 노출하는 객체`이다.
 
@@ -52,7 +52,7 @@ BOM은 웹 페이지 콘텐츠와 무관하게 `브라우저 기능을 노출하
 
 ---
 
-### <a name="global" ></a> 1.1 전역 스코프
+###  1.1 전역 스코프
 
 전역에서 선언한 `변수`와 `함수`는 모두 **window 객체의 프로퍼티 및 메서드**가 된다.
 
@@ -87,13 +87,13 @@ alert(window.color);
 
 ---
 
-### <a name="frame" ></a> 1.2 창 사이의 관계와 프레임
+###  1.2 창 사이의 관계와 프레임
 
 페이지에 프레임이 들어 있으면 각 프레임은 독자적인 window객체를 가지며, frames 컬렉션에 저장된다.
 
 ---
 
-### <a name="screen-position" ></a> 1.3 창의 위치
+###  1.3 창의 위치
 
 `screenLeft` : 디바이스 화면 왼쪽에서 브라우저 창까지 가로 거리 `screenTop` : 디바이스 화면 위쪽에서
 브라우저 창까지 세로 거리 `moveBy(가로이동 픽셀수, 세로이동 픽셀수)` : (왼->오 / 위-> 아래)
@@ -103,7 +103,7 @@ alert(window.color);
 
 ---
 
-### <a name="screen-size" ></a> 1.4 창의 크기
+###  1.4 창의 크기
 
 크기측정
 
@@ -119,7 +119,7 @@ alert(window.color);
 
 ---
 
-### <a name="navigation&open" ></a> 1.5 내비게이션과 열기
+###  1.5 내비게이션과 열기
 
 `window.open()` : URL로 이동한 후 브라우저 창을 새로 연다.
 
@@ -191,7 +191,7 @@ alert(wroxWin.opener === window); // true
 
 ---
 
-### <a name="interval&timeout" ></a> 1.6 인터벌과 타임아웃
+###  1.6 인터벌과 타임아웃
 
 window에는 코드가 특정 시간에 실행되게끔 해주는 메서드가 있다. `setTimeout(실해코드, 시간(밀리초))`
 : 일정 시간 뒤에 코드를 실행 `setInterval()` : 일정 시간마다 코드를 반복 실행
@@ -221,7 +221,7 @@ setInterval(function () {
 
 ---
 
-### <a name="system-popup" ></a> 1.7 시스템 대화상자
+###  1.7 시스템 대화상자
 
 `alert()` : Ok `confirm()` : Ok / cancel `prompt()` : input / Ok / cancel
 

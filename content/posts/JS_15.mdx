@@ -87,8 +87,8 @@ thumbnail: /images/2018/31/thumb_default.jpg
 
 ---
 
-<a name="1"></a># 1. 함수 정의
-<a name="1-1"></a>
+# 1. 함수 정의
+
 ## 함수 선언문
 
 ```js
@@ -98,7 +98,7 @@ function add(x, y) {
 }
 ```
 
-<a name="1-2" ></a>
+
 ## 함수 표현식
 ```js
 // 함수 표현식
@@ -156,7 +156,7 @@ factorial(3); // error
 ```
 
 - 관습적으로 <span class="mint">함수 표현식 뒤에는 세미콜론을 붙인다.</span>
-  <a name="1-3"></a>
+  
 
 ## Function() 생성자 함수
 
@@ -167,7 +167,7 @@ var add = new Function('x', 'y', 'return x + y');
 ```
 
 - 자주 사용되지 않는다.
-  <a name="1-4"></a>
+  
 
 ## 함수 호이스팅
 
@@ -179,9 +179,9 @@ var add = new Function('x', 'y', 'return x + y');
 
 ---
 
-<a name="2" ></a>
+
 # 2. 함수 객체: 함수도 객체다. 
-<a name="2-1" ></a>
+
 ## 2.1 자바스크립트에서는 함수도 객체다. 
 함수 자체가 <span class="mint">일반 객체처럼 프로퍼티들을 가질 수 있다.</span>
 ```js
@@ -193,7 +193,7 @@ add.result = add(3,2); add.status = 'OK';
 
 ````
 
-<a name="2-2" ></a>
+
 ## 2.2 자바스크립트에서 함수는 값으로 취급된다. (일급객체)
 자바스크립트에서 함수는 <span class="mint">일급객체</span>이다.
 
@@ -232,7 +232,7 @@ console.log(obj.baz()) // 200;
 
 > 클로저
 
-<a name="2-3"></a>
+
 ## 2.3 함수 객체의 기본 프로퍼티
 <span class="mint">함수 객체만의 표준 프로퍼티</span>가 정의되어 있다.
 <img src="/images/2018/31/add.png" />
@@ -321,8 +321,8 @@ console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
 
 ---
 
-<a name="3"></a># 3. 함수의 다양한 형태
-<a name="3-1"></a>
+# 3. 함수의 다양한 형태
+
 ## 3.1 콜백함수 함수 표현식에서 함수이름은 꼭 붙이지 않아도 되는 선택사항이다. (익명함수)
 <span class="mint">익명함수의 대표적인 용도가 **콜백함수.**</span>
 
@@ -334,7 +334,7 @@ console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
 - 대표적인 콜백함수는 이벤트 핸들러 처리.
   - DOM 이벤트가 발생할 경우, 이벤트 핸들러를 발생시킨다.
 
-<a name="3-2" ></a>
+
 ## 3.2 즉시실행함수
 = 함수를 정의함과 동시에 바로 실행하는 함수
 ```js
@@ -355,7 +355,7 @@ console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
   - 변수 스코프를 위해서 사용한다. 함수 코드 내부에서만 유효할 수 있도록
   - 라이브러리 내의 변수들은 함수 외부에서 접근할 수 없다.
 
-<a name="3-3" ></a>
+
 ## 3.3 내부 함수
 함수 코드 내부에서 함수 정의
 - 공용으로 쓰이지 않고 정말 내부에서만 쓰일때
@@ -402,5 +402,5 @@ inner(); // 클로저
 
 ---
 
-<a name="3-4"></a>
+
 ## 3.4 함수를 리턴하는 함수

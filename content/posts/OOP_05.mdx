@@ -82,7 +82,7 @@ thumbnail: /images/2018/36/thumb_default.jpg
 
 ---
 
-<a name="1"></a>
+
 ## 1. 개요 어떤 상황을 보고 구조적이고 재귀적인 형태로 파악을 할 수 있느냐, 데이터 분석을 할 수
 있느냐..
 
@@ -160,7 +160,7 @@ const parser = (input: string): Result[] => {
 
 ---
 
-<a name="2"></a>
+
 ## 2. 텍스트 노드 C타입: 텍스트
 
 ### 2-1. 순서
@@ -282,7 +282,7 @@ const textNode = (input: string, cursor: number, curr: StackItem): number => {
 
 ---
 
-<a name="3"></a>
+
 ## 3. 태그 노드
 
 #### <span class="mint">`<`</span>가 발동 트리거로 쓰이고 있다.
@@ -303,7 +303,7 @@ const textNode = (input: string, cursor: number, curr: StackItem): number => {
 > 공통점을 찾아서 코드를 중복시키는 것을 피해야한다. 눈을 훈련해서 먼저 공통요소를 추상화 할 수 있는
 > 능력을 키워야한다.
 
-<a name="3-1" ></a>
+
 ### 3.1 empty element `<img />`, open tag `<div>`
 empty element가 더 간단해 보이므로 먼저짜긔
 
@@ -343,7 +343,7 @@ const parser = input => {
 const textNode = (input, cursor, curr) => {...};
 ```
 
-<a name="cf__1"></a>
+
 #### cf__1 코드 설계를 잘하자 좋은 코드를 짜는 비밀은 - 테스트 주도 개발에 있는 것이 아니라, -
 데이터를 이해하고 재귀적인 로직을 찾아내거나 - 추상화된 공통점을 찾아내거나 - 역할을 이해하거나에
 있다.
@@ -386,7 +386,7 @@ curr.tag.children.push(tag);
 2. 공통 처리사항 층
 3. 다른점을 기술하는 부분을 흡수하는 층
 
-<a name="cf__2"></a>
+
 #### cf__2 화이트리스 **화이트리스 whitelist** '안전'이 증명된 것만을 허용하는 것으로 '악의성'이
 입증된 것을 차단하는 블랙리스트 보안과 상반되는 보안 방식 이다. 화이트리스트, 블랙리스트라는 용어
 대신 'positive'와 'nagative' 보안 방법으로 불려지기도 합니다.
@@ -465,12 +465,12 @@ const elementNode = (
 
 ```
 
-<a name="cf__3"></a>
+
 #### cf__3 가독성이 높은 코드? (변수명을 이쁘게 쓰던, 컨벤션을 지키던) **코드가 리더블하다?**
 Readable - **적절한 역할모델**로 위임되서 그들간의 **통신과 협업만 볼 수 있는 코드**가 가독성이 높은
 코드이다.
 
-<a name="3-2"></a>
+
 ### 3.2 close tag
 
 ```js
@@ -517,7 +517,7 @@ const elementNode = (input, cursor, idx, curr, stack) => {
 
 ```
 
-<a name="cf__4"></a>
+
 #### cf__4 css압축이나 javascript압축보다 **html압축이 브라우저의 부하를 줄이는 방법** 쓸데없는
 노드생성을 줄인다.
 
@@ -541,7 +541,7 @@ const elementNode = (input, cursor, idx, curr, stack) => {
 
 ---
 
-<a name="4"></a>
+
 ## 4. 최종
 
 ```js

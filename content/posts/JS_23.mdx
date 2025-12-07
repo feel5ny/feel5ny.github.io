@@ -71,7 +71,7 @@ Symbol에 대해서 이해가 안갔는데 C언어의 enum과 비슷한 개념�
 2. **Symbol.for()**: 글로벌 Symbol registry에 저장되며 전체 프로그램에서 사용한다.
 3. **Well-Known Symbol**: 빌트인 Symbol 프로퍼티로 오버라이드하여 기능을 추가, 변경할 수 있다.
 
-<a name="1"></a>
+
 ## 1. primitive string, number, boolean은 레퍼(Wrapper) 오브젝트가 있다. - string은 String -
 number는 Number - boolean은 Boolean - es6에서 symbol의 Symbol 오브젝트가 추가되었다.
 
@@ -79,7 +79,7 @@ wrapper 오브젝트는 vlaueOf()로 프리미티브 값을 구할 수 있지만
 
 ---
 
-<a name="2"></a>
+
 ## 2. Symbol() `Symbol([description])` - description: 설명, 주석 - 반환값: 유니크한 Symbol 값
 
 ```js
@@ -117,20 +117,20 @@ feature2: sym == Symbole() // false
 
 ---
 
-<a name="3"></a>
+
 ## 3. Symbol 값 변경 - Symbol()로 생성한 Symbol값은 변경할 수 없다. - Symbol값에 문자열을 추가하고
 싶을 경우 Symbol을 toString()이나 String()으로 변환한 후 연결해야한다.
 
 ---
 
-<a name="4"></a>
+
 ## 4. Symbol 오브젝트 생성 Object(123)처럼 Object()의 파라미터에 123을 지정하면 Number 오브젝트를
 반환한다. - Object() 파라미터에 Symbol 값을 지정하면 Symbol 오브젝트를 반환한다. - Symbol 오브젝트에
 Symbol메서드, Symbol.prototype, protototype에 연결된 프로퍼티가 설정된다.
 
 ---
 
-<a name="5"></a>
+
 ## 5. 오브젝트에서 Symbol 사용 유일한 값을 갖는 Symbol 특성을 활용하여 Symbol 값을 오브젝트의
 프로퍼티 키로 사용하면 프로퍼티 키가 중복되지 않습니다.
 
@@ -162,7 +162,7 @@ console.log(obj.sym); // undefined
 
 ---
 
-<a name="6"></a>
+
 ## 6. Symbol 사용형태 for-in 문에서 symbol-keyed property는 열거되지 않는다. - Symbol이
 `[[Enumerable]]: false`이기 때문. [(객체의 데이터 프로퍼티에서 `[[Enumerable]]`은 기본적으로
 true이다.)](https://feel5ny.github.io/2017/12/04/JS_05_1/)
@@ -221,7 +221,7 @@ console.log(result); // {}
 
 빈 오브젝트가 반환된다. 이는 Symbol 값을 외부에 노출되지 않도록 하기 위한 조치이다.
 
-<a name="6-4"></a>
+
 ### 6.4 프로퍼티 은닉화 - symbol로 정의된 키값에는 바로 접근이 불가능하다. - 키값이 들어있는
 프로퍼티를 객체 내부에 적용해놓으면 심볼 키에 접근가능하다.
 

@@ -48,7 +48,7 @@ thumbnail: /images/post_img/14/thumb_default.jpg
 > [강의록](http://slides.com/woongjae/deck-8#)을 참고하여 작성하였습니다. (짱짱) **오류**가 있다면
 > 언제든지 댓글 부탁드립니다 .
 
-<a name="0"></a>
+
 ### 0. literal
 
 - `값 자체가 변하지 않는 값을 의미합니다 .`
@@ -63,7 +63,7 @@ thumbnail: /images/post_img/14/thumb_default.jpg
 
 ---
 
-<a name="1"></a>
+
 ## 1. 기본 자료형 Primitive Type
 
 - object 와 reference 형태가 아닌 실제 값을 저장하는 자료형입니다 .
@@ -77,7 +77,7 @@ let name = 'Nayoung';
 name.toString();
 ```
 
-<a name="1-1"></a>
+
 ### 1-1. boolean
 
 - 가장 기본적인 데이터 타입
@@ -108,7 +108,7 @@ let isOk: Boolean = true
 let isNotOk: boolean = new Boolean(true)
 ```
 
-<a name="1-2"></a>
+
 ### 1-2. number
 
 - JavaScript 와 같이, TypeScript 의 모든 숫자는 부동 소수점 값 입니다.
@@ -121,7 +121,7 @@ let binary: number = 0b1010 // 2진수 리터럴
 let octal: number = 0o744 // 8진수 리터럴
 ```
 
-<a name="1-3"></a>
+
 ### 1-3. string
 
 - Template String을 자주 쓴다 .
@@ -134,7 +134,7 @@ let name: string = 'mark'
 name = 'anna'
 ```
 
-<a name="1-4"></a>
+
 ### 1-4. Template String
 
 - 주로 사용한다.
@@ -160,7 +160,7 @@ let sentence: string =
   ' years old next month.'
 ```
 
-<a name="1-5"></a>
+
 ### 1-5. Undefined & null
 
 - TypeScript에서 'undefined'와 'null'은 실제로 각각 'undefined'와 'null'이라는 고유한 타입을
@@ -238,10 +238,10 @@ console.log(typeof u) // undefined
 
 ---
 
-<a name="2"></a>
+
 ## 2. 참조타입 (javaScript)
 
-<a name="2-1"></a>
+
 ### 2-1. Array
 
 - 원래 자바스크립트에서 array는 객체입니다.
@@ -255,7 +255,7 @@ let list: number[] = [1, 2, 3]
 let list: Array<number> = [1, 2, 3]
 ```
 
-<a name="2-2"></a>
+
 ### 2-2. Symbol 🙄
 
 - ECMAScript 2015의 Symbol 입니다.
@@ -275,10 +275,10 @@ console.log(obj[sym]); // "value"
 
 ---
 
-<a name="3"></a>
+
 ## 3. 타입스크립트에서 추가로 제공하는 타입
 
-<a name="3-1"></a>
+
 ### 3-1. Void
 
 - 타입이 없는 상태입니다.
@@ -294,7 +294,7 @@ function returnVoid(message): void {
 returnVoid('리턴이 없다')
 ```
 
-<a name="3-2"></a>
+
 ### 3-2. Any
 
 - 어떤 타입이어도 상관없는 타입입니다.
@@ -311,7 +311,7 @@ function returnAny(message): any {
 returnVoid('리턴은 아무거나')
 ```
 
-<a name="3-3"></a>
+
 ### 3-3. Never
 
 - 리턴에 주로 사용된다.
@@ -334,7 +334,7 @@ function infiniteLoop(): never {
 }
 ```
 
-<a name="3-4"></a>
+
 ### 3-4. Tuple
 
 - **배열인데 타입이 한가지가 아닌 경우**
@@ -361,7 +361,7 @@ const person: [string, number] = ['mark', 35]
 const [name, age] = person
 ```
 
-<a name="3-5"></a>
+
 ### 3-5. Enum
 
 - C 에서 보던것과 같습니다.

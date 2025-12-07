@@ -76,7 +76,7 @@ thumbnail: /images/post_img/22/thumb_default.jpg
 
 ---
 
-### <a name="1" ></a> 1. ~any~ => generic
+###  1. ~any~ => generic
 
 any의 사용을 지양하고자 타입을 인자로 넘긴다.
 
@@ -123,7 +123,7 @@ console.log(helloGeneric(35).toString()); // console.log(helloGeneric<number>(35
 
 ---
 
-### <a name="2" ></a> 2. basic generic
+###  2. basic generic
 
 1. Generic 타입을 쓰지 않으면, T 로 추론
 2. Generic 타입을 쓰면, T 를 확인
@@ -144,7 +144,7 @@ hello<number>('35');
 
 ---
 
-### <a name="3" ></a> 3. Generic Array
+###  3. Generic Array
 
 hello 함수의 제네릭 타입을 [] 를 이용하여 배열로 사용할 수 있음
 
@@ -158,7 +158,7 @@ console.log(hello<string>(['Hello', 'World']));
 
 ---
 
-### <a name="4" ></a> 4. Generic Type
+###  4. Generic Type
 
 구현체에 return T 를 설정하지 않아도, return false 시 오류가 나지 않는다?
 
@@ -176,7 +176,7 @@ console.log(hello<string>('Hello').length);
 
 ---
 
-### <a name="5" ></a> 5. Generic Class
+###  5. Generic Class
 
 명시적으로 제네릭 타입을 설정하면 오류
 
@@ -198,7 +198,7 @@ new Person('Mark');
 
 ---
 
-### <a name="6" ></a> 6. Generic with extends
+###  6. Generic with extends
 
 T 가 string 또는 number 를 상속받기 때문에 boolean 은 안된다.
 
@@ -220,7 +220,7 @@ new Person(35);
 
 ---
 
-### <a name="7" ></a> 7. Generic with multiple types
+###  7. Generic with multiple types
 
 ```ts
 class Person<T, K> {
@@ -238,7 +238,7 @@ new Person('Mark', 35);
 
 ---
 
-### <a name="8" ></a> 8. type lookup system
+###  8. type lookup system
 
 keyof 키워드를 알아야한다.
 

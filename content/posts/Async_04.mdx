@@ -76,7 +76,7 @@ thumbnail: /images/2018/29/thumb_default.jpg
 
 ---
 
-<a name="1" />
+
 
 ## 1. RxJS란?
 
@@ -84,11 +84,11 @@ RxJS is a library for composing asynchronous and event-based programs by using o
 RxJS는 Observable를 사용하여 비동기 및 이벤트 기반 프로그램을 작성하기 위한 라이브러리이다.
 (범용적인 데이터 플로우 솔류션을 지향하는 라이브러리라고 책 저자가 정의함)
 
-<a name="2" />
+
 
 ## 2. RxJS 시작하기
 
-<a name="2-1" />
+
 
 ### 2.1 RxJS 첫번째 예제
 
@@ -109,7 +109,7 @@ click$.subscribe(observer);
 통한 이벤트 핸들러 등록과 유사하다. 둘의 차이점은 브라우저를 통해 전달되는 이벤트 정보를
 Observable로 변환하는 작업을 추가로 한다는 점
 
-<a name="2-2" />
+
 
 ### 2.2 RxJS 첫번째 예제 개선하기
 
@@ -160,7 +160,7 @@ ajax$
 
 ---
 
-<a name="2-3" />
+
 
 ### 2.3 RxJS 두번째 예제
 
@@ -188,7 +188,7 @@ const oberver = user => console.log(user);
 a$.subscribe(observer);
 ```
 
-## <a name="3" />
+## 
 
 ## 3. RxJS 4대 천왕
 
@@ -205,14 +205,14 @@ a$.subscribe(observer);
 
 ---
 
-<a name="3-1" />
+
 
 ### 3.1 Observable
 
 **시간을 축**으로 연속적인 데이터를 저장하는 컬렉션을 표현한 객체이다. Observable은 데이터를
 제공하는 소스를 Observer에게 전달한다. 이를 **스트림(stream)**이라고 부른다.
 
-<a name="3-2" />
+
 
 ### 3.2 오퍼레이터
 
@@ -221,7 +221,7 @@ a$.subscribe(observer);
 
 오퍼레이터는 현재의 Observable 인스턴스를 기반으로 항상 새로운 Observable 인스턴스를 반환한다.
 
-<a name="3-4" />
+
 
 ### 3.3 Observer
 
@@ -266,7 +266,7 @@ click$.subscribe(
 
 ---
 
-<a name="3-4" />
+
 
 ### 3.4 Subscription
 
@@ -281,7 +281,7 @@ const subscription = currentTarget$.subscribe(observer);
 subscription.unsubscribe();
 ```
 
-<a name="4" />
+
 
 ## 4. RxJS 개발 방법
 
