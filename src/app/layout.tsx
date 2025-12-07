@@ -3,6 +3,7 @@ import 'nextra-theme-blog/style.css';
 import '@/styles/globals.css';
 import CustomFooter from '@/components/custom-footer';
 import CustomHeader from '@/components/custom-header';
+import { ScrollToTopButton } from '@/components/scroll-to-top-button';
 import { Metadata } from 'next';
 import { Layout } from 'nextra-theme-blog';
 import { Inter } from 'next/font/google';
@@ -66,6 +67,7 @@ export default async function RootLayout({ children }) {
           {children}
 
           <CustomFooter />
+          <ScrollToTopButton />
         </Layout>
       </body>
     </html>
