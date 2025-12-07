@@ -61,19 +61,29 @@ export default async function CategoryPage(props: CategoryPageProps) {
   return (
     <>
       <h1>{categoryInfo?.name || decodedCategory}</h1>
+      {categoryInfo?.description && (
+        <p className="text-muted-foreground mb-6">{categoryInfo.description}</p>
+      )}
       {categoryInfo?.subCategories && categoryInfo.subCategories.length > 0 && (
         <div className="mb-6">
           <ul className="list-disc list-inside">
-            {categoryInfo.subCategories.map(subCat => (
-              <li key={subCat.slug}>
-                <a href={`/categories/${params.category}/${subCat.slug}`}>
-                  {subCat.name} ({subCat.count})
-                </a>
-              </li>
-            ))}
+            {categoryInfo.subCategories
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(subCat => (
+                <li key={subCat.slug}>
+                  <a
+                    className="no-underline"
+                    href={`/categories/${params.category}/${subCat.slug}`}
+                  >
+                    {subCat.name} ({subCat.count})
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
       )}
+      <br />
+      <br />
       <Posts posts={posts} showViewAllButton={false} />
     </>
   );

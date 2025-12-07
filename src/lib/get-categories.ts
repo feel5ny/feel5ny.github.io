@@ -1,11 +1,13 @@
 // src/lib/get-categories.ts
 // 카테고리 관련 유틸리티 함수
 import { getPosts } from '@/lib/get-posts';
+import { getCategoryDescription } from '@/lib/category-descriptions';
 
 export type CategoryItem = {
   name: string;
   slug: string;
   count: number;
+  description?: string;
   subCategories?: CategoryItem[];
 };
 
@@ -69,6 +71,7 @@ export async function getCategories(): Promise<CategoryItem[]> {
           name: category,
           slug: categorySlug,
           count: 0,
+          description: getCategoryDescription(category),
           subCategories: [],
         });
       }
