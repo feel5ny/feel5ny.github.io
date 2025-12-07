@@ -113,16 +113,18 @@ export default async function Page(props: PageProps) {
   // 포스트 페이지 판단
   const shouldShowPostDetail = params.mdxPath && isPostPage(params.mdxPath);
 
+  const postDetailContent = shouldShowPostDetail ? (
+    <PostDetail metadata={metadata}>
+      <MDXContent {...props} params={params} />
+    </PostDetail>
+  ) : (
+    <MDXContent {...props} params={params} />
+  );
+
   return (
     // @ts-ignore
     <Wrapper toc={toc} metadata={metadata}>
-      {shouldShowPostDetail && (
-        <PostDetail metadata={metadata}>
-          <MDXContent {...props} params={params} />
-        </PostDetail>
-      )}
-
-      {!shouldShowPostDetail && <MDXContent {...props} params={params} />}
+      {postDetailContent}
     </Wrapper>
   );
 }

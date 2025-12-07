@@ -1,44 +1,37 @@
 // @flow
 import * as React from 'react';
 import { Link } from 'next-view-transitions';
-import { IconArrowBack, IconPoint } from '@tabler/icons-react';
+import { IconArrowBack, IconPoint, IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { formatDate } from '@/lib/format-date';
 import GiscusComments from '@/components/giscus-comments';
 import { CustomMetadata } from '@/app/[[...mdxPath]]/page';
 import { Posts } from '@/components/posts';
-import { CustomTOC } from '@/components/custom-toc';
-import { CustomTodo } from '@/components/custom-todo';
 import { PostThumbnail } from '@/components/post-thumbnail';
+import { getPostNavigation, getPostRoute } from '@/lib/post-navigation';
+import { ReadingProgress } from '@/components/reading-progress';
 
 type Props = {
   metadata: CustomMetadata;
   children: React.ReactNode;
 };
 
-export function PostDetail({ metadata, children }: Props) {
-  // Parse customList and customTodo from JSON strings
-  let customList = null;
-  let customTodo = null;
-
+function parseJsonSafely(jsonString: string | undefined): unknown | null {
+  if (!jsonString) return null;
   try {
-    if (metadata.customList) {
-      customList = JSON.parse(metadata.customList);
-    }
+    return JSON.parse(jsonString);
   } catch (e) {
-    console.warn('Failed to parse customList:', e);
+    console.warn('Failed to parse JSON:', e);
+    return null;
   }
+}
 
-  try {
-    if (metadata.customTodo) {
-      customTodo = JSON.parse(metadata.customTodo);
-    }
-  } catch (e) {
-    console.warn('Failed to parse customTodo:', e);
-  }
-
+export async function PostDetail({ metadata, children }: Props) {
   const isPostPage = metadata.title === 'Posts';
+  const navigation = await getPostNavigation(metadata.title as string);
+
   return (
     <>
+      <ReadingProgress />
       <div className="flex items-center gap-4 text-sm mb-6">
         <Link href="/posts" className="hover:underline no-underline flex items-center gap-1">
           <IconArrowBack className="w-4" />
@@ -49,7 +42,6 @@ export function PostDetail({ metadata, children }: Props) {
       </div>
       {!isPostPage && <h1 className="text-3xl font-bold mb-6">{metadata.title as string}</h1>}
 
-      {/* 썸네일 이미지 표시 */}
       {metadata.thumbnail && (
         <PostThumbnail
           thumbnail={metadata.thumbnail}
@@ -57,12 +49,39 @@ export function PostDetail({ metadata, children }: Props) {
         />
       )}
 
-      {/* Render custom TOC if available */}
-      {/* {customList && <CustomTOC list={customList} />} */}
       {children}
 
-      {/* Render custom TODO if available */}
-      {/* {customTodo && <CustomTodo todo={customTodo} />} */}
+      {(navigation.prev || navigation.next) && (
+        <div className="flex justify-between items-center gap-4 my-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+          {navigation.prev ? (
+            <Link
+              href={getPostRoute(navigation.prev)}
+              className="flex items-center gap-2 text-sm group max-w-[45%] no-underline"
+            >
+              <IconChevronLeft className="w-4 h-4 shrink-0 group-hover:-translate-x-1 transition-transform" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-xs text-muted-foreground mb-1">Previous</span>
+                <span className="font-medium truncate">{navigation.prev.title}</span>
+              </div>
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          {navigation.next ? (
+            <Link
+              href={getPostRoute(navigation.next)}
+              className="flex items-center gap-2 text-sm group max-w-[45%] ml-auto text-right no-underline"
+            >
+              <div className="flex flex-col min-w-0">
+                <span className="text-xs text-muted-foreground mb-1">Next</span>
+                <span className="font-medium truncate">{navigation.next.title}</span>
+              </div>
+              <IconChevronRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          ) : null}
+        </div>
+      )}
 
       <h2>Related</h2>
       <Posts tags={metadata.tags} excludeByTitle={metadata.title as string} first={5} />

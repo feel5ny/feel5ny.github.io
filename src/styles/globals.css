@@ -137,6 +137,10 @@
     @apply bg-background text-foreground;
   }
 
+  ul {
+    @apply list-disc list-inside !pl-0;
+  }
+
   .x\:container {
     @apply !max-w-[700px];
   }

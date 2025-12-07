@@ -25,7 +25,7 @@ export async function Posts({ posts, tags, excludeByTitle, first, showViewAllBut
 
         return (
           <div key={post.route} className="flex flex-wrap">
-            <div className="w-[calc(100%-110px)]">
+            <div className="w-[calc(100%-120px)]">
               {/* 카테고리 캡션 */}
               {mainCategory && (
                 <div className="text-xs text-muted-foreground mb-1">
@@ -113,7 +113,7 @@ export async function Posts({ posts, tags, excludeByTitle, first, showViewAllBut
               )}
             </div>
 
-            <div className="w-[110px] text-right">
+            <div className="w-[120px] text-right">
               <div className="text-sm text-muted-foreground pt-1">
                 <div>{post.frontMatter?.date ? formatDate(post.frontMatter.date) : ''}</div>
               </div>

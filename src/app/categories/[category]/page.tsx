@@ -63,7 +63,6 @@ export default async function CategoryPage(props: CategoryPageProps) {
       <h1>{categoryInfo?.name || decodedCategory}</h1>
       {categoryInfo?.subCategories && categoryInfo.subCategories.length > 0 && (
         <div className="mb-6">
-          <h2>소카테고리</h2>
           <ul className="list-disc list-inside">
             {categoryInfo.subCategories.map(subCat => (
               <li key={subCat.slug}>
