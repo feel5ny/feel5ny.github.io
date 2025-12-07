@@ -29,3 +29,4 @@ export function PostThumbnail({ thumbnail, alt }: Props) {
   );
 }
 
+
