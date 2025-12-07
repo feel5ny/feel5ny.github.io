@@ -22,7 +22,6 @@ export type CustomMetadata = Metadata & {
   date?: string;
   enableComment?: boolean;
   tags?: string[];
-  customList?: string; // JSON string
   customTodo?: string; // JSON string
   thumbnail?: string; // 썸네일 이미지 경로
 };
