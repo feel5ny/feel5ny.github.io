@@ -113,7 +113,7 @@ export default async function Page(props: PageProps) {
   const shouldShowPostDetail = params.mdxPath && isPostPage(params.mdxPath);
 
   const postDetailContent = shouldShowPostDetail ? (
-    <PostDetail metadata={metadata}>
+    <PostDetail metadata={metadata} toc={toc}>
       <MDXContent {...props} params={params} />
     </PostDetail>
   ) : (

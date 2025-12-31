@@ -9,10 +9,18 @@ import { Posts } from '@/components/posts';
 import { PostThumbnail } from '@/components/post-thumbnail';
 import { getPostNavigation, getPostRoute } from '@/lib/post-navigation';
 import { ReadingProgress } from '@/components/reading-progress';
+import { PostTOC } from '@/components/post-toc';
+
+type Heading = {
+  id: string;
+  value: string;
+  depth: number;
+};
 
 type Props = {
   metadata: CustomMetadata;
   children: React.ReactNode;
+  toc?: Heading[];
 };
 
 function parseJsonSafely(jsonString: string | undefined): unknown | null {
@@ -25,7 +33,7 @@ function parseJsonSafely(jsonString: string | undefined): unknown | null {
   }
 }
 
-export async function PostDetail({ metadata, children }: Props) {
+export async function PostDetail({ metadata, children, toc }: Props) {
   const isPostPage = metadata.title === 'Posts';
   const navigation = await getPostNavigation(metadata.title as string);
 
@@ -48,6 +56,8 @@ export async function PostDetail({ metadata, children }: Props) {
           alt={(metadata.title as string) || 'Post thumbnail'}
         />
       )}
+
+      {toc && <PostTOC toc={toc} />}
 
       {children}
 
