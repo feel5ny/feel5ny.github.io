@@ -169,4 +169,28 @@
   article img {
     @apply rounded-lg;
   }
+
+  /* 포스트 콘텐츠 단어 기준 줄바꿈 (한글 지원) */
+  article,
+  .x\:container,
+  [class*='prose'] {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* 긴 URL이나 영문 단어가 있는 경우만 단어 내 줄바꿈 허용 */
+  article a,
+  article code,
+  article pre {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* 일반 텍스트는 한글 단어 단위로 줄바꿈 */
+  article p,
+  article li,
+  article span {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
 }
