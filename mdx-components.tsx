@@ -92,6 +92,30 @@ const blogComponents = getBlogMDXComponents({
       </h6>
     );
   },
+  img: ({ src, alt, ...props }) => {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        className="rounded-lg"
+        {...props}
+      />
+    );
+  },
+  figure: ({ children, ...props }) => {
+    return (
+      <figure {...props}>
+        {React.Children.map(children, (child) => {
+          if (React.isValidElement(child) && child.type === 'img') {
+            return React.cloneElement(child, {
+              className: `rounded-lg ${child.props.className || ''}`,
+            } as any);
+          }
+          return child;
+        })}
+      </figure>
+    );
+  },
   DateFormatter: ({ date }) =>
     `Last updated at ${date.toLocaleDateString('en', {
       day: 'numeric',

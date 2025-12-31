@@ -163,4 +163,10 @@
   .x\:container {
     @apply !max-w-[700px];
   }
+
+  /* MDX 내 이미지 라운드 처리 */
+  figure img,
+  article img {
+    @apply rounded-lg;
+  }
 }
