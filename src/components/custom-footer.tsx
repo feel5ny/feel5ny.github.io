@@ -1,7 +1,7 @@
 import { Footer, ThemeSwitch } from 'nextra-theme-blog';
 import { getPageMap } from 'nextra/page-map';
 import { Navbar } from '@/components/navbar';
-import { Search } from 'nextra/components';
+import ClientSearch from '@/components/client-search';
 import React from 'react';
 
 const CustomFooter = async () => {
@@ -15,7 +15,7 @@ const CustomFooter = async () => {
             <ThemeSwitch />
             <div>© {new Date().getFullYear()} Felix</div>
           </div>
-          <Search placeholder="Search posts..." />
+          <ClientSearch placeholder="Search posts..." />
         </div>
       </div>
     </div>

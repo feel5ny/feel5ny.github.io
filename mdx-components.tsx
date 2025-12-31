@@ -92,23 +92,18 @@ const blogComponents = getBlogMDXComponents({
       </h6>
     );
   },
-  img: ({ src, alt, ...props }) => {
-    return (
-      <img
-        src={src}
-        alt={alt}
-        className="rounded-lg"
-        {...props}
-      />
-    );
+  img: ({ src, alt, ...props }: any) => {
+    const srcValue = typeof src === 'string' ? src : src?.src || src?.default?.src || undefined;
+    return <img src={srcValue} alt={alt} className="rounded-lg" {...props} />;
   },
-  figure: ({ children, ...props }) => {
+  figure: ({ children, ...props }: { children?: React.ReactNode; [key: string]: any }) => {
     return (
       <figure {...props}>
-        {React.Children.map(children, (child) => {
+        {React.Children.map(children, child => {
           if (React.isValidElement(child) && child.type === 'img') {
+            const childProps = child.props as { className?: string; [key: string]: any };
             return React.cloneElement(child, {
-              className: `rounded-lg ${child.props.className || ''}`,
+              className: `rounded-lg ${childProps.className || ''}`,
             } as any);
           }
           return child;
