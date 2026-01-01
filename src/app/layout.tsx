@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   openGraph: {
     locale: 'ko_KR',
   },
+  verification: {
+    google: 'zZRsiCbEGXFFiO-Q8FDJ8Vi7OIe-uNQ0oOCid1YwSGQ',
+  },
 };
 
 const bodyFont = Inter({
