@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="arrDown" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,0 L5,10 z" fill="#2a78d6"/>
+    </marker>
+  </defs>
+  <rect width="800" height="360" fill="#fcfcfb"/>
+
+  <text x="400" y="42" text-anchor="middle" font-size="17" font-weight="700" fill="#0b0b0b">파트별 캡틴을 가로막던 두 가지 비용</text>
+  <text x="400" y="64" text-anchor="middle" font-size="13" fill="#52514e">AI가 두 비용을 함께 낮춘다 — 캡틴이 될 수 있는 사람의 풀이 넓어진다</text>
+
+  <!-- baseline -->
+  <line x1="90" y1="280" x2="710" y2="280" stroke="#d8d7d2" stroke-width="1.5"/>
+
+  <!-- Group 1: 맥락을 쌓는 비용 -->
+  <g>
+    <rect x="150" y="110" width="56" height="170" rx="4" fill="#a8a7a1"/>
+    <text x="178" y="100" text-anchor="middle" font-size="12" fill="#52514e">이전</text>
+    <rect x="238" y="200" width="56" height="80" rx="4" fill="#2a78d6"/>
+    <text x="266" y="190" text-anchor="middle" font-size="12" fill="#52514e">AI와 함께</text>
+    <line x1="222" y1="140" x2="222" y2="178" stroke="#2a78d6" stroke-width="2"/>
+    <polygon points="216,178 228,178 222,190" fill="#2a78d6"/>
+    <text x="222" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#0b0b0b">맥락을 쌓는 비용</text>
+    <text x="222" y="332" text-anchor="middle" font-size="11.5" fill="#52514e">코드베이스 · 히스토리 · 과거 결정의 이유</text>
+  </g>
+
+  <!-- Group 2: 기록·가시화 비용 -->
+  <g>
+    <rect x="506" y="130" width="56" height="150" rx="4" fill="#a8a7a1"/>
+    <text x="534" y="120" text-anchor="middle" font-size="12" fill="#52514e">이전</text>
+    <rect x="594" y="212" width="56" height="68" rx="4" fill="#2a78d6"/>
+    <text x="622" y="202" text-anchor="middle" font-size="12" fill="#52514e">AI와 함께</text>
+    <line x1="578" y1="152" x2="578" y2="190" stroke="#2a78d6" stroke-width="2"/>
+    <polygon points="572,190 584,190 578,202" fill="#2a78d6"/>
+    <text x="578" y="312" text-anchor="middle" font-size="14" font-weight="600" fill="#0b0b0b">기록 · 가시화하는 비용</text>
+    <text x="578" y="332" text-anchor="middle" font-size="11.5" fill="#52514e">ADR 초안 · 회의록 정리 · 액션아이템 추출</text>
+  </g>
+
+  <text x="710" y="352" text-anchor="end" font-size="10.5" fill="#a8a7a1">개념도 — 실제 수치가 아닙니다</text>
+</svg>

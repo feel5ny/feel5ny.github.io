@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" font-family="'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif">
+  <defs>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a8a7a1"/>
+    </marker>
+  </defs>
+  <rect width="800" height="420" fill="#fcfcfb"/>
+
+  <!-- ===== Left: bottleneck ===== -->
+  <text x="200" y="42" text-anchor="middle" font-size="17" font-weight="700" fill="#0b0b0b">"가장 잘 아는 한 명"</text>
+  <text x="200" y="64" text-anchor="middle" font-size="13" fill="#52514e">모든 결정이 한 사람을 통과한다</text>
+
+  <!-- center node -->
+  <circle cx="200" cy="220" r="30" fill="#eb6834"/>
+  <text x="200" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">한 명</text>
+
+  <!-- surrounding members, arrows pointing in -->
+  <g stroke="#a8a7a1" stroke-width="2" fill="none">
+    <circle cx="90"  cy="140" r="18"/>
+    <circle cx="90"  cy="300" r="18"/>
+    <circle cx="200" cy="105" r="18"/>
+    <circle cx="200" cy="335" r="18"/>
+    <circle cx="310" cy="140" r="18"/>
+    <circle cx="310" cy="300" r="18"/>
+  </g>
+  <g stroke="#a8a7a1" stroke-width="1.5">
+    <line x1="106" y1="152" x2="172" y2="200" marker-end="url(#arrG)"/>
+    <line x1="106" y1="288" x2="172" y2="240" marker-end="url(#arrG)"/>
+    <line x1="200" y1="126" x2="200" y2="186" marker-end="url(#arrG)"/>
+    <line x1="200" y1="314" x2="200" y2="254" marker-end="url(#arrG)"/>
+    <line x1="294" y1="152" x2="228" y2="200" marker-end="url(#arrG)"/>
+    <line x1="294" y1="288" x2="228" y2="240" marker-end="url(#arrG)"/>
+  </g>
+
+  <rect x="118" y="374" width="164" height="24" rx="12" fill="none" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="200" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#eb6834">병목 · 단일장애점</text>
+
+  <!-- divider -->
+  <line x1="400" y1="30" x2="400" y2="400" stroke="#e5e4e0" stroke-width="1"/>
+
+  <!-- ===== Right: captains per part ===== -->
+  <text x="600" y="42" text-anchor="middle" font-size="17" font-weight="700" fill="#0b0b0b">"파트마다 가장 잘 아는 한 명"</text>
+  <text x="600" y="64" text-anchor="middle" font-size="13" fill="#52514e">결정이 파트별로 병렬로 일어난다</text>
+
+  <!-- 4 clusters: PA A, PA B, PA C, 공용 -->
+  <!-- cluster template: captain (blue) + 2 members -->
+  <g>
+    <!-- PA A -->
+    <circle cx="505" cy="140" r="20" fill="#2a78d6"/>
+    <circle cx="470" cy="180" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <circle cx="540" cy="180" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <text x="505" y="216" text-anchor="middle" font-size="12" fill="#52514e">PA A</text>
+    <!-- PA B -->
+    <circle cx="695" cy="140" r="20" fill="#2a78d6"/>
+    <circle cx="660" cy="180" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <circle cx="730" cy="180" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <text x="695" y="216" text-anchor="middle" font-size="12" fill="#52514e">PA B</text>
+    <!-- PA C -->
+    <circle cx="505" cy="280" r="20" fill="#2a78d6"/>
+    <circle cx="470" cy="320" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <circle cx="540" cy="320" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <text x="505" y="356" text-anchor="middle" font-size="12" fill="#52514e">PA C</text>
+    <!-- 공용 -->
+    <circle cx="695" cy="280" r="20" fill="#2a78d6"/>
+    <circle cx="660" cy="320" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <circle cx="730" cy="320" r="13" fill="none" stroke="#a8a7a1" stroke-width="2"/>
+    <text x="695" y="356" text-anchor="middle" font-size="12" fill="#52514e">공용 영역</text>
+  </g>
+
+  <rect x="522" y="374" width="156" height="24" rx="12" fill="none" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="600" y="390" text-anchor="middle" font-size="12" font-weight="600" fill="#2a78d6">파트별 informed captain</text>
+</svg>
