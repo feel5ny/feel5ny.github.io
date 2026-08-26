@@ -1,3 +1,5 @@
+
+
 # Nextra Blog Starter
 
 <img width="1632" height="1061" alt="screenshot" src="https://github.com/user-attachments/assets/1c2ee6d0-719d-4f56-b39b-99dc3fcbb428" />
@@ -49,6 +51,8 @@ pnpm dev
 ## 📝 Usage
 
 ### Adding New Posts
+
+Alternatively, run `pnpm create-post` to scaffold a new post.
 
 1. Create a new `.mdx` file in the `content` directory
 2. Add your front matter at the top of the file:
