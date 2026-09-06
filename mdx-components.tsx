@@ -4,6 +4,8 @@ import { Posts } from '@/components/posts';
 import { Tags } from '@/components/tags';
 import { CustomTOC } from '@/components/custom-toc';
 import { CustomTodo } from '@/components/custom-todo';
+import * as Portfolio from '@/components/portfolio';
+import * as PortfolioLayers from '@/components/portfolio/layers';
 import { slugify } from '@/lib/slugify';
 import React from 'react';
 
@@ -139,5 +141,7 @@ export function useMDXComponents() {
     Tags: Tags,
     CustomTOC: CustomTOC,
     CustomTodo: CustomTodo,
+    ...Portfolio,
+    ...PortfolioLayers,
   };
 }

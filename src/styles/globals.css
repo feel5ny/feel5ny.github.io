@@ -194,3 +194,36 @@
     overflow-wrap: break-word;
   }
 }
+
+/* 비공개 포트폴리오 카드 안의 MDX 문단·목록 여백 */
+.pf-case-body > p,
+.pf-case-body > ul {
+  margin: 0;
+}
+.pf-case-body > p + p,
+.pf-case-body > p + ul {
+  margin-top: 0.5rem;
+}
+.pf-case-body ul {
+  padding-left: 1.1em;
+  list-style: disc;
+}
+.pf-case-body li + li {
+  margin-top: 0.25rem;
+}
+.pf-case-body li > strong {
+  font-weight: 600;
+  color: inherit;
+}
+@media print {
+  .pf-case-body {
+    height: auto !important;
+    opacity: 1 !important;
+  }
+  .pf-node-panel[hidden] {
+    display: block !important;
+  }
+}
+.pf-case-body code {
+  font-size: 0.85em;
+}
