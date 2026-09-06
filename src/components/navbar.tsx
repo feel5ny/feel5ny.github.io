@@ -12,9 +12,11 @@ type NavbarProps = {
 
 export const Navbar: FC<NavbarProps> = ({ children, pageMap, className }) => {
   const { topLevelNavbarItems } = normalizePages({ list: pageMap, route: '/' });
+  // normalizePages는 하위 페이지가 있는 폴더의 display: 'hidden'을 내비 목록에서 걸러 주지 않으므로 직접 제외한다
+  const visibleNavbarItems = topLevelNavbarItems.filter(nav => nav.display !== 'hidden');
   return (
     <div className={cn('flex items-center gap-3', className)} data-pagefind-ignore="all">
-      {topLevelNavbarItems.map(nav => (
+      {visibleNavbarItems.map(nav => (
         <NavbarLink key={nav.route} href={nav.route}>
           {nav.title}
         </NavbarLink>
