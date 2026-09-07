@@ -750,3 +750,76 @@ export const PfShot = ({
     )}
   </Reveal>
 );
+
+/* ------------------------------------ 페이지 단위 섹션 ------------------------------------ */
+
+// 문서를 한 화면 단위의 페이지로 나눈다. 스냅은 globals.css의 html:has(.pf-page) 규칙이 담당한다.
+export const PfPage = ({
+  id,
+  no,
+  label,
+  children,
+}: {
+  id: string;
+  no: string;
+  label: string;
+  children: React.ReactNode;
+}) => (
+  <section id={id} data-page-label={label} data-page-no={no} className="pf-page">
+    <div className="not-prose mb-4 flex items-baseline justify-between border-b border-dashed border-stone-300/80 pb-2 dark:border-stone-700">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400">
+        {label}
+      </span>
+      <span className="text-[11px] tabular-nums text-stone-400">{no}</span>
+    </div>
+    {children}
+  </section>
+);
+
+export const PfPageNav = () => {
+  const [pages, setPages] = React.useState<{ id: string; label: string; no: string }[]>([]);
+  const [active, setActive] = React.useState('');
+  React.useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.pf-page'));
+    setPages(els.map(e => ({ id: e.id, label: e.dataset.pageLabel ?? '', no: e.dataset.pageNo ?? '' })));
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: '-10% 0px -75% 0px', threshold: 0 }
+    );
+    els.forEach(e => observer.observe(e));
+    return () => observer.disconnect();
+  }, []);
+  if (pages.length === 0) return null;
+  const idx = Math.max(0, pages.findIndex(p => p.id === active));
+  return (
+    <div className="not-prose sticky top-2 z-30 my-4 flex justify-center">
+      <div className="flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border border-stone-200/80 bg-[rgb(250,245,233)]/92 px-1.5 py-1 shadow-sm backdrop-blur dark:border-stone-700 dark:bg-[rgb(21,18,13)]/92">
+        {pages.map((p, i) => (
+          <a
+            key={p.id}
+            href={`#${p.id}`}
+            title={p.label}
+            className={cn(
+              'flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[12px] no-underline transition',
+              active === p.id
+                ? 'bg-stone-800 font-semibold text-white dark:bg-stone-200 dark:text-stone-900'
+                : 'text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-100'
+            )}
+          >
+            <span className="tabular-nums opacity-70">{p.no}</span>
+            <span className={cn('hidden sm:inline', active !== p.id && 'sr-only md:not-sr-only')}>{p.label}</span>
+          </a>
+        ))}
+        <span className="ml-1 shrink-0 border-l border-stone-300/70 pl-1.5 text-[11px] tabular-nums text-stone-400 dark:border-stone-600">
+          {idx + 1}/{pages.length}
+        </span>
+        <PfExpandAll />
+      </div>
+    </div>
+  );
+};

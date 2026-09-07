@@ -227,3 +227,32 @@
 .pf-case-body code {
   font-size: 0.85em;
 }
+
+/* 비공개 포트폴리오: 섹션을 페이지처럼 넘긴다 */
+html:has(.pf-page) {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 12px;
+}
+.pf-page {
+  scroll-snap-align: start;
+  min-height: 100svh;
+  padding-top: 16px;
+  padding-bottom: 56px;
+}
+.pf-page:first-of-type {
+  padding-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.pf-page) {
+    scroll-snap-type: none;
+  }
+}
+@media print {
+  .pf-page {
+    min-height: auto;
+    break-before: page;
+  }
+  .pf-page:first-of-type {
+    break-before: auto;
+  }
+}
