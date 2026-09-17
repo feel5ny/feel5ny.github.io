@@ -1,0 +1,125 @@
+.diagram {
+  margin: 24px 0 !important;
+}
+.diagram figcaption {
+  font-size: 13px;
+  font-weight: 650;
+  margin-bottom: 14px;
+}
+.comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+.before,
+.after {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--wash);
+  min-width: 0;
+}
+.after {
+  background: var(--selected);
+}
+.heading > span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.after .heading > span {
+  color: var(--accent);
+}
+.diagram .heading h3 {
+  font-size: 15px;
+  margin: 0 0 20px;
+}
+.requests {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.requests > span {
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 11px;
+}
+.arrow,
+.changeArrow {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 20px;
+}
+.arrow {
+  height: 36px;
+}
+.bottleneck,
+.framework {
+  display: grid;
+  gap: 5px;
+  padding: 15px 12px;
+  text-align: center;
+  border-radius: 9px;
+  background: var(--paper);
+}
+.bottleneck strong,
+.framework strong {
+  font-size: 13px;
+}
+.framework strong {
+  color: var(--accent);
+}
+.bottleneck > span,
+.framework > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+.branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.branches > div {
+  display: grid;
+  gap: 5px;
+  padding: 12px 8px;
+  text-align: center;
+  border-radius: 8px;
+  background: var(--paper);
+}
+.branches span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.branches strong {
+  font-size: 12px;
+}
+.diagram .note,
+.diagram .status {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 16px 0 0;
+}
+@media (max-width: 1100px) {
+  .comparison {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .changeArrow {
+    transform: rotate(90deg);
+    height: 28px;
+  }
+}
+@media print {
+  .before,
+  .after {
+    break-inside: avoid;
+  }
+}

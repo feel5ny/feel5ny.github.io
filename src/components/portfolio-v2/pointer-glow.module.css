@@ -1,0 +1,33 @@
+.glow {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.glow[data-active='true'] {
+  opacity: 1;
+}
+.glow > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1100px;
+  height: 1100px;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 42% 42%, var(--spotlight-color), transparent),
+    radial-gradient(closest-side at 62% 58%, var(--spotlight-secondary), transparent);
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce), (forced-colors: active) {
+  .glow {
+    display: none;
+  }
+}
+@media print {
+  .glow {
+    display: none;
+  }
+}

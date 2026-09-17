@@ -5,7 +5,7 @@ import CustomFooter from '@/components/custom-footer';
 import CustomHeader from '@/components/custom-header';
 import { ScrollToTopButton } from '@/components/scroll-to-top-button';
 import { Metadata } from 'next';
-import { Layout } from 'nextra-theme-blog';
+import { SiteFrame } from '@/components/site-frame';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
@@ -64,14 +64,17 @@ export default async function RootLayout({ children }) {
           </>
         )}
 
-        <Layout>
-          <CustomHeader />
-
+        <SiteFrame
+          header={<CustomHeader />}
+          footer={
+            <>
+              <CustomFooter />
+              <ScrollToTopButton />
+            </>
+          }
+        >
           {children}
-
-          <CustomFooter />
-          <ScrollToTopButton />
-        </Layout>
+        </SiteFrame>
       </body>
     </html>
   );

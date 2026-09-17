@@ -1,0 +1,130 @@
+.map {
+  margin: 22px 0 !important;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--wash);
+}
+.map figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.map figcaption > span {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+.stages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stages > li {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 18px;
+  padding: 16px 0;
+}
+.stage {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  position: relative;
+}
+.stage::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 36px;
+  bottom: -26px;
+  width: 1px;
+  background: var(--line);
+}
+.stages > li:last-child .stage::after {
+  display: none;
+}
+.letter {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  color: var(--accent);
+  background: var(--selected);
+  font-size: 12px;
+  font-weight: 650;
+}
+.stage strong {
+  font-size: 13px;
+}
+.english {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+}
+.map .experience h3 {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 4px;
+}
+.map .experience p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}
+.map .note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+.monitoring {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.monitoring > li + li {
+  margin-top: 4px;
+}
+.monitoring > li::marker {
+  color: var(--accent);
+}
+@media (max-width: 600px) {
+  .map {
+    padding: 16px;
+  }
+  .stages > li {
+    grid-template-columns: 75px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 0;
+  }
+  .stage {
+    gap: 6px;
+  }
+  .letter {
+    width: 22px;
+    height: 25px;
+    border-radius: 7px;
+    font-size: 10px;
+  }
+  .stage::after {
+    left: 10px;
+    top: 32px;
+    bottom: -22px;
+  }
+  .english {
+    display: none;
+  }
+}
+@media print {
+  .stages > li {
+    break-inside: avoid;
+  }
+}
