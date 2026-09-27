@@ -6,7 +6,7 @@ const experience = [
     label: '유입',
     name: 'Acquisition',
     title: '검색에서 서비스를 발견하도록',
-    work: '굿닥 시술백과 검색 유입 페이지 개발 · 건강 웹 검색 노출·sitemap 정비와 색인 요청 자동화 참여',
+    work: '건강 웹 검색 노출·sitemap 정비와 색인 요청 자동화 참여',
   },
   {
     letter: 'A',

@@ -32,7 +32,7 @@
   active navigation, badges and controls. Neutral surfaces and the secondary cyan/pink section
   accents remain; lime is an adaptation, not a logo color.
 - `journey.tsx` / `journey.module.css`: a compact AARRR experience map, connecting each stage to
-  implemented web work rather than explaining the framework. Source: full career original, G04/R09
+  implemented web work rather than explaining the framework. Source: full career original, R09
   (search), B02/R05 (application), B07 (push/Alimtalk entry), B03 (health preview sharing), B06
   (consultation). These are development contributions, not claims of owning growth strategy or
   improving stage metrics. B03 sharing is distinct from the unimplemented snapshot-sharing idea. The
@@ -63,6 +63,21 @@
 This is a separate version, not the output of the existing `portfolio:sync` command. That command
 continues to target v1. Future content edits should be checked against the Obsidian source; nothing
 writes back to the vault automatically.
+
+The author's follow-up clarification limits Goodoc Talk and the procedure encyclopedia to short
+development-history entries: detailed implementation decisions are not confidently recalled. Their
+original records remain in the full career source (G04/G05), but they are not featured technical or
+outcome case studies. The AARRR acquisition example now uses only the health-web SEO work (R09).
+This clarification is also reflected in the Obsidian portfolio draft and Rallit draft; older
+archived versions and the v1 sync source are not changed.
+
+The perspective section includes insurance-claim first-customer QA (May–June 2026), sourced from the
+author's supplied Slack-summary screenshot (full career source R10). Nighttime-message feedback led
+to a PM-decided sending restriction and deployment; a reported message-entry error was corrected by
+the server owner. The author owns firsthand observation and reporting, not those policy decisions or
+fixes. Original Slack threads were not independently rechecked. Status-update notifications remain a
+prioritization proposal, and competitor benchmarking remains design input; neither is presented as a
+shipped outcome. No personal/family details or internal links are exposed.
 
 The gene flow summarizes working steps, not an actual screen or an independently claimed
 architecture. The author's 2026-09-14 follow-up clarifications add flow-first communication, tests
