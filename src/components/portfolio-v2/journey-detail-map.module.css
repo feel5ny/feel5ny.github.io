@@ -1,0 +1,155 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 20px 0;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--wash);
+}
+.figure figcaption {
+  display: grid;
+  gap: 5px;
+  font-size: 15px;
+}
+.figure figcaption span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.lanes {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+.figure .lane h4 {
+  margin: 0 0 7px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--accent);
+}
+.figure .steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.steps li {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  padding: 11px 12px;
+  border-radius: 8px;
+  background: var(--paper);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+.steps strong {
+  font-size: 13px;
+}
+.steps span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.steps li + li::before {
+  content: '→';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 16px;
+}
+.retentionCases {
+  display: grid;
+  gap: 24px;
+  margin: 24px 0;
+}
+.retentionCases .figure {
+  margin: 0;
+}
+.figure .fixNote {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 14px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.fixNote span {
+  color: var(--muted);
+}
+.figure.analysis {
+  background: transparent;
+  border: 1px solid var(--line);
+}
+.figure .constraints {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.constraints li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.constraints span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.contribution {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 20px;
+  padding: 14px;
+  margin: 0;
+  border-radius: 8px;
+  background: var(--wash);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.contribution dt {
+  font-weight: 600;
+}
+.contribution dd {
+  color: var(--muted);
+  margin: 5px 0 0;
+}
+@container (max-width: 520px) {
+  .figure .constraints,
+  .contribution {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .figure .steps {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .steps li {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+  .steps li + li::before {
+    content: '↓';
+    left: 16px;
+    top: -18px;
+    transform: none;
+    line-height: 18px;
+  }
+}
+@media print {
+  .lane {
+    break-inside: avoid;
+  }
+}

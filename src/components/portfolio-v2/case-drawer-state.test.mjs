@@ -63,7 +63,7 @@ test('AARRR navigation follows stage order in both directions and stops at bound
 });
 
 test('project drawers have no AARRR navigation', () => {
-  for (const id of ['gene', 'insurance', 'review', 'team'])
+  for (const id of ['gene', 'insurance', 'family-history', 'review', 'team'])
     assert.equal(journeyNavigation(id), null);
 });
 

@@ -1,63 +1,22 @@
 import styles from './detail-diagrams.module.css';
 
-export function HappyTalkConstraintDiagram() {
-  return (
-    <figure
-      className={styles.figure}
-      aria-label="카카오톡 오픈빌더 자동발화 설정에 따른 파라미터 전달 분기"
-    >
-      <figcaption>
-        <strong>같은 API 호출, 설정에 따라 다른 전달 방식</strong>
-        <span>카카오톡 오픈빌더 · 2024년 기록</span>
-      </figcaption>
-      <div className={styles.decisionLayout}>
-        <div className={`${styles.node} ${styles.shared}`}>
-          <span>확인한 지점</span>
-          <strong>API 응답 HTML</strong>
-          <small>
-            내부 JavaScript의
-            <br />
-            자동발화 이벤트 조건 확인
-          </small>
-        </div>
-        <span className={styles.arrow} aria-hidden="true">
-          →
-        </span>
-        <div className={styles.branches}>
-          <div className={styles.branch}>
-            <span>자동발화 이벤트 설정</span>
-            <strong>챗봇 실행용 URL로 이동</strong>
-            <small>bot·event만 사용 → 전달한 상담 파라미터 무시</small>
-          </div>
-          <div className={styles.branch}>
-            <span>자동발화 이벤트 미설정</span>
-            <strong>폼을 POST로 전송</strong>
-            <small>전달한 파라미터를 포함해 채팅 연결</small>
-          </div>
-        </div>
-      </div>
-      <div className={styles.rules}>
-        <span>커스텀 파라미터 20자 제한</span>
-        <span>구분 문자 | 또는 %7C 포함 시 유실</span>
-      </div>
-      <p className={styles.note}>
-        레슨런: 요청값뿐 아니라 외부 응답 HTML과 계정 설정도 확인해야 했습니다. 이 확인 방법과
-        파라미터 제약을 기록했습니다.
-      </p>
-    </figure>
-  );
-}
-
 export function ConsultationIncidentMap() {
   return (
-    <figure className={styles.figure} aria-label="상담 장애의 원인 분류와 대응·사후처리 기준">
+    <figure
+      className={`${styles.figure} ${styles.compactIncident}`}
+      aria-label="상담 장애의 원인 분류와 대응·사후처리 기준"
+    >
       <figcaption>
         <strong>문제 유형에 따라 대응 경로를 분리</strong>
         <span>장애 가이드 · 2024.01</span>
       </figcaption>
       <div className={styles.rules}>
-        <span>감지: 제휴사 제보 · Sentry</span>
-        <span>진단: 전환 지점 · 응답 · 서비스 제약 확인</span>
+        <span>
+          <strong>감지:</strong> 제휴사 제보 · Sentry
+        </span>
+        <span>
+          <strong>진단:</strong> 전환 지점 · 응답 · 서비스 제약 확인
+        </span>
       </div>
       <dl className={`${styles.lanes} ${styles.policyLanes}`}>
         <div>

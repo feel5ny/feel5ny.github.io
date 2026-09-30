@@ -1,0 +1,81 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 16px 0;
+  padding: 14px;
+  background: var(--wash);
+  border-radius: 12px;
+}
+.figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.figure figcaption span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 10px;
+  padding: 8px 10px;
+  background: var(--paper);
+  border-radius: 8px;
+}
+.row + .row {
+  margin-top: 6px;
+}
+.label {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.stack strong,
+.remaining {
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: var(--wash);
+}
+.remaining {
+  color: var(--accent-pink);
+}
+.fixed .label,
+.fixed .stack strong {
+  color: var(--accent-cyan);
+}
+.figure .row p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.figure .note {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+@container (max-width: 520px) {
+  .row {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+  .figure .row p {
+    grid-column: 2;
+  }
+}
+@media print {
+  .figure {
+    break-inside: avoid;
+  }
+}

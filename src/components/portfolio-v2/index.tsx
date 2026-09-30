@@ -5,9 +5,11 @@ import { ScrollEffects } from './scroll-effects';
 import { WorkAccordion } from './work-accordion';
 import { PointerGlow } from './pointer-glow';
 import { OperationsMap } from './operations-map';
-import { CaseDrawer } from './case-drawer';
+import { CaseDrawer, CaseDetailLink } from './case-drawer';
 import { GeneDetails, ReviewDetails, TeamDetails } from './case-details';
 import { InsuranceDetails } from './insurance-details';
+import { FamilyHistoryDetails } from './family-history-details';
+import { GeneProjectMap } from './gene-project-map';
 
 const links = [
   { label: 'GitHub', href: 'https://github.com/feel5ny' },
@@ -16,7 +18,11 @@ const links = [
 ];
 
 const otherWork = [
-  ['2026', '가족력 완벽대비', '신규 웹뷰의 입력·동의·결과 화면과 보험 상담 연결을 개발했습니다.'],
+  [
+    '2026',
+    '가족력 완벽대비',
+    '신규 웹뷰 개발과 입력 수정 후 정보 연동 단계가 반복 노출되는 캐시 경쟁 상태 수정.',
+  ],
   [
     '2026',
     '내보험탭 보험료 줄이기',
@@ -24,8 +30,8 @@ const otherWork = [
   ],
   [
     '2025 ~ 2026',
-    '건강 웹 검색 유입 정비',
-    '검색 노출 대상과 sitemap을 정비하고, IndexNow 기반 색인 요청 자동화 작업에 참여했습니다.',
+    '건강 웹·콘텐츠 웹 검색 유입 정비',
+    '건강 웹의 sitemap을 정비했습니다. 콘텐츠 웹은 네이버 미색인 문제를 조사·수정하고, 전체 콘텐츠의 재색인 요청을 위해 IndexNow 단건·벌크 요청 경로를 구성했습니다.',
   ],
   [
     '2023 ~',
@@ -110,12 +116,12 @@ export function PortfolioV2() {
                 <p className={styles.caption}>이번 포트폴리오에 담은 작업</p>
                 <a href="#gene">
                   <span className={styles.number}>01</span>
-                  <span>기존 동작을 지키는 리뉴얼</span>
+                  <span>운영 중인 제품의 리뉴얼</span>
                   <span aria-hidden="true">↗</span>
                 </a>
                 <a href="#insurance">
                   <span className={styles.number}>02</span>
-                  <span>상담 연동과 운영 관측</span>
+                  <span>신규 제품의 구축과 운영</span>
                   <span aria-hidden="true">↗</span>
                 </a>
                 <a href="#review">
@@ -133,17 +139,13 @@ export function PortfolioV2() {
               data-reveal="section"
             >
               <div className={styles.sectionLabel}>
-                <span>01 · 제품 리뉴얼</span>
+                <span>01 · 운영 중인 제품의 리뉴얼</span>
                 <span>2026.05 — 07</span>
               </div>
-              <h2 id="gene-title">
-                흐름을 먼저 맞추고,
-                <br />
-                기존 동작을 지키는 개발
-              </h2>
+              <h2 id="gene-title">유전자검사 2.0 리뉴얼</h2>
               <p className={`${styles.subtitle} ${styles.companySubtitle}`}>
                 <img src="/images/portfolio/banksalad.png" alt="" width={18} height={18} />
-                <span>뱅크샐러드 · 유전자검사 2.0 리뉴얼</span>
+                <span>뱅크샐러드 · 기존 동작을 보호하며 새 경험으로 전환</span>
               </p>
               <dl className={styles.facts}>
                 <div>
@@ -151,66 +153,32 @@ export function PortfolioV2() {
                   <dd>웹 테크스펙 리드 · 프론트엔드 개발</dd>
                 </div>
                 <div>
-                  <dt>초점</dt>
-                  <dd>상태별 흐름 합의 · 기존 기능 재사용 · 테스트·MSW 회귀 검증</dd>
+                  <dt>담당</dt>
+                  <dd>전체 흐름·스캐폴딩 · 브릿지·상태별 랜딩 개발 · 이미지 POC</dd>
                 </div>
               </dl>
 
               <div className={styles.bodySection}>
                 <ul className={styles.bullets}>
                   <li>
-                    <strong>문제:</strong> 진행 중인 검사·복수 검사권·기존 외부 URL을 유지하면서
-                    신청부터 결과까지 리뉴얼
+                    <strong>과제:</strong> 운영 중인 유전자검사의 신청·진행·결과 경험을 리뉴얼.
+                    유지할 기능을 보호하면서 기존 화면과 신규 화면을 연결
                   </li>
                   <li>
-                    <strong>선택:</strong> 상태별 흐름과 재사용 범위를 먼저 합의하고,
-                    서버·클라이언트에서 같은 이동 규칙 사용
+                    <strong>개발:</strong> 전체 흐름을 테크스펙·스캐폴딩으로 구체화하고, 브릿지와
+                    검사 상태에 따라 목적지를 결정하는 다이나믹 랜딩 구현
                   </li>
                   <li>
-                    <strong>기여:</strong> 테크스펙·스캐폴딩·브릿지·다이나믹 랜딩 개발, 테스트·MSW
-                    검증과 배포 후 정리
+                    <strong>변경 검증:</strong> 기존 동작을 테스트로 고정하고, MSW로 상태별 새 흐름
+                    확인. FF로 기존·신규 화면 공개를 제어하고, 안정화 후 전환 코드와 문서 정리
                   </li>
                 </ul>
               </div>
-              <figure className={styles.flowFigure}>
-                <figcaption>
-                  <span>개발 전부터 배포 후까지의 작업 순서</span>
-                  <span>작업 과정 요약</span>
-                </figcaption>
-                <div className={styles.flow} data-motion-sequence>
-                  <div className={styles.flowEntry}>
-                    <span className={styles.smallLabel}>개발 전</span>
-                    <strong>
-                      상태·진입 조건 확인
-                      <br />
-                      전체 흐름 정리
-                    </strong>
-                  </div>
-                  <span className={styles.flowArrow} aria-hidden="true" />
-                  <div className={styles.flowOwned}>
-                    <span className={styles.smallLabel}>기존 기능 변경 전</span>
-                    <strong>
-                      유지할 동작을
-                      <br />
-                      테스트로 먼저 작성
-                    </strong>
-                    <small>리팩토링 시 회귀 확인 기준</small>
-                  </div>
-                  <span className={styles.flowArrow} aria-hidden="true" />
-                  <div className={styles.flowDestination}>
-                    <span className={styles.smallLabel}>배포 후</span>
-                    <strong>
-                      기존 코드 정리
-                      <br />
-                      다음 작업을 위한 문서 정리
-                    </strong>
-                  </div>
-                </div>
-              </figure>
+              <GeneProjectMap />
               <CaseDrawer
                 id="gene"
-                title="유전자검사 2.0"
-                description="기존 사용자 경험을 유지하기 위한 사전 합의, 재사용과 회귀 검증"
+                title="유전자검사 2.0 리뉴얼 · 개발 과정"
+                description="재사용과 신규 개발의 구분, PM과의 Spec-out 협의, 회귀 검증과 FF 공개 제어"
               >
                 <GeneDetails />
               </CaseDrawer>
@@ -223,14 +191,10 @@ export function PortfolioV2() {
               data-reveal="section"
             >
               <div className={styles.sectionLabel}>
-                <span>02 · 상담 연동과 운영 관측</span>
+                <span>02 · 신규 제품의 구축과 운영</span>
                 <span>2023 — 2026 · 여러 프로젝트</span>
               </div>
-              <h2 id="insurance-title">
-                상담 연결을 구현하고,
-                <br />
-                전환 구간의 이상을 살피는 개발
-              </h2>
+              <h2 id="insurance-title">신규 보험 제품의 구축과 운영</h2>
               <p className={`${styles.subtitle} ${styles.companySubtitle}`}>
                 <img src="/images/portfolio/banksalad.png" alt="" width={18} height={18} />
                 <span>뱅크샐러드 · 보험 중개 MVP, 보험료 줄이기, 가족력 완벽대비</span>
@@ -238,51 +202,72 @@ export function PortfolioV2() {
               <dl className={styles.facts}>
                 <div>
                   <dt>역할</dt>
-                  <dd>프론트엔드 개발 · 상담 연동 구축·운영</dd>
+                  <dd>신규 웹·웹뷰 개발 · 외부 상담 연동 · 출시 후 운영</dd>
                 </div>
                 <div>
                   <dt>초점</dt>
-                  <dd>외부 상담 연동 · 전환 지표·오류 관측 · 장애 대응 절차</dd>
+                  <dd>입력부터 결과·상담까지 구현 · 매출 직결 구간의 안정성 관측</dd>
                 </div>
               </dl>
               <div className={styles.bodySection}>
                 <ul className={styles.bullets}>
                   <li>
-                    <strong>연동:</strong> 보험 중개 MVP의 상담 신청·외부 채팅 연동·상담사용 웹뷰
-                    개발, 해피톡 상담 연결 최초 구성
+                    <strong>구축:</strong> 보험 중개 MVP와 신규 보험 제품의 웹·웹뷰 개발.
+                    입력·동의·결과 확인에서 상담 신청까지 이어지는 기능 구현
                   </li>
                   <li>
-                    <strong>관측:</strong> Amplitude 퍼널과 이상 지표 알림, Sentry 오류 알림과 각
-                    레이어별 모니터링 추가
+                    <strong>흐름·연동:</strong> useFunnel 단계 전환과 방문 이력, 결과 재진입 시 캐시
+                    정합성 관리. 외부 채팅 연동과 앱 푸시·알림톡 진입 경로 연결
                   </li>
                   <li>
-                    <strong>대응 기준:</strong> 응답 HTML에서 설정별 파라미터 전달 분기를 확인하고,
-                    장애 유형별 연락·수정 경로와 누락 상담 매핑 절차를 문서화
+                    <strong>운영:</strong> 매출로 이어지는 상담 전환 구간을 Amplitude 퍼널·Agent와
+                    Sentry로 관측하고, 외부 연동 제약과 장애 대응 절차를 문서화
                   </li>
                 </ul>
               </div>
-              <div className={styles.insuranceJourney} aria-label="상담 연동 구현과 운영 관측 범위">
+              <div
+                className={styles.insuranceJourney}
+                aria-label="신규 보험 제품의 구축부터 운영까지"
+              >
                 <div>
-                  <span>연동 구현</span>
-                  <strong>상담 신청 · 외부 채팅</strong>
+                  <span>신규 구축</span>
+                  <strong>입력 · 동의 · 결과 · 상담</strong>
                 </div>
                 <span aria-hidden="true">→</span>
                 <div>
-                  <span>운영 관측</span>
-                  <strong>전환 퍼널 · 오류 알림</strong>
+                  <span>흐름 연결</span>
+                  <strong>단계·상태 관리 · 외부 연동</strong>
                 </div>
                 <span aria-hidden="true">→</span>
                 <div>
-                  <span>대응 절차 정리</span>
-                  <strong>연동 제약 · 장애 대응</strong>
+                  <span>안정성 유지</span>
+                  <strong>퍼널·오류 관측 · 장애 대응</strong>
                 </div>
               </div>
               <CaseDrawer
                 id="insurance"
-                title="보험 제품 개발 · 상담 연동과 운영 관측"
-                description="응답 HTML 분석으로 확인한 연동 제약, 장애 유형별 대응 정책과 운영 관측"
+                title="신규 보험 제품의 구축과 운영 · 개발 과정"
+                description="MVP·신규 웹뷰 구축, 단계·상태 관리, 외부 연동과 매출 직결 구간의 모니터링"
               >
                 <InsuranceDetails />
+              </CaseDrawer>
+              <div id="family-history" className={styles.relatedCase}>
+                <div>
+                  <span className={styles.relatedLabel}>관련 기술 사례 · TanStack Query</span>
+                  <h3>가족력 결과 화면의 재진입 오류 수정</h3>
+                  <p>늦게 도착한 응답이 최신 캐시를 덮어쓰는 원인과 해결 과정</p>
+                </div>
+                <div className={styles.linkRow}>
+                  <CaseDetailLink id="family-history">해결 과정 보기</CaseDetailLink>
+                </div>
+              </div>
+              <CaseDrawer
+                id="family-history"
+                title="최신 상태를 덮어쓰는 비동기 요청의 경쟁 상태 해결"
+                description="가족력 완벽대비 · 2026.07 · 캐시 직접 갱신 이후에도 남은 재진입 문제의 후속 수정"
+                showTrigger={false}
+              >
+                <FamilyHistoryDetails />
               </CaseDrawer>
             </article>
 
@@ -423,8 +408,8 @@ export function PortfolioV2() {
                     맥락이 흩어짐
                   </li>
                   <li>
-                    <strong>선택:</strong> 영역의 맥락을 가진 담당자에게 판단을 분산하고, 실행자가
-                    바뀌어도 이어갈 절차 마련
+                    <strong>선택:</strong> 공통 영역의 맥락을 유지하고 판단하는 담당자(DRI)를 두고,
+                    구현은 팀원과 분담. 실행자가 바뀌어도 이어갈 절차 마련
                   </li>
                   <li>
                     <strong>기여:</strong> Tech Lead들과 책임 범위를 협의하고 ADR·DRI 보드·Jira
@@ -503,6 +488,13 @@ export function PortfolioV2() {
                       <div>
                         <h3>{title}</h3>
                         <p>{description}</p>
+                        {title === '가족력 완벽대비' && (
+                          <div className={styles.linkRow}>
+                            <CaseDetailLink id="family-history">
+                              캐시 경쟁 상태 해결 보기
+                            </CaseDetailLink>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

@@ -1,0 +1,135 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--wash);
+  border-radius: 14px;
+}
+.figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 15px;
+}
+.figure figcaption span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.scroll {
+  overflow-x: auto;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+.scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.scroll svg {
+  display: block;
+  width: 100%;
+  min-width: 960px;
+  height: auto;
+}
+.mainLine {
+  stroke: var(--muted);
+  opacity: 0.6;
+}
+.discussion {
+  stroke: var(--accent-cyan);
+}
+.escalation {
+  stroke: var(--accent-pink);
+}
+.deferred {
+  stroke: var(--muted);
+  stroke-dasharray: 7 6;
+}
+.execution {
+  stroke: var(--accent);
+}
+.mainNodes,
+.discussionNodes,
+.executionNodes,
+.escalationNode,
+.deferredNode {
+  fill: var(--paper);
+  stroke-width: 3;
+}
+.mainNodes,
+.deferredNode {
+  stroke: var(--muted);
+}
+.discussionNodes {
+  stroke: var(--accent-cyan);
+}
+.executionNodes {
+  stroke: var(--accent);
+}
+.escalationNode {
+  stroke: var(--accent-pink);
+}
+.label {
+  fill: var(--ink);
+  font-size: 17px;
+  font-weight: 650;
+}
+.sub {
+  fill: var(--muted);
+  font-size: 14px;
+}
+.executionPaths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.executionPaths > div {
+  background: var(--paper);
+  border-radius: 8px;
+  padding: 12px;
+}
+.executionPaths dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.executionPaths dd {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 6px 0 0;
+}
+.figure .note,
+.figure .hint {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+}
+.figure .hint {
+  display: none;
+}
+@container (max-width: 959px) {
+  .figure .hint {
+    display: block;
+  }
+}
+@container (max-width: 500px) {
+  .executionPaths {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .figure {
+    break-inside: avoid;
+  }
+  .scroll {
+    overflow: visible;
+  }
+  .scroll svg {
+    min-width: 0;
+  }
+  .figure .hint {
+    display: none;
+  }
+}

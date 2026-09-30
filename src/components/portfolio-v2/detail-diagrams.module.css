@@ -90,34 +90,6 @@
   color: var(--muted);
   font-size: 11px;
 }
-.decisionLayout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1.5fr);
-  align-items: center;
-}
-.branches {
-  display: grid;
-  gap: 12px;
-}
-.branch {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 16px;
-  border-radius: 10px;
-  border-left: 3px solid var(--accent-pink);
-  background: var(--paper);
-  font-size: 13px;
-  line-height: 1.6;
-}
-.branch:last-child {
-  border-left-color: var(--accent-cyan);
-}
-.branch > span,
-.branch > small {
-  color: var(--muted);
-  font-size: 12px;
-}
 .lanes.policyLanes {
   margin-top: 18px;
 }
@@ -218,10 +190,6 @@
   padding: 16px;
   border-radius: 10px;
   background: var(--paper);
-  border-left: 3px solid var(--accent-cyan);
-}
-.lanes > div:last-child {
-  border-left-color: var(--accent-pink);
 }
 .lanes dt,
 .lanes dd {
@@ -237,6 +205,58 @@
   color: var(--muted);
   font-size: 12px;
 }
+.figure.compactIncident {
+  margin: 18px 0;
+  padding: 16px;
+}
+.compactIncident figcaption {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.compactIncident .rules {
+  justify-content: flex-start;
+  gap: 6px;
+  margin-top: 0;
+}
+.compactIncident .rules > span {
+  padding: 3px 6px;
+}
+.compactIncident .lanes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+.compactIncident .lanes > div {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 10px 12px;
+}
+.compactIncident .lanes dt,
+.compactIncident .lanes dd {
+  gap: 2px;
+  font-size: 12px;
+}
+.compactIncident .lanes dt > span,
+.compactIncident .lanes dd > span {
+  font-size: 11px;
+}
+.compactIncident .recovery {
+  gap: 4px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--paper);
+  font-size: 12px;
+}
+.compactIncident .recovery p {
+  font-size: 11px;
+  line-height: 1.6;
+}
+@container (max-width: 500px) {
+  .compactIncident .lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 @container (max-width: 560px) {
   .documentRoles {
     grid-template-columns: minmax(0, 1fr);
@@ -248,14 +268,6 @@
   }
   .documentRoles dt {
     margin-bottom: 0;
-  }
-  .decisionLayout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-  }
-  .decisionLayout > .arrow {
-    transform: rotate(90deg);
-    line-height: 1;
   }
   .routing {
     grid-template-columns: minmax(0, 1fr);

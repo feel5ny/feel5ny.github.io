@@ -1,100 +1,94 @@
 import styles from './portfolio.module.css';
 import { ReviewFlow } from './review-flow';
 import { CodeEvidence } from './code-evidence';
-import { GeneRoutingDiagram, GeneVerificationMap, WrapUpDocumentMap } from './detail-diagrams';
+import { WrapUpDocumentMap } from './detail-diagrams';
+import { OperationsBranches } from './operations-branches';
+import { OperationsDomains } from './operations-domains';
+import { GeneTransitionMap } from './gene-transition-map';
 
 export function GeneDetails() {
   return (
     <>
       <div className={styles.bodySection}>
-        <h3>새 화면보다 먼저 풀어야 했던 연결 조건</h3>
+        <h3>과제. 운영 중인 제품의 기존 동작을 보호하며 리뉴얼</h3>
         <ul className={styles.bullets}>
           <li>
-            신청·검사·결과 화면을 바꾸면서도 이미 검사를 진행 중인 사용자는 이어서 이용해야 했음
+            신청·검사 진행·결과 확인이 이미 운영 중인 상태에서 2.0 경험으로 전환. 유지할 기능의
+            회귀와 새 흐름의 동작을 함께 확인해야 하는 작업
           </li>
           <li>
-            검사 상태·보유 검사권·외부 URL에 따라 도착할 화면이 달라, 개별 화면만으로는 전체 흐름을
-            확인하기 어려웠음
-          </li>
-        </ul>
-      </div>
-
-      <GeneRoutingDiagram />
-
-      <div className={styles.bodySection}>
-        <h3>구현. 서버와 클라이언트가 같은 규칙으로 목적지 결정</h3>
-        <ul className={styles.bullets}>
-          <li>
-            <strong>기본 경로:</strong> 서버에서 검사 상태를 조회하고 공통 함수로 목적지를 결정해
-            리다이렉트
+            <strong>맡은 개발:</strong> 전체 flow·테크스펙·스캐폴딩, 브릿지·다이나믹 랜딩 신규
+            개발과 이미지 리소스 POC
           </li>
           <li>
-            <strong>실패 경로:</strong> 서버 처리 중 예외가 나면 Sentry에 기록하고 클라이언트
-            fallback으로 전환. 클라이언트도 같은 함수를 사용
-          </li>
-          <li>
-            <strong>예외 구분:</strong> 검사 진행·동의 처리에 필수인 토큰 누락은 오류로 드러내고,
-            정의되지 않은 상태는 소개 화면으로 연결
-          </li>
-        </ul>
-        <CodeEvidence
-          title="진입 쿼리보다 목적지의 필수 값을 우선"
-          source="get-server-side-props.webview.ts · 코드 발췌"
-          code={`const query = { ...ctx.query, ...targetUrl.query };
-delete query['slug'];`}
-        >
-          진입 맥락은 유지하되 <strong>이동할 화면에 필요한 값이 우선하도록</strong> 목적지 쿼리를
-          나중에 병합합니다. 경로용 slug는 다음 화면에 전달하지 않습니다.
-        </CodeEvidence>
-      </div>
-
-      <div className={styles.bodySection}>
-        <h3>선택. 화면 구현에 앞서 흐름과 개발 범위부터 합의</h3>
-        <ul className={styles.bullets}>
-          <li>
-            검사 상태·보유 검사권·진입 조건에 따른{' '}
-            <strong data-reveal="underline">전체 flow를 개발 전에 정리</strong>
-          </li>
-          <li>
-            기존 화면을 재사용할 구간과 새로 만들 구간을 구분하고, 연결 조건이 미확정인 지점을 먼저
-            협의
-          </li>
-          <li>
-            <strong>범위 조정:</strong> 신청 내용을 임시저장해 재진입 시 복원하는 기능은 구현 부담을
-            고려해 이번 리뉴얼 범위에서 제외
-          </li>
-          <li>
-            합의한 흐름을 테크스펙·스캐폴딩으로 옮기고, 브릿지·다이나믹 랜딩 개발과 이미지 POC 진행
+            <strong>화면 구성:</strong> 신청·진행 타임라인·반송 신청·구매는 재사용하고, 선착순
+            시도·전체 결과 화면은 변경. 신규 리포트 화면 개발은 위임
           </li>
         </ul>
       </div>
 
       <div className={styles.bodySection}>
-        <h3>검증. 유지할 동작을 테스트로 먼저 고정</h3>
-        <p>
-          기존 신청·반송 흐름을 재사용하면서, 유지할 기능은{' '}
-          <strong data-reveal="underline">테스트 코드부터 작성</strong>한 뒤 리팩토링했습니다.
-        </p>
-        <GeneVerificationMap />
-        <p className={styles.caption}>
-          테스트에는 신청 기회 유무, 검사 중 토큰 누락, 완료 상태별 동의 여부, 미정의 상태의 목적지
-          확인이 포함됩니다. MSW 화면 확인과는 별도로 이동 판단을 검증합니다.
-        </p>
+        <h3>1. 판단 — 구현 전에 연결 조건과 개발 범위를 합의</h3>
+        <ul className={styles.bullets}>
+          <li>
+            여러 화면을 나누어 개발하므로, 검사 상태·보유 검사권·진입 조건에 따른{' '}
+            <strong data-reveal="underline">전체 흐름을 먼저 정리</strong>
+          </li>
+          <li>
+            재사용할 구간과 새로 만들 구간을 구분하고, 연결 조건이 미확정인 지점을 먼저 협의해 구현
+            중 오갈 커뮤니케이션을 앞당김
+          </li>
+          <li>
+            <strong>PM과 Spec-out 협의:</strong> 신청 내용의 임시저장·재진입 복원에 필요한 구현
+            부담을 공유하고, 사용자 편의와 개발 비용을 함께 검토해 이번 개발 범위에서 제외
+          </li>
+          <li>합의한 흐름을 테크스펙과 스캐폴딩에 반영하고 개별 화면 구현으로 연결</li>
+        </ul>
       </div>
 
       <div className={styles.bodySection}>
-        <h3>출시 후. 외부 진입 경로와 다음 작업의 맥락까지 정리</h3>
+        <h3>2. 개발 — 기존 기능은 활용하고, 새 경험에 필요한 화면을 구현</h3>
         <ul className={styles.bullets}>
           <li>
-            <strong>기존 링크 유지:</strong> 외부에 배포된 실험 진입 URL은 새 랜딩으로 연결하고,
-            불필요한 실험 분기 파라미터만 제거
+            <strong>재사용·변경:</strong> 신청·검사 진행·반송·구매 기능을 전부 다시 만들지 않고
+            재사용. 선착순 시도·전체 결과 화면은 새 요구사항에 맞게 변경
           </li>
+          <li>
+            <strong>신규 구현:</strong> 전체 스캐폴딩과 브릿지·다이나믹 랜딩을 개발하고 이미지
+            리소스 POC 진행. 리포트 화면 개발은 위임
+          </li>
+          <li>
+            <strong>랜딩의 역할:</strong> 다른 도메인의 배너 등에서 들어온 사용자를 검사 상태에 맞는
+            화면으로 연결. 서버 처리와 클라이언트 fallback에서 같은 이동 규칙 사용
+          </li>
+          <li>
+            <strong>재사용에 따른 확인:</strong> 화면을 재사용해도 새 흐름과의 연결이 맞는지는 별도
+            문제. 기존 동작의 회귀와 신규 화면 간 전환을 나누어 검증
+          </li>
+        </ul>
+      </div>
+
+      <div className={styles.bodySection}>
+        <h3>3. 전환 — 기존 동작 보호부터 공개 제어까지</h3>
+        <GeneTransitionMap />
+        <ul className={styles.bullets}>
+          <li>
+            <strong>이동 규칙 검증:</strong> 랜딩의 목적지 판단과 필수 값 누락 등 예외 조건은 단위
+            테스트로 확인
+          </li>
+          <li>
+            <strong>분기 기준:</strong> Amplitude Feature Flag(FF) 값으로 기존·신규 화면을 선택. 2.0
+            화면 안에서 검사 상태에 따라 목적지를 정하는 랜딩과는 별개의 분기
+          </li>
+        </ul>
+      </div>
+
+      <div className={styles.bodySection}>
+        <h3>4. 마무리 — 코드 정리와 함께 다음 작업의 맥락 보존</h3>
+        <ul className={styles.bullets}>
           <li>
             <strong>Wrap-up:</strong> 다음 작업에 필요한 전제와 맥락을 정리하고, 의사결정
             기록·동료의 이해·AI 작업 규칙을 구분하는 문서 기준 활용
-          </li>
-          <li>
-            <strong>실험 배포:</strong> Sentry 실험 태그를 기준으로 관련 오류 모니터링
           </li>
         </ul>
         <WrapUpDocumentMap />
@@ -134,7 +128,7 @@ export function ReviewDetails() {
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>선택 1. 변경 파일과 위험도에 따라 검토 범위 결정</h3>
+        <h3>설계 1. 변경 파일과 위험도에 따라 리뷰 범위 결정</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>달라진 요구:</strong> 1인 팀·휴가 중 리뷰어 부재·비개발자 기여로 조직 차원의
@@ -144,6 +138,7 @@ export function ReviewDetails() {
             <strong>라우터:</strong> 변경 파일의 경로·확장자와 상위 AGENTS.md를 기준으로 필요한 리뷰
             레이어 선택. 규칙과 발동 조건은 레이어별 파일에 함께 정의
           </li>
+          <li>파일 조건에 맞는 리뷰 선택과 잘못된 입력 처리는 스크립트 테스트로 확인</li>
           <li>
             <strong>위험도별 분기:</strong> 보안 민감 경로는 보안 검토, 공통 라이브러리는 사용처
             영향 검토를 연결. 사람 리뷰가 없는 면제 경로는 검토 범위와 모델 티어 상향
@@ -164,26 +159,7 @@ fi`}
         읽을 규칙이 없으면 해당 레이어를 제외하고, 실행·제외 이유를 출력합니다.
       </CodeEvidence>
       <div className={styles.bodySection}>
-        <h3>검증. 실행 대상과 실패 조건을 스크립트 테스트로 고정</h3>
-        <ul className={styles.bullets}>
-          <li>
-            <strong>입력 오류:</strong> 존재하지 않는 레이어 이름은 exit 2, 명시적으로 넘긴 빈 파일
-            목록이나 실행 대상 0개는 exit 3으로 종료
-          </li>
-          <li>
-            <strong>조건별 실행:</strong> 파일 유형별 레이어 선택, AGENTS.md 유무에 따른 도메인 리뷰
-            제외, 사람 리뷰 면제 경로의 프로필·최소 티어 상향 확인
-          </li>
-          <li>
-            <strong>출력 계약:</strong> 호출자가 읽는 LAYERS·TIERS와 변경 규모 신호의 출력 확인
-          </li>
-        </ul>
-        <p className={styles.caption}>
-          검증 대상은 라우터의 실행 계약입니다. AI 지적의 정확도는 별도 검증 대상으로 두고 있습니다.
-        </p>
-      </div>
-      <div className={styles.bodySection}>
-        <h3>선택 2. 검토 강도와 개발 흐름의 비용을 함께 고려</h3>
+        <h3>설계 2. 검토 강도와 실행 비용 조정</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>실행 시점:</strong> 일반 PR 생성에는 빠른 정적 점검만 두고, 전체 AI 리뷰는 명시
@@ -220,6 +196,7 @@ export function TeamDetails() {
   return (
     <>
       <div className={styles.bodySection}>
+        <h3>DRI: 공통 영역의 맥락을 유지하고 판단하는 담당자</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>목적:</strong> 사람이 바뀌어도 같은 기준과 절차로 업무가 이어지는 운영
@@ -230,11 +207,13 @@ export function TeamDetails() {
             요청하거나 결정 이유를 다시 찾는 일이 반복
           </li>
           <li>
-            <strong>접근:</strong> 제보·판단·실행의 책임을 나누고, 접수부터 의사결정과 인수인계까지
-            이어지는 절차 설계
+            <strong>접근:</strong> DRI(Directly Responsible Individual)는 담당 영역의 맥락을
+            이해하고 의사결정·리뷰를 맡음. 구현은 제품팀이나 별도 작업팀과 나누는 구조
           </li>
         </ul>
       </div>
+      <OperationsDomains />
+      <OperationsBranches />
       <div className={styles.bodySection}>
         <h3>다음 사람이 판단하고 작업을 이어갈 수 있도록</h3>
         <ul className={styles.bullets}>
@@ -245,7 +224,8 @@ export function TeamDetails() {
           </li>
           <li>
             <strong>실행 단위:</strong> 큰 작업은 테크스펙에서 개별 머지가 가능한 작은 작업으로
-            분할. 실행자가 일부 작업을 맡아도 전체 과제의 책임은 담당 DRI가 유지
+            분할. 실행자가 바뀌어도 담당 DRI가 판단의 맥락과 과제의 연결을 유지하고, 구현·검증은
+            실행 담당과 QA·PR·CI로 진행
           </li>
           <li>
             <strong>인수인계:</strong> 중단 시 진행 상황·막힌 지점·다음 할 일을 남기고 착수 가능

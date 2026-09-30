@@ -1,0 +1,73 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 24px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--wash);
+}
+.figure figcaption {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.figure figcaption span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.figure .stages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stages li {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 9px;
+  background: var(--paper);
+}
+.stage {
+  color: var(--accent-cyan);
+  font-size: 11px;
+}
+.figure .stages h3 {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.figure .stages p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.stages small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+.figure .foundation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.foundation strong {
+  color: var(--ink);
+}
+@container (max-width: 600px) {
+  .figure .stages {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .figure {
+    break-inside: avoid;
+  }
+}

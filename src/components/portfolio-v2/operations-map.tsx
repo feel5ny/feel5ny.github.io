@@ -33,30 +33,29 @@ export function OperationsMap() {
             <h3>영역의 맥락을 가진 담당자가 판단</h3>
           </div>
           <ul className={styles.distributed} aria-label="각 문제를 관련 영역으로 나누어 처리">
-            {['A', 'B', 'C'].map(area => (
+            {['레포 관리', '라우팅', '관측·모니터링'].map(area => (
               <li key={area}>
-                <span className={styles.problem}>문제 {area}</span>
+                <span className={styles.problem}>{area}</span>
                 <span className={styles.arrow} aria-hidden="true">
                   ↓
                 </span>
                 <div className={styles.domain}>
-                  <strong>영역 {area}</strong>
-                  <span>맥락을 가진 담당</span>
-                  <span className={styles.decision}>판단 · 실행</span>
+                  <strong>영역 담당자</strong>
+                  <span>코드·운영 이력 이해</span>
+                  <span className={styles.decision}>판단 · 리뷰</span>
                 </div>
               </li>
             ))}
           </ul>
           <p className={styles.context}>
-            관련 코드·운영 이력을 아는 담당자가 대안을 검토하고, 영역별로 나누어 처리
+            각 영역의 맥락으로 대안을 검토하고, 구현은 제품팀·별도 작업팀과 분담
           </p>
           <div className={styles.sharedContext}>
             <strong>판단 근거는 함께 축적</strong>
             <span>ADR·티켓에 남겨 다음 판단과 인수인계에 활용</span>
           </div>
           <p className={styles.note}>
-            A·B·C는 분산 구조를 설명하는 예시입니다. 영역 간 영향이 있는 결정은 관련 담당자와
-            협의합니다.
+            전체 10개 중 대표 영역입니다. 영역 간 영향이 있는 결정은 관련 담당자와 협의합니다.
           </p>
         </div>
       </div>

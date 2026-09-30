@@ -5,8 +5,8 @@ import styles from './portfolio.module.css';
 
 const sections = [
   ['intro', '소개', ''],
-  ['gene', '기존 동작을 지키는 리뉴얼', '01'],
-  ['insurance', '상담 연동과 운영 관측', '02'],
+  ['gene', '운영 중인 제품의 리뉴얼', '01'],
+  ['insurance', '신규 제품의 구축과 운영', '02'],
   ['review', 'AI 리뷰의 선제적 시도', '03'],
   ['perspective', '사용자 경험 전체 보기', ''],
   ['team', '지속 가능한 팀 운영', ''],

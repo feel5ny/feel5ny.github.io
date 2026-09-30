@@ -1,0 +1,165 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--wash);
+}
+.figure figcaption {
+  display: grid;
+  gap: 5px;
+  font-size: 15px;
+}
+.figure figcaption span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.scroll {
+  overflow-x: auto;
+  margin-top: 18px;
+  padding: 4px;
+}
+.scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+.figure .stages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  min-width: 780px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stage {
+  position: relative;
+  min-width: 0;
+  padding: 16px;
+  background: var(--paper);
+  border-radius: 10px;
+}
+.stage + .stage::before {
+  content: '→';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 20px;
+}
+.phase {
+  font-size: 11px;
+  color: var(--muted);
+}
+.figure .stage h4 {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 7px 0 16px;
+}
+.node,
+.gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 6px;
+  min-height: 44px;
+  border-radius: 7px;
+  background: var(--wash);
+  text-align: center;
+  font-size: 12px;
+}
+.node span,
+.gate span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.gate {
+  background: var(--selected);
+  color: var(--accent-cyan);
+}
+.versions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.fork {
+  display: block;
+  width: 100%;
+  height: 26px;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.5px;
+}
+.down {
+  display: block;
+  text-align: center;
+  line-height: 26px;
+  color: var(--muted);
+}
+.cleanup {
+  display: grid;
+  gap: 4px;
+  margin-top: 15px;
+  font-size: 11px;
+}
+.cleanup > span {
+  color: var(--muted);
+  font-size: 10px;
+}
+.figure .stage p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+.checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 4px 0;
+}
+.checks dt {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+.checks dd {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.figure .hint {
+  display: none;
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+@container (max-width: 788px) {
+  .figure .hint {
+    display: block;
+  }
+}
+@container (max-width: 480px) {
+  .checks {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .figure {
+    break-inside: avoid;
+  }
+  .scroll {
+    overflow: visible;
+  }
+  .figure .stages {
+    min-width: 0;
+  }
+  .figure .hint {
+    display: none;
+  }
+}

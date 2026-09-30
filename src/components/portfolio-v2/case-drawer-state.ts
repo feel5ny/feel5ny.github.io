@@ -1,6 +1,7 @@
 export const caseIds = [
   'gene',
   'insurance',
+  'family-history',
   'review',
   'team',
   'acquisition',
@@ -12,11 +13,11 @@ export const caseIds = [
 export type CaseId = (typeof caseIds)[number];
 
 export const journeyStages = [
-  { id: 'acquisition', label: '유입' },
-  { id: 'activation', label: '활성화' },
-  { id: 'retention', label: '유지' },
-  { id: 'referral', label: '추천' },
-  { id: 'revenue', label: '수익' },
+  { id: 'acquisition', label: 'Acquisition' },
+  { id: 'activation', label: 'Activation' },
+  { id: 'retention', label: 'Retention' },
+  { id: 'referral', label: 'Referral' },
+  { id: 'revenue', label: 'Revenue' },
 ] as const;
 
 export function journeyNavigation(id: CaseId) {

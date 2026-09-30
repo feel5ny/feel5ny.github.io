@@ -422,6 +422,7 @@
   align-items: center;
   min-height: 44px;
   padding: 10px 16px;
+  border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
   box-shadow: 0 2px 6px #00000006;
@@ -430,6 +431,41 @@
 }
 .linkRow a span {
   color: var(--accent);
+}
+.relatedCase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 10px;
+  background: var(--wash);
+}
+.relatedCase > div:first-child {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.relatedLabel {
+  font-size: 11px;
+  color: var(--muted);
+}
+.relatedCase h3 {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.relatedCase p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.relatedCase .linkRow {
+  margin: 0;
+}
+.relatedCase .linkRow a {
+  white-space: nowrap;
 }
 .contents {
   margin-top: 30px;
@@ -525,12 +561,13 @@
   padding: 0 0 0 1.2em;
   margin: 0;
   list-style: disc;
-  max-width: 700px;
+  max-width: 100%;
 }
 .bullets li {
   padding-left: 4px;
   font-size: 15px;
   line-height: 1.7;
+  text-wrap: pretty;
 }
 .bullets li + li {
   margin-top: 6px;
@@ -561,9 +598,10 @@
 }
 .bodySection p,
 .case > p {
-  max-width: 700px;
+  max-width: 100%;
   font-size: 16px;
   line-height: 1.75;
+  text-wrap: pretty;
 }
 .flowFigure,
 .routingFigure {

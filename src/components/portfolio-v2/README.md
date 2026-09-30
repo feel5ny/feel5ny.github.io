@@ -1,6 +1,98 @@
 # Portfolio 2026 v2
 
 - Route: `/private/portfolio-2026-v2/`
+- Each AARRR detail opens with a brief frontend perspective, then the separately labeled actual
+  contributions. These describe the author's lens on discoverability, first value, return paths,
+  sharing and revenue-path reliability, not additional delivered features or measured funnel gains.
+- Acquisition domain correction: the author identifies the Naver non-indexing investigation/fix and
+  IndexNow integration as content-web work, not health-web work. Following the fix, full-content
+  resubmission was needed; CI-level automation was the author's motivation. Inspected implementation
+  and API README at `apps/banksaladv2/pages/api/` show CMS-webhook single submissions and an
+  explicit bulk submission endpoint. The CI workflow injects configuration but no IndexNow
+  submission step was found. Copy distinguishes that intent from implemented webhook/bulk paths and
+  makes no claim that all submitted URLs were indexed. Health-web sitemap work remains a separate
+  contribution.
+- AI review details no longer have a standalone router-test section listing exit codes and output
+  contracts. A single sentence in the routing explanation notes script checks for review selection
+  and invalid input. Existing source/test evidence remains here; removing the disclaimer does not
+  imply measured AI accuracy. Evidence-checking improvements remain part of the review workflow.
+- Spec-out copy follows the author's clarification that scope decisions involved PM communication.
+  The supplied `make-tradeoff-proposal` skill informed the framing: engineering presents cost/risk
+  and options; product-value decisions belong to PM. Historical examples remain limited to gene
+  draft saving/restoration and insurance MVP result recalculation. No retrospective estimates,
+  documented option matrix, actual use of this skill on those projects or sole decision authority is
+  claimed. This edit is portfolio copy, not a new spec-out proposal or an external message.
+- `gene-transition-map.tsx` replaces repeated verification/release prose with a horizontal
+  lifecycle: tests before refactoring → FF selection between existing/new screens → 2.0 default and
+  cleanup. MSW and Sentry appear as separate verification/observation tools. This is a workflow
+  concept, not a claim about actual rollout percentages, rollback execution or zero regressions. It
+  uses semantic HTML, decorative connectors and a keyboard-scrollable narrow-screen region. Colored
+  edge highlights are intentionally avoided.
+- Gene 2.0 is presented project-first: renewal of application/progress/results, then the author's
+  scaffolding, bridge and state-based landing work. `gene-project-map.tsx` maps experience stages to
+  reuse, changes and delegated report implementation based on the author's scope clarifications. It
+  is a conceptual scope map, not an exact screen/route sequence or a claim of sole delivery. The
+  drawer now follows scope agreement → reuse/new implementation → regression verification → FF
+  release control → cleanup/wrap-up. Redirect implementation is a short scope bullet, not the
+  featured technical challenge; the large routing diagram, query-merge code excerpt and routing
+  verification table are no longer rendered. The narrative emphasizes actual decisions, the
+  draft-save scope tradeoff and tests/MSW without invented complexity or savings metrics.
+- Feature Flag evidence: before cleanup commit `fd288f717f`, web/webview bridge entry components
+  select original versus `.exp` screens through Amplitude experiment hooks. Author-owned cleanup
+  commits `fd288f717f` and `785d6c0e0d` remove entries/old screens and experiment keys. This
+  supports release branching and post-release cleanup, not a particular rollout percentage, an
+  exercised rollback or proven conversion lift. State-based 2.0 landing remains distinct from FF
+  routing.
+- `funnel-history-details.tsx` adds a distinct useFunnel/history case within the insurance drawer,
+  with a compact before/after stack diagram. Verified against author-owned merged PR #14525
+  (2026-07-28), commit `75081734f87ac5c64565e84416e2ce6cbfd32645`, the input funnel hook and page.
+  `@use-funnel/next` manages input/conditional connection steps; rewinding the nested connection
+  flow before replacing with the result removes the leftover input entry. A transition loader avoids
+  remounting the input view and duplicate exposure events during navigation. This is a merged
+  implementation/PR account, not device verification rerun here or a measured activation gain. Copy
+  omits the AI-assistance badge at the author's request, does not claim original
+  library/architecture design, and keeps history cleanup separate from the later cache race and from
+  gene 2.0.
+- DRI details now define the role as retaining domain context and making decisions/reviewing, not
+  personally executing every task. `operations-domains.tsx` groups the ten domains from
+  `docs/10-dri/foundation.md` into three plain-language categories; scopes summarize group guides.
+  The foundation's stale frontmatter says nine, but its body and domain table list ten. This is a
+  responsibility map, not a claim that every owner has been assigned or all processes established.
+  `operations-branches.tsx` adapts the author's DRI presentation: written ADR discussion, escalation
+  only for unresolved questions, recorded deferral, and distributed implementation/verification.
+  Branches represent workflow, not literal Git branches. No names, internal links or staffing
+  budgets are published. The overview shows three representative domains; the drawer shows all ten.
+- Activation copy emphasizes implementing the first-use flow through application, consent and result
+  viewing, not generic in-app navigation or measured activation improvement. The overview covers
+  genetic-testing launch/operation experience; the detail distinguishes 2.0 state-based landing
+  work, which also serves in-progress and returning users. Family-history re-entry/cache correctness
+  remains a separate technical case, not an activation outcome.
+- Amplitude monitoring clarification (2026-09-30): the author supplied an Agent-configuration
+  screenshot and confirmed dashboard integration with received alerts. Insurance and AARRR revenue
+  copy now describe daily funnel/entry-path checks, prompt-defined comparison/exclusion rules and
+  reports for human on-call diagnosis. The screenshot shows configuration, not measured detection
+  accuracy; no custom anomaly algorithm, root-cause automation, delivery channel, time saved or
+  incident reduction is claimed. Do not embed the internal screenshot or publish exact thresholds.
+- `family-history-details.tsx` / `.module.css`: a separate technical drawer
+  (`?detail=family-history`) linked from insurance and career entries. Sources checked directly:
+  merged PR #14555 (2026-07-28), follow-up #14567 (2026-07-29), its diff and both hooks at commit
+  `17653ed7c42b`. A four-step responsive sequence shows why direct cache writes were insufficient:
+  an earlier background refetch resolved later and overwrote the viewed flag. The follow-up applies
+  Infinity stale time only to that write-once flag and waits for cancellation before writing the
+  cache. This is not a server transaction or a promise of persistence after failed writes.
+  PR-recorded manual flow verification and static checks are labeled as historical evidence, not
+  tests rerun here. No new performance metrics or controlled slow-network tests are claimed. Commits
+  credit Claude; the visible assistance badge is omitted at the author's request. This does not
+  establish independent discovery of every cause; retain the attribution in source notes. The
+  form-value/history issue is intentionally not merged into this case.
+- HappyTalk reverse-analysis content is now three compact bullets: response branch, parameter
+  constraints and lesson learned. The large branch diagram and duplicate pseudocode have been
+  removed at the author's request; the separate incident-response map remains.
+- Author clarification: the 2.0 redirect landing routes users arriving from banners and other
+  domains to the appropriate page for their genetic-testing state. It is not an old-version user
+  migration or continuity mechanism. Overview, detail copy, diagram and AARRR activation copy follow
+  this distinction. Reusing existing functionality and protecting it with regression tests is a
+  separate renewal concern, not the reason for the redirect page.
 - The drawer toolbar is a single compact row: AARRR label and stage navigation on the left, quiet
   link-copy/close controls on the right. Narrow screens use labeled icon-only controls and retain
   44px touch targets. Left/Right arrows switch stages only inside an open AARRR dialog; text
@@ -11,36 +103,33 @@
   2026-09-14.
 - `index.tsx`: edited presentation of the source; private review notes and source links are
   excluded.
-- `detail-diagrams.tsx` / `detail-diagrams.module.css`: gene details show the two execution paths
-  using a shared redirect rule, a unit-test/MSW verification comparison and the wrap-up document
-  roles. Diagrams live in the featured cases, not the shortened AARRR summaries. The former generic
-  insurance-observation diagram was removed; actual HappyTalk constraint/incident diagrams remain.
-  Labels are accessible HTML and connectors are decorative. Narrow layouts adapt via container
-  queries; print keeps each figure together. Browser discovery returned no available browser, so
-  visual verification remains outstanding.
-- `code-evidence.tsx`: short, labeled code evidence in the three featured technical cases. Gene
-  query merging is an actual excerpt from `get-server-side-props.webview.ts`; its server fallback,
-  resolver and test file were also read. The pre-review force-all/AGENTS.md branch is an actual
-  router excerpt; the router smoke suite was rerun and passed 21 checks. Gene tests were inspected,
-  not executed in this revision. HappyTalk is explicitly sanitized pseudocode describing the
-  historical supplier response, not a verbatim excerpt or authored supplier implementation. No
+- `detail-diagrams.tsx` / `detail-diagrams.module.css`: gene details show the wrap-up document
+  roles; the former routing and verification diagrams are no longer rendered. The former generic
+  insurance-observation diagram was removed; the HappyTalk incident-response diagram remains. Labels
+  are accessible HTML and connectors are decorative. Narrow layouts adapt via container queries;
+  print keeps each figure together. Browser discovery returned no available browser, so visual
+  verification remains outstanding.
+- `code-evidence.tsx`: short, labeled code evidence in the AI review case. The former gene query
+  excerpt is removed to keep the emphasis on renewal decisions. The server fallback, resolver and
+  test file were read as evidence. The pre-review force-all/AGENTS.md branch is an actual router
+  excerpt; the router smoke suite was rerun and passed 21 checks. Gene tests were inspected, not
+  executed in this revision. HappyTalk now uses compact reverse-analysis notes without code. No
   account identifiers, credentials, internal URLs or private imports are published. Source files
   remain unchanged. No latency, conversion, defect-reduction or AI-accuracy result is inferred.
-- `happy-talk-diagrams.tsx`: the insurance project drawer now foregrounds the actual integration
-  lesson and incident policy. Evidence is the author's supplied Markdown exports, read in full:
-  “해피톡 레슨런 기록” and “상담과정 이슈 발생시 Guide Line” (updated 2024-01-04, author identified
-  as Kim Nayoung). The recorded external response HTML branches on Kakao Open Builder's automatic
-  utterance event: URL navigation with bot/event ignores supplied parameters; the other branch
-  submits the form by POST with parameters. This is historical integration analysis, not code the
-  author implemented at the supplier, a current vendor specification or a claim of fixing the
-  supplier. The records also note a 20-character custom-field limit and delimiter-related loss. The
-  guide defines web/vendor/spec diagnosis, direct web fixes versus supplier communication through
-  the contracted partner, and manual matching of application/chat records when their counts differ.
-  No implemented validator, disabled chatbot setting, automated recovery or measured
-  incident/revenue improvement is inferred. Only sanitized summaries are rendered: no copied HTML,
-  screenshots, customer names, account/channel IDs, tokens, internal URLs or detailed data exports.
-  Amplitude monitoring and later handoff remain sourced from the author's separate clarifications,
-  not these two documents.
+- `happy-talk-diagrams.tsx`: visualizes the incident policy; the integration lesson is summarized in
+  `insurance-details.tsx`. Evidence is the author's supplied Markdown exports, read in full: “해피톡
+  레슨런 기록” and “상담과정 이슈 발생시 Guide Line” (updated 2024-01-04, author identified as Kim
+  Nayoung). The recorded external response HTML branches on Kakao Open Builder's automatic utterance
+  event: URL navigation with bot/event ignores supplied parameters; the other branch submits the
+  form by POST with parameters. This is historical integration analysis, not code the author
+  implemented at the supplier, a current vendor specification or a claim of fixing the supplier. The
+  records also note a 20-character custom-field limit and delimiter-related loss. The guide defines
+  web/vendor/spec diagnosis, direct web fixes versus supplier communication through the contracted
+  partner, and manual matching of application/chat records when their counts differ. No implemented
+  validator, disabled chatbot setting, automated recovery or measured incident/revenue improvement
+  is inferred. Only sanitized summaries are rendered: no copied HTML, screenshots, customer names,
+  account/channel IDs, tokens, internal URLs or detailed data exports. Amplitude monitoring and
+  later handoff remain sourced from the author's separate clarifications, not these two documents.
 - `case-drawer.tsx`: main cases keep concise summaries and open detailed material in a native modal
   dialog, styled as a right-hand drawer on desktop and full-screen on mobile. Escape and backdrop
   dismissal, background scroll locking, focus return, history navigation and shareable `?detail=`
@@ -64,28 +153,36 @@
   read-only; its business-rule example values, internal links and planned adoption tasks are not
   copied into the public portfolio.
 - `insurance-details.tsx`: insurance is a separate featured collection of work from 2023–2026, not a
-  single continuous project. It connects product value, consultation integration, scope and policy
-  decisions, Amplitude/Sentry monitoring, and firsthand insurance-claim feedback. Content follows
-  the author's project clarifications; no conversion lift, unsupported architecture or ownership of
-  another person's policy decision/server fix is implied.
-- The featured product cases use distinct lenses: gene renewal covers agreement, reuse and
-  regression testing to preserve existing behavior; insurance covers external consultation
-  integration, funnel/error monitoring and documented incident response. Menu labels, overview,
-  headings and the insurance diagram follow this distinction. Policy/scope decisions remain
-  supporting detail below monitoring. The undocumented custom-parameter limitation comes from the
-  author's work summary and subsequently supplied lesson/incident-guide exports; no specific fix or
-  measured reliability/revenue improvement is inferred.
+  single continuous project. It connects MVP/new webview construction, useFunnel/history and cache
+  correctness, external routing/consultation integration, Amplitude/Sentry monitoring, and firsthand
+  insurance-claim feedback. The policy-confirmation paragraph was removed from the featured case; no
+  claim of code-level policy architecture is made. Content follows the author's project
+  clarifications; no conversion lift, unsupported architecture or ownership of another person's
+  policy decision/server fix is implied.
+- The featured product cases use distinct lenses: gene renewal protects an already-operating product
+  through scope agreement, reuse, regression tests/MSW, FF release control and cleanup. Insurance
+  covers new product construction, input/result flows, external integration and ongoing monitoring
+  of revenue-related conversion paths. Navigation, overview, headings and the insurance diagram use
+  this distinction. MVP scope adjustment stays with the construction stage; no regression-free
+  launch, conversion lift or revenue improvement is claimed. The undocumented custom-parameter
+  limitation comes from the author's work summary and subsequently supplied lesson/incident-guide
+  exports; no specific fix or measured reliability/revenue improvement is inferred.
 - Mentoring headings use local, unmodified official favicons at 20px: Programmers for Devcourse and
   Sparta for Hanghae Plus. Sources and download date are in `public/images/portfolio/README.md`.
   Both use the career-logo alignment so wrapped text remains vertically centered with the icon.
-- AARRR rows each link to independent stage-specific details: acquisition (SEO/sitemap/IndexNow),
-  activation (application flow and state-based landing), retention (message-entry pages and webview
-  routing), referral (health-preview screens and sharing), revenue (consultation and monitoring).
-  Five supporting drawers live in `journey-details.tsx`, with 2–3 confirmed work bullets each.
-  Repeated context/contribution paragraphs and duplicate diagrams are removed. Activation/revenue
-  offer optional drill-down links to the featured gene/insurance cases. Previous/Next and keyboard
-  navigation remain. Sharing stays limited to confirmed scope; the snapshot idea is not presented as
-  shipped work. AARRR is an experience map, not five equally deep standalone case studies.
+- Acquisition now includes Goodoc's 2020 procedure encyclopedia as Gatsby static generation (SSG),
+  based on career-original G04 and the post-return inventory. PWA/offline/installability is not
+  established by those records. This is a short implementation-history item, not a reconstructed
+  architecture success story; old indexing/conversion figures remain excluded pending validation.
+- AARRR rows each link to independent stage-specific details: acquisition (Gatsby
+  SSG/sitemap/IndexNow), activation (application flow and state-based landing), retention
+  (message-entry pages and webview routing), referral (health-preview screens and sharing), revenue
+  (consultation and monitoring). Five supporting drawers live in `journey-details.tsx`, with 2–3
+  confirmed work bullets each. Repeated context/contribution paragraphs and duplicate diagrams are
+  removed. Activation/revenue offer optional drill-down links to the featured gene/insurance cases.
+  Previous/Next and keyboard navigation remain. Sharing stays limited to confirmed scope; the
+  snapshot idea is not presented as shipped work. AARRR is an experience map, not five equally deep
+  standalone case studies.
 - Section subtitles use the same local Banksalad PNG as career headings, at 18px with empty alt
   text. The adjacent visible company name supplies the label. A flex row centers the logo against
   the full text block when the subtitle wraps, while keeping the text left-aligned.
@@ -94,14 +191,15 @@
   because filesystem access was denied.
 - Editorial revision: the resume should summarize role, contribution and delivered work in 2–3
   bullets per project, while the portfolio explains constraints, choices and verification. Gene
-  content now foregrounds existing-user continuity, flow-first scope agreement, shared redirect
-  rules and layered testing. The application draft-save scope exclusion comes from the author's
-  direct clarification, not an inferred code decision. No alternative evaluation, failure story,
-  performance metric or SSR outcome is invented. AI and operating-framework status is consolidated
-  at the top of each case; redundant disclaimers and duplicate contribution caveats are removed. The
-  insurance-claim example retains the author's reporting role and credits the actual decision and
-  implementation owners in its outcome. Resume/doc replacement copy was prepared separately because
-  access to the vault remains denied; the source resume has not been edited or fully audited.
+  content foregrounds state-based entry into 2.0, flow-first scope agreement, shared redirect rules
+  and separately scoped regression testing. The application draft-save scope exclusion comes from
+  the author's direct clarification, not an inferred code decision. No alternative evaluation,
+  failure story, performance metric or SSR outcome is invented. AI and operating-framework status is
+  consolidated at the top of each case; redundant disclaimers and duplicate contribution caveats are
+  removed. The insurance-claim example retains the author's reporting role and credits the actual
+  decision and implementation owners in its outcome. Resume/doc replacement copy was prepared
+  separately because access to the vault remains denied; the source resume has not been edited or
+  fully audited.
 - Career company headings use local, unmodified PNG logos at 20px. Sources:
   [Banksalad official favicon](https://cdn.banksalad.com/app/meta/introduce-a/favicon.png) and
   [Goodoc app icon, published by Goodoc Co.,Ltd on the App Store](https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e9/cb/a3/e9cba3bd-85e5-7dff-4168-649554fded80/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png).
@@ -234,3 +332,45 @@ or confidential screenshots.
 
 Local preview: `pnpm dev --port 3100`, then open the route. Type check:
 `pnpm exec tsc --noEmit --incremental false`. Static export: `pnpm exec next build`.
+
+Revenue/insurance monitoring copy was checked against `libs/utils/error/src/critical-error.ts` and
+the insurance `sentry-insurance-error-handler.ts` implementations. The handler wraps errors in
+`CriticalError`, sets `level: 'fatal'` and fingerprints by class/message; it excludes selected
+HTTP/network/timeout errors. This is an application-defined class, not a Sentry SDK class. The copy
+does not claim authorship of the original shared class, whose creation predates the available
+history. Alert use and the complementary daily funnel checks are author-confirmed; live Sentry alert
+configuration and measured response-time improvements were not independently verified. The funnel
+combines revenue-dashboard events and additional measurement events, with the existing Amplitude
+Agent daily check providing a slower, aggregate signal alongside error alerts.
+
+Pre-release test credit is limited to the author's verified test additions in commit `6286d29676`
+(2026-07-29): the consultation hook's existing tests were extended to check insurance sync status in
+the completion event. The commit includes an AI co-author. Current tests also cover link generation,
+fallback/error logging and loading/error behavior, but the portfolio does not attribute the whole
+suite to the author. Source and historical diff were inspected; company tests and a historical
+pre-release run were not rerun or verified in this portfolio editing session.
+
+The five AARRR drawers include compact, responsive diagrams in `journey-detail-map.tsx`. Acquisition
+keeps three products' search work in separate lanes; activation shows state-based destinations, not
+a mandatory linear sequence of all states. Retention shows message re-entry; referral separates
+sender-side data conversion from the voucher recipient's entry path. Revenue separates pre-release
+tests from independent error-alert and daily aggregate-monitoring paths. No conversion rates or
+measured improvements are inferred from diagrams.
+
+Referral details are supplemented by the author's supplied `뱅샐-공유하기.pdf`, a seven-page
+2022-12-23 tech-talk record. All pages were text-extracted and visually inspected. Pages 3–4
+describe domain sharing data converted into platform-specific objects and passed to UI; pages 5–6
+show implemented SNS sharing and voucher-link entry with code prefill. Page 7 discusses client-side
+long-link tradeoffs under limited server capacity. This is historical evidence, not current SDK
+guidance; no numeric link-length limit or measured referral lift is claimed. The source PDF,
+screenshots and internal repository links are not published in the portfolio.
+
+Retention was expanded from the author's five supplied dynamic-link pain-point screenshots and
+follow-up attribution. The historical analysis covers web URL/deep-link/dynamic-link composition,
+nested encoding, per-user and marketing parameter replacement, messaging-channel length constraints,
+and OS/channel testing plus PM/marketing/server coordination. Short-link parameter overrides were
+identified as a desired replacement capability, not a capability verified here for Airbridge. The
+author confirms raising these issues contributed to a subsequent Airbridge transition; credit is
+limited to problem analysis, reporting and providing evaluation requirements, not contracting,
+migration ownership or measured retention/operational improvement. Historical provider constraints
+are not presented as current technical guidance. Screenshots and internal URLs are not published.

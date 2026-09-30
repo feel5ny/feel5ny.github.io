@@ -10,11 +10,18 @@ function Arrow() {
 
 export function GeneRoutingDiagram() {
   return (
-    <figure className={styles.figure} aria-label="서버와 클라이언트가 공유하는 이동 판단 규칙">
+    <figure
+      className={styles.figure}
+      aria-label="2.0 랜딩에서 검사 상태에 맞는 목적지를 결정하는 구조"
+    >
       <figcaption>
-        <strong>두 실행 경로, 하나의 이동 규칙</strong>
-        <span>규칙 공유 구조</span>
+        <strong>여러 진입점 → 검사 상태 확인 → 해당 페이지</strong>
+        <span>2.0 랜딩의 이동 규칙</span>
       </figcaption>
+      <p className={styles.note}>
+        다른 도메인의 배너 등에서 진입한 사용자를 검사 상태에 맞는 페이지로 연결합니다. 서버와
+        클라이언트 fallback은 같은 이동 규칙을 사용합니다.
+      </p>
       <div className={styles.routing}>
         <div className={styles.sources}>
           <div className={styles.node}>
@@ -60,7 +67,7 @@ export function GeneVerificationMap() {
     <figure className={styles.figure} aria-label="단위 테스트와 MSW의 검증 범위 비교">
       <figcaption>
         <strong>이동 판단과 화면 연결을 나눠 검증</strong>
-        <span>회귀 확인 기준</span>
+        <span>2.0 랜딩 검증</span>
       </figcaption>
       <table className={styles.comparison}>
         <thead>

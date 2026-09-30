@@ -1,0 +1,83 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 24px 0;
+}
+.figure figcaption {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+.figure figcaption span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.group {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--wash);
+  --group-accent: var(--accent-cyan);
+}
+.group:nth-child(2) {
+  --group-accent: var(--accent);
+}
+.group:nth-child(3) {
+  --group-accent: var(--accent-pink);
+}
+.figure .group h4 {
+  margin: 0;
+  color: var(--group-accent);
+  font-size: 14px;
+}
+.figure .group p {
+  margin: 5px 0 16px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.group dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+.group dt {
+  font-size: 13px;
+  font-weight: 650;
+  word-break: keep-all;
+}
+.group dd {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.figure .note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+@container (max-width: 620px) {
+  .groups {
+    grid-template-columns: 1fr;
+  }
+  .group dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (max-width: 340px) {
+  .group dl {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .group {
+    break-inside: avoid;
+  }
+}
