@@ -1,0 +1,325 @@
+.figure.figure {
+  margin: 24px 0;
+  padding: 22px;
+  border-radius: 14px;
+  background: var(--wash);
+  color: var(--ink);
+  container-type: inline-size;
+}
+.figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 22px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.figure figcaption > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+.routing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1.2fr) 32px minmax(0, 1fr);
+  align-items: center;
+}
+.sources {
+  display: grid;
+  gap: 12px;
+}
+.node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 18px 12px;
+  border-radius: 10px;
+  background: var(--paper);
+  text-align: center;
+}
+.node > span,
+.node > small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.node > strong {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.shared {
+  background: var(--selected);
+  border: 1px solid var(--accent-cyan);
+}
+.shared > span {
+  color: var(--accent-cyan);
+}
+.shared code {
+  padding: 0;
+  background: none;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.arrow {
+  text-align: center;
+  color: var(--accent-cyan);
+  font-size: 24px;
+}
+.merge {
+  width: 32px;
+  height: 140px;
+  overflow: visible;
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 1.5px;
+}
+.rules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.rules > span {
+  border-radius: 6px;
+  padding: 5px 9px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 11px;
+}
+.decisionLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1.5fr);
+  align-items: center;
+}
+.branches {
+  display: grid;
+  gap: 12px;
+}
+.branch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 10px;
+  border-left: 3px solid var(--accent-pink);
+  background: var(--paper);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.branch:last-child {
+  border-left-color: var(--accent-cyan);
+}
+.branch > span,
+.branch > small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.lanes.policyLanes {
+  margin-top: 18px;
+}
+.recovery {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--selected);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.recovery > span {
+  color: var(--accent-cyan);
+  font-size: 11px;
+}
+.figure .recovery p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.figure .note {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.documentRoles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.documentRoles > div {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--paper);
+}
+.documentRoles dt,
+.documentRoles dd {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.documentRoles dt {
+  margin-bottom: 16px;
+}
+.documentRoles code {
+  color: var(--accent-cyan);
+  font-size: 12px;
+  background: none;
+  padding: 0;
+}
+.documentRoles span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.comparison {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.comparison th,
+.comparison td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.comparison thead th {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+.comparison th:first-child {
+  width: 24%;
+}
+.comparison tbody th {
+  color: var(--accent-cyan);
+}
+.lanes {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.lanes > div {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--paper);
+  border-left: 3px solid var(--accent-cyan);
+}
+.lanes > div:last-child {
+  border-left-color: var(--accent-pink);
+}
+.lanes dt,
+.lanes dd {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.lanes dt > span,
+.lanes dd > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+@container (max-width: 560px) {
+  .documentRoles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .documentRoles > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: 12px;
+  }
+  .documentRoles dt {
+    margin-bottom: 0;
+  }
+  .decisionLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .decisionLayout > .arrow {
+    transform: rotate(90deg);
+    line-height: 1;
+  }
+  .routing {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .sources {
+    position: relative;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sources::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    width: 50%;
+    height: 14px;
+    border: 1.5px solid var(--accent-cyan);
+    border-top: 0;
+  }
+  .merge {
+    width: 100%;
+    height: 24px;
+    stroke: none;
+    overflow: hidden;
+  }
+  .routing .shared {
+    position: relative;
+  }
+  .routing .shared::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 7px);
+    left: 50%;
+    height: 20px;
+    border-left: 1.5px solid var(--accent-cyan);
+  }
+  .routing .arrow {
+    transform: rotate(90deg);
+    line-height: 1;
+  }
+  .lanes > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 12px;
+  }
+  .lanes dt {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .comparison th,
+  .comparison td {
+    padding: 10px 5px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 480px) {
+  .figure.figure {
+    padding: 16px;
+  }
+}
+@media print {
+  .figure {
+    break-inside: avoid;
+    border: 1px solid var(--line);
+  }
+}

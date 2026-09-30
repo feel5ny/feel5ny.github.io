@@ -5,6 +5,9 @@ import { ScrollEffects } from './scroll-effects';
 import { WorkAccordion } from './work-accordion';
 import { PointerGlow } from './pointer-glow';
 import { OperationsMap } from './operations-map';
+import { CaseDrawer } from './case-drawer';
+import { GeneDetails, ReviewDetails, TeamDetails } from './case-details';
+import { InsuranceDetails } from './insurance-details';
 
 const links = [
   { label: 'GitHub', href: 'https://github.com/feel5ny' },
@@ -107,11 +110,16 @@ export function PortfolioV2() {
                 <p className={styles.caption}>이번 포트폴리오에 담은 작업</p>
                 <a href="#gene">
                   <span className={styles.number}>01</span>
-                  <span>흐름을 먼저 맞추는 개발</span>
+                  <span>기존 동작을 지키는 리뉴얼</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a href="#insurance">
+                  <span className={styles.number}>02</span>
+                  <span>상담 연동과 운영 관측</span>
                   <span aria-hidden="true">↗</span>
                 </a>
                 <a href="#review">
-                  <span className={styles.number}>02</span>
+                  <span className={styles.number}>03</span>
                   <span>AI 리뷰의 선제적 시도</span>
                   <span aria-hidden="true">↗</span>
                 </a>
@@ -129,11 +137,14 @@ export function PortfolioV2() {
                 <span>2026.05 — 07</span>
               </div>
               <h2 id="gene-title">
-                합의가 필요한 흐름을 먼저 정리하고,
+                흐름을 먼저 맞추고,
                 <br />
-                기존 동작을 지키며 리뉴얼하기
+                기존 동작을 지키는 개발
               </h2>
-              <p className={styles.subtitle}>뱅크샐러드 · 유전자검사 2.0 리뉴얼</p>
+              <p className={`${styles.subtitle} ${styles.companySubtitle}`}>
+                <img src="/images/portfolio/banksalad.png" alt="" width={18} height={18} />
+                <span>뱅크샐러드 · 유전자검사 2.0 리뉴얼</span>
+              </p>
               <dl className={styles.facts}>
                 <div>
                   <dt>역할</dt>
@@ -141,31 +152,26 @@ export function PortfolioV2() {
                 </div>
                 <div>
                   <dt>초점</dt>
-                  <dd>흐름 사전 정리 · 기존 기능 회귀 검증 · 배포 후 마무리</dd>
+                  <dd>상태별 흐름 합의 · 기존 기능 재사용 · 테스트·MSW 회귀 검증</dd>
                 </div>
               </dl>
 
               <div className={styles.bodySection}>
-                <h3>리뉴얼의 조건</h3>
-                <ul className={styles.bullets}>
-                  <li>신청·검사·결과 경험을 새롭게 구성하는 리뉴얼</li>
-                  <li>진행 중인 검사·복수 검사권·기존 외부 URL을 함께 고려</li>
-                  <li>기존 화면의 재사용·변경과 신규 화면의 연결 확인</li>
-                </ul>
-              </div>
-
-              <div className={styles.bodySection}>
-                <h3>커뮤니케이션이 필요한 흐름부터 정리</h3>
                 <ul className={styles.bullets}>
                   <li>
-                    검사 상태·보유 검사권·진입 조건에 따른{' '}
-                    <strong data-reveal="underline">전체 flow를 개발 전에 정리</strong>
+                    <strong>문제:</strong> 진행 중인 검사·복수 검사권·기존 외부 URL을 유지하면서
+                    신청부터 결과까지 리뉴얼
                   </li>
-                  <li>화면 연결과 미확정 조건을 드러내, 협의가 필요한 지점 먼저 확인</li>
-                  <li>테크스펙·스캐폴딩, 브릿지·다이나믹 랜딩 개발과 이미지 POC 진행</li>
+                  <li>
+                    <strong>선택:</strong> 상태별 흐름과 재사용 범위를 먼저 합의하고,
+                    서버·클라이언트에서 같은 이동 규칙 사용
+                  </li>
+                  <li>
+                    <strong>기여:</strong> 테크스펙·스캐폴딩·브릿지·다이나믹 랜딩 개발, 테스트·MSW
+                    검증과 배포 후 정리
+                  </li>
                 </ul>
               </div>
-
               <figure className={styles.flowFigure}>
                 <figcaption>
                   <span>개발 전부터 배포 후까지의 작업 순서</span>
@@ -196,63 +202,88 @@ export function PortfolioV2() {
                     <strong>
                       기존 코드 정리
                       <br />
-                      프로젝트 wrap-up
+                      다음 작업을 위한 문서 정리
                     </strong>
                   </div>
                 </div>
               </figure>
+              <CaseDrawer
+                id="gene"
+                title="유전자검사 2.0"
+                description="기존 사용자 경험을 유지하기 위한 사전 합의, 재사용과 회귀 검증"
+              >
+                <GeneDetails />
+              </CaseDrawer>
+            </article>
 
+            <article
+              id="insurance"
+              className={styles.case}
+              aria-labelledby="insurance-title"
+              data-reveal="section"
+            >
+              <div className={styles.sectionLabel}>
+                <span>02 · 상담 연동과 운영 관측</span>
+                <span>2023 — 2026 · 여러 프로젝트</span>
+              </div>
+              <h2 id="insurance-title">
+                상담 연결을 구현하고,
+                <br />
+                전환 구간의 이상을 살피는 개발
+              </h2>
+              <p className={`${styles.subtitle} ${styles.companySubtitle}`}>
+                <img src="/images/portfolio/banksalad.png" alt="" width={18} height={18} />
+                <span>뱅크샐러드 · 보험 중개 MVP, 보험료 줄이기, 가족력 완벽대비</span>
+              </p>
+              <dl className={styles.facts}>
+                <div>
+                  <dt>역할</dt>
+                  <dd>프론트엔드 개발 · 상담 연동 구축·운영</dd>
+                </div>
+                <div>
+                  <dt>초점</dt>
+                  <dd>외부 상담 연동 · 전환 지표·오류 관측 · 장애 대응 절차</dd>
+                </div>
+              </dl>
               <div className={styles.bodySection}>
-                <h3>상태별 이동 규칙을 화면에서 분리</h3>
                 <ul className={styles.bullets}>
                   <li>
-                    검사 상태별 목적지를 결정하는 함수를 분리하고,{' '}
-                    <strong>서버 리다이렉트와 클라이언트 fallback에서 같은 규칙 사용</strong>
+                    <strong>연동:</strong> 보험 중개 MVP의 상담 신청·외부 채팅 연동·상담사용 웹뷰
+                    개발, 해피톡 상담 연결 최초 구성
                   </li>
-                  <li>진입 쿼리는 유지하되, 목적지에 필요한 필수 파라미터를 우선 적용</li>
                   <li>
-                    기존 신청·반송 흐름을 재사용하고, 신규 다이나믹 랜딩에서 검사 상태에 맞게 연결
+                    <strong>관측:</strong> Amplitude 퍼널과 이상 지표 알림, Sentry 오류 알림과 각
+                    레이어별 모니터링 추가
+                  </li>
+                  <li>
+                    <strong>대응 기준:</strong> 응답 HTML에서 설정별 파라미터 전달 분기를 확인하고,
+                    장애 유형별 연락·수정 경로와 누락 상담 매핑 절차를 문서화
                   </li>
                 </ul>
               </div>
-
-              <div className={styles.bodySection}>
-                <h3>판단 규칙과 화면 흐름을 나누어 검증</h3>
-                <ul className={styles.bullets}>
-                  <li>
-                    유지할 기능은 <strong data-reveal="underline">테스트 코드부터 작성</strong>한 뒤
-                    리팩토링
-                  </li>
-                  <li>
-                    <strong>단위 테스트:</strong> 상태별 이동 목적지와 필수 토큰 누락 등 예외 조건
-                    검증
-                  </li>
-                  <li>
-                    <strong>MSW 시나리오:</strong> 검사권 보유 여부·검사 진행 상태·API 오류를 재현해
-                    화면과 연결 흐름 확인
-                  </li>
-                  <li>
-                    로컬·스테이징에서 MSW 시나리오 선택 시 서버 리다이렉트를 건너뛰고 클라이언트
-                    경로로 검증
-                  </li>
-                </ul>
+              <div className={styles.insuranceJourney} aria-label="상담 연동 구현과 운영 관측 범위">
+                <div>
+                  <span>연동 구현</span>
+                  <strong>상담 신청 · 외부 채팅</strong>
+                </div>
+                <span aria-hidden="true">→</span>
+                <div>
+                  <span>운영 관측</span>
+                  <strong>전환 퍼널 · 오류 알림</strong>
+                </div>
+                <span aria-hidden="true">→</span>
+                <div>
+                  <span>대응 절차 정리</span>
+                  <strong>연동 제약 · 장애 대응</strong>
+                </div>
               </div>
-
-              <div className={styles.bodySection}>
-                <h3>배포 이후까지 마무리</h3>
-                <ul className={styles.bullets}>
-                  <li>
-                    <strong>기존 링크 유지:</strong> 외부에 배포된 실험 진입 URL은 새 랜딩으로
-                    연결하고, 불필요한 실험 분기 파라미터만 제거
-                  </li>
-                  <li>
-                    <strong>Wrap-up:</strong> pre-condition·AGENTS.md에 프로젝트의 전제와 맥락 정리
-                  </li>
-                  <li>
-                    <strong>실험 배포:</strong> Sentry 실험 태그를 기준으로 관련 오류 모니터링
-                  </li>
-                </ul>
-              </div>
+              <CaseDrawer
+                id="insurance"
+                title="보험 제품 개발 · 상담 연동과 운영 관측"
+                description="응답 HTML 분석으로 확인한 연동 제약, 장애 유형별 대응 정책과 운영 관측"
+              >
+                <InsuranceDetails />
+              </CaseDrawer>
             </article>
 
             <article
@@ -262,90 +293,49 @@ export function PortfolioV2() {
               data-reveal="section"
             >
               <div className={styles.sectionLabel}>
-                <span>02 · AI 셀프 리뷰</span>
-                <span>2026 — 진행 중</span>
+                <span>03 · AI 셀프 리뷰</span>
+                <span>2026 —</span>
               </div>
               <h2 id="review-title">
                 어떤 컨벤션을 따라야 할까?
                 <br />그 질문에서 시작한 AI 셀프 리뷰
               </h2>
               <p className={styles.subtitle}>
-                개인 셀프 리뷰로 선제적 POC → 사내 리뷰 수요에 맞춘 확장 설계
+                개인 셀프 리뷰에서 변경 파일 기반의 리뷰 레이어로 확장
               </p>
               <dl className={styles.facts}>
                 <div>
                   <dt>담당</dt>
-                  <dd>문제 인식 · 셀프 리뷰 POC · 리뷰 확장 방향 구상</dd>
+                  <dd>문제 인식 · 셀프 리뷰 스킬 구축 · 라우팅형 리뷰 구조 확장</dd>
                 </div>
                 <div>
                   <dt>현재</dt>
-                  <dd>개인 스킬 구축 / 라우팅 기반 리뷰 구조는 설계 중</dd>
+                  <dd>라우팅형 프로토타입 구현 · 적용 범위와 운영 효과 검증 단계</dd>
                 </div>
               </dl>
               <div className={styles.bodySection}>
-                <h3>시작점 — 신·구 컨벤션의 혼란</h3>
-                <ul className={styles.bullets}>
-                  <li>복직 후 현재 적용할 규칙과 기존 코드를 구분하기 어려웠음</li>
-                  <li>규칙 확인과 PR 점검을 위한 개인 AI 셀프 리뷰 스킬 구축</li>
-                  <li>AGENTS.md에 맥락, 스킬에 반복 작업 정리 · 테크스펙을 코드 옆으로 이동</li>
-                </ul>
-              </div>
-              <div className={styles.bodySection}>
-                <h3>사내 AI 리뷰 방향을 앞서 시도한 POC</h3>
                 <ul className={styles.bullets}>
                   <li>
-                    조직 수요가 구체화되기 전, 맥락·규칙을 AI 리뷰에 연결하는{' '}
-                    <strong data-reveal="underline">개인 POC 진행</strong>
+                    <strong>출발점:</strong> 복직 후 현재 적용할 컨벤션을 구분하기 어려워 조직의
+                    맥락과 규칙을 연결하는 셀프 리뷰 스킬 구축
                   </li>
-                  <li>이후 1인 팀·휴가 중 리뷰어 부재·비개발자 기여 등 사내 검토 수요 발생</li>
-                  <li>필요한 관점만 선택하는 라우팅 구조로 확장 설계 중</li>
+                  <li>
+                    <strong>확장:</strong> 변경 파일·위험도에 따라 필요한 리뷰 레이어를 선택하는
+                    프로토타입 구현
+                  </li>
+                  <li>
+                    <strong>개선:</strong> 실행 비용을 나누고, AI 지적의 근거를 재검증한 뒤 읽기
+                    쉬운 리포트로 전달
+                  </li>
                 </ul>
               </div>
-              <figure className={styles.routingFigure}>
-                <figcaption>
-                  <span>현재 구상하고 있는 리뷰 흐름</span>
-                  <span>설계 중 · 구현 완료 아님</span>
-                </figcaption>
-                <div className={styles.routing} data-motion-sequence>
-                  <div>
-                    <span>입력</span>
-                    <strong>검토할 작업</strong>
-                  </div>
-                  <span className={styles.flowArrow} aria-hidden="true" />
-                  <div className={styles.routingRule}>
-                    <span>초반 라우팅</span>
-                    <strong>필요한 맥락·관점 선택</strong>
-                  </div>
-                  <span className={styles.flowArrow} aria-hidden="true" />
-                  <div>
-                    <span>검토</span>
-                    <strong>선택한 리뷰 레이어</strong>
-                  </div>
-                </div>
-                <p>
-                  모든 관점을 매번 적용하는 대신, 작업에 필요한 레이어만 선택하는 것이 의도입니다.
-                  입력·선택 기준과 리뷰 누락을 확인할 방법은 구체화가 필요합니다.
-                </p>
-              </figure>
-              <div className={styles.statusColumns}>
-                <div>
-                  <h3>지금 남아 있는 것</h3>
-                  <ul className={styles.bullets}>
-                    <li>개인 셀프 리뷰 POC · 규칙·문서</li>
-                    <li>조직 검토 수요로 확장하는 설계 방향</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3>앞으로 확인할 것</h3>
-                  <ul className={styles.bullets}>
-                    <li>라우팅 기준 · 레이어 구성 · 리뷰 누락</li>
-                    <li>적용 범위 · 사용 빈도 · 대기시간·결함 감소 효과</li>
-                  </ul>
-                </div>
-              </div>
-              <p className={styles.note}>
-                전사 정착이나 운영 효과를 완료 성과로 제시하는 사례는 아닙니다.
-              </p>
+              <CaseDrawer
+                id="review"
+                title="AI 셀프 리뷰 · pre-review"
+                description="변경 파일 라우팅, 병렬 실행과 근거 검증의 구현 구조"
+              >
+                <ReviewDetails />
+              </CaseDrawer>
             </article>
 
             <section
@@ -368,26 +358,6 @@ export function PortfolioV2() {
                   <li>
                     개별 화면을 넘어, 개발하는 기능이 사용자의 어떤 목적과 제품의 흐름에 연결되는지
                     이해하려고 합니다.
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.bodySection}>
-                <h3>직접 사용하며 운영 정책과 오류 개선에 기여</h3>
-                <p className={styles.caption}>
-                  보험청구 첫 고객 QA · 2026.05 ~ 06 · 직접 사용·문제 발견·제보
-                </p>
-                <ul className={styles.bullets}>
-                  <li>
-                    <strong>발견:</strong> 서비스를 직접 이용하며 새벽 알림톡 수신 문제와 결제완료
-                    알림톡의 진입 오류 제보
-                  </li>
-                  <li>
-                    <strong>반영:</strong> PM의 발송 시간 제한 결정 후 배포 · 진입 오류는 서버
-                    담당자가 수정
-                  </li>
-                  <li>
-                    <strong>내 기여:</strong> 사용자로서 겪은 문제와 맥락을 전달. 운영 정책 결정과
-                    수정 구현은 각 담당자의 기여
                   </li>
                 </ul>
               </div>
@@ -438,34 +408,38 @@ export function PortfolioV2() {
               <p className={styles.subtitle}>
                 웹 Chapter Lead · 공통 웹 업무의 운영 프레임워크 설계·정비
               </p>
+              <dl className={styles.facts}>
+                <div>
+                  <dt>현재</dt>
+                  <dd>
+                    운영 체계 적용·정착 단계 · 병목 감소 효과 측정 전 · Tech Lead 자동 알림 준비 중
+                  </dd>
+                </div>
+              </dl>
               <div className={styles.bodySection}>
                 <ul className={styles.bullets}>
                   <li>
-                    <strong>목적:</strong> 사람이 바뀌어도 같은 기준과 절차로 업무가 이어지는 운영
-                    프레임워크
+                    <strong>문제:</strong> 공통 업무의 판단과 실행이 특정 리드에게 집중되고 결정의
+                    맥락이 흩어짐
                   </li>
                   <li>
-                    <strong>출발점:</strong> 공통 업무의 질문·판단·실행이 특정인에게 집중
+                    <strong>선택:</strong> 영역의 맥락을 가진 담당자에게 판단을 분산하고, 실행자가
+                    바뀌어도 이어갈 절차 마련
                   </li>
                   <li>
-                    <strong>접근:</strong> Tech Lead들과 책임 범위 협의, 판단·실행 분리, 협의 경로와
-                    결정 기록 정비
+                    <strong>기여:</strong> Tech Lead들과 책임 범위를 협의하고 ADR·DRI 보드·Jira
+                    자동화·CODEOWNERS·AI 스킬을 운영에 연결
                   </li>
                 </ul>
               </div>
               <OperationsMap />
-              <dl className={styles.operatingNotes}>
-                <div>
-                  <dt>운영하며 바꾼 것</dt>
-                  <dd>담당 범위의 인식 차이와 시간 확보 문제를 확인하고 배분 기준 조정</dd>
-                </div>
-                <div>
-                  <dt>정착을 위해 보완 중</dt>
-                  <dd>
-                    담당자가 바뀌어도 운영을 이어가기 위한 점검 주기·조치·권한, 인수인계와 참여 정착
-                  </dd>
-                </div>
-              </dl>
+              <CaseDrawer
+                id="team"
+                title="공통 웹 업무 운영 프레임워크"
+                description="ADR, 책임 범위, 실행 단위와 인수인계를 연결한 운영 설계"
+              >
+                <TeamDetails />
+              </CaseDrawer>
             </section>
 
             <section
@@ -540,14 +514,25 @@ export function PortfolioV2() {
                   <div>
                     <span>2022.02 시작</span>
                     <div>
-                      <h4 className={styles.mentoringTitle}>K-Digital Training 데브코스</h4>
+                      <h4 className={`${styles.mentoringTitle} ${styles.companyName}`}>
+                        <img
+                          src="/images/portfolio/programmers.png"
+                          width={20}
+                          height={20}
+                          alt=""
+                        />
+                        <span>K-Digital Training 데브코스</span>
+                      </h4>
                       <p>프론트엔드 과정의 멘토로 참여했습니다.</p>
                     </div>
                   </div>
                   <div>
                     <span>2024.03 ~ 2025.02</span>
                     <div>
-                      <h4 className={styles.mentoringTitle}>항해 플러스</h4>
+                      <h4 className={`${styles.mentoringTitle} ${styles.companyName}`}>
+                        <img src="/images/portfolio/sparta.png" width={20} height={20} alt="" />
+                        <span>항해 플러스</span>
+                      </h4>
                       <p>프론트엔드 주니어 개발자 대상 멘토링을 진행했습니다.</p>
                     </div>
                   </div>

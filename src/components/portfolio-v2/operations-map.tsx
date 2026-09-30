@@ -29,32 +29,40 @@ export function OperationsMap() {
         </span>
         <div className={styles.after}>
           <div className={styles.heading}>
-            <span>TO-BE · 정착 중</span>
-            <h3>기준에 따라 나누는 업무</h3>
+            <span>TO-BE</span>
+            <h3>영역의 맥락을 가진 담당자가 판단</h3>
           </div>
-          <div className={styles.framework}>
-            <strong>공통 운영 프레임워크</strong>
-            <span>담당 체계 · 역할 경계 · 협의 경로</span>
+          <ul className={styles.distributed} aria-label="각 문제를 관련 영역으로 나누어 처리">
+            {['A', 'B', 'C'].map(area => (
+              <li key={area}>
+                <span className={styles.problem}>문제 {area}</span>
+                <span className={styles.arrow} aria-hidden="true">
+                  ↓
+                </span>
+                <div className={styles.domain}>
+                  <strong>영역 {area}</strong>
+                  <span>맥락을 가진 담당</span>
+                  <span className={styles.decision}>판단 · 실행</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.context}>
+            관련 코드·운영 이력을 아는 담당자가 대안을 검토하고, 영역별로 나누어 처리
+          </p>
+          <div className={styles.sharedContext}>
+            <strong>판단 근거는 함께 축적</strong>
+            <span>ADR·티켓에 남겨 다음 판단과 인수인계에 활용</span>
           </div>
-          <span className={styles.arrow} aria-hidden="true">
-            ↓
-          </span>
-          <div className={styles.branches}>
-            <div>
-              <span>실행할 업무</span>
-              <strong>영역 담당자</strong>
-            </div>
-            <div>
-              <span>판단이 필요한 업무</span>
-              <strong>협의 · 의사결정</strong>
-            </div>
-          </div>
-          <p className={styles.note}>안내·스펙·결정 기록으로 다음 담당자에게 맥락 연결</p>
+          <p className={styles.note}>
+            A·B·C는 분산 구조를 설명하는 예시입니다. 영역 간 영향이 있는 결정은 관련 담당자와
+            협의합니다.
+          </p>
         </div>
       </div>
       <p className={styles.status}>
-        목표는 담당자가 바뀌어도 이어지는 운영입니다. 역할 배분과 참여 정착은 계속 보완하고
-        있습니다.
+        한 사람에게 판단과 실행을 모으지 않고, 각 영역의 맥락을 더 나은 의사결정에 활용하려는
+        구조입니다.
       </p>
     </figure>
   );

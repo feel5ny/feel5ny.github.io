@@ -1,0 +1,70 @@
+.evidence.evidence {
+  margin: 22px 0;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--wash);
+  min-width: 0;
+}
+.evidence figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.evidence figcaption span {
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.evidence pre {
+  margin: 0;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+.evidence pre code {
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 0;
+  background: none;
+  white-space: pre;
+}
+.explanation {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.explanation strong {
+  color: var(--ink);
+}
+@media (max-width: 480px) {
+  .evidence.evidence {
+    padding: 14px;
+  }
+  .evidence pre {
+    padding: 12px;
+    font-size: 11px;
+  }
+}
+@media print {
+  .evidence {
+    break-inside: avoid;
+  }
+  .evidence pre {
+    white-space: pre-wrap;
+    overflow: visible;
+  }
+  .evidence pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}

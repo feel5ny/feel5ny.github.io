@@ -59,8 +59,7 @@
 .arrow {
   height: 36px;
 }
-.bottleneck,
-.framework {
+.bottleneck {
   display: grid;
   gap: 5px;
   padding: 15px 12px;
@@ -68,37 +67,68 @@
   border-radius: 9px;
   background: var(--paper);
 }
-.bottleneck strong,
-.framework strong {
+.bottleneck strong {
   font-size: 13px;
 }
-.framework strong {
-  color: var(--accent);
-}
-.bottleneck > span,
-.framework > span {
+.bottleneck > span {
   color: var(--muted);
   font-size: 11px;
 }
-.branches {
+.diagram .distributed {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.branches > div {
-  display: grid;
-  gap: 5px;
-  padding: 12px 8px;
+.distributed li {
+  min-width: 0;
+  margin: 0;
   text-align: center;
-  border-radius: 8px;
+}
+.problem {
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 11px;
+}
+.domain {
+  display: grid;
+  gap: 8px;
+  padding: 14px 6px;
+  border-radius: 9px;
   background: var(--paper);
 }
-.branches span {
-  font-size: 10px;
-  color: var(--muted);
+.domain strong,
+.sharedContext strong {
+  color: var(--accent);
+  font-size: 13px;
 }
-.branches strong {
+.domain > span,
+.sharedContext > span {
+  color: var(--muted);
+  font-size: 11px;
+  word-break: keep-all;
+}
+.domain .decision {
+  color: var(--ink);
+  font-weight: 600;
+}
+.diagram .context {
+  margin: 16px 0;
   font-size: 12px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.sharedContext {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 9px;
+  background: var(--paper);
 }
 .diagram .note,
 .diagram .status {

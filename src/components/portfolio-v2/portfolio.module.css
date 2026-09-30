@@ -696,6 +696,48 @@
   gap: 12px;
   margin-top: 28px !important;
 }
+.insuranceJourney {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr) 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+.insuranceJourney > div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 20px 12px;
+  border-radius: 10px;
+  background: var(--wash);
+}
+.insuranceJourney > div > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.insuranceJourney strong {
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.insuranceJourney > span {
+  color: var(--accent);
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .insuranceJourney {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .insuranceJourney > div {
+    grid-template-columns: 60px minmax(0, 1fr);
+    padding: 14px;
+    align-items: center;
+  }
+  .insuranceJourney > span {
+    transform: rotate(90deg);
+  }
+}
 .operatingNotes > div {
   display: grid;
   grid-template-columns: 148px 1fr;
@@ -771,6 +813,24 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.companySubtitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.companySubtitle > span {
+  min-width: 0;
+}
+.companySubtitle img {
+  display: block;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border-radius: 4px;
+  object-fit: contain;
+  align-self: center;
 }
 .companyName img {
   display: block;

@@ -1,0 +1,175 @@
+.figure {
+  container-type: inline-size;
+  margin: 28px 0 !important;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--wash);
+}
+.figure figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.figure figcaption > span {
+  color: var(--muted);
+  font-size: 11px;
+}
+.scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+.scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.figure .scrollHint {
+  display: none;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.graph {
+  display: grid;
+  min-width: 800px;
+  grid-template-columns:
+    minmax(0, 0.8fr) 18px minmax(0, 1.1fr) 26px minmax(0, 2fr) 26px minmax(0, 1.3fr)
+    26px minmax(0, 1.15fr);
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding-bottom: 20px;
+}
+.node {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  text-align: center;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.node strong {
+  font-size: 13px;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.node > span,
+.node small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.node .step {
+  font-size: 10px;
+}
+.arrow {
+  color: var(--muted);
+  font-size: 22px;
+  text-align: center;
+}
+.layers {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(88px, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+.layers .node {
+  align-content: center;
+}
+.node.inactive {
+  background: transparent;
+  border-style: dashed;
+}
+.inactive strong {
+  color: var(--muted);
+}
+.split,
+.merge {
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.25;
+}
+.split path,
+.merge path {
+  vector-effect: non-scaling-stroke;
+}
+.inactivePath {
+  stroke-dasharray: 4 4;
+}
+.validation {
+  position: relative;
+  min-width: 0;
+}
+.node.verified {
+  border: 2px solid var(--accent-cyan);
+  background: var(--selected);
+}
+.verified strong {
+  color: var(--accent-cyan);
+}
+.discarded {
+  position: absolute;
+  inset: calc(100% + 8px) 0 auto;
+  display: grid;
+  gap: 5px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.discarded > span:first-child {
+  font-size: 20px;
+}
+.accepted {
+  display: grid;
+  text-align: center;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.figure .caption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+@container (max-width: 799px) {
+  .figure .scrollHint {
+    display: block;
+  }
+}
+@media (max-width: 760px) {
+  .figure {
+    padding: 16px;
+  }
+}
+@media print {
+  .figure {
+    break-inside: auto;
+  }
+  .node,
+  .validation {
+    break-inside: avoid;
+  }
+  .scroll {
+    overflow: visible;
+  }
+  .graph {
+    min-width: 0;
+  }
+  .figure .scrollHint {
+    display: none;
+  }
+}

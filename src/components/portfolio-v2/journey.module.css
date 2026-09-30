@@ -83,18 +83,33 @@
   font-size: 11px;
   line-height: 1.7;
 }
-.monitoring {
-  margin: 8px 0 0;
-  padding-left: 16px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
+.detailLink {
+  margin-top: 10px;
 }
-.monitoring > li + li {
-  margin-top: 4px;
-}
-.monitoring > li::marker {
+.detailLink a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   color: var(--accent);
+  font-size: 12px;
+  text-decoration: none;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+.detailLink a:hover,
+.detailLink a:focus-visible {
+  background: var(--selected);
+  border-color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .detailLink a {
+    transition: none;
+  }
 }
 @media (max-width: 600px) {
   .map {
@@ -124,6 +139,9 @@
   }
 }
 @media print {
+  .detailLink {
+    display: none;
+  }
   .stages > li {
     break-inside: avoid;
   }
