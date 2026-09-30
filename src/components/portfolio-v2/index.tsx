@@ -100,8 +100,8 @@ export function PortfolioV2() {
               <div className={styles.introText}>
                 <ul className={styles.bullets}>
                   <li>제품 개발과 건강 웹팀 Tech Lead · 웹 Chapter Lead 병행</li>
-                  <li>컨벤션 혼란에서 시작한 AI 셀프 리뷰와 공통 업무 운영 프레임워크</li>
-                  <li>필요한 것을 구상하고, 직접 만들고, 실제로 굴려보는 일에 관심</li>
+                  <li>동료·다른 팀·다음 담당자가 이해하고 이어가기 쉽도록 맥락과 판단 근거 정리</li>
+                  <li>반복되는 일은 도구와 절차로 만들고, 회고하며 실제로 도움이 되는지 개선</li>
                 </ul>
               </div>
               <div className={styles.linkRow}>
@@ -440,7 +440,7 @@ export function PortfolioV2() {
               <h2 id="background-title">경력과 다른 작업들</h2>
               <div className={styles.career}>
                 <div>
-                  <span>2025 복직 ~ 현재</span>
+                  <span>2025.10 복직 ~ 현재</span>
                   <div>
                     <h3 className={styles.companyName}>
                       <img src="/images/portfolio/banksalad.png" width="20" height="20" alt="" />
@@ -504,7 +504,7 @@ export function PortfolioV2() {
                 <h3>멘토링</h3>
                 <div className={styles.career}>
                   <div>
-                    <span>2022.02 시작</span>
+                    <span>2022.02 ~ 2023년 중순경</span>
                     <div>
                       <h4 className={`${styles.mentoringTitle} ${styles.companyName}`}>
                         <img

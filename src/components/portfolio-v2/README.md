@@ -312,7 +312,8 @@ architecture. The author's 2026-09-14 follow-up clarifications add flow-first co
 before changes to preserved behavior, extensive state-based MSW scenarios, and post-release wrap-up.
 Sentry experiment-tag monitoring describes the author's experiment deployment practice, not an A/B
 outcome of the gene renewal. QA counts and the redundant result block are omitted. Mentoring entries
-come from the full career source; the Devcourse end date remains unconfirmed.
+come from the full career source. On 2026-09-30 the author recalled Devcourse ending around
+mid-2023; the UI preserves that approximation rather than inventing an exact month.
 
 AI status was corrected after inspecting the actual pre-review skill, route script, both profiles,
 layer-format guide, rule-background notes and report-format reference on 2026-09-30. The August 31
@@ -374,3 +375,16 @@ author confirms raising these issues contributed to a subsequent Airbridge trans
 limited to problem analysis, reporting and providing evaluation requirements, not contracting,
 migration ownership or measured retention/operational improvement. Historical provider constraints
 are not presented as current technical guidance. Screenshots and internal URLs are not published.
+
+Final content alignment (2026-09-30): the intro now foregrounds shared context, reusable tools and
+procedures, and reflection rather than naming the review project. AARRR copy is condensed alongside
+the diagrams; detailed implementation remains in the linked project drawers. Acquisition credits the
+author with guiding the creation of the SEO skill/checklist and sitemap operating guide, not
+personally authoring every implementation detail. The author confirmed return from parental leave in
+October 2025. Hanghae Plus dates remain from the existing record, not reconfirmed here.
+
+The Obsidian Rallit resume became accessible and was updated in this session. Earlier access-denied
+notes above describe previous edits, not current access. The Rallit summary now aligns FF renewal,
+family-history query/history fixes, monitoring, review-prototype status, SEO domain boundaries,
+shared operating artifacts and historical sharing work. Other resume versions and the Obsidian
+portfolio source were not automatically synchronized; no external Rallit profile was edited.
