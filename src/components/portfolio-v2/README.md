@@ -1,6 +1,54 @@
 # Portfolio 2026 v2
 
 - Route: `/private/portfolio-2026-v2/`
+- Retention scope refinement (2026-10-02): removed survey/satisfaction/reconsultation from the
+  overview, copy and diagrams at the author's request. Retention now leads with actual-medical
+  return journeys, followed by encoding fixes and link-operations analysis. Insurance project and
+  Revenue consultation-integration content are unchanged.
+- Retention follow-up (2026-10-02): author confirmed ownership of survey and actual-medical screen
+  development. Details now lead with post-consultation feedback/reconsultation and
+  insurance-state-dependent return journeys, with separate encoding fixes and link-operations
+  analysis. Current code verifies satisfaction-specific copy and insurance connection/ownership
+  branches. The newer `alimtalkSendToken` propagation commit is by another contributor and is not
+  attributed to the author. No retention uplift, campaign ownership or message-volume metrics are
+  claimed. Resume links use the exact Rallit resume URL supplied by the author, not the old profile.
+- Insurance conversion map (2026-10-02): replaces the project-scope list with three parallel product
+  cards converging on application → external chat. Monitoring sits separately below the user flow:
+  Sentry error alerts and daily Amplitude funnel checks. This summarizes separate projects toward a
+  shared product goal, not a shared-module architecture or measured conversion lift. Mobile stacks
+  the product group above the conversion path, without horizontal scrolling.
+- Overall review follow-up (2026-10-01): gene renewal now explains preservation of the original
+  screens, isolated `.exp` changes with shared packages, temporary duplication/verification cost,
+  and completed post-release cleanup. This is the implemented transition approach, not a claim of
+  independently inventing it, measured regression reduction, or an undocumented alternatives review.
+  Insurance work is mapped to MVP (2023), premium-saving module (2026), family-history (2026), and
+  cross-product operations. Activation consistently distinguishes reused/changed screens from new
+  bridge/landing development. Its test diagram and Revenue's repeated implementation flows are
+  condensed; project drawers retain technical detail. Intro lists start year and current team scope;
+  the previously supplied Rallit profile is linked without publishing an inferred email address.
+- AARRR purpose audit (2026-10-01): each purpose now has a separate figure rather than a lane inside
+  one uniform flow. Acquisition separates SSG delivery, indexing checks and the two submission
+  triggers for IndexNow. Activation uses a state-to-destination mapping separate from verification
+  coverage. Referral separates sender data conversion from recipient entry. Revenue separates
+  pre-release assertions, error alerts and daily funnel checks. Retention keeps its
+  implementation/analysis separation. Arrows denote actual sequence or routing; checks are
+  unconnected comparison cards. A mistaken expansion of this audit to other project diagrams was
+  reverted; previously requested Three-doc system and cache sequences remain. Checked all five AARRR
+  drawers in headless Chromium at 1280px and 390px, including dark-mode screenshots: no drawer-level
+  horizontal overflow or page errors. ArrowRight navigation from Activation to Retention and the
+  existing nine drawer-state tests pass.
+- The former AI-review section now covers context, repeatable procedures and review checks. Its
+  visible titles/navigation change, but `#review` and `?detail=review` remain compatible. Three-doc
+  system is shown here rather than in the gene wrap-up. The source is a draft guide, not evidence of
+  complete migration, automated synchronization or ongoing document refresh.
+- `tradeoff-proposal-map.tsx` summarizes the health web team's shared judgment criteria and proposal
+  → team review → PM decision → recording workflow. The debt rubric's six dimensions,
+  approximate/time-boxed assessment and revision based on repayment experience come from
+  `tech-debt-criteria.md`; convention-based options come from `current-pattern.md` and
+  `make-tradeoff-proposal/SKILL.md`. The PM agreement's original Google Doc was not inspected; only
+  the skill's embedded fallback summary is represented. No internal links, detailed scoring,
+  invented estimates, measured savings or organization-wide adoption are published. This is a
+  health-team collaboration practice, distinct from chapter-wide DRI operations.
 - Each AARRR detail opens with a brief frontend perspective, then the separately labeled actual
   contributions. These describe the author's lens on discoverability, first value, return paths,
   sharing and revenue-path reliability, not additional delivered features or measured funnel gains.
@@ -74,17 +122,22 @@
   accuracy; no custom anomaly algorithm, root-cause automation, delivery channel, time saved or
   incident reduction is claimed. Do not embed the internal screenshot or publish exact thresholds.
 - `family-history-details.tsx` / `.module.css`: a separate technical drawer
-  (`?detail=family-history`) linked from insurance and career entries. Sources checked directly:
-  merged PR #14555 (2026-07-28), follow-up #14567 (2026-07-29), its diff and both hooks at commit
-  `17653ed7c42b`. A four-step responsive sequence shows why direct cache writes were insufficient:
-  an earlier background refetch resolved later and overwrote the viewed flag. The follow-up applies
-  Infinity stale time only to that write-once flag and waits for cancellation before writing the
-  cache. This is not a server transaction or a promise of persistence after failed writes.
-  PR-recorded manual flow verification and static checks are labeled as historical evidence, not
-  tests rerun here. No new performance metrics or controlled slow-network tests are claimed. Commits
-  credit Claude; the visible assistance badge is omitted at the author's request. This does not
-  establish independent discovery of every cause; retain the attribution in source notes. The
-  form-value/history issue is intentionally not merged into this case.
+  (`?detail=family-history`) linked from insurance; the career-entry shortcut was removed on
+  request. Sources checked directly: merged PR #14555 (2026-07-28), follow-up #14567 (2026-07-29),
+  its diff and both hooks at commit `17653ed7c42b`. `cache-race-sequence.tsx` compares the remaining
+  race after the first fix with the follow-up, using screen/query hook, local cache and server
+  lifelines. Direct writes were insufficient: an earlier background refetch resolved later and
+  overwrote the viewed flag. The follow-up applies Infinity stale time only to that write-once flag
+  and waits for cancellation before writing the cache. This is not a server transaction or a promise
+  of persistence after failed writes. Server-side view-history writes are omitted from the
+  conceptual sequence; query cancellation prevents stale cache application, not necessarily physical
+  termination of server processing. Narrow diagrams scroll horizontally with keyboard focus; large
+  drawers show the comparison side by side. PR-recorded manual flow verification and static checks
+  are labeled as historical evidence, not tests rerun here. No new performance metrics or controlled
+  slow-network tests are claimed. Commits credit Claude; the visible assistance badge is omitted at
+  the author's request. This does not establish independent discovery of every cause; retain the
+  attribution in source notes. The form-value/history issue is intentionally not merged into this
+  case.
 - HappyTalk reverse-analysis content is now three compact bullets: response branch, parameter
   constraints and lesson learned. The large branch diagram and duplicate pseudocode have been
   removed at the author's request; the separate incident-response map remains.
@@ -145,9 +198,9 @@
   scroll lock and focus before the new one captures them; new stages start at the top. Non-AARRR
   project drawers do not show these controls. Stage order, boundaries and history-state handling are
   covered by the expanded helper tests.
-- Wrap-up copy follows the supplied `three-doc-system.md` guide (2026-04-26, draft): tech-spec
+- AI-context copy follows the supplied `three-doc-system.md` guide (2026-04-26, draft): tech-spec
   preserves decisions/plans, README explains the code to people, and AGENTS.md holds AI-relevant
-  constraints/rules. `WrapUpDocumentMap` visualizes this classification, not a completed migration
+  constraints/rules. `ThreeDocSystemMap` visualizes this classification, not a completed migration
   checklist. No team-wide adoption, recurring refresh process, measured AI coverage or completed
   three-document split for every gene file is claimed. The source guide and company repository are
   read-only; its business-rule example values, internal links and planned adoption tasks are not
@@ -206,12 +259,14 @@
   Files: `public/images/portfolio/{banksalad,goodoc}.png`. Decorative empty alt text avoids
   repeating the adjacent company name. Logos identify employers, not endorsement.
 - `scroll-effects.tsx`: whole-section reveals (not separate heading/body animations), selective
-  underline draws, and sequential diagram steps. Motion begins at 70% of viewport height (30% above
-  the bottom). Pixel root margins and zero threshold handle mobile and very tall sections. Scrolling
-  back up resets elements only as they leave below the full viewport, so they replay on re-entry
-  without flickering at the central trigger. Focused content is revealed for keyboard navigation.
-  Already-read content above stays visible. Text remains available without JS; reduced-motion and
-  printing reveal everything immediately.
+  marker-style text highlights, and sequential diagram steps. Highlights use a translucent green
+  band behind the glyphs, not a link-like underline, with separate light/dark opacity. Browser
+  checks cover reveal/reset, reduced motion and print. Motion begins at 70% of viewport height (30%
+  above the bottom). Pixel root margins and zero threshold handle mobile and very tall sections.
+  Scrolling back up resets elements only as they leave below the full viewport, so they replay on
+  re-entry without flickering at the central trigger. Focused content is revealed for keyboard
+  navigation. Already-read content above stays visible. Text remains available without JS;
+  reduced-motion and printing reveal everything immediately.
 - `pointer-glow.tsx` / `pointer-glow.module.css`: a subtle blue-violet radial light follows a fine
   pointer via one animation-frame update, with no React renders per move or continuous loop. Fixed
   viewport positioning keeps it aligned during scrolling. The decorative overlay cannot intercept
