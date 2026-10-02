@@ -2,6 +2,7 @@ import styles from './portfolio.module.css';
 import { ConsultationIncidentMap } from './happy-talk-diagrams';
 import { CaseDetailLink } from './case-drawer';
 import { FunnelHistoryDetails } from './funnel-history-details';
+import { InsuranceConversionMap } from './insurance-conversion-map';
 
 export function InsuranceDetails() {
   return (
@@ -19,15 +20,10 @@ export function InsuranceDetails() {
           </li>
         </ul>
       </div>
+      <InsuranceConversionMap />
       <div className={styles.bodySection}>
-        <h3>1. 신규 구축 — MVP와 신규 제품의 웹·웹뷰 개발</h3>
+        <h3>1. MVP 범위 — 구현 복잡도와 기대 효용을 PM과 비교</h3>
         <ul className={styles.bullets}>
-          <li>
-            <strong>보험 중개 MVP:</strong> 상담 신청, 외부 채팅 연동, 상담사용 웹뷰 개발
-          </li>
-          <li>
-            <strong>가족력 완벽대비:</strong> 입력·동의·결과 화면과 보험 상담 연결 개발
-          </li>
           <li>
             <strong>PM과 Spec-out 협의:</strong> 사용자의 추가 선택에 따른 결과 재조회 기능의 구현
             복잡도를 설명하고, 기대 효용과 비교해 MVP 범위에서 제외하기로 협의
@@ -35,7 +31,7 @@ export function InsuranceDetails() {
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>2. 단계·상태 관리 — 첫 이용부터 결과 재진입까지 연결</h3>
+        <h3>2. 가족력 완벽대비 — 첫 이용부터 결과 재진입까지 연결</h3>
         <p>
           정보를 추가로 연동해야 하는 사용자와 바로 결과를 볼 수 있는 사용자의 경로를 나누고, 흐름을
           마친 뒤의 뒤로가기와 입력 수정 후 재진입도 함께 확인했습니다.

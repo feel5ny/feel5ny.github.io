@@ -97,12 +97,15 @@ export function GeneVerificationMap() {
   );
 }
 
-export function WrapUpDocumentMap() {
+export function ThreeDocSystemMap() {
   return (
-    <figure className={styles.figure} aria-label="Wrap-up에서 구분하는 세 문서의 역할">
+    <figure
+      className={styles.figure}
+      aria-label="결정 배경, 동료의 이해, AI 작업 규칙을 나누는 문서 체계"
+    >
       <figcaption>
-        <strong>다음 작업을 위한 세 가지 문서</strong>
-        <span>Wrap-up 정리 기준</span>
+        <strong>Three-doc system · 정보의 목적에 따라 나누기</strong>
+        <span>문서별 독자와 역할</span>
       </figcaption>
       <dl className={styles.documentRoles}>
         <div>

@@ -2,19 +2,27 @@ import type { CaseId } from './case-drawer-state';
 import styles from './journey-detail-map.module.css';
 
 type Step = { title: string; detail: string };
-type MapContent = {
+type Purpose = {
+  label: string;
   title: string;
   note: string;
-  lanes: { label: string; steps: Step[] }[];
+  kind: 'flow' | 'checks' | 'routing' | 'indexing';
+  steps: Step[];
+};
+type MapContent = {
+  title: string;
+  lanes: Purpose[];
 };
 
 const maps: Partial<Record<CaseId, MapContent>> = {
   acquisition: {
     title: '검색에 발견되기까지, 서로 다른 세 작업',
-    note: '제품별 구현 경로 · 색인 요청과 실제 검색 노출은 별개',
     lanes: [
       {
         label: '굿닥 · 시술백과',
+        title: '검색용 웹 구축',
+        note: '콘텐츠를 검색 가능한 개별 페이지로 구성',
+        kind: 'flow',
         steps: [
           { title: '시술·상품 데이터', detail: '검색할 콘텐츠' },
           { title: 'Gatsby · SSG', detail: '빌드 시 페이지 생성' },
@@ -23,6 +31,9 @@ const maps: Partial<Record<CaseId, MapContent>> = {
       },
       {
         label: '뱅크샐러드 · 건강 웹',
+        title: '검색 노출 대상과 색인 상태 점검',
+        note: '검색엔진에 전달할 URL과 실제 색인 여부를 각각 확인',
+        kind: 'checks',
         steps: [
           { title: '노출 대상 확인', detail: 'URL·색인 상태 점검' },
           { title: 'sitemap 정비', detail: '검색엔진에 URL 전달' },
@@ -31,42 +42,42 @@ const maps: Partial<Record<CaseId, MapContent>> = {
       },
       {
         label: '뱅크샐러드 · 콘텐츠 웹',
+        title: '변경분 요청과 전체 재제출 경로 구성',
+        note: 'IndexNow 색인 요청 · 제출이 실제 색인을 보장하지는 않음',
+        kind: 'indexing',
         steps: [
-          { title: '발행·수정 / 전체 재제출', detail: '단건 웹훅·벌크 요청' },
-          { title: 'IndexNow 연동', detail: '색인 요청 자동화' },
-          { title: '검색엔진에 제출', detail: '변경된 콘텐츠 URL' },
+          { title: '발행·수정', detail: '웹훅으로 단건 요청' },
+          { title: '전체 재제출', detail: '벌크 요청 경로' },
+          { title: 'IndexNow 연동', detail: '콘텐츠 URL 색인 요청' },
+          { title: '검색엔진에 제출', detail: '대상 콘텐츠 URL' },
         ],
       },
     ],
   },
   activation: {
     title: '진입한 사용자를 지금 필요한 화면으로',
-    note: '유전자검사 2.0 · 상태에 맞는 화면 연결과 전환 확인',
     lanes: [
       {
-        label: '사용자 경로',
+        label: '화면 연결 · 유전자검사 2.0',
+        title: '진입 상태에 따라 필요한 화면으로 분기',
+        note: '대표 상태의 개념도 · 실제 이동은 검사권·진입 조건도 함께 고려',
+        kind: 'routing',
         steps: [
-          { title: '배너 등에서 진입', detail: '다른 도메인의 접점' },
-          { title: '상태별 랜딩', detail: '첫 이용 · 검사 중 · 결과 있음' },
-          { title: '필요한 화면', detail: '신청 · 진행 확인 · 결과 조회' },
-        ],
-      },
-      {
-        label: '개발에서 확인한 것',
-        steps: [
-          { title: '진입 조건 정리', detail: '검사권·진행 상태' },
-          { title: '단위 테스트', detail: '상태별 이동 규칙' },
-          { title: 'MSW 시나리오', detail: '화면 연결·다음 단계 전환' },
+          { title: '첫 이용', detail: '신청 화면' },
+          { title: '검사 진행 중', detail: '진행 확인 화면' },
+          { title: '결과 있음', detail: '결과 조회 화면' },
         ],
       },
     ],
   },
   referral: {
     title: '공유 모듈에서 수신자의 앱 진입까지',
-    note: '2022년 SNS 공유 구현·레슨런 기준',
     lanes: [
       {
         label: '보내는 쪽 · 공유 모듈',
+        title: '공유 데이터를 플랫폼별 형식으로 변환',
+        note: '2022년 SNS 공유 구현 · 데이터 변환과 UI 전달',
+        kind: 'flow',
         steps: [
           { title: '도메인별 데이터', detail: '제목·내용·이미지·링크' },
           { title: '플랫폼별 객체 생성', detail: '각 공유 인터페이스에 맞게 변환' },
@@ -75,6 +86,9 @@ const maps: Partial<Record<CaseId, MapContent>> = {
       },
       {
         label: '받는 쪽 · 바우처 선물',
+        title: '전달받은 정보를 앱 안의 행동으로 연결',
+        note: '링크 선택 이후 바우처 코드가 전달되는 경로',
+        kind: 'flow',
         steps: [
           { title: '카카오톡 콘텐츠', detail: '공유받은 링크 선택' },
           { title: '원링크 → 앱 진입', detail: '바우처 코드 전달' },
@@ -84,31 +98,17 @@ const maps: Partial<Record<CaseId, MapContent>> = {
     ],
   },
   revenue: {
-    title: '배포 전 검증, 운영 중 두 속도의 관측',
-    note: '오류 알림과 일일 지표 점검은 서로를 보완하는 독립 경로',
+    title: '상담 경로를 지키는 두 속도의 관측',
     lanes: [
       {
-        label: '배포 전 · 변경 확인',
+        label: '운영 중 · 상호 보완하는 관측',
+        title: '기술 오류와 전환 단절을 함께 확인',
+        note: '오류 알림으로 빠르게 대응하고, 일일 지표 점검으로 빈틈을 보완',
+        kind: 'checks',
         steps: [
-          { title: '완료 이벤트 변경', detail: '보험 연동 여부 추가' },
-          { title: '기존 훅 테스트 보강', detail: '전달되는 속성값 검증' },
-          { title: '변경 동작 확인', detail: '의도한 이벤트 호출 점검' },
-        ],
-      },
-      {
-        label: '운영 중 · 빠른 대응',
-        steps: [
-          { title: '중요 오류 발생', detail: 'CriticalError로 분류' },
-          { title: 'Sentry 알림', detail: 'fatal · 메시지별 그룹화' },
-          { title: '우선 확인·대응', detail: '오류의 원인과 영향 파악' },
-        ],
-      },
-      {
-        label: '운영 중 · 일일 관측',
-        steps: [
-          { title: '유입·클릭·완료 이벤트', detail: '매출·지표용 이벤트 활용' },
-          { title: '퍼널 대시보드·Agent', detail: '전환 급락·경로 단절 점검' },
-          { title: '온콜 확인·대응', detail: '추세·경로를 보고 원인 판단' },
+          { title: '오류 발생 시', detail: 'CriticalError · Sentry 중요 오류 알림' },
+          { title: '매일', detail: 'Amplitude 퍼널 · Agent로 전환 급락·단절 점검' },
+          { title: '대응 판단', detail: '온콜이 오류·지표의 원인과 영향을 확인' },
         ],
       },
     ],
@@ -117,30 +117,33 @@ const maps: Partial<Record<CaseId, MapContent>> = {
 
 function RetentionDetailMap() {
   return (
-    <div className={styles.retentionCases}>
-      <figure className={styles.figure} aria-labelledby="retention-map-title">
-        <figcaption id="retention-map-title">
-          <span>IMPLEMENTATION · 직접 구현·수정</span>
-          <strong>진입 오류 수정</strong>
+    <div className={styles.purposePanels}>
+      <figure className={styles.figure} aria-labelledby="retention-medical-title">
+        <figcaption id="retention-medical-title">
+          <span>정보 확인 · 실손보험 안내</span>
+          <strong>메시지를 보고 돌아온 사용자를 상태에 맞는 정보로 연결</strong>
+          <span>진입 단계에 따라 보험 연결 여부 확인 또는 연결·보유 상태 확인 흐름 진행</span>
         </figcaption>
         <div className={styles.lanes}>
-          <ol className={styles.steps}>
-            <li>
-              <strong>푸시·알림톡</strong>
-              <span>메시지 링크로 진입</span>
-            </li>
-            <li>
-              <strong>앱·웹뷰 라우팅</strong>
-              <span>iOS 딥링크 · Android openView</span>
-            </li>
-            <li>
-              <strong>관련 화면</strong>
-              <span>보험 제품의 진입 페이지</span>
-            </li>
-          </ol>
+          <FlowSteps
+            steps={[
+              { title: '알림톡으로 재방문', detail: '실손보험 관련 내용 확인' },
+              { title: '사용자 상태 확인', detail: '보험 연결·실손 보유 여부' },
+              { title: '관련 정보로 이동', detail: '내 보험·보험 상세·미보유 안내' },
+            ]}
+          />
         </div>
+      </figure>
+      <figure
+        className={`${styles.figure} ${styles.analysis}`}
+        aria-labelledby="retention-routing-title"
+      >
+        <figcaption id="retention-routing-title">
+          <span>경로 보호 · 직접 수정</span>
+          <strong>메시지에서 화면까지, OS별 진입 오류 대응</strong>
+        </figcaption>
         <p className={styles.fixNote}>
-          <strong>수정한 지점</strong>
+          <strong>iOS 딥링크 · Android openView</strong>
           <span>이중 인코딩 문제 대응 · openView 미인코딩 처리 · 실험 키 통일</span>
         </p>
       </figure>
@@ -196,31 +199,108 @@ function RetentionDetailMap() {
   );
 }
 
+function FlowSteps({ steps }: { steps: Step[] }) {
+  return (
+    <ol className={styles.steps}>
+      {steps.map(step => (
+        <li key={step.title}>
+          <strong>{step.title}</strong>
+          <span>{step.detail}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function PurposeDiagram({ purpose }: { purpose: Purpose }) {
+  if (purpose.kind === 'checks') {
+    return (
+      <dl className={styles.checks}>
+        {purpose.steps.map(step => (
+          <div key={step.title}>
+            <dt>{step.title}</dt>
+            <dd>{step.detail}</dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+  if (purpose.kind === 'routing') {
+    return (
+      <div className={styles.routing}>
+        <div className={styles.routingSource}>
+          <span>다른 도메인의 접점</span>
+          <strong>배너 등으로 진입</strong>
+          <span>상태별 랜딩에서 목적지 판단</span>
+        </div>
+        <span className={styles.connector} aria-hidden="true">
+          →
+        </span>
+        <dl className={styles.routes}>
+          {purpose.steps.map(step => (
+            <div key={step.title}>
+              <dt>{step.title}</dt>
+              <span aria-hidden="true">→</span>
+              <dd>{step.detail}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    );
+  }
+  if (purpose.kind === 'indexing') {
+    return (
+      <div className={styles.indexing}>
+        <ul className={styles.inputs} aria-label="색인 요청을 시작하는 두 경로">
+          {purpose.steps.slice(0, 2).map(step => (
+            <li className={styles.node} key={step.title}>
+              <strong>{step.title}</strong>
+              <span>{step.detail}</span>
+            </li>
+          ))}
+        </ul>
+        <span className={styles.connector} aria-hidden="true">
+          →
+        </span>
+        <div className={styles.node}>
+          <strong>{purpose.steps[2].title}</strong>
+          <span>{purpose.steps[2].detail}</span>
+        </div>
+        <span className={styles.connector} aria-hidden="true">
+          →
+        </span>
+        <div className={styles.node}>
+          <strong>{purpose.steps[3].title}</strong>
+          <span>{purpose.steps[3].detail}</span>
+        </div>
+      </div>
+    );
+  }
+  return <FlowSteps steps={purpose.steps} />;
+}
+
 export function JourneyDetailMap({ id }: { id: CaseId }) {
   if (id === 'retention') return <RetentionDetailMap />;
   const content = maps[id];
   if (!content) return null;
   return (
-    <figure className={styles.figure} aria-labelledby={`${id}-map-title`}>
-      <figcaption id={`${id}-map-title`}>
-        <strong>{content.title}</strong>
-        <span>{content.note}</span>
-      </figcaption>
-      <div className={styles.lanes}>
-        {content.lanes.map(lane => (
-          <div className={styles.lane} key={lane.label}>
-            <h4>{lane.label}</h4>
-            <ol className={styles.steps}>
-              {lane.steps.map(step => (
-                <li key={step.title}>
-                  <strong>{step.title}</strong>
-                  <span>{step.detail}</span>
-                </li>
-              ))}
-            </ol>
+    <div className={styles.purposePanels} role="group" aria-label={content.title}>
+      {content.lanes.map((purpose, index) => (
+        <figure
+          className={`${styles.figure} ${purpose.kind === 'checks' ? styles.analysis : ''}`}
+          key={purpose.label}
+          aria-labelledby={`${id}-purpose-${index}`}
+        >
+          <figcaption id={`${id}-purpose-${index}`}>
+            <span className={styles.purposeLabel}>{purpose.label}</span>
+            <strong>{purpose.title}</strong>
+            <span>{purpose.note}</span>
+          </figcaption>
+          <div className={styles.diagramBody}>
+            <PurposeDiagram purpose={purpose} />
           </div>
-        ))}
-      </div>
-    </figure>
+        </figure>
+      ))}
+    </div>
   );
 }

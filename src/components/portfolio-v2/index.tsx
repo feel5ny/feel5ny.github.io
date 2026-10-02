@@ -6,12 +6,16 @@ import { WorkAccordion } from './work-accordion';
 import { PointerGlow } from './pointer-glow';
 import { OperationsMap } from './operations-map';
 import { CaseDrawer, CaseDetailLink } from './case-drawer';
-import { GeneDetails, ReviewDetails, TeamDetails } from './case-details';
+import { GeneDetails, AiWorkflowDetails, TeamDetails } from './case-details';
 import { InsuranceDetails } from './insurance-details';
 import { FamilyHistoryDetails } from './family-history-details';
 import { GeneProjectMap } from './gene-project-map';
 
 const links = [
+  {
+    label: '이력서 · 랠릿',
+    href: 'https://www.rallit.com/resumes/1614283@feel5.nayoung/%EA%B9%80%EB%82%98%EC%98%81',
+  },
   { label: 'GitHub', href: 'https://github.com/feel5ny' },
   { label: '개발 기록', href: 'https://feel5ny.github.io' },
   { label: '발표 자료', href: 'https://speakerdeck.com/feel5ny' },
@@ -97,9 +101,23 @@ export function PortfolioV2() {
                 <br className={styles.desktopBreak} /> 사용자가 거치는 웹·웹뷰를 개발해 온
                 김나영입니다.
               </p>
+              <dl className={styles.careerSummary} aria-label="경력과 현재 리딩 범위">
+                <div>
+                  <dt>프론트엔드 개발</dt>
+                  <dd>2018년부터</dd>
+                </div>
+                <div>
+                  <dt>건강 웹팀 Tech Lead</dt>
+                  <dd>프론트엔드 4명</dd>
+                </div>
+                <div>
+                  <dt>웹 Chapter Lead</dt>
+                  <dd>웹 개발자 15명</dd>
+                </div>
+              </dl>
               <div className={styles.introText}>
                 <ul className={styles.bullets}>
-                  <li>제품 개발과 건강 웹팀 Tech Lead · 웹 Chapter Lead 병행</li>
+                  <li>제품을 직접 개발하며 팀·챕터 리딩 병행</li>
                   <li>동료·다른 팀·다음 담당자가 이해하고 이어가기 쉽도록 맥락과 판단 근거 정리</li>
                   <li>반복되는 일은 도구와 절차로 만들고, 회고하며 실제로 도움이 되는지 개선</li>
                 </ul>
@@ -126,7 +144,7 @@ export function PortfolioV2() {
                 </a>
                 <a href="#review">
                   <span className={styles.number}>03</span>
-                  <span>AI 리뷰의 선제적 시도</span>
+                  <span>AI 작업의 맥락과 기준</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -278,48 +296,49 @@ export function PortfolioV2() {
               data-reveal="section"
             >
               <div className={styles.sectionLabel}>
-                <span>03 · AI 셀프 리뷰</span>
+                <span>03 · AI 작업의 맥락과 기준</span>
                 <span>2026 —</span>
               </div>
               <h2 id="review-title">
-                어떤 컨벤션을 따라야 할까?
-                <br />그 질문에서 시작한 AI 셀프 리뷰
+                AI가 맥락을 이해하고,
+                <br />
+                팀의 기준으로 작업하도록
               </h2>
               <p className={styles.subtitle}>
-                개인 셀프 리뷰에서 변경 파일 기반의 리뷰 레이어로 확장
+                문서로 맥락을 정리하고, 스킬로 절차를 연결하고, 리뷰로 점검
               </p>
               <dl className={styles.facts}>
                 <div>
                   <dt>담당</dt>
-                  <dd>문제 인식 · 셀프 리뷰 스킬 구축 · 라우팅형 리뷰 구조 확장</dd>
+                  <dd>문서 역할·작성 기준 정리 · 반복 작업의 스킬화 · 리뷰 프로토타입 구축</dd>
                 </div>
                 <div>
                   <dt>현재</dt>
-                  <dd>라우팅형 프로토타입 구현 · 적용 범위와 운영 효과 검증 단계</dd>
+                  <dd>문서 분리 가이드 초안 · 라우팅형 리뷰 POC 구현 · 적용 범위와 효과 검증 중</dd>
                 </div>
               </dl>
               <div className={styles.bodySection}>
                 <ul className={styles.bullets}>
                   <li>
-                    <strong>출발점:</strong> 복직 후 현재 적용할 컨벤션을 구분하기 어려워 조직의
-                    맥락과 규칙을 연결하는 셀프 리뷰 스킬 구축
+                    <strong>출발점:</strong> 복직 후 신·구 컨벤션을 구분하기 어려웠던 경험에서,
+                    사람과 AI가 현재의 기준과 결정 배경을 찾기 쉬운 작업 환경에 관심
                   </li>
                   <li>
-                    <strong>확장:</strong> 변경 파일·위험도에 따라 필요한 리뷰 레이어를 선택하는
-                    프로토타입 구현
+                    <strong>맥락:</strong> tech-spec·README·AGENTS.md의 역할을 나누고, 결정 배경과
+                    코드 설명이 AI 작업 규칙에 뒤섞이지 않도록 작성 기준 정리
                   </li>
                   <li>
-                    <strong>개선:</strong> 실행 비용을 나누고, AI 지적의 근거를 재검증한 뒤 읽기
-                    쉬운 리포트로 전달
+                    <strong>절차·점검:</strong> 반복 작업을 스킬로 연결하고, 변경 파일·위험도에 따라
+                    필요한 리뷰를 실행하는 프로토타입 구현. AI 지적도 근거를 확인한 뒤 전달
                   </li>
                 </ul>
               </div>
               <CaseDrawer
                 id="review"
-                title="AI 셀프 리뷰 · pre-review"
-                description="변경 파일 라우팅, 병렬 실행과 근거 검증의 구현 구조"
+                title="AI 작업 환경 · 맥락, 절차, 점검"
+                description="Three-doc system의 문서 분리 기준부터 스킬과 pre-review 구현까지"
               >
-                <ReviewDetails />
+                <AiWorkflowDetails />
               </CaseDrawer>
             </article>
 
@@ -415,13 +434,17 @@ export function PortfolioV2() {
                     <strong>기여:</strong> Tech Lead들과 책임 범위를 협의하고 ADR·DRI 보드·Jira
                     자동화·CODEOWNERS·AI 스킬을 운영에 연결
                   </li>
+                  <li>
+                    <strong>건강 웹팀의 협업 기준:</strong> 기술적 우려를 공통 기준으로 검토하고,
+                    원안·대안의 비용과 리스크를 비교해 PM에게 제안하는 절차 마련
+                  </li>
                 </ul>
               </div>
               <OperationsMap />
               <CaseDrawer
                 id="team"
-                title="공통 웹 업무 운영 프레임워크"
-                description="ADR, 책임 범위, 실행 단위와 인수인계를 연결한 운영 설계"
+                title="팀 운영과 협업 프레임워크"
+                description="챕터의 공통 업무 운영과 건강 웹팀의 PM 협의 기준"
               >
                 <TeamDetails />
               </CaseDrawer>
@@ -488,13 +511,6 @@ export function PortfolioV2() {
                       <div>
                         <h3>{title}</h3>
                         <p>{description}</p>
-                        {title === '가족력 완벽대비' && (
-                          <div className={styles.linkRow}>
-                            <CaseDetailLink id="family-history">
-                              캐시 경쟁 상태 해결 보기
-                            </CaseDetailLink>
-                          </div>
-                        )}
                       </div>
                     </div>
                   ))}

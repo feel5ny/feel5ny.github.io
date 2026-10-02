@@ -1,0 +1,155 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 20px 0;
+  padding: 22px;
+  border-radius: 14px;
+  background: var(--wash);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  margin-bottom: 16px;
+}
+.heading strong {
+  font-size: 15px;
+}
+.heading > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.documents {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.documents > div {
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--paper);
+  min-width: 0;
+}
+.documents dt {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.documents dd {
+  margin: 0;
+  color: var(--muted);
+}
+.assessment {
+  margin-top: 16px;
+}
+.figure .criteria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 8px 0;
+  list-style: none;
+}
+.criteria li {
+  margin: 0;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--paper);
+  font-size: 12px;
+}
+.figure .assessment p,
+.figure .flow p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.bridge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0;
+}
+.bridge > span {
+  font-size: 24px;
+  color: var(--accent-cyan);
+}
+.bridge > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  min-width: 0;
+}
+.bridge code {
+  padding: 0;
+  background: none;
+  color: var(--accent-cyan);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.bridge div > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.figure .flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flow > li {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--paper);
+}
+.flow strong,
+.summary,
+.number {
+  display: block;
+}
+.number {
+  color: var(--accent-cyan);
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.summary {
+  margin-top: 8px;
+  font-size: 12px;
+}
+.arrow {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 18px;
+}
+@container (max-width: 620px) {
+  .documents,
+  .figure .flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .flow > li {
+    padding-left: 46px;
+  }
+  .number {
+    position: absolute;
+    left: 14px;
+    top: 17px;
+  }
+  .arrow {
+    top: auto;
+    bottom: -23px;
+    right: calc(50% - 9px);
+    transform: rotate(90deg);
+  }
+}

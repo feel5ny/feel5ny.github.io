@@ -1,0 +1,175 @@
+.figure.figure {
+  container-type: inline-size;
+  margin: 24px 0;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--wash);
+  color: var(--ink);
+}
+.figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  font-size: 15px;
+}
+.figure figcaption > span,
+.figure .hint,
+.figure .note {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.figure .hint {
+  display: none;
+  margin: 8px 0 0;
+}
+.figure .note {
+  margin: 14px 0 0;
+}
+.comparison {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+.panel {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--paper);
+}
+.panel h4 {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-radius: 6px;
+}
+.scroll:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+.canvas {
+  min-width: 400px;
+}
+.participants {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+.participants span {
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--wash);
+}
+.timeline {
+  position: relative;
+}
+.lifelines {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  pointer-events: none;
+}
+.lifelines > span {
+  border-left: 1px dashed var(--line);
+  margin-left: 50%;
+}
+.figure .messages {
+  position: relative;
+  margin: 0;
+  padding: 4px 0 10px;
+  list-style: none;
+}
+.messages > li {
+  position: relative;
+  min-height: 82px;
+  padding: 0;
+  margin: 0;
+}
+.order {
+  position: absolute;
+  top: 25px;
+  left: 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.message {
+  position: absolute;
+  top: 8px;
+  color: var(--ink);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0 4px 5px;
+  background: var(--paper);
+}
+.label > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.connector {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: currentColor;
+}
+.connector::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.reverse .connector::after {
+  right: auto;
+  left: 0;
+  transform: rotate(-135deg);
+}
+.problem {
+  color: var(--accent-pink);
+}
+.figure .outcome {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--wash);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.outcome code {
+  font-size: inherit;
+  overflow-wrap: anywhere;
+}
+@container (min-width: 900px) {
+  .comparison {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (max-width: 450px) {
+  .figure .hint {
+    display: block;
+  }
+}
+@media print {
+  .panel {
+    break-inside: avoid;
+  }
+}

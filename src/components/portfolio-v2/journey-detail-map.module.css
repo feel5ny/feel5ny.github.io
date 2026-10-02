@@ -20,11 +20,13 @@
   gap: 14px;
   margin-top: 16px;
 }
-.figure .lane h4 {
-  margin: 0 0 7px;
+.figure figcaption .purposeLabel {
   font-size: 12px;
   line-height: 1.5;
   color: var(--accent);
+}
+.diagramBody {
+  margin-top: 18px;
 }
 .figure .steps {
   display: grid;
@@ -64,12 +66,98 @@
   color: var(--muted);
   font-size: 16px;
 }
-.retentionCases {
+.purposePanels {
   display: grid;
   gap: 24px;
   margin: 24px 0;
 }
-.retentionCases .figure {
+.purposePanels .figure {
+  margin: 0;
+}
+.checks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.checks > div {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--wash);
+}
+.checks dt {
+  font-size: 13px;
+  font-weight: 600;
+}
+.checks dd {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.routing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1.6fr);
+  align-items: center;
+}
+.routingSource,
+.node {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--paper);
+  font-size: 13px;
+  line-height: 1.55;
+  min-width: 0;
+}
+.routingSource > span,
+.node > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.routes {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+.routes > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1.3fr);
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  background: var(--paper);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.routes dt {
+  font-weight: 600;
+}
+.routes dd {
+  margin: 0;
+}
+.routes span,
+.connector {
+  color: var(--muted);
+  text-align: center;
+}
+.connector {
+  font-size: 20px;
+}
+.indexing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr);
+  align-items: center;
+}
+.figure .inputs {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.inputs li {
   margin: 0;
 }
 .figure .fixNote {
@@ -126,6 +214,21 @@
   margin: 5px 0 0;
 }
 @container (max-width: 520px) {
+  .checks,
+  .routing,
+  .indexing {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .routing > .connector,
+  .indexing > .connector {
+    display: block;
+    transform: rotate(90deg);
+    justify-self: center;
+    line-height: 28px;
+  }
+  .figure .inputs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .figure .constraints,
   .contribution {
     grid-template-columns: 1fr;
@@ -149,7 +252,7 @@
   }
 }
 @media print {
-  .lane {
+  .figure {
     break-inside: avoid;
   }
 }

@@ -18,15 +18,15 @@ const experience = [
     detail: 'activation',
     linkLabel: 'Activation 작업 보기',
     title: '첫 이용 흐름 구현',
-    work: '신청·동의·결과 확인으로 이어지는 웹 화면과 전환 흐름 개발 · 사용자 상태에 맞는 진입 화면 연결',
+    work: '유전자검사 2.0의 기존·변경 화면에 신규 브릿지·상태별 랜딩을 연결해 필요한 단계로 안내',
   },
   {
     letter: 'R',
     name: 'Retention',
     detail: 'retention',
     linkLabel: 'Retention 작업 보기',
-    title: '재진입 경로·딥링크 운영 개선',
-    work: '푸시·알림톡 진입 개발과 인코딩 오류 대응 · 다이나믹링크 운영 제약을 분석·제보해 에어브릿지 전환 논의에 기여',
+    title: '알림톡에서 기대한 보험 정보로 연결',
+    work: '실손보험 상태별 진입 화면 개발 · 인코딩 오류 대응 · 딥링크 운영 제약 개선 제안',
   },
   {
     letter: 'R',

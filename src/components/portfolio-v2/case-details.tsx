@@ -1,10 +1,11 @@
 import styles from './portfolio.module.css';
 import { ReviewFlow } from './review-flow';
 import { CodeEvidence } from './code-evidence';
-import { WrapUpDocumentMap } from './detail-diagrams';
 import { OperationsBranches } from './operations-branches';
 import { OperationsDomains } from './operations-domains';
 import { GeneTransitionMap } from './gene-transition-map';
+import { TradeoffProposalMap } from './tradeoff-proposal-map';
+import { ThreeDocSystemMap } from './detail-diagrams';
 
 export function GeneDetails() {
   return (
@@ -32,7 +33,7 @@ export function GeneDetails() {
         <ul className={styles.bullets}>
           <li>
             여러 화면을 나누어 개발하므로, 검사 상태·보유 검사권·진입 조건에 따른{' '}
-            <strong data-reveal="underline">전체 흐름을 먼저 정리</strong>
+            <strong data-reveal="highlight">전체 흐름을 먼저 정리</strong>
           </li>
           <li>
             재사용할 구간과 새로 만들 구간을 구분하고, 연결 조건이 미확정인 지점을 먼저 협의해 구현
@@ -50,12 +51,16 @@ export function GeneDetails() {
         <h3>2. 개발 — 기존 기능은 활용하고, 새 경험에 필요한 화면을 구현</h3>
         <ul className={styles.bullets}>
           <li>
-            <strong>재사용·변경:</strong> 신청·검사 진행·반송·구매 기능을 전부 다시 만들지 않고
-            재사용. 선착순 시도·전체 결과 화면은 새 요구사항에 맞게 변경
+            <strong>변경 범위 분리:</strong> 운영 중인 1.0 화면은 보존하고, 재사용할 화면과 내부
+            의존성을 별도 실험 경로(.exp)에 복사해 2.0 요구사항에 맞게 변경. 공통 패키지는 공유
           </li>
           <li>
-            <strong>신규 구현:</strong> 전체 스캐폴딩과 브릿지·다이나믹 랜딩을 개발하고 이미지
-            리소스 POC 진행. 리포트 화면 개발은 위임
+            <strong>판단의 기준:</strong> 기존 사용자 경로를 남긴 채 새 흐름을 구현·검증하고,
+            Feature Flag로 공개 여부를 나눌 수 있는 구성을 사용
+          </li>
+          <li>
+            <strong>감수한 비용:</strong> 전환기에는 두 버전의 코드와 검증 범위를 함께 관리해야 함.
+            중복을 영구 구조로 남기지 않도록, 전체 공개 이후 기존 코드·분기를 정리하는 단계까지 연결
           </li>
           <li>
             <strong>랜딩의 역할:</strong> 다른 도메인의 배너 등에서 들어온 사용자를 검사 상태에 맞는
@@ -84,20 +89,23 @@ export function GeneDetails() {
       </div>
 
       <div className={styles.bodySection}>
-        <h3>4. 마무리 — 코드 정리와 함께 다음 작업의 맥락 보존</h3>
+        <h3>4. 전환 이후 — 기존 코드 정리와 인수인계</h3>
         <ul className={styles.bullets}>
           <li>
-            <strong>Wrap-up:</strong> 다음 작업에 필요한 전제와 맥락을 정리하고, 의사결정
-            기록·동료의 이해·AI 작업 규칙을 구분하는 문서 기준 활용
+            <strong>완료한 전환:</strong> 2.0 전체 공개 이후 기존 화면·실험 분기·실험키를 정리. 삭제
+            과정에서 공통 코드와 외부 URL에 미치는 영향 확인
+          </li>
+          <li>
+            <strong>맥락 정리:</strong> 다음 변경에서 판단 근거를 다시 찾지 않도록, 결정 배경과
+            유지해야 할 제약을 문서로 남김
           </li>
         </ul>
-        <WrapUpDocumentMap />
       </div>
     </>
   );
 }
 
-export function ReviewDetails() {
+export function AiWorkflowDetails() {
   return (
     <>
       <div className={styles.bodySection}>
@@ -105,21 +113,45 @@ export function ReviewDetails() {
         <ul className={styles.bullets}>
           <li>복직 후 현재 적용할 규칙과 기존 코드를 구분하기 어려웠음</li>
           <li>
-            코드만으로 현재의 기준을 판단하기 어려워, 리뷰 시 조직의 규칙과 결정 맥락을 함께
-            확인하는 방식 선택
+            코드만으로 현재의 기준을 판단하기 어려워, 결정 배경과 작업 규칙을 찾을 수 있는 문서부터
+            반복 작업의 절차와 리뷰까지 연결
           </li>
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>구축. 맥락과 반복 점검 절차를 분리</h3>
+        <h3>1. 맥락 — 문서가 답하는 질문을 구분</h3>
+        <ul className={styles.bullets}>
+          <li>
+            <strong>문제:</strong> AGENTS.md에 결정 배경·코드 설명·작업 규칙이 섞이면, AI가 실제로
+            지켜야 할 제약을 찾기 어려워짐
+          </li>
+          <li>
+            <strong>정리 기준:</strong> 코드만으로 알기 어려운 도메인 규칙·외부 시스템 제약·금지
+            사항을 AGENTS.md에 남기고, 배경과 설명은 목적에 맞는 문서로 분리
+          </li>
+        </ul>
+        <ThreeDocSystemMap />
+        <ul className={styles.bullets}>
+          <li>
+            <strong>중복 방지:</strong> 파일 트리·API 목록처럼 코드에서 확인할 수 있는 정보를
+            복제하지 않고, 결정 배경은 tech-spec 링크로 연결하도록 기준 마련
+          </li>
+          <li>
+            <strong>전환기 안내:</strong> 신·구 코드가 공존할 때의 임시 제약은 영구 규칙과 분리하고,
+            적용 범위와 만료 시점을 표시하는 형식 정의
+          </li>
+        </ul>
+      </div>
+      <div className={styles.bodySection}>
+        <h3>2. 절차 — 문서의 기준을 반복 가능한 작업으로 연결</h3>
         <ul className={styles.bullets}>
           <li>
             사내 AI 리뷰 수요가 구체화되기 전, 맥락·규칙을 AI 리뷰에 연결하는{' '}
-            <strong data-reveal="underline">개인 POC 진행</strong>
+            <strong data-reveal="highlight">개인 POC 진행</strong>
           </li>
           <li>
-            <strong>AGENTS.md:</strong> 프로젝트의 맥락과 컨벤션을 정리하고, 테크스펙을 코드 옆에
-            배치
+            <strong>역할 분리:</strong> 문서는 지켜야 할 기준과 제약을 담고, 스킬은 그 기준을
+            확인하며 작업하는 순서를 안내
           </li>
           <li>
             <strong>셀프 리뷰 스킬:</strong> 규칙 확인과 PR 점검 절차를 반복해서 호출할 수 있는
@@ -128,7 +160,7 @@ export function ReviewDetails() {
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>설계 1. 변경 파일과 위험도에 따라 리뷰 범위 결정</h3>
+        <h3>3. 점검 — 변경 파일과 위험도에 따라 리뷰 범위 결정</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>달라진 요구:</strong> 1인 팀·휴가 중 리뷰어 부재·비개발자 기여로 조직 차원의
@@ -159,7 +191,7 @@ fi`}
         읽을 규칙이 없으면 해당 레이어를 제외하고, 실행·제외 이유를 출력합니다.
       </CodeEvidence>
       <div className={styles.bodySection}>
-        <h3>설계 2. 검토 강도와 실행 비용 조정</h3>
+        <h3>리뷰의 검토 강도와 실행 비용 조정</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>실행 시점:</strong> 일반 PR 생성에는 빠른 정적 점검만 두고, 전체 AI 리뷰는 명시
@@ -272,6 +304,19 @@ export function TeamDetails() {
           </dd>
         </div>
       </dl>
+      <div className={styles.bodySection}>
+        <h3>기술적 우려를, 함께 판단할 수 있는 제안으로</h3>
+        <p className={styles.caption}>건강 웹팀 · Tech Lead로 마련한 PM 협의 절차</p>
+        <p>
+          기술적 부담을 개인의 감각으로만 설명하지 않도록 공통 평가 기준을 마련하고, 팀이 검토한
+          대안을 PM이 판단할 수 있는 형태로 전달하도록 구성했습니다.
+        </p>
+        <TradeoffProposalMap />
+        <p className={styles.note}>
+          <strong>기준 보정:</strong> 실제 상환 사례를 반영해 비용 구간을 조정하고, 개별 작업으로
+          해결하기 어려운 부채는 별도 상환 프로젝트로 다루는 XL 등급을 추가했습니다.
+        </p>
+      </div>
     </>
   );
 }

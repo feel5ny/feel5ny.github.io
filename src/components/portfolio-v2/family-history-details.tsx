@@ -1,12 +1,5 @@
 import styles from './portfolio.module.css';
-import diagram from './family-history-details.module.css';
-
-const sequence = [
-  ['조회 시작', '결과 화면 마운트 시, 아직 조회 이력이 없는 서버 값을 요청'],
-  ['캐시 갱신', '결과를 봤으므로 로컬 캐시에 ‘조회함’을 반영'],
-  ['늦은 응답', '먼저 출발한 조회가 뒤늦게 도착해 ‘미조회’로 덮어씀'],
-  ['이전 단계 재노출', '입력 수정 화면이 이전 값을 읽어 첫 이용 흐름으로 판단'],
-];
+import { CacheRaceSequence } from './cache-race-sequence';
 
 export function FamilyHistoryDetails() {
   return (
@@ -29,30 +22,7 @@ export function FamilyHistoryDetails() {
           <li>그러나 이미 진행 중이던 background refetch가 새 캐시를 덮어쓰는 문제가 남음</li>
         </ul>
       </div>
-      <figure
-        className={diagram.sequence}
-        aria-label="캐시 갱신 뒤 늦은 조회 응답이 상태를 되돌리는 순서"
-      >
-        <figcaption>
-          <strong>시작 순서와 완료 순서가 다른 요청</strong>
-          <span>첫 수정 후에도 남았던 경쟁 상태</span>
-        </figcaption>
-        <ol>
-          {sequence.map(([title, description], index) => (
-            <li key={title}>
-              <div className={diagram.step}>
-                <span>0{index + 1}</span>
-                {index === 2 && <span className={diagram.badge}>문제 발생</span>}
-              </div>
-              <strong>{title}</strong>
-              <p>{description}</p>
-            </li>
-          ))}
-        </ol>
-        <p className={diagram.resolution}>
-          <strong>후속 수정</strong> 자동 재조회 억제 + 진행 중인 조회 취소 → ‘조회함’ 캐시 반영
-        </p>
-      </figure>
+      <CacheRaceSequence />
       <div className={styles.bodySection}>
         <h3>선택. 데이터 성격과 요청 순서를 함께 제어</h3>
         <ul className={styles.bullets}>
