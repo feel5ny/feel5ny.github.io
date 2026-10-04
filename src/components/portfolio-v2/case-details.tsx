@@ -143,24 +143,25 @@ export function AiWorkflowDetails() {
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>2. 절차 — 문서의 기준을 반복 가능한 작업으로 연결</h3>
+        <h3>2. POC — 전사 하네스에 앞서 웹 개발 업무에서 확인</h3>
         <ul className={styles.bullets}>
           <li>
-            사내 AI 리뷰 수요가 구체화되기 전, 맥락·규칙을 AI 리뷰에 연결하는{' '}
-            <strong data-reveal="highlight">개인 POC 진행</strong>
+            <strong>배경:</strong> 전사 AI 하네스 구축을 위해, 웹 개발 업무에서 잘 동작하는 리뷰
+            규칙을 먼저 적용해 볼 필요
           </li>
           <li>
-            <strong>역할 분리:</strong> 문서는 지켜야 할 기준과 제약을 담고, 스킬은 그 기준을
-            확인하며 작업하는 순서를 안내
+            <strong>확인할 것:</strong> 실제 PR에서 규칙이 적절한지, 비용 한도를 얼마나 사용하는지,
+            지적 내용이 신뢰할 만한지 확인하고 다듬기 위한{' '}
+            <strong data-reveal="highlight">리뷰 POC 구현</strong>
           </li>
           <li>
-            <strong>셀프 리뷰 스킬:</strong> 규칙 확인과 PR 점검 절차를 반복해서 호출할 수 있는
-            형태로 구성
+            <strong>구현:</strong> 웹 개발 업무의 규칙을 적용하는 PR 리뷰 스킬을 만들고, 비용과 검토
+            강도를 조절할 수 있도록 조건별 실행을 연결
           </li>
         </ul>
       </div>
       <div className={styles.bodySection}>
-        <h3>3. 점검 — 변경 파일과 위험도에 따라 리뷰 범위 결정</h3>
+        <h3>3. 실행 방식 — 변경 파일과 위험도에 따라 리뷰 범위 결정</h3>
         <ul className={styles.bullets}>
           <li>
             <strong>달라진 요구:</strong> 1인 팀·휴가 중 리뷰어 부재·비개발자 기여로 조직 차원의
