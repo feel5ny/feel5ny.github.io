@@ -215,7 +215,7 @@ export function CaseDrawer({
             close();
         }}
       >
-        <div className={styles.toolbar}>
+        <div className={styles.toolbar} data-journey={Boolean(stageNavigation)}>
           <div className={styles.toolbarMain}>
             <span className={styles.toolbarLabel}>{stageNavigation ? 'AARRR' : '개발 상세'}</span>
             {stageNavigation && (

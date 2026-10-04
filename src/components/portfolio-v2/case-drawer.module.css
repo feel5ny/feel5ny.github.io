@@ -188,6 +188,11 @@
     min-height: 44px;
   }
 }
+@media (max-width: 360px) {
+  .toolbar[data-journey='true'] .toolbarLabel {
+    display: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .dialog[open] {
     animation: none;

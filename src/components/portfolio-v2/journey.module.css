@@ -24,9 +24,10 @@
 }
 .stages > li {
   display: grid;
-  grid-template-columns: 145px minmax(0, 1fr);
-  gap: 18px;
-  padding: 16px 0;
+  grid-template-columns: 145px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
 }
 .stage {
   display: flex;
@@ -39,7 +40,7 @@
   position: absolute;
   left: 14px;
   top: 36px;
-  bottom: -26px;
+  bottom: -20px;
   width: 1px;
   background: var(--line);
 }
@@ -80,7 +81,7 @@
   line-height: 1.7;
 }
 .detailLink {
-  margin-top: 10px;
+  align-self: center;
 }
 .detailLink a {
   display: inline-flex;
@@ -93,6 +94,7 @@
   color: var(--accent);
   font-size: 12px;
   text-decoration: none;
+  white-space: nowrap;
   transition:
     background 160ms ease,
     border-color 160ms ease;
@@ -101,6 +103,16 @@
 .detailLink a:focus-visible {
   background: var(--selected);
   border-color: var(--accent);
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 @media (prefers-reduced-motion: reduce) {
   .detailLink a {
@@ -112,9 +124,20 @@
     padding: 16px;
   }
   .stages > li {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
-    padding: 14px 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 8px;
+    padding: 10px 0;
+  }
+  .experience {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .detailLink {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .detailLink a {
+    padding-inline: 10px;
   }
   .stage {
     gap: 6px;

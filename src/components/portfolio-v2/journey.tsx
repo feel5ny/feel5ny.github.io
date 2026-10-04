@@ -8,47 +8,41 @@ const experience = [
     letter: 'A',
     name: 'Acquisition',
     detail: 'acquisition',
-    linkLabel: 'Acquisition 작업 보기',
     title: '검색용 웹 구축·색인 정비',
-    work: '굿닥 시술백과 Gatsby 정적 페이지 개발 · 건강 웹 sitemap 정비 · 콘텐츠 웹 IndexNow 색인 요청 연동',
+    work: 'Gatsby 정적 웹 구축 · sitemap 정비 · IndexNow 연동',
   },
   {
     letter: 'A',
     name: 'Activation',
     detail: 'activation',
-    linkLabel: 'Activation 작업 보기',
     title: '첫 이용 흐름 구현',
-    work: '유전자검사 2.0의 기존·변경 화면에 신규 브릿지·상태별 랜딩을 연결해 필요한 단계로 안내',
+    work: '브릿지·상태별 랜딩으로 기존·신규 화면 연결',
   },
   {
     letter: 'R',
     name: 'Retention',
     detail: 'retention',
-    linkLabel: 'Retention 작업 보기',
     title: '알림톡에서 기대한 보험 정보로 연결',
-    work: '실손보험 상태별 진입 화면 개발 · 인코딩 오류 대응 · 딥링크 운영 제약 개선 제안',
+    work: '실손보험 진입 화면 · OS별 인코딩 대응 · 딥링크 개선 제안',
   },
   {
     letter: 'R',
     name: 'Referral',
     detail: 'referral',
-    linkLabel: 'Referral 작업 보기',
     title: '공유 모듈·수신자 진입',
-    work: '카카오톡 공유 모듈 · 플랫폼별 공유 데이터 변환 · 바우처 링크의 앱 진입·코드 전달 · 건강 정보 공유 개발',
+    work: '카카오톡 공유 모듈 · 플랫폼별 데이터 변환 · 수신자 앱 진입',
   },
   {
     letter: 'R',
     name: 'Revenue',
     detail: 'revenue',
-    linkLabel: 'Revenue 작업 보기',
     title: '상담 연동·전환 구간 관측',
-    work: '상담 연동 개발 · Amplitude Agent 일일 지표 점검·알림과 Sentry 오류 모니터링',
+    work: '상담 연동 · Sentry 중요 오류 알림 · Amplitude 퍼널·Agent',
   },
 ] satisfies Array<{
   letter: string;
   name: string;
   detail: CaseId;
-  linkLabel: string;
   title: string;
   work: string;
 }>;
@@ -73,9 +67,11 @@ export function EntryJourney() {
               <div className={styles.experience}>
                 <h3>{stage.title}</h3>
                 <p>{stage.work}</p>
-                <div className={styles.detailLink}>
-                  <CaseDetailLink id={stage.detail}>{stage.linkLabel}</CaseDetailLink>
-                </div>
+              </div>
+              <div className={styles.detailLink}>
+                <CaseDetailLink id={stage.detail}>
+                  <span className={styles.srOnly}>{stage.name} </span>상세 보기
+                </CaseDetailLink>
               </div>
             </li>
           ))}
