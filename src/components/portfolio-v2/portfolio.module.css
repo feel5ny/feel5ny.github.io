@@ -24,6 +24,9 @@
 .portfolio [data-reveal='highlight'][data-reveal-state='pending'] {
   background-size: 0% 1.05em;
 }
+.portfolio [data-anchor-reveal] {
+  transition: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .portfolio [data-reveal] {
     opacity: 1 !important;

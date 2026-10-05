@@ -34,9 +34,40 @@ export function ScrollEffects() {
     const revealTargets = (element: HTMLElement) => staggerGroups.get(element) ?? [element];
     const setState = (element: HTMLElement, state: 'visible' | 'pending') => {
       revealTargets(element).forEach(target => {
+        if (state === 'pending' && target.hasAttribute('data-anchor-reveal')) return;
         target.dataset.revealState = state;
       });
     };
+    let anchorTimer: ReturnType<typeof setTimeout> | undefined;
+    const clearAnchorReveal = () => {
+      clearTimeout(anchorTimer);
+      targets.forEach(element => delete element.dataset.anchorReveal);
+    };
+    const revealAnchor = (hash: string) => {
+      let destination: HTMLElement | null;
+      try {
+        destination = document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch {
+        return;
+      }
+      if (!destination || !root.contains(destination)) return;
+      clearAnchorReveal();
+      targets.forEach(element => {
+        if (destination.contains(element) || element.contains(destination)) {
+          element.dataset.anchorReveal = '';
+          element.dataset.revealState = 'visible';
+        }
+      });
+      // Skip reveal delays during the jump, then restore normal scroll/replay behavior.
+      anchorTimer = setTimeout(clearAnchorReveal, 1500);
+    };
+    const onAnchorClick = (event: MouseEvent) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return;
+      const link = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+      if (link) revealAnchor(link.getAttribute('href') ?? '');
+    };
+    const onHashChange = () => revealAnchor(window.location.hash);
     let observer: IntersectionObserver | undefined;
     let resetObserver: IntersectionObserver | undefined;
     let resizeFrame = 0;
@@ -100,6 +131,7 @@ export function ScrollEffects() {
       });
     };
     startTracking();
+    onHashChange();
     const onResize = () => {
       cancelAnimationFrame(resizeFrame);
       resizeFrame = requestAnimationFrame(startTracking);
@@ -121,13 +153,18 @@ export function ScrollEffects() {
     motionPreference.addEventListener('change', startTracking);
     window.addEventListener('resize', onResize);
     root.addEventListener('focusin', onFocus);
+    root.addEventListener('click', onAnchorClick, true);
+    window.addEventListener('hashchange', onHashChange);
     window.addEventListener('beforeprint', beforePrint);
     window.addEventListener('afterprint', afterPrint);
     return () => {
       disconnect();
+      clearAnchorReveal();
       cancelAnimationFrame(resizeFrame);
       window.removeEventListener('resize', onResize);
       root.removeEventListener('focusin', onFocus);
+      root.removeEventListener('click', onAnchorClick, true);
+      window.removeEventListener('hashchange', onHashChange);
       motionPreference.removeEventListener('change', startTracking);
       window.removeEventListener('beforeprint', beforePrint);
       window.removeEventListener('afterprint', afterPrint);
