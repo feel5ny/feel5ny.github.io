@@ -291,6 +291,13 @@ export function TeamDetails() {
       </div>
       <dl className={styles.operatingNotes}>
         <div>
+          <dt>현재 상태</dt>
+          <dd>
+            운영 체계를 적용하고 정착시키는 단계. 병목 감소 효과는 아직 측정하지 않았으며, Tech Lead
+            자동 알림은 준비 중
+          </dd>
+        </div>
+        <div>
           <dt>내가 주도한 범위</dt>
           <dd>
             운영 구조와 절차 설계, Tech Lead들과의 책임 범위 협의, 도구·기록 연결. 각 영역의 세부

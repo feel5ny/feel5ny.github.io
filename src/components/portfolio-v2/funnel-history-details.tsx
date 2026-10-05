@@ -16,9 +16,9 @@ export function FunnelHistoryDetails() {
           화면으로 돌아감. 연동 퍼널의 첫 단계까지만 되돌려 중간 방문 이력이 남아 있었음
         </li>
         <li>
-          <strong>수정:</strong> <code>goBackToPreviousPageAsync</code>로 연동 진입 전까지 되감은 뒤
-          결과 화면으로 <code>replace</code>. 전환 중에는 로더를 표시해 입력 화면의 재노출과 노출
-          이벤트 중복을 방지
+          <strong>수정:</strong> 정보 연동에 들어가기 전까지 방문 이력을 되돌린 뒤, 현재 페이지를
+          결과 화면으로 교체(<code>replace</code>). 전환 중에는 로더를 표시해 입력 화면의 재노출과
+          노출 이벤트 중복을 방지
         </li>
       </ul>
       <figure className={diagram.figure} aria-labelledby="funnel-history-title">

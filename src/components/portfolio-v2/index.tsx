@@ -179,6 +179,10 @@ export function PortfolioV2() {
                   <dt>담당</dt>
                   <dd>전체 흐름·스캐폴딩 · 브릿지·상태별 랜딩 개발 · 이미지 POC</dd>
                 </div>
+                <div>
+                  <dt>결과</dt>
+                  <dd>2026년 7월 출시, 전체 공개 이후 기존 화면과 실험 분기 정리</dd>
+                </div>
               </dl>
 
               <div className={styles.bodySection}>
@@ -231,6 +235,10 @@ export function PortfolioV2() {
                   <dt>초점</dt>
                   <dd>입력부터 결과·상담까지 구현 · 매출 직결 구간의 안정성 관측</dd>
                 </div>
+                <div>
+                  <dt>결과</dt>
+                  <dd>2023년 9월 MVP 출시, 상담 연동 개발·운영 후 2026년 4월 팀원에게 이관</dd>
+                </div>
               </dl>
               <div className={styles.bodySection}>
                 <ul className={styles.bullets}>
@@ -245,6 +253,11 @@ export function PortfolioV2() {
                   <li>
                     <strong>운영:</strong> 매출로 이어지는 상담 전환 구간을 Amplitude 퍼널·Agent와
                     Sentry로 관측하고, 외부 연동 제약과 장애 대응 절차를 문서화
+                  </li>
+                  <li>
+                    <strong>직접 사용한 경험:</strong> 보험청구 중 새벽 알림톡 수신과 결제 완료
+                    링크의 진입 오류를 발견해 제보. 이후 발송 시간 제한이 적용되고 서버 담당자가
+                    진입 오류를 수정
                   </li>
                 </ul>
               </div>
@@ -423,10 +436,8 @@ export function PortfolioV2() {
               </p>
               <dl className={styles.facts}>
                 <div>
-                  <dt>현재</dt>
-                  <dd>
-                    운영 체계 적용·정착 단계 · 병목 감소 효과 측정 전 · Tech Lead 자동 알림 준비 중
-                  </dd>
+                  <dt>구축</dt>
+                  <dd>공통 업무의 담당 체계와 협의·인수인계 절차를 정리하고 운영에 적용 중</dd>
                 </div>
               </dl>
               <div className={styles.bodySection}>
