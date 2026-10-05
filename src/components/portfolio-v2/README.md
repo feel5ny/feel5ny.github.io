@@ -239,9 +239,9 @@
 - Section subtitles use the same local Banksalad PNG as career headings, at 18px with empty alt
   text. The adjacent visible company name supplies the label. A flex row centers the logo against
   the full text block when the subtitle wraps, while keeping the text left-aligned.
-- The author confirmed the Banksalad start date as 2021-03-29. Month-level career entries use
-  `2021.03`; a resume showing `2021.04` needs correction. The Obsidian resume could not be updated
-  because filesystem access was denied.
+- On 2026-10-05, the author requested `2021.04` for the Banksalad start month displayed in the
+  portfolio, superseding the earlier `2021.03` display instruction. This change is portfolio-only;
+  the author handles Rallit separately.
 - Editorial revision: the resume should summarize role, contribution and delivered work in 2–3
   bullets per project, while the portfolio explains constraints, choices and verification. Gene
   content foregrounds state-based entry into 2.0, flow-first scope agreement, shared redirect rules

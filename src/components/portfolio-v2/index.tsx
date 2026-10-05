@@ -503,7 +503,7 @@ export function PortfolioV2() {
                   </div>
                 </div>
                 <div>
-                  <span>2021.03 ~ 2024.07</span>
+                  <span>2021.04 ~ 2024.07</span>
                   <div>
                     <h3 className={styles.companyName}>
                       <img src="/images/portfolio/banksalad.png" width="20" height="20" alt="" />
